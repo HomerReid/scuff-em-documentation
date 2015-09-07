@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>General command-line reference - SCUFF-EM documentation</title>
+  
+
+  <link rel="shortcut icon" href="../../scuffEM.ico">
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "applications/GeneralReference"
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script src="../../js/theme.js"></script> 
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+  <script src="../../mathjaxhelper.js"></script>
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+
+      <p align="center"
+      <a href="../..">
+         <img align="center" height="auto" width="100%"  
+              src="../../img/scuffEMNavBar.png"
+      </a>
+
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> SCUFF-EM documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../..">SCUFF-EM documentation</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Examples</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/CubeTorus/">Casimir forces in a compact geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/SiliconBeams/SiliconBeams/">Casimir forces in a 1D extended geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/SiliconSlabs/SiliconSlabs/">Casimir forces in a 2D extended geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/SiO2Spheres/SiO2Spheres/">Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/TipSubstrate/TipSubstrate/">Spatial distribution of heat flux from a warm tip over a cold substrate</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/HalfSpaceLDOS/HalfSpaceLDOS/">LDOS and dyadic Green functions above an infinite aluminum half-space</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/PlatonicSolids/PlatonicSolids/">Electrostatic polarizability of platonic solids</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>General reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/TopLevel/">Top-level overview</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/Installing/">Installation</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/Geometries/">Geometry descriptions</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/Materials/">Material designations</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/Transformations/">Geometric transformations</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Command-line application reference</span></li>
+
+        
+            
+    <li class="toctree-l1 current">
+        <a class="current" href="./">General command-line reference</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#common-command-line-arguments">Common command-line arguments</a></li>
+                
+                    <li><a class="toctree-l4" href="#options-specifying-geometry-inputs">Options specifying geometry inputs</a></li>
+                
+                    <li><a class="toctree-l4" href="#options-specifying-individual-frequencies-and-bloch-vectors-at-which-to-calculate">Options specifying individual frequencies and Bloch vectors at which to calculate</a></li>
+                
+                    <li><a class="toctree-l4" href="#options-specifying-evaluation-points">Options specifying evaluation points</a></li>
+                
+                    <li><a class="toctree-l4" href="#options-controlling-frequency-integrations">Options controlling frequency integrations</a></li>
+                
+                    <li><a class="toctree-l4" href="#options-controlling-brillouin-zone-integrations">Options controlling Brillouin-zone integrations</a></li>
+                
+                    <li><a class="toctree-l4" href="#miscellaneous-options">Miscellaneous options</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#passing-command-line-options-via-text-file">Passing command-line options via text file</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#complex-numbers">Complex numbers</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#log-files">Log files</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#output-files">Output Files</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#environment-variables">Environment variables</a></li>
+                
+            
+            </ul>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../scuff-scatter/scuff-scatter/">scuff-scatter</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../scuff-transmission/scuff-transmission/">scuff-transmission</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../scuff-ldos/scuff-ldos/">scuff-ldos</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../scuff-tmatrix/scuff-tmatrix/">scuff-tmatrix</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../scuff-cas3D/scuff-cas3D/">scuff-cas3D</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../scuff-caspol/scuff-caspol/">scuff-caspol</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../scuff-neq/scuff-neq/">scuff-neq</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../scuff-RF/scuff-RF/">scuff-RF</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../scuff-static/scuff-static/">scuff-static</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../scuff-analyze/scuff-analyze/">scuff-analyze</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>API reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../API/libscuff/">libscuff</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>For developers</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../forDevelopers/Implementation/">Implementation</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../forDevelopers/DataStructures/">Data Structures</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../forDevelopers/Documentation/">Documentation</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">SCUFF-EM documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.."><span class="SmallCaps">scuff-em</span> documentation</a> &raquo;</li>
+    
+      
+        
+          <li>Command-line application reference &raquo;</li>
+        
+      
+    
+    <li>General command-line reference</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/homerreid/scuff-em/" class="icon icon-github"> Edit on GitHub</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="general-reference-for-scuff-em-command-line-applications">General reference for <a class="wikilink" href="../../scuff-em/">scuff-em</a> command-line applications</h1>
+<p>This page collects some general information that applies
+to many or all of the standalone command-line applications
+in the <a class="wikilink" href="../../scuff-em/">scuff-em</a> suite.</p>
+<p><a name="CommonOptions"></a></p>
+<h1 id="common-command-line-arguments">Common command-line arguments</h1>
+<p>The various standalone applications in the <a class="wikilink" href="../../scuff-em/">scuff-em</a> suite
+share a number of command-line arguments in common,
+as described below.
+Not all codes accept all arguments (for example, 
+<a class="wikilink" href="../../scuff-transmission/">scuff-transmission</a> does not accept <code>--TransFile</code>), but the 
+format of each arguments is standardized among all codes that <em>do</em> 
+accept that argument.</p>
+<h3 id="options-specifying-geometry-inputs"><em>Options specifying geometry inputs</em></h3>
+<p class="toc"><code>--geometry MyGeometry.scuffgeo</code></p>
+<blockquote>
+<p>Specifies the 
+<a href="../../reference/Geometries/"><span class="SC">scuff-em</span> geometry file</a>
+describing your geometry. This option is always mandatory.</p>
+</blockquote>
+<p class="toc"><code>--TransFile MyTransformations.trans</code></p>
+<blockquote>
+<p>Specifies an optional file describing one or more
+<a href="../../reference/Transformations/">geometrical transformations</a>
+to be applied to your geometry. Omitting the <code>--TransFile</code> option
+(when running a code that accepts it) is equivalent to specifying
+an empty transformation named <code>DEFAULT</code> that leaves the geometry
+unchanged from the configuration described by the <code>.scuffgeo</code> file.</p>
+</blockquote>
+<h3 id="options-specifying-individual-frequencies-and-bloch-vectors-at-which-to-calculate"><em>Options specifying individual frequencies and Bloch vectors at which to calculate</em></h3>
+<p class="toc"><code>--Omega 3.34
+--Omega 4.25+0.9i
+--Lambda 2.3
+--OmegaFile MyOmegaFile
+--LambdaFile MyLambdaFile</code></p>
+<blockquote>
+<p>Specifies one or more frequencies at which to perform calculations.</p>
+<p><code>--Omega</code> specifies the angular frequency in units of 
+<script type="math/tex">\omega_0=3\cdot 10^{14}</script> rad/sec. The argument of <code>--Omega</code> may be a
+<a href="./#Complex">complex number</a>.</p>
+<p>The alternative option <code>--Lambda</code> instead specifies the frequency
+in terms of the corresponding free-space wavelength <script type="math/tex">\lambda=c/\omega</script> 
+(where <script type="math/tex">c</script> is the <em>vacuum</em> speed of light, irrespective of the material
+properties of your geometry.)
+<code>--Lambda</code> values are interpreted in units of microns (<script type="math/tex">\mu</script>m).</p>
+<p>The options <code>--OmegaFile</code> or <code>--LambdaFile</code> may be used to specify a 
+file containing one or more <code>--Omega</code> or <code>--Lambda</code> values, one 
+per line (blank lines and comments are ignored.)</p>
+</blockquote>
+<p class="toc"><code>--OmegakBlochFile MyOkBFile</code></p>
+<blockquote>
+<p>Similar to <code>--OmegaFile</code>, but specifies a list of
+(frequency, Bloch vector) points at which to perform calculations.
+This option only makes sense when used with 
+<a href="../../reference/Geometries/#Extended">extended geometries</a></p>
+<p>The argument specified for <code>--OmegakBlochFile</code> should
+be a file containing two numbers on each line (for 1D extended 
+geometries) or three numbers on each line (for 2D extended 
+geometries). (Blank lines and comment lines beginning with <code>#</code>
+are ignored.) The first number on each line is the <code>--Omega</code>
+value; the next one or two numbers are the components of the 
+1D or 2D Bloch wavevector, measured in units of (<script type="math/tex">\mu</script>m)<script type="math/tex">^{-1}</script>.</p>
+</blockquote>
+<p class="toc"><code>--Xi 0.39 
+--XiFile MyXiFile
+--XikBlochFile MyXkBFile</code></p>
+<blockquote>
+<p>Similar to <code>--Omega</code>, <code>--OmegaFile</code>, and <code>--OmegakBlochFile,</code> 
+but used for codes (<a class="SC" href="../scuff-cas3D/scuff-cas3D/">scuff-cas3d</a> and
+<a class="SC" href="../scuff-caspol/scuff-caspol/">scuff-caspol</a>) that perform calculations
+at pure imaginary frequencies, <script type="math/tex">\omega=i\xi</script>.
+Values specified for <code>--Xi</code> should be positive real numbers.</p>
+</blockquote>
+<p><a name="EvaluationPoints"></a></p>
+<h3 id="options-specifying-evaluation-points"><em>Options specifying evaluation points</em></h3>
+<p class="toc"><code>--EPFile MyEPFile</code></p>
+<blockquote>
+<p>For codes that compute spatially-resolved output quantities,
+this option specifies a file describing a list of spatial 
+evaluation points. (<em>Which</em> output quantity depends
+on the code you are running; for example,
+<a class="SC" href="../scuff-scatter/scuff-scatter/">scuff-scatter</a>
+will report components of the scattered and total fields at the 
+evaluation points, while
+<a class="SC" href="../scuff-neq/scuff-neq/">scuff-neq</a>
+will report values of the thermally-averaged fluxes of
+energy and momentum at the evaluation points.)</p>
+<p>The argument to <code>--EPFile</code> should be a file containing one or more
+lines, each of which contains three space-separated numbers
+(the Cartesian coordinates of the evaluation point). 
+Blank lines and comments (lines beginning with <code>#</code>) are ignored.
+For example,
+to ask <a class="wikilink" href="../../scuff-scatter/">scuff-scatter</a> for the scattered field components
+at points on the <em>z</em> axis, the file might look like this:</p>
+<p class="hljs"><code># evaluation points
+0.0 0.0 -2.0
+0.0 0.0 -1.9
+...
+0.0 0.0  1.9
+0.0 0.0  2.0</code></p>
+</blockquote>
+<h3 id="options-controlling-frequency-integrations"><em>Options controlling frequency integrations</em></h3>
+<p class="toc"><code>--OmegaQuadrature [adaptive | cliff]
+--OmegaMin 0.01
+--XiQuadrature [adaptive | cliff]
+--XiMin 0.01
+--AbsTol
+--RelTol</code></p>
+<blockquote>
+<p>These arguments affect the behavior of application codes
+that compute output quantities by performing numerical
+integrations over angular frequencies---either real
+angular frequencies <script type="math/tex">\omega</script> or imaginary angular
+frequencies <script type="math/tex">\xi</script>. (More specifically, <a class="wikilink" href="../../scuff-neq/">scuff-neq</a>
+performs <script type="math/tex">\omega</script> integrations, while <a class="wikilink" href="../../scuff-cas3d/">scuff-cas3d</a> and
+<a class="wikilink" href="../../scuff-caspol/">scuff-caspol</a> perform <script type="math/tex">\xi</script> integrations.)</p>
+<p><code>--OmegaQuadrature</code> or <code>--XiQuadrature</code> specify the
+numerical quadrature algorithm. If these
+options are left unspecified, an appropriate algorithm 
+is chosen automatically.</p>
+<p><code>--OmegaMin</code> or <code>--XiMin</code> specify the minimum angular
+frequency at which numerical <a class="wikilink" href="../../scuff-em/">scuff-em</a> calculations 
+are performed. For cases in which the lower limit of the 
+<script type="math/tex">\omega</script> or <script type="math/tex">\xi</script> integration is 0, the integrand is 
+assumed to be constant between 0 and the value specified here.
+These options are interpreted in the usual <a class="wikilink" href="../../scuff-em/">scuff-em</a>
+frequency units of <script type="math/tex">3\times 10^{14}</script> rad/sec, so typical
+values will be something like <code>0.001.</code></p>
+<p><code>--AbsTol</code> and <code>--RelTol</code> may be used to specify
+absolute and relative error tolerances for adaptive
+quadrature algorithms. If an adaptive cubature method
+seems be spending too much time attempting to achieve
+high accuracy in a frequency quadrature, try increasing
+<code>--RelTol</code> to something like <code>0.1</code> or even <code>0.5.</code></p>
+</blockquote>
+<h3 id="options-controlling-brillouin-zone-integrations"><em>Options controlling Brillouin-zone integrations</em></h3>
+<p class="toc"><code>--BZQuadrature [adaptive | cliff]
+--BZSymmetry [adaptive | cliff]
+--MaxBZSamples 1000;</code></p>
+<blockquote>
+<p>These arguments affect the behavior of application codes
+that compute output quantities for periodic geometries
+by performing numerical integrations over the Brillouin
+zone. Such codes include <a class="wikilink" href="../../scuff-ldos/">scuff-ldos</a>, <a class="wikilink" href="../../scuff-neq/">scuff-neq</a>,
+<a class="wikilink" href="../../scuff-cas3d/">scuff-cas3d</a>, and <a class="wikilink" href="../../scuff-caspol/">scuff-caspol</a>.</p>
+<p><code>--BZSymmetry</code> may be used for 2D periodic geometries to
+declare that the Brillouin-zone integrand <script type="math/tex">f(k_x, k_y)</script>
+is symmetric under the interchange <script type="math/tex">k_x \leftrightarrow k_y</script>.</p>
+<p><code>--MaxBZSamples 1000</code> may be used to restrict adaptive
+integration algorithms to a maximum of 1,000 evaluations
+of the Brillouin-zone integrand.</p>
+</blockquote>
+<h3 id="miscellaneous-options"><em>Miscellaneous options</em></h3>
+<p class="toc"><code>--FileBase MyFileBase</code></p>
+<blockquote>
+<p>Specifies the base file name for output files (so that, for example,
+the frequency-resolved output file written by <a class="wikilink" href="../../scuff-cas3d/">scuff-cas3d</a>
+will be <code>MyFileBase.byXi</code>, while the frequency-integrated 
+output file will be <code>MyFileBase.out</code>). If this option is not 
+specified, the file base is taken to be the base filename of the 
+<code>.scuffgeo</code> file.</p>
+</blockquote>
+<h1 id="passing-command-line-options-via-text-file">Passing command-line options via text file</h1>
+<p>All of the standalone applications in the <a class="wikilink" href="../../scuff-em/">scuff-em</a> suite allow 
+their command-line options to be passed via a text file fed into 
+standard input.</p>
+<p>Each line of this text file should consist of a single 
+command-line option (minus the -- at the beginning) followed by any 
+arguments the option might take.</p>
+<p>For example, running <a class="wikilink" href="../../scuff-scatter/">scuff-scatter</a> with the command-line options</p>
+<pre><code class="bash">% scuff-scatter --geometry Spheres.scuffgeo --omega 1.0 --pwPolarization 1 0 0 --pwDirection 0 0 1 --EPFile MyEPFile 
+</code></pre>
+
+<p>is equivalent to running</p>
+<pre><code class="bash">% scuff-scatter &lt; MyOptionsFile
+</code></pre>
+
+<p>where the file <code>MyOptionsFile</code> looks like this:</p>
+<pre><code># options for scuff-scatter 
+geometry Spheres.scuffgeo
+omega 1.0
+
+pwPolarization 1 0 0 
+pwDirection 0 0 1
+
+EPFile MyEPFile
+</code></pre>
+
+<p>Note that blank lines and comments (lines starting with #) are ignored.</p>
+<p>You may also combine the two methods of specifying options by passing 
+some options via text file and others on the command line. If there are 
+any conflicts, the values specified on the command line take precedence. 
+For instance, to re-run the example above at a new frequency with 
+everything else unchanged, you could say</p>
+<pre><code> % scuff-scatter --Omega 2.0 &lt; MyOptionsFile
+</code></pre>
+
+<p><a name="Complex"></a></p>
+<h1 id="complex-numbers">Complex numbers</h1>
+<p>Many of the standalone programs in the <a class="wikilink" href="../../scuff-em/">scuff-em</a> suite have 
+options for which you may specify complex numbers. (An example 
+is the --omega option accepted by <a class="wikilink" href="../../scuff-scatter/">scuff-scatter</a> and other 
+codes, for which you may specify complex or even pure imaginary 
+numbers to do calculations at complex frequencies.)</p>
+<p>To specify a complex number as a parameter value, write both the 
+real and imaginary parts together as a single string (no spaces), 
+separated by <code>+</code> or <code>-</code>, with the imaginary part terminated by 
+<code>i</code> or <code>I</code> (you may also use <code>j</code> or <code>J</code>). For example, all 
+of the following are valid frequency specifications:</p>
+<pre><code> --omega 2.3+4.5i
+ --omega 2.3
+ --omega 4.5j
+ --omega 12.3e2+45.4e2I
+</code></pre>
+
+<p><a name="LogFiles"></a> </p>
+<h1 id="log-files">Log files</h1>
+<p>All command-line codes in the <a class="wikilink" href="../../scuff-em/">scuff-em</a> suite
+write logging information to text-based logfiles
+with extension <code>.log.</code> You can monitor these
+files to follow the progress of your calculations.</p>
+<p>For example, after launching 
+[ this sample <span class="SC">scuff-cas3d</span> run ][SiliconSlabs],</p>
+<p>type the following at a terminal window:</p>
+<pre><code class="bash">% tail -f SiliconSlabs_L2_40.log
+</code></pre>
+
+<p>This produces a running list of log messages, something like this:</p>
+<pre><code>06/15/15::10:13:40: scuff-cas3D running on superhr1
+06/15/15::10:13:40: Added /home/homer/work/scuff-em-sandbox/mshFiles to mesh search path.
+06/15/15::10:13:40: Adding lattice basis vector (2,0).
+06/15/15::10:13:40: Adding lattice basis vector (0,2).
+06/15/15::10:13:40: Computing Casimir integrand at (Xi,kx,ky)=(0.5,0.19635,0.19635)
+06/15/15::10:13:49: Computing Casimir integrand at (Xi,kx,ky)=(0.5,0.217586,0.172518)
+06/15/15::10:13:51: Computing Casimir integrand at (Xi,kx,ky)=(0.5,0.256543,0.106264)
+06/15/15::10:13:52: Computing Casimir integrand at (Xi,kx,ky)=(0.5,0.275845,0.0318681) 
+</code></pre>
+
+<p><a name="OutputFiles"></a></p>
+<h1 id="output-files">Output Files</h1>
+<p>The <a class="wikilink" href="../../scuff-em/">scuff-em</a> application codes generally produce
+output in the form of human-readable text-based
+data files. The typical naming convention for 
+these files is <code>Geometry.Extension</code>, where <code>Geometry.scuffgeo</code>
+is the name of the <a class="wikilink" href="../../scuff-em/">scuff-em</a> geometry file 
+on which the calculation was run, and where <code>Extension</code>
+is an application-specific file extension that attempts 
+to describe the content of the file; for example, 
+<a class="wikilink" href="../../scuff-scatter/">scuff-scatter</a> produces files named <code>Geometry.PFT</code>
+to report the power, force, and torque on bodies 
+irradiated by external fields. You can use the 
+<code>--filebase</code> command-line option to <a class="wikilink" href="../../scuff-em/">scuff-em</a>
+codes to select a base filename other than 
+<code>Geometry.</code></p>
+<p>All text-based data files produced by <a class="wikilink" href="../../scuff-em/">scuff-em</a>
+codes should contain a human-readable <em>header</em> at the 
+top of the file explaining how to interpret its content.
+For example, the first few lines of the 
+<code>.PFT</code> output file produced by <a class="wikilink" href="../../scuff-scatter/">scuff-scatter</a>
+look like this:</p>
+<pre><code># scuff-scatter running on hikari 08/03/15::23:15:45
+# data file columns: 
+# 1 omega 
+# 2 surface label 
+# 3 absorbed power (watts)
+# 4 scattered power (watts)
+# 5 x-force (nanoNewtons)
+# 6 y-force (nanoNewtons)
+# 7 z-force (nanoNewtons)
+# 8 x-torque (nanoNewtons*microns)
+# 9 y-torque (nanoNewtons*microns)
+# 10 z-torque (nanoNewtons*microns)
+0.05 Particle 6.994160e-04 1.562608e-03 -1.120907e-04 7.169210e-03 7.128598e-03 -3.622586e-03 1.005173e-03 9.428114e-02 
+</code></pre>
+
+<p>If you encounter a situation in which a <a class="wikilink" href="../../scuff-em/">scuff-em</a>
+application code fails to write an appropriate file
+header to an output file, please file an issue
+on the 
+<a href="https://github.com/HomerReid/scuff-em.git"><span class="CodeName">scuff-em</span> GitHub page</a>.</p>
+<p>Other types of output files produced by <a class="wikilink" href="../../scuff-em/">scuff-em</a>
+application codes include <code>.hdf5</code> binary data
+files and <code>.pp</code> files containing visualization data
+that may be viewed in <a class="wikilink" href="../../gmsh/">gmsh</a>.</p>
+<h1 id="environment-variables">Environment variables</h1>
+<p>Here are some environment-variable settings that 
+affect the behavior of <a class="wikilink" href="../../scuff-em/">scuff-em</a>.</p>
+<pre><code class="bash">% export SCUFF_MESH_PATH=/path/to/msh/files`
+</code></pre>
+
+<blockquote>
+<p>Specifies a directory in which to look for mesh files
+(such as <code>.msh</code> files produced by <a class="wikilink" href="../../gmsh/">gmsh</a>) 
+referred to by <code>.scuffgeo</code> files.</p>
+</blockquote>
+<pre><code class="bash">% export SCUFF_LOGLEVEL=&quot;NONE&quot;
+% export SCUFF_LOGLEVEL=&quot;TERSE&quot;
+% export SCUFF_LOGLEVEL=&quot;VERBOSE&quot;
+% export SCUFF_LOGLEVEL=&quot;VERBOSE2&quot;
+</code></pre>
+
+<blockquote>
+<p>Sets the verbosity of messages written to the <code>.log</code> file.</p>
+</blockquote>
+<pre><code class="bash">% export SCUFF_INTERPOLATION_TOLERANCE=1.0e-3
+</code></pre>
+
+<blockquote>
+<p>This option, which is only relevant for
+<a href="../../reference/Geometries/#Extended">extended geometries</a>,
+set an internal tolerance parameter that controls
+the accuracy with which BEM matrix elements and
+scattered fields are computed. Its default value
+is <code>1.0e-6</code>, but this is probably overly stringent,
+and may generally be relaxed to <code>1e-3</code> or so
+to reduce memory usage and CPU time without 
+significant accuracy penalties. If your calculation
+is running out of memory or taking too long to run,
+try setting it to <code>1.0e-4</code> or <code>1.0e-3.</code>
+Please tell us about your experiences 
+with this parameter!</p>
+<p>(More specifically: <a class="wikilink" href="../../scuff-em/">scuff-em</a> uses Ewald summation
+to accelerate the calculation of the periodic Green's
+function, but even this accelerated calculation is 
+not fast enough to handle the many millions of 
+evaluations needed to assemble the 
+For this reason, when assembling the BEM matrix at
+a given frequency and Bloch vector, <a class="wikilink" href="../../scuff-em/">scuff-em</a> first
+precomputes Ewald-summed values of the periodic DGF 
+at grid points of an interpolation grid, after which
+values are obtained by interpolation (bypassing 
+Ewald summation). The spacing of the grid points is 
+chosen automatically to ensure that the maximum relative 
+error between the interpolated and exact values at any 
+point within the grid boundaries is less than 
+<code>SCUFF_INTERPOLATION_TOLERANCE.</code></p>
+</blockquote>
+<pre><code class="bash">% export OMP_NUM_THREADS=&quot;8&quot;
+% export GOMP_CPU_AFFINITY=&quot;0-7&quot;
+</code></pre>
+
+<blockquote>
+<p>These options <strong>should not</strong> be necessary, but <strong>may</strong> be
+needed to ensure that <a class="wikilink" href="../../scuff-em/">scuff-em</a> takes advantage
+of all available CPU cores on your system. The former 
+option says that you want to use 8 cores, and the latter 
+option says that you want these 8 cores to be the first
+8 available (as opposed to, say, the second set of 8
+available cores on a 16-core machine).</p>
+</blockquote>
+<p><a href="https://github.com/HomerReid/scuff-em.git"><span class="CodeName">scuff-em</span> GitHub page</a>.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../scuff-scatter/scuff-scatter/" class="btn btn-neutral float-right" title="scuff-scatter"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../reference/Transformations/" class="btn btn-neutral" title="Geometric transformations"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    <!-- Copyright etc -->
+    </p>
+  </div>
+
+  <a href="http://homerreid.com/scuff-em"> 
+    <span class="SmallCaps">scuff-em</span>
+  </a> documentation, by
+  <a href="http://homerreid.com">Homer Reid</a>
+
+  <p>
+  <font size=-1>
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> 
+  using a customized theme modeled 
+  after the 
+  <a href="https://github.com/snide/sphinx_rtd_theme">theme</a>
+  provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  </font>
+
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../../reference/Transformations/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../scuff-scatter/scuff-scatter/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

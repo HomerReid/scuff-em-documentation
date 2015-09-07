@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>scuff-static - SCUFF-EM documentation</title>
+  
+
+  <link rel="shortcut icon" href="../../../scuffEM.ico">
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/highlight.css">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "applications/scuff-static/scuff-static"
+  </script>
+  
+  <script src="../../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../../js/highlight.pack.js"></script>
+  <script src="../../../js/theme.js"></script> 
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+  <script src="../../../mathjaxhelper.js"></script>
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+
+      <p align="center"
+      <a href="../../..">
+         <img align="center" height="auto" width="100%"  
+              src="../../../img/scuffEMNavBar.png"
+      </a>
+
+      <div class="wy-side-nav-search">
+        <a href="../../.." class="icon icon-home"> SCUFF-EM documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../../..">SCUFF-EM documentation</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Examples</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../examples/CubeTorus/">Casimir forces in a compact geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../examples/SiliconBeams/SiliconBeams/">Casimir forces in a 1D extended geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../examples/SiliconSlabs/SiliconSlabs/">Casimir forces in a 2D extended geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../examples/SiO2Spheres/SiO2Spheres/">Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../examples/TipSubstrate/TipSubstrate/">Spatial distribution of heat flux from a warm tip over a cold substrate</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../examples/HalfSpaceLDOS/HalfSpaceLDOS/">LDOS and dyadic Green functions above an infinite aluminum half-space</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../examples/PlatonicSolids/PlatonicSolids/">Electrostatic polarizability of platonic solids</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>General reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/TopLevel/">Top-level overview</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/Installing/">Installation</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/Geometries/">Geometry descriptions</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/Materials/">Material designations</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/Transformations/">Geometric transformations</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Command-line application reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../GeneralReference/">General command-line reference</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../scuff-scatter/scuff-scatter/">scuff-scatter</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../scuff-transmission/scuff-transmission/">scuff-transmission</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../scuff-ldos/scuff-ldos/">scuff-ldos</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../scuff-tmatrix/scuff-tmatrix/">scuff-tmatrix</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../scuff-cas3D/scuff-cas3D/">scuff-cas3D</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../scuff-caspol/scuff-caspol/">scuff-caspol</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../scuff-neq/scuff-neq/">scuff-neq</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../scuff-RF/scuff-RF/">scuff-RF</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 current">
+        <a class="current" href="./">scuff-static</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#common-options">Common options</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#options-requesting-capacitance-matrix-output">Options requesting capacitance-matrix output</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#options-requesting-polarizability-output">Options requesting polarizability output</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#options-requesting-computation-of-electrostatic-fields">Options requesting computation of electrostatic fields</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#2-examples-of-calculations-using-scuff-static">2. Examples of calculations using scuff-static</a></li>
+                
+            
+            </ul>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../scuff-analyze/scuff-analyze/">scuff-analyze</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>API reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../API/libscuff/">libscuff</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>For developers</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../forDevelopers/Implementation/">Implementation</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../forDevelopers/DataStructures/">Data Structures</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../forDevelopers/Documentation/">Documentation</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../..">SCUFF-EM documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.."><span class="SmallCaps">scuff-em</span> documentation</a> &raquo;</li>
+    
+      
+        
+          <li>Command-line application reference &raquo;</li>
+        
+      
+    
+    <li>scuff-static</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/homerreid/scuff-em/" class="icon icon-github"> Edit on GitHub</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1> Solving electrostatics problems with
+     <span class="SC">scuff-static</span>
+</h1>
+
+<p><a class="wikilink" href="../../../scuff-static/">scuff-static</a> is a tool within the
+<a class="wikilink" href="../../../scuff-em/">scuff-em</a> code suite for solving
+a broad class of electrostatics problems.</p>
+<p>The calculations that <a class="wikilink" href="../../../scuff-static/">scuff-static</a> can
+perform include the following:</p>
+<ul>
+<li>
+<p>Compute the capacitance matrix (i.e. the self- and mutual-
+capacitances) of a collection of conductors.</p>
+</li>
+<li>
+<p>Compute the DC polarizability of a conducting or
+dielectric body.</p>
+</li>
+<li>
+<p>Compute the electrostatic potential and field
+at arbitrary user-specified points in the vicinity
+of conducting or dielectric bodies, with the
+conductors maintained at arbitrary user-specified
+potentials and (optionally) an arbitrary user-specified
+external forcing field.</p>
+</li>
+<li>
+<p>Compute the <em>C-matrix</em>, a sort of electrostatic
+version of the
+<a href="../../scuff-tmatrix/scuff-tmatrix/">"T-matrix"</a>
+used to characterize the scattering properties
+of bodies at nonzero frequencies. The C-matrix
+was shown in
+<a href="http://dx.doi.org/10.1103/PhysRevLett.114.151602">this paper</a>
+to be related to quantum-mechanical entanglement
+entropy.</p>
+</li>
+</ul>
+<p>As a technical detail, we note that the implementation of
+<a class="wikilink" href="../../../scuff-static/">scuff-static</a> actually differs in some significant ways
+from the other codes in the <a class="wikilink" href="../../../scuff-em/">scuff-em</a> suite; in particular,
+as compared to the <a class="wikilink" href="../../../scuff-em/">scuff-em</a> core library,
+<a class="wikilink" href="../../../scuff-static/">scuff-static</a> uses different basis functions and a
+different formulation of the boundary-element method, as
+appropriate for zero-frequency problems. (More specifically,
+<a class="wikilink" href="../../../scuff-static/">scuff-static</a> expands
+surface electric charge densities on PEC and dielectric
+surfaces using ``pulse'' basis functions, which are
+constant on individual triangles and vanishing everywhere
+else.) However, from the implementation standpoint, it
+turns out that the calculations needed to implement the
+electrostatics calculations in <a class="wikilink" href="../../../scuff-static/">scuff-static</a> are a
+proper <em>subset</em> of the calculations already implemented
+in <a class="wikilink" href="../../../scuff-em/">scuff-em</a>. Moreover, from the user's standpoint,
+the work needed to set up a <a class="wikilink" href="../../../scuff-static/">scuff-static</a> problem
+(create surface meshes, write geometry files, etc.)
+is similar to the setup needed for the nonzero-frequency
+codes in the <a class="wikilink" href="../../../scuff-em/">scuff-em</a> suite.
+This is why it makes sense to package these codes together.</p>
+<p>Here is a brief <a href="../scuff-static.pdf">technical memo</a>
+discussing the implementation of <a class="wikilink" href="../../../scuff-static/">scuff-static</a>,
+including both the underlying BEM electrostatics formulation
+and the execution of the various types of calculation
+(capacitance, polarizability, etc.) that the code can do.</p>
+<div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#1-scuff-static-command-line-options">1. <span class="SC">scuff-static</span> command-line options</a><ul>
+<li><a href="#common-options">Common options</a></li>
+<li><a href="#options-requesting-capacitance-matrix-output">Options requesting capacitance-matrix output</a></li>
+<li><a href="#options-requesting-polarizability-output">Options requesting polarizability output</a></li>
+<li><a href="#options-requesting-computation-of-electrostatic-fields">Options requesting computation of electrostatic fields</a></li>
+</ul>
+</li>
+<li><a href="#2-examples-of-calculations-using-scuff-static">2. Examples of calculations using <span class="SC">scuff-static</span></a></li>
+</ul>
+</div>
+<hr />
+<p><a name="CommandLineOptions"></a></p>
+<h1 id="1-scuff-static-command-line-options">1. <span class="SC">scuff-static</span> command-line options</h1>
+<h3 id="common-options">Common options</h3>
+<p><a class="wikilink" href="../../../scuff-static/">scuff-static</a> recognizes the following subset of the
+<a href="../../GeneralReference/#CommonOptions">list of commonly accepted options to
+ <span class="SC">scuff-em</span> command-line codes</a>.</p>
+<p class="toc"><code>--geometry
+--TransFile
+--EPFile
+--Cache
+--ReadCache
+--WriteCache</code></p>
+<h3 id="options-requesting-capacitance-matrix-output">Options requesting capacitance-matrix output</h3>
+<p class="toc"><code>--CapFile    MyCapacitanceMatrix.dat
+--TransFile  MyTransFile.trans</code></p>
+<p>If you specify a file name using <code>--CapFile</code>, <a class="wikilink" href="../../../scuff-static/">scuff-static</a>
+will compute the full capacitance matrix for your geometry
+and write the data to the specified file. (The file will be
+overwritten if it already exists.)</p>
+<p>The optional <code>--TransFile</code> option may be used to specify a
+list of
+<a href="../../../reference/Transformations/">geometrical transformations</a>
+to be applied to your geometry. In this case, the full capacitance
+matrix will be computed for each specified transformation.</p>
+<h3 id="options-requesting-polarizability-output">Options requesting polarizability output</h3>
+<p class="toc"><code>--PolFile    MyPolFile.dat</code></p>
+<p>If you specify a file name using <code>--PolFile</code>, <a class="wikilink" href="../../../scuff-static/">scuff-static</a>
+will compute the DC polarizability of each object in your
+geometry and write the data to the specified file. (The file
+will be overwritten if it already exists.)</p>
+<h3 id="options-requesting-computation-of-electrostatic-fields">Options requesting computation of electrostatic fields</h3>
+<p class="toc"><code>--EPFile     MyEPFile
+--PlotFile   MyPlotFile.pp
+--PotFile    MyPotFile
+--ConstField [X|Y|Z]
+--PhiExt     PhiFile</code></p>
+<p>If you specify a list of field evaluation points using
+<code>--EPFile MyEPFile</code>, then <a class="wikilink" href="../../../scuff-static/">scuff-static</a> will compute
+the electrostatic potential and field at each evaluation
+point and write the results to a file named <code>MyEPFile.out</code>.
+(The file will be overwritten if it already exists.)
+The file will contain a header explaining how to interpret
+its contents.</p>
+<p>The <code>--PlotFile</code> option may be used to request
+creation of a <a class="wikilink" href="../../../gmsh/">gmsh</a> visualization file plotting
+the induced charge density on all conducting and
+dielectric surfaces in the geometry.
+If you say <code>--PlotFile MyPlotFile.pp</code>, then you
+will get a file named <code>MyPlotFile.pp</code> which
+may be opened in <a class="wikilink" href="../../../gmsh/">gmsh</a> for visualization purposes.</p>
+<p>By default, all conductor surfaces will be held
+at zero potential. If you wish to set one or more
+conductor surfaces to non-zero potential, you may do this
+by saying <code>--PotFile MyPotFile</code> (here "pot" is short
+for "potential). <code>MyPotFile</code> should be simply a
+list of (surface label, potential value) pairs,
+like this:</p>
+<p class="toc"><code>UpperSurface  1.2
+ LowerSurface -3.4</code></p>
+<p>where <code>UpperSurface</code> and <code>LowerSurface</code> are the
+labels you assigned to the surfaces in question
+in the <code>.scuffgeo</code> file. (The label is the string
+following the <code>OBJECT</code> or <code>SURFACE</code> keyword
+in the <code>.scuffgeo</code> file.) This would set the
+conductor surface <code>UpperSurface</code> to a potential of
+1.2 volts and the conductor surface <code>LowerSurface</code>
+to a potential of -3.4 volts.</p>
+<p>By default, the calculation will be performed with
+no external electrostatic field. You can say e.g.
+<code>--ConstField X</code> to request that the calculation
+be performed in the presence of a constant unit-strength
+electrostatic field pointing in the positive <script type="math/tex">x</script>
+direction.</p>
+<p>Alternatively, you may use the <code>--PhiExt</code> option
+to specify the name of a file describing a more
+complicated (non-constant) external field.</p>
+<hr />
+<p><a name="Examples"></a></p>
+<h1 id="2-examples-of-calculations-using-scuff-static">2. Examples of calculations using <span class="SC">scuff-static</span></h1>
+<ul>
+<li>
+<p><a href="../../../examples/PlatonicSolids/PlatonicSolids/">Polarizability of platonic solids</a></p>
+</li>
+<li>
+<p><a href="../../../examples/PlatonicSolids/PlatonicSolids/">Self- and mutual-capacitance of irregularly shaped conductors</a></p>
+</li>
+<li>
+<p><a href="../../../examples/PlatonicSolids/PlatonicSolids/">Electrostatic fields in the vicinity of a complicated gate array</a></p>
+</li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../scuff-analyze/scuff-analyze/" class="btn btn-neutral float-right" title="scuff-analyze"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../scuff-RF/scuff-RF/" class="btn btn-neutral" title="scuff-RF"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    <!-- Copyright etc -->
+    </p>
+  </div>
+
+  <a href="http://homerreid.com/scuff-em"> 
+    <span class="SmallCaps">scuff-em</span>
+  </a> documentation, by
+  <a href="http://homerreid.com">Homer Reid</a>
+
+  <p>
+  <font size=-1>
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> 
+  using a customized theme modeled 
+  after the 
+  <a href="https://github.com/snide/sphinx_rtd_theme">theme</a>
+  provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  </font>
+
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../../scuff-RF/scuff-RF/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../scuff-analyze/scuff-analyze/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

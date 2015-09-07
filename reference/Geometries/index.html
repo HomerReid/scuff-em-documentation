@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Geometry descriptions - SCUFF-EM documentation</title>
+  
+
+  <link rel="shortcut icon" href="../../scuffEM.ico">
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "reference/Geometries"
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script src="../../js/theme.js"></script> 
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+  <script src="../../mathjaxhelper.js"></script>
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+
+      <p align="center"
+      <a href="../..">
+         <img align="center" height="auto" width="100%"  
+              src="../../img/scuffEMNavBar.png"
+      </a>
+
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> SCUFF-EM documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../..">SCUFF-EM documentation</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Examples</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/CubeTorus/">Casimir forces in a compact geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/SiliconBeams/SiliconBeams/">Casimir forces in a 1D extended geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/SiliconSlabs/SiliconSlabs/">Casimir forces in a 2D extended geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/SiO2Spheres/SiO2Spheres/">Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/TipSubstrate/TipSubstrate/">Spatial distribution of heat flux from a warm tip over a cold substrate</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/HalfSpaceLDOS/HalfSpaceLDOS/">LDOS and dyadic Green functions above an infinite aluminum half-space</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/PlatonicSolids/PlatonicSolids/">Electrostatic polarizability of platonic solids</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>General reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../TopLevel/">Top-level overview</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Installing/">Installation</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Geometry descriptions</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#1-simple-geometries-one-or-more-compact-objects-possibly-nested">1. Simple Geometries: One or more compact objects (possibly nested)</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#2-more-complex-geometries-multi-material-junctions">2. More complex geometries: multi-material junctions</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#3-extended-geometries-periodic-boundary-conditions">3. Extended geometries: periodic boundary conditions</a></li>
+                
+                    <li><a class="toctree-l4" href="#compact-objects-fully-contained-in-the-unit-cell">Compact objects fully contained in the unit cell</a></li>
+                
+                    <li><a class="toctree-l4" href="#surfaces-that-straddle-the-unit-cell-boundary">Surfaces that straddle the unit-cell boundary</a></li>
+                
+                    <li><a class="toctree-l4" href="#meshing-constraints-for-surfaces-that-straddle-the-unit-cell-boundary">Meshing constraints for surfaces that straddle the unit-cell boundary</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#4-syntax-reference-for-the-scuffgeo-file-format">4. Syntax reference for the .scuffgeo file format</a></li>
+                
+                    <li><a class="toctree-l4" href="#meshpath-statement">MESHPATH statement</a></li>
+                
+                    <li><a class="toctree-l4" href="#region-statement">REGION statement</a></li>
+                
+                    <li><a class="toctree-l4" href="#objectendobject-sections">OBJECT...ENDOBJECT sections</a></li>
+                
+                    <li><a class="toctree-l4" href="#surfaceendsurface-sections">SURFACE...ENDSURFACE sections</a></li>
+                
+                    <li><a class="toctree-l4" href="#latticeendlattice-sections">LATTICE...ENDLATTICE sections</a></li>
+                
+                    <li><a class="toctree-l4" href="#materialendmaterial-sections">MATERIAL...ENDMATERIAL sections</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#5-a-compendium-of-sample-scuffgeo-files">5. A compendium of sample .scuffgeo files</a></li>
+                
+            
+            </ul>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Materials/">Material designations</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Transformations/">Geometric transformations</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Command-line application reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/GeneralReference/">General command-line reference</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-scatter/scuff-scatter/">scuff-scatter</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-transmission/scuff-transmission/">scuff-transmission</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-ldos/scuff-ldos/">scuff-ldos</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-tmatrix/scuff-tmatrix/">scuff-tmatrix</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-cas3D/scuff-cas3D/">scuff-cas3D</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-caspol/scuff-caspol/">scuff-caspol</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-neq/scuff-neq/">scuff-neq</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-RF/scuff-RF/">scuff-RF</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-static/scuff-static/">scuff-static</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-analyze/scuff-analyze/">scuff-analyze</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>API reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../API/libscuff/">libscuff</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>For developers</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../forDevelopers/Implementation/">Implementation</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../forDevelopers/DataStructures/">Data Structures</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../forDevelopers/Documentation/">Documentation</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">SCUFF-EM documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.."><span class="SmallCaps">scuff-em</span> documentation</a> &raquo;</li>
+    
+      
+        
+          <li>General reference &raquo;</li>
+        
+      
+    
+    <li>Geometry descriptions</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/homerreid/scuff-em/" class="icon icon-github"> Edit on GitHub</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="geometry-descriptions-in-scuff-em">Geometry Descriptions in scuff-EM</h1>
+<p>Geometries in <a class="wikilink" href="../../scuff-em/">scuff-em</a> are described by simple text files 
+that are conventionally given the file extension <code>.scuffgeo.</code> 
+The <code>.scuffgeo</code> file format supports a variety of options for 
+specifying scattering geometries.</p>
+<p>The simplest case is one in which you have a collection of
+compact homogeneous objects (which may be nested inside 
+one another). In this case, your <code>.scuffgeo</code> 
+file will simply specify mesh files representing the 
+surfaces of these objects, as well as optional material
+specifications for the frequency-dependent electrical properties
+of the media inside.
+(A <em>mesh</em> is a collection of flat triangular panels that 
+approximates a two-dimensional surface.
+<a class="wikilink" href="../../scuff-em/">scuff-em</a> doesn't do the meshing for you;
+you use external meshing software such as 
+<a href="http://geuz.org/gmsh">GMSH</a> or 
+<a href="http://www.comsol.com">COMSOL</a>
+for that.)</p>
+<p>In more complicated cases, it may not be possible to
+describe your geometry as a simple collection of
+objects. This is true, for example, if your geometry 
+contains any <em>multi-material junctions</em>---that is, 
+points at which three or more disparate media meet.
+In this case your <code>.scuffgeo</code> file will specify 
+a series of three-dimensional <em>regions</em> and a set of 
+two-dimensional meshed <em>surfaces</em> lying between them.</p>
+<p>Finally, your geometry may be infinitely <em>extended</em> in 
+one or two directions. Examples of 1D extended geometries
+include this description of
+<a href="../../examples/SiliconBeams/SiliconBeams/"><em>parallel silicon beams</em></a>,
+while examples of 2D extended geometries include
+a planar metamaterial array or an infinite square lattice
+of spheres. In this case, your <code>.scuffgeo</code> file will
+specify <em>lattice vectors</em> together with a description
+of the objects, or the regions and surfaces, that constitute
+just the <em>unit-cell</em> geometry, which is then infinitely
+periodically replicated to constitute the actual geometry.</p>
+<p>In what follows we will see how to write <code>.scuffgeo</code>
+files that describe each of these types of geometries.</p>
+<ol class="TOC">
+
+<p align="center">
+<b>Geometry Files in <span class="SmallCaps">scuff-em</span></b>
+</p>
+
+<li> <a href="#Simple">Simple geometries: One or more compact objects (possibly nested)</a>
+<li> <a href="#Complex">More complex geometries: multi-material junctions</a>
+<li> <a href="#Extended">Extended geometries: periodic boundary conditions</a>
+<li> <a href="#Reference"><code>.scuffgeo</code> file syntax reference</a>
+<li> <a href="#Examples">A compendium of <code>.scuffgeo</code> files</a>
+
+</ol>
+
+<p><a name="Simple"></a> </p>
+<h2 id="1-simple-geometries-one-or-more-compact-objects-possibly-nested">1. Simple Geometries: One or more compact objects (possibly nested)</h2>
+<p>The simplest <a class="wikilink" href="../../scuff-em/">scuff-em</a> geometries consist of 
+one or more <em>compact objects</em>---that is, finite volumes of homogeneous media,
+bounded by closed 2D surfaces. In this case, all meshed surfaces in the geometry 
+must be <em>closed</em> surfaces, and no two object surfaces may touch or overlap.
+Each surface is then associated with a single homogeneous material
+region---namely, the region interior to that surface---and we collectively
+refer to that material region and its closed surface as an <em>object.</em></p>
+<p>The <code>.scuffgeo</code> file for geometries of this type consists simply 
+of a sequence of <em>object declarations</em>, one for each compact object 
+in the geometry. A typical object declaration section looks something 
+like this:</p>
+<pre><code>OBJECT UpperSphere
+    MESHFILE Sphere_458.msh
+    MATERIAL Gold
+    DISPLACED 0 0 3
+    ROTATED 45 ABOUT 0 0 1
+ENDOBJECT
+</code></pre>
+
+<p>The string that follows the <code>OBJECT</code> keyword 
+(<code>UpperSphere</code> in this case) is an arbitrary 
+user-specified label that you may attach to your object
+for ease of identifying it in output files, etc. </p>
+<p>The only keyword that is strictly required within the 
+<code>OBJECT...ENDOBJECT</code> clause is <code>MESHFILE.</code> This specifies 
+a mesh file, generated by <a class="wikilink" href="../../gmsh/">gmsh</a>, <a class="wikilink" href="../../comsol/">comsol</a>, or other meshing 
+tools, describing the surface of your object. 
+<a class="wikilink" href="../../scuff-em/">scuff-em</a> will look for this file in several places: </p>
+<ul>
+<li>the current working directory</li>
+<li>the directory specified by the <code>SCUFF_MESH_PATH</code> environment variable</li>
+<li>any search directories specified using the <code>MESHPATH</code> keyword in the <code>.scuffgeo</code> file.</li>
+</ul>
+<p>The latter two options allow you to set up one or more common 
+repositories of mesh files which you can then re-use for 
+<a class="wikilink" href="../../scuff-em/">scuff-em</a> calculations launched from whatever directory you like.</p>
+<p>The optional <code>MATERIAL</code> keyword is used to select a 
+<a href="../Materials/"><span class="SC">scuff-em</span> material designation</a>
+(in this case, <code>Gold</code>) for the medium interior to 
+your object. The actual definition of the material <code>Gold</code>
+(given by a <code>MATERIAL...ENDMATERIAL</code> clause)
+may be present in the <code>.scuffgeo</code> file before the 
+<code>OBJECT</code> specification, or may exist in a separate 
+material database file. If you don't specify a <code>MATERIAL</code>
+for your object, it will be treated as a perfectly electrically 
+conducting (PEC) body. </p>
+<p>The optional <code>DISPLACED</code> and <code>ROTATED</code>
+keywords specify geometrical transformations 
+that are applied to the surface mesh after it is read in from 
+the mesh file. For example, if your mesh file describes a sphere 
+centered around the origin, and you include the line 
+<code>DISPLACED 0 0 3</code> in your <code>OBJECT...ENDOBJECT</code>
+clause, then your geometry as interpreted by 
+<a class="wikilink" href="../../scuff-em/">scuff-em</a> will contain a sphere
+centered around the point with cartesian coordinates 
+(0,0,3). For more details, see the 
+<a href="#Reference">syntax reference</a>
+below.</p>
+<p>Your <code>.scuffgeo</code> file may contain any number of
+<code>OBJECT...ENDOBJECT</code> clauses.
+The objects specified by these clauses may be 
+<a href="#NestedSpheres"><em>nested</em></a>,
+i.e. one object may be fully contained inside another 
+object; this will be autodetected by <a class="wikilink" href="../../scuff-em/">scuff-em</a>.</p>
+<p>(However, this simple way of specifying geometries has 
+the constraint that no two object surfaces may touch or intersect. 
+If you find yourself needing to describe geometries involving 
+objects whose surface touch---thus defining <em>multi-material junctions</em>---you
+you have graduated to writing the 
+<a href="#Complex">slightly more complicated type of <code>.scuffgeo</code> file described below</a>.)</p>
+<p>Here's an example of a simple <code>.scuffgeo</code> file describing 
+a smaller PEC sphere embedded inside a larger silicon dioxide
+sphere.</p>
+<pre><code># material specification for intrinsic silicon
+MATERIAL SILICON
+epsf = 1.035;      # \epsilon_infinity
+eps0 = 11.87;      # \epsilon_0 
+wp = 6.6e15;       # \plasmon frequency
+Eps(w) = epsf + (eps0-epsf)/(1-(w/wp)^2);
+ENDMATERIAL
+
+
+OBJECT SiliconSphere 
+MESHFILE Sphere_R1P0.msh
+MATERIAL Silicon
+ENDOBJECT 
+
+
+OBJECT InnerSphere 
+MESHFILE Sphere_R0P5.msh
+MATERIAL PEC
+ENDOBJECT 
+</code></pre>
+
+<p><img alt="SphericalShell" src="../SphericalShell.png" /></p>
+<p>Note that the <code>MATERIAL PEC</code> specification for the 
+inner sphere is actually superfluous---we could simply have 
+omitted it, because PEC is the default material assumed for 
+<code>OBJECT</code> clauses. On the other hand, if we had 
+instead said <code>MATERIAL Vacuum</code>, then we would be 
+describing an <em>vacuum</em> sphere inside our larger 
+silicon sphere---that is, a spherical <em>shell</em> of silicon,
+as considered in 
+[this <span class="SmallCaps">scuff-scatter</span> example][SphericalShellExample].</p>
+<p><a name="Complex"></a></p>
+<h2 id="2-more-complex-geometries-multi-material-junctions">2. More complex geometries: multi-material junctions</h2>
+<p>The attempt to describe a geometry simply as a collection of compact objects 
+breaks down for more complicated situations. For example, consider the composite 
+sphere (or "bihemisphere") depicted in the figure below; this is a spherical
+object formed by adjoining an upper hemisphere of material A to a lower 
+hemisphere of material B. </p>
+<p><strong>Schematic depiction of a Bihemisphere</strong></p>
+<p><img alt="BiHemisphere" src="../BiHemisphere.png" /></p>
+<p><strong>Mesh representations of the three interface surfaces</strong>
+(shown displaced for clarity)</p>
+<p><img alt="BiHemisphereMesh" src="../BiHemisphereMesh.png" /></p>
+<p>Our first thought might be to think of the upper hemispherical volume as one 
+compact object, and the lower hemispherical volume as a second compact object.
+But this doesn't work, because we can't assign a unique closed surface to each
+compact object. Clearly the upper hemispherical surface "belongs" to object 
+<code>UpperHemisphere,</code> and the lower hemispherical surface "belongs" to
+object <code>LowerHemisphere.</code> But to which volume do we assign the surface 
+of the equatorial plane?</p>
+<p>More formally, the key aspect of the bihemisphere geometry that prevents 
+it from being describable as a collection of compact objects is the presence
+of <em>multi-material junctions</em>---that is, regions of the geometry 
+at which three or more homogeneous material regions meet. The equator of 
+the bihemisphere is a multi-material junction. </p>
+<p>(A note on terminology: In <a class="wikilink" href="../../scuff-em/">scuff-em</a> parlance,
+a multi-material junction (MMJ) is a point or line 
+at which <em>three or more</em> homogeneous regions meet.
+Of course any meshed surface in a geometry---including 
+the closed surfaces used to describe simple compact-object 
+geometries above---lies at the junction of
+at least <em>two</em> regions, and is thus technically 
+a "multi-material" junction, but is not considered 
+an MMJ for the purposes of the present discussion.)</p>
+<p>Geometries involving multi-material junctions are described in 
+<a class="wikilink" href="../../scuff-em/">scuff-em</a> by explicitly 
+specifying the various <em>regions</em> and <em>surfaces</em> 
+that are present. Each <em>region</em> is a contiguous volume 
+throughout which the material properties are spatially constant.
+Each <em>surface</em> is a mesh describing a closed <em>or open</em> 
+2D surface represented as a 
+union of flat triangular panels. Each surface must lie at the 
+interface between precisely two regions.</p>
+<p>For example, in the bihemisphere geometry, there are three 
+regions: </p>
+<ul>
+<li>The exterior medium (vacuum).</li>
+<li>The upper hemispherical volume (material A).</li>
+<li>The lower hemispherical volume (material B).</li>
+</ul>
+<p>And there are three surfaces:</p>
+<ul>
+<li>The upper hemispherical surface, which is an interface between regions 1 and 2.</li>
+<li>The lower hemispherical surface, which is an interface between regions 1 and 3.</li>
+<li>The surface of the equatorial plane, which is an interface between regions 2 and 3.</li>
+</ul>
+<p>The <code>.scuffgeo</code> file for geometry described
+using regions and surfaces will consist, unsurprisingly,
+of <code>REGION</code> lines and 
+<code>SURFACE...ENDSURFACE</code> clauses.</p>
+<p>Each <code>REGION</code> line should look something like this:</p>
+<pre><code>REGION UpperHemisphereVolume MATERIAL Gold
+</code></pre>
+
+<p>The string identifier following the <code>REGION</code> keyword is an 
+arbitrary label you may assign to your region. The string identifier
+following the <code>MATERIAL</code> keyword is a 
+<a href="../Materials/"><span class="SmallCaps">scuff-em</span> material designation</a>
+specifying the frequency-dependent material properties 
+of the region.</p>
+<p>All <a class="wikilink" href="../../scuff-em/">scuff-em</a> geometries by default
+start off with an implicitly defined region
+named <code>Exterior</code>, of material <code>VACUUM</code>.
+If you want to change the material properties of the 
+exterior medium---for example, if your entire scattering geometry
+is embedded in ethanol---you can say something like </p>
+<pre><code>REGION Exterior MATERIAL Ethanol
+</code></pre>
+
+<p>Otherwise, you can refer freely to the region named 
+<code>Exterior</code> without defining it, as it will 
+be automatically present in all <a class="wikilink" href="../../scuff-em/">scuff-em</a>
+geometries.</p>
+<p>Surfaces in a regions-and-surfaces geometry are identified 
+by <code>SURFACE...ENDSURFACE</code> clauses.
+These are similar to <code>OBJECT...ENDOBJECT</code> 
+clauses, but with a couple of differences. A typical 
+example looks like this:</p>
+<pre><code>SURFACE UpperHemisphereSurface
+    MESHFILE UpperHemisphereSurface.msh
+    REGIONS Exterior UpperHemisphereVolume
+ENDSURFACE
+</code></pre>
+
+<p>The string identifier following the <code>SURFACE</code> keyword
+is an arbitrary label you may assign to your surface to 
+help identify it in output files, etc.</p>
+<p>The mandatory <code>MESHFILE</code> keyword specifies the 
+name of a file from which <a class="wikilink" href="../../scuff-em/">scuff-em</a>
+will attempt to read the surface mesh.</p>
+<p>The mandatory <code>REGIONS</code> keyword identifies the two 
+regions that lie on the two sides of the surface.
+These should be regions that were previously declared using 
+<code>REGION</code> statements (with the exception of the
+region <code>Exteror</code>, which is always implicitly 
+present.)</p>
+<p>The <em>order</em> in which you specify surfaces is 
+important for the internal workings of <a class="wikilink" href="../../scuff-em/">scuff-em</a>,
+although most output quantities reported by most 
+<a class="wikilink" href="../../scuff-em/">scuff-em</a> codes will not depend on 
+this ordering.</p>
+<p>The distinction is this: The surface normal vector is taken to 
+point <em>into</em> the first region specified with the 
+<code>REGIONS</code> keyword, and thus <em>away from</em> the second
+region. What this means internally is that surface currents on 
+the surface contribute to the fields in the first region with a 
+<em>positive</em> sign, and to the fields in the second region 
+with a <em>negative</em> sign. Again, however, this is all handled 
+consistently within the internal workings of the code, so flipping
+the order in the <code>REGION</code> specification should not
+lead to any differences in physically relevant output quantities.
+(If you flip the order of the regions, the currents on the surface
+change sign, and their contributions to the fields in each region
+change sign, so the fields don't change.)</p>
+<p>In addition to the mandatory <code>MESHFILE</code> 
+and <code>REGIONS</code> keyword, the <code>SURFACE...ENDSURFACE</code>
+may also include <code>DISPLACED</code> and/or <code>ROTATED</code>
+statements to apply geometrical transforms to your surface,
+as is possible in <code>OBJECT...ENDOBJECT</code> clauses.</p>
+<p>Note that any geometry that may be represented in the simpler
+form discussed above (as a sequence of <code>OBJECT...ENDOBJECT</code>
+clauses) may also be represented in the regions-and-surfaces 
+language. 
+A compact object consists of a single region (the interior of 
+the object) and a single surface (lying at the interface between
+the interior and exterior regions). Thus, if the meshfile 
+<code>MySphere.msh</code> represents a meshed sphere, then the 
+following two <code>.scuffgeo</code> files are equivalent:</p>
+<pre><code>REGION SphereInterior MATERIAL Gold
+
+SURFACE TheSphere
+MESHFILE Sphere.msh
+REGIONS  Exterior SphereInterior
+ENDSURFACE
+</code></pre>
+
+<pre><code>OBJECT TheSphere
+MESHFILE Sphere.msh
+MATERIAL Gold
+ENDSURFACE
+</code></pre>
+
+<p>(And see <a href="#NestedSpheres">below</a> for an example of how to 
+rewrite the nested-spheres example from above
+in the regions-and-surfaces language.)</p>
+<p>In some cases it may be convenient to write a single meshfile
+that contains mesh descriptions for multiple surfaces 
+in your geometry. This may be done by including a
+<code>MESHTAG</code> specification in your 
+<code>SURFACE...ENDSURFACE</code> clause:</p>
+<pre><code>SURFACE MySurface
+    MESHFILE MyMeshFile.msh
+    MESHTAG 12
+    REGIONS MyRegion1 MyRegion2
+ENDSURFACE
+</code></pre>
+
+<p>What this does is to instruct <a class="wikilink" href="../../scuff-em/">scuff-em</a> to
+read from <code>MyMeshFile.msh</code> only those triangular panels
+that have been tagged by the meshing program as belonging 
+to entity 12. 
+(Different meshing programs have different ways of tagging mesh 
+entities. In <a class="wikilink" href="../../gmsh/">gmsh</a>, the tag corresponds to
+what <a class="wikilink" href="../../gmsh/">gmsh</a> calls the "physical region;"
+it is the argument that enters statements
+such as <code>Physical Surface(12)={...}</code> in the <code>.geo</code>
+file, and it is the number printed as the <em><code>physical-number</code></em>
+field in the <code>.msh</code> output file.)</p>
+<p>As an example, here's a <code>.scuffgeo</code> file for the bihemisphere 
+geometry described above. The meshfile <code>BiHemisphere_126.msh</code>
+was produced by a <a class="wikilink" href="../../gmsh/">gmsh</a> file named 
+[BiHemisphere.geo](BiHemisphere.geo};
+note that the three separate interface surfaces
+are created with three separate <code>Physical Surface</code>
+commands, each specifying a different tag, which is then used 
+in the <code>.scuffgeo</code> file below to distinguish different 
+entities in the <code>.msh</code> file.</p>
+<pre><code>REGION Exterior        MATERIAL VACUUM
+REGION UpperHemisphere MATERIAL CONST_EPS_20
+REGION LowerHemisphere MATERIAL CONST_EPS_2
+
+SURFACE LowerHemisphereSurface 
+    MESHFILE BiHemisphere_126.msh
+    MESHTAG 1
+    REGIONS Exterior LowerHemisphere
+ENDSURFACE
+
+SURFACE UpperHemisphereSurface 
+    MESHFILE BiHemisphere_126.msh
+    MESHTAG 2
+    REGIONS Exterior UpperHemisphere
+ENDSURFACE
+
+SURFACE EquatorialPlane
+    MESHFILE BiHemisphere_126.msh
+    PHYSICAL_REGION 3
+    REGIONS UpperHemisphere LowerHemisphere
+ENDSURFACE
+</code></pre>
+
+<h1 id="3-extended-geometries-periodic-boundary-conditions">3. Extended geometries: periodic boundary conditions</h1>
+<p><a class="wikilink" href="../../scuff-em/">scuff-em</a> can handle geometries that are
+infinitely extended (that is, periodically repeated) in one or two
+dimensions using Bloch-periodic boundary conditions. In this case,
+your <code>.scuffgeo</code> file will contain a specification of 
+the objects, or the surfaces and regions, that constitute the 
+<em>unit-cell</em> geometry, together with a specification of the 
+<em>lattice vectors</em> that describe how the unit cell is periodically
+repeated.</p>
+<blockquote>
+<p><strong>Note</strong>: The current version of <a class="wikilink" href="../../scuff-em/">scuff-em</a> 
+requires that 2D lattice basis vectors have vanishing <em>z</em>
+component and that 1D lattice basis vectors have vanishing
+<em>y</em> and <em>z</em> components. In other words, for 2D periodicity
+the lattice vectors must live in the <em>xy</em> plane, while
+for 1D periodicity the lattice vector must be aligned 
+with the <em>x</em> axis. This places no restriction on the 
+actual geometric configurations that may be treated, but 
+may be inconvenient for some users who are accustomed to 
+setting up their periodic geometries in a different way.
+(For example, if you are studying thin films, and you are 
+used to having the film surfaces parallel to the <em>yz</em>
+plane with the film thickness in the <em>x</em> direction, you will
+need to rotate your coordinate system so that the surfaces 
+re parallel to the <em>xy</em> plane and the thickness is in 
+the <em>z</em> direction.) This limitation may be lifted in 
+a future code release.</p>
+<p><strong>Note</strong>: An additional restriction in the current version
+of <a class="wikilink" href="../../scuff-em/">scuff-em</a> is that 2D lattices must be <em>rectangular</em> 
+lattices: the first <code>LATTICE</code> vector must have only its 
+<script type="math/tex">x</script> component nonzero, while the second <code>LATTICE</code> vector 
+must have only its <script type="math/tex">y</script> component nonzero (although the two 
+vectors may have different lengths).
+. This actually <em>does</em> place restrictions on 
+the geometries that may be treated (for example, it 
+excludes hexagonal lattices), and it will be remedied
+as soon as somebody wants to run calculations on a 
+non-square-lattice geometry and is willing to help me
+test the new feature.</p>
+</blockquote>
+<p>The lattice is specified using a <code>LATTICE...ENDLATTICE</code>
+section. For example, a square lattice with lattice constant 
+of 1 <script type="math/tex">\mu</script>m would look like this: </p>
+<pre><code>LATTICE
+VECTOR 1 0 
+VECTOR 0 1 
+ENDLATTICE 
+</code></pre>
+
+<p>Each <code>VECTOR xx yy</code> statement adds a new lattice vector
+with cartesian components of <code>(xx,yy)</code> length units.</p>
+<p>You may specify one or two <code>VECTOR</code> statements.
+If you specify a single <code>VECTOR</code>, your unit-cell
+geometry will be periodically repeated in just that one direction.
+If you specify two <code>VECTOR</code> statements, your unit-cell
+geometry will be periodically repeated in a two-dimensional lattice
+pattern.</p>
+<p>Having specified the lattice vectors, the remainder of your 
+<code>.scuffgeo</code> file just consists of a specification of 
+the unit-cell geometry as if it were a standalone compact 
+geometry. For example, you may include <code>OBJECT...ENDOBJECT</code> 
+sections to describe any compact objects that exist inside 
+the unit cell, or <code>REGION</code> statements and <code>SURFACE...ENDSURFACE</code>
+sections to describe more complicated unit-cell geometries.</p>
+<h2 id="compact-objects-fully-contained-in-the-unit-cell">Compact objects fully contained in the unit cell</h2>
+<p>The simplest case is that in which your geometry is simply 
+an array of isolated compact objects (with "isolated" here meaning 
+that each object does not touch its periodically repeated images.)
+In this case, you will want to make sure that the objects 
+lie entirely within the unit cell (not straddling its boundaries),</p>
+<p>For example, here's a <code>.scuffgeo</code> file describing
+a square lattice of cubical nanoparticles:</p>
+<p><strong> The unit cell geometry </strong></p>
+<p><img alt="CubeUnitCell.png" src="../CubeUnitCell.png" /></p>
+<p><strong> The innermost 25 cells of the full geometry </strong></p>
+<p><img alt="CubeLattice.png" src="../CubeLattice.png" /></p>
+<p><strong> The <code>.scuffgeo</code> file </strong> </p>
+<pre><code>LATTICE
+VECTOR 0.5  0
+VECTOR 0.0  0.5
+ENDLATTICE 
+
+OBJECT CubicalNanoparticle
+MESHFILE Cube.msh
+MATERIAL Silicon
+ENDOBJECT
+</code></pre>
+
+<h2 id="surfaces-that-straddle-the-unit-cell-boundary">Surfaces that straddle the unit-cell boundary</h2>
+<p>More generally, your unit-cell geometry may include surfaces 
+that straddle the unit-cell boundary. (This will be the case 
+whenever the infinite surfaces you are describing are 
+<em>connected</em>, as opposed to the isolated arrays of objects
+considered above). For example, here's a <code>.scuffgeo</code>
+file representing a thin metallic film perforated by an 
+array of holes. The parameters here are chosen to mimic 
+the geometry studied by 
+<a href="http://prl.aps.org/abstract/PRL/v86/i6/p1114_1">Martin-Moreno et al, <em>Physical Review Letters</em> <strong>86</strong> 1114 (2001).</a></p>
+<p><strong> The unit cell geometry</strong></p>
+<p><img alt="PTFUnitCell1.png" src="../PTFUnitCell1.png" /></p>
+<p><strong>The innermost 25 cells of the full geometry</strong></p>
+<p><img alt="PTFLattice.png" src="../PTFLattice.png" /></p>
+<p><strong> The <code>.scuffgeo</code> file</strong></p>
+<pre><code>LATTICE
+VECTOR 0.75  0
+VECTOR 0.0   0.75
+ENDLATTICE 
+
+OBJECT UnitCellMesh
+MESHFILE PFT_794.msh
+MATERIAL Gold
+ENDOBJECT
+</code></pre>
+
+<h2 id="meshing-constraints-for-surfaces-that-straddle-the-unit-cell-boundary">Meshing constraints for surfaces that straddle the unit-cell boundary</h2>
+<p>There is an important constraint on the surface meshes that may be<br />
+used to define the unit-cell geometry for problems involving continuous symmetries.</p>
+<p>The constraint is this: 
+<em>For any panel edge that lies on a unit-cell 
+boundary, there must be an identical edge lying on the opposite 
+side of the unit-cell boundary.</em> One way to think about this is 
+that the periodically-repeated images of the unit-cell geometry must 
+all fit together "nicely" at the unit-cell boundaries, as indicated 
+in the right panel of the figure above.</p>
+<p><a name="Reference"></a></p>
+<h1 id="4-syntax-reference-for-the-scuffgeo-file-format">4. Syntax reference for the <code>.scuffgeo</code> file format</h1>
+<p>A <code>.scuffgeo</code> file consists of one or more multiline
+<em>sections</em> (delimited by starting and ending keywords)
+plus zero or more single-line <em>statements</em>.</p>
+<p>Blank lines and comments (lines beginning with a <code>#</code> symbol)
+are ignored in <code>.scuffgeo</code> files.</p>
+<h3 id="meshpath-statement"><code>MESHPATH</code> statement</h3>
+<table width="75%" align="center" border="1" cellpadding="5" cellspacing="5">
+
+<tr> <th width="200"> Keyword </th> 
+<th> Description </th> 
+</tr>
+
+<tr> 
+<td> <code>MESHPATH</code> <b><i>my-mesh-path</i></b></td>
+<td> Adds the directory <b><i>my-mesh-path</i></b>
+     to the path searched by <span class="SmallCaps">scuff-em</span> 
+     for mesh files.
+</td>
+</tr> 
+</table>
+
+<h3 id="region-statement"><code>REGION</code> statement</h3>
+<table width="75%" align="center" border="1" cellpadding="5" cellspacing="5">
+
+<tr> <th width="200"> Keyword </th> 
+<th> Description </th> 
+</tr>
+
+<tr> 
+<td> <code>REGION</code> <b><i>Name</i></b>
+     <code>MATERIAL</code> <b><i>Material</i></b>
+</td>
+<td> 
+     Adds a new homogeneous material region
+     to the geometry with name <b><i>Name</b></i>
+     and material properties described by the     
+     <span class="SmallCaps">scuff-em</span> 
+     material designation <b><i>Material</i></b>.
+
+     As discussed above, <code>REGION</code>
+     statements are <i>not needed</i>
+     for geometries consisting of compact homogeneous
+     bodies described by <code>OBJECT</code> sections.
+     (Each <code>OBJECT</code> section automatically
+     adds a new region to the problem for the interior
+     of the object in question.) <code>REGION</code>
+     statements are generally only necessary when your 
+     geometry contains 
+     <a href="#Complex">multi-material junctions.</a>
+
+</td>
+</tr> 
+</table>
+
+<h3 id="objectendobject-sections"><code>OBJECT...ENDOBJECT</code> sections</h3>
+<table width="75%" align="center" border="1" cellpadding="5" cellspacing="5">
+
+<tr> <th width="200"> Keyword </th> 
+<th> Description </th> 
+</tr>
+
+<tr> 
+<td> <code>OBJECT</code> <b><i>object label</i></b> </td>
+<td> Begins an object declaration for an object with the specified
+label.
+</td>
+</tr> 
+
+<tr> 
+<td> <code>MESHFILE</code> <b><i>MyFile.msh</i></b> </td>
+<td> Specifies the mesh file that defines the closed surface
+     of the object.
+</td>
+</tr> 
+
+<tr> 
+<td> <code>MESHTAG </code> <b><i>xx</i></b> </td>
+<td> Specifies that only panels tagged in the mesh
+     file with tag <b><i>xx</i></b> are to be considered 
+     part of the surface of this object. This allows a
+     single <code>.msh</code> file to contain multiple
+     closed surfaces each defining distinct objects.
+</td>
+</tr> 
+
+<tr> 
+<td> <code>MATERIAL </code> <b><i>MyMaterial</i></b> </td>
+<td> Specifies a <span class="SmallCaps">scuff-em</span>
+     material designation for the homogeneous medium
+     interior to the object.
+</td>
+</tr> 
+
+<tr> 
+<td> <code>DISPLACED</code> <b><i>xx yy zz</i></b> </td>
+<td> Indicates that the contents of the specified mesh 
+file are to be translated through a displacement vector with 
+cartesian components (<b><i>xx, yy, zz</i></b>before
+inclusion in the geometry.
+</td>
+</tr>
+
+<tr> 
+<td> <code>ROTATED</code> <b><i>dd</i></b> <code>ABOUT</code> <b><i>nx ny nz</i></b> </td>
+<td> Indicates that the contents of the specified mesh 
+file are to be rotated through an angle of <b><i>dd</i></b>
+degrees (<b>degrees, not radians</b>) about an axis passing 
+through the origin and through the point with cartesian coordinates
+(<b><i>nx, ny, nz/</i></b>before inclusion in the geometry.
+</td>
+</tr> 
+
+<tr> 
+<td> <code>ENDOBJECT</code></td>
+<td> Ends the object declaration.
+</td>
+</tr> 
+</table>
+
+<h3 id="surfaceendsurface-sections"><code>SURFACE...ENDSURFACE</code> sections</h3>
+<h3 id="latticeendlattice-sections"><code>LATTICE...ENDLATTICE</code> sections</h3>
+<h3 id="materialendmaterial-sections"><code>MATERIAL...ENDMATERIAL</code> sections</h3>
+<blockquote>
+<p>For details on how to write a <code>MATERIAL</code> section,
+see <a href="../Materials/">here</a>.</p>
+</blockquote>
+<p><a name="Examples"></a> </p>
+<h1 id="5-a-compendium-of-sample-scuffgeo-files">5. A compendium of sample <code>.scuffgeo</code> files</h1>
+<p>The images corresponding to the <code>.scuffgeo</code> files below were 
+obtained using the <code>scuff-analyze</code> utility distributed with 
+the <a class="wikilink" href="../../scuff-em/">scuff-em</a> suite, like this:</p>
+<pre><code class="bash">% scuff-analyze --geometry MyGeometry.scuffgeo --WriteGMSHFiles
+</code></pre>
+
+<p>This produces a <a class="wikilink" href="../../gmsh/">gmsh</a> post-processing file 
+named <code>MyGeometry.pp</code> that you can open in 
+<a class="wikilink" href="../../gmsh/">gmsh</a> to visualize your geometry and
+make sure <a class="wikilink" href="../../scuff-em/">scuff-em</a> interpreted your 
+<code>.scuffgeo</code> file as you intended.
+This is generally a good thing to do before launching any serious
+calculations.</p>
+<p><a name="SingleSphere"></a>
+<strong>A single perfectly electrically conducting (PEC) sphere</strong></p>
+<p>This is perhaps the simplest imaginable <a class="wikilink" href="../../scuff-em/">scuff-em</a>
+geometry.</p>
+<pre><code>OBJECT PECSphere 
+    MESHFILE Sphere.msh
+ENDOBJECT 
+</code></pre>
+
+<p><img alt="Sphere" src="../Sphere.png" /></p>
+<hr />
+<p><a name="TwoSpheres"></a>
+<strong>A gold sphere and a silicon sphere</strong></p>
+<p>This example illustrates the use of the <code>DISPLACED</code>
+keyword to displace a surface mesh relative to its positioning 
+in the mesh file. Note in particular that this keyword allows
+us to use the same mesh file to describe two different spheres,
+which speeds things up by allowing <a class="wikilink" href="../../scuff-em/">scuff-em</a> 
+to reuse certain parts of the calculation, thus eliminating
+redundant numerical work. (Without the <code>DISPLACED</code> 
+keyword in this example, the two spheres would be sitting on 
+top of one another.)</p>
+<pre><code>MATERIAL SILICON
+  epsf = 1.035;      # \epsilon_infinity
+  eps0 = 11.87;      # \epsilon_0 
+  wp = 6.6e15;       # \plasmon frequency
+  Eps(w) = epsf + (eps0-epsf)/(1-(w/wp)^2);
+ENDMATERIAL
+
+MATERIAL GOLD
+  wp = 1.37e16; 
+  gamma = 5.32e13;
+  Eps(w) = 1 - wp^2 / (w * (w + i*gamma));
+ENDMATERIAL
+
+MESHPATH /home/homer/work/MeshFiles
+
+OBJECT GoldSphere
+  MESHFILE Sphere.msh
+  MATERIAL Gold
+  DISPLACED 0 0 3
+ENDOBJECT 
+
+OBJECT SiliconSphere
+  MESHFILE Sphere.msh
+  MATERIAL Silicon
+ENDOBJECT 
+</code></pre>
+
+<p><img alt="TwoSpheres.png" src="../TwoSpheres.png" /></p>
+<hr />
+<p><a name="NestedSpheres"></a>
+<strong>A small gold sphere inside a larger silicon dioxide sphere</strong></p>
+<pre><code>MATERIAL SILICON
+  epsf = 1.035;      # \epsilon_infinity
+  eps0 = 11.87;      # \epsilon_0 
+  wp = 6.6e15;       # \plasmon frequency
+  Eps(w) = epsf + (eps0-epsf)/(1-(w/wp)^2);
+ENDMATERIAL
+
+OBJECT SiliconSphere 
+  MESHFILE Sphere_R1P0.msh
+  MATERIAL Silicon
+ENDOBJECT 
+
+
+OBJECT InnerSphere 
+  MESHFILE Sphere_R0P5.msh
+  MATERIAL PEC
+ENDOBJECT 
+</code></pre>
+
+<p><img alt="SphericalShell" src="../SphericalShell.png" /></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Materials/" class="btn btn-neutral float-right" title="Material designations"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../Installing/" class="btn btn-neutral" title="Installation"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    <!-- Copyright etc -->
+    </p>
+  </div>
+
+  <a href="http://homerreid.com/scuff-em"> 
+    <span class="SmallCaps">scuff-em</span>
+  </a> documentation, by
+  <a href="http://homerreid.com">Homer Reid</a>
+
+  <p>
+  <font size=-1>
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> 
+  using a customized theme modeled 
+  after the 
+  <a href="https://github.com/snide/sphinx_rtd_theme">theme</a>
+  provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  </font>
+
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../Installing/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../Materials/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Material designations - SCUFF-EM documentation</title>
+  
+
+  <link rel="shortcut icon" href="../../scuffEM.ico">
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "reference/Materials"
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script src="../../js/theme.js"></script> 
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+  <script src="../../mathjaxhelper.js"></script>
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+
+      <p align="center"
+      <a href="../..">
+         <img align="center" height="auto" width="100%"  
+              src="../../img/scuffEMNavBar.png"
+      </a>
+
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> SCUFF-EM documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../..">SCUFF-EM documentation</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Examples</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/CubeTorus/">Casimir forces in a compact geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/SiliconBeams/SiliconBeams/">Casimir forces in a 1D extended geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/SiliconSlabs/SiliconSlabs/">Casimir forces in a 2D extended geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/SiO2Spheres/SiO2Spheres/">Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/TipSubstrate/TipSubstrate/">Spatial distribution of heat flux from a warm tip over a cold substrate</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/HalfSpaceLDOS/HalfSpaceLDOS/">LDOS and dyadic Green functions above an infinite aluminum half-space</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/PlatonicSolids/PlatonicSolids/">Electrostatic polarizability of platonic solids</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>General reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../TopLevel/">Top-level overview</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Installing/">Installation</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Geometries/">Geometry descriptions</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Material designations</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#1-built-in-materials">1. Built-In Materials</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#2-frequency-independent-materials">2. Frequency-independent materials</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#3-materials-specified-using-tabulated-data">3. Materials specified using tabulated data</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#4-user-defined-materials">4. User-defined materials</a></li>
+                
+                    <li><a class="toctree-l4" href="#the-location-of-the-database-file">The location of the database file</a></li>
+                
+                    <li><a class="toctree-l4" href="#entries-in-the-database-file">Entries in the database file</a></li>
+                
+                    <li><a class="toctree-l4" href="#a-sample-database-file">A Sample Database File</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#5-scuff-plotepsmu-a-command-line-utility-for-verifying-material-properties">5. scuff-plotEpsMu: A command-line utility for verifying material properties</a></li>
+                
+            
+            </ul>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Transformations/">Geometric transformations</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Command-line application reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/GeneralReference/">General command-line reference</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-scatter/scuff-scatter/">scuff-scatter</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-transmission/scuff-transmission/">scuff-transmission</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-ldos/scuff-ldos/">scuff-ldos</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-tmatrix/scuff-tmatrix/">scuff-tmatrix</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-cas3D/scuff-cas3D/">scuff-cas3D</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-caspol/scuff-caspol/">scuff-caspol</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-neq/scuff-neq/">scuff-neq</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-RF/scuff-RF/">scuff-RF</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-static/scuff-static/">scuff-static</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-analyze/scuff-analyze/">scuff-analyze</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>API reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../API/libscuff/">libscuff</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>For developers</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../forDevelopers/Implementation/">Implementation</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../forDevelopers/DataStructures/">Data Structures</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../forDevelopers/Documentation/">Documentation</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">SCUFF-EM documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.."><span class="SmallCaps">scuff-em</span> documentation</a> &raquo;</li>
+    
+      
+        
+          <li>General reference &raquo;</li>
+        
+      
+    
+    <li>Material designations</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/homerreid/scuff-em/" class="icon icon-github"> Edit on GitHub</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="material-descriptions-in-scuff-em">Material descriptions in <a class="wikilink" href="../../scuff-em/">scuff-em</a></h1>
+<p><a class="wikilink" href="../../scuff-em/">scuff-em</a> allows the
+frequency-dependent electrical properties (dielectric
+permittivity and magnetic permeability) of materials to be 
+specified in one of several ways:</p>
+<ul>
+<li>You can use a <em>built-in</em> material like <code>PEC</code> or <code>Vacuum.</code>  </li>
+<li>You can specify a material with <em>constant</em> (frequency-independent) 
+permittivity and permeability.</li>
+<li>You can specify a data file containing tabulated 
+permittivity and permeability values over a range of 
+frequencies; in this case, <a class="wikilink" href="../../scuff-em/">scuff-em</a>
+will interpolate between values in your file to estimate
+material properties at arbitrary frequencies.</li>
+<li>You can define your own material with 
+arbitrary frequency-dependent material properties,
+specified using mathematical expressions.</li>
+</ul>
+<p>Materials are generally specified to
+<a class="wikilink" href="../../scuff-em/">scuff-em</a> by including a line like </p>
+<pre><code class="bash">MATERIAL MyMaterialName
+</code></pre>
+
+<p>in the 
+<a href="../Geometries/"><code>.scuffgeo</code> file</a>;
+here <code>MyMaterialName</code> is a string constructed in different
+ways depending on which of the above types of material specification
+you have in mind, as detailed below.</p>
+<p>Note that material specification in <a class="wikilink" href="../../scuff-em/">scuff-em</a> are 
+<em>case-insensitive.</em> The strings <code>TEFLON,</code> <code>Teflon,</code> and <code>teflon</code> all 
+refer to the same material.</p>
+<p>Note also that the values of the permittivity and permeability
+described by <a class="wikilink" href="../../scuff-em/">scuff-em</a> material designations are always
+the dimensionless <em>relative</em> permittivity and permeability,
+with values of 1 in vacuum.</p>
+<ol class="TOC">
+
+<p align="center">
+ <b> Material specifications in <span class="SmallCaps">scuff-em</span></b>
+</p>
+
+ <li> <a href="#BuiltIn">Built-in materials</a>
+ <li> <a href="#Constant">Frequency-independent materials</a>
+ <li> <a href="#Tabulated">Materials specified using tabulated data</a>
+ <li> <a href="#Parsed">User-defined materials</a>
+ <li> <a href="#scuff-plotEpsMu">
+       <span class="SmallCaps">scuff-plotepseu:</span> A command-line 
+       utility for verifying material properties</a>
+</ol>
+
+<hr />
+<p><a name="BuiltIn"></a></p>
+<h2 id="1-built-in-materials">1. Built-In Materials</h2>
+<p>The two built-in materials are <code>Vacuum</code> and 
+<code>PEC</code>. The former describes a material with 
+<script type="math/tex">\epsilon=\mu=1</script> at all frequencies, while the latter describes 
+a <strong>P</strong>erfect <strong>E</strong>lectrical <strong>C</strong>onductor.</p>
+<hr />
+<p><a name="Constant"></a></p>
+<h2 id="2-frequency-independent-materials">2. Frequency-independent materials</h2>
+<p>For a non-magnetic material with frequency-independent permittivity
+<script type="math/tex">\epsilon</script>, you can use a material specification of the form </p>
+<pre><code>MATERIAL CONST_EPS_11.8
+</code></pre>
+
+<p>where you would replace <code>11.8</code> with the constant value 
+of the permittivity. (Note that <code>CONST_EPS_11.8</code> 
+is all one word, with no spaces.)</p>
+<p>For a material with frequency-independent permittivity <script type="math/tex">\epsilon</script>
+<em>and</em> frequency-independent permeability <script type="math/tex">\mu\ne1</script>, you can 
+use a material-property designation of the form </p>
+<pre><code>MATERIAL CONST_EPS_11.8_MU_0.8
+</code></pre>
+
+<p>where you would replace <code>0.8</code> with the constant value 
+of the permeability. (Again, all one word, no spaces.)</p>
+<p>You can also specify materials with negative and/or complex 
+permittivity: </p>
+<pre><code>MATERIAL CONST_EPS_-54+46i
+</code></pre>
+
+<p>Of course, a dielectric function with a frequency-independent 
+imaginary part is unphysical, but no problems will arise as long 
+as you are only doing computations at a single frequency.</p>
+<hr />
+<p><a name="Tabulated"></a></p>
+<h2 id="3-materials-specified-using-tabulated-data">3. Materials specified using tabulated data</h2>
+<p>If you have tabulated frequency data for the permittivity and/or permeability
+of your material, you can specify this to <a class="wikilink" href="../../scuff-em/">scuff-em</a> using a material 
+specification of the form</p>
+<pre><code>MATERIAL FILE_MyDataFile.dat
+</code></pre>
+
+<p>where the <code>FILE_</code> part of the string is fixed, and the 
+remainder is the name of your data file (which is of course case-sensitive.)
+Again, note that the material property specification is all one word with
+no spaces.</p>
+<p>The data file is interpreted by <a class="wikilink" href="../../scuff-em/">scuff-em</a>
+in the following way:</p>
+<ul>
+<li>Blank lines and comments (lines beginning with <code>#</code>) are ignored.</li>
+<li>All other lines must contain either two or three space-separated 
+strings, which are interpreted as</li>
+</ul>
+<blockquote>
+<p><strong><em>Omega</em></strong> <strong><em>Epsilon(Omega)</em></strong>  [<strong><em>Mu(Omega)</em></strong>]</p>
+</blockquote>
+<p>where <strong><em>Omega</em></strong> is an angular frequency, <strong><em>Epsilon(Omega)</em></strong> 
+is the relative permittivity at that frequency, and the optional
+<strong><em>Mu(Omega)</em></strong> is the relative permeability.</p>
+<p>The values specified for <em>Eps</em> and <em>Mu</em> may be
+<a href="../../applications/GeneralReference/#Complex">complex numbers.</a>.</p>
+<p><strong>Note that <script type="math/tex">\omega</script> values in material data files are always specified
+in units of radians per second, <em>not</em> the specialized frequency
+units that are used in <a class="wikilink" href="../../scuff-em/">scuff-em</a> application codes.</strong> For 
+example, an angular frequency of <script type="math/tex">3\cdot 10^{14}</script> rad/sec would
+be specified as <code>1.0</code> in (for example) the <code>--omega</code> argument
+to <a class="wikilink" href="../../scuff-scatter/">scuff-scatter</a>, but as <code>3.0e14</code> in a material data file.</p>
+<p>For example, suppose you have tabulated data for the 
+frequency-dependent permittivity of silver over a finite
+range of frequencies. Put those data into a text file
+called (for example) <code>Silver.dat</code>
+with the angular frequencies (in radians per second)
+on the first column, and the complex relative permittivity
+on the second column, so that the data file looks something
+like this:</p>
+<pre><code>2.5133e15 -28.832+0.39369i
+2.6180e15 -26.235+0.35815i
+...
+5.2360e15 -2.3459+0.23547i
+5.3855e15 -1.7349+0.24727i
+</code></pre>
+
+<p>This says that, for example, at angular frequency
+<script type="math/tex">\omega=2.5133\cdot 10^{15}\hbox{ rad/sec}</script> we have 
+relative permittivity 
+<script type="math/tex">\epsilon(\omega)=-28.832 + 0.39369i.</script>
+</p>
+<p>Then your <code>.scuffgeo</code> file may refer to a material
+named <code>FILE_Silver.dat,</code> whose dielectric function at
+arbitrary frequencies <script type="math/tex">\omega</script> will be obtained by
+interpolating the data specified in your data file.
+For example, to describe a sphere made of this material
+your ``.scuffgeo'' file could contain a section like</p>
+<pre><code>OBJECT SilverSphere
+    MESHFILE Sphere.msh
+    MATERIAL FILE_Silver.dat
+ENDOBJECT
+</code></pre>
+
+<p>Note: If you are doing calculations at <em>imaginary</em> frequencies
+(in <a class="wikilink" href="../../scuff-cas3d/">scuff-cas3d</a>, <a class="wikilink" href="../../scuff-caspol/">scuff-caspol</a>, or <a class="wikilink" href="../../scuff-scatter/">scuff-scatter</a> with
+an imaginary value specified for <code>--omega</code>)
+and you have tabulated data for the relative permittivity
+on the imaginary frequency axis, you can play exactly the 
+same game described above, except that now the <script type="math/tex">\omega</script>
+values on the first column of the data file will be 
+pure imaginary (they will end in <code>i</code> or <code>I</code>).
+(Also, on physical grounds the relative permittivity at
+each frequency should be real-valued and positive in this 
+case).</p>
+<hr />
+<p><a name="Parsed"></a></p>
+<h1 id="4-user-defined-materials">4. User-defined materials</h1>
+<p>For more general materials, you will want to define your own
+frequency-dependent material designations. You do this by 
+first creating an entry in a database file that describes 
+your material, and then referring back to that entry in 
+<code>.scuffgeo</code> files and anywhere else you need to 
+specify a material property designation. (Alternatively, 
+you can define the material on-the-fly inside a 
+<code>MATERIAL...ENDMATERIAL</code> section in your <code>.scuffgeo</code> file. 
+See <a href="../Geometries/">here</a> for more details.</p>
+<p><a name="Database"></a></p>
+<h3 id="the-location-of-the-database-file">The location of the database file</h3>
+<p><a class="wikilink" href="../../libmatprop/">libmatprop</a> looks in the following three places for its 
+database file:</p>
+<ul>
+<li>
+<p>The file <code>${HOME}/.matprop.dat</code> (i.e. a file 
+named <code>.matprop.dat</code> in the top-level directory
+for your user account.)</p>
+</li>
+<li>
+<p>The file named by the environment variable <code>SCUFF_MATPROPFILE.</code> </p>
+</li>
+<li>
+<p>A file named <code>matprop.dat</code> in the current working
+directory. (Note the absence of a leading period as compared
+with the previous item.)</p>
+</li>
+</ul>
+<p>Personally, I think the first or second of these options is the most
+convenient; they allow you to create and maintain a single database
+file that contains all the common materials you will ever need to use.</p>
+<h3 id="entries-in-the-database-file">Entries in the database file</h3>
+<p>A typical entry in the database file looks like this:</p>
+<pre><code>MATERIAL SiliconCarbide
+
+  EpsInf = 6.7;
+  a0     = -3.32377e28;
+  a1     = +8.93329e11;
+  b0     = -2.21677e28;
+  b1     = 8.93329e11;
+
+  Eps(w) = EpsInf * ( w^2 + a1*i*w + a0 ) / ( w^2 + b1*i*w + b0);
+
+ENDMATERIAL
+</code></pre>
+
+<p>The first line defines the name of the material (the name you
+would supply as an argument to the <code>MATERIAL</code> keyword 
+in a <code>.scuffgeo</code> file, for example).</p>
+<p>The next few lines define some constants. These constant
+definitions are specific to this particular <code>MATERIAL</code>;
+two different <code>MATERIAL</code> sections in the database 
+file may define the same constant to have two different values.</p>
+<p>The line <code>Eps(w) = ...</code> defines the 
+frequency-dependent relative permittivity of your material.
+The expression to the right of the <code>=</code> sign is 
+parsed and interpreted as a function
+of the single variable <code>w,</code> the angular frequency.
+The expression may refer to any of the constants you have defined 
+for the present material; it may also use the symbols
+<code>i</code> and <code>I</code> to denote the imaginary unit.</p>
+<p><strong>Again, <script type="math/tex">\omega</script> values in material property specifications are 
+always interpreted in units of radians per second, <em>not</em> the 
+specialized angular-frequency units that are used in some of the 
+<a class="wikilink" href="../../scuff-em/">scuff-em</a> application codes.</strong></p>
+<p>If your material has <script type="math/tex">\mu\ne 1</script>, you may optionally also include a line 
+of the form</p>
+<pre><code>Mu(w) = some-function(w)
+</code></pre>
+
+<h3 id="a-sample-database-file">A Sample Database File</h3>
+<p>Here is a sample database file:<a href="../matprop.dat"><code>matprop.dat</code></a>.
+I recommend you rename this file to <code>${HOME}/.matprop.dat</code> and 
+augment it as necessary for your applications.</p>
+<hr />
+<p><a name="scuff-plotEpsMu"></a> </p>
+<h1 id="5-scuff-plotepsmu-a-command-line-utility-for-verifying-material-properties">5. <code>scuff-plotEpsMu:</code> A command-line utility for verifying material properties</h1>
+<p>The <a class="wikilink" href="../../scuff-em/">scuff-em</a> distribution comes with an application program named 
+<code>scuff-plotEpsMu</code> that you
+can use to make sure that a material property designation is 
+interpreted the way you intended. You can run this command with 
+no arguments to get usage information:</p>
+<pre><code class="bash">% scuff-plotEpsMu 
+
+error: --material option is mandatory (aborting)
+
+usage: scuff-plotEpsMu [options]
+
+options: 
+
+--material xx  (name of material)
+--OmegaMin xx  (minimum angular frequency)
+--OmegaMax xx  (maximum angular frequency)
+--gnuplot      (use GNUPLOT to plot results)
+--geometry xx  (.scuffgeo file containing material definition)
+</code></pre>
+
+<p>Running <code>scuff-plotEpsMu --material MyMaterial</code>
+will produce an output file name <code>MyMaterial.epsmu</code>,
+which will contain 7 columns of data, representing the 
+permittivity and permeability of your material at various 
+angular frequencies on both the real and imaginary &omega; 
+axes:</p>
+<p align="center">
+<table align="center" border="1" cellpadding="5" cellspacing="5">
+<tr> 
+<th> Column   </th>
+<th> 1 </th> <th> 2 </th> <th> 3 </th> <th> 4 </th> 
+<th> 5 </th> <th> 6 </th> <th> 7 </th>
+</tr> 
+<tr> 
+<th> Quantity </th>
+<td> &omega; </td>
+<td> Re &epsilon;(&omega;)  </td>
+<td> Im &epsilon;(&omega;)  </td>
+<td> Re &mu;(&omega;)  </td>
+<td> Im &mu;(&omega;)  </td>
+<td> &epsilon;(i&omega;) </td>
+<td> &mu;(i&omega;) </td>
+</tr> 
+</table>
+</p>
+
+<p>If <a class="wikilink" href="../../gnuplot/">gnuplot</a> is installed on your system,
+then you can use the <code>--GnuPlot</code> option to generate pop-up 
+plots of <script type="math/tex">\epsilon(\omega)</script> and <script type="math/tex">\mu(\omega)</script> vs. <script type="math/tex">\omega</script>
+for your material.</p>
+<p>You can use <code>--OmegaMin/--OmegaMax</code> to set the
+range of angular frequencies over which material properties 
+will be plotted. The defaults are equivalent to specifying 
+<code>--OmegaMin 1e8</code> and <code>--OmegaMax 1e16</code>, 
+respectively.</p>
+<p>If your material is defined on-the-fly in a <code>.scuffgeo</code> 
+file, you can pass that file to <code>scuff-plotEpsMu</code> using 
+the <code>--geometry</code> option. (If your material is defined
+in a <a href="#Database">material database file</a>
+then this option is not needed.)</p>
+<p>For example, in 
+<a href="scuff-em/scuff-scatter/index.shtml#Mie">this example</a>
+we used a material named <code>SiliconCarbide,</code> which was defined
+in a geometry file named <code>SiCSphere.scuffgeo.</code> To check the
+the frequency-dependent permittivity of this material, we can say</p>
+<pre><code class="bash">% scuff-plotEpsMu --material SiliconCarbide --geometry SiCSphere.scuffgeo --gnuplot
+</code></pre>
+
+<p>This will pop up four graphs, of which one looks something like this:</p>
+<p><img alt="SiliconCarbideEps.png" src="../SiliconCarbideEps.png" /></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Transformations/" class="btn btn-neutral float-right" title="Geometric transformations"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../Geometries/" class="btn btn-neutral" title="Geometry descriptions"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    <!-- Copyright etc -->
+    </p>
+  </div>
+
+  <a href="http://homerreid.com/scuff-em"> 
+    <span class="SmallCaps">scuff-em</span>
+  </a> documentation, by
+  <a href="http://homerreid.com">Homer Reid</a>
+
+  <p>
+  <font size=-1>
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> 
+  using a customized theme modeled 
+  after the 
+  <a href="https://github.com/snide/sphinx_rtd_theme">theme</a>
+  provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  </font>
+
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../Geometries/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../Transformations/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

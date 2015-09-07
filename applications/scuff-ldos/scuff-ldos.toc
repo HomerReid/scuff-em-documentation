@@ -1,0 +1,9 @@
+\contentsline {section}{\numberline {1}Green's functions and LDOS in the non-periodic case}{2}
+\contentsline {section}{\numberline {2}Extension to the periodic case}{3}
+\contentsline {section}{\numberline {3}API Routines for computing dyadic Green's functions}{5}
+\contentsline {section}{\numberline {A}Fields of a phased array of point dipole radiators}{6}
+\contentsline {section}{\numberline {B}Analytical expressions for the dyadic Green's functions of a dielectric half-space}{9}
+\contentsline {subsection}{\numberline {B.1}Plane-wave decomposition of non-periodic point-source fields}{9}
+\contentsline {subsection}{\numberline {B.2}Plane-wave decomposition of non-periodic DGFs}{11}
+\contentsline {subsection}{\numberline {B.3}Plane-wave decomposition of periodic DGFs}{11}
+\contentsline {section}{\numberline {C}Rewriting infinite 2D $\mathbf {k}$-integrals as Brillouin-zone integrals}{13}

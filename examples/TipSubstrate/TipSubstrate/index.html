@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Spatial distribution of heat flux from a warm tip over a cold substrate - SCUFF-EM documentation</title>
+  
+
+  <link rel="shortcut icon" href="../../../scuffEM.ico">
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/highlight.css">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "examples/TipSubstrate/TipSubstrate"
+  </script>
+  
+  <script src="../../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../../js/highlight.pack.js"></script>
+  <script src="../../../js/theme.js"></script> 
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+  <script src="../../../mathjaxhelper.js"></script>
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+
+      <p align="center"
+      <a href="../../..">
+         <img align="center" height="auto" width="100%"  
+              src="../../../img/scuffEMNavBar.png"
+      </a>
+
+      <div class="wy-side-nav-search">
+        <a href="../../.." class="icon icon-home"> SCUFF-EM documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../../..">SCUFF-EM documentation</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Examples</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../CubeTorus/">Casimir forces in a compact geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../SiliconBeams/SiliconBeams/">Casimir forces in a 1D extended geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../SiliconSlabs/SiliconSlabs/">Casimir forces in a 2D extended geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../SiO2Spheres/SiO2Spheres/">Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Spatial distribution of heat flux from a warm tip over a cold substrate</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#gmsh-geometry-files-for-paraboloidal-tip-and-cylindrical-substrate">gmsh geometry files for paraboloidal tip and cylindrical substrate</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#gmsh-geometry-files">gmsh geometry files</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#list-of-geometric-transformations">List of geometric transformations</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#list-of-evaluation-points">List of evaluation points</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#run-scuff-neq">Run scuff-neq</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#plot-z-directed-poynting-flux-from-the-tip-through-the-vacuum-and-into-the-substrate">Plot z-directed Poynting flux from the tip through the vacuum and into the substrate:</a></li>
+                
+            
+            </ul>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../HalfSpaceLDOS/HalfSpaceLDOS/">LDOS and dyadic Green functions above an infinite aluminum half-space</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../PlatonicSolids/PlatonicSolids/">Electrostatic polarizability of platonic solids</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>General reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/TopLevel/">Top-level overview</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/Installing/">Installation</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/Geometries/">Geometry descriptions</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/Materials/">Material designations</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/Transformations/">Geometric transformations</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Command-line application reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/GeneralReference/">General command-line reference</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-scatter/scuff-scatter/">scuff-scatter</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-transmission/scuff-transmission/">scuff-transmission</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-ldos/scuff-ldos/">scuff-ldos</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-tmatrix/scuff-tmatrix/">scuff-tmatrix</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-cas3D/scuff-cas3D/">scuff-cas3D</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-caspol/scuff-caspol/">scuff-caspol</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-neq/scuff-neq/">scuff-neq</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-RF/scuff-RF/">scuff-RF</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-static/scuff-static/">scuff-static</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-analyze/scuff-analyze/">scuff-analyze</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>API reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../API/libscuff/">libscuff</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>For developers</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../forDevelopers/Implementation/">Implementation</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../forDevelopers/DataStructures/">Data Structures</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../forDevelopers/Documentation/">Documentation</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../..">SCUFF-EM documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.."><span class="SmallCaps">scuff-em</span> documentation</a> &raquo;</li>
+    
+      
+        
+          <li>Examples &raquo;</li>
+        
+      
+    
+    <li>Spatial distribution of heat flux from a warm tip over a cold substrate</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/homerreid/scuff-em/" class="icon icon-github"> Edit on GitHub</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="spatial-distribution-of-heat-flux-from-a-warm-tip-over-a-cold-substrate">Spatial distribution of heat flux from a warm tip over a cold substrate</h1>
+<p>The files for this example may be found in the
+<code>share/scuff-em/examples/TipSubstrate</code> subdirectory
+of your <a class="wikilink" href="../../../scuff-em/">scuff-em</a> installation.</p>
+<hr />
+<h2 id="gmsh-geometry-files-for-paraboloidal-tip-and-cylindrical-substrate"><a class="wikilink" href="../../../gmsh/">gmsh</a> geometry files for paraboloidal tip and cylindrical substrate</h2>
+<ul>
+<li><a href="../Paraboloid.geo"><code>Paraboloid.geo</code></a></li>
+<li><a href="../Cylinder.geo"><code>Cylinder.geo</code></a></li>
+</ul>
+<p>The following script generates coarse and fine meshes of 
+these objects; it uses <a href="../../../applications/scuff-analyze/scuff-analyze/#RenameMesh">this script</a>.</p>
+<pre><code class="bash">#!/bin/bash
+for SHAPE in Paraboloid Cylinder
+do
+  for L in 1.0 0.5
+  do
+    gmsh -2 -clscale ${L} ${SHAPE}.geo -o ${SHAPE}.msh
+    RenameMesh ${SHAPE}.msh
+  done
+done
+</code></pre>
+
+<hr />
+<h2 id="gmsh-geometry-files"><a class="wikilink" href="../../../gmsh/">gmsh</a> geometry files</h2>
+<ul>
+<li><a href="../TipSubstrate_Coarse.scuffgeo"><code>TipSubstrate_Coarse.scuffgeo</code></a></li>
+<li><a href="../TipSubstrate_Fine.scuffgeo"><code>TipSubstrate_Fine.scuffgeo</code></a></li>
+</ul>
+<p><img alt="Tip-substrate picture" src="../TipSubstratePicture.png" /></p>
+<hr />
+<h2 id="list-of-geometric-transformations">List of geometric transformations</h2>
+<ul>
+<li><a href="../TipSubstrate.trans"><code>TipSubstrate.trans</code></a></li>
+</ul>
+<hr />
+<h2 id="list-of-evaluation-points">List of evaluation points</h2>
+<ul>
+<li><a href="../EPFile"><code>EPFile</code></a></li>
+</ul>
+<hr />
+<h2 id="run-scuff-neq">Run <a class="wikilink" href="../../../scuff-neq/">scuff-neq</a></h2>
+<pre><code class="bash">#!/bin/bash
+ARGS=&quot;&quot;
+ARGS=&quot;${ARGS} --geometry ../TipSubstrate_Fine.scuffgeo&quot;
+ARGS=&quot;${ARGS} --TransFile ../TipSubstrate.trans&quot;
+ARGS=&quot;${ARGS} --Omega 0.7&quot;
+ARGS=&quot;${ARGS} --EPFile ../EPFile&quot;
+ARGS=&quot;${ARGS} --Power --ZForce&quot;
+
+scuff-neq ${ARGS}
+</code></pre>
+
+<hr />
+<h2 id="plot-z-directed-poynting-flux-from-the-tip-through-the-vacuum-and-into-the-substrate">Plot <script type="math/tex">z</script>-directed Poynting flux from the tip through the vacuum and into the substrate:</h2>
+<pre><code class="bash">gnuplot&gt; plot 'TipSubstrate_Fine.SRFlux' u 5:9
+</code></pre>
+
+<p><img alt="Tip-substrate data" src="../TipSubstrateData.png" /></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../HalfSpaceLDOS/HalfSpaceLDOS/" class="btn btn-neutral float-right" title="LDOS and dyadic Green functions above an infinite aluminum half-space"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../SiO2Spheres/SiO2Spheres/" class="btn btn-neutral" title="Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    <!-- Copyright etc -->
+    </p>
+  </div>
+
+  <a href="http://homerreid.com/scuff-em"> 
+    <span class="SmallCaps">scuff-em</span>
+  </a> documentation, by
+  <a href="http://homerreid.com">Homer Reid</a>
+
+  <p>
+  <font size=-1>
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> 
+  using a customized theme modeled 
+  after the 
+  <a href="https://github.com/snide/sphinx_rtd_theme">theme</a>
+  provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  </font>
+
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../../SiO2Spheres/SiO2Spheres/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../HalfSpaceLDOS/HalfSpaceLDOS/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

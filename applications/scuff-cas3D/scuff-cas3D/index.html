@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>scuff-cas3D - SCUFF-EM documentation</title>
+  
+
+  <link rel="shortcut icon" href="../../../scuffEM.ico">
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/highlight.css">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "applications/scuff-cas3D/scuff-cas3D"
+  </script>
+  
+  <script src="../../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../../js/highlight.pack.js"></script>
+  <script src="../../../js/theme.js"></script> 
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+  <script src="../../../mathjaxhelper.js"></script>
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+
+      <p align="center"
+      <a href="../../..">
+         <img align="center" height="auto" width="100%"  
+              src="../../../img/scuffEMNavBar.png"
+      </a>
+
+      <div class="wy-side-nav-search">
+        <a href="../../.." class="icon icon-home"> SCUFF-EM documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../../..">SCUFF-EM documentation</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Examples</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../examples/CubeTorus/">Casimir forces in a compact geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../examples/SiliconBeams/SiliconBeams/">Casimir forces in a 1D extended geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../examples/SiliconSlabs/SiliconSlabs/">Casimir forces in a 2D extended geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../examples/SiO2Spheres/SiO2Spheres/">Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../examples/TipSubstrate/TipSubstrate/">Spatial distribution of heat flux from a warm tip over a cold substrate</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../examples/HalfSpaceLDOS/HalfSpaceLDOS/">LDOS and dyadic Green functions above an infinite aluminum half-space</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../examples/PlatonicSolids/PlatonicSolids/">Electrostatic polarizability of platonic solids</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>General reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/TopLevel/">Top-level overview</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/Installing/">Installation</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/Geometries/">Geometry descriptions</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/Materials/">Material designations</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/Transformations/">Geometric transformations</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Command-line application reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../GeneralReference/">General command-line reference</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../scuff-scatter/scuff-scatter/">scuff-scatter</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../scuff-transmission/scuff-transmission/">scuff-transmission</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../scuff-ldos/scuff-ldos/">scuff-ldos</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../scuff-tmatrix/scuff-tmatrix/">scuff-tmatrix</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 current">
+        <a class="current" href="./">scuff-cas3D</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#1a-compact-objects">1a. Compact objects</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#1b-extended-objects">1b. Extended objects</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#2-scuff-cas3d-command-line-options">2. scuff-cas3d command-line options</a></li>
+                
+                    <li><a class="toctree-l4" href="#common-options">Common options</a></li>
+                
+                    <li><a class="toctree-l4" href="#options-requesting-casimir-output-quantities">Options requesting Casimir output quantities</a></li>
+                
+                    <li><a class="toctree-l4" href="#options-specifying-temperature">Options specifying temperature</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#3-scuff-cas3d-output-files">3. scuff-cas3d output files</a></li>
+                
+                    <li><a class="toctree-l4" href="#the-log-file">The .log file</a></li>
+                
+                    <li><a class="toctree-l4" href="#the-out-file">The .out file</a></li>
+                
+                    <li><a class="toctree-l4" href="#the-byxi-file">The .byXi file</a></li>
+                
+                    <li><a class="toctree-l4" href="#the-byxikbloch-file">The .byXikBloch file</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#4-examples-of-casimir-calculations-using-scuff-cas3d">4. Examples of Casimir calculations using scuff-cas3d</a></li>
+                
+            
+            </ul>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../scuff-caspol/scuff-caspol/">scuff-caspol</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../scuff-neq/scuff-neq/">scuff-neq</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../scuff-RF/scuff-RF/">scuff-RF</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../scuff-static/scuff-static/">scuff-static</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../scuff-analyze/scuff-analyze/">scuff-analyze</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>API reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../API/libscuff/">libscuff</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>For developers</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../forDevelopers/Implementation/">Implementation</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../forDevelopers/DataStructures/">Data Structures</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../forDevelopers/Documentation/">Documentation</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../..">SCUFF-EM documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.."><span class="SmallCaps">scuff-em</span> documentation</a> &raquo;</li>
+    
+      
+        
+          <li>Command-line application reference &raquo;</li>
+        
+      
+    
+    <li>scuff-cas3D</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/homerreid/scuff-em/" class="icon icon-github"> Edit on GitHub</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1>Computing thermal-equilibrium Casimir energies, forces, 
+    and torques with <span class="SC">scuff-cas3d</span>
+</h1>
+
+<p><a class="wikilink" href="../../../scuff-cas3d/">scuff-cas3d</a> is a command-line application within the <a class="wikilink" href="../../../scuff-em/">scuff-em</a> suite
+for modeling Casimir interactions between compact or extended homogeneous
+bodies of arbitary shape and arbitrary (linear, isotropic, piecewise homogeneous)
+frequency-dependent permittivity and permeability. <a class="wikilink" href="../../../scuff-cas3d/">scuff-cas3d</a> implements the 
+<a href="http://dx.doi.org/10.1103/PhysRevA.88.022514"><em>fluctuating-surface current (FSC)</em> approach</a>
+to numerical Casimir modeling.]</p>
+<p><a class="wikilink" href="../../../scuff-cas3d/">scuff-cas3d</a> handles <em>equilibrium</em> Casimir interactions, in which
+all interacting bodies and the external medium in which they are embedded 
+exist at the same temperature (which may be absolute zero). If you
+need to model Casimir interactions between bodies at <em>different</em> 
+temperatures, the tool you want is 
+<a class="SC" href="../../scuff-neq/scuff-neq/">scuff-neq</a>.
+(However: if your exterior embedding medium is not at zero 
+temperature, then the <em>total</em> Casimir forces will involve
+both non-equilibrium contributions computed with <a class="wikilink" href="../../../scuff-neq/">scuff-neq</a> 
+and equilibrium contributions (at the temperature of the 
+exterior medium) computed with <a class="wikilink" href="../../../scuff-cas3d/">scuff-cas3d</a>.</p>
+<p>The basic flow of a typical <a class="wikilink" href="../../../scuff-cas3d/">scuff-cas3d</a> run goes something like this:</p>
+<ul>
+<li>
+<p>You create a <a href="../../../reference/Geometries/"><span class="SC">scuff-em</span> geometry file</a>
+describing the interacting objects or surfaces in your geometry.</p>
+</li>
+<li>
+<p>Optionally, you define a 
+<a href="../../../reference/Transformations/">list of geometric transformations</a> 
+to be applied to the geometry for Casimir computations.
+For example, if your geometry consists of two nanoparticles, you
+might ask for the Casimir force between the particles at 10 different
+values of the surface--surface separation.</p>
+</li>
+<li>
+<p>You run <a class="wikilink" href="../../../scuff-cas3d/">scuff-cas3d</a> with various
+<a href="#CommandLineOptions">command-line options</a> specifying the
+desired output quantities (energy, <script type="math/tex">y</script>-force, etc.), whether
+you want frequency-resolved or frequency-summed data, and
+other options. This produces various text-based 
+<a href="#OutputFiles">output files</a>, which you will typically
+plot using <a class="SC" href="../www.gnuplot.info">gnuplot</a> or other 
+plotting or post-processing tools.</p>
+</li>
+</ul>
+<div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#1-what-scuff-cas3d-actually-computes">1. What scuff-cas3d actually computes</a><ul>
+<li><a href="#1a-compact-objects">1a. Compact objects</a></li>
+<li><a href="#1b-extended-objects">1b. Extended objects</a></li>
+</ul>
+</li>
+<li><a href="#2-scuff-cas3d-command-line-options">2. <span class="SC">scuff-cas3d</span> command-line options</a><ul>
+<li><a href="#common-options">Common options</a></li>
+<li><a href="#options-requesting-casimir-output-quantities">Options requesting Casimir output quantities</a></li>
+<li><a href="#options-specifying-temperature">Options specifying temperature</a></li>
+</ul>
+</li>
+<li><a href="#3-scuff-cas3d-output-files">3. <span class="SC">scuff-cas3d</span> output files</a><ul>
+<li><a href="#the-log-file">The .log file</a></li>
+<li><a href="#the-out-file">The .out file</a></li>
+<li><a href="#the-byxi-file">The .byXi file</a></li>
+<li><a href="#the-byxikbloch-file">The .byXikBloch file</a></li>
+</ul>
+</li>
+<li><a href="#4-examples-of-casimir-calculations-using-scuff-cas3d">4. Examples of Casimir calculations using <span class="SC">scuff-cas3d</span></a></li>
+</ul>
+</div>
+<h1 id="1-what-scuff-cas3d-actually-computes">1. What <a class="wikilink" href="../../../scuff-cas3d/">scuff-cas3d</a> actually computes</h1>
+<h2 id="1a-compact-objects">1a. Compact objects</h2>
+<p>The Casimir energy <script type="math/tex">\mathcal{E}</script> of a collection of compact bodies,
+and the <script type="math/tex">i</script>-directed Casimir force <script type="math/tex">\mathcal{F}_i</script> and 
+torque <script type="math/tex">\mathcal{T}_i</script> on one of 
+those bodies, are computed in the FSC approach as integrals 
+over the positive imaginary frequency axis
+(<script type="math/tex">\omega=i\xi</script>) of the form</p>
+<p>
+<script type="math/tex; mode=display"> \begin{array}{ccc}
+   \mathcal{E}   &=& \int_0^\infty E(\xi) \, d\xi \\
+   \mathcal{F}_i &=& \int_0^\infty F_i(\xi) \, d\xi \\
+   \mathcal{T}_i &=& \int_0^\infty T_i(\xi) \, d\xi \\
+   \end{array}
+</script>
+</p>
+<p>(This is for the zero-temperature case; at a finite temperature
+<script type="math/tex">T</script> the imaginary-frequency integration is replaced by a 
+Matsubara sum according to the prescription
+<script type="math/tex; mode=display"> \int_0^\infty F(\xi) \, d\xi 
+   \qquad \Longrightarrow \qquad
+   (\Delta \xi) \sideset{}{'}{\sum}_{n=0}^\infty F(n\Delta\xi),
+   \qquad \Delta\xi =\frac{2\pi k T}{\hbar}
+</script>
+where the primed sum indicates that the <script type="math/tex">n=0</script> term is 
+to be weighted by <script type="math/tex">1/2.</script>)</p>
+<p>The heart of the FSC algorithm implemented by <a class="wikilink" href="../../../scuff-cas3d/">scuff-cas3d</a>
+is an efficient technique for computing the quantities
+<script type="math/tex">\{E,F_i,T_i\}(\xi)</script>---that is, the contributions of 
+individual imaginary frequencies to the total Casimir 
+quantities---at arbitrary frequencies <script type="math/tex">\xi</script>.
+The question of <em>which</em> frequencies <script type="math/tex">\xi</script> are sampled
+depends on the command-line options you specify:</p>
+<ul>
+<li>
+<p>If you use the <code>--Xi</code> or <code>--XiFile</code> command-line options to 
+specify one or more particular values of <script type="math/tex">\xi</script>, then <a class="wikilink" href="../../../scuff-cas3d/">scuff-cas3d</a>
+will compute and report just the integrand <script type="math/tex">F(\xi)</script> at those
+values. In this case, the code will produce a <code>.byXi</code> file,
+but no <code>.out</code> file.</p>
+</li>
+<li>
+<p>If, instead, you use the <code>--temperature</code> command-line option to specify 
+a temperature at which to calculate, then <a class="wikilink" href="../../../scuff-cas3d/">scuff-cas3d</a>
+will evaluate the Matsubara sums to compute the full 
+Casimir quantities at the given temperature. In this 
+case you will get both a <code>.byXi</code> and a <code>.out</code> file; 
+the <code>.byXi</code> file will report data on the Casimir
+integrands at the Matsubara frequencies
+<script type="math/tex">\xi_n\equiv n\Delta \xi</script> for <script type="math/tex">n=0,1,\cdots</script>
+</p>
+</li>
+<li>
+<p>If you don't specify any of the above, then <a class="wikilink" href="../../../scuff-cas3d/">scuff-cas3d</a>
+defaults to performing a full numerical frequency integration
+to compute zero-temperature Casimir quantities. In 
+this case, you will get both a <code>.byXi</code> and a <code>.out</code>
+file; the <code>.byXi</code> file reports data on the Casimir
+integrands at the frequencies <script type="math/tex">\{\xi\}</script> chosen by 
+the built-in integrator.</p>
+</li>
+</ul>
+<h2 id="1b-extended-objects">1b. Extended objects</h2>
+<p>For an extended material configuration described by a
+<a href="../../../reference/Geometries/#Extended">periodic geometry</a>
+with Bloch-periodic boundary conditions, the Casimir force 
+<em>density</em> (that is, the force <strong>per unit length</strong> for a 1D 
+extended geometry, or <strong>per unit area</strong> for a 2D extended 
+geometry) is computed in the FSC approach as multi-dimensional 
+integrals over both imaginary frequencies <script type="math/tex">\xi</script> and Bloch 
+vectors <script type="math/tex">\mathbf{k}</script>:</p>
+<p>
+<script type="math/tex; mode=display"> \mathcal{F}
+   = 
+   \int_0^\infty d\xi \,
+    \underbrace{\int_{\text{BZ}} 
+     f(\xi, \mathbf{k}) 
+     \, d\mathbf{k}}_{\equiv F(\xi)}
+</script>
+</p>
+<p>(Expressions for the Casimir energy and torque are similar).
+The Bloch vector <script type="math/tex">\mathbf k</script> is a one-component vector
+for 1D-extended geometries (such as 
+<a href="../../../examples/SiliconBeams/SiliconBeams/">infinite-length cylinders or beams</a>,
+and a two-component vector
+for 2D-extended geometries (such as 
+<a href="../../../examples/SiliconSlabs/SiliconSlabs/">infinite-area slabs</a>).
+The <script type="math/tex">\mathbf k</script> integral here ranges over the <em>Brillouin
+zone</em> (BZ)</p>
+<p><a class="wikilink" href="../../../scuff-cas3d/">scuff-cas3d</a> uses the FSC algorithm to compute
+values of the integrand <script type="math/tex">f(\xi, \mathbf k)</script> at 
+individual <script type="math/tex">(\xi, \mathbf k)</script> points.</p>
+<p>The FSC algorithm implemented by <a class="wikilink" href="../../../scuff-cas3d/">scuff-cas3d</a>
+is an efficient technique for computing the quantity
+<script type="math/tex"> f(\xi, \mathbf k)</script>---that is, the contributions of
+individual (imaginary frequency, wavevector) pairs
+<script type="math/tex">(\xi,\mathbf k)</script>---to the total Casimir quantities.
+The question of <em>which</em> (<script type="math/tex">\xi, \mathbf k)</script> points are 
+sampled depends on the command-line options you specify:</p>
+<ul>
+<li>
+<p>If you use the <code>--XikBlochFile</code> command-line option
+to specify a list of <script type="math/tex">(\xi, \mathbf k)</script> points, then 
+<a class="wikilink" href="../../../scuff-cas3d/">scuff-cas3d</a> will compute and report just the 
+integrand <script type="math/tex">f(\xi, \mathbf k)</script> at those values. 
+In this case, the code will produce a <code>.byXikBloch</code> file,
+but no other output files.</p>
+</li>
+<li>
+<p>If you use the <code>--Xi</code> or <code>--XiFile</code> command-line options to
+specify one or more particular values of <script type="math/tex">\xi</script> (but not
+specific values of <script type="math/tex">\mathbf k</script>), then <a class="wikilink" href="../../../scuff-cas3d/">scuff-cas3d</a> will
+numerically evaluate the Brillouin-zone integral over 
+<script type="math/tex">\mathbf k</script> and will report the resulting value of the 
+quantity <script type="math/tex">F(\xi)</script> at each <script type="math/tex">\xi</script> value. 
+In this case, the code will produce two output files
+<strong>(1)</strong> a <code>.byXi</code> file reporting values of <script type="math/tex">F(\xi)</script> at the 
+<script type="math/tex">\xi</script> points you specified, and <strong>(2)</strong> a <code>.byXikBloch</code>
+file reporting values of the <script type="math/tex">\mathbf k</script> integrand <script type="math/tex">f(\xi, \mathbf k)</script>
+at each of the <script type="math/tex">\mathbf k</script> points sampled by the 
+built-in integrator.</p>
+</li>
+<li>
+<p>If you use the <code>--temperature</code> command-line option to specify
+a temperature at which to calculate, then <a class="wikilink" href="../../../scuff-cas3d/">scuff-cas3d</a>
+will evaluate the Matsubara sums to compute the full 
+Casimir quantities at the given temperature. In this 
+case you will get three output files: 
+<strong>(1)</strong> a <code>.out</code> file reporting the full Matsubara-summed
+Casimir quantities,
+<strong>(2)</strong> a <code>.byXi</code> file reporting values of the function
+<script type="math/tex">F(\xi)</script> at each Matsubara frequency; and 
+<strong>(3)</strong> a <code>.byXikBloch</code>
+file reporting values of the <script type="math/tex">\mathbf k</script> integrand <script type="math/tex">f(\xi, \mathbf k)</script>
+at each point sampled by the built-in integrator.</p>
+</li>
+<li>
+<p>If you don't specify any of the above, then <a class="wikilink" href="../../../scuff-cas3d/">scuff-cas3d</a>
+defaults to performing a full numerical frequency integration
+to compute zero-temperature Casimir quantities. In
+this case, you will get the same three output files
+as in the case of the previous item (<code>.out</code>, <code>.byXi</code>, <code>.byXikBloch</code>);
+the only difference is that the <script type="math/tex">\xi</script> points reported
+in the <code>.byXi</code> and <code>.byXikBloch</code> files are the quadrature 
+points chosen by the built-in integrator instead of the 
+Matsubara frequencies.</p>
+</li>
+</ul>
+<p><a name="CommandLineOptions"></a></p>
+<h1 id="2-scuff-cas3d-command-line-options">2. <span class="SC">scuff-cas3d</span> command-line options</h1>
+<h3 id="common-options">Common options</h3>
+<p><a class="wikilink" href="../../../scuff-cas3d/">scuff-cas3d</a> recognizes the following subset of the 
+[list of commonly accepted options to <span class="SC">scuff-em</span> command-line codes][CommonOptions].</p>
+<p class="toc"><code>--geometry
+--TransFile
+--Xi
+--XiFile
+--XikBlochFile
+--XiQuadrature
+--XiMin
+--BZQuadrature
+--BZSymmetry
+--MaxBZSamples
+--AbsTol
+--RelTol
+--FileBase
+--Cache
+--ReadCache
+--WriteCache</code></p>
+<h3 id="options-requesting-casimir-output-quantities">Options requesting Casimir output quantities</h3>
+<p class="toc"><code>--Energy
+--XForce
+--YForce
+--ZForce
+--Torque ax ay az</code></p>
+<p>Specifies the Casimir quantities in which you are
+interested: the energy, the Cartesian components
+of the force, or the torque about an axis
+passing through the origin and the point with 
+Cartesian coordinates <code>(ax,ay,az).</code> (Thus, for</p>
+<p>You may specify more than one of these options,
+but you must specify at least one.</p>
+<p><strong>Note</strong>: <a class="wikilink" href="../../../scuff-cas3d/">scuff-cas3d</a> always computes the force and torque
+on just <strong>one</strong> of the objects or surfaces in your geometry---namely,
+the one described by the first <code>OBJECT</code> or <code>SURFACE</code> 
+specification in your <code>.scuffgeo</code> file. For geometries
+consisting of just two objects or surfaces, the force/torque
+on the second object/surface is just the negative of the 
+force/torque on the first. </p>
+<h3 id="options-specifying-temperature">Options specifying temperature</h3>
+<p class="toc"><code>--Temperature 300</code></p>
+<p>Sets the simulation temperature <strong>in units of Kelvin,</strong>
+so that <code>--temperature 300</code> requests room-temperature calculations.
+This option implies that you are asking <a class="wikilink" href="../../../scuff-cas3d/">scuff-cas3d</a>
+to compute full Matsubara-summed Casimir quantities, so it is
+incompatible with options such as <code>--Xi</code> or <code>--XiFile</code> that
+specify particular frequencies at which to compute.</p>
+<p><a name="OutputFiles"></a></p>
+<h1 id="3-scuff-cas3d-output-files">3. <span class="SC">scuff-cas3d</span> output files</h1>
+<p>The base file name of all output files produced by
+<code>scuff-cas3d</code> may be specified using the <code>--FileBase</code>
+command-line option; if this option is not specified
+then the file base is taken to be the base file
+name of the <code>.scuffgeo</code> file you specified using
+the <code>--geometry</code> option.</p>
+<p>For all data output files (<code>.out</code>, <code>.byXi</code>,
+<code>.byXikBloch</code>), the output file contains a
+<em>header</em> (a sequence of text lines starting with<code>#</code>)
+explaining how to interpret the contents of the file.</p>
+<h3 id="the-log-file">The <code>.log</code> file</h3>
+<p>Like all command-line codes in the <a class="wikilink" href="../../../scuff-em/">scuff-em</a> suite,
+<a class="wikilink" href="../../../scuff-cas3d/">scuff-cas3d</a> writes a <a href="../../GeneralReference/#LogFiles"><code>.log</code> file</a> that you 
+can monitor to keep track of your calculation's progress.</p>
+<h3 id="the-out-file">The <code>.out</code> file</h3>
+<p>If you requested the calculation of
+full frequency-integrated or Matsubara-summed
+Casimir quantities, these will be written to 
+the <code>.out</code> file.</p>
+<h3 id="the-byxi-file">The <code>.byXi</code> file</h3>
+<p>For any problem involving compact geometries,
+and for any problem involving extended geometries
+in which you requested Brillouin-zone integrations,
+the contributions of individual imaginary frequencies 
+<script type="math/tex">\xi</script> will be written to a file named <code>.byXi</code>.</p>
+<h3 id="the-byxikbloch-file">The <code>.byXikBloch</code> file</h3>
+<p>For any problem involving extended geometries,
+the contributions of individual (frequency, Bloch vector)
+points <script type="math/tex">(\xi,\mathbf k)</script> will be written to a file
+named <code>FILEBASE.byXikBloch</code>.</p>
+<p><a name="Examples"></a></p>
+<h1 id="4-examples-of-casimir-calculations-using-scuff-cas3d">4. Examples of Casimir calculations using <span class="SC">scuff-cas3d</span></h1>
+<ul>
+<li>
+<p>Casimir forces in a compact geometry:
+  <a href="http://homerreid.dyndns.org/scuff-EM/scuff-cas3D/scuff-cas3D-Tutorial.shtml">A cube and a torus immersed in ethanol</a></p>
+</li>
+<li>
+<p>Casimir forces in a 1D extended geometry: 
+  <a href="../../../examples/SiliconBeams/SiliconBeams/">infinite-length silicon beams</a></p>
+</li>
+<li>
+<p>Casimir forces in a 2D extended geometry: 
+  <a href="../../../examples/SiliconSlabs/SiliconSlabs/">infinite-area silicon slabs</a></p>
+</li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../scuff-caspol/scuff-caspol/" class="btn btn-neutral float-right" title="scuff-caspol"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../scuff-tmatrix/scuff-tmatrix/" class="btn btn-neutral" title="scuff-tmatrix"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    <!-- Copyright etc -->
+    </p>
+  </div>
+
+  <a href="http://homerreid.com/scuff-em"> 
+    <span class="SmallCaps">scuff-em</span>
+  </a> documentation, by
+  <a href="http://homerreid.com">Homer Reid</a>
+
+  <p>
+  <font size=-1>
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> 
+  using a customized theme modeled 
+  after the 
+  <a href="https://github.com/snide/sphinx_rtd_theme">theme</a>
+  provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  </font>
+
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../../scuff-tmatrix/scuff-tmatrix/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../scuff-caspol/scuff-caspol/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

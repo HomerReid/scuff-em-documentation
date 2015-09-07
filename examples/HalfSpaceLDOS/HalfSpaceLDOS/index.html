@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>LDOS and dyadic Green functions above an infinite aluminum half-space - SCUFF-EM documentation</title>
+  
+
+  <link rel="shortcut icon" href="../../../scuffEM.ico">
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/highlight.css">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "examples/HalfSpaceLDOS/HalfSpaceLDOS"
+  </script>
+  
+  <script src="../../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../../js/highlight.pack.js"></script>
+  <script src="../../../js/theme.js"></script> 
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+  <script src="../../../mathjaxhelper.js"></script>
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+
+      <p align="center"
+      <a href="../../..">
+         <img align="center" height="auto" width="100%"  
+              src="../../../img/scuffEMNavBar.png"
+      </a>
+
+      <div class="wy-side-nav-search">
+        <a href="../../.." class="icon icon-home"> SCUFF-EM documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../../..">SCUFF-EM documentation</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Examples</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../CubeTorus/">Casimir forces in a compact geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../SiliconBeams/SiliconBeams/">Casimir forces in a 1D extended geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../SiliconSlabs/SiliconSlabs/">Casimir forces in a 2D extended geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../SiO2Spheres/SiO2Spheres/">Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../TipSubstrate/TipSubstrate/">Spatial distribution of heat flux from a warm tip over a cold substrate</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 current">
+        <a class="current" href="./">LDOS and dyadic Green functions above an infinite aluminum half-space</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#scuff-em-geometry-files">scuff-em geometry files</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#list-of-evaluation-points">List of evaluation points</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#list-of-omega-mathbf-k_b-points">List of (\omega, \mathbf k_B) points</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#launching-the-run">Launching the run</a></li>
+                
+            
+            </ul>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../PlatonicSolids/PlatonicSolids/">Electrostatic polarizability of platonic solids</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>General reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/TopLevel/">Top-level overview</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/Installing/">Installation</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/Geometries/">Geometry descriptions</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/Materials/">Material designations</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/Transformations/">Geometric transformations</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Command-line application reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/GeneralReference/">General command-line reference</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-scatter/scuff-scatter/">scuff-scatter</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-transmission/scuff-transmission/">scuff-transmission</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-ldos/scuff-ldos/">scuff-ldos</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-tmatrix/scuff-tmatrix/">scuff-tmatrix</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-cas3D/scuff-cas3D/">scuff-cas3D</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-caspol/scuff-caspol/">scuff-caspol</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-neq/scuff-neq/">scuff-neq</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-RF/scuff-RF/">scuff-RF</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-static/scuff-static/">scuff-static</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-analyze/scuff-analyze/">scuff-analyze</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>API reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../API/libscuff/">libscuff</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>For developers</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../forDevelopers/Implementation/">Implementation</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../forDevelopers/DataStructures/">Data Structures</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../forDevelopers/Documentation/">Documentation</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../..">SCUFF-EM documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.."><span class="SmallCaps">scuff-em</span> documentation</a> &raquo;</li>
+    
+      
+        
+          <li>Examples &raquo;</li>
+        
+      
+    
+    <li>LDOS and dyadic Green functions above an infinite aluminum half-space</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/homerreid/scuff-em/" class="icon icon-github"> Edit on GitHub</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1>Photonic LDOS above a dielectric half-space</h1>
+
+<p>In this example, we exploit <a class="wikilink" href="../../../scuff-em/">scuff-em</a>'s
+<a href="../../../reference/Geometries/#Extended">support for 2D periodic geometries</a>
+by using <a href="../../../applications/scuff-ldos/scuff-ldos/"><span class="SC">scuff-ldos</span></a>
+to compute the electromagnetic local density
+of states (LDOS) at evaluation points lying above an
+infinite planar dielectric interface.</p>
+<p>Because this geometry happens to be amenable to an analytical 
+treatment, we will also <em>check</em> the numerical results of
+<a class="wikilink" href="../../../scuff-em/">scuff-em</a> against the results of analytical calculations of
+the LDOS.</p>
+<p>The files for this example may be found in the
+<code>share/scuff-em/examples/HalfSpaceLDOS</code> subdirectory
+of your <a class="wikilink" href="../../../scuff-em/">scuff-em</a> installation.</p>
+<hr />
+<h1 id="gmsh-geometry-file-for-unit-cell-geometry"><a class="wikilink" href="../../../gmsh/">gmsh</a> geometry file for unit-cell geometry</h1>
+<p>The <a class="wikilink" href="../../../gmsh/">gmsh</a> geometry file <a href="../Square_N.geo"><code>Square_N.geo</code></a>
+describes the portion of the half-space interface
+that lies within the <em>unit cell,</em>
+i.e. the cell that is infinitely periodically
+replicated to yield the full geometry.</p>
+<p>I call this file <code>Square_N.geo</code> to remind myself that 
+it contains a parameter <code>N</code> that describes the meshing 
+fineness; more specifically, <code>N</code> defines the number of 
+segments per unit length. (The file also contains 
+a parameter named <code>L</code> that defines the unit-cell
+length in microns; here we will keep this parameter
+fixed at <script type="math/tex">L</script>=1 micron.)</p>
+<p>To produce a discretized surface-mesh
+representation of this geometry, we run it through 
+<a class="wikilink" href="../../../gmsh/">gmsh</a>, using the <a class="wikilink" href="../../../gmsh/">gmsh</a> command-line argument
+<code>-setnumber</code> to fix a value for the <code>N</code> parameter.</p>
+<pre><code class="bash">% gmsh -2 -setnumber N 4 Square_N.geo -o Square.msh
+% RenameMesh Square.msh
+
+% gmsh -2 -setnumber N 8 Square_N.geo -o Square.msh
+% RenameMesh Square.msh
+</code></pre>
+
+<p>(Here <a href="../../../examples/SiO2Spheres/RenameMesh"><code>RenameMesh</code></a> is a simple <code>bash</code> script
+that uses <a class="wikilink" href="../../../scuff-analyze/">scuff-analyze</a> to count the number of interior
+edges in a surface mesh and rename the mesh file accordingly.)
+These commands produce the files <code>Square_40.msh</code>
+and <code>Square_176.msh</code>.
+These meshes may be visualized in <a class="wikilink" href="../../../gmsh/">gmsh</a>:</p>
+<pre><code class="bash">% gmsh Square_40.msh
+% gmsh Square_176.msh
+</code></pre>
+
+<p>Note the following:</p>
+<ul>
+<li>
+<p>For 2D periodic geometries in <a class="wikilink" href="../../../scuff-em/">scuff-em</a>, the 
+   lattice vectors must lie in the <script type="math/tex">xy</script> plane.</p>
+</li>
+<li>
+<p>For surfaces that straddle the unit-cell boundaries
+   (as is the case here), each triangle edge that lies
+   on any edge of the unit cell must have an identical
+   image edge on the opposite side of the unit cell.
+   An easy way to achieve this is to use <em>extrusions</em>
+   in <a class="wikilink" href="../../../gmsh/">gmsh</a>, as in the <code>.geo</code> file above.</p>
+</li>
+<li>
+<p>In this case the unit cell dimensions are 
+   <script type="math/tex">L_x\times L_y</script> where <script type="math/tex">L_x=L_y=1\, \mu\text{m}</script>.
+   (More generally, <script type="math/tex">L_x</script> and <script type="math/tex">L_y</script> may be any arbitrary
+   nonzero values, and they need not equal each other.)</p>
+</li>
+</ul>
+<hr />
+<h1 id="scuff-em-geometry-files"><a class="wikilink" href="../../../scuff-em/">scuff-em</a> geometry files</h1>
+<p>The 
+[<span class="SC">scuff-em</span> geometry files][Geometries]
+describing an infinite-area PEC ground plane at <script type="math/tex">z</script>=0
+are 
+<a href="../PECPlate_40.scuffgeo"><code>PECPlate_40.scuffgeo</code></a>
+and 
+<a href="../PECPlate_176.scuffgeo"><code>PECPlate_176.scuffgeo</code></a>.</p>
+<p>The 
+[<span class="SC">scuff-em</span> geometry files][Geometries]
+describing an infinite aluminum half-space occupying
+the region <script type="math/tex">z<0</script> are 
+<a href="../AlHalfSpace_40.scuffgeo"><code>AlHalfSpace_40.scuffgeo</code></a>
+and 
+<a href="../AlHalfSpace_176.scuffgeo"><code>AlHalfSpace_176.scuffgeo</code></a>.</p>
+<hr />
+<h1 id="list-of-evaluation-points">List of evaluation points</h1>
+<p>We'll compute the LDOS at two points, located 
+a distance of 0.1 <script type="math/tex">\mu</script>m and 1 <script type="math/tex">\mu</script>m above the 
+origin on the <script type="math/tex">z</script> axis. The <code>EPFile</code> looks like
+this:</p>
+<pre><code>0.0 0.0 0.1
+0.0 0.0 1.0
+</code></pre>
+
+<hr />
+<h1 id="list-of-omega-mathbf-k_b-points">List of <script type="math/tex">(\omega, \mathbf k_B)</script> points</h1>
+<p>We'll run calculations at a single frequency 
+(<script type="math/tex">\omega=3\times 10^{14}</script> rad/sec) and at Bloch
+vectors of the form <script type="math/tex">\mathbf k_B=(0,k_y)</script> for 
+values of <script type="math/tex">k_y</script> running from <script type="math/tex">0</script> to <script type="math/tex">\pi</script>.
+Thus we create a text file called <code>OKBFile</code> that
+looks like this:</p>
+<pre><code>1.0 0.0 0.00
+1.0 0.0 0.10
+...
+1.0 0.0 3.14
+</code></pre>
+
+<hr />
+<h1 id="launching-the-run">Launching the run</h1>
+<p>We will do two <a class="wikilink" href="../../../scuff-ldos/">scuff-ldos</a> runs, one in which
+the LDOS is computed using a semi-analytical approach
+(plane-wave decomposition) and another in which
+the LDOS is computed using the <a class="wikilink" href="../../../scuff-em/">scuff-em</a> core
+library.</p>
+<p><code>ARGS=""
+  ARGS="${ARGS} --geometry ../${GEOM}"
+  ARGS="${ARGS} --EPFile  ../EPFile"
+  ARGS="${ARGS} --OmegakBlochFile ../OKBFile"
+  ARGS="${ARGS} --HalfSpace Aluminum"
+  scuff-ldos ${ARGS}</code></p>
+<p><code>ARGS=""
+  ARGS="${ARGS} --geometry ../${GEOM}"
+  ARGS="${ARGS} --EPFile  ../EPFile"
+  ARGS="${ARGS} --OmegakBlochFile ../OKBFile"
+  scuff-ldos ${ARGS}</code></p>
+<p><img alt="aluminum LDOS data" src="../AluminumLDOS.png" /></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../PlatonicSolids/PlatonicSolids/" class="btn btn-neutral float-right" title="Electrostatic polarizability of platonic solids"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../TipSubstrate/TipSubstrate/" class="btn btn-neutral" title="Spatial distribution of heat flux from a warm tip over a cold substrate"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    <!-- Copyright etc -->
+    </p>
+  </div>
+
+  <a href="http://homerreid.com/scuff-em"> 
+    <span class="SmallCaps">scuff-em</span>
+  </a> documentation, by
+  <a href="http://homerreid.com">Homer Reid</a>
+
+  <p>
+  <font size=-1>
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> 
+  using a customized theme modeled 
+  after the 
+  <a href="https://github.com/snide/sphinx_rtd_theme">theme</a>
+  provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  </font>
+
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../../TipSubstrate/TipSubstrate/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../PlatonicSolids/PlatonicSolids/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Implementation - SCUFF-EM documentation</title>
+  
+
+  <link rel="shortcut icon" href="../../scuffEM.ico">
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "forDevelopers/Implementation"
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script src="../../js/theme.js"></script> 
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+  <script src="../../mathjaxhelper.js"></script>
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+
+      <p align="center"
+      <a href="../..">
+         <img align="center" height="auto" width="100%"  
+              src="../../img/scuffEMNavBar.png"
+      </a>
+
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> SCUFF-EM documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../..">SCUFF-EM documentation</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Examples</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/CubeTorus/">Casimir forces in a compact geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/SiliconBeams/SiliconBeams/">Casimir forces in a 1D extended geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/SiliconSlabs/SiliconSlabs/">Casimir forces in a 2D extended geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/SiO2Spheres/SiO2Spheres/">Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/TipSubstrate/TipSubstrate/">Spatial distribution of heat flux from a warm tip over a cold substrate</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/HalfSpaceLDOS/HalfSpaceLDOS/">LDOS and dyadic Green functions above an infinite aluminum half-space</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/PlatonicSolids/PlatonicSolids/">Electrostatic polarizability of platonic solids</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>General reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/TopLevel/">Top-level overview</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/Installing/">Installation</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/Geometries/">Geometry descriptions</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/Materials/">Material designations</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/Transformations/">Geometric transformations</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Command-line application reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/GeneralReference/">General command-line reference</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-scatter/scuff-scatter/">scuff-scatter</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-transmission/scuff-transmission/">scuff-transmission</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-ldos/scuff-ldos/">scuff-ldos</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-tmatrix/scuff-tmatrix/">scuff-tmatrix</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-cas3D/scuff-cas3D/">scuff-cas3D</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-caspol/scuff-caspol/">scuff-caspol</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-neq/scuff-neq/">scuff-neq</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-RF/scuff-RF/">scuff-RF</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-static/scuff-static/">scuff-static</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-analyze/scuff-analyze/">scuff-analyze</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>API reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../API/libscuff/">libscuff</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>For developers</span></li>
+
+        
+            
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Implementation</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#the-core-library-libscuff">The core library (libscuff)</a></li>
+                
+            
+            </ul>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../DataStructures/">Data Structures</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Documentation/">Documentation</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">SCUFF-EM documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.."><span class="SmallCaps">scuff-em</span> documentation</a> &raquo;</li>
+    
+      
+        
+          <li>For developers &raquo;</li>
+        
+      
+    
+    <li>Implementation</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/homerreid/scuff-em/" class="icon icon-github"> Edit on GitHub</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="under-the-hood-the-algorithms-implemented-by-scuff-em">Under the hood: the algorithms implemented by <a class="wikilink" href="../../scuff-em/">scuff-em</a></h1>
+<p>This page offers some top-level overview sketches 
+of the basic algorithms implemented by the various codes in 
+the <a class="wikilink" href="../../scuff-em/">scuff-em</a> suite.</p>
+<p>For more details on the implementation of these algorithms, see
+<a href="../DataStructures/">Data Structures and Class Methods in <span class="SmallCaps">scuff-em</span></a>.</p>
+<p>For further technical details on the <a class="wikilink" href="../../scuff-em/">scuff-em</a> core library, check out the
+<a href="http://homerreid.com/research/codes/scuff-EM/lsInnards.pdf"><span class="SmallCaps">libscuff</span> Implementation Notes and Technical Reference</a>,
+available as a PDF document.</p>
+<h2 id="the-core-library-libscuff">The core library (<a class="wikilink" href="../../libscuff/">libscuff</a>)</h2>
+<p>At its heart, the 
+<a href="../../API/libscuff/"><span class="SmallCaps">scuff-em</span> core library</a>
+is an implementation of the surface-integral-equation /
+ boundary-element method (SIE / BEM) 
+for solving electromagnetic scattering problems. </p>
+<p>More specifically, 
+<a class="wikilink" href="../../scuff-em/">scuff-em</a> 
+implements the EFIE and PMCHW formulations of the SIE / BEM with 
+RWG basis functions used to expand tangential currents on the 
+surfaces of compact 3D objects.</p>
+<p>If all of those acronyms went by a little quickly, 
+here's a sketch of the basic problem addressed by the
+<a class="wikilink" href="../../scuff-em/">scuff-em</a> core library.
+We have a collection of homogeneous material objects (maybe 
+gold or silicon spheres or cubes) embedded in some medium 
+(generally vacuum or a dielectric liquid), we irradiate the 
+configuration with some known electromagnetic disturbance 
+(such as a plane wave), and we seek to compute the electromagnetic 
+fields scattered from the objects.
+In a surface-integral-equation (SIE) method, we do this by first 
+computing the <em>surface currents</em> induced on the object 
+surfaces by the incident field. (For perfectly conducting 
+scatterers we have only electric surface currents <strong>K</strong>; 
+for general scatterers we have both electric and magnetic 
+(<strong>N</strong>) surface currents.) Once we have solved for the 
+surface currents, we can use them to evaluate the scattered 
+fields anywhere we like.</p>
+<p><img alt="scattering cartoon" src="../ScatteringCartoon.png" /></p>
+<p>To solve for the surface currents, we write down an 
+<em>integral equation</em> relating the surface currents to
+the incident field. This integral equation basically says 
+that the tangential components of the scattered field (the 
+field due to the surface currents) should precisely cancel 
+the tangential components of the 
+incident field at the object surfaces. 
+(This statement is more of a mnemonic than a rigorous description;
+see the 
+<a href="cgi-bin/servdoc.cgi?filename=scuff-EM/lsInnards.pdf">technical memo</a>
+for a more thorough treatment.) 
+Schematically, the integral
+equation looks something like this:</p>
+<p><img alt="integral equation" src="../IntegralEquation.png" />
+<script type="math/tex; mode=display"> \oint 
+   \boldsymbol{\Gamma}(\omega; \mathbf{x}, \mathbf{x}^\prime)
+   \cdot \left(\begin{array}{c} \mathbf{K}(\mathbf{x}^\prime) \\
+                                \mathbf{N}(\mathbf{x}^\prime)
+         \end{array}\right) d\mathbf{x}^\prime
+       = -\left(\begin{array}{c} \mathbf{E}(\mathbf{x}) \\
+                                 \mathbf{H}(\mathbf{x})
+          \end{array}\right)^{\hbox{\scriptsize{inc}}}
+</script>
+</p>
+<p>where <script type="math/tex">\boldsymbol{\Gamma}</script>
+involves the dyadic Green's function for Maxwell's 
+equations. Here the surface integral extends over the surfaces of
+all scattering objects in our scattering geometry, and the equation
+is required to hold at all points <strong>x</strong> on all object
+surfaces. (The equation is understood to apply only to the 
+surface-tangential components of the vectors on the two sides.)</p>
+<p>This is the surface-integral-equation (SIE) formulation of 
+our scattering problem. To solve the integral equation 
+numerically, we now proceed to <em>discretize</em> it by 
+expanding the <strong>K</strong> and <strong>N</strong> surface currents in some 
+basis of expansion functions. The particular functions used 
+by <span class="codename">libscuff</span> are the "RWG" basis 
+functions, which were defined in this paper:</p>
+<blockquote>
+<p>"Electromagnetic Scattering by Surfaces of Arbitrary Shape,"
+by S. Rao, D. Wilton, and A. Glisson, 
+<em>IEEE Transactions on Antennas and Propagation</em> <strong>30</strong>
+409 (1982) 
+<a href="http://dx.doi.org/10.1109/TAP.1982.1142818">http://dx.doi.org/10.1109/TAP.1982.1142818</a></p>
+</blockquote>
+<p>The RWG basis functions are defined by meshing the surfaces 
+of compact 3D objects into flat triangular panels, and assigning 
+to each internal <em>edge</em> in the discretization a localized 
+surface current that is sourced and sunk at the panel vertices 
+opposite that edge:</p>
+<p><img alt="RWG basis functions" src="../RWGBasisFunctions.png" /></p>
+<p>Having introduced a discrete basis of expansion functions,
+our integral equation becomes a simultaneous system of 
+linear equations: </p>
+<p><img alt="matrix equation" src="../MatrixEquation.png" /></p>
+<p>This approach to solving surface integral equations is known 
+as the <em>boundary-element method</em> (BEM), and the linear 
+system in the equation above is sometimes known as the BEM 
+system. The <a class="wikilink" href="../../scuff-em/">scuff-em</a> core library provides
+routines for assembling the BEM matrix <strong>M</strong>, and the right-hand 
+side vector of incident-field expansion coefficients, for arbitrary 
+scattering geometries and arbitrary incident fields at arbitrary 
+frequencies.</p>
+<p>Then, using the matrix and RHS vector assembled by the core
+library, you can use external linear algebra software like
+<a href="http://www.netlib.org/lapack"><span class="SmallCaps">lapack</span></a>
+to solve the linear system, after which you can again use
+routines provided by the <a class="wikilink" href="../../scuff-em/">scuff-em</a> core library to compute the 
+scattered fields at arbitrary points.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../DataStructures/" class="btn btn-neutral float-right" title="Data Structures"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../API/libscuff/" class="btn btn-neutral" title="libscuff"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    <!-- Copyright etc -->
+    </p>
+  </div>
+
+  <a href="http://homerreid.com/scuff-em"> 
+    <span class="SmallCaps">scuff-em</span>
+  </a> documentation, by
+  <a href="http://homerreid.com">Homer Reid</a>
+
+  <p>
+  <font size=-1>
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> 
+  using a customized theme modeled 
+  after the 
+  <a href="https://github.com/snide/sphinx_rtd_theme">theme</a>
+  provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  </font>
+
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../../API/libscuff/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../DataStructures/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

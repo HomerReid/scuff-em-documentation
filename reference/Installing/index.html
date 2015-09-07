@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Installation - SCUFF-EM documentation</title>
+  
+
+  <link rel="shortcut icon" href="../../scuffEM.ico">
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "reference/Installing"
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script src="../../js/theme.js"></script> 
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+  <script src="../../mathjaxhelper.js"></script>
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+
+      <p align="center"
+      <a href="../..">
+         <img align="center" height="auto" width="100%"  
+              src="../../img/scuffEMNavBar.png"
+      </a>
+
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> SCUFF-EM documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../..">SCUFF-EM documentation</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Examples</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/CubeTorus/">Casimir forces in a compact geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/SiliconBeams/SiliconBeams/">Casimir forces in a 1D extended geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/SiliconSlabs/SiliconSlabs/">Casimir forces in a 2D extended geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/SiO2Spheres/SiO2Spheres/">Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/TipSubstrate/TipSubstrate/">Spatial distribution of heat flux from a warm tip over a cold substrate</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/HalfSpaceLDOS/HalfSpaceLDOS/">LDOS and dyadic Green functions above an infinite aluminum half-space</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/PlatonicSolids/PlatonicSolids/">Electrostatic polarizability of platonic solids</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>General reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../TopLevel/">Top-level overview</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Installation</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#1-external-packages">1. External packages</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#2-cloning-the-github-repository-and-building-the-code">2. Cloning the GitHub repository and building the code</a></li>
+                
+                    <li><a class="toctree-l4" href="#build-options">Build options</a></li>
+                
+            
+            </ul>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Geometries/">Geometry descriptions</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Materials/">Material designations</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Transformations/">Geometric transformations</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Command-line application reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/GeneralReference/">General command-line reference</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-scatter/scuff-scatter/">scuff-scatter</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-transmission/scuff-transmission/">scuff-transmission</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-ldos/scuff-ldos/">scuff-ldos</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-tmatrix/scuff-tmatrix/">scuff-tmatrix</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-cas3D/scuff-cas3D/">scuff-cas3D</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-caspol/scuff-caspol/">scuff-caspol</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-neq/scuff-neq/">scuff-neq</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-RF/scuff-RF/">scuff-RF</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-static/scuff-static/">scuff-static</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-analyze/scuff-analyze/">scuff-analyze</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>API reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../API/libscuff/">libscuff</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>For developers</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../forDevelopers/Implementation/">Implementation</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../forDevelopers/DataStructures/">Data Structures</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../forDevelopers/Documentation/">Documentation</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">SCUFF-EM documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.."><span class="SmallCaps">scuff-em</span> documentation</a> &raquo;</li>
+    
+      
+        
+          <li>General reference &raquo;</li>
+        
+      
+    
+    <li>Installation</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/homerreid/scuff-em/" class="icon icon-github"> Edit on GitHub</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="installing-scuff-em">Installing <a class="wikilink" href="../../scuff-em/">scuff-em</a></h2>
+<h2 id="1-external-packages">1. External packages</h2>
+<p><a class="wikilink" href="../../scuff-em/">scuff-em</a> relies on a small number of well-established free 
+software packages to implement certain non-essential functionality. 
+<a class="wikilink" href="../../scuff-em/">scuff-em</a> can be compiled and installed without any of these packages, 
+but in this case the code will be somewhat crippled.</p>
+<ul>
+<li>
+<p>If you actually want to solve scattering problems (instead of 
+  just setting them up), you will need
+  <a href="http://www.netlib.org/lapack">LAPACK/BLAS</a>.</p>
+</li>
+<li>
+<p>If you want the capacity to write output files in the 
+  standard HDF5 binary format, you will need
+  <a href="http://www.hdfgroup.org/HDF5">HDF5</a>.</p>
+</li>
+<li>
+<p>If you want to compile the <a class="wikilink" href="../../python/">python</a> interface, you will need the
+  <a class="wikilink" href="../../python/">python</a> development files.</p>
+</li>
+<li>
+<p>Although not required to install, compile, or use
+  <a class="wikilink" href="../../scuff-em/">scuff-em</a>,
+  <a href="http://geuz.org/gmsh"><span class="SC">gmsh</span></a>
+  is an extremely valuable open-source meshing and visualization
+  tool that is used throughout the
+  <a class="wikilink" href="../../scuff-em/">scuff-em</a> documentation.</p>
+</li>
+</ul>
+<p>On Debian/Ubuntu Linux systems, you can fetch all of these packages by doing a </p>
+<pre><code class="bash">% sudo apt-get install liblapack-dev libblas-dev libhdf5-serial-dev python-dev gmsh
+</code></pre>
+
+<blockquote>
+<p>Note: In some cases it seems the <code>gmsh</code> package conflicts with 
+the <code>libhdf5-serial-dev</code> package. In this case, just 
+remove <code>gmsh</code> from the above <code>apt-get</code> statement; you can 
+install it by hand following the instructions
+on the <a href="http://geuz.org/gmsh">GMSH website</a>.
+(Note that <a class="wikilink" href="../../gmsh/">gmsh</a>, though very useful, 
+is not necessary to compile or run <a class="wikilink" href="../../scuff-em/">scuff-em</a>.)</p>
+</blockquote>
+<h2 id="2-cloning-the-github-repository-and-building-the-code">2. Cloning the GitHub repository and building the code</h2>
+<p><a class="wikilink" href="../../scuff-em/">scuff-em</a> is hosted on [GitHub][GitHub].
+To fetch and install the latest version of the 
+code, execute the following steps. (Replace the string
+<code>/path/to/scuff-em-installation-directory</code>
+with your desired installation directory.)</p>
+<pre><code class="bash">% git clone https://homerreid@github.com/HomerReid/scuff-em.git
+% cd scuff-em
+% sh autogen.sh --prefix=/path/to/scuff-em-installation-directory
+% make install
+</code></pre>
+
+<p>If this succeeds, the executable versions of the application
+programs (such as <code>scuff-scatter</code>, <code>scuff-rf</code>, etc.) will be 
+installed in the directory <code>PREFIX/bin/</code> 
+and the demonstration examples for the various application programs 
+will be in <code>PREFIX/share/scuff-em/examples</code>
+(where <code>PREFIX</code> is the directory you specified using the 
+<code>--prefix</code> option above).</p>
+<p>If you have trouble installing <a class="wikilink" href="../../scuff-em/">scuff-em</a>,
+please file an issue on the 
+<a href="../GitHub"><span class="SC">scuff-em</span> GitHub page</a>.</p>
+<h3 id="build-options">Build options</h3>
+<p>You may specify options to the <code>autogen.sh</code>
+(or <code>configure</code>) command to guide the compilation process. 
+For a full list of available options,
+type <code>configure --help.</code> Here we summarize some of the
+more salient possibilities.</p>
+<p><a name="Threading"></a></p>
+<h4 id="multithreading-openmp-vs-pthreads">Multithreading: <a class="wikilink" href="../../openmp/">openmp</a> vs. <a class="wikilink" href="../../pthreads/">pthreads</a></h4>
+<p>The <a class="wikilink" href="../../scuff-em/">scuff-em</a> core library 
+uses multithreading for all steps in the
+<a href="scuff-em/libscuff/MainFlow.shtml">main flow</a> of
+the BEM scattering procedure. You can use <code>configure</code>
+options to select whether this multithreading is implemented
+using <a class="wikilink" href="../../openmp/">openmp</a> or <a class="wikilink" href="../../pthreads/">pthreads</a>. The former is the default,
+while the latter may be enabled like this:</p>
+<pre><code class="bash">% ./configure --without-openmp --with-pthreads
+</code></pre>
+
+<p>The default <a class="wikilink" href="../../openmp/">openmp</a>
+multithreading tends to play better with other multithreaded 
+software packages and is definitely the right choice if you 
+will be operating on a shared machine with some CPU cores 
+occupied by other users. 
+(You can monitor performance by inspecting
+<a href="scuff-em/reference/scuffEMMisc.shtml#LogFiles"<code>.log</code> files.</a>)</p>
+<p>Support for <a class="wikilink" href="../../pthreads/">pthreads</a>
+is a legacy feature that will be discontinued in future versions of 
+<a class="wikilink" href="../../scuff-em/">scuff-em</a>.</p>
+<p>Note: in some cases you may need to tweak certain environment 
+variables to achieve maximal 
+<a class="wikilink" href="../../openmp/">openmp</a> performance.
+For example, on my workstation (which has 8 CPU cores),
+in order to get <a class="wikilink" href="../../openmp/">openmp</a> codes
+to use all 8 cores I need to set the following environment
+variable:</p>
+<pre><code class="bash">% export GOMP_CPU_AFFINITY=0-7
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Geometries/" class="btn btn-neutral float-right" title="Geometry descriptions"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../TopLevel/" class="btn btn-neutral" title="Top-level overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    <!-- Copyright etc -->
+    </p>
+  </div>
+
+  <a href="http://homerreid.com/scuff-em"> 
+    <span class="SmallCaps">scuff-em</span>
+  </a> documentation, by
+  <a href="http://homerreid.com">Homer Reid</a>
+
+  <p>
+  <font size=-1>
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> 
+  using a customized theme modeled 
+  after the 
+  <a href="https://github.com/snide/sphinx_rtd_theme">theme</a>
+  provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  </font>
+
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../TopLevel/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../Geometries/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

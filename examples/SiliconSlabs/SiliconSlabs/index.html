@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Casimir forces in a 2D extended geometry - SCUFF-EM documentation</title>
+  
+
+  <link rel="shortcut icon" href="../../../scuffEM.ico">
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/highlight.css">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "examples/SiliconSlabs/SiliconSlabs"
+  </script>
+  
+  <script src="../../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../../js/highlight.pack.js"></script>
+  <script src="../../../js/theme.js"></script> 
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+  <script src="../../../mathjaxhelper.js"></script>
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+
+      <p align="center"
+      <a href="../../..">
+         <img align="center" height="auto" width="100%"  
+              src="../../../img/scuffEMNavBar.png"
+      </a>
+
+      <div class="wy-side-nav-search">
+        <a href="../../.." class="icon icon-home"> SCUFF-EM documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../../..">SCUFF-EM documentation</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Examples</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../CubeTorus/">Casimir forces in a compact geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../SiliconBeams/SiliconBeams/">Casimir forces in a 1D extended geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Casimir forces in a 2D extended geometry</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#scuff-em-geometry-file">scuff-em geometry file</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#scuff-em-transformation-file">scuff-em transformation file</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#launching-the-run">Launching the run</a></li>
+                
+            
+            </ul>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../SiO2Spheres/SiO2Spheres/">Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../TipSubstrate/TipSubstrate/">Spatial distribution of heat flux from a warm tip over a cold substrate</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../HalfSpaceLDOS/HalfSpaceLDOS/">LDOS and dyadic Green functions above an infinite aluminum half-space</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../PlatonicSolids/PlatonicSolids/">Electrostatic polarizability of platonic solids</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>General reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/TopLevel/">Top-level overview</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/Installing/">Installation</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/Geometries/">Geometry descriptions</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/Materials/">Material designations</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/Transformations/">Geometric transformations</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Command-line application reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/GeneralReference/">General command-line reference</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-scatter/scuff-scatter/">scuff-scatter</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-transmission/scuff-transmission/">scuff-transmission</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-ldos/scuff-ldos/">scuff-ldos</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-tmatrix/scuff-tmatrix/">scuff-tmatrix</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-cas3D/scuff-cas3D/">scuff-cas3D</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-caspol/scuff-caspol/">scuff-caspol</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-neq/scuff-neq/">scuff-neq</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-RF/scuff-RF/">scuff-RF</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-static/scuff-static/">scuff-static</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-analyze/scuff-analyze/">scuff-analyze</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>API reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../API/libscuff/">libscuff</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>For developers</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../forDevelopers/Implementation/">Implementation</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../forDevelopers/DataStructures/">Data Structures</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../forDevelopers/Documentation/">Documentation</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../..">SCUFF-EM documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.."><span class="SmallCaps">scuff-em</span> documentation</a> &raquo;</li>
+    
+      
+        
+          <li>Examples &raquo;</li>
+        
+      
+    
+    <li>Casimir forces in a 2D extended geometry</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/homerreid/scuff-em/" class="icon icon-github"> Edit on GitHub</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1>Casimir forces between infinite-area silicon slabs (2D periodicity)</h1>
+
+<p>In this example, we exploit <a class="wikilink" href="../../../scuff-em/">scuff-em</a>'s
+<a href="../../../reference/Geometries/#Extended">support for 2D periodic geometries</a>
+to compute the equilibrium Casimir force per unit area
+between silicon slabs of infinite surface area.
+The files for this example may be found in the
+<code>share/scuff-em/examples/SiliconSlabs</code> subdirectory
+of your <a class="wikilink" href="../../../scuff-em/">scuff-em</a> installation.</p>
+<hr />
+<h1 id="gmsh-geometry-file-for-unit-cell-geometry"><a class="wikilink" href="../../../gmsh/">gmsh</a> geometry file for unit-cell geometry</h1>
+<p>The <a class="wikilink" href="../../../gmsh/">gmsh</a> geometry file <a href="../Square_N.geo"><code>Square_N.geo</code></a>
+describes the portion of the surface of a single
+slab that lies within the <em>unit cell,</em>
+i.e. the cell that is infinitely periodically
+replicated to yield the full geometry.
+In this case, the slab is infinitely thick (it is a 
+half-space), so its surface consists of just a single
+two-dimensional sheet extending throughout the entire
+unit cell. I call this file <code>Square_N.geo</code> to 
+remind myself that it contains a parameter <code>N</code> 
+that describes the meshing fineness; more specifically,
+<code>N</code> defines the number of segments per unit length.</p>
+<p>To produce a discretized surface-mesh
+representation of this geometry, we run it through 
+<a class="wikilink" href="../../../gmsh/">gmsh</a>:</p>
+<pre><code class="bash">% gmsh -2 Square_N.geo
+</code></pre>
+
+<p>This produces the file <code>Square_N.msh</code>, which
+I rename to <code>Square_L2.40.msh</code> because the side length
+of the square is <script type="math/tex">L=2\,\mu\text{m}</script> and because
+this particular mesh has 40 interior edges (this
+number defines the number of surface-current basis
+functions and thus the size of the BEM matrix in a
+<a class="wikilink" href="../../../scuff-em/">scuff-em</a> calculation). Editing the <code>.geo</code> file
+to change the <code>N</code> parameter to 3 (from its default 
+value of 2) and re-running <code>gmsh -2</code> produces a
+finer mesh file, which I rename to <code>Square_L2_96.msh</code>.
+These meshes may be visualized in <a class="wikilink" href="../../../gmsh/">gmsh</a>:</p>
+<pre><code class="bash">% gmsh Square_L2_40.msh
+% gmsh Square_L2_96.msh
+</code></pre>
+
+<p><strong> <code>Square_L2_40.msh</code></strong></p>
+<p><img alt="Coarse mesh picture" src="../Square_L2_40.png" /></p>
+<p><strong> <code>Square_L2_96.msh</code></strong></p>
+<p><img alt="Fine mesh picture" src="../Square_L2_96.png" /></p>
+<p>Note the following:</p>
+<ul>
+<li>
+<p>For 2D periodic geometries in <a class="wikilink" href="../../../scuff-em/">scuff-em</a>, the 
+   lattice vectors must lie in the <script type="math/tex">xy</script> plane.</p>
+</li>
+<li>
+<p>For surfaces that straddle the unit-cell boundaries
+   (as is the case here), each triangle edge that lies
+   on any edge of the unit cell must have an identical
+   image edge on the opposite side of the unit cell.
+   An easy way to achieve this is to use <em>extrusions</em>
+   in <a class="wikilink" href="../../../gmsh/">gmsh</a>, as in the <code>.geo</code> file above.</p>
+</li>
+<li>
+<p>In this case the unit cell dimensions are 
+   <script type="math/tex">L_x\times L_y</script> where <script type="math/tex">L_x=L_y=2\, \mu\text{m}</script>.
+   (More generally, <script type="math/tex">L_x</script> and <script type="math/tex">L_y</script> may be any arbitrary
+   nonzero values, and they need not equal each other.)</p>
+</li>
+</ul>
+<hr />
+<h1 id="scuff-em-geometry-file"><a class="wikilink" href="../../../scuff-em/">scuff-em</a> geometry file</h1>
+<p>The 
+<a href="../../reference/Geometries"><span class="SC">scuff-em</span> geometry file</a>
+describing two silicon half-spaces (infinitely-thick slabs)
+bounded by the coarser of the two unit-cell meshes described 
+above is <a href="../SiliconSlabs_L2_40.scuffgeo"><code>SiliconSlabs_L2_40.scuffgeo</code></a>:</p>
+<pre><code class="bash"># SCUFF-EM geometry file for two silicon slabs,
+# each of infinite cross-sectional area and infinite
+# thickness, separated in the z direction by 1 microns
+
+LATTICE
+    VECTOR 2.0 0.0
+    VECTOR 0.0 2.0
+ENDLATTICE
+
+MATERIAL SILICON
+    epsf = 1.035;      # \epsilon_infinity
+    eps0 = 11.87;      # \epsilon_0 
+    wp = 6.6e15;       # \plasmon frequency
+    Eps(w) = epsf + (eps0-epsf)/(1-(w/wp)^2);
+ENDMATERIAL
+
+REGION UpperSlab MATERIAL Silicon
+REGION Gap       MATERIAL Vacuum
+REGION LowerSlab MATERIAL Silicon
+
+SURFACE UpperSurface
+    MESHFILE Square_L2_40.msh
+    REGIONS UpperSlab Gap
+    DISPLACED 0 0 0.5
+ENDOBJECT
+
+SURFACE LowerSurface
+    MESHFILE Square_L2_40.msh
+    REGIONS LowerSlab Gap
+ENDOBJECT
+</code></pre>
+
+<p>Note the following points: </p>
+<ul>
+<li>
+<p>Even though our geometry doesn't contain any 
+<a href="../../../reference/Geometries/#Complex">multi-material junctions</a>,
+nonetheless we have to describe it using 
+<a href="../../../reference/Geometries/#Complex"><code>REGION</code> and <code>SURFACE</code> statements</a>
+instead of 
+<a href="../../../reference/Geometries/#Simple"><code>OBJECT</code>...<code>ENDOBJECT</code> statements</a>
+because the geometry can't be described as one or 
+more compact objects embedded in an exterior medium.</p>
+</li>
+<li>
+<p>In the default configuration described by the <code>.scuffgeo</code>
+file, the slab surfaces are displaced from each other
+by a distance of 0.5 <script type="math/tex">\mu</script>m. The geometric transformations 
+described below will be relative to this default 
+separation.</p>
+</li>
+</ul>
+<hr />
+<h1 id="scuff-em-transformation-file"><a class="wikilink" href="../../../scuff-em/">scuff-em</a> transformation file</h1>
+<p>The file describing a list of
+<a href="../../reference/Transformations">geometric transformations</a>
+is <a href="../Slabs.trans"><code>Slabs.trans</code></a>:</p>
+<pre><code class="bash">TRANS 0.5 SURFACE UpperSurface DISP 0 0 0.0
+TRANS 1.0 SURFACE UpperSurface DISP 0 0 0.5
+TRANS 1.5 SURFACE UpperSurface DISP 0 0 1.0
+TRANS 2.0 SURFACE UpperSurface DISP 0 0 1.5
+TRANS 2.5 SURFACE UpperSurface DISP 0 0 2.0
+TRANS 3.0 SURFACE UpperSurface DISP 0 0 2.5
+TRANS 3.5 SURFACE UpperSurface DISP 0 0 3.0
+TRANS 4.0 SURFACE UpperSurface DISP 0 0 3.5
+TRANS 4.5 SURFACE UpperSurface DISP 0 0 4.0
+TRANS 5.0 SURFACE UpperSurface DISP 0 0 4.5
+</code></pre>
+
+<p>It's convenient to visualize the effect of these
+transformations on our geometry before we run the calculation:</p>
+<pre><code class="bash">% scuff-analyze --geometry SiliconSlabs_L2_40.scuffgeo --TransFile Slabs.trans
+</code></pre>
+
+<p>This produces the file <code>SiliconSlabs_L2_40.transformed.pp</code>,
+which can be visualized by opening it in <a class="wikilink" href="../../../GMSH/">GMSH</a>:</p>
+<p><img alt="Transformed silicon slab meshes" src="../SiliconSlabsTransformed.png" /></p>
+<hr />
+<h1 id="launching-the-run">Launching the run</h1>
+<p>Here's a <code>bash</code> script that will run the full Casimir 
+calculation on both the coarser and finer meshes:</p>
+<pre><code class="bash"># /bin/bash
+
+for N in 40 192
+do
+  ARGS=&quot;&quot;
+  ARGS=&quot;${ARGS} --geometry   SiliconSlabs_L2_${N}.scuffgeo&quot;
+  ARGS=&quot;${ARGS} --TransFile  Beams.trans&quot;
+  ARGS=&quot;${ARGS} --BZSymmetry BZSymmetry&quot;
+  ARGS=&quot;${ARGS} --energy&quot;
+  ARGS=&quot;${ARGS} --zForce&quot;
+
+  scuff-cas3D ${ARGS}
+done
+</code></pre>
+
+<p>This produces the files <code>SiliconSlabs_L2_40.out</code>
+and <code>SiliconSlabs_L2_96.out</code>. The former file looks
+like this:</p>
+<pre><code class="bash"># scuff-cas3D run on superhr1 at 06/15/15::23:50:32
+# data file columns: 
+#1: transform tag
+#2: energy 
+#3: energy error due to numerical Xi integration 
+#4: z-force 
+#5: z-force error due to numerical Xi integration 
+0.5 -1.254502e-01 5.463886e-05 -7.264755e-01 3.268714e-04 
+1.0 -1.631064e-02 5.770642e-06 -4.865678e-02 2.055737e-05 
+...
+</code></pre>
+
+<p>Now plot the energy and force per unit area vs.
+separation distance:</p>
+<pre><code class="bash">% gnuplot
+gnuplot&gt; set xlabel 'surface--surface separation (um)'
+gnuplot&gt; set ylabel 'Energy / (\hbar c / 1um), Force / ( \hbar c/(1um^2) )'
+gnuplot&gt; set logscale y
+gnuplot&gt; FILE='SiliconSlabs_L2_N40.out'
+gnuplot&gt; plot FILE u 1:2 t 'Energy (SCUFF)', '' u 1:4 t 'Force (SCUFF)'
+
+</code></pre>
+
+<p><img alt="Silicon slab data" src="../SiliconSlabsData.png" /></p>
+<p>In this plot, the solid lines are the results of the Lifshitz
+formula for the Casimir energy and force between silicon
+slabs.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../SiO2Spheres/SiO2Spheres/" class="btn btn-neutral float-right" title="Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../SiliconBeams/SiliconBeams/" class="btn btn-neutral" title="Casimir forces in a 1D extended geometry"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    <!-- Copyright etc -->
+    </p>
+  </div>
+
+  <a href="http://homerreid.com/scuff-em"> 
+    <span class="SmallCaps">scuff-em</span>
+  </a> documentation, by
+  <a href="http://homerreid.com">Homer Reid</a>
+
+  <p>
+  <font size=-1>
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> 
+  using a customized theme modeled 
+  after the 
+  <a href="https://github.com/snide/sphinx_rtd_theme">theme</a>
+  provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  </font>
+
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../../SiliconBeams/SiliconBeams/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../SiO2Spheres/SiO2Spheres/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

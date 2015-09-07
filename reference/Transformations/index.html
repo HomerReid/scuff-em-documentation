@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Geometric transformations - SCUFF-EM documentation</title>
+  
+
+  <link rel="shortcut icon" href="../../scuffEM.ico">
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "reference/Transformations"
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script src="../../js/theme.js"></script> 
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+  <script src="../../mathjaxhelper.js"></script>
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+
+      <p align="center"
+      <a href="../..">
+         <img align="center" height="auto" width="100%"  
+              src="../../img/scuffEMNavBar.png"
+      </a>
+
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> SCUFF-EM documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../..">SCUFF-EM documentation</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Examples</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/CubeTorus/">Casimir forces in a compact geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/SiliconBeams/SiliconBeams/">Casimir forces in a 1D extended geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/SiliconSlabs/SiliconSlabs/">Casimir forces in a 2D extended geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/SiO2Spheres/SiO2Spheres/">Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/TipSubstrate/TipSubstrate/">Spatial distribution of heat flux from a warm tip over a cold substrate</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/HalfSpaceLDOS/HalfSpaceLDOS/">LDOS and dyadic Green functions above an infinite aluminum half-space</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/PlatonicSolids/PlatonicSolids/">Electrostatic polarizability of platonic solids</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>General reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../TopLevel/">Top-level overview</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Installing/">Installation</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Geometries/">Geometry descriptions</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Materials/">Material designations</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Geometric transformations</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#1-syntax-of-the-trans-file">1. Syntax of the .trans file</a></li>
+                
+                    <li><a class="toctree-l4" href="#abbreviated-syntax">Abbreviated Syntax</a></li>
+                
+                    <li><a class="toctree-l4" href="#empty-transformations">Empty Transformations</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#2-an-example-of-a-trans-file">2. An example of a .trans file</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#3-visualizing-the-effect-of-the-transformations-you-specified">3. Visualizing the effect of the transformations you specified</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#4-geometrical-transformations-may-not-change-the-nesting-topology">4. Geometrical transformations may not change the nesting topology</a></li>
+                
+            
+            </ul>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Command-line application reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/GeneralReference/">General command-line reference</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-scatter/scuff-scatter/">scuff-scatter</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-transmission/scuff-transmission/">scuff-transmission</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-ldos/scuff-ldos/">scuff-ldos</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-tmatrix/scuff-tmatrix/">scuff-tmatrix</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-cas3D/scuff-cas3D/">scuff-cas3D</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-caspol/scuff-caspol/">scuff-caspol</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-neq/scuff-neq/">scuff-neq</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-RF/scuff-RF/">scuff-RF</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-static/scuff-static/">scuff-static</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-analyze/scuff-analyze/">scuff-analyze</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>API reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../API/libscuff/">libscuff</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>For developers</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../forDevelopers/Implementation/">Implementation</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../forDevelopers/DataStructures/">Data Structures</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../forDevelopers/Documentation/">Documentation</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">SCUFF-EM documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.."><span class="SmallCaps">scuff-em</span> documentation</a> &raquo;</li>
+    
+      
+        
+          <li>General reference &raquo;</li>
+        
+      
+    
+    <li>Geometric transformations</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/homerreid/scuff-em/" class="icon icon-github"> Edit on GitHub</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="geometrical-transformations-in-scuff-em">Geometrical transformations in <a class="wikilink" href="../../scuff-em/">scuff-em</a></h1>
+<p>For some of the physical problems handled by codes in the 
+<a class="wikilink" href="../../scuff-em/">scuff-em</a> suite, it is of interest
+to consider the effect of <em>geometrical transformations</em>---namely, 
+rigid displacements and rotations of the objects in a geometry with 
+respect to one another.</p>
+<p>For example, if you are investigating the Casimir force between 
+two nanoparticles of some exotic shape, you will probably want
+to carry out the calculation for many (let's say 25) different 
+values of the interparticle separation and obtain the full 
+force-vs-separation <em>curve</em>, not just the force on a single
+configuration.</p>
+<p>Of course, one way to handle this situation would be simply to
+create 25 different <code>.scuffgeo</code> files, each describing
+the nanoparticles at different separation distances, and then run 
+<a href="../../applications/scuff-cas3D/scuff-cas3D/"><span class="SmallCaps">scuff-cas3d</span></a> 
+25 separate times. However, such a procedure would not only be a major
+hassle, but would also fail to exploit some significant 
+computational redundancies.</p>
+<p>For example, in a geometry consisting of two nanoparticles,
+the diagonal blocks of the 
+<a href="../../forDevelopers/Implementation/">BEM matrix</a>
+are <em>independent of the interparticle separation</em> and hence 
+need only be assembled once per frequency, after which they 
+can be <em>reused</em> for all 25 interparticle separations.
+This can save a lot of time as compared to the cost of 
+running 25 independent calculations.</p>
+<p>To facilitate this type of calculation, several of the 
+standalone applications in the 
+<a class="wikilink" href="../../scuff-em/">scuff-em</a> 
+suite offer the option of specifying a <em>transformation list.</em>
+This is a file describing a sequence of geometrical transformations
+to be carried out on the base geometry described by your 
+<code>.scuffgeo</code> file. Each output quantity that you
+request (be it the <em>y-</em>directed Casimir force, the 
+total heat transfer, or what have you) will then be computed
+and reported separately for each of the transformations you 
+specified.</p>
+<p>An important caveat is that 
+<strong>geometrical transformations may not change the <em>nesting topology</em> of a 
+<a class="wikilink" href="../../scuff-em/">scuff-em</a> geometry.</strong> This is discussed in more detail
+<a href="#Nesting">below</a>.</p>
+<ol class="TOC">
+
+<tr> <th> 
+<p align="center"><b> Geometrical Transformations in
+                      <span class="SmallCaps">scuff-em</span>
+                 </b>
+</p>
+
+ <li> <a href="#TransFile">Syntax of the <code>.trans</code> file</a>
+ <li> <a href="#Example">An example of a <code>.trans</code> file</a>
+ <li> <a href="#Visualizing">Visualizing the effect of the transformations you specified</a>
+ <li> <a href="#Nesting">Transformations may not change the nesting topology</a>
+</ol>
+
+<p><a name="TransFile"></a></p>
+<h1 id="1-syntax-of-the-trans-file">1. Syntax of the <code>.trans</code> file</h1>
+<p>You will list your geometrical transformations in a file 
+whose name conventionally has file extension <code>.trans</code>.
+This is the file you will specify using the 
+<code>--transfile</code> option to 
+<a href="../../applications/scuff-cas3d"><span class="SmallCaps">scuff-cas3d</span></a> 
+and other codes.</p>
+<p>The <code>.trans</code> file may contain any number of 
+transformations. 
+Each transformation will specify <em>which</em> objects in your
+geometry are to be transformed, and <em>how</em> those objects 
+will be displaced or rotated. </p>
+<p>Each transformation will be specified by a section of the file
+that looks something like this:</p>
+<blockquote>
+<p><code>TRANSFORMATION</code> <strong><em>name-of-transformation</em></strong>  </p>
+<blockquote>
+<p><code>OBJECT</code> <strong><em>FirstObjectLabel</em></strong>  </p>
+<blockquote>
+<p><strong><em>displacement-or-rotation</em></strong><br />
+<strong><em>displacement-or-rotation</em></strong><br />
+...   </p>
+</blockquote>
+<p><code>OBJECT</code> <strong><em>SecondObjectLabel</em></strong>  </p>
+<blockquote>
+<p><strong><em>displacement-or-rotation</em></strong><br />
+<strong><em>displacement-or-rotation</em></strong><br />
+...  </p>
+</blockquote>
+</blockquote>
+<p><code>ENDTRANSFORMATION</code></p>
+</blockquote>
+<p>The <b><em>name-of-transformation</em></b> field after the 
+<code>TRANSFORMATION</code> keyword specifies a mandatory label
+assigned to this transformation, which will be used
+in output files to identify quantities computed under this
+transformation. </p>
+<p>The <strong><em>FirstObjectLabel</em></strong> field should be the label of
+an object in your geometry (as assigned using the <code>OBJECT</code>
+keyword in a <a href="../Geometries/"><code>.scuffgeo</code> file</a>a.
+Displacements and rotations specified after this line will apply to the
+object named on this line, until the next <code>OBJECT</code> line is 
+encountered.</p>
+<p>Each <strong><em>displacement-or-rotation</em></strong> line should look either like
+this:</p>
+<blockquote>
+<blockquote>
+<p><code>DISPLACED</code>   <strong><em>xx yy zz</em></strong></p>
+</blockquote>
+</blockquote>
+<p>or like this:</p>
+<blockquote>
+<blockquote>
+<p><code>ROTATED</code> <strong><em>dd</em></strong> <code>ABOUT</code> <strong><em>nx ny nz</em></strong></p>
+</blockquote>
+</blockquote>
+<p>The former case specifies that the object in question is to be displaced
+through a displacement vector with cartesian coordinates 
+<strong><em>(xx,yy,zz)</em></strong>.</p>
+<p>The latter case specifies that the object in question is to be rotated
+through <strong><em>dd</em></strong> degrees about an axis passing through the origin
+and through the point with cartesian coordinates <strong><em>(xx,yy,zz).</em></strong>
+Note that <code>ABOUT</code> is a fixed keyword that must be repeated
+verbatim.
+<strong>(Note that the rotation angle is specified in 
+degrees, not radians.)</strong></p>
+<p>You may specify any number of <code>DISPLACEMENT</code> and 
+<code>ROTATION</code> statements to be applied to each object.
+These statements will be applied<br />
+in the order they are specified in the <code>.trans</code> file.</p>
+<p>Note that <code>TRANSFORMATION...ENDTRANSFORMATION</code>
+sections are not cumulative; two consecutive such sections do not 
+build on each other, but instead describe distinct transformations
+applied to the geometry starting in its original state as described 
+in the <code>.scuffgeo</code> file.</p>
+<p>(However, if your <code>.scuffgeo</code> included any 
+<code>DISPLACED</code> or <code>ROTATED</code> statements to
+transform object meshes prior to their inclusion in the
+geometry, then the transformations in a <code>.trans</code>
+file <em>are</em> cumulative with respect to those, as any
+such transformations are considered to be included
+into the base default configuration of the geometry.)</p>
+<p>Blank lines and comments (lines beginning with <code>#</code>) in
+<code>.trans</code> files are ignored.</p>
+<h2 id="abbreviated-syntax">Abbreviated Syntax</h2>
+<p>For simple transformations you may use the following
+abbreviated one-line syntax in place of an entire
+<code>TRANSFORMATION...ENDTRANSFORMATION</code> section:</p>
+<blockquote>
+<p><code>TRANS</code> <strong><em>name</em></strong> <code>OBJECT</code> <strong><em>Label</em></strong>   <strong><em>displacement-or-rotation</em></strong></p>
+</blockquote>
+<p>This differs from the syntax outlined above in the following
+ways: </p>
+<ul>
+<li>The entire transformation is specified on a single line.</li>
+<li>The line begins with the shortened keyword <code>TRANS</code>, and there is no terminating keyword.</li>
+</ul>
+<h2 id="empty-transformations">Empty Transformations</h2>
+<p>The following transformations are perfectly legal:</p>
+<pre><code>TRANSFORMATION 0.0
+ENDTRANSFORMATION
+</code></pre>
+
+<pre><code>TRANS Default
+</code></pre>
+
+<p>These define <code>transformations</code> that actually leave the geometry
+untouched from the configuration specified in the <code>.scuffgeo</code>
+file. You may name these transformations anything you please, just
+as with any other transformations. This is sometimes useful for
+carrying out computations on a sequence of geometric configurations
+of which one is the unmodified configuration of the <code>.scuffgeo</code>
+file.</p>
+<p><a name="Example"></a></p>
+<h1 id="2-an-example-of-a-trans-file">2. An example of a <code>.trans</code> file</h1>
+<p>Here's an example of a <code>.trans</code> file designed to 
+be used with <a href="../SphereCube.scuffgeo">this geometry file</a>,
+which contains two objects with
+user-assigned labels <code>TheSphere</code> and <code>TheCube</code>.</p>
+<p>Note that, in the <code>.scuffgeo</code> file, the cube is 
+displaced 3 units in the positive <em>z</em> direction relative 
+to the configuration of its mesh file; as noted above,
+transformations in the <code>.trans</code> are 
+carried out starting from that displaced configuration.</p>
+<p>This file declares three separate transformations:</p>
+<ul>
+<li>
+<p>The first (labeled <code>2.0</code>) displaces the sphere 2.0 
+length units in the <em>y</em> direction, while simultaneously 
+displacing the cube 2.0 units in the <em>x</em> direction.  </p>
+</li>
+<li>
+<p>The second (labeled <code>2.0R</code>) is the same as the 
+first, but with the cube first rotated 45 degrees 
+(&pi;/4 radians) about the <em>z</em> axis before it is 
+displaced.  </p>
+</li>
+<li>
+<p>The third (labeled <code>-3.0</code>) displaces the sphere 
+negative 3.0 length units in the <em>y</em> direction, while
+leaving the cube untouched.</p>
+</li>
+</ul>
+<pre><code># a transformation in which both cube and sphere are displaced 
+TRANSFORMATION 2.0
+
+OBJECT       TheSphere
+DISPLACED    0.0 2.0 0.0 
+
+OBJECT       TheCube
+DISPLACED    2.0 0.0 0.0
+
+ENDTRANSFORMATION
+
+# similar to the above, but now the square is rotated before it is displaced
+TRANSFORMATION 2.0R
+
+OBJECT       TheSphere
+DISPLACED    0.0 2.0 0.0 
+
+OBJECT       TheCube
+ROTATED      45 ABOUT 0 0 1 
+DISPLACED    2.0 0.0 0.0
+
+ENDTRANSFORMATION
+
+# in this transformation, only the sphere is affected, so we can use the abbreviated syntax
+TRANS -3.0 OBJECT TheSphere DISP 0.0 -3.0 0.0
+</code></pre>
+
+<p><a name="Visualizing"></a></p>
+<h1 id="3-visualizing-the-effect-of-the-transformations-you-specified">3. Visualizing the effect of the transformations you specified</h1>
+<p>Before running a full calculation using a <code>.trans</code>
+file, you will generally want to double-check to make sure 
+that the geometrical transformations as interpreted by 
+<a class="wikilink" href="../../scuff-em/">scuff-em</a> are actually what 
+you intended. </p>
+<p>A simple way to do this is to use the 
+<a href="../../applications/scuff-analyze/scuff-analyze/"><span class="SmallCaps">scuff-analyze</span></a>
+utility application that comes with the <a class="wikilink" href="../../scuff-em/">scuff-em</a> distribution. 
+Invoking this utility
+with the <code>--geometry</code> and <code>--transfile</code>
+options to specify your <code>.scuffgeo</code> and 
+<code>.trans</code> files will produce an output file 
+called <code>MyGeometry.transformed.pp</code> 
+(where <code>MyGeometry.scuffgeo</code> was the name of the 
+your geometry file) which you can open in 
+<a href="http://geuz.org/gmsh"><span class="SmallCaps">gmsh</span></a>.</p>
+<p>For example, to visualize the impact of the transformations 
+in the example above, we could proceed as follows.
+(All the files needed to execute this example may be found
+in the <code>examples/SphereCube</code> directory of the 
+<a class="wikilink" href="../../scuff-em/">scuff-em</a> source distribution.)</p>
+<pre><code class="bash">% scuff-analyze --geometry SphereCube.scuffgeo --transfile SphereCube.trans
+</code></pre>
+
+<p>This will generate a file named <code>SphereCube.transformed.pp</code>
+that you can open in <a class="wikilink" href="../../gmsh/">gmsh</a>:</p>
+<pre><code class="bash">% gmsh SphereCube.transformed.pp
+</code></pre>
+
+<p><img alt="Transformation1" src="../Transformation1.png" /></p>
+<p><img alt="Transformation2" src="../Transformation2.png" /></p>
+<p><img alt="Transformation3" src="../Transformation3.png" /></p>
+<p>Note that the items in the <a class="wikilink" href="../../gmsh/">gmsh</a>
+menu here are labeled using the strings you assigned to each
+transformation in your <code>.trans</code> file (the
+<strong><em>name-of-transformation</em></strong> field in the syntax 
+description above).</p>
+<p><a name="Nesting"></a></p>
+<h1 id="4-geometrical-transformations-may-not-change-the-nesting-topology">4. Geometrical transformations may not change the nesting topology</h1>
+<p>An important restriction on the use of geometrical transformations 
+in <a class="wikilink" href="../../scuff-em/">scuff-em</a> is that transformations 
+may not change the <em>nesting topology</em> of a 
+<a class="wikilink" href="../../scuff-em/">scuff-em</a> geometry -- that is, the 
+containership relations that classify which objects are 
+embedded inside which other objects. This is because 
+<a class="wikilink" href="../../scuff-em/">scuff-em</a> autodetects the nesting 
+topology when it first reads in the <code>.scuffgeo</code>
+file and cannot subsequently redefine it.</p>
+<p>For example, perhaps your <code>.scuffgeo</code> file describes 
+a geometry consisting of a big sphere (perhaps filled with a dielectric 
+liquid like water) and a smaller sphere (perhaps a ball of silicon) 
+inside this sphere. In this case, you can use geometrical 
+transformations to move the smaller sphere around <em>within</em> the 
+larger sphere, but you may not write a geometrical transformation
+that displaces the smaller sphere all the way <em>outside</em> 
+the larger sphere. If you want to run simulations in which the 
+smaller sphere lies outside the larger sphere, you will need to 
+write a new <code>.scuffgeo</code> file in which that condition 
+is satisfied from the start.</p>
+<p>(Also, you may not write a geometrical transformation that 
+displaces the smaller sphere in such a way that its surface
+intersects the surface of the larger sphere -- in that case,
+your geometry would contain a
+<a href="../Geometries/">multi-material junction</a>
+and would require a <code>.scuffgeo</code> description in terms of 
+<code>REGIONS</code> and <code>SURFACES</code> instead of the simpler 
+description in terms of <code>OBJECTS</code>
+that suffices for fully-embedded geometries.)</p>
+<p>As another example, suppose you want to compute the Casimir force 
+between two identical dielectric objects over a range of separations. 
+In this case, you might be tempted to write a <code>.scuffgeo</code> 
+file in which the two objects start out lying on top of each other,
+and then displace them using geometrical transformations in the
+actual force computation. However, this won't work: when 
+<a class="wikilink" href="../../scuff-em/">scuff-em</a> first processes the 
+<code>.scuffgeo</code> file, it will be confused by the appearance
+of two objects appearing to coexist in the same physical space,
+and the nesting topology will be incorrectly characterized.
+Instead, you will want to start out with a <code>.scuffgeo</code>
+file in which the objects are displaced from one another; you can,
+of course, subsequently rotate or displace them further to your
+heart's content using geometrical transformations.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../applications/GeneralReference/" class="btn btn-neutral float-right" title="General command-line reference"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../Materials/" class="btn btn-neutral" title="Material designations"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    <!-- Copyright etc -->
+    </p>
+  </div>
+
+  <a href="http://homerreid.com/scuff-em"> 
+    <span class="SmallCaps">scuff-em</span>
+  </a> documentation, by
+  <a href="http://homerreid.com">Homer Reid</a>
+
+  <p>
+  <font size=-1>
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> 
+  using a customized theme modeled 
+  after the 
+  <a href="https://github.com/snide/sphinx_rtd_theme">theme</a>
+  provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  </font>
+
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../Materials/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../applications/GeneralReference/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>
