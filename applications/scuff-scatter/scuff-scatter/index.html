@@ -73,6 +73,34 @@
         
             
     <li class="toctree-l1 ">
+        <a class="" href="../../../examples/MieScattering/MieScattering/">Mie scattering</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../examples/DielectricShell/DielectricShell/">Electrostatics of a spherical dielectric shell</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../examples/ThinFilm/ThinFilm/">Spatially-resolved study of plane-wave transmission through an infinite-area thin dielectric film</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../examples/DiffractionPatterns/DiffractionPatterns/">Imaging diffraction patterns of discs, disc arrays, and hole arrays in metal screens</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
         <a class="" href="../../../examples/CubeTorus/">Casimir forces in a compact geometry</a>
         
     </li>
@@ -163,6 +191,13 @@
     </li>
 
         
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/IncidentFields/">Incident Fields</a>
+        
+    </li>
+
+        
     </ul>
 <li>
           
@@ -183,6 +218,24 @@
         <a class="current" href="./">scuff-scatter</a>
         
             <ul>
+            
+                <li class="toctree-l3"><a href="#common-options">Common options</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#options-defining-the-scattering-problem">Options defining the scattering problem</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#options-defining-the-incident-field">Options defining the incident field</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#options-requesting-scattered-and-total-fields">Options requesting scattered and total fields</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#options-requesting-power-force-and-torque-data">Options requesting power, force, and torque data</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#2-scuff-scatter-examples">2. scuff-scatter examples</a></li>
+                
             
             </ul>
         
@@ -339,10 +392,134 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="scuff-scatter">scuff-scatter</h1>
-<p>The documentation for <a class="wikilink" href="../../../scuff-scatter/">scuff-scatter</a> has not yet been
-ported from its earlier version. For the time being, please
-<a href="http://homerreid.com/scuff-em/scuff-scatter">access the earlier version of the documentation.</a></p>
+                <h1> Solving electromagnetic scattering problems with 
+     <span class="SC">scuff-scatter</span>
+</h1>
+
+<p><a class="wikilink" href="../../../scuff-scatter/">scuff-scatter</a> is a tool within the <a class="wikilink" href="../../../scuff-em/">scuff-em</a> code suite
+for solving classical scattering problems involving
+user-specified incident fields impinging on a material
+geometry.</p>
+<p>To run a scattering calculation using <a class="wikilink" href="../../../scuff-scatter/">scuff-scatter</a>, you will</p>
+<ul>
+<li>
+<p>Create a <a href="../../../reference/Geometries/"><span class="SC">scuff-em</span> geometry file</a>
+describing the shapes and material properties of the scattering objects in your geometry</p>
+</li>
+<li>
+<p>Choose the <a href="../../../reference/IncidentFields/">incident field</a> that will scatter off your objects: a plane wave, a gaussian beam, a point dipole source, or some combination thereof</p>
+</li>
+<li>
+<p>Run <a class="wikilink" href="../../../scuff-scatter/">scuff-scatter</a> with command-line options specifying the geometry, the frequencies, the incident field, and the type of output you wish to get back.</p>
+</li>
+</ul>
+<p>The various output quantities that you can ask <a class="wikilink" href="../../../scuff-scatter/">scuff-scatter</a> to generate include the following:</p>
+<ul>
+<li>
+<p>The components of the scattered and total electric and magnetic fields at arbitrary user-specified points away from scattering surfaces. (The points may lie inside or outside the scattering objects).</p>
+</li>
+<li>
+<p>The components of the total electric and magnetic fields on the scattering surfaces. (These quantities may alternatively be interpreted as effective surface currents and charges that give rise to the scattered fields.)</p>
+</li>
+<li>
+<p>The electric and magnetic dipole moments induced by the incident field on the scattering objects. (These are obtained from the interpretation of the tangential fields as effective sources that radiate the scattered fields.)</p>
+</li>
+<li>
+<p>The total power scattered by, and the total power absorbed by, the scattering objects from the incident field.</p>
+</li>
+<li>
+<p>The total force and/or torque exerted on the scattering objects by the incident fields (radiation pressure).</p>
+</li>
+<li>
+<p>Visualization files plotting the electric and magnetic surface currents, and the associated charge densities, 
+  induced by the incident fields on the scattering objects.</p>
+</li>
+<li>
+<p>Visualization files plotting field components and Poynting fluxes on arbitrary user-specified surface meshes.</p>
+</li>
+</ul>
+<div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#1-scuff-scatter-command-line-options">1. <span class="SC">scuff-scatter</span> command-line options</a><ul>
+<li><a href="#common-options">Common options</a></li>
+<li><a href="#options-defining-the-scattering-problem">Options defining the scattering problem</a></li>
+<li><a href="#options-defining-the-incident-field">Options defining the incident field</a></li>
+<li><a href="#options-requesting-scattered-and-total-fields">Options requesting scattered and total fields</a></li>
+<li><a href="#options-requesting-power-force-and-torque-data">Options requesting power, force, and torque data</a></li>
+</ul>
+</li>
+<li><a href="#2-scuff-scatter-examples">2. <span class="SC">scuff-scatter</span> examples</a></li>
+</ul>
+</div>
+<p><a name="Options"></a></p>
+<h1 id="1-scuff-scatter-command-line-options">1. <span class="SC">scuff-scatter</span> command-line options</h1>
+<h3 id="common-options">Common options</h3>
+<p><a class="wikilink" href="../../../scuff-scatter/">scuff-scatter</a> recognizes the following subset of the 
+<a href="../../GeneralReference/#CommonOptions">list of commonly accepted options to <span class="SC">scuff-em</span> command-line codes</a>.</p>
+<pre><code class="bash">--geometry
+--EPFile
+--Omega
+--OmegaFile
+--Cache
+--ReadCache
+--WriteCache
+</code></pre>
+
+<h2 id="options-defining-the-scattering-problem">Options defining the scattering problem</h2>
+<pre><code class="bash">--geometry MyGeometry.scuffgeo
+</code></pre>
+
+<p>Specifies the geometry input file.</p>
+<pre><code class="bash">--Omega      3.14
+--OmegaFile  MyOmegaFile
+</code></pre>
+
+<p>Specifies the angular frequencies at which to
+run calculations. (Angular frequencies are interpreted
+in units of <script type="math/tex">c/1\,\mu\text{m}=3\cdot 10^{14}</script> rad/sec.)
+The <code>--Omega</code> option may be used more than once 
+to specify multiple frequencies. Alternatively,
+the <code>--OmegaFile</code> option may be used to specify the
+name of a file containing a list of frequencies (one per
+line) at which to run calculations.</p>
+<h2 id="options-defining-the-incident-field">Options defining the incident field</h2>
+<p>The options for specifying incident fields in
+<a class="wikilink" href="../../../scuff-em/">scuff-em</a> are described in detail on the page
+<a href="../../../reference/IncidentFields/">Incident fields in <span class="SC">scuff-em</span></a>;
+here we just list the
+available options without commentary.</p>
+<pre><code class="bash">--pwDirection    nx ny nz
+--pwPolarization Ex Ey Ez
+</code></pre>
+
+<pre><code class="bash">--psStrength Px Py Pz
+--psLocation xx yy zz
+</code></pre>
+
+<pre><code class="bash">--gbDirection nx ny nz
+--gbPolarization Ex Ey Ez
+--gbCenter Cx Cy Cz
+--gbWaist W
+</code></pre>
+
+<p>(As in <a class="wikilink" href="../../../scuff-scatter/">scuff-scatter</a>, these options may occur multiple times 
+to define superpositions of multiple types of incident field.)</p>
+<h2 id="options-requesting-scattered-and-total-fields">Options requesting scattered and total fields</h2>
+<pre><code class="bash"> --EPFile MyEPFile
+</code></pre>
+
+<p>Specifies a list of evaluation points at which to
+compute and report components of the scattered and total
+fields. This option may be specified more than once to 
+define multiple sets of field evaluation points. </p>
+<h2 id="options-requesting-power-force-and-torque-data">Options requesting power, force, and torque data</h2>
+<p><a name="Examples"></a></p>
+<h1 id="2-scuff-scatter-examples">2. <span class="SC">scuff-scatter</span> examples</h1>
+<ul>
+<li><a href="../../../examples/MieScattering/MieScattering/">Mie scattering</a></li>
+<li><a href="../../../examples/DielectricShell/DielectricShell/">Electrostatics of a spherical dielectric shell</a></li>
+<li><a href="../../../examples/ThinFilm/ThinFilm/">Spatially-resolved study of plane-wave transmission through a infinite-area thin dielectric film</a></li>
+<li><a href="../../../examples/DiffractionPatterns/DiffractionPatterns/">Diffraction of a plane wave by a discs, disc arrays, and hole arrays</a></li>
+</ul>
               
             </div>
           </div>

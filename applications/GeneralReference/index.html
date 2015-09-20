@@ -73,6 +73,34 @@
         
             
     <li class="toctree-l1 ">
+        <a class="" href="../../examples/MieScattering/MieScattering/">Mie scattering</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/DielectricShell/DielectricShell/">Electrostatics of a spherical dielectric shell</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/ThinFilm/ThinFilm/">Spatially-resolved study of plane-wave transmission through an infinite-area thin dielectric film</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/DiffractionPatterns/DiffractionPatterns/">Imaging diffraction patterns of discs, disc arrays, and hole arrays in metal screens</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
         <a class="" href="../../examples/CubeTorus/">Casimir forces in a compact geometry</a>
         
     </li>
@@ -163,6 +191,13 @@
     </li>
 
         
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/IncidentFields/">Incident Fields</a>
+        
+    </li>
+
+        
     </ul>
 <li>
           
@@ -177,7 +212,7 @@
         
             <ul>
             
-                <li class="toctree-l3"><a href="#common-command-line-arguments">Common command-line arguments</a></li>
+                <li class="toctree-l3"><a href="#1-common-command-line-arguments">1. Common command-line arguments</a></li>
                 
                     <li><a class="toctree-l4" href="#options-specifying-geometry-inputs">Options specifying geometry inputs</a></li>
                 
@@ -192,19 +227,19 @@
                     <li><a class="toctree-l4" href="#miscellaneous-options">Miscellaneous options</a></li>
                 
             
-                <li class="toctree-l3"><a href="#passing-command-line-options-via-text-file">Passing command-line options via text file</a></li>
+                <li class="toctree-l3"><a href="#2-passing-command-line-options-via-text-file">2. Passing command-line options via text file</a></li>
                 
             
-                <li class="toctree-l3"><a href="#complex-numbers">Complex numbers</a></li>
+                <li class="toctree-l3"><a href="#3-complex-numbers">3. Complex numbers</a></li>
                 
             
-                <li class="toctree-l3"><a href="#log-files">Log files</a></li>
+                <li class="toctree-l3"><a href="#4-log-files">4. Log files</a></li>
                 
             
-                <li class="toctree-l3"><a href="#output-files">Output Files</a></li>
+                <li class="toctree-l3"><a href="#5-output-files">5. Output Files</a></li>
                 
             
-                <li class="toctree-l3"><a href="#environment-variables">Environment variables</a></li>
+                <li class="toctree-l3"><a href="#6-environment-variables">6. Environment variables</a></li>
                 
             
             </ul>
@@ -373,8 +408,26 @@
 <p>This page collects some general information that applies
 to many or all of the standalone command-line applications
 in the <a class="wikilink" href="../../scuff-em/">scuff-em</a> suite.</p>
+<div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#general-reference-for-scuff-em-command-line-applications">General reference for scuff-em command-line applications</a></li>
+<li><a href="#1-common-command-line-arguments">1. Common command-line arguments</a><ul>
+<li><a href="#options-specifying-geometry-inputs">Options specifying geometry inputs</a></li>
+<li><a href="#options-specifying-individual-frequencies-and-bloch-vectors-at-which-to-calculate">Options specifying individual frequencies and Bloch vectors at which to calculate</a></li>
+<li><a href="#options-specifying-evaluation-points">Options specifying evaluation points</a></li>
+<li><a href="#options-controlling-frequency-integrations">Options controlling frequency integrations</a></li>
+<li><a href="#options-controlling-brillouin-zone-integrations">Options controlling Brillouin-zone integrations</a></li>
+<li><a href="#miscellaneous-options">Miscellaneous options</a></li>
+</ul>
+</li>
+<li><a href="#2-passing-command-line-options-via-text-file">2. Passing command-line options via text file</a></li>
+<li><a href="#3-complex-numbers">3. Complex numbers</a></li>
+<li><a href="#4-log-files">4. Log files</a></li>
+<li><a href="#5-output-files">5. Output Files</a></li>
+<li><a href="#6-environment-variables">6. Environment variables</a></li>
+</ul>
+</div>
 <p><a name="CommonOptions"></a></p>
-<h1 id="common-command-line-arguments">Common command-line arguments</h1>
+<h1 id="1-common-command-line-arguments">1. Common command-line arguments</h1>
 <p>The various standalone applications in the <a class="wikilink" href="../../scuff-em/">scuff-em</a> suite
 share a number of command-line arguments in common,
 as described below.
@@ -531,7 +584,7 @@ output file will be <code>MyFileBase.out</code>). If this option is not
 specified, the file base is taken to be the base filename of the 
 <code>.scuffgeo</code> file.</p>
 </blockquote>
-<h1 id="passing-command-line-options-via-text-file">Passing command-line options via text file</h1>
+<h1 id="2-passing-command-line-options-via-text-file">2. Passing command-line options via text file</h1>
 <p>All of the standalone applications in the <a class="wikilink" href="../../scuff-em/">scuff-em</a> suite allow 
 their command-line options to be passed via a text file fed into 
 standard input.</p>
@@ -567,7 +620,7 @@ everything else unchanged, you could say</p>
 </code></pre>
 
 <p><a name="Complex"></a></p>
-<h1 id="complex-numbers">Complex numbers</h1>
+<h1 id="3-complex-numbers">3. Complex numbers</h1>
 <p>Many of the standalone programs in the <a class="wikilink" href="../../scuff-em/">scuff-em</a> suite have 
 options for which you may specify complex numbers. (An example 
 is the --omega option accepted by <a class="wikilink" href="../../scuff-scatter/">scuff-scatter</a> and other 
@@ -585,14 +638,14 @@ of the following are valid frequency specifications:</p>
 </code></pre>
 
 <p><a name="LogFiles"></a> </p>
-<h1 id="log-files">Log files</h1>
+<h1 id="4-log-files">4. Log files</h1>
 <p>All command-line codes in the <a class="wikilink" href="../../scuff-em/">scuff-em</a> suite
 write logging information to text-based logfiles
 with extension <code>.log.</code> You can monitor these
 files to follow the progress of your calculations.</p>
 <p>For example, after launching 
-[ this sample <span class="SC">scuff-cas3d</span> run ][SiliconSlabs],</p>
-<p>type the following at a terminal window:</p>
+<a href="../../examples/SiliconSlabs/SiliconSlabs/">this sample <span class="SC">scuff-cas3d</span> run</a>,
+type the following at a terminal window:</p>
 <pre><code class="bash">% tail -f SiliconSlabs_L2_40.log
 </code></pre>
 
@@ -608,7 +661,7 @@ files to follow the progress of your calculations.</p>
 </code></pre>
 
 <p><a name="OutputFiles"></a></p>
-<h1 id="output-files">Output Files</h1>
+<h1 id="5-output-files">5. Output Files</h1>
 <p>The <a class="wikilink" href="../../scuff-em/">scuff-em</a> application codes generally produce
 output in the form of human-readable text-based
 data files. The typical naming convention for 
@@ -653,10 +706,10 @@ on the
 application codes include <code>.hdf5</code> binary data
 files and <code>.pp</code> files containing visualization data
 that may be viewed in <a class="wikilink" href="../../gmsh/">gmsh</a>.</p>
-<h1 id="environment-variables">Environment variables</h1>
+<h1 id="6-environment-variables">6. Environment variables</h1>
 <p>Here are some environment-variable settings that 
 affect the behavior of <a class="wikilink" href="../../scuff-em/">scuff-em</a>.</p>
-<pre><code class="bash">% export SCUFF_MESH_PATH=/path/to/msh/files`
+<pre><code class="bash">% export SCUFF_MESH_PATH=/path/to/msh/files
 </code></pre>
 
 <blockquote>
@@ -694,7 +747,7 @@ with this parameter!</p>
 to accelerate the calculation of the periodic Green's
 function, but even this accelerated calculation is 
 not fast enough to handle the many millions of 
-evaluations needed to assemble the 
+evaluations needed to assemble the full BEM matrix.
 For this reason, when assembling the BEM matrix at
 a given frequency and Bloch vector, <a class="wikilink" href="../../scuff-em/">scuff-em</a> first
 precomputes Ewald-summed values of the periodic DGF 
@@ -719,7 +772,6 @@ option says that you want these 8 cores to be the first
 8 available (as opposed to, say, the second set of 8
 available cores on a 16-core machine).</p>
 </blockquote>
-<p><a href="https://github.com/HomerReid/scuff-em.git"><span class="CodeName">scuff-em</span> GitHub page</a>.</p>
               
             </div>
           </div>
@@ -730,7 +782,7 @@ available cores on a 16-core machine).</p>
         <a href="../scuff-scatter/scuff-scatter/" class="btn btn-neutral float-right" title="scuff-scatter"/>Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../../reference/Transformations/" class="btn btn-neutral" title="Geometric transformations"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../reference/IncidentFields/" class="btn btn-neutral" title="Incident Fields"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -772,7 +824,7 @@ available cores on a 16-core machine).</p>
           <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../../reference/Transformations/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../../reference/IncidentFields/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
         <span style="margin-left: 15px"><a href="../scuff-scatter/scuff-scatter/" style="color: #fcfcfc">Next &raquo;</a></span>

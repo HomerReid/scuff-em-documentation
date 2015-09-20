@@ -73,6 +73,34 @@
         
             
     <li class="toctree-l1 ">
+        <a class="" href="../../../examples/MieScattering/MieScattering/">Mie scattering</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../examples/DielectricShell/DielectricShell/">Electrostatics of a spherical dielectric shell</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../examples/ThinFilm/ThinFilm/">Spatially-resolved study of plane-wave transmission through an infinite-area thin dielectric film</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../examples/DiffractionPatterns/DiffractionPatterns/">Imaging diffraction patterns of discs, disc arrays, and hole arrays in metal screens</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
         <a class="" href="../../../examples/CubeTorus/">Casimir forces in a compact geometry</a>
         
     </li>
@@ -163,6 +191,13 @@
     </li>
 
         
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/IncidentFields/">Incident Fields</a>
+        
+    </li>
+
+        
     </ul>
 <li>
           
@@ -229,6 +264,8 @@
                 <li class="toctree-l3"><a href="#2-scuff-neq-command-line-options">2. scuff-neq command-line options</a></li>
                 
                     <li><a class="toctree-l4" href="#common-options">Common options</a></li>
+                
+                    <li><a class="toctree-l4" href="#options-specifying-input-fields">Options specifying input fields</a></li>
                 
                     <li><a class="toctree-l4" href="#options-requesting-output-quantities">Options requesting output quantities</a></li>
                 
@@ -450,6 +487,7 @@ as discussed in more detail below.</p>
 <li><a href="#1-what-scuff-neq-actually-computes">1. What <span class="SC">scuff-neq</span> actually computes</a></li>
 <li><a href="#2-scuff-neq-command-line-options">2. <span class="SC">scuff-neq</span> command-line options</a><ul>
 <li><a href="#common-options">Common options</a></li>
+<li><a href="#options-specifying-input-fields">Options specifying input fields</a></li>
 <li><a href="#options-requesting-output-quantities">Options requesting output quantities</a></li>
 <li><a href="#option-requesting-visualization-output">Option requesting visualization output</a></li>
 <li><a href="#options-specifying-object-temperatures">Options specifying object temperatures</a></li>
@@ -562,17 +600,23 @@ quantity that is computed by <a class="wikilink" href="../../../scuff-neq/">scuf
 <p><a class="wikilink" href="../../../scuff-neq/">scuff-neq</a> recognizes the following subset of the 
 <a href="../../GeneralReference/#CommonOptions">list of commonly accepted options to <span class="SC">scuff-em</span> command-line codes</a>.</p>
 <p class="toc"><code>--geometry
---TransFile
+--EPFile
 --Omega
 --OmegaFile
---OmegaQuadrature
---OmegaMin
---AbsTol
---RelTol
---FileBase
 --Cache
 --ReadCache
 --WriteCache</code></p>
+<h3 id="options-specifying-input-fields">Options specifying input fields</h3>
+<p><a class="wikilink" href="../../../scuff-scatter/">scuff-scatter</a> recognizes the following options specifying
+various types of incident fields. You may specify more than
+one type of incident field, in which case your geometry will
+be illuminated by the simultaneous superposition of all the 
+fields you specify.</p>
+<p>For more details on how to use the following options 
+and the precise mathematical expressions for the fields
+they describe,
+see [Incident fields in <span class="SC">scuff-em</span>][IncidentFields].</p>
+<p>These options are </p>
 <h3 id="options-requesting-output-quantities">Options requesting output quantities</h3>
 <p class="toc"><code>--PAbs  
 --PRad  

@@ -73,6 +73,34 @@
         
             
     <li class="toctree-l1 ">
+        <a class="" href="../../examples/MieScattering/MieScattering/">Mie scattering</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/DielectricShell/DielectricShell/">Electrostatics of a spherical dielectric shell</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/ThinFilm/ThinFilm/">Spatially-resolved study of plane-wave transmission through an infinite-area thin dielectric film</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/DiffractionPatterns/DiffractionPatterns/">Imaging diffraction patterns of discs, disc arrays, and hole arrays in metal screens</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
         <a class="" href="../../examples/CubeTorus/">Casimir forces in a compact geometry</a>
         
     </li>
@@ -179,6 +207,13 @@
                 
             
             </ul>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../IncidentFields/">Incident Fields</a>
         
     </li>
 
@@ -426,24 +461,21 @@ geometry are to be transformed, and <em>how</em> those objects
 will be displaced or rotated. </p>
 <p>Each transformation will be specified by a section of the file
 that looks something like this:</p>
-<blockquote>
-<p><code>TRANSFORMATION</code> <strong><em>name-of-transformation</em></strong>  </p>
-<blockquote>
-<p><code>OBJECT</code> <strong><em>FirstObjectLabel</em></strong>  </p>
-<blockquote>
-<p><strong><em>displacement-or-rotation</em></strong><br />
-<strong><em>displacement-or-rotation</em></strong><br />
-...   </p>
+<blockquote class="shaded">
+> ``TRANSFORMATION`` ***name-of-transformation***  
+>> ``OBJECT`` ***FirstObjectLabel***  
+>>> ***displacement-or-rotation***  
+>>> ***displacement-or-rotation***  
+>>> ...
+
+>> ``OBJECT`` ***SecondObjectLabel***  
+>>> ***displacement-or-rotation***  
+>>> ***displacement-or-rotation***  
+>>> ...  
+
+> ``ENDTRANSFORMATION``
 </blockquote>
-<p><code>OBJECT</code> <strong><em>SecondObjectLabel</em></strong>  </p>
-<blockquote>
-<p><strong><em>displacement-or-rotation</em></strong><br />
-<strong><em>displacement-or-rotation</em></strong><br />
-...  </p>
-</blockquote>
-</blockquote>
-<p><code>ENDTRANSFORMATION</code></p>
-</blockquote>
+
 <p>The <b><em>name-of-transformation</em></b> field after the 
 <code>TRANSFORMATION</code> keyword specifies a mandatory label
 assigned to this transformation, which will be used
@@ -673,7 +705,7 @@ heart's content using geometrical transformations.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../applications/GeneralReference/" class="btn btn-neutral float-right" title="General command-line reference"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../IncidentFields/" class="btn btn-neutral float-right" title="Incident Fields"/>Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../Materials/" class="btn btn-neutral" title="Material designations"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -721,7 +753,7 @@ heart's content using geometrical transformations.</p>
         <span><a href="../Materials/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../../applications/GeneralReference/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../IncidentFields/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

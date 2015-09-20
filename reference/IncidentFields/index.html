@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Incident Fields - SCUFF-EM documentation</title>
+  
+
+  <link rel="shortcut icon" href="../../scuffEM.ico">
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "reference/IncidentFields"
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script src="../../js/theme.js"></script> 
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+  <script src="../../mathjaxhelper.js"></script>
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+
+      <p align="center"
+      <a href="../..">
+         <img align="center" height="auto" width="100%"  
+              src="../../img/scuffEMNavBar.png"
+      </a>
+
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> SCUFF-EM documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../..">SCUFF-EM documentation</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Examples</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/MieScattering/MieScattering/">Mie scattering</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/DielectricShell/DielectricShell/">Electrostatics of a spherical dielectric shell</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/ThinFilm/ThinFilm/">Spatially-resolved study of plane-wave transmission through an infinite-area thin dielectric film</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/DiffractionPatterns/DiffractionPatterns/">Imaging diffraction patterns of discs, disc arrays, and hole arrays in metal screens</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/CubeTorus/">Casimir forces in a compact geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/SiliconBeams/SiliconBeams/">Casimir forces in a 1D extended geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/SiliconSlabs/SiliconSlabs/">Casimir forces in a 2D extended geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/SiO2Spheres/SiO2Spheres/">Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/TipSubstrate/TipSubstrate/">Spatial distribution of heat flux from a warm tip over a cold substrate</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/HalfSpaceLDOS/HalfSpaceLDOS/">LDOS and dyadic Green functions above an infinite aluminum half-space</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/PlatonicSolids/PlatonicSolids/">Electrostatic polarizability of platonic solids</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>General reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../TopLevel/">Top-level overview</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Installing/">Installation</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Geometries/">Geometry descriptions</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Materials/">Material designations</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Transformations/">Geometric transformations</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Incident Fields</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#plane-waves">Plane waves</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#gaussian-beams">Gaussian beams</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#point-sources">Point sources</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#using-incident-fields-in-api-programs">Using incident fields in API programs</a></li>
+                
+            
+            </ul>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Command-line application reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/GeneralReference/">General command-line reference</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-scatter/scuff-scatter/">scuff-scatter</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-transmission/scuff-transmission/">scuff-transmission</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-ldos/scuff-ldos/">scuff-ldos</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-tmatrix/scuff-tmatrix/">scuff-tmatrix</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-cas3D/scuff-cas3D/">scuff-cas3D</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-caspol/scuff-caspol/">scuff-caspol</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-neq/scuff-neq/">scuff-neq</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-RF/scuff-RF/">scuff-RF</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-static/scuff-static/">scuff-static</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-analyze/scuff-analyze/">scuff-analyze</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>API reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../API/libscuff/">libscuff</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>For developers</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../forDevelopers/Implementation/">Implementation</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../forDevelopers/DataStructures/">Data Structures</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../forDevelopers/Documentation/">Documentation</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">SCUFF-EM documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.."><span class="SmallCaps">scuff-em</span> documentation</a> &raquo;</li>
+    
+      
+        
+          <li>General reference &raquo;</li>
+        
+      
+    
+    <li>Incident Fields</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/homerreid/scuff-em/" class="icon icon-github"> Edit on GitHub</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="incident-fields-in-scuff-em">Incident fields in <span class="SC">scuff-em</span></h1>
+<p>For the classical scattering problems solved by
+<a href="../../applications/scuff-scatter/scuff-scatter/"><span class="SC">scuff-scatter</span></a>
+or by C++ or python codes using the
+<a href="../../API/libscuff/"><span class="SC">scuff-em</span> API</a>,
+you will want to specify the incident fields that
+scatter from your geometry.</p>
+<p>The default <a class="wikilink" href="../../scuff-em/">scuff-em</a> distribution offers three
+built-in types of incident fields:</p>
+<ul>
+<li><a href="#PlaneWaves">Plane waves</a></li>
+<li><a href="#GaussianBeams">Gaussian beams</a></li>
+<li>The fields of <a href="#PointSources">point electric or magnetic dipole sources.</a></li>
+</ul>
+<p>It is also easy to <a href="#RollingYourOwn">define your own custom incident fields</a>
+for use in API programs.</p>
+<p><a name="PlaneWaves"></p>
+<h2 id="plane-waves">Plane waves</h2>
+<p><a class="wikilink" href="../../scuff-scatter/">scuff-scatter</a> command-line syntax:</p>
+<pre><code class="bash">--pwDirection nx ny nz
+--pwPolarization Ex Ey Ez 
+</code></pre>
+
+<p>{.toc}</p>
+<p>C++ code:</p>
+<pre><code class="c">  double  nHat[3] = {nx, ny, nz};
+  cdouble E0[3]   = {Ex, Ey, Ez};
+  PlaneWave *PW=new PlaneWave(E0, nHat);
+</code></pre>
+
+<p>Selects the incident field to be a plane wave, with propagation vector 
+<strong>n</strong>=<em>(nx,ny,nz)</em> and <strong>E</strong>-field polarization vector <strong>E</strong>=<em>(Ex,Ey,Ez).</em></p>
+<p>More specifically, the fields of a plane wave are</p>
+<p><img alt="Expressions for plane wave fields" src="../PlaneWave.png" /></p>
+<p>where the components of the vectors <script type="math/tex">\mathbf{\hat n}</script> 
+and 
+<script type="math/tex">\mathbf{E}_0</script>
+are what you specify with the <code>--pwDirection</code> and 
+<code>--pwPolarization</code> options to <a class="wikilink" href="../../scuff-scatter/">scuff-scatter</a>. (The frequency 
+<script type="math/tex">\omega</script> is specified using other options described below; the 
+quantities <script type="math/tex">\epsilon</script> and <script type="math/tex">\mu</script> are the material properties of the exterior 
+medium at this frequency, which are determined by the material 
+property designation you give the external medium in the 
+<code>.scuffgeo</code> file; the wave impedance of the medium is 
+<script type="math/tex">Z=\sqrt{\mu/\epsilon}\approx 377\,\Omega</script> in vacuum.)</p>
+<p>The values specified for <code>--pwPolarization</code> may be 
+<a href="../../applications/GeneralReference/#Complex">complex numbers.</a></p>
+<p>As an example, the command-line options</p>
+<p class="toc"><code>--pwDirection 0 0 1 --pwPolarization 0.7071 0.7071i 0.0</code></p>
+<p>will specify an incident field consisting of a circularly
+polarized plane wave traveling in the positive <em>z</em> direction.</p>
+<p><a name="GaussianBeams"></p>
+<h2 id="gaussian-beams">Gaussian beams</h2>
+<p><a class="wikilink" href="../../scuff-scatter/">scuff-scatter</a> command-line syntax:</p>
+<pre><code class="bash">--gbCenter Cx Cy Cz
+--gbDirection nx ny nz
+--gbPolarization Ex Ey Ez
+--gbWaist W
+</code></pre>
+
+<p>C++ code:</p>
+<pre><code class="c">  double X0[3]={Cx, Cy, Cz};     /* beam center point */
+  double KProp[3]={nx, ny, nz};  /* beam propagation vector */
+  cdouble E0[3]={Ex, Ey, Ez};    /* complex field-strength vector */
+  double W0=W;                   /* beam waist */
+  GaussianBeam *GB=new GaussianBeam(X0, KProp, E0, W0);
+</code></pre>
+
+<p>Selects the incident field to be a focused Gaussian beam, 
+traveling in the direction defined by the unit vector 
+<strong>n</strong>=<code>(nx,ny,nz)</code>, with <strong>E</strong>-field polarization 
+vector <strong>E</strong>=<code>(Ex,Ey,Ez)</code>, beam center point with cartesian 
+coordinates <strong>C</strong>=<code>(Cx,Cy,Cz)</code>, and beam waist <code>W</code>.</p>
+<p>The values specified for <code>--gbPolarization</code> may be
+<a href="../../applications/GeneralReference/#Complex">complex numbers.</a></p>
+<p>The <a class="wikilink" href="../../scuff-em/">scuff-em</a> implementation of the
+field of a Gaussian laser beam was contributed by 
+Johannes Feist and follows this paper:</p>
+<ul>
+<li>Sheppard and Saghafi, "Electromagnetic Gaussian Beams 
+Beyond the Paraxial Approximation," <em>Journal of the Optical 
+Society of America A</em> <strong>16</strong> 1381 (1999), <a href="http://dx.doi.org/10.1364/JOSAA.16.001381">http://dx.doi.org/10.1364/JOSAA.16.001381</a>.</li>
+</ul>
+<p><a name="PointSources"></p>
+<h2 id="point-sources">Point sources</h2>
+<p><a class="wikilink" href="../../scuff-scatter/">scuff-scatter</a> command-line syntax:</p>
+<pre><code class="bash">--psStrength Px Py Pz
+--psLocation xx yy zz
+</code></pre>
+
+<p>C++ code:</p>
+<pre><code class="c">  double  X0[3] = {xx, yy, zz};
+  cdouble P0[3] = {Px, Py, Pz};
+  PointSource *PS=new PointSource(X0, P0);
+</code></pre>
+
+<p>Selects the incident field to be the field of a pointlike
+electric dipole radiator with dipole moment <strong>P</strong>=<code>(Px,Py,Pz)</code>
+and located at cartesian coordinates (<code>xx,yy,zz</code>).</p>
+<p>More specifically, the fields of a point source are given by</p>
+<p><img alt="Expressions for point-source fields" src="../PointSource.png" /></p>
+<p>The values specified for <code>--psStrength</code> may be
+<a href="../../applications/GeneralReference/#Complex">complex numbers.</a></p>
+<p>You may define the incident field to be a superposition of
+the fields of multiple point sources by specifying these
+options more than once. (The <em>n</em>th occurrence of <code>--psStrength</code>
+will be paired with the <em>n</em>th occurrence of <code>--psLocation.</code>)</p>
+<p>In API codes (but not in <a class="wikilink" href="../../scuff-scatter/">scuff-scatter</a>) it is also
+possible to a define a magnetic point source as follows:</p>
+<pre><code class="c">  PointSource *PS=new PointSource(X0, P0);
+</code></pre>
+
+<p><a name="RollingYourOwn"></p>
+<h2 id="using-incident-fields-in-api-programs">Using incident fields in API programs</h2>
+<p>Please see 
+<a href="http://homerreid.com/scuff-em/libscuff/IncField.shtml">here</a>
+for further details and examples of how incident fields are manipulated in API codes, including an example of how to create your
+own custom-designed incident field.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../applications/GeneralReference/" class="btn btn-neutral float-right" title="General command-line reference"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../Transformations/" class="btn btn-neutral" title="Geometric transformations"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    <!-- Copyright etc -->
+    </p>
+  </div>
+
+  <a href="http://homerreid.com/scuff-em"> 
+    <span class="SmallCaps">scuff-em</span>
+  </a> documentation, by
+  <a href="http://homerreid.com">Homer Reid</a>
+
+  <p>
+  <font size=-1>
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> 
+  using a customized theme modeled 
+  after the 
+  <a href="https://github.com/snide/sphinx_rtd_theme">theme</a>
+  provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  </font>
+
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../Transformations/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../applications/GeneralReference/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

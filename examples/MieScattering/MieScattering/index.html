@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Mie scattering - SCUFF-EM documentation</title>
+  
+
+  <link rel="shortcut icon" href="../../../scuffEM.ico">
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/highlight.css">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "examples/MieScattering/MieScattering"
+  </script>
+  
+  <script src="../../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../../js/highlight.pack.js"></script>
+  <script src="../../../js/theme.js"></script> 
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+  <script src="../../../mathjaxhelper.js"></script>
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+
+      <p align="center"
+      <a href="../../..">
+         <img align="center" height="auto" width="100%"  
+              src="../../../img/scuffEMNavBar.png"
+      </a>
+
+      <div class="wy-side-nav-search">
+        <a href="../../.." class="icon icon-home"> SCUFF-EM documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../../..">SCUFF-EM documentation</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Examples</span></li>
+
+        
+            
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Mie scattering</a>
+        
+            <ul>
+            
+            </ul>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../DielectricShell/DielectricShell/">Electrostatics of a spherical dielectric shell</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../ThinFilm/ThinFilm/">Spatially-resolved study of plane-wave transmission through an infinite-area thin dielectric film</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../DiffractionPatterns/DiffractionPatterns/">Imaging diffraction patterns of discs, disc arrays, and hole arrays in metal screens</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../CubeTorus/">Casimir forces in a compact geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../SiliconBeams/SiliconBeams/">Casimir forces in a 1D extended geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../SiliconSlabs/SiliconSlabs/">Casimir forces in a 2D extended geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../SiO2Spheres/SiO2Spheres/">Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../TipSubstrate/TipSubstrate/">Spatial distribution of heat flux from a warm tip over a cold substrate</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../HalfSpaceLDOS/HalfSpaceLDOS/">LDOS and dyadic Green functions above an infinite aluminum half-space</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../PlatonicSolids/PlatonicSolids/">Electrostatic polarizability of platonic solids</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>General reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/TopLevel/">Top-level overview</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/Installing/">Installation</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/Geometries/">Geometry descriptions</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/Materials/">Material designations</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/Transformations/">Geometric transformations</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/IncidentFields/">Incident Fields</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Command-line application reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/GeneralReference/">General command-line reference</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-scatter/scuff-scatter/">scuff-scatter</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-transmission/scuff-transmission/">scuff-transmission</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-ldos/scuff-ldos/">scuff-ldos</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-tmatrix/scuff-tmatrix/">scuff-tmatrix</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-cas3D/scuff-cas3D/">scuff-cas3D</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-caspol/scuff-caspol/">scuff-caspol</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-neq/scuff-neq/">scuff-neq</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-RF/scuff-RF/">scuff-RF</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-static/scuff-static/">scuff-static</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-analyze/scuff-analyze/">scuff-analyze</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>API reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../API/libscuff/">libscuff</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>For developers</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../forDevelopers/Implementation/">Implementation</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../forDevelopers/DataStructures/">Data Structures</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../forDevelopers/Documentation/">Documentation</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../..">SCUFF-EM documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.."><span class="SmallCaps">scuff-em</span> documentation</a> &raquo;</li>
+    
+      
+        
+          <li>Examples &raquo;</li>
+        
+      
+    
+    <li>Mie scattering</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/homerreid/scuff-em/" class="icon icon-github"> Edit on GitHub</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="plane-wave-scattering-from-a-dielectric-sphere-mie-scattering">Plane-wave scattering from a dielectric sphere (Mie scattering)</h1>
+<p>We first demonstrate how to use <a class="wikilink" href="../../../scuff-scatter/">scuff-scatter</a> to solve the canonical textbook 
+problem of <em>Mie scattering</em> -- the scattering of a plane wave from a dielectric 
+sphere. The files for this example are in 
+the <code>share/scuff-em/examples/SolidSphere</code> subdirectory of the <a class="wikilink" href="../../../scuff-em/">scuff-em</a>
+source distribution.</p>
+<p>We begin by creating a <a href="http://geuz.org/gmsh"><span class="SC">gmsh</span></a> geometry file for the 
+sphere <a href="../Sphere.geo">(<code>Sphere.geo</code>)</a>. We turn this geometry file into a mesh 
+file by running the following command:</p>
+<pre><code class="bash"> % gmsh -2 -clscale 1.0 Sphere.geo
+</code></pre>
+
+<p>This produces a file named <a href="../Sphere.msh"><code>Sphere.msh</code></a> which looks like this:</p>
+<p><img alt="Sphere mesh" src="../SphereMesh.png" /></p>
+<p>You can adjust the fineness of the surface mesh by varying the <code>-clscale</code> parameter 
+(which stands for "characteristic length scale"); finer meshes will be more accurate 
+but will take longer to simulate.</p>
+<p>Next we create a <a href="../../../reference/Geometries/"><span class="SC">scuff-em</span> geometry file</a>
+that will tell scuff-scatter about our geometry, including both the surface mesh 
+and the material properties (dielectric function) of the sphere. As a first example, 
+we'll use a dielectric model for silicon carbide that expresses the relative 
+permittivity as a rational function of ω; in this case we'll call the geometry 
+file <code>SiCSphere.scuffgeo.</code></p>
+<pre><code class="bash">MATERIAL SiliconCarbide
+
+   EpsInf = 6.7;
+   a0     = -3.32377e28;
+   a1     = +8.93329e11;
+   b0     = -2.21677e28;
+   b1     = 8.93329e11;
+   Eps(w) = EpsInf * (a0 + i*a1*w + w*w) / ( b0 + i*b1*w + w*w);
+
+ENDMATERIAL 
+
+OBJECT TheSphere
+        MESHFILE Sphere.msh
+        MATERIAL SiliconCarbide
+ENDOBJECT
+</code></pre>
+
+<p>We create a simple file called <a href="../OmegaValues.dat"><code>OmegaValues.dat</code></a> containing a 
+list of angular frequencies at which to run the scattering problem:</p>
+<pre><code class="bash">    0.010
+    0.013
+    ...
+    10.0
+</code></pre>
+
+<p>(We pause to note one subtlety here: Angular frequencies specified 
+using the <code>--Omega</code> or <code>--OmegaFile</code> arguments are interpreted in 
+units of <script type="math/tex">c / 1 \mu</script>m = <script type="math/tex">3\cdot 10^{14}</script> rad/sec.
+These are natural 
+frequency units to use for problems involving micron-sized objects; 
+in particular, for Mie scattering from a sphere of radius 1 μm, as 
+we are considering here, the numerical value of <code>Omega</code> is just the 
+quantity <script type="math/tex">kR</script> (wavenumber times radius) known as the 
+"size parameter" in the Mie scattering literature. In contrast, 
+when specifying functions of angular frequency like <code>Eps(w)</code> in 
+<code>MATERIAL...ENDMATERIAL</code> sections of geometry files or in any other 
+<a href="../../../reference/Materials/"><span class="SC">scuff-em</span> material description</a>, 
+the <code>w</code> variable 
+is always interpreted in units of <strong>1 <code>rad/sec</code></strong>, because these are 
+the units in which tabulated material properties and functional forms 
+for model dielectric functions are typically expressed.)</p>
+<p>Finally, we'll create a little text file called <code>Args</code> that will contain 
+a list of command-line options for <a class="wikilink" href="../../../scuff-scatter/">scuff-scatter</a>; these will include 
+<strong>(1)</strong> a specification of the geometry, <strong>(2)</strong> the frequency list, 
+<strong>(3)</strong> the name of an output file for the power, force, and torque 
+<strong>(4)</strong> the name of a cache file for geometric data (this file doesn't 
+exist yet, but will be created by our first run of <a class="wikilink" href="../../../scuff-scatter/">scuff-scatter</a>), 
+and <strong>(5)</strong> a specification of the incident field.</p>
+<pre><code class="bash">    geometry SiCSphere.scuffgeo
+    OmegaFile OmegaValues.dat
+    PFTFile SiCSphere.PFT
+    Cache Sphere.cache
+    pwDirection 0 0 1
+    pwPolarization 1 0 0
+
+</code></pre>
+
+<p>And now we just pipe this little file into the standard input of <a class="wikilink" href="../../../scuff-scatter/">scuff-scatter</a>:</p>
+<pre><code class="bash">    % scuff-scatter &lt; Args 
+</code></pre>
+
+<p>This produces the file <code>SiCSphere.PFT</code>, which contains one line per simulated 
+frequency; each line contains data on the scattered and total power, the force, 
+and the torque on the particle at that frequency. (Look at the first few lines
+of the file for a text description of how to interpret it.)</p>
+<p>(On my fairly standard workstation (8 Xeon E5420 cores, 2.5 GHz), this calculation 
+takes a few minutes to run. You can monitor its progress by following the <code>scuff-scatter.log</code> 
+file. Note that, during computationally-intensive operations such as the BEM matrix assembly, 
+the code should be using all available CPU cores on your workstation; if you find that this is 
+not the case (for example, by monitoring CPU usage using 
+<a href="http://htop.sourceforge.net"><span class="SC">htop</span></a>) 
+you may need to 
+[reconfigure and recompile with different openmp/pthreads configuration options.][scuffEMInstallation.shtml]</p>
+<p>Here's a comparison of the scuff-scatter results with the analytical Mie series, as computed 
+using <a href="../Mie.math">this Mathematica script.</a> [Like most Mie codes, this script computes the 
+absorption and scattering <em>cross-sections</em>, which we multiply by the incoming beam flux (<script type="math/tex">\frac{1}{2Z_0}</script> for a unit-strength plane wave in vacuum) to get 
+values for the absorbed and scattered <em>power</em>.]</p>
+<p><img alt="Silicon carbide data plot" src="../SiCData.png" /></p>
+<p>Now let's redo the calculation for a sphere made of gold instead of silicon carbide.  In this case we will name our scuff-em geometry file <code>GoldSphere.scuffgeo</code>:</p>
+<pre><code class="bash">    MATERIAL Gold
+      wp = 1.37e16;
+      gamma = 5.32e13;
+      Eps(w) = 1 - wp^2 / (w * (w + i*gamma));
+    ENDMATERIAL
+
+    OBJECT TheSphere
+        MESHFILE Sphere.msh
+        MATERIAL Gold
+    ENDOBJECT
+
+</code></pre>
+
+<p>Since most of the command-line arguments to <a class="wikilink" href="../../../scuff-scatter/">scuff-scatter</a> will be the same as before, 
+we can reuse the same <code>Args</code> file, with the options that need to be given new values 
+specified on the command line:</p>
+<pre><code class="bash">% scuff-scatter --geometry GoldSphere.scuffgeo --PFTFile GoldSphere.PFT &lt; Args
+
+</code></pre>
+
+<p>(Note that we don't have to change the name of the cache file specified with the <code>Cache</code> 
+option; because we are using the same surface mesh as before, and because 
+<a href="http://homerreid.com/scuff-em/reference/scuffEMMisc.shtml#Caching">cached geometric data in <span class="SC">scuff-em</span> are independent of material properties</a>, 
+we can take advantage of geometric data computed during the earlier run for the silicon carbide sphere.)</p>
+<p>Now our data look like this:</p>
+<p><img alt="Gold data" src="../GoldData.png" /></p>
+<p>In some cases it's useful to look at how the induced surface currents vary over the surface of the object. 
+Let's re-run the SiC example, now at just the single angular frequency of ω=0.1, and ask for a surface current plot.</p>
+<pre><code class="bash">% scuff-scatter --geometry SiCSphere.scuffgeo --Omega 0.1 --Cache Sphere.cache --pwDirection 0 0 1 --pwPolarization 1 0 0 --PlotSurfaceCurrents
+</code></pre>
+
+<p>This produces a file named <code>SiCSphere.0.1.pp</code>, which we can open in gmsh like this:</p>
+<pre><code class="bash"> % gmsh SiCSphere.0.1.pp
+</code></pre>
+
+<p><img alt="Sphere surface currents" src="../SphereSurfaceCurrents.png" /></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../DielectricShell/DielectricShell/" class="btn btn-neutral float-right" title="Electrostatics of a spherical dielectric shell"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../.." class="btn btn-neutral" title="SCUFF-EM documentation"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    <!-- Copyright etc -->
+    </p>
+  </div>
+
+  <a href="http://homerreid.com/scuff-em"> 
+    <span class="SmallCaps">scuff-em</span>
+  </a> documentation, by
+  <a href="http://homerreid.com">Homer Reid</a>
+
+  <p>
+  <font size=-1>
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> 
+  using a customized theme modeled 
+  after the 
+  <a href="https://github.com/snide/sphinx_rtd_theme">theme</a>
+  provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  </font>
+
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../../.." style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../DielectricShell/DielectricShell/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

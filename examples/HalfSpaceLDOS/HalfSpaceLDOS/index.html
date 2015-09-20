@@ -73,6 +73,34 @@
         
             
     <li class="toctree-l1 ">
+        <a class="" href="../../MieScattering/MieScattering/">Mie scattering</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../DielectricShell/DielectricShell/">Electrostatics of a spherical dielectric shell</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../ThinFilm/ThinFilm/">Spatially-resolved study of plane-wave transmission through an infinite-area thin dielectric film</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../DiffractionPatterns/DiffractionPatterns/">Imaging diffraction patterns of discs, disc arrays, and hole arrays in metal screens</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
         <a class="" href="../../CubeTorus/">Casimir forces in a compact geometry</a>
         
     </li>
@@ -175,6 +203,13 @@
             
     <li class="toctree-l1 ">
         <a class="" href="../../../reference/Transformations/">Geometric transformations</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/IncidentFields/">Incident Fields</a>
         
     </li>
 
@@ -425,14 +460,14 @@ These meshes may be visualized in <a class="wikilink" href="../../../gmsh/">gmsh
 <hr />
 <h1 id="scuff-em-geometry-files"><a class="wikilink" href="../../../scuff-em/">scuff-em</a> geometry files</h1>
 <p>The 
-[<span class="SC">scuff-em</span> geometry files][Geometries]
+<a href="../../../reference/Geometries/"><span class="SC">scuff-em</span> geometry files</a>
 describing an infinite-area PEC ground plane at <script type="math/tex">z</script>=0
 are 
 <a href="../PECPlate_40.scuffgeo"><code>PECPlate_40.scuffgeo</code></a>
 and 
 <a href="../PECPlate_176.scuffgeo"><code>PECPlate_176.scuffgeo</code></a>.</p>
 <p>The 
-[<span class="SC">scuff-em</span> geometry files][Geometries]
+<a href="../../../reference/Geometries/"><span class="SC">scuff-em</span> geometry files</a>
 describing an infinite aluminum half-space occupying
 the region <script type="math/tex">z<0</script> are 
 <a href="../AlHalfSpace_40.scuffgeo"><code>AlHalfSpace_40.scuffgeo</code></a>
@@ -469,17 +504,22 @@ the LDOS is computed using a semi-analytical approach
 (plane-wave decomposition) and another in which
 the LDOS is computed using the <a class="wikilink" href="../../../scuff-em/">scuff-em</a> core
 library.</p>
-<p><code>ARGS=""
-  ARGS="${ARGS} --geometry ../${GEOM}"
-  ARGS="${ARGS} --EPFile  ../EPFile"
-  ARGS="${ARGS} --OmegakBlochFile ../OKBFile"
-  ARGS="${ARGS} --HalfSpace Aluminum"
-  scuff-ldos ${ARGS}</code></p>
-<p><code>ARGS=""
-  ARGS="${ARGS} --geometry ../${GEOM}"
-  ARGS="${ARGS} --EPFile  ../EPFile"
-  ARGS="${ARGS} --OmegakBlochFile ../OKBFile"
-  scuff-ldos ${ARGS}</code></p>
+<pre><code class="bash">  #!/bin/bash
+
+  ARGS=&quot;&quot;
+  ARGS=&quot;${ARGS} --geometry ../${GEOM}&quot;
+  ARGS=&quot;${ARGS} --EPFile  ../EPFile&quot;
+  ARGS=&quot;${ARGS} --OmegakBlochFile ../OKBFile&quot;
+  ARGS=&quot;${ARGS} --HalfSpace Aluminum&quot;
+  scuff-ldos ${ARGS}
+
+  ARGS=&quot;&quot;
+  ARGS=&quot;${ARGS} --geometry ../${GEOM}&quot;
+  ARGS=&quot;${ARGS} --EPFile  ../EPFile&quot;
+  ARGS=&quot;${ARGS} --OmegakBlochFile ../OKBFile&quot;
+  scuff-ldos ${ARGS}
+</code></pre>
+
 <p><img alt="aluminum LDOS data" src="../AluminumLDOS.png" /></p>
               
             </div>
