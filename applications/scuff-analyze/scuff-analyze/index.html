@@ -282,7 +282,36 @@
         
             <ul>
             
-                <li class="toctree-l3"><a href="#bash-script-to-rename-a-mesh-file-according-to-its-number-of-edges">bash script to rename a mesh file according to its number of edges</a></li>
+                <li class="toctree-l3"><a href="#options-specifying-the-file-to-analyze">Options specifying the file to analyze</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#option-specifying-a-list-of-geometrical-transformations">Option specifying a list of geometrical transformations</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#options-controlling-the-generation-of-visualization-files">Options controlling the generation of visualization files</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#scuff-analyze-console-output">scuff-analyze console output</a></li>
+                
+                    <li><a class="toctree-l4" href="#running-scuff-analyze-on-a-geometry-file">Running scuff-analyze on a geometry file</a></li>
+                
+                    <li><a class="toctree-l4" href="#running-scuff-analyze-on-a-mesh-file">Running scuff-analyze on a mesh file</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#viewing-gmsh-visualization-files">Viewing gmsh visualization files</a></li>
+                
+                    <li><a class="toctree-l4" href="#gmsh-visualization-of-full-geometries">gmsh Visualization of Full Geometries</a></li>
+                
+                    <li><a class="toctree-l4" href="#gmsh-visualization-of-extended-geometries-the-neighbors-option">gmsh Visualization of Extended Geometries: The --neighbors Option</a></li>
+                
+                    <li><a class="toctree-l4" href="#gmsh-visualization-of-individual-meshes">gmsh Visualization of Individual Meshes</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#viewing-gnuplot-visualization-files">Viewing gnuplot visualization files</a></li>
+                
+                    <li><a class="toctree-l4" href="#gnuplot-visualization-of-full-geometries">gnuplot Visualization of Full Geometries</a></li>
+                
+                    <li><a class="toctree-l4" href="#gnuplot-visualization-of-individual-meshes">gnuplot Visualization of Individual Meshes</a></li>
                 
             
             </ul>
@@ -377,35 +406,342 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="scuff-analyze">scuff-analyze</h1>
-<p>The documentation for <a class="wikilink" href="../../../scuff-analyze/">scuff-analyze</a> has not yet been
-ported from its earlier version. For the time being, please
-<a href="http://homerreid.com/scuff-em/scuff-analyze">access the earlier version of the documentation.</a></p>
-<p><a name="RenameMesh"></a></p>
-<h3 id="bash-script-to-rename-a-mesh-file-according-to-its-number-of-edges"><code>bash</code> script to rename a mesh file according to its number of edges</h3>
-<p>I call this script <code>RenameMesh.</code> Usage example:</p>
-<pre><code class="bash"> % RenameMesh Paraboloid.msh
- Moved Paraboloid.msh to Paraboloid_750.msh.
+                <h1> Analyzing objects and geometries with <span class="SC">scuff-analyze</span></h1>
+
+<p>The <a class="wikilink" href="../../../scuff-em/">scuff-em</a> suite comes with a simple standalone utility named 
+<a class="wikilink" href="../../../scuff-analyze/">scuff-analyze</a> that you can use to gather some quick statistics on
+meshed objects and scattering geometries described by mesh files and 
+geometry files.</p>
+<p>There are several situations in which this can be useful:</p>
+<ul>
+<li>You want to know how much memory will be occupied by the BEM matrix 
+    for a geometry described by a <code>.scuffgeo</code> file.</li>
+<li>Your <code>.scuffgeo</code> file contains multiple <code>OBJECTs</code> or <code>SURFACEs</code>, each 
+    described by a separate surface mesh and possibly displaced, rotated, 
+    or periodically replicated via <code>LATTICE</code> statements, and you want to 
+    visualize the full geometry to make sure the file you wrote actually 
+    describes what you want.</li>
+<li>You have created a <code>.trans</code> file describing a list of 
+    <a href="../../../reference/Transformations/">geometrical transformations</a> 
+    to be applied to your geometry, and before running a full calculation 
+    you want to do a quick sanity check by visualizing the geometry under
+    each of your transformations to make sure they are what you intended.</li>
+<li>You want to delve into the innards of <a class="wikilink" href="../../../libscuff/">libscuff</a> by playing around 
+    with the simultaneous linear BEM system it constructs. In this case 
+    you will need to know how the RWG basis functions in your surface mesh 
+    are ordered within the BEM matrices and vectors, i.e. you need the 
+    correspondence between rows of the BEM matrix and interior edges in your 
+    surface-mesh geometry.</li>
+</ul>
+<div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#scuff-analyze-command-line-options">scuff-analyze Command-Line Options</a><ul>
+<li><a href="#options-specifying-the-file-to-analyze">Options specifying the file to analyze</a></li>
+<li><a href="#option-specifying-a-list-of-geometrical-transformations">Option specifying a list of geometrical transformations</a></li>
+<li><a href="#options-controlling-the-generation-of-visualization-files">Options controlling the generation of visualization files</a></li>
+</ul>
+</li>
+<li><a href="#scuff-analyze-console-output">scuff-analyze console output</a><ul>
+<li><a href="#running-scuff-analyze-on-a-geometry-file">Running scuff-analyze on a geometry file</a></li>
+<li><a href="#running-scuff-analyze-on-a-mesh-file">Running scuff-analyze on a mesh file</a></li>
+</ul>
+</li>
+<li><a href="#viewing-gmsh-visualization-files">Viewing gmsh visualization files</a><ul>
+<li><a href="#gmsh-visualization-of-full-geometries">gmsh Visualization of Full Geometries</a></li>
+<li><a href="#gmsh-visualization-of-extended-geometries-the-neighbors-option">gmsh Visualization of Extended Geometries: The --neighbors Option</a></li>
+<li><a href="#gmsh-visualization-of-individual-meshes">gmsh Visualization of Individual Meshes</a></li>
+</ul>
+</li>
+<li><a href="#viewing-gnuplot-visualization-files">Viewing gnuplot visualization files</a><ul>
+<li><a href="#gnuplot-visualization-of-full-geometries">gnuplot Visualization of Full Geometries</a></li>
+<li><a href="#gnuplot-visualization-of-individual-meshes">gnuplot Visualization of Individual Meshes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<hr />
+<h1 id="scuff-analyze-command-line-options">scuff-analyze Command-Line Options</h1>
+<h2 id="options-specifying-the-file-to-analyze"><em>Options specifying the file to analyze</em></h2>
+<pre><code class="bash">    --geometry MyGeometry.scuffgeo
 </code></pre>
 
-<pre><code class="bash">#!/bin/bash
-
-if [ $# -eq  0 ]
-then
-  echo &quot;usage: $0 Object.msh&quot;
-fi
-
-NUMEDGES=`scuff-analyze --mesh $1  | grep 'interior edges' | head -1 | cut -f2 -d' '`
-if [ &quot;x${NUMEDGES}&quot; == &quot;x&quot; ]
-then 
-  echo &quot;Something's gone wrong.&quot;
-  exit
-fi
-
-/bin/mv $1 ${1%%.msh}_${NUMEDGES}.msh
-
-echo &quot;Moved $1 to ${1%%.msh}_${NUMEDGES}.msh.&quot;
+<p>Analyze a full geometry described by a
+<a href="../../../reference/Geometries/">scuff-em geometry.</a></p>
+<pre><code class="bash">    --mesh     MyObject.msh
+    --meshFile MyObject.mesh
 </code></pre>
+
+<p>Analyze a single object described by a surface mesh. (The
+two options are synonomous.)</p>
+<h2 id="option-specifying-a-list-of-geometrical-transformations"><em>Option specifying a list of geometrical transformations</em></h2>
+<pre><code class="bash">    --TransFile MyTransFile.trans
+</code></pre>
+
+<p>Specify a list of 
+<a href="../../../reference/Transformations/">geometrical transformations</a> 
+to be applied to a geometry. This is useful for <strong>(a)</strong> checking
+that your transformation file can be properly parsed by 
+<a class="wikilink" href="../../../scuff-em/">scuff-em</a>, and <strong>(b)</strong> producing a visualization output file to 
+confirm that the transformations you got are the ones you wanted.</p>
+<h2 id="options-controlling-the-generation-of-visualization-files"><em>Options controlling the generation of visualization files</em></h2>
+<pre><code class="bash">    --WriteGMSHFiles 
+</code></pre>
+
+<p>Write visualization files suitable for viewing with 
+<a href="http://www.geuz.org/gmsh">[gmsh]</a>.</p>
+<pre><code class="bash">    --WriteGMSHLabels 
+</code></pre>
+
+<p>Append visualization data to <a class="wikilink" href="../../../gmsh/">gmsh</a> visualization files that 
+provides information on how the geometry is represented internally 
+within <a class="wikilink" href="../../../scuff-em/">scuff-em</a>. This option is automatically enabled when the 
+<code>--mesh</code> option is used.</p>
+<pre><code class="bash">    --Neighbors nn
+</code></pre>
+
+<p>(For periodically repeated geometries only). If this option is specified, 
+the <a class="wikilink" href="../../../gmsh/">gmsh</a> visualization files will include the first <code>nn</code> neighboring 
+cells in all directions. (For example, <code>--Neighbors 1</code> will produce a 
+plot showing the innermost 3x3 grid of unit cells, while <code>--Neighbors 2</code> 
+will show the innermost 5x5 grid of cells.) This is useful for visualizing 
+how your unit-cell meshes fit together with their images across unit-cell 
+boundaries to comprise a periodically replicated lattice.</p>
+<pre><code class="bash">    --WriteGnuplotFiles 
+</code></pre>
+
+<p>Write visualization files suitable for viewing with 
+<a href="http://www.gnuplot.info">gnuplot.</a></p>
+<hr />
+<h1 id="scuff-analyze-console-output"><a class="wikilink" href="../../../scuff-analyze/">scuff-analyze</a> console output</h1>
+<h3 id="running-scuff-analyze-on-a-geometry-file">Running <a class="wikilink" href="../../../scuff-analyze/">scuff-analyze</a> on a geometry file</h3>
+<p>Running <a class="wikilink" href="../../../scuff-analyze/">scuff-analyze</a> on a typical <a class="wikilink" href="../../../scuff-em/">scuff-em</a> geometry file 
+yields console output that looks like this:</p>
+<pre><code class="bash">      % scuff-analyze --geometry CylinderRing.scuffgeo
+
+         ***********************************************
+         *  GEOMETRY CylinderRing.scuffgeo 
+         ***********************************************
+               2 objects
+           22548 total basis functions
+          Size of BEM matrix: 3.84 GB
+
+         ***********************************************
+         *  OBJECT 0: Label = Ring
+         ***********************************************
+          Meshfile: Ring.msh 
+          7360 panels
+          11040 total edges
+          22080 total basis functions
+          11040 interior edges
+          3680 total vertices (after eliminating 0 redundant vertices)
+          3680 interior vertices
+          0 boundary contours
+
+          interior vertices - interior edges + panels = euler characteristic
+                       3680 -          11040 +   7360 = 0
+
+          Total area: 6.1547934e+00 
+          Avg area: 8.3624910e-04 // sqrt(Avg Area)=2.8917972e-02
+
+         ***********************************************
+         *  OBJECT 1: Label = Cylinder
+         ***********************************************
+          Meshfile: Cylinder.msh 
+          156 panels
+          234 total edges
+          468 total basis functions
+          234 interior edges
+          80 total vertices (after eliminating 0 redundant vertices)
+          80 interior vertices
+          0 boundary contours
+
+          interior vertices - interior edges + panels = euler characteristic
+                         80 -            234 +    156 = 2
+
+          Total area: 6.6885562e-01 
+          Avg area: 4.2875360e-03 // sqrt(Avg Area)=6.5479279e-02
+
+         Thank you for your support.
+</code></pre>
+
+<h3 id="running-scuff-analyze-on-a-mesh-file">Running <a class="wikilink" href="../../../scuff-analyze/">scuff-analyze</a> on a mesh file</h3>
+<p>You can also run <a class="wikilink" href="../../../scuff-analyze/">scuff-analyze</a> on a mesh file describing just a 
+single object:</p>
+<pre><code class="bash">      % scuff-analyze --mesh Cylinder.msh
+
+         Meshfile: Cylinder.msh 
+         156 panels
+         234 total edges
+         234 total basis functions
+         234 interior edges
+         80 total vertices (after eliminating 0 redundant vertices)
+         80 interior vertices
+         0 boundary contours
+
+         interior vertices - interior edges + panels = euler characteristic
+                        80 -            234 +    156 = 2
+
+         Total area: 6.6885562e-01 
+         Avg area: 4.2875360e-03 // sqrt(Avg Area)=6.5479279e-02
+
+        Thank you for your support.
+</code></pre>
+
+<p>One use of <a class="wikilink" href="../../../scuff-analyze/">scuff-analyze</a> is to generate visualization files that 
+may be opened in <a href="http://www.gnuplot.info">gnuplot</a> 
+or <a href="http://www.geuz.org/gmsh">gmsh.</a> In addition to showing you what 
+your geometry looks like, these files will also indicate the internal 
+numbering that <a class="wikilink" href="../../../scuff-em/">scuff-em</a> uses for the vertices, panels, and edges 
+in the surface discretization. This information can be useful, for 
+example, in interpreting the BEM matrices exported by passing the 
+<code>--ExportBEMMatrix</code> option to various <a class="wikilink" href="../../../scuff-em/">scuff-em</a> programs.</p>
+<hr />
+<h1 id="viewing-gmsh-visualization-files">Viewing <a class="wikilink" href="../../../gmsh/">gmsh</a> visualization files</h1>
+<p>The <a class="wikilink" href="../../../gmsh/">gmsh</a> visualization files generated by <a class="wikilink" href="../../../scuff-analyze/">scuff-analyze</a> 
+contain different information depending on whether you use the 
+<code>--geometry</code> option to specify a full <a class="wikilink" href="../../../scuff-em/">scuff-em</a> geometry 
+(a <a href="../../../reference/Geometries/"><code>.scuffgeo</code></a> file) or the 
+<code>--mesh</code> option to specify a single surface mesh for an 
+individual object (as described by a <a class="wikilink" href="../../../gmsh/">gmsh</a> <code>.msh</code> file or 
+other mesh file format).</p>
+<h3 id="gmsh-visualization-of-full-geometries"><a class="wikilink" href="../../../gmsh/">gmsh</a> Visualization of Full Geometries</h3>
+<p>If you specify the <code>--geometry</code> option, the resulting <code>.pp</code> file 
+will contain only a single "view" giving you a graphical 
+representation of the various objects in the geometry. This is 
+convenient for confirming that objects are positioned relative 
+to one another in the way that you intended. For instance, 
+consider the following geometry file (called <code>SphereCube.scuffgeo</code>), 
+which describes a geometry involving a sphere and a cube, with the 
+cube displaced and rotated vis-a-vis the base position and orientation 
+described by its <code>.msh</code> file:</p>
+<pre><code class="bash"> OBJECT TheSphere
+    MESHFILE  Sphere.msh
+    MATERIAL  Silicon
+ ENDOBJECT
+
+ OBJECT TheCube
+    MESHFILE  Cube.msh
+    MATERIAL  Teflon
+    ROTATED   45 ABOUT 0 0 1
+    DISPLACED 0.9 1.1 2.3
+ ENDOBJECT
+</code></pre>
+
+<p>To visualize this configuration of objects, from the command line we can say</p>
+<pre><code class="bash">    % scuff-analyze --geometry SphereCube.scuffgeo --WriteGMSHFiles
+    % gmsh SphereCube.pp
+</code></pre>
+
+<p>The first command here creates a file called <code>SphereCube.pp</code> (as well 
+as a bunch of console output, which we omit), while the second line 
+opens this file in <a class="wikilink" href="../../../gmsh/">gmsh</a>, yielding this:</p>
+<p><img alt="Sphere cube image" src="../SphereCube.png" /></p>
+<h3 id="gmsh-visualization-of-extended-geometries-the-neighbors-option"><a class="wikilink" href="../../../gmsh/">gmsh</a> Visualization of Extended Geometries: The <code>--neighbors</code> Option</h3>
+<p>Here's an example in which we have a periodically extended geometry 
+and we'd like to visualize how the unit cell described by our 
+<code>.scuffgeo</code> file fits together with its images across the unit-cell 
+boundaries. This geometry describes an array of nanospheres atop a 
+silicon substrate.</p>
+<p>The <code>.scuffgeo</code> file:</p>
+<pre><code class="bash">LATTICE 
+    VECTOR 2.4 0.0 0.0 
+    VECTOR 0.0 2.4 0.0
+ENDLATTICE 
+
+REGION UpperHalfSpace MATERIAL Vacuum
+REGION LowerHalfSpace MATERIAL Silicon
+REGION SphereInterior MATERIAL Gold
+
+SURFACE Sphere
+    MESHFILE Sphere.msh
+    DISPLACED 1.2 1.2 1.85
+    REGIONS UpperHalfSpace SphereInterior
+ENDOBJECT
+
+
+SURFACE Substrate
+    MESHFILE Square.msh
+    REGIONS UpperHalfSpace LowerHalfSpace
+ENDOBJECT
+</code></pre>
+
+<p>To visualize the unit cell together with a few surrounding lattice 
+cells, we use the <code>--Neighbors</code> option to <a class="wikilink" href="../../../scuff-analyze/">scuff-analyze</a>:</p>
+<pre><code class="bash">    % scuff-analyze --geometry SphereSubstrateArray.scuffgeo --WriteGMSHFiles --Neigbors 2
+    % gmsh SphereSubstrateArray.pp
+</code></pre>
+
+<p><img alt="Sphere substrate array" src="../SphereSubstrateArray.png" /></p>
+<p>Notice that the visualization plot here includes extra panels hanging off 
+two of the four edges of each lattice cell. These are called <em>straddlers;</em> 
+they are not present in the actual <code>.msh</code> file specified in your <code>.scuffgeo</code> 
+file, but are automatically added internally by <a class="wikilink" href="../../../scuff-em/">scuff-em</a> for contiguous 
+surfaces extending beyond the confines of the unit cell.</p>
+<h3 id="gmsh-visualization-of-individual-meshes">gmsh Visualization of Individual Meshes</h3>
+<p>On the other hand, if you specify the <code>--mesh</code> option to <a class="wikilink" href="../../../scuff-analyze/">scuff-analyze</a>, 
+then the <code>.pp</code> files generated by the <code>--WriteGMSHFiles</code> option will contain 
+various additional information. For example, suppose we wanted to get some 
+more information on the sphere mesh from the previous example:</p>
+<pre><code class="bash">    % scuff-analyze --mesh Sphere.msh --WriteGMSHFiles
+    % gmsh Sphere.pp
+</code></pre>
+
+<p>The first command here creates a <a class="wikilink" href="../../../gmsh/">gmsh</a> post-processing file called 
+<code>Sphere.pp</code> which contains several "views," each providing a different 
+set of information on how <a class="wikilink" href="../../../scuff-em/">scuff-em</a> internally processes the surface 
+mesh. Within the gmsh GUI, you can zoom in and out, rotate and translate 
+the object, and click the little yellow squares in the menu window to 
+turn on and off the display of individual views. (For clarity, the 
+screenshot below was generated using a more coarsely-meshed sphere than 
+in the screenshot above.)</p>
+<p><img alt="Sphere image" src="../Sphere.png" /></p>
+<p>The first view here (the one named "Sphere") just plots the triangular 
+panels that define the surface mesh. This is the same information that 
+you would get from running <a class="wikilink" href="../../../scuff-analyze/">scuff-analyze</a> with the <code>--geometry</code> option.</p>
+<p>The remaining views contain the following additional information. (This 
+information is probably only of interest to people who want to hack about 
+in the internals of <a class="wikilink" href="../../../libscuff/">libscuff</a> and need to know the details of the internal 
+representation of objects and BEM quantities.)</p>
+<ul>
+<li>The direction of the surface normal to each panel as read in from the <code>.msh</code> file.
+At present this information is not used for anything inside <a class="wikilink" href="../../../libscuff/">libscuff</a>, because <a class="wikilink" href="../../../scuff-em/">scuff-em</a>
+makes its own overriding decision about how to orient the surface normal.</li>
+<li>The (zero-based) indices of the panels.</li>
+<li>The (zero-based) indices of the internal edges. The internal edge whose 
+    index is <em>n</em> corresponds to the <em>n</em>th RWG basis function for this object 
+    and hence to the <em>n</em>th surface-current expansion coefficient (for PEC 
+    objects) or the <em>2n</em>th and <em>2n+1</em>th surface-current expansion coefficients 
+    (for non-PEC objects) in the portion of the BEM solution vector 
+    corresponding to the object in question.</li>
+<li>The (zero-based) indices of the exterior edges.</li>
+<li>The (zero-based) indices of the vertices.</li>
+</ul>
+<hr />
+<h1 id="viewing-gnuplot-visualization-files">Viewing <a class="wikilink" href="../../../gnuplot/">gnuplot</a> visualization files</h1>
+<h3 id="gnuplot-visualization-of-full-geometries"><a class="wikilink" href="../../../gnuplot/">gnuplot</a> Visualization of Full Geometries</h3>
+<p>Running <a class="wikilink" href="../../../scuff-analyze/">scuff-analyze</a> with the <code>--WriteGNUPLOTFiles</code> option will 
+create a file called <code>MyGeometry.gp</code> (where <code>MyGeometry.scuffgeo</code> was 
+the geometry file specified using the <code>--geometry</code> option) which you 
+can visualize in <a class="wikilink" href="../../../gnuplot/">gnuplot</a> using the command <code>splot 'MyGeometry.gp' w lp.</code></p>
+<pre><code class="bash">    % scuff-analyze --geometry SphereCube.scuffgeo --WriteGNUPLOTFiles
+    % gnuplot
+    gnuplot&gt; splot 'SphereCube.gp' w lp
+</code></pre>
+
+<p><img alt="SphereCube gnuplot image" src="../SphereCube_gnuplot.png" /></p>
+<h3 id="gnuplot-visualization-of-individual-meshes"><a class="wikilink" href="../../../gnuplot/">gnuplot</a> Visualization of Individual Meshes</h3>
+<p>Running <a class="wikilink" href="../../../scuff-analyze/">scuff-analyze</a> with the <code>--WriteGNUPLOTFiles</code> option will 
+create a file called <code>MyObject.gp</code> (where <code>MyObject.msh</code> was the mesh 
+file specified using the <code>--mesh</code> option), together with a bunch of 
+auxiliary files named, for instance, <code>MyObject.gp.edgelabels</code>. 
+These auxiliary files contain <a class="wikilink" href="../../../gnuplot/">gnuplot</a> commands to superpose 
+various types of additional information atop the basic plots, and 
+should be used with the <code>load</code> command, like this:</p>
+<p><code>bash
+    % scuff-analyze --mesh Sphere.msh --WriteGNUPLOTFiles
+    % gnuplot
+    gnuplot&gt; load 'Sphere.gp.edgelabels'
+    gnuplot&gt; splot 'Sphere.gp' w lp</code>bash</p>
+<p><img alt="Sphere gnuplot image" src="../Sphere_gnuplot.png" /></p>
               
             </div>
           </div>

@@ -392,7 +392,7 @@ file by running the following command:</p>
 (which stands for "characteristic length scale"); finer meshes will be more accurate 
 but will take longer to simulate.</p>
 <p>Next we create a <a href="../../../reference/Geometries/"><span class="SC">scuff-em</span> geometry file</a>
-that will tell scuff-scatter about our geometry, including both the surface mesh 
+that will tell <a class="wikilink" href="../../../scuff-scatter/">scuff-scatter</a> about our geometry, including both the surface mesh 
 and the material properties (dielectric function) of the sphere. As a first example, 
 we'll use a dielectric model for silicon carbide that expresses the relative 
 permittivity as a rational function of ω; in this case we'll call the geometry 
@@ -454,7 +454,8 @@ and <strong>(5)</strong> a specification of the incident field.</p>
 
 </code></pre>
 
-<p>And now we just pipe this little file into the standard input of <a class="wikilink" href="../../../scuff-scatter/">scuff-scatter</a>:</p>
+<p>And now we just pipe this little file into the standard input of 
+<a class="wikilink" href="../../../scuff-scatter/">scuff-scatter</a>:</p>
 <pre><code class="bash">    % scuff-scatter &lt; Args 
 </code></pre>
 
@@ -470,12 +471,12 @@ not the case (for example, by monitoring CPU usage using
 <a href="http://htop.sourceforge.net"><span class="SC">htop</span></a>) 
 you may need to 
 [reconfigure and recompile with different openmp/pthreads configuration options.][scuffEMInstallation.shtml]</p>
-<p>Here's a comparison of the scuff-scatter results with the analytical Mie series, as computed 
+<p>Here's a comparison of the <a class="wikilink" href="../../../scuff-scatter/">scuff-scatter</a> results with the analytical Mie series, as computed 
 using <a href="../Mie.math">this Mathematica script.</a> [Like most Mie codes, this script computes the 
 absorption and scattering <em>cross-sections</em>, which we multiply by the incoming beam flux (<script type="math/tex">\frac{1}{2Z_0}</script> for a unit-strength plane wave in vacuum) to get 
 values for the absorbed and scattered <em>power</em>.]</p>
 <p><img alt="Silicon carbide data plot" src="../SiCData.png" /></p>
-<p>Now let's redo the calculation for a sphere made of gold instead of silicon carbide.  In this case we will name our scuff-em geometry file <code>GoldSphere.scuffgeo</code>:</p>
+<p>Now let's redo the calculation for a sphere made of gold instead of silicon carbide.  In this case we will name our <a class="wikilink" href="../../../scuff-em/">scuff-em</a> geometry file <code>GoldSphere.scuffgeo</code>:</p>
 <pre><code class="bash">    MATERIAL Gold
       wp = 1.37e16;
       gamma = 5.32e13;

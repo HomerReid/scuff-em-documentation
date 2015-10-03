@@ -1,0 +1,16 @@
+09/29/15::21:59:37: Added /home/homer/work/scuff-em/examples/DiffractionPatterns/ to mesh search path. 
+09/29/15::21:59:37: Adding lattice basis vector (1,0). 
+09/29/15::21:59:37: Adding lattice basis vector (0,1). 
+09/29/15::21:59:37: Found mesh file /home/homer/work/scuff-em/examples/DiffractionPatterns//HoleyScreenUnitCell_1228.msh 
+09/29/15::21:59:37:  Mem before straddlers: 59 
+09/29/15::21:59:37:  Detected (20,20) straddlers for surface HoleyScreen 
+09/29/15::21:59:37: Surface HoleyScreen: {Straddlers, ExteriorEdges}={40,72} {open} 
+09/29/15::21:59:37: Flipped 876 panel normals to comport with region definitions. 
+09/29/15::22:00:44: Added /home/homer/work/scuff-em/examples/DiffractionPatterns/ to mesh search path. 
+09/29/15::22:00:44: Adding lattice basis vector (1,0). 
+09/29/15::22:00:44: Adding lattice basis vector (0,1). 
+09/29/15::22:00:44: Found mesh file /home/homer/work/scuff-em/examples/DiffractionPatterns//HoleyScreenUnitCell_1228.msh 
+09/29/15::22:00:45:  Mem before straddlers: 59 
+09/29/15::22:00:45:  Detected (20,20) straddlers for surface HoleyScreen 
+09/29/15::22:00:45: Surface HoleyScreen: {Straddlers, ExteriorEdges}={40,72} {open} 
+09/29/15::22:00:45: Flipped 876 panel normals to comport with region definitions. 

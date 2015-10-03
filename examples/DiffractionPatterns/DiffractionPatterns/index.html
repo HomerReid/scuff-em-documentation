@@ -98,6 +98,18 @@
         
             <ul>
             
+                <li class="toctree-l3"><a href="#gmsh-geometry-file-and-surface-mesh-for-the-screen-unit-cell">gmsh geometry file and surface mesh for the screen unit cell</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#scuff-em-geometry-files">scuff-em geometry files</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#field-visualization-mesh">Field visualization mesh</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#running-scuff-scatter">Running scuff-scatter</a></li>
+                
+            
             </ul>
         
     </li>
@@ -375,7 +387,154 @@
             <div class="section">
               
                 <h1 id="diffraction-patterns-for-discs-disc-arrays-and-hole-arrays-in-metal-screens">Diffraction patterns for discs, disc arrays, and hole arrays in metal screens</h1>
-<p>As a final example, we shine a laser beam on a small metallic disc and observe the resulting diffraction pattern on an observation screen located behind the disc. The files for this example are in the <code>share/scuff-em/examples/DiffractionPatterns</code> subdirectory of the <code>scuff-em</code> source distribution.</p>
+<p>In this example, we shine a laser beam (or a plane wave) on an 
+(infinite-area) metal screen perforated by a square-lattice
+array of circular holes, and produce images of the diffraction 
+patterns as observed on a visualization surface located behind the 
+perforated screen. Here's a schematic depiction of the configuration:</p>
+<p><img alt="Diffraction experiment image" src="../DiffractionSchematic.png" /></p>
+<p>The files for this example may be found in the
+<code>share/scuff-em/examples/DiffractionPatterns</code> subdirectory
+of your <a class="wikilink" href="../../../scuff-em/">scuff-em</a> installation.</p>
+<hr />
+<h2 id="gmsh-geometry-file-and-surface-mesh-for-the-screen-unit-cell"><a class="wikilink" href="../../../gmsh/">gmsh</a> geometry file and surface mesh for the screen unit cell</h2>
+<p>The <a class="wikilink" href="../../../gmsh/">gmsh</a> geometry file <a href="../HoleyScreenUnitCell.geo"><code>HoleyScreenUnitCell.geo</code></a>
+describes an (infinitely thin) square metallic screen, 
+of dimensions 1&mu;m &times; 1&mu;m, with a hole of radius 0.25 &mu;m
+centered at the center of the square. I produce coarser and 
+finer surface meshes for this geometry by saying</p>
+<pre><code class="bash">% gmsh -2 -clscale 1 HoleyScreenUnitCell.geo
+% RenameMesh HoleyScreenUnitCell.msh
+% gmsh -2 -clscale 0.75 HoleyScreenUnitCell.geo
+% RenameMesh HoleyScreenUnitCell.msh
+</code></pre>
+
+<p>(where <a href="../../SiO2Spheres/RenameMesh"><code>RenameMesh</code></a> is a simple 
+<code>bash</code> script that uses <a class="wikilink" href="../../../scuff-analyze/">scuff-analyze</a> to count the number 
+of interior edges in a surface mesh and rename the mesh file 
+accordingly.)
+This produces the files <code>HoleyScrenUnitCell_1228.msh</code>
+and <code>HoleyScreenUnitCell_2318.msh,</code>
+which you can visualize by opening in <a class="wikilink" href="../../../gmsh/">gmsh</a>::</p>
+<pre><code class="bash">% gmsh HoleyScreenUnitCell_1228.msh
+% gmsh HoleyScreenUnitCell_2318.msh
+</code></pre>
+
+<p><img alt="Coarse Holey screen mesh image" src="../HoleyScreenUnitCell_1228.png" /></p>
+<p><img alt="Fine Holey screen mesh image" src="../HoleyScreenUnitCell_2318.png" /></p>
+<p>Note that finer meshing resolution is obtained by specifying
+the <code>-clscale</code> argument to <a class="wikilink" href="../../../gmsh/">gmsh</a> (it stands
+for "characteristic length scale"), which specifies an overall
+scaling factor for all triangle edges.</p>
+<hr />
+<h2 id="scuff-em-geometry-files"><a class="wikilink" href="../../../scuff-em/">scuff-em</a> geometry files</h2>
+<p>The <a class="wikilink" href="../../../scuff-em/">scuff-em</a> geometry files
+<a href="../HoleyScreen_1228.scuffgeo"><code>HoleyScreen_1228.scuffgeo</code></a>
+and
+<a href="../HoleyScreen_2318.scuffgeo"><code>HoleyScreen_2318.scuffgeo</code></a>
+describe infinite square lattices with unit
+cells defined by the unit-cell meshes we created
+above. The <em>N</em>=1228 guy looks like this:</p>
+<pre><code class="bash">LATTICE
+        VECTOR 1 0
+        VECTOR 0 1
+ENDLATTICE    
+
+OBJECT HoleyScreen
+        MESHFILE HoleyScreenUnitCell_1228.msh
+ENDOBJECT
+</code></pre>
+
+<p>Note that we don't have to specify a <code>MATERIAL</code>
+for the screen, since PEC is the default.</p>
+<p>We can use <a class="wikilink" href="../../../scuff-analyze/">scuff-analyze</a> to produce an image
+of what the full geometry looks like, including
+the lattice repetitions:</p>
+<pre><code class="bash">% scuff-analyze --geometry HoleyScreen_1228.scuffgeo --WriteGMSHFiles --Neighbors 2
+</code></pre>
+
+<p>This produces the file <code>HoleyScreen_1228.pp</code>, which you 
+can view by opening it in <a class="wikilink" href="../../../gmsh/">gmsh</a>:</p>
+<pre><code class="bash">% gmsh HoleyScreen_1228.pp
+</code></pre>
+
+<p><img alt="HoleyScreen geometry image" src="../HoleyScreenGeometry.png" /></p>
+<hr />
+<h2 id="field-visualization-mesh">Field visualization mesh</h2>
+<p>The next step is to create a meshed representation of the
+surface on which we will visualize the diffraction patterns.
+Here's a <a class="wikilink" href="../../../gmsh/">gmsh</a> file called
+<a href="../FVMesh.geo"><code>FVMesh.geo</code></a> that describes a square of
+side length 1 micron, parallel to the <em>xy</em> plane and
+located at a height of <em>z</em>=1 micron, thus corresponding
+to the region enclosed by the dotted line in the schematic
+figure above. ("FVMesh" stands for <code>field-visualization
+mesh.) This</code>.geo<code>file contains a user-specifiable
+parameter</code>N` that sets the number of triangle edges per
+unit length in the mesh representation; I would
+like to set this number to 50, so I say</p>
+<pre><code class="bash">% gmsh -2 -setnumber N 50 FVMesh.geo -o FVMesh.msh
+% RenameMesh FVMesh.msh
+</code></pre>
+
+<p>This produces the file <code>FVMesh_7400.msh</code>:</p>
+<p><img alt="FVMesh image" src="../FVMesh_7400.png" /></p>
+<hr />
+<h2 id="running-scuff-scatter">Running <a class="wikilink" href="../../../scuff-scatter/">scuff-scatter</a></h2>
+<p>Now all that's left is to run the calculation.
+Put the following content into a little text
+file called <code>scuff-scatter.args</code> and pipe it into
+the standard input of <a class="wikilink" href="../../../scuff-scatter/">scuff-scatter</a>:</p>
+<pre><code class="bash">geometry        HoleyScreen_1228.scuffgeo
+FVMesh          FVMesh_7400.msh
+Lambda          0.3751
+Lambda          0.2501
+Lambda          0.1251
+pwDirection     0 0 1
+pwPolarization  1 0 0 
+</code></pre>
+
+<p>Note that I have chosen wavelengths of 1.5x, 1.0x, and 0.5x 
+the hole radius; in each case I have shifted the wavelength by a 
+tiny amount away from being commensurate with the lattice period
+to avoid numerical instabilities associated with Wood anomalies.</p>
+<p>```bash
+ % scuff-scatter &lt; scuff-scatter.args
+ % scuff-scatter --geometry HoleyScreen_2318.scuffgeo &lt; scuff-scatter.args
+````</p>
+<p>In the second command line here, the command-line specified 
+geometry overrides the geometry in the <code>.args</code> file. </p>
+<p>This produces the files <code>HoleyScreen_1228.FVMesh_7400.pp</code>
+and <code>HoleyScreen_2318.FVMesh_7400.pp</code>, which can be
+visualized by opening them in <a class="wikilink" href="../../../gmsh/">gmsh</a>.</p>
+<table border="1" cellpadding="1" align="center">
+ <tr>
+  <td> <img src="L1P5RCoarse.png"></td>
+  <td> <img src="L1P5RFine.png"></td>
+ </tr>
+ <tr>
+  <td> &lambda;=1.5 R (coarse mesh)
+  <td> &lambda;=1.5 R (fine mesh)
+ </tr>
+ <tr>
+  <td> <img src="L1P0RCoarse.png"></td>
+  <td> <img src="L1P0RFine.png"></td>
+ </tr>
+ <tr>
+  <td> &lambda;=1.0 R (coarse mesh)
+  <td> &lambda;=1.0 R (fine mesh)
+ </tr>
+ <tr>
+  <td> <img src="L0P5RCoarse.png"></td>
+  <td> <img src="L0P5RFine.png"></td>
+ </tr>
+ <tr>
+  <td> &lambda;=0.5 R (coarse mesh)
+  <td> &lambda;=0.5 R (fine mesh)
+ </tr>
+</table>
+
+<hr />
               
             </div>
           </div>

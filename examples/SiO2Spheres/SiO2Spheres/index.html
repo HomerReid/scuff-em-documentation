@@ -400,7 +400,7 @@ of your <a class="wikilink" href="../../../scuff-em/">scuff-em</a> installation.
 <h2 id="gmsh-geometry-file-and-surface-mesh-for-a-single-sphere"><a class="wikilink" href="../../../gmsh/">gmsh</a> geometry file and surface mesh for a single sphere</h2>
 <p>The <a class="wikilink" href="../../../gmsh/">gmsh</a> geometry file <a href="../Sphere.geo"><code>Sphere.geo</code></a>
 describes a sphere of radius 1 micron; it may 
-be meshed to generate coarse and fine surface as follows:</p>
+be meshed to generate coarse and fine surface meshes as follows:</p>
 <pre><code class="bash">% gmsh -2 -clscale 1 Sphere.geo
 % RenameMesh Sphere.msh
 % gmsh -2 -clscale 0.5 Sphere.geo

@@ -458,7 +458,8 @@ own custom-designed physics codes.</p>
   the Bloch vectors) at which you want to perform calculations</p>
 </li>
 <li>
-<p>For scattering codes: a specification of the incident fields</p>
+<p>For scattering codes: a specification of the 
+  [incident fields][IncidentFields.md].</p>
 </li>
 <li>
 <p>Specifications of the output quantities you wish to get back: 
@@ -513,8 +514,61 @@ of arbitrary compact scatterers.</p>
 </li>
 </ul>
 <h3 id="fluctuation-induced-interactions">Fluctuation-induced interactions</h3>
+<ul>
+<li>
+<p><a href="../../applications/scuff-cas3D/scuff-cas3D/"><span class="SC">scuff-cas3D</span></a></p>
+<blockquote>
+<p>An implementation of the 
+[fluctuating-surface-current approach to equilibrium Casimir forces][FSCPaper] 
+in compact or extended geometries.</p>
+</blockquote>
+</li>
+<li>
+<p><a href="../../applications/scuff-caspol/scuff-caspol/"><span class="SC">scuff-caspol</span></a></p>
+<blockquote>
+<p>A tool for computing Casimir-Polder potentials for
+polarizable molecules in the vicinity of compact or 
+extended material bodies.</p>
+</blockquote>
+</li>
+<li>
+<p><a href="../../applications/scuff-neq/scuff-neq/"><span class="SC">scuff-neq</span></a></p>
+<blockquote>
+<p>An implementation of the fluctuating-surface-current
+approach to non-equilibrium fluctuation-induced
+interactions among compact objects.
+Available outputs include: frequency-resolved or 
+frequency-integrated rates of heat radiation or 
+radiative heat transfer; non-equilibrium Casimir 
+forces; self-propulsion and self-rotation of 
+isolated bodies.</p>
+</blockquote>
+</li>
+</ul>
 <h3 id="rf-microwave-engineering">RF / microwave engineering</h3>
+<ul>
+<li><a href="../../applications/scuff-RF/scuff-RF/"><span class="SC">scuff-RF</span></a><blockquote>
+<p>A tool for modeling the electromagnetic properties of 
+passive RF devices such as antennas and inductors.
+Available outputs include: frequency-dependent
+S-parameters for arbitrarily-shaped objects;
+radiated field patterns for antennas or other objects
+driven by user-specified currents.</p>
+</blockquote>
+</li>
+</ul>
 <h3 id="electrostatics">Electrostatics</h3>
+<ul>
+<li>[<span class="SC">scuff-static</span>][scuff-static]<blockquote>
+<p>An electrostatic solver. 
+Available outputs include: self- and mutual-capacitances
+of arbitrarily-shaped conductors ; DC polarizabilities of
+conducting and dielectric bodies; electrostatic fields
+(at user-specified evaluation points) in the presence 
+of conducting surfaces held at user-specified potentials.</p>
+</blockquote>
+</li>
+</ul>
 <h2 id="citing-scuff-em">Citing <a class="wikilink" href="../../scuff-em/">scuff-em</a></h2>
 <p>If you find <a class="wikilink" href="../../scuff-em/">scuff-em</a> useful for generating
 results included in publications, please consider citing both 
@@ -546,6 +600,8 @@ month = jul,
 note=&quot;\texttt{http://homerreid.com/scuff-EM}&quot;
 }
 </code></pre>
+
+<p>[scuff-static]              ../applications/scuff-static/scuff-static.md</p>
               
             </div>
           </div>

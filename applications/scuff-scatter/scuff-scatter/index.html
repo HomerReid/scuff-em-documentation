@@ -469,8 +469,10 @@ describing the shapes and material properties of the scattering objects in your 
 </code></pre>
 
 <p>Specifies the geometry input file.</p>
-<pre><code class="bash">--Omega      3.14
+<pre><code class="bash">--Omega      3.1415
 --OmegaFile  MyOmegaFile
+--Lambda     0.5
+--LambdaFile MyLambdaFile
 </code></pre>
 
 <p>Specifies the angular frequencies at which to
@@ -481,6 +483,23 @@ to specify multiple frequencies. Alternatively,
 the <code>--OmegaFile</code> option may be used to specify the
 name of a file containing a list of frequencies (one per
 line) at which to run calculations.</p>
+<p>The options <code>--Lambda</code> and <code>--LambdaFile</code> may alternatively
+be used to define the frequencies at which to run calculations
+in terms of the corresponding free-space wavelength
+<script type="math/tex">\lambda=\frac{2\pi}{\omega}</script>, interpreted in units
+of microns. Thus <code>--Omega 3.1415</code> and <code>--Lambda 0.5</code>
+are equivalent; both specify an angular frequency
+<script type="math/tex">\omega=\pi \cdot 3\cdot 10^{14}</script>rad/sec, 
+corresponding
+to a free-space wavelength of <script type="math/tex">\lambda=0.5\,\mu</script>m.</p>
+<p>Note: Even if you use <code>--Lambda / --LambdaFile</code>
+instead of <code>--Omega / --OmegaFile</code> to specify the
+computational frequencies, the output files
+will still report data in terms of the frequency
+(the equivalent <code>--Omega</code> values), not the 
+wavelength. To plot your data versus wavelength
+instead of frequency, just plot versus the
+quantity <script type="math/tex">\frac{2\pi}{\omega}</script>.</p>
 <h2 id="options-defining-the-incident-field">Options defining the incident field</h2>
 <p>The options for specifying incident fields in
 <a class="wikilink" href="../../../scuff-em/">scuff-em</a> are described in detail on the page
