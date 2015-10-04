@@ -65,22 +65,17 @@
         
             <ul>
             
-                <li class="toctree-l3"><a href="#general-reference">General reference</a></li>
+                <li class="toctree-l3"><a href="#tutorial-examples">Tutorial Examples</a></li>
                 
-            
-                <li class="toctree-l3"><a href="#command-line-application-reference">Command-line application reference</a></li>
+                    <li><a class="toctree-l4" href="#command-line-application-reference">Command-line application reference</a></li>
                 
-            
-                <li class="toctree-l3"><a href="#api-reference">API reference</a></li>
+                    <li><a class="toctree-l4" href="#api-reference">API reference</a></li>
                 
-            
-                <li class="toctree-l3"><a href="#developer-reference">Developer reference</a></li>
+                    <li><a class="toctree-l4" href="#developer-reference">Developer reference</a></li>
                 
-            
-                <li class="toctree-l3"><a href="#faq">FAQ</a></li>
+                    <li><a class="toctree-l4" href="#faq">FAQ</a></li>
                 
-            
-                <li class="toctree-l3"><a href="#technical-memos">Technical memos</a></li>
+                    <li><a class="toctree-l4" href="#technical-memos">Technical memos</a></li>
                 
             
             </ul>
@@ -397,8 +392,8 @@
 
 <p><strong> Note:</strong> As of June 2015, the <a class="wikilink" href="./scuff-em/">scuff-em</a> documentation is the process
    of being ported from an 
-   <a href="http://homerreid.com/scuff-em">older format (pure HTML, maintained separately
-   from the code repository)</a> to a 
+   <a href="http://homerreid.com/scuff-em">older format</a>
+   (pure HTML, maintained separately from the code repository) to a 
    newer format (plain-text markdown files, maintained together 
    with the repository, and built by
    <a href="http://www.mkdocs.org">mkdocs</a> into the documentation website).
@@ -408,7 +403,16 @@
 <p>While the porting process is underway, some of the links on these<br />
    pages will take you to earlier versions of the documentation. Thanks
    for bearing with us as we complete the update!</p>
-<h2 id="examples">Examples</h2>
+<h2 id="general-reference">General reference</h2>
+<ul>
+<li><a href="reference/TopLevel/">Top-level overview</a></li>
+<li><a href="reference/Installing/">Installation</a></li>
+<li><a href="reference/Geometries/">Geometry files</a></li>
+<li><a href="reference/Materials/">Material descriptions</a></li>
+<li><a href="reference/Transformations/">Geometrical transformations</a></li>
+<li><a href="reference/IncidentFields/">Incident Fields</a></li>
+</ul>
+<h1 id="tutorial-examples">Tutorial Examples</h1>
 <ul>
 <li><a href="examples/MieScattering/MieScattering/">Mie scattering</a></li>
 <li><a href="examples/DielectricShell/DielectricShell/">Electrostatics of a spherical dielectric shell</a></li>
@@ -419,59 +423,45 @@
 <li><a href="examples/SiliconSlabs/SiliconSlabs/">Casimir forces in a 2D extended geometry</a></li>
 <li><a href="examples/SiO2Spheres/SiO2Spheres/">Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres</a></li>
 <li><a href="examples/TipSubstrate/TipSubstrate/">Spatial distribution of heat flux from a warm tip over a cold substrate</a></li>
-<li>[LDOS and dyadic Green functions above an infinite aluminum half- <a href="examples/HalfSpaceLDOS/HalfSpaceLDOS/">space</a></li>
+<li><a href="examples/HalfSpaceLDOS/HalfSpaceLDOS/">LDOS and dyadic Green functions above an infinite aluminum half-space</a></li>
 <li><a href="examples/PlatonicSolids/PlatonicSolids/">Electrostatic polarizability of platonic solids</a></li>
-</ul>
-<h2 id="general-reference">General reference</h2>
-<ul>
-<li><a href="reference/TopLevel/">Top-level overview</a></li>
-<li><a href="reference/Installing/">Installation</a></li>
-<li><a href="reference/Geometries/">Geometry files</a></li>
-<li><a href="reference/Materials/">Material descriptions</a></li>
-<li><a href="reference/Transformations/">Geometrical transformations</a></li>
-<li><a href="reference/IncidentFields/">Incident Fields</a></li>
 </ul>
 <h2 id="command-line-application-reference">Command-line application reference</h2>
 <ul>
-<li><a href="applications/GeneralReference/">General reference for <span class="SC">scuff-em</span> command-line applications</a></li>
-</ul>
-<p><br></p>
+<li>
+<p><a href="applications/GeneralReference/">General reference for <span class="SC">scuff-em</span> command-line applications</a></p>
+</li>
+<li>
+<p><em>Nanophotonics codes</em></p>
 <ul>
-<li><em>Nanophotonics codes</em><ul>
 <li><a href="applications/scuff-scatter/scuff-scatter/"><span class="SC">scuff-scatter</span></a>: general-purpose electromagnetic scattering</li>
 <li><a href="applications/scuff-ldos/scuff-ldos/"><span class="SC">scuff-ldos</span></a>                  - photonic <strong>l</strong>ocal <strong>d</strong>ensity <strong>o</strong>f <strong>s</strong>tates</li>
 <li><a href="applications/scuff-transmission/scuff-transmission/"><span class="SC">scuff-transmission</span></a>  - plane-wave transmission through 2D extended structures</li>
 <li><a href="applications/scuff-tmatrix/scuff-tmatrix/"><span class="SC">scuff-tmatrix</span></a>            - T-matrices of arbitrary compact objects in the spherical-wave basis  </li>
 </ul>
 </li>
-</ul>
-<p><br></p>
+<li>
+<p><em>Equilibrium Casimir codes</em></p>
 <ul>
-<li><em>Equilibrium Casimir codes</em><ul>
 <li><a href="applications/scuff-cas3D/scuff-cas3D/"><span class="SC">scuff-cas3d</span></a>   - Casimir energies, forces, and torques</li>
 <li><a href="applications/scuff-caspol/scuff-caspol/"><span class="SC">scuff-caspol</span></a> - Casimir-Polder potentials</li>
 </ul>
 </li>
-</ul>
-<p><br></p>
+<li>
+<p><em>Non-equilibrium Casimir/ heat-transfer code</em></p>
 <ul>
-<li><em>Non-equilibrium Casimir/ heat-transfer code</em><ul>
 <li><a href="applications/scuff-neq/scuff-neq/"><span class="SC">scuff-neq</span></a>       - radiative heat transfer and non-equilibrium Casimir forces/torques</li>
 </ul>
 </li>
-</ul>
-<p><br></p>
+<li>
+<p><em>RF / microwave engineering code</em></p>
 <ul>
-<li><em>RF / microwave engineering code</em><ul>
 <li><a href="applications/scuff-RF/scuff-RF/"><span class="SC">scuff-rf</span></a>         - multiport network parameters
                                  (S- and impedance parameters),
                                  and radiated fields, for passive RF
                                  and microwave structures.</li>
 </ul>
 </li>
-</ul>
-<p><br></p>
-<ul>
 <li>
 <p><em>Electrostatics code</em></p>
 <ul>
@@ -480,15 +470,13 @@
                                  electrostatic potentials and fields</li>
 </ul>
 </li>
-</ul>
-<p><br></p>
+<li>
+<p><em>Utility code</em></p>
 <ul>
-<li><em>Utility code</em><ul>
 <li><a href="applications/scuff-analyze/scuff-analyze/"><span class="SC">scuff-analyze</span></a> - diagnostic tool to print info on <a class="wikilink" href="./scuff-em/">scuff-em</a> geometries</li>
 </ul>
 </li>
 </ul>
-<p><br></p>
 <h2 id="api-reference">API reference</h2>
 <ul>
 <li><a href="API/libscuff/"><span class="SC">libscuff</span></a> - Accessing <a class="wikilink" href="./scuff-em/">scuff-em</a> from C++ and python programs</li>
@@ -501,6 +489,11 @@
 </ul>
 <h2 id="faq">FAQ</h2>
 <h2 id="technical-memos">Technical memos</h2>
+<ul>
+<li><a href="./tex/lsInnards.pdf"><span class="SC">libscuff</span> Implementation and Technical Details</a> - a technical memo describing many details of the core library implementation</li>
+<li><a href="./tex/PFT.pdf">Computation of power, force, and torque in <span class="SC">scuff-em</span></a> - a technical memo describing methods for computing power, force and torque, with applications to both classical scattering and non-equilibrium fluctuational electrodynamics</li>
+<li><a href="./tex/lsInnards.pdf"><span class="SC">libscuff</span> Implementation and Technical Details</a> - a technical memo describing many details of the core library implementation</li>
+</ul>
               
             </div>
           </div>
@@ -562,5 +555,5 @@
 
 <!--
 MkDocs version : 0.13.3
-Build Date UTC : 2015-10-03 23:52:07.885986
+Build Date UTC : 2015-10-04 03:25:18.502714
 -->

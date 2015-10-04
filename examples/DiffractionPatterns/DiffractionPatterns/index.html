@@ -468,9 +468,9 @@ Here's a <a class="wikilink" href="../../../gmsh/">gmsh</a> file called
 side length 1 micron, parallel to the <em>xy</em> plane and
 located at a height of <em>z</em>=1 micron, thus corresponding
 to the region enclosed by the dotted line in the schematic
-figure above. ("FVMesh" stands for <code>field-visualization
-mesh.) This</code>.geo<code>file contains a user-specifiable
-parameter</code>N` that sets the number of triangle edges per
+figure above. ("FVMesh" stands for "field-visualization
+mesh.") This <code>.geo</code> file contains a user-specifiable
+parameter <code>N</code> that sets the number of triangle edges per
 unit length in the mesh representation; I would
 like to set this number to 50, so I say</p>
 <pre><code class="bash">% gmsh -2 -setnumber N 50 FVMesh.geo -o FVMesh.msh
@@ -494,14 +494,15 @@ pwDirection     0 0 1
 pwPolarization  1 0 0 
 </code></pre>
 
-<p>Note that I have chosen wavelengths of 1.5x, 1.0x, and 0.5x 
-the hole radius; in each case I have shifted the wavelength by a 
+<p>Note that I have chosen wavelengths of 
+<script type="math/tex">\lambda=\{1.5,1.0,0.5\}R</script> where <script type="math/tex">R=0.25\,\mu</script>m is 
+the hole radius. In each case I have shifted the wavelength by a 
 tiny amount away from being commensurate with the lattice period
 to avoid numerical instabilities associated with Wood anomalies.</p>
-<p>```bash
- % scuff-scatter &lt; scuff-scatter.args
+<pre><code class="bash"> % scuff-scatter &lt; scuff-scatter.args
  % scuff-scatter --geometry HoleyScreen_2318.scuffgeo &lt; scuff-scatter.args
-````</p>
+</code></pre>
+
 <p>In the second command line here, the command-line specified 
 geometry overrides the geometry in the <code>.args</code> file. </p>
 <p>This produces the files <code>HoleyScreen_1228.FVMesh_7400.pp</code>
@@ -509,24 +510,24 @@ and <code>HoleyScreen_2318.FVMesh_7400.pp</code>, which can be
 visualized by opening them in <a class="wikilink" href="../../../gmsh/">gmsh</a>.</p>
 <table border="1" cellpadding="1" align="center">
  <tr>
-  <td> <img src="L1P5RCoarse.png"></td>
-  <td> <img src="L1P5RFine.png"></td>
+  <td> <img src="../L1P5RCoarse.png"></td>
+  <td> <img src="../L1P5RFine.png"></td>
  </tr>
  <tr>
   <td> &lambda;=1.5 R (coarse mesh)
   <td> &lambda;=1.5 R (fine mesh)
  </tr>
  <tr>
-  <td> <img src="L1P0RCoarse.png"></td>
-  <td> <img src="L1P0RFine.png"></td>
+  <td> <img src="../L1P0RCoarse.png"></td>
+  <td> <img src="../L1P0RFine.png"></td>
  </tr>
  <tr>
   <td> &lambda;=1.0 R (coarse mesh)
   <td> &lambda;=1.0 R (fine mesh)
  </tr>
  <tr>
-  <td> <img src="L0P5RCoarse.png"></td>
-  <td> <img src="L0P5RFine.png"></td>
+  <td> <img src="../L0P5RCoarse.png"></td>
+  <td> <img src="../L0P5RFine.png"></td>
  </tr>
  <tr>
   <td> &lambda;=0.5 R (coarse mesh)

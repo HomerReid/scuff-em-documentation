@@ -1,0 +1,364 @@
+\documentclass[letterpaper]{article}
+
+\input{scufftex}
+
+\newcommand\supsstar[1]{^{\hbox{\scriptsize{#1}}*}}
+\newcommand\suptstar[1]{^{\hbox{\scriptsize{#1}}*}}
+
+\graphicspath{{figures/}}
+
+%------------------------------------------------------------
+%------------------------------------------------------------
+%- Special commands for this document -----------------------
+%------------------------------------------------------------
+%------------------------------------------------------------
+
+%------------------------------------------------------------
+%------------------------------------------------------------
+%- Document header  -----------------------------------------
+%------------------------------------------------------------
+%------------------------------------------------------------
+\title {{\sc scuff-scatter} Implementation Notes}
+\author {Homer Reid}
+\date {March 18, 2012}
+
+%------------------------------------------------------------
+%------------------------------------------------------------
+%- Start of actual document
+%------------------------------------------------------------
+%------------------------------------------------------------
+
+\begin{document}
+\pagestyle{myheadings}
+\markright{Homer Reid: {\sc scuff-scatter} Implementation Notes}
+\maketitle
+
+\tableofcontents
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Concise Formulas for Scattered and Absorbed Power}
+
+In many scattering problems we will want to compute the total
+power scattered from, and the total power absorbed by, the
+object(s) in a scattering geometry.  The na\"ive way to do 
+this would be to integrate the normal Poynting vector over
+some fictitious bounding surface surrounding the object(s);
+this integral could be evaluated by numerical quadrature,
+with the values of the Poynting vector at each quadrature
+point computed by the usual {\sc libscuff} methods for
+calculating scattered fields. {\sc scuff-scatter} uses a 
+more efficient approach, obtaining the scattered and absorbed 
+power \textit{directly} from matrix-vector and vector-vector 
+(dot) products involving the BEM matrices and 
+vectors.\footnote{The possibility of deriving compact 
+expressions like these seems to have been first noticed by
+Steven Johnson.}
+
+Throughout this section, $\mathcal{S}$ denotes the boundary
+of the exterior medium (that is, the union of the outer surfaces
+of all objects contained in the exterior medium), and 
+$\vbhat{n}$ denotes the normal vector at a point on 
+$\mathcal{S}$; $\vbhat{n}$ is taken positive pointing
+into the exterior medium (away from the object).
+We work at a single frequency and suppress $\omega$ arguments.
+
+\subsection{Absorbed Power}
+
+The absorbed power is the integral of the inward-directed normal 
+component of the total Poynting vector over the full surface
+$\mathcal{S}$:
+
+%====================================================================%
+\begin{align}
+ P\sups{abs} 
+&= - \oint \vb P\sups{tot}(\vb x) \cdot \vbhat{n} \, dA 
+\label{AbsorbedPower}
+\end{align}
+%====================================================================%
+where the minus sign arises because by convention we define $\vbhat{n}$ 
+to be the outward-directed surface normal.
+
+At a point $\vb x$ on $\mathcal{S}$, the (outward-directed) normal 
+component of the total Poynting vector is 
+%====================================================================%
+\begin{align}
+ \vb P\sups{tot}(\vb x) \cdot \vbhat{n}(\vb x)
+  &=\frac{1}{2}\text{Re} 
+    \bigg\{ \vbhat{n}(\vb x) \cdot 
+            \Big[\vb E\supsstar{tot}(\vb x) \times \vb H\sups{tot}(\vb x)
+            \Big]
+    \bigg\}
+\\
+%--------------------------------------------------------------------%
+\intertext{Using the fact that $|\vbhat{n}|=1$, we may rewrite this 
+           in the form (temporarily suppressing $\vb x$ arguments)}
+  &=-\frac{1}{2}\text{Re} 
+    \Bigg\{ \big(\vbhat{n}\times \vb H\supsstar{tot}\big)
+            \cdot
+            \big(\vbhat{n} \times \big(-\vbhat{n} \times \vb E\sups{tot}\big)
+            \big)
+    \Bigg\}.
+\nonumber
+%--------------------------------------------------------------------%
+\intertext{But the quantities in parentheses here are just the electric
+           and magnetic surface currents that enter into the SIE 
+           formulation of scattering problems, so we find simply}
+%--------------------------------------------------------------------%
+\vb P\sups{tot}(\vb x) \cdot \vbhat{n}(\vb x)
+  &=-\frac{1}{2}\text{Re}
+     \bigg\{ \vb K^* \cdot \Big[\vbhat{n} \times \vb N \Big] \bigg\}.
+\label{PTotDotN}
+\end{align}
+%====================================================================%
+%
+% some quick matlab code that verifies the above:
+%  E=rand(3,1) + sqrt(-1)*rand(3,1);
+%  EStar=conj(E);
+%  H=rand(3,1) + sqrt(-1)*rand(3,1);
+%  nHat=rand(3,1); 
+%  nHat=nHat/norm(nHat);
+%  K=cross(nHat,H);
+%  KStar=conj(K);
+%  N=-cross(nHat,E);
+%  EStarxH=cross(conj(E),H);
+%  P1 = 0.5*real( nHat' * EStarxH )
+%  P2 = -0.5*real( KStar.' * cross(nHat, N) );
+Inserting (\ref{PTotDotN}) into (\ref{AbsorbedPower}), we have
+%====================================================================%
+\begin{align}
+ P\sups{abs}
+&=\frac{1}{2}\text{Re }\oint 
+  \bigg\{ \vb K^*(\vb x) \cdot 
+          \Big[\vbhat{n} \times \vb N(\vb x) \Big] 
+  \bigg\} d\vb x
+%--------------------------------------------------------------------%
+\intertext{
+Insert the surface-current expansions
+$\vb K(\vb x)=\sum_\alpha k_\alpha \vb f_\alpha(\vb x), \, 
+ \vb N(\vb x)=-Z_0\sum_\alpha n_\alpha \vb f_\alpha(\vb x)
+$:}
+%--------------------------------------------------------------------%
+&=-\frac{Z_0}{2}\text{Re }\sum_{\alpha\beta}  k^*_\alpha n_\beta
+  \oint  \vb f_\alpha(\vb x) \cdot  
+         \Big[\vbhat{n} \times \vb f_\beta(\vb x) \Big]
+         d\vb x
+\\
+&=-\frac{Z_0}{2}\text{Re }\sum_{\alpha\beta}  k^*_\alpha n_\beta
+  \oint  \vb f_\alpha(\vb x) \cdot  
+         \Big[\vbhat{n} \times \vb f_\beta(\vb x) \Big]
+         d\vb x
+\\
+&=-\frac{Z_0}{2}\text{Re }\sum_{\alpha\beta} 
+    k^*_\alpha O^{(\times)}_{\alpha\beta} n_\beta
+\label{PAbsFormula}
+\end{align}
+%====================================================================%
+where I have introduced the ``crossed overlap matrix'' $\vb O^{(\times)}$
+for the RWG basis, with matrix elements 
+\begin{align*}
+O^{(\times)}_{\alpha\beta}
+=\oint \vb f_\alpha(\vb x) \cdot 
+       \Big[\vbhat{n} \times \vb f_\beta(\vb x) \Big]
+       d\vb x.
+\end{align*}
+%====================================================================%
+%The matrix of quantities $O^{(\times)}_{\alpha\beta}$ is sort of like 
+%a crossed version of an overlap matrix for the set of 
+%basis functions $\{\vb f_\alpha.\}$ 
+This is an extremely 
+sparse matrix, with vanishing diagonals and precisely 4 nonzero 
+entries per row, which may be computed in
+closed form (cf. {\sc libscuff} technical memo, Section 12.2).
+Thus the operation count for evaluating (\ref{PAbsFormula}) 
+is $\mathcal{O}(N)$, as compared to $\mathcal{O}(N^2)$ for 
+the equivalent matrix-vector product formulas.
+
+\subsubsection*{Units}
+The crossed-overlap matrix element $O^{(\times)}_{\alpha\beta}$ has
+units of area.
+The electric and magnetic surface-current expansion coefficients
+$\{k_\alpha, n_\alpha\}$ both have units of current/length.
+(The magnetic current $\vb N$ has units of voltage/length, 
+but in \lss conventions the magnetic-current expansion 
+coefficients $\{n_\alpha\}$ are defined with the $Z_0$ 
+prefactor that ensures they have the same units as $\{k_\alpha\}$.)
+Then the units of (\ref{PAbsFormula}) are 
+$$ \left[\frac{\text{voltage}}{\text{current}}\right]
+   \cdot
+   \left[\frac{\text{current}}{\text{length}}\right]
+   \cdot
+   \Big[\text{length}^2\Big]
+   \cdot
+   \left[\frac{\text{current}}{\text{length}}\right]
+  =\left[\text{voltage }\cdot\text{ current}\right] 
+  =\left[\text{power}\right] \checkmark
+$$
+
+\subsubsection*{Nested Surfaces}
+
+Expression \ref{PAbsFormula} remains valid as-is when nested
+surfaces are present, as long as the summation is understood
+to run only over basis functions defined on the surfaces of 
+objects that border the exterior medium.
+
+\subsection{Scattered Power}
+
+The scattered power is the integral of the outward-directed normal 
+component of the \textit{scattered} Poynting vector over 
+$\mathcal{S}$:
+%====================================================================%
+\begin{align}
+P\sups{scat} 
+&= + \oint \vb P\sups{scat}(\vb x) \cdot \vbhat{n} \, dA 
+\label{ScatteredPower}
+\end{align}
+%====================================================================%
+where the scattered Poynting vector is the 
+Poynting vector as computed using only the scattered fields.
+In analogy to equation (\ref{PTotDotN}), we write
+%====================================================================%
+\begin{subequations}
+\begin{align}
+ \vb P\sups{scat}(\vb x) \cdot \vbhat{n}(\vb x)
+  &=\frac{1}{2}\text{Re } 
+    \bigg\{ \vbhat{n}(\vb x) \cdot
+            \Big[ \vb E\supsstar{scat}(\vb x) \times \vb H\sups{scat}(\vb x)
+            \Big]
+    \bigg\}
+\nonumber
+\intertext{Noting that scattered fields are the differences between
+total and incident fields and again suppressing $\vb x$ arguments, we
+find }
+%--------------------------------------------------------------------%
+  &=\frac{1}{2}\text{Re }
+    \bigg\{ \vbhat{n}\cdot
+            \Big[ \big(\vb E\supsstar{tot} - \vb E\supsstar{inc}\big)
+                   \times
+                  \big(\vb H\sups{tot} - \vb H\sups{inc}\big)
+            \Big]
+    \bigg\}
+\nonumber
+\intertext{which we write as a sum of three terms:}
+  &= \hspace{0.18in} \vb P\sups{tot} \cdot \vbhat{n}
+\\[3pt]
+  & \hspace{0.2in}
+     +\frac{1}{2}\text{Re } 
+        \bigg\{ \vbhat{n}\cdot \Big[ \vb E\supsstar{inc} \times \vb H\sups{inc} \Big]
+        \bigg\}
+\\[3pt]
+  & \hspace{0.2in}
+     -\frac{1}{2}\text{Re }
+      \bigg\{ \vbhat{n}\cdot 
+              \Big[ \vb E\supsstar{inc} \times \vb H\sups{tot} \Big]
+             \, + \, 
+             \vbhat{n}\cdot 
+              \Big[ \vb E\supsstar{tot} \times \vb H\sups{inc} \Big]
+      \bigg\}.
+\end{align}
+\label{ThreeTerms}
+\end{subequations}
+
+\subsubsection*{First Term}
+
+The first term here (\ref{ThreeTerms}a) is the normal component of the 
+total Poynting vector,
+as considered in the previous section; the surface integral of this
+term yields $-P\sups{abs}.$
+
+\subsubsection*{Second Term}
+
+The second term (\ref{ThreeTerms}b) is the normal Poynting 
+flux due to the incident field sources alone. The surface integral 
+of this term yields the net power delivered to the volume of the 
+scatterer in the absence of the scatterer. But in the absence of the 
+scatterer there is nowhere
+for this power to go; there is nothing to absorb it, so any power
+that flows in must flow back out. Hence the surface integral
+of this term vanishes.
+
+\subsubsection*{Third Term}
+
+The third term (\ref{ThreeTerms}b) is 
+%====================================================================%
+\begin{align*}
+&\hspace{-0.3in}
+ -\frac{1}{2}\text{Re }
+      \bigg\{ \vbhat{n}\cdot 
+              \Big[ \vb E\supsstar{inc} \times \vb H\sups{tot} \Big]
+             \, + \, 
+             \vbhat{n}\cdot 
+              \Big[ \vb E\supsstar{tot} \times \vb H\sups{inc} \Big]
+      \bigg\}
+\\
+&=
+ +\frac{1}{2}\text{Re }
+      \bigg\{ \vb E\supsstar{inc} \cdot \Big[\vbhat{n}\times \vb H\sups{tot}\Big]
+              \, + \, 
+              \vb H\supsstar{inc} \cdot \Big[ -\vbhat{n}\times \vb E\sups{tot}\Big]
+      \bigg\}
+\\
+&=
+ +\frac{1}{2}\text{Re }
+      \bigg\{ \vb E\supsstar{inc} \cdot \vb K \, + \, 
+              \vb H\supsstar{inc} \cdot \vb N
+      \bigg\}
+\intertext{Insert the surface-current expansions 
+           $\vb K=\sum k_\alpha \vb f_\alpha, 
+           \vb N=-Z_0 \sum n_\alpha \vb f_\alpha$:}
+&=
+ +\frac{1}{2}\text{Re }\sum_{\alpha}
+      \bigg\{ k_\alpha \vb E\supsstar{inc} \cdot \vb f_\alpha 
+             \, 
+              - Z_0 n_\alpha \vb H\supsstar{inc} \cdot \vb f_\alpha
+      \bigg\}
+\intertext{The surface integral of this is }
+\oint \left\{ \right\} 
+&= \frac{Z_0}{2} \text{Re }\sum_{\alpha} 
+   \bigg\{ k^*_\alpha 
+           \underbrace{\Big[\oint \vb E\supsstar{inc}(\vb x) \cdot \vb f(\vb x) d\vb x\Big]/Z_0}
+                     _{v\supt{E}_\alpha}
+          -n^*_\alpha
+           \underbrace{\Big[\oint \vb H\supsstar{inc}(\vb x) \cdot \vb f(\vb x) d\vb x\Big]}
+                     _{v\supt{H}_\alpha}
+   \bigg\}
+\\[5pt]
+&= \frac{Z_0}{2} \sum_{\alpha} \Big[k^*_\alpha v\supt{E}_\alpha 
+                                      -n^*_\alpha v\supt{H}_\alpha \Big]
+\end{align*}
+where $\{ v\supt{E}_\alpha, v\supt{H}_\alpha\}$ are the 
+elements of the RHS vector of the BEM system as computed by 
+\ls.
+
+\subsubsection*{Total Scattered Power}
+
+Combining all of the above, the total scattered power is 
+
+$$P\sups{scat} = -P\sups{abs} + \frac{1}{2}\texttt{KN}^* \cdot \overline{\texttt{RHS}}$$
+where \texttt{KN} and \texttt{RHS} are respectively the vector of 
+surface-current expansion coefficients and the RHS vector, as computed
+by \ls, and the bar on the second term in the dot product indicates that 
+the magnetic contributions enter with a minus sign.
+
+\section{Plane-wave scattering from a dielectric sphere}
+
+To demonstrate the validity of the concise power formulas, we'll use
+them here to investigate the scattering and absorption cross-sections
+for a dielectric sphere illuminated by a plane wave.
+
+\subsection*{Exact Results}
+
+\subsection*{Calculations using {\sc scuff-scatter}}
+
+\subsection*{Converting power data to cross-sections}
+The quantities that {\sc scuff-scatter} writes to the
+{\texttt Sphere.power} file are the total 
+scattered and absorbed power. To obtain the scattering 
+and absorption cross-sections, we divide the power by
+the incident power per unit area, which in this case 
+is 
+$$\text{incident flux of a plane wave in vacuum}=\frac{|\vb E_0|^2}{2Z_0}.$$
+
+\end{document}
