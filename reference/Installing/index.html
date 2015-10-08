@@ -486,6 +486,77 @@ to use all 8 cores I need to set the following environment
 variable:</p>
 <pre><code class="bash">% export GOMP_CPU_AFFINITY=0-7
 </code></pre>
+
+<p><a name="Debugging"></a></p>
+<h4 id="building-for-debugging">Building for debugging</h4>
+<p>If you would like to run <a class="wikilink" href="../../scuff-em/">scuff-em</a> API codes in a debugger
+like <a href="https://www.gnu.org/software/gdb"><span class="SC">gdb</sc></a>,
+you will want to modify the build options to <strong>(a)</strong> include
+debugging symbols, <strong>(b)</strong> turn off optimization, <strong>(c)</strong>
+disable <a class="wikilink" href="../../openmp/">openmp</a> multithreading, which does not play well
+with <a class="wikilink" href="../../GDB/">GDB</a>. </p>
+<p>Here is the script that works for me to achieve these goals:</p>
+<pre><code class="bash">#!/bin/bash
+
+CC=&quot;gcc -ggdb -O0&quot;
+CXX=&quot;g++ -ggdb -O0&quot;
+export CFLAGS=&quot;-O0&quot;
+export CXXFLAGS=&quot;-O0&quot;
+sh autogen.sh --enable-debug --without-openmp --disable-shared
+</code></pre>
+
+<p>(It shouldn't be necessary to have to add <code>-O0</code> to both the
+environment variables and the compiler command lines, but
+this seems to be the only way things work for me.)</p>
+<p>After running this script to reconfigure for building with
+compiling support, you will want to <code>make clean; make</code>
+to rebuild everything with debugging support. Of course,
+after you are finished debugging you will need to reconfigure
+with debugging support removed and then re-do the 
+clean build. Because this is time-consuming, I typically
+maintain two separate copies of the code base, one for
+debugging and one for running at full speed.</p>
+<p>Once debugging support has been added, you can run 
+the code in <a class="wikilink" href="../../gdb/">gdb</a>. Here's a sample session:</p>
+<pre><code class="bash"> % gdb /path/to/debug/repository/bin/scuff-ldos
+
+ (gdb) set args &lt; scuff-ldos.args
+
+ (gdb) break GetHalfSpaceDGFs
+Breakpoint 1 at 0x409626: file AnalyticalDGFs.cc, line 217.
+
+ (gdb) run
+
+Breakpoint 1, GetHalfSpaceDGFs (Omega=..., kBloch=0x7fffffffd5c0, 
+    zp=0.10000000000000001, LBasis=0x7fffffffd380, MP=0x130a7c0, RelTol=0.01, 
+    AbsTol=1e-10, MaxCells=1000, GE=0x7fffffffd3a0, GM=0x7fffffffd430)
+    at AnalyticalDGFs.cc:217
+
+217   double BZVolume=GetRLBasis(LBasis, RLBasis);
+
+(gdb) print Omega
+$1 = {_M_value = 0.10000000000000001 + 0 * I}
+
+(gdb) u 230
+
+GetHalfSpaceDGFs (Omega=..., kBloch=0x7fffffffd5c0, zp=0.10000000000000001, 
+    LBasis=0x7fffffffd380, MP=0x130a7c0, RelTol=0.01, AbsTol=1e-10, 
+    MaxCells=1000, GE=0x7fffffffd3a0, GM=0x7fffffffd430)
+    at AnalyticalDGFs.cc:230
+
+230   cdouble Sum[18];
+
+(gdb) print Data-&gt;Epsilon
+$2 = {_M_value = -45765.335680436379 + 115960.58424811834 * I}
+</code></pre>
+
+<p><strong>Note</strong>: If you have a better debugging solution that 
+does not require steps <strong>(b)</strong> and/or <strong>(c)</strong> above , please
+let me know about it. It stinks to have to run the codes
+at greatly reduced speed when debugging, because often the
+problem spots lie after expensive sections like BEM matrix
+assembly, and then it takes forever for the code to run
+in the debugger to get there.</p>
               
             </div>
           </div>

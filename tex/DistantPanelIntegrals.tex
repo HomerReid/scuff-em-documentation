@@ -1,0 +1,142 @@
+\documentclass[letterpaper]{article}
+
+\input{scufftex}
+
+\graphicspath{{figures/}}
+
+%------------------------------------------------------------
+%------------------------------------------------------------
+%- Special commands for this document -----------------------
+%------------------------------------------------------------
+%------------------------------------------------------------
+
+%------------------------------------------------------------
+%------------------------------------------------------------
+%- Document header  -----------------------------------------
+%------------------------------------------------------------
+%------------------------------------------------------------
+\title {Efficient Evaluation of Matrix Elements \\
+        between Distant Basis Functions in \ls}
+\author {Homer Reid}
+\date {April 16, 2013}
+
+%------------------------------------------------------------
+%------------------------------------------------------------
+%- Start of actual document
+%------------------------------------------------------------
+%------------------------------------------------------------
+
+\begin{document}
+\pagestyle{myheadings}
+\markright{Homer Reid: \lss Implementation and Technical Details}
+\maketitle
+
+\tableofcontents
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Overview}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Cartesian Multipole Technique}
+
+$$ G_{\mu\nu}(\vb r) = 
+     G_{\mu\nu}(\vb r_0) 
+   + (\vb r - \vb r_0)_\rho G_{\mu\nu\rho}(\vb r_0) 
+   + \frac{1}{2}(\vb r - \vb r_0)_\rho (\vb r - \vb r_0)_\sigma 
+     G_{\mu\nu\rho\sigma}(\vb r_0) + \cdots
+$$
+\begin{align*}
+&\hspace{-0.1in} 
+\int \int f_{m\mu}(\vb x) G_{\mu\nu}(\vb x-\vb x^\prime) f_{n\nu}(\vb x^\prime)
+  d\vb x d d\vb x^\prime
+\\
+&=
+ G_{\mu\nu}^0
+ \underbrace{\left[ \int f_{m\mu}(\vb x) \, d\vb x \right]}
+           _{\mc M_{m\mu}}
+ \underbrace{\left[ \int f_{n\nu}(\vb x^\prime) \, d\vb x^\prime \right]}
+           _{\mc M_{n\nu}}
+\\
+&+
+ G_{\mu\nu\rho}^0
+ \left\{ \underbrace{
+            \left[ \int (\vb x - \vb x_0)_\rho f_{m\mu}(\vb x) \, d\vb x \right]
+                    }_{\mc M_{m\mu\rho}}
+         \underbrace{
+         \left[ \int f_{n\nu}(\vb x^\prime) \, d\vb x^\prime \right]
+                    }_{\mc M_{n\nu}}
+        -
+         \underbrace{
+         \left[ \int f_{m\mu}(\vb x) \, d\vb x \right]
+                    }_{\mc M_{m\mu}}
+         \underbrace{
+         \left[ \int (\vb x^\prime-\vb x^\prime_0)_\rho 
+                     f_{n\nu}(\vb x^\prime) \, d\vb x^\prime \right]
+                    }_{\mc M_{n\nu\rho}}
+ \right\}     
+\\
+&+\cdots
+\end{align*}
+
+\subsection*{Multipole moments of RWG basis functions}
+
+\begin{align*}
+ \mc M_{m\mu}     
+&= \frac{l_m}{3}\Big(\vb Q^-_m - \vb Q^+_m\Big)_\mu
+\\
+ \mc M_{m\mu\rho} 
+&= \frac{l_m}{12}\Big[ \vb A^-_\mu \vb A^-_\rho 
+                      -\vb A^+_\mu \vb A^+_\rho \Big]
+  -\frac{1}{8}\Big[ \vb B_\mu \mc M_{m\rho} + \mc M_{m\mu} \vb B_\rho \Big]
+\end{align*}
+
+\subsection*{Cartesian Components of Dyadic Green's functions}
+
+\begin{align*}
+  G_{\mu\nu}(\vb r) 
+&= \left[P_1(ikr)\delta_{\mu\nu} + P_2(ikr)\frac{r_\mu r_\nu}{r^2}\right]\Phi(r)
+\\
+  C_{\mu\nu}(\vb r) 
+&= ik P_3(ikr) \Phi(r) \varepsilon_{\mu\nu\rho} r_\rho
+\end{align*}
+
+\begin{align*}
+ \Phi(r) &=\frac{e^{ikr}}{4\pi (ik)^2 r^3}
+\\
+P_1(x)&=1-x-x^2 
+\\
+P_2(x)&=-3 + 3x - x^2
+\\
+P_3(x)&=-1+x
+\\
+\end{align*}
+
+\subsection*{First derivatives}
+
+\begin{align*}
+  G_{\mu\nu\rho}(\vb r)
+&=\frac{d}{dr_\rho} G_{\mu\nu}(\vb r)
+&= \left[P_1(ikr)\delta_{\mu\nu} + P_2(ikr)\frac{r_\mu r_\nu}{r^2}\right]\Phi(r)
+\\
+  C_{\mu\nu}(\vb r) 
+&= ik P_3(ikr) \Phi(r) \varepsilon_{\mu\nu\rho} r_\rho
+\end{align*}
+
+\begin{align*}
+ \Phi(r) &=\frac{e^{ikr}}{4\pi (ik)^2 r^3}
+\\
+P_1(x)&=1-x-x^2 
+\\
+P_2(x)&=-3 + 3x - x^2
+\\
+P_3(x)&=-1+x
+\\
+\end{align*}
+
+\end{document}
