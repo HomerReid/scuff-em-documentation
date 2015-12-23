@@ -122,6 +122,13 @@
         
             
     <li class="toctree-l1 ">
+        <a class="" href="../../NanostructureCasimirPolder/NanostructureCasimirPolder/">Casimir-Polder potentials in dielectric nanostructures</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
         <a class="" href="../../SiO2Spheres/SiO2Spheres/">Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres</a>
         
     </li>
@@ -510,7 +517,9 @@ this:</p>
 <p>We'll run calculations at a single frequency 
 (<script type="math/tex">\omega=3\times 10^{14}</script> rad/sec) and at Bloch
 vectors of the form <script type="math/tex">\mathbf k_B=(0,k_y)</script> for 
-values of <script type="math/tex">k_y</script> running from <script type="math/tex">0</script> to <script type="math/tex">\pi</script>.
+values of <script type="math/tex">k_y</script> running from <script type="math/tex">0</script> to <script type="math/tex">\pi/L</script>
+(where <script type="math/tex">L</script>=1 <script type="math/tex">\mu</script>m is the lattice constant
+in this case).
 Thus we create a text file called <code>OKBFile</code> that
 looks like this:</p>
 <pre><code>1.0 0.0 0.00
@@ -525,23 +534,44 @@ looks like this:</p>
 the LDOS is computed using a semi-analytical approach
 (plane-wave decomposition) and another in which
 the LDOS is computed using the <a class="wikilink" href="../../../scuff-em/">scuff-em</a> core
-library.</p>
+library. Note that the command-line arguments 
+for the two runs are identical except that one of them
+has the extra option <code>--HalfSpace Aluminum.</code></p>
 <pre><code class="bash">  #!/bin/bash
-
   ARGS=&quot;&quot;
-  ARGS=&quot;${ARGS} --geometry ../${GEOM}&quot;
-  ARGS=&quot;${ARGS} --EPFile  ../EPFile&quot;
-  ARGS=&quot;${ARGS} --OmegakBlochFile ../OKBFile&quot;
+  ARGS=&quot;${ARGS} --geometry AlHalfSpace_40.scuffgeo&quot; 
+  ARGS=&quot;${ARGS} --EPFile  EPFile&quot;
+  ARGS=&quot;${ARGS} --OmegakBlochFile OKBFile&quot;
   ARGS=&quot;${ARGS} --HalfSpace Aluminum&quot;
-  scuff-ldos ${ARGS}
-
-  ARGS=&quot;&quot;
-  ARGS=&quot;${ARGS} --geometry ../${GEOM}&quot;
-  ARGS=&quot;${ARGS} --EPFile  ../EPFile&quot;
-  ARGS=&quot;${ARGS} --OmegakBlochFile ../OKBFile&quot;
   scuff-ldos ${ARGS}
 </code></pre>
 
+<p>Both of these runs produce an output file 
+named <code>AlHalfSpace_40.byOmegakBloch.</code> (If you
+don't rename the file after the first run, 
+the data from the second run will simply be 
+appended to the file below the first set of data).</p>
+<p>Here's a plot of <script type="math/tex">\mathcal{G}^E_{zz}</script> (the <script type="math/tex">zz</script>
+component of the electric dyadic Green's function)
+versus the <script type="math/tex">y</script>-component of the Bloch vector
+as computed using the analytical and <a class="wikilink" href="../../../scuff-em/">scuff-em</a>
+approaches.
+=======</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>f86803d1cef0c7c65a7e721df61196204158b754</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
 <p><img alt="aluminum LDOS data" src="../AluminumLDOS.png" /></p>
               
             </div>

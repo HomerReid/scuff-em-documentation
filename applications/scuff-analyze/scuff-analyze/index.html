@@ -122,6 +122,13 @@
         
             
     <li class="toctree-l1 ">
+        <a class="" href="../../../examples/NanostructureCasimirPolder/NanostructureCasimirPolder/">Casimir-Polder potentials in dielectric nanostructures</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
         <a class="" href="../../../examples/SiO2Spheres/SiO2Spheres/">Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres</a>
         
     </li>
@@ -505,6 +512,25 @@ plot showing the innermost 3x3 grid of unit cells, while <code>--Neighbors 2</co
 will show the innermost 5x5 grid of cells.) This is useful for visualizing 
 how your unit-cell meshes fit together with their images across unit-cell 
 boundaries to comprise a periodically replicated lattice.</p>
+<pre><code class="bash">    --EPFile MyEPFile
+</code></pre>
+
+<p>This option allows you to specify a list of individual points
+to be plotted in the visualization file together with the
+meshed surfaces in your geometry. This is useful for double-checking
+that the points at which you are requesting spatially-resolved
+information from a <a class="wikilink" href="../../../scuff-em/">scuff-em</a> code (for example, scattered
+and total field components in 
+<a href="../../scuff-scatter/scuff-scatter/"><span class="SC">scuff-scatter</span></a>,
+or Casimir-Polder potentials in
+<a href="../../scuff-caspol/scuff-caspol/"><span class="SC">scuff-caspol</span></a>
+spatially-resolved Poynting flux in
+<a href="../../scuff-neq/scuff-neq/"><span class="SC">scuff-neq</span></a>) are 
+actually the points you wanted. The file <code>MyEPFile</code>
+is the same file you specify for the <code>--EPFile</code> option
+to any other <a class="wikilink" href="../../../scuff-em/">scuff-em</a> code: it
+should contain 3 numbers per line (the cartesian 
+coordinates of the points).</p>
 <pre><code class="bash">    --WriteGnuplotFiles 
 </code></pre>
 
