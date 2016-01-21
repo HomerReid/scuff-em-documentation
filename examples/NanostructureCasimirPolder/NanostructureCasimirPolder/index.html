@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Casimir-Polder potentials in dielectric nanostructures - SCUFF-EM documentation</title>
+  
+
+  <link rel="shortcut icon" href="../../../scuffEM.ico">
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/highlight.css">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "examples/NanostructureCasimirPolder/NanostructureCasimirPolder"
+  </script>
+  
+  <script src="../../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../../js/highlight.pack.js"></script>
+  <script src="../../../js/theme.js"></script> 
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+  <script src="../../../mathjaxhelper.js"></script>
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+
+      <p align="center"
+      <a href="../../..">
+         <img align="center" height="auto" width="100%"  
+              src="../../../img/scuffEMNavBar.png"
+      </a>
+
+      <div class="wy-side-nav-search">
+        <a href="../../.." class="icon icon-home"> SCUFF-EM documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../../..">SCUFF-EM documentation</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Examples</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../MieScattering/MieScattering/">Mie scattering</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../DielectricShell/DielectricShell/">Electrostatics of a spherical dielectric shell</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../ThinFilm/ThinFilm/">Spatially-resolved study of plane-wave transmission through an infinite-area thin dielectric film</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../DiffractionPatterns/DiffractionPatterns/">Imaging diffraction patterns of discs, disc arrays, and hole arrays in metal screens</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../CubeTorus/">Casimir forces in a compact geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../SiliconBeams/SiliconBeams/">Casimir forces in a 1D extended geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../SiliconSlabs/SiliconSlabs/">Casimir forces in a 2D extended geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Casimir-Polder potentials in dielectric nanostructures</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#scuff-em-geometry-file-for-dielectric-nanobeam">scuff-em geometry file for dielectric nanobeam</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#gmsh-geometry-and-surface-mesh-for-nanoarray-unit-cell">gmsh geometry and surface mesh for nanoarray unit cell</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#scuff-em-geometry-file-for-dielectric-nanoarray">scuff-em geometry file for dielectric nanoarray</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#evaluation-points-for-casimir-polder-potentials">Evaluation points for Casimir-Polder potentials</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#setting-up-the-casimir-polder-calculation">Setting up the Casimir-Polder calculation</a></li>
+                
+            
+            </ul>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../SiO2Spheres/SiO2Spheres/">Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../TipSubstrate/TipSubstrate/">Spatial distribution of heat flux from a warm tip over a cold substrate</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../HalfSpaceLDOS/HalfSpaceLDOS/">LDOS and dyadic Green functions above an infinite aluminum half-space</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../PlatonicSolids/PlatonicSolids/">Electrostatic polarizability of platonic solids</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>General reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/TopLevel/">Top-level overview</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/Installing/">Installation</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/Geometries/">Geometry descriptions</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/Materials/">Material designations</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/Transformations/">Geometric transformations</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/IncidentFields/">Incident fields</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/BrillouinZoneIntegration/">Brillouin zone integration</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Command-line application reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/GeneralReference/">General command-line reference</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-scatter/scuff-scatter/">scuff-scatter</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-transmission/scuff-transmission/">scuff-transmission</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-ldos/scuff-ldos/">scuff-ldos</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-tmatrix/scuff-tmatrix/">scuff-tmatrix</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-cas3D/scuff-cas3D/">scuff-cas3D</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-caspol/scuff-caspol/">scuff-caspol</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-neq/scuff-neq/">scuff-neq</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-RF/scuff-RF/">scuff-RF</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-static/scuff-static/">scuff-static</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-analyze/scuff-analyze/">scuff-analyze</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>API reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../API/libscuff/">libscuff</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>For developers</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../forDevelopers/Implementation/">Implementation</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../forDevelopers/DataStructures/">Data Structures</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../forDevelopers/Documentation/">Documentation</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../..">SCUFF-EM documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.."><span class="SmallCaps">scuff-em</span> documentation</a> &raquo;</li>
+    
+      
+        
+          <li>Examples &raquo;</li>
+        
+      
+    
+    <li>Casimir-Polder potentials in dielectric nanostructures</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/homerreid/scuff-em/" class="icon icon-github"> Edit on GitHub</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1>Casimir-Polder potentials in dielectric nanostructures</h1>
+
+<p>In this example, we exploit <a class="wikilink" href="../../../scuff-em/">scuff-em</a>'s support for periodic
+geometries to compute Casimir-Polder potentials for atoms inside
+dielectric waveguides. Our basic test example will be the 1D 
+photonic crystal studied in this paper:</p>
+<ul>
+<li><a href="http://stacks.iop.org/1367-2630/15/i=8/a=083026">C. L. Hung, S. M. Meenehan, D. E. Chang, O. Painter,
+    H. J. Kimble, ``Trapped atoms in one-dimensional
+    photonic crystals.'' <em>New Journal of Physics</em> <strong>15</strong>
+    083026 (2013).</a></li>
+</ul>
+<p>We will illustrate the use of <a class="wikilink" href="../../../scuff-em/">scuff-em</a>'s Casimir-Polder
+module <a class="wikilink" href="../../../scuff-caspol/">scuff-caspol</a> by reproducing the results of 
+Hung et al. for a 1D lattice, then extend the calculation
+to the case of a 2D square lattice.
+The files for this example may be found in the
+<code>share/scuff-em/examples/NanobeamCasimirPolder</code> subdirectory
+of your <a class="wikilink" href="../../../scuff-em/">scuff-em</a> installation.</p>
+<hr />
+<h2 id="gmsh-geometry-and-surface-mesh-for-nanobeam-unit-cell"><a class="wikilink" href="../../../gmsh/">gmsh</a> geometry and surface mesh for nanobeam unit cell</h2>
+<p>The <a class="wikilink" href="../../../gmsh/">gmsh</a> geometry file <a href="../UnitCell.geo"><code>UnitCell.geo</code></a>
+describes just the portion of the nanobeam surface that 
+lies within the <em>unit cell,</em> i.e. the cell that is 
+infinitely periodically replicated to yield the full 
+geometry. To produce a discretized surface-mesh
+representation of this geometry, we run it through
+<a class="wikilink" href="../../../gmsh/">gmsh</a>:</p>
+<pre><code class="bash">% gmsh -2 UnitCell.geo
+</code></pre>
+
+<p>This produces a file named <code>UnitCell.msh</code>, which
+I rename to <code>NanoBeamUnitCell_1006_.msh</code> because
+<strong>(a)</strong> I will be using it as the unit cell of a beam
+geometry, in contrast to a different use I will find
+for the same unit cell below; and <strong>(b)</strong> the mesh has 1006 
+interior edges (this is the number that defines the 
+memory and computation time requirements for the 
+<a class="wikilink" href="../../../scuff-em/">scuff-em</a> calculation; it may be found by running
+<code>scuff-analyze --mesh UnitCell.msh</code>).
+You can open the <code>.msh</code> file in <a class="wikilink" href="../../../gmsh/">gmsh</a> to visualize
+the unit-cell mesh:</p>
+<pre><code class="bash">% gmsh NanoBeamUnitCell_1006.msh
+</code></pre>
+
+<p><img alt="Unit cell mesh picture" src="../NanoBeamUnitCellMesh.png" /></p>
+<p>Note the following:</p>
+<ul>
+<li>
+<p>For 1D periodic geometries in <a class="wikilink" href="../../../scuff-em/">scuff-em</a>, the direction
+   of infinite extent must be the <em>x</em> direction.</p>
+</li>
+<li>
+<p>The sidewalls normal to the <script type="math/tex">y</script> and <script type="math/tex">z</script> directions are 
+   meshed, but the sidewalls normal to the <script type="math/tex">x</script> direction are 
+   <em>not</em> meshed for this structure, because those surfaces are 
+   not interfaces between different dielectrics.</p>
+</li>
+<li>
+<p>For surfaces that straddle the unit-cell boundaries
+   (as is the case here), each triangle edge that lies
+   on the unit-cell boundary must have an identical
+   image edge on the opposite side of the unit cell.
+   An easy way to achieve this is to use <em>extrusions</em>
+   in <a class="wikilink" href="../../../gmsh/">gmsh</a>, as in the <code>.geo</code> file above.</p>
+</li>
+<li>
+<p>In this case the unit cell is 0.367 <script type="math/tex">\mu</script>m long.
+   This and other geometric parameters can be modified 
+   by editing the file <code>UnitCell.geo</code> or directly
+   on the <a class="wikilink" href="../../../gmsh/">gmsh</a> commmand line using the <code>-setnumber</code> option.</p>
+</li>
+</ul>
+<hr />
+<h2 id="scuff-em-geometry-file-for-dielectric-nanobeam"><a class="wikilink" href="../../../scuff-em/">scuff-em</a> geometry file for dielectric nanobeam</h2>
+<p>A <a class="wikilink" href="../../../scuff-em/">scuff-em</a> [geometry file]<a href="../reference/Geometries">scuffEMGeometries</a> 
+describing an extended nanobeam consisting of infinitely
+many repetitions of the above unit cell filled with
+a dielectric material of constant relative permittivity
+<script type="math/tex">\epsilon=4</script>, is 
+<a href="../NanoBeam_1006.scuffgeo"><code>NanoBeam_1006.scuffgeo</code></a>.
+The file reads, in its entirety, </p>
+<pre><code>LATTICE
+    VECTOR 0.367 0.0
+ENDLATTICE
+
+OBJECT Nanobeam
+    MESHFILE NanoBeamUnitCell_1006.msh
+    MATERIAL CONST_EPS_4
+ENDOBJECT
+</code></pre>
+
+<p>We can use <a class="wikilink" href="../../../scuff-analyze/">scuff-analyze</a> to visualize the geometry 
+described by this <code>.scuffgeo</code> file:</p>
+<pre><code class="bash">% scuff-analyze --geometry NanoBeam_1006.scuffgeo --WriteGMSHFiles --Neighbors 3
+</code></pre>
+
+<p>[The option <code>--Neighbors 3</code> requests that, in addition to the unit-cell
+geometry, the first 3 periodic images of the unit cell <em>in both the 
+positive and negative directions</em> (for a total of 5 copies of the 
+unit cell) be plotted as well. This helps to convey a slightly
+better sense of the actual infinite-length structure being 
+simulated.] This produces the file <code>NanoBeam_1006.pp</code>, which you 
+can view in <a class="wikilink" href="../../../gmsh/">gmsh</a>:</p>
+<pre><code class="bash">% gmsh NanoBeam_1006.pp
+</code></pre>
+
+<p><img alt="Geometry visualization file picture" src="../NanoBeamMesh.png" /></p>
+<p>Note that the visualization file produced by <a class="wikilink" href="../../../scuff-analyze/">scuff-analyze</a> includes
+extra triangles (visible at the left end of the structure) that are
+not present in the unit-cell geometry. These are called <i>straddlers</i>,
+and they are added automatically by <a class="wikilink" href="../../../scuff-em/">scuff-em</a> to account for 
+surface currents that flow across the unit-cell boundaries in 
+periodic geometries.</p>
+<hr />
+<h2 id="gmsh-geometry-and-surface-mesh-for-nanoarray-unit-cell"><a class="wikilink" href="../../../gmsh/">gmsh</a> geometry and surface mesh for nanoarray unit cell</h2>
+<p>It's easy to generalize all of this to a geometry
+with two-dimensional periodicity. The only modification
+required to the unit-cell mesh is that we have to 
+remove the sidewalls normal to the <script type="math/tex">y</script> direction.
+This can be done using the same <a class="wikilink" href="../../../gmsh/">gmsh</a> geometry
+we used above for the nanobeam unit cell, but with 
+the extra command-line option <code>-setnumber LDim 2</code>
+on the <a class="wikilink" href="../../../gmsh/">gmsh</a> command line. (Here <code>LDim</code> stands
+for "lattice dimension".)</p>
+<pre><code class="bash">% gmsh -2 -setnumber LDim 2 UnitCell.geo
+</code></pre>
+
+<p>This produces a file named <code>UnitCell.msh</code>, which
+I rename to <code>NanoArrayUnitCell_800_.msh.</code> It looks like this</p>
+<p><img alt="Unit cell mesh picture" src="../NanoArrayUnitCellMesh.png" /></p>
+<hr />
+<h2 id="scuff-em-geometry-file-for-dielectric-nanoarray"><a class="wikilink" href="../../../scuff-em/">scuff-em</a> geometry file for dielectric nanoarray</h2>
+<p>A <a href="../reference/Geometries"> <span class="SC">scuff-em</span> geometry file</a>
+describing a dielectric surface extended in two
+dimensions and perforated with a square lattice
+of the holes pictured above is 
+<a href="../NanoArray_800.scuffgeo"><code>NanoArray_800.scuffgeo</code></a>.
+The file reads</p>
+<pre><code>LATTICE
+    VECTOR 0.367  0.0
+    VECTOR 0.000  0.845
+ENDLATTICE
+
+OBJECT NanoArray
+    MESHFILE NanoArrayUnitCell_800.msh
+    MATERIAL CONST_EPS_4
+ENDOBJECT
+</code></pre>
+
+<p>Again we use <a class="wikilink" href="../../../scuff-analyze/">scuff-analyze</a> to visualize the geometry
+described by this <code>.scuffgeo</code> file:</p>
+<pre><code class="bash">% scuff-analyze --geometry NanoArray_800.scuffgeo --WriteGMSHFiles --Neighbors 3
+</code></pre>
+
+<p><img alt="Geometry visualization file picture" src="../NanoArrayMesh.png" /></p>
+<hr />
+<h2 id="evaluation-points-for-casimir-polder-potentials">Evaluation points for Casimir-Polder potentials</h2>
+<p>For a Casimir-Polder calculation we will want to evaluate
+the Casimir-Polder potential at range of points. We 
+put the Cartesian coordinates of these points into a 
+text file named <a href="../EPFile"><code>EPFile</code></a>, which looks like 
+this:</p>
+<pre><code class="bash">0.1835 0.4225 -0.500
+0.1835 0.4225 -0.480
+0.1835 0.4225 -0.460
+...
+0.1835 0.4225 0.480
+0.1835 0.4225 0.500
+</code></pre>
+
+<p>and defines a line of points running through the middle of the hole
+in the beam unit cell.</p>
+<p>To double-check that the evaluation points we specify
+are actually where we expect them to be vis-a-vis the 
+meshed surfaces in our problem, we can ask <a class="wikilink" href="../../../scuff-analyze/">scuff-analyze</a>
+to plot the evaluation points together with the 
+unit-cell geometry:</p>
+<pre><code class="bash"> % scuff-analyze --geometry NanoBeam_1006.scuffgeo --EPFile EPFile --WriteGMSHFiles
+</code></pre>
+
+<p><img alt="Mesh and evaluation points picture" src="../MeshAndPoints.png" /></p>
+<p>This confirms that our <code>EPFile</code> describes a line of evaluation
+points running through the middle of the hole in the beam 
+structure, as desired.</p>
+<hr />
+<h2 id="setting-up-the-casimir-polder-calculation">Setting up the Casimir-Polder calculation</h2>
+<p>To compute the Casimir-Polder potential on, say,
+a rubidium atom at the above evaluation points
+for the 1D and 2D extended structures, we now say simply</p>
+<pre><code class="bash">  % scuff-caspol --geometry NanoBeam_1006.scuffgeo --EPFile EPFile --Atom Rubidium
+</code></pre>
+
+<p>and/or</p>
+<pre><code class="bash">  % scuff-caspol --geometry NanoArray_800.scuffgeo --EPFile EPFile --Atom Rubidium
+</code></pre>
+
+<p>These calculations will produce files named <code>NanoBeam_1006.out</code> and 
+<code>NanoArray_800.out</code> tabulating the Casimir-Polder potential 
+experience by the rubidium atom at each of the specified evaluation
+points.</p>
+<p>For more information on <a class="wikilink" href="../../../scuff-caspol/">scuff-caspol</a>, see the 
+<a href="http://homerreid.com/scuff-em/scuff-caspol">old <span class="SC">scuff-caspol</span> documentation</a>,
+which is thorough and up-to-date (though it does not 
+cover CP calculations in extended geometries) despite 
+having not yet been ported from its previous format.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../SiO2Spheres/SiO2Spheres/" class="btn btn-neutral float-right" title="Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../SiliconSlabs/SiliconSlabs/" class="btn btn-neutral" title="Casimir forces in a 2D extended geometry"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    <!-- Copyright etc -->
+    </p>
+  </div>
+
+  <a href="http://homerreid.com/scuff-em"> 
+    <span class="SmallCaps">scuff-em</span>
+  </a> documentation, by
+  <a href="http://homerreid.com">Homer Reid</a>
+
+  <p>
+  <font size=-1>
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> 
+  using a customized theme modeled 
+  after the 
+  <a href="https://github.com/snide/sphinx_rtd_theme">theme</a>
+  provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  </font>
+
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../../SiliconSlabs/SiliconSlabs/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../SiO2Spheres/SiO2Spheres/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

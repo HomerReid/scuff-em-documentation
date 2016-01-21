@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Incident fields - SCUFF-EM documentation</title>
+  <title>Brillouin zone integration - SCUFF-EM documentation</title>
   
 
   <link rel="shortcut icon" href="../../scuffEM.ico">
@@ -21,7 +21,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "reference/IncidentFields"
+    var mkdocs_page_name = "reference/BrillouinZoneIntegration"
   </script>
   
   <script src="../../js/jquery-2.1.1.min.js"></script>
@@ -199,31 +199,22 @@
 
         
             
-    <li class="toctree-l1 current">
-        <a class="current" href="./">Incident fields</a>
-        
-            <ul>
-            
-                <li class="toctree-l3"><a href="#plane-waves">Plane waves</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#gaussian-beams">Gaussian beams</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#point-sources">Point sources</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#using-incident-fields-in-api-programs">Using incident fields in API programs</a></li>
-                
-            
-            </ul>
+    <li class="toctree-l1 ">
+        <a class="" href="../IncidentFields/">Incident fields</a>
         
     </li>
 
         
             
-    <li class="toctree-l1 ">
-        <a class="" href="../BrillouinZoneIntegration/">Brillouin zone integration</a>
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Brillouin zone integration</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#command-line-options-for-customizing-built-in-bz-integration">Command-line options for customizing built-in BZ integration</a></li>
+                
+            
+            </ul>
         
     </li>
 
@@ -386,7 +377,7 @@
         
       
     
-    <li>Incident fields</li>
+    <li>Brillouin zone integration</li>
     <li class="wy-breadcrumbs-aside">
       
         
@@ -400,126 +391,138 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="incident-fields-in-scuff-em">Incident fields in <span class="SC">scuff-em</span></h1>
-<p>For the classical scattering problems solved by
-<a href="../../applications/scuff-scatter/scuff-scatter/"><span class="SC">scuff-scatter</span></a>
-or by C++ or python codes using the
-<a href="../../API/libscuff/"><span class="SC">scuff-em</span> API</a>,
-you will want to specify the incident fields that
-scatter from your geometry.</p>
-<p>The default <a class="wikilink" href="../../scuff-em/">scuff-em</a> distribution offers three
-built-in types of incident fields:</p>
+                <h1 id="brillouin-zone-integration-in-scuff-em">Brillouin-zone integration in <a class="wikilink" href="../../scuff-em/">scuff-em</a></h1>
+<p>Many codes in the <a class="wikilink" href="../../scuff-em/">scuff-em</a> suite require evaluating
+integrals over the Brillouin zone (BZ) of a 1D or 2D
+reciprocal lattice, i.e.</p>
+<p>
+<script type="math/tex; mode=display"> Q(\omega) = \int_{\hbox{BZ}} \mathcal{Q}(\omega, \bf{k}) \,d\bf{k}.</script>
+</p>
+<p>Examples of calculations that require
+Brillouin-zone integrations include</p>
 <ul>
-<li><a href="#PlaneWaves">Plane waves</a></li>
-<li><a href="#GaussianBeams">Gaussian beams</a></li>
-<li>The fields of <a href="#PointSources">point electric or magnetic dipole sources.</a></li>
+<li>
+<p>the Casimir force per unit imaginary frequency
+<script type="math/tex">\omega=i\xi</script> 
+on an extended object in
+<a href="../../applications/scuff-cas3D/scuff-cas3D/"><span class="SC">scuff-cas3D</span></a></p>
+</li>
+<li>
+<p>the Casimir-Polder potential per unit imaginary frequency
+<script type="math/tex">\omega=i\xi</script> 
+experienced by a polarizable particle near an extended surface
+in 
+<a href="../../applications/scuff-caspol/scuff-caspol/"><span class="SC">scuff-caspol</span></a></p>
+</li>
+<li>
+<p>the local density of states at a given angular frequency
+<script type="math/tex">\omega</script>
+at user-specified evaluation points in 
+<a href="../../applications/scuff-ldos/scuff-ldos/"><span class="SC">scuff-ldos</span></a>.</p>
+</li>
 </ul>
-<p>It is also easy to <a href="#RollingYourOwn">define your own custom incident fields</a>
-for use in API programs.</p>
-<p><a name="PlaneWaves"></p>
-<h2 id="plane-waves">Plane waves</h2>
-<p><a class="wikilink" href="../../scuff-scatter/">scuff-scatter</a> command-line syntax:</p>
-<pre><code class="bash">--pwDirection nx ny nz
---pwPolarization Ex Ey Ez 
-</code></pre>
-
-<p>C++ code:</p>
-<pre><code class="c">  double  nHat[3] = {nx, ny, nz};
-  cdouble E0[3]   = {Ex, Ey, Ez};
-  PlaneWave *PW=new PlaneWave(E0, nHat);
-</code></pre>
-
-<p>Selects the incident field to be a plane wave, with propagation vector 
-<strong>n</strong>=<em>(nx,ny,nz)</em> and <strong>E</strong>-field polarization vector <strong>E</strong>=<em>(Ex,Ey,Ez).</em></p>
-<p>More specifically, the fields of a plane wave are</p>
-<p><img alt="Expressions for plane wave fields" src="../PlaneWave.png" /></p>
-<p>where the components of the vectors <script type="math/tex">\mathbf{\hat n}</script> 
-and 
-<script type="math/tex">\mathbf{E}_0</script>
-are what you specify with the <code>--pwDirection</code> and 
-<code>--pwPolarization</code> options to <a class="wikilink" href="../../scuff-scatter/">scuff-scatter</a>. (The frequency 
-<script type="math/tex">\omega</script> is specified elsewhere, for example using 
-command-line options like <code>--omega.</code> The
-quantities <script type="math/tex">\epsilon</script> and <script type="math/tex">\mu</script> are the material properties of
-the exterior medium at this frequency, which are determined by
-the material property designation you give the external medium
-in the <code>.scuffgeo</code> file; the wave impedance of the medium is
-<script type="math/tex">Z=\sqrt{\mu/\epsilon}\approx 377\,\Omega</script> in vacuum.)</p>
-<p>The values specified for <code>--pwPolarization</code> may be
-<a href="../../applications/GeneralReference/#Complex">complex numbers.</a></p>
-<p>As an example, the <a class="wikilink" href="../../scuff-scatter/">scuff-scatter</a> command-line options</p>
-<pre><code class="bash">--pwDirection 0 0 1 --pwPolarization 0.7071 0.7071i 0.0
-</code></pre>
-
-<p>will specify an incident field consisting of a circularly
-polarized plane wave traveling in the positive <em>z</em> direction.</p>
-<p><a name="GaussianBeams"></p>
-<h2 id="gaussian-beams">Gaussian beams</h2>
-<p><a class="wikilink" href="../../scuff-scatter/">scuff-scatter</a> command-line syntax:</p>
-<pre><code class="bash">--gbCenter Cx Cy Cz
---gbDirection nx ny nz
---gbPolarization Ex Ey Ez
---gbWaist W
-</code></pre>
-
-<p>C++ code:</p>
-<pre><code class="c">  double X0[3]={Cx, Cy, Cz};     /* beam center point */
-  double KProp[3]={nx, ny, nz};  /* beam propagation vector */
-  cdouble E0[3]={Ex, Ey, Ez};    /* complex field-strength vector */
-  double W0=W;                   /* beam waist */
-  GaussianBeam *GB=new GaussianBeam(X0, KProp, E0, W0);
-</code></pre>
-
-<p>Selects the incident field to be a focused Gaussian beam, 
-traveling in the direction defined by the unit vector 
-<strong>n</strong>=<code>(nx,ny,nz)</code>, with <strong>E</strong>-field polarization 
-vector <strong>E</strong>=<code>(Ex,Ey,Ez)</code>, beam center point with cartesian 
-coordinates <strong>C</strong>=<code>(Cx,Cy,Cz)</code>, and beam waist <code>W</code>.</p>
-<p>The values specified for <code>--gbPolarization</code> may be
-<a href="../../applications/GeneralReference/#Complex">complex numbers.</a></p>
-<p>The <a class="wikilink" href="../../scuff-em/">scuff-em</a> implementation of the
-field of a Gaussian laser beam was contributed by 
-Johannes Feist and follows this paper:</p>
+<p>In general, Brillouin-zone integrations are evaluated
+by numerical cubature---that is, as weighted sums of
+integrand samples:
+<script type="math/tex; mode=display"> Q(\omega) \approx \sum W_n \mathcal Q(\omega, \bf k_n)</script>
+where <script type="math/tex">\{W_n, \bf k_n\}</script> are the weights and points in
+a cubature rule for the Brillouin zone of your reciprocal
+lattice, and where each integrand sample
+<script type="math/tex">\mathcal Q(\omega, \bf k_n)</script> is computed by performing a
+single <a class="wikilink" href="../../scuff-em/">scuff-em</a> calculation at a fixed Bloch
+wavevector. The <a class="wikilink" href="../../scuff-em/">scuff-em</a> workflow offers two 
+options for evaluating such cubatures:   </p>
 <ul>
-<li>Sheppard and Saghafi, "Electromagnetic Gaussian Beams 
-Beyond the Paraxial Approximation," <em>Journal of the Optical 
-Society of America A</em> <strong>16</strong> 1381 (1999), <a href="http://dx.doi.org/10.1364/JOSAA.16.001381">http://dx.doi.org/10.1364/JOSAA.16.001381</a>.</li>
+<li>
+<p>You can design and implement your own cubature scheme
+involving your own custom-chosen weights and points
+<script type="math/tex">\{W_n, \bf k_n\}</script>. In this case, you will typically
+use the <code>--byOmegakBloch</code> command-line option to instruct
+a <a class="wikilink" href="../../scuff-em/">scuff-em</a> application code to report values of the
+quantity <script type="math/tex">\mathcal Q(\omega, \bf k_n)</script> at each of your points
+(this output will typically be written to file with
+extension <code>.byOmegakBloch</code> or <code>.byXikBloch</code>),
+then compute the weighted sums yourself in e.g.
+<a href="http://julialang.org"><span class="SC">julia</span></a>.    </p>
+</li>
+<li>
+<p>Alternatively, you can ask <a class="wikilink" href="../../scuff-em/">scuff-em</a> to perform the
+BZ integration internally, using one of several
+built-in cubature schemes. In this case the BZ-integrated
+quantities <script type="math/tex">Q(\omega)</script> will typically be written to 
+an output file with extension <code>.byOmega</code> or <code>.byXi</code>.
+You will <em>also</em> get an output file named <code>.byOmegakBloch</code>
+or <code>.byXikBloch</code> that reports the Bloch-vector-resolved
+integrand samples <script type="math/tex">\mathcal Q(\omega, \bf k_n)</script>
+chosen internally by the <a class="wikilink" href="../../scuff-em/">scuff-em</a> BZ integrator.   </p>
+</li>
 </ul>
-<p><a name="PointSources"></p>
-<h2 id="point-sources">Point sources</h2>
-<p><a class="wikilink" href="../../scuff-scatter/">scuff-scatter</a> command-line syntax:</p>
-<pre><code class="bash">--psStrength Px Py Pz
---psLocation xx yy zz
-</code></pre>
-
-<p>C++ code:</p>
-<pre><code class="c">  double  X0[3] = {xx, yy, zz};
-  cdouble P0[3] = {Px, Py, Pz};
-  PointSource *PS=new PointSource(X0, P0);
-</code></pre>
-
-<p>Selects the incident field to be the field of a pointlike
-electric dipole radiator with dipole moment <strong>P</strong>=<code>(Px,Py,Pz)</code>
-and located at cartesian coordinates (<code>xx,yy,zz</code>).</p>
-<p>More specifically, the fields of a point source are given by</p>
-<p><img alt="Expressions for point-source fields" src="../PointSource.png" /></p>
-<p>The values specified for <code>--psStrength</code> may be
-<a href="../../applications/GeneralReference/#Complex">complex numbers.</a></p>
-<p>You may define the incident field to be a superposition of
-the fields of multiple point sources by specifying these
-options more than once. (The <em>n</em>th occurrence of <code>--psStrength</code>
-will be paired with the <em>n</em>th occurrence of <code>--psLocation.</code>)</p>
-<p>In API codes (but not in <a class="wikilink" href="../../scuff-scatter/">scuff-scatter</a>) it is also
-possible to a define a magnetic point source as follows:</p>
-<pre><code class="c">  PointSource *PS=new PointSource(X0, P0);
-</code></pre>
-
-<p><a name="RollingYourOwn"></p>
-<h2 id="using-incident-fields-in-api-programs">Using incident fields in API programs</h2>
-<p>Please see 
-<a href="http://homerreid.com/scuff-em/libscuff/IncField.shtml">here</a>
-for further details and examples of how incident fields are manipulated in API codes, including an example of how to create your
-own custom-designed incident field.</p>
+<h3 id="command-line-options-for-customizing-built-in-bz-integration">Command-line options for customizing built-in BZ integration</h3>
+<p>If you choose the second option above, you may use the following
+set of command-line options, recognized by all application
+codes in the <a class="wikilink" href="../../scuff-em/">scuff-em</a> suite, to customize the cubature
+scheme used by <a class="wikilink" href="../../scuff-em/">scuff-em</a> to evaluate the Brillouin-zone integral.</p>
+<p class="toc"><code>--BZIMethod TC
+--BZIMethod CC
+--BZIMethod Adaptive</code></p>
+<p>This option specifies the type of cubature rule used to
+evaluate the Brillouin-zone integral:</p>
+<ul>
+<li>
+<p>For geometries with two-dimensional lattice periodicity,
+  <code>--BZIMethod TC</code> selects a "triangle cubature" rule in which
+  the Brillouin zone is divided into two triangles, over which
+  the integral is evaluated using a fixed-order cubature scheme.
+  This method is the default for geometries with 2D periodicity.</p>
+</li>
+<li>
+<p><code>--BZIMethod CC</code> selects fixed-order Clenshaw-Curtis quadrature.
+  This option is available for geometries of both 1D and 2D
+  periodicity.
+  For 2D lattices, the BZ integral is evaluated
+  using two nested 1D Clenshaw-Curtis quadrature rules.
+  This method is the default for geometries with 1D periodicity.</p>
+</li>
+<li>
+<p><code>--BZIMethod Adaptive</code> selects an adaptive cubature scheme
+  that automatically choose sample points and keeps going
+  until a specified convergence tolerance is achieved.
+  This option is available for geometries of both 1D and 2D
+  periodicity.    </p>
+</li>
+</ul>
+<p class="toc"><code>--BZIOrder NN</code></p>
+<p>For integration methods that use fixed-order cubature rules
+  (<code>--BZIMethod TC</code> or <code>--BZIMethod CC</code>), this option may be 
+  used to specify the order of the cubature rule.  </p>
+<p>For Clenshaw-Curtis cubature (<code>--BZIMethod CC</code>), the order <code>NN</code>
+  may be any odd integer between 9 and 99. (In this case 
+  the "order" actually refers to the number of sample points in the
+  cubature rule.)    </p>
+<p>For triangle cubature (<code>--BZIMethod TC</code>), the order <code>NN</code>
+  may be 1, 2, 4, 5, 7, 9, 13, 14, 16, 20, or 25. In this
+  case the "order" is the degree of polynomial that is integrated
+  exactly by the cubature rule, not the number of sample points.</p>
+<p class="toc"><code>--BZIRelTol     1.0e-2
+--BZIMaxEvals   1000</code></p>
+<p>These options may be used to specify stopping criteria for
+  adaptive integration methods (<code>--BZIMethod adaptive</code>).
+  <code>--BZIRelTol</code> sets the relative convergence tolerance,
+  while <code>--BZIMaxEvals</code> sets the upper limit on the number of 
+  integrand samples the integrator may use.</p>
+<p class="toc"><code>--BZSymmetric
+--FullBZ</code></p>
+<p>These options may be used to describe symmetries of the integrand function <script type="math/tex">\mathcal{Q}(\bf k)</script>.</p>
+<p>For geometries with 2D square-lattice periodicity, <code>--BZSymmetric</code> may be used to specify that the Brillouin-zone integrand is symmetric under interchange of <script type="math/tex">k_x</script> and <script type="math/tex">k_y</script> (i.e. <script type="math/tex">\mathcal{Q}(k_x, k_y)=\mathcal{Q}(k_y, k_x)</script>, saving a factor of approximately 2 in evaluating the BZ cubature. </p>
+<p>[Note that symmetry requires both that <strong>(a)</strong> the surface meshes in the geometry are symmetric under inversion about the line <script type="math/tex">x=y</script>, and <strong>(b)</strong> the integrand <script type="math/tex">\mathcal{Q}(\bf k)</script> is symmetric under inversion about the line <script type="math/tex">k_x=k_y.</script> Condition <strong>(b)</strong> is not always satisfied even for geometries that satisfy condition <strong>(a)</strong>; an example would be the calculation of LDOS at a point <script type="math/tex">\bf x</script> that does not lie on the line <script type="math/tex">x=y.</script>]</p>
+<p>The default behavior of <a class="wikilink" href="../../scuff-em/">scuff-em</a> is to integrate over just the <em>irreducible</em> portion of the Brillouin zone and double or quadruple the result to get the full BZ integral. You can override this behavior by specifying <code>--FullBZ,</code> in which case the integral over the full Brillouin zone will be computed at 2x or 4x greater cost.</p>
+<p>For a 1D lattice with lattice constant <script type="math/tex">L</script>, 
+the full Brillouin zone is the region <script type="math/tex">0\le k \le \frac{2\pi}{L}</script>, and the irreducible Brillouin zone is the region <script type="math/tex">0\le k \le \frac{\pi}{L}.</script>
+For a 2D rectangular lattice with direct lattice constants <script type="math/tex">L_x, L_y</script>,
+the full Brillouin zone is the rectangle in the <script type="math/tex">(k_x,k_y)</script> plane with corners at the origin and at 
+<script type="math/tex">(k_x,k_y)=(\frac{2\pi}{L_x},\frac{2\pi}{L_y})</script>,
+while the irreducible Brillouin zone is the rectangle with corners at the origin and at 
+<script type="math/tex">(k_x,k_y)=(\frac{\pi}{L_x},\frac{\pi}{L_y})</script>.</p>
               
             </div>
           </div>
@@ -527,10 +530,10 @@ own custom-designed incident field.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../BrillouinZoneIntegration/" class="btn btn-neutral float-right" title="Brillouin zone integration"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../applications/GeneralReference/" class="btn btn-neutral float-right" title="General command-line reference"/>Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../Transformations/" class="btn btn-neutral" title="Geometric transformations"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../IncidentFields/" class="btn btn-neutral" title="Incident fields"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -572,10 +575,10 @@ own custom-designed incident field.</p>
           <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../Transformations/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../IncidentFields/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../BrillouinZoneIntegration/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../../applications/GeneralReference/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
