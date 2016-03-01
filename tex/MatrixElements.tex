@@ -1,0 +1,719 @@
+\documentclass[letterpaper]{article}
+
+\input{scufftex}
+\usepackage{mathtools}
+
+\graphicspath{{figures/}}
+
+%------------------------------------------------------------
+%------------------------------------------------------------
+%- Special commands for this document -----------------------
+%------------------------------------------------------------
+%------------------------------------------------------------
+\newcommand{\vbsigma}{\boldsymbol{\sigma}}
+\newcommand{\YY}{\mc Y}
+\newcommand{\BE}{\begin{equation}}
+\newcommand{\EE}{\end{equation}}
+\newcommand{\wt}{\widetilde}
+\newcommand{\wh}{\widehat}
+\newcommand{\whmb}[1]{\widehat{\mb #1}}
+\newcommand{\GTiab}{\wt{\mb G}_{i;ab}}
+\newcommand{\CTiab}{\wt{\mb C}_{i;ab}}
+
+\newcommand{\ImBig}[1]
+ {\left[ \text{Im }\left(\vphantom{\Big(} #1 \right)\right]}
+\newcommand{\ReBig}[1]
+ {\left[ \text{Re }\left(\vphantom{\Big(} #1 \right)\right]}
+
+%------------------------------------------------------------
+%------------------------------------------------------------
+%- Document header  -----------------------------------------
+%------------------------------------------------------------
+%------------------------------------------------------------
+\title {Evaluation of four-dimensional integrals for
+        matrix elements in {\sc scuff-em}}
+\author {Homer Reid}
+\date {November 24, 2015}
+
+%------------------------------------------------------------
+%------------------------------------------------------------
+%- Start of actual document
+%------------------------------------------------------------
+%------------------------------------------------------------
+
+\begin{document}
+\pagestyle{myheadings}
+\markright{Homer Reid: 4D integrals for {\sc scuff-em} matrix elements}
+\maketitle 
+
+\tableofcontents
+
+%====================================================================%
+%====================================================================%
+%====================================================================%
+\newpage
+\section{BEM Matrix Elements}
+
+\subsection{Edges, basis functions, and surface-current expansions}
+
+{\sc scuff-em} approximates the electric and magnetic surface currents
+$\vb K, \vb N$ on each surface in a geometry as an expansion in
+a set of $N\subt{BF}$ basis functions. In six-vector notation we have
+%====================================================================%
+\begin{align*}
+   \left(\begin{array}{c} \vb K(\vb x) \\ \vb N(\vb x) \end{array}\right)
+&= \sum_{\alpha=1}^{N\subt{BF}} c_{\alpha} \bmc B_{\alpha}(\vb x)
+\end{align*}
+%====================================================================%
+$$
+\bmc B_{2a}(\vb x)=
+ \left(\begin{array}{c} \vb b_a(\vb x) \\ 0 \end{array}\right),
+\qquad
+\bmc B_{2a+1}(\vb x)=
+ \left(\begin{array}{c} 0 \\ \vb b_a(\vb x) \end{array}\right) \\
+$$
+%====================================================================%
+\begin{align*}
+  \left(\begin{array}{c} \vb K(\vb x) \\ \vb N(\vb x) \end{array}\right)
+&= \sum_{a=1}^{N\subt{E}}
+  \left(
+  \begin{array}{r}      k_a \vb b_a (\vb x) \\
+                        n_a \vb b_a (\vb x) 
+  \end{array}\right)
+\end{align*}
+%====================================================================%
+(The actual coefficients computed by {\sc scuff-em} are
+$\hat{n}_a \equiv -Z_0 n_a$.)
+
+Here $\alpha$ runs over all basis functions in the {\sc scuff-em}
+calculation (of which there are $N\subt{BF}$ in total),
+$a$ runs over all internal edges on all surfaces
+(of which there are $N\subt{E}$ in total), and $\vb b_a(\vb x)$ 
+is the RWG basis function associated with the $a$th interior
+edge.
+
+
+\subsection{BEM Matrix Elements}
+
+If two basis functions $\bmc B_\alpha, \bmc B_\beta$ lie on
+the same surface and this surface is a dielectric interface,
+then the $(\alpha,\beta)$ element of the BEM matrix receives
+contributions from both the media exterior and interior to the 
+surface. Otherwise ($\bmc B_\alpha, \bmc B_\beta$ on the same
+PEC surface or on different surfaces) there is only a contribution
+from the exterior medium:\footnote{More accurately, there is only
+a contribution from the medium common to the surfaces on 
+which $\bmc B_\alpha, \bmc B_\beta$ lie. In the case of 
+nested surfaces this will be the interior medium for one of the 
+surfaces.}
+%====================================================================%
+$$
+ M_{\alpha\beta}(\omega)
+=\begin{dcases}
+  M_{\alpha\beta}\sups{ext}(\omega)
+ +M_{\alpha\beta}\sups{int}(\omega),
+   \quad &\bmc B_\alpha, \bmc B_\beta \quad \text{on same (dielectric) surface}
+\\
+  M_{\alpha\beta}\sups{ext}(\omega)
+   \quad &\bmc B_\alpha, \bmc B_\beta \quad \text{on same (PEC) surface or different surfaces}
+ \end{dcases}
+$$
+%====================================================================%
+Each pair of interior edges $(E_a,E_b)$ contributes a $2\times 2$ block
+of matrix elements to the BEM matrix for medium $r$:
+%====================================================================%
+\numeq{MabrOmega}
+{ M_{ab}^r(\omega)
+ =i\frac{\omega}{c_0}
+   \left(\begin{array}{cc}
+       \mu_r \mb G_{ab}(k_r) & -n_r \mb C_{ab}(k_r) \\[5pt]
+       -n_r \mb C_{ab}(k_r) & -\epsilon_r \mb G_{ab}(k_r)
+   \end{array}\right)
+}
+%====================================================================%
+Here $c_0$ is the vacuum speed of light, $\{\epsilon_r, \mu_r\}$ are 
+the relative permittivity and permeability of medium $r$ at 
+frequency $\omega$, and 
+%====================================================================%
+$$ n_r=\sqrt{\epsilon_r \mu_r}, \qquad k_r=n_r \frac{\omega}{c_0}.$$
+%====================================================================%
+The $\mb G, \mb C$ matrix elements and their $k$ derivatives are 
+%====================================================================%
+\begin{subequations}
+\begin{align}
+\mb G_{ab}(k)
+&=
+ \int \left(\vb b_a \cdot \vb b_b
+            - \frac{ \left[\nabla \cdot \vb b_a\right]
+                     \left[\nabla \cdot \vb b_b\right]
+                   }{k^2}
+      \right) G_0(k, \vb r) d^4 \vb r
+\\
+%====================================================================%
+%--------------------------------------------------------------------%
+\mb C_{ab}(k)
+&=
+ \frac{1}{ik}
+ \int \left(\vb b_a \times \vb b_b \right) \cdot \nabla G_0(k,\vb r)
+ \,d^4 \vb r
+\end{align}
+\label{GCab}
+\end{subequations}
+%====================================================================%
+In these equations, I have 
+%====================================================================%
+\numeq{g0Def}
+{ G_0(k,\vb r) = 
+  \begin{dcases*} 
+    \frac{e^{ikr}}{4\pi r}, \qquad &non-periodic
+       \\[10pt]
+    \sum_{\vb L} e^{i\vb k\subt{B}\cdot \vb L}
+                   \frac{e^{ik|\vb r+\vb L|}}{4\pi |\vb r+\vb L|}
+                 \qquad &Bloch-periodic with Bloch vector $\vb k\subt{B}$
+  \end{dcases*} 
+}
+%====================================================================%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Alternative notation}
+
+Equations (\ref{MabrOmega}) and (\ref{GCab}) are the way I have
+always defined things in {\sc scuff-em}; among their advantages
+is the fact that $\mb C$ has the same units as $\mb G$ 
+(namely, inverse length). However, for present purposes it is 
+actually convenient to write (\ref{MabrOmega}) in the slightly different
+form
+%====================================================================%
+\numeq{MabrOmega2}
+{ M_{ab}^r(\omega)
+ = \left(\begin{array}{cc}
+       \frac{i\omega\mu_r }{c} \mb G_{ab}(k_r) & -\wh{\mb C}_{ab}(k_r) \\[5pt]
+       -\wh{\mb C}_{ab}(k_r) & -\frac{i\omega \epsilon_r}{c} \mb G_{ab}(k_r)
+   \end{array}\right)
+}
+%====================================================================%
+where 
+%====================================================================%
+\numeq{whCab}
+{ \wh{\mb C}(k)\equiv ik \mb C(k), 
+  \qquad \wh{\mb C}_{ab}
+   =
+   \int \left(\vb b_a \times \vb b_b \right) \cdot \nabla G_0(k,\vb r)
+   \,d^4 \vb r.
+}
+%====================================================================%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Force and torque integrals}
+
+\subsection{Force}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{align*}
+F_i&= \frac{1}{2\omega} \text{Im }\int
+ \left(\begin{array}{c} \vb K(\vb x) \\ \vb N(\vb x)\end{array}\right)^\dagger
+ \left(\begin{array}{c} \partial_i \vb E(\vb x) \\ 
+                        \partial_i \vb H(\vb x)\end{array}\right) \,d\vb x
+\\
+&= \frac{1}{2\omega} \text{Im }\int
+ \left(\begin{array}{c} \vb K(\vb x) \\ 
+                        \vb N(\vb x)
+       \end{array}\right)^\dagger
+%====================================================================%
+ \left(\begin{array}{cc}  i\omega\mu_r  \partial_i \mb G(\vb x, \vb x^\prime)
+                         &\partial_i \whmb C(\vb x, \vb x^\prime) \\
+                         -\partial_i \whmb C(\vb x, \vb x^\prime)
+                         &i\omega \epsilon_r \partial_i\mb G(\vb x, \vb x^\prime)
+       \end{array}\right)
+%====================================================================%
+ \left( \begin{array}{c} \vb K(\vb x^\prime) \\
+                         \vb N(\vb x^\prime)
+        \end{array}\right)
+\,d\vb x \,d\vb x^\prime
+\\
+%====================================================================%
+&=\frac{1}{2\omega}\text{Im }\sum_{ab}
+ \left(\begin{array}{c} k_a \\ n_a \end{array}\right)^\dagger
+%====================================================================%
+ \left(\begin{array}{cc}  i\omega \mu_r       \partial_i \mb G_{ab}
+                         &\partial_i \whmb C_{ab} \\
+                         -\partial_i \whmb C_{ab}
+                         &i\omega\epsilon_r \partial_i \mb G_{ab}
+       \end{array}\right)
+%====================================================================%
+ \left(\begin{array}{c} k_b \\ n_b \end{array}\right)
+\\
+&=-\sum_{b>a}
+ \Bigg\{
+      \frac{Z_0}{c}
+      \ImBig{k_a^* k_b}
+      \ImBig{\mu_r \mb \partial_i \mb G_{ab}}
+  \,+\,
+      \frac{1}{cZ_0}
+      \ImBig{n_a^* n_b}
+      \ImBig{\epsilon_r \mb \partial_i \mb G_{ab}}
+\\
+&\qquad\qquad
+     +\frac{1}{\omega}
+       \ReBig{k_a^* n_b - n_a^* k_b} 
+       \ImBig{\partial_i \whmb C_{ab}}
+ \Bigg\}
+\end{align*}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%=================================================
+%=================================================
+%=================================================
+\subsection{Torque}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{align*}
+\mc T_i
+ &=
+\mc T_i^{(1)} + \mc T_i^{(2)}
+\\
+\mc T_i^{(1)}
+&=\frac{1}{2\omega} \text{Im }\int
+ \left(\begin{array}{c} \vb K(\vb x) \\ \vb N(\vb x)\end{array}\right)^\dagger
+ \left(\begin{array}{c} \partial_{\theta_i} \vb E(\vb x) \\ 
+                        \partial_{\theta_i} \vb H(\vb x)\end{array}\right) \,d\vb x
+\\
+&=-\sum_{b>a}
+ \Bigg\{
+      \frac{Z_0}{c}
+      \ImBig{k_a^* k_b}
+      \ImBig{\mu_r \mb \partial_{\theta_i} \mb G_{ab}}
+  \,+\,
+      \frac{1}{cZ_0}
+      \ImBig{n_a^* n_b}
+      \ImBig{\epsilon_r \mb \partial_{\theta_i} \mb G_{ab}}
+\\
+&\qquad\qquad
+    -\frac{1}{\omega}
+     \ReBig{k_a^* n_b - n_a^* k_b} 
+     \ImBig{\partial_{\theta_i} \whmb C_{ab}}
+ \Bigg\}
+\\[12pt]
+%--------------------------------------------------------------------%
+\mc T_i^{(2)}
+&=\frac{1}{2\omega} \text{Im }\int
+  \bigg\{ \vb K^* \times \vb E + \vb N^* \times \vb H \bigg\}_i
+  \,d\vb x
+\\
+&=\frac{1}{2\omega} \varepsilon_{ijk}\text{Im }\iint
+  \bigg\{  K^*_j \Big[ i\omega \mu_r \mb G_{k\ell}\Big] K_\ell
+          +K^*_j \Big[ \wh{\mb C}_{k\ell}\Big] N_\ell
+\\
+&\qquad\qquad\qquad\qquad
+          -N^*_j \Big[ \wh{\mb C}_{k\ell}\Big] K_\ell
+          +N^*_j \Big[ i\omega \epsilon_r \mb G_{k\ell}\Big] 
+           N_\ell\bigg\}
+  \,d^4 \vb x
+\\
+&=-\sum_{b>a}
+ \Bigg\{
+      \frac{Z_0}{c}
+      \ImBig{k_a^* k_b} \ImBig{\mu_r \GTiab}
+ \,+\,
+      \frac{1}{c Z_0}
+      \ImBig{n_a^* n_b} \ImBig{\epsilon_r \GTiab}
+\\
+&\qquad\quad\qquad
+     - \frac{1}{2\omega} \ReBig{k_a^* n_b - n_a^* k_b}
+       \ImBig{\CTiab}
+ \Bigg\}
+\end{align*}
+%====================================================================%
+
+%====================================================================%
+$$
+ \GTiab
+ \equiv \varepsilon_{ijk} \iint b_{aj} \mb G_{k\ell} b_{b\ell} \, d\vb r,
+ \qquad 
+ \CTiab
+ \equiv \varepsilon_{ijk} \iint b_{aj} \whmb C_{k\ell} b_{b\ell} \, d\vb r
+$$
+
+%%--------------------------------------------------------------------%
+%&=\varepsilon_{ijk} \iint b_{aj}
+% \Big[\delta_{k\ell}G_0 + k^2 \partial_k \partial_\ell G_0\Big]
+%ji%  b_{b\ell} \, d\vb r
+%%%%%%%%%\\
+%--------------------------------------------------------------------%
+%--------------------------------------------------------------------%
+%\\
+%&=\underbrace{\varepsilon_{ijk} \varepsilon_{k\ell m}}
+%            _{\delta_{i\ell} \delta_{jm} - \delta_{im}\delta_{j\ell}}
+% \iint b_{aj} b_{b\ell} \partial_m G_0 \, d\vb r
+%\\
+%&= \iint 
+%   \Big\{ \Big(\vb b_a \cdot \nabla G_0 \Big) b_{bi} - 
+%          \Big(\vb b_a \cdot \vb b_b\Big) \partial_i G_0
+%   \Big\}\,d\vb r
+%\end{align*}
+%====================================================================%
+
+%--------------------------------------------------------------------%
+%
+%&=\frac{1}{2\omega} \varepsilon_{ijk}\text{Im }\int
+% \left(\begin{array}{c} K_j(\vb x) \\ N_j(\vb x)\end{array}\right)^\dagger
+% \left(\begin{array}{c} E_k(\vb x) \\ 
+%                        H_k(\vb x)\end{array}\right) \,d\vb x
+%\\
+%%--------------------------------------------------------------------%
+%&=\frac{1}{2} \varepsilon_{ijk}\text{Im }\int
+% \left(\begin{array}{c} K_j(\vb x) \\ 
+%                        N_j(\vb x)
+%       \end{array}\right)^\dagger
+%%====================================================================%
+% \left(\begin{array}{cc}  i\mu_r       \mb G_{k\ell}(\vb x, \vb x^\prime)
+%                         &i n_r        \mb C_{k\ell}(\vb x, \vb x^\prime) \\
+%                         -i n_r        \mb C_{k\ell}(\vb x, \vb x^\prime)
+%                         &i \epsilon_r \mb G_{k\ell}(\vb x, \vb x^\prime)
+%       \end{array}\right)
+%%====================================================================%
+% \left( \begin{array}{c} K_\ell(\vb x^\prime) \\
+%                         N_\ell(\vb x^\prime)
+%        \end{array}\right)
+%\,d\vb x \,d\vb x^\prime
+%\\
+%&=\frac{1}{2}\text{Im }\sum_{ab}
+% \left(\begin{array}{c} k_a \\ n_a \end{array}\right)^\dagger
+%%====================================================================%
+% \left(\begin{array}{cc}  i\mu_r       \wt{\mb G}_{ab}
+%                         &i n_r        \wt{\mb C}_{ab} \\
+%                         -i n_r        \wt{\mb C}_{ab}
+%                         &i \epsilon_r \wt{\mb G}_{ab}
+%       \end{array}\right)
+%%====================================================================%
+% \left(\begin{array}{c} k_b \\ n_b \end{array}\right)
+%\\
+%&=-\sum_{b>a}
+% \Bigg\{
+%      Z_0
+%      \ImBig{k_a^* k_b}
+%      \ImBig{\mu_r \wt{\mb G}_{ab}}
+% \\
+%&\hphantom{ -\sum_{b>a} \Bigg\{ }
+%     +\frac{1}{Z_0}
+%      \ImBig{n_a^* n_b}
+%      \ImBig{\epsilon_r \wt{\mb G}_{ab}}
+%\\
+%&\hphantom{ -\sum_{b>a} \Bigg\{ }
+%     - \ReBig{k_a^* n_b - n_a^* k_b} 
+%       \ReBig{n_r \wt{\mb C}_{ab}}
+% \Bigg\}
+%\end{align*}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Frequency derivatives}
+
+The $\omega$ derivative of (\ref{MabrOmega2}) reads
+%====================================================================%
+\begin{align*}
+\frac{d}{d\omega}
+ M_{ab}^r
+ &= \frac{i}{c}\left(\begin{array}{cc}
+    \big(\omega \mu_r\big)^\prime \mb G_{ab}(k_r) & 0
+    \\[5pt]
+    0 & \big(\omega \epsilon_r\big)^\prime \mb G_{ab}(k_r)
+    \end{array}\right)
+\\
+&\qquad
+  +\left(\begin{array}{cc}
+       \frac{i\omega\mu_r }{c} \mb G^\prime_{ab}(k_r) 
+      &-\wh{\mb C}^\prime_{ab}(k_r) 
+      \\[5pt]
+       -\wh{\mb C}^\prime_{ab}(k_r) 
+      & -\frac{i\omega \epsilon_r}{c} \mb G_{ab}(k_r)
+   \end{array}\right)
+\end{align*}
+where 
+$$ \big(\omega \mu_r\big)^\prime 
+    = \mu_r + \omega\frac{d\mu_r}{d\omega},   
+   \qquad 
+   \big(\omega \epsilon_r\big)^\prime 
+   = \epsilon_r + \omega\frac{d\epsilon_r}{d\omega},
+$$
+%====================================================================%
+and primes on $\mb G$ and $\wh{\mb C}$ denote differentiation with 
+respect to $k$. 
+
+The $k$ derivatives of the $\mb G, \wh{\mb C}$ matrix elements are
+%====================================================================%
+\begin{subequations}
+\begin{align}
+ \mb G^\prime_{ab}(k)
+&= \frac{2}{k^3}
+   \int \left[\nabla \cdot \vb b_a\right] 
+        \left[\nabla \cdot \vb b_b\right] G_0(k,\vb r)
+   \, d^4 \vb r
+\\
+%--------------------------------------------------------------------%
+&\qquad
+ +
+ \int \left(\vb b_a \cdot \vb b_b 
+            - \frac{ \left[\nabla \cdot \vb b_a\right]
+                     \left[\nabla \cdot \vb b_b\right] 
+                   }{k^2}
+      \right) G_0^\prime(k,\vb r)\, d^4\vb r
+\\
+%--------------------------------------------------------------------%
+\mb C^\prime_{ab}(k)
+&= \int \left(\vb b_a \times \vb b_b \right) \cdot \nabla G_0^\prime(k,\vb r)
+   \,d^4 \vb r
+\end{align}
+\label{dGCabdOmega}
+\end{subequations}
+%====================================================================%
+In both the periodic and non-periodic cases, $k$ derivatives of $G_0$
+may be related to spatial derivatives according to
+%====================================================================%
+\begin{align}
+ \pard{}{k} G_0
+ &= -i|\vb r|^2 \left( \frac{\vb r \cdot \nabla G_0}{|\vb r|} - ik G_0\right)
+\\
+ \pard{}{k} \nabla G_0 
+&= -k \vb r G_0
+\label{NonsingularKernels}
+\end{align}
+%====================================================================%
+Importantly, the kernels defined by (\ref{NonsingularKernels}) are
+both \textit{nonsingular} at $\vb r=0$, allowing the use of simple
+numerical cubature to evaluate matrix elements.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Computation of matrix elements}
+
+\subsection{BEM matrix elements}
+
+%====================================================================%
+\begin{align}
+ \mb G_{ab} 
+&=
+\iint \left( \vb b_a \cdot \vb b_b - \frac{4}{k^2}\right) G_0(r) \, d^4 \vb r
+\\
+&=
+ \mb C_{ab} &=
+ \frac{1}{ik}
+ \varepsilon_{ijk}
+\iint b_{ai} b_{bj} \partial_k G_0(r) \, d^4 \vb r
+\end{align}
+%====================================================================%
+
+\subsection{Force integrals}
+
+%====================================================================%
+\begin{align}
+ \partial_i \mb G_{ab} &=
+\iint 
+ \underbrace{\left( \vb b_a \cdot \vb b_b - \frac{4}{k^2}\right)}
+           _{P\supt{EFIE}}
+      \partial_i G_0(r) \, d^4 \vb r
+\\[10pt]
+ &=
+ \sum_p \overline{\psi}_p
+ \iint P\supt{EFIE} r_i r^p \, d\vb r
++
+ \iint P\supt{EFIE} r_i \psi\supt{DS}(r) \, d^4 \vb r
+\\[5pt]
+ \text{Im } \partial_i \whmb C_{ab} 
+&=
+ \varepsilon_{jk\ell}
+ \iint b_{aj} b_{bk} 
+ \Big[
+ \text{Im }\partial_i \partial_\ell G_0(r) 
+ \Big] \, d \vb r
+\end{align}
+%====================================================================%
+
+%=================================================
+%=================================================
+%=================================================
+\subsection{Torque integrals}
+
+%====================================================================%
+\begin{align}
+ \partial_{\theta_i} \mb G_{ab} 
+&=
+ \varepsilon_{ijk}
+ \iint \left( \vb b_a \cdot \vb b_b - \frac{4}{k^2}\right)
+       (\vb x_a-\vb x_0)_j \partial_k G_0(r) \, d^4 \vb r
+\\
+ \partial_{\theta_i} \mb C_{ab} &=
+ \frac{1}{ik}
+ \varepsilon_{ijk}
+ \varepsilon_{jk\ell}
+ \iint b_{aj} b_{bk} 
+  (\vb x_a - \vb x_0)_j
+  \partial_i \partial_\ell G_0(r) \, d^4\vb r
+\end{align}
+%====================================================================%
+
+%====================================================================%
+\begin{align*}
+ \wt{\mb G}_{i;ab} 
+&\equiv
+   \varepsilon_{ijk} 
+   \int b_{aj}(\vb x) 
+        \underbrace{\mb G_{k\ell}(\vb x, \vb x^\prime)}
+                  _{\left(   \delta_{k\ell} 
+                            +\frac{1}{k^2}\partial_k \partial_\ell
+                    \right)G_0}
+        b_{b\ell}(\vb x^\prime) \, d\vb x \, d\vb x^\prime
+\\
+&=
+   \int \left\{\left(\vb b_a \times \vb b_b\right)_i 
+               \left(G_0 + \frac{1}{k^2}\psi\right)
+               +\Big[\left(\vb b_a \times \vb r\right)_i
+                     \left(\vb b_b \cdot \vb r\right)
+                \Big]\zeta(r)
+        \right\}\,d\vb x \, d\vb x^\prime
+\\
+ \wt{\mb C}_{i;ab} 
+&\equiv
+   \varepsilon_{ijk} 
+   \int b_{aj}(\vb x) 
+        \underbrace{\whmb C_{k\ell}(\vb x, \vb x^\prime)}
+                  _{\epsilon_{k\ell m} r_m \psi(r)}
+        b_{b\ell}(\vb x^\prime) \, d\vb x \, d\vb x^\prime
+\\
+&=
+   \int\left\{ \Big( \vb b_a \cdot \vb r\Big) b_{bi}
+              -\Big( \vb b_a \cdot \vb b_b\Big) r_i
+       \right\} \psi(r) \, d\vb x \, d\vb x^\prime
+\\
+\end{align*}
+%====================================================================%
+
+$$\partial_i G_0(r) = r_i \psi(r) $$
+$$\partial_i \partial_j G_0(r) = \delta_{ij}\psi(r) + r_i r_j \zeta(r) $$
+$$\psi(r) = (ikr-1)\frac{e^{ikr}}{4\pi r^3}$$
+$$\zeta(r) = \Big[ (ikr)^2 - 3ikr + 3\Big] \frac{e^{ikr}}{4\pi r^5}$$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\appendix
+\newpage
+\section{Scalar and dyadic Green's functions and their most singular terms}
+
+\subsection{Scalar GF}
+
+%====================================================================%
+\begin{align*}
+  G_0(r) &= \frac{e^{ikr}}{4\pi r}
+\\
+ \partial_i G_0(r) &= 
+  r_i \psi(r), \qquad \psi(r)\equiv (ikr-1)\frac{e^{ikr}}{4\pi r^3} 
+\\
+ \partial_i \partial_j G_0(r) &=
+  \delta_{ij} \psi(r) + r_i r_j \zeta(r), \qquad
+  \zeta(r)\equiv \frac{e^{ikr}}{4\pi r^5}\Big[3 - 3ikr + (ikr)^2\Big]
+\end{align*}
+%====================================================================%
+
+\subsection{Desingularized scalar GF}
+%====================================================================%
+\begin{align*}
+  G_0(r) &= \frac{1}{4\pi r} + \frac{\texttt{ExpRel}(ikr,1)}{4\pi r}
+\\[14pt]
+%--------------------------------------------------------------------%
+ \partial_i G_0(r) &=
+  r_i \psi\supt{S}(r)
+  +
+  r_i \psi\supt{DS}(r),
+\\
+ \psi\supt{DS}(r) &= \frac{\texttt{ExpRel}(ikr,3)}{4\pi r^3} 
+\\
+ \psi\supt{S}(r) &= \sum_{p} C_p r^p,
+ \qquad
+ C_{-3}=-\frac{1}{4\pi}, 
+ \qquad 
+ C_{-1} = -\frac{k^2}{8\pi},
+ \qquad
+ C_{0}=-\frac{ik^3}{8\pi}
+\\[14pt]
+%--------------------------------------------------------------------%
+\text{Im } \partial_i \partial_j G_0(r)
+&=\text{nonsingular}
+\end{align*}
+%====================================================================%
+
+\subsection{Dyadic GFs}
+
+%====================================================================%
+\numeq{GCComponents}
+{
+ \mb G_{ij}(\vb r)
+  = \frac{e^{ikr}}{4\pi (ik)^2 r^3}
+    \left[ F_1(ikr) \delta_{ij} + F_2(ikr) \frac{r_i r_j}{r^2}\right],
+\qquad
+C_{ij}(k,\vb r) 
+  = \frac{e^{ikr}}{4\pi (ik) r^3} \varepsilon_{ijk} r_k F_3(ikr),
+}
+$$ F_1(x) = 1-x+x^2, 
+   \qquad 
+   F_2(x) = -3 + 3x - x^2, 
+   \qquad 
+   F_3(x)=-1+x.
+$$
+%====================================================================%
+
+\subsection*{Desingularized DGFs}
+
+$$   \mb G_{ij}(\vb r)
+   = \mb G_{ij}\supt{S}(\vb r)
+    +\mb G_{ij}\supt{DS}(\vb r)
+$$
+
+$$ \mb G\supt{DS}_{ij}(\vb r)
+   =
+    \frac{\texttt{ExpRel}(ikr,3)}{4\pi (ik)^2 r^3}
+    \left[ F_1(ikr) \delta_{ij} + F_2(ikr) \frac{r_i r_j}{r^2}\right],
+  \qquad 
+   \mb C\supt{DS}_{ij}(\vb r)
+   =
+    \frac{\texttt{ExpRel}(ikr,3)}{4\pi (ik) r^3} \varepsilon_{ijk}r_k
+$$
+
+$$ \mb G\supt{S}_{ij}(\vb r)
+   = \Big[ \sum_p \Upsilon_p^1 r^p \Big] \delta_{ij} 
+    +\Big[ \sum_p \Upsilon_p^2 r^p \Big] \frac{r_i r_j}{r^2}
+$$
+
+$$ \mb C\supt{S}_{ij}(\vb r)
+   = \Big[ \sum_p \Upsilon_p^3 r^p \Big] \varepsilon_{ijk} r_k
+$$
+
+$$
+ \Upsilon_{-3}^{1} = -\frac{1}{4\pi k^2},      \qquad 
+ \Upsilon_{-1}^{1} = +\frac{1}{8\pi},          \qquad 
+ \Upsilon_{ 0}^{1} = +\frac{ik}{8\pi},         \qquad 
+ \Upsilon_{ 1}^{1} = -\frac{k^2}{8\pi},
+$$
+
+$$
+ \Upsilon_{-3}^{2} = +\frac{3}{4 \pi k^2},      \qquad 
+ \Upsilon_{-1}^{2} = +\frac{1}{8\pi},          \qquad 
+ \Upsilon_{ 0}^{2} = +\frac{ik}{8\pi},         \qquad 
+ \Upsilon_{ 1}^{2} = +\frac{k^2}{8\pi},
+$$
+
+$$
+ \Upsilon_{-3}^{3} = +\frac{i}{4\pi k},  \qquad
+ \Upsilon_{-1}^{3} = +\frac{ik}{8\pi},   \qquad
+ \Upsilon_{ 0}^{3} = -\frac{k^2}{8\pi},  \qquad 
+ \Upsilon_{ 1}^{3} = 0.
+$$
+
+\end{document}
