@@ -147,16 +147,23 @@
         
             <ul>
             
+                <li class="toctree-l3"><a href="#gmsh-geometry-file-for-unit-cell-geometry">gmsh geometry file for unit-cell geometry</a></li>
+                
+            
                 <li class="toctree-l3"><a href="#scuff-em-geometry-files">scuff-em geometry files</a></li>
                 
             
                 <li class="toctree-l3"><a href="#list-of-evaluation-points">List of evaluation points</a></li>
                 
             
-                <li class="toctree-l3"><a href="#list-of-omega-mathbf-k_b-points">List of (\omega, \mathbf k_B) points</a></li>
+                <li class="toctree-l3"><a href="#launching-a-bloch-vector-resolved-run">Launching a Bloch-vector-resolved run</a></li>
+                
+                    <li><a class="toctree-l4" href="#command-line-arguments-for-quasi-analytical-calculation-using-plane-wave-decomposition">Command-line arguments for quasi-analytical calculation using plane-wave decomposition:</a></li>
+                
+                    <li><a class="toctree-l4" href="#command-line-arguments-for-fully-numerical-calculation-using-discretized-surface-meshes">Command-line arguments for fully numerical calculation using discretized surface meshes:</a></li>
                 
             
-                <li class="toctree-l3"><a href="#launching-the-run">Launching the run</a></li>
+                <li class="toctree-l3"><a href="#launching-a-brillouin-zone-integrated-run">Launching a Brillouin-zone integrated run</a></li>
                 
             
             </ul>
@@ -216,7 +223,14 @@
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../../../reference/IncidentFields/">Incident Fields</a>
+        <a class="" href="../../../reference/IncidentFields/">Incident fields</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/BrillouinZoneIntegration/">Brillouin zone integration</a>
         
     </li>
 
@@ -302,6 +316,77 @@
             
     <li class="toctree-l1 ">
         <a class="" href="../../../applications/scuff-analyze/scuff-analyze/">scuff-analyze</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Validation tests</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../tests/Overview/">Overview of the test suite</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../tests/MieScattering/MieScattering/">Mie scattering</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../tests/FresnelScattering/FresnelScattering/">Fresnel scattering</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../tests/CasimirSpheres/CasimirSpheres/">Equilibrium Casimir forces between spheres</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../tests/CasimirPlates/CasimirPlates/">Equilibrium Casimir forces between plates</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../tests/CPSphere/CPSphere/">Equilibrium Casimir-Polder potential near a sphere</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../tests/CPPlate/CPPlate/">Equilibrium Casimir-Polder potential near a plate</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../tests/NEQSpheres/NEQSpheres/">Heat transfer and non-equilibrium Casimir forces between spheres</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../tests/libscuff/libscuff/">Low-level tests of the core library</a>
         
     </li>
 
@@ -408,6 +493,70 @@ the LDOS.</p>
 <p>The files for this example may be found in the
 <code>share/scuff-em/examples/HalfSpaceLDOS</code> subdirectory
 of your <a class="wikilink" href="../../../scuff-em/">scuff-em</a> installation.</p>
+<p>Also, the computational procedure implemented by <a href="../../../applications/scuff-ldos/scuff-ldos/">scuff-ldos</a>
+is described in this memo:
+<a href="../../../tex/scuff-ldos.pdf">Computation of Green's Functions and LDOS in <span class="SC">scuff-em</span></a>.</p>
+<h3 id="slight-complication-the-need-for-brillouin-zone-integration-in-periodic-geometries">Slight complication: The need for Brillouin-zone integration in periodic geometries</h3>
+<p>In general, the quantity in which we will be interested
+is the LDOS at a single point <script type="math/tex">\bf x</script> in space---basically,
+the scattered field at <script type="math/tex">\bf x</script> due to a point dipole
+source at <script type="math/tex">\bf x</script>. For a compact geometry such as a 
+dielectric nanoparticle, this requires just a single 
+scattering calculation (technically 6 calculations
+with different incident fields, but calculations with
+additional incident fields come basically for free
+once we've assembled and factorized the BEM matrix).</p>
+<p>However, the situation is slightly more complicated for
+periodic geometries. To compute the LDOS at a point
+in the vicinity of (say) an infinitely extended
+(periodically replicated) surface, we need to solve a
+scattering problem in which the incident field is not 
+Bloch-periodic, but is instead the field of a localized 
+point source, which certainly does not obey
+Bloch-periodic boundary conditions.
+However, when working with periodic geometries in <a class="wikilink" href="../../../scuff-em/">scuff-em</a>,
+each individual scattering problem has the property
+that <em>everything</em> in the problem---including the incident
+field---must be Bloch-periodic with a specific Bloch vector
+<script type="math/tex">\bf k_{\hbox{B}}</script>. Thus, when we do a single scattering
+problem with a point-source incident field in a 
+periodic <a class="wikilink" href="../../../scuff-em/">scuff-em</a> geometry at Bloch vector
+<script type="math/tex">\bf k_{\hbox{B}}</script>, the incident field is really
+the field of an infinite phased <em>array</em> of point sources, 
+with the source in lattice cell <script type="math/tex">\bf L</script> phased
+by the Bloch factor <script type="math/tex">e^{i\bf k_B\cdot \bf L}.</script>
+This is not the incident field we want to consider 
+when computing LDOS.</p>
+<p>Of course, it is still possible to get what we want---the
+response of our geometry to a non-periodic point source---but
+it requires summing the results of many scattering problems,
+with each problem phased in such a way as to cancel out
+the effects of all source in all lattice cells except the 
+particular cell we want. In other words, to get the 
+LDOS at a single point in a periodic geometry
+requires a <em>Brillouin-zone integration</em>, in which
+we perform and sum the results of many scattering calculations
+at various Bloch vectors <script type="math/tex">\bf k_B</script> lying in the 
+Brillouin zone of the reciprocal lattice.</p>
+<p>There are two ways to do calculations like this in <a class="wikilink" href="../../../scuff-em/">scuff-em</a>:</p>
+<ul>
+<li>
+<p>You can design your own cubature scheme for integration over
+the Brillouin zone, and simply ask <a class="wikilink" href="../../../scuff-ldos/">scuff-ldos</a> to give you
+values of the integrand at specific Bloch vectors <script type="math/tex">\bf k_B</script>.
+In this case you will pass the <code>--OmegakBlochFile</code> command-line
+argument to <a class="wikilink" href="../../../scuff-ldos/">scuff-ldos</a></p>
+</li>
+<li>
+<p>Alternatively, you can use the built-in Brillouin-zone integrator
+in <a class="wikilink" href="../../../scuff-em/">scuff-em</a> to perform the BZ integral automatically,
+resulting in reports</p>
+</li>
+</ul>
+<p>The general topic of Brillouin-zone integration in <a class="wikilink" href="../../../scuff-em/">scuff-em</a> codes is
+discussed in more detail 
+on the page 
+<a href="../../../reference/BrillouinZoneIntegration.md.">Brillouin-zone integration in <span class="SC">scuff-em</span></a></p>
 <hr />
 <h1 id="gmsh-geometry-file-for-unit-cell-geometry"><a class="wikilink" href="../../../gmsh/">gmsh</a> geometry file for unit-cell geometry</h1>
 <p>The <a class="wikilink" href="../../../gmsh/">gmsh</a> geometry file <a href="../Square_N.geo"><code>Square_N.geo</code></a>
@@ -513,36 +662,55 @@ this:</p>
 </code></pre>
 
 <hr />
-<h1 id="list-of-omega-mathbf-k_b-points">List of <script type="math/tex">(\omega, \mathbf k_B)</script> points</h1>
-<p>We'll run calculations at a single frequency 
-(<script type="math/tex">\omega=3\times 10^{14}</script> rad/sec) and at Bloch
-vectors of the form <script type="math/tex">\mathbf k_B=(0,k_y)</script> for 
+<h1 id="launching-a-bloch-vector-resolved-run">Launching a Bloch-vector-resolved run</h1>
+<p>Before running a full Brillouin-zone-integrated
+calculation to get the full LDOS at a given
+frequency <script type="math/tex">\omega</script>, we'll first run calculations
+at a set of pre-specified individual Bloch vectors
+<script type="math/tex">\mathbf k_{\small{\text{B}}}</script> in the Brillouin zone.</p>
+<p>We'll take <script type="math/tex">\omega=3\times 10^{14}</script> rad/sec
+(or <script type="math/tex">\omega=1</script> in <a class="wikilink" href="../../../scuff/">scuff</a> units) and 
+will consider Bloch
+vectors of the form <script type="math/tex">\mathbf k_{\small{\text{B}}}=(0,k_y)</script> for 
 values of <script type="math/tex">k_y</script> running from <script type="math/tex">0</script> to <script type="math/tex">\pi/L</script>
 (where <script type="math/tex">L</script>=1 <script type="math/tex">\mu</script>m is the lattice constant
 in this case).
-Thus we create a text file called <code>OKBFile</code> that
-looks like this:</p>
+Thus we create a text file called <a href="../OKBFile"><code>OKBFile</code></a> 
+that looks like this:</p>
 <pre><code>1.0 0.0 0.00
 1.0 0.0 0.10
 ...
 1.0 0.0 3.14
 </code></pre>
 
-<hr />
-<h1 id="launching-the-run">Launching the run</h1>
-<p>We will do two <a class="wikilink" href="../../../scuff-ldos/">scuff-ldos</a> runs, one in which
-the LDOS is computed using a semi-analytical approach
-(plane-wave decomposition) and another in which
+<p>As a sanity check, we will do two <a class="wikilink" href="../../../scuff-ldos/">scuff-ldos</a> runs,
+one in which the LDOS is computed using a semi-analytical
+approach (plane-wave decomposition) and another in which
 the LDOS is computed using the <a class="wikilink" href="../../../scuff-em/">scuff-em</a> core
-library. Note that the command-line arguments 
-for the two runs are identical except that one of them
-has the extra option <code>--HalfSpace Aluminum.</code></p>
+library. The semi-analytical approach is implemented
+by <a href="../../../applications/scuff-ldos/scuff-ldos/">scuff-ldos</a> and is requested by giving all the same
+command-line arguments you would give to do an ordinary
+<a href="../../../applications/scuff-ldos/scuff-ldos/">scuff-ldos</a> calculation, but with the additional argument
+<code>--HalfSpace Aluminum.</code> (Note that you must specify a <code>.scuffgeo</code>
+file for the <code>--HalfSpace</code> calculation, even though the 
+meshed geometry is not used in this calculation; the
+<code>.scuffgeo</code> file is used to specify the lattice.)</p>
+<h4 id="command-line-arguments-for-quasi-analytical-calculation-using-plane-wave-decomposition">Command-line arguments for quasi-analytical calculation using plane-wave decomposition:</h4>
 <pre><code class="bash">  #!/bin/bash
   ARGS=&quot;&quot;
   ARGS=&quot;${ARGS} --geometry AlHalfSpace_40.scuffgeo&quot; 
   ARGS=&quot;${ARGS} --EPFile  EPFile&quot;
   ARGS=&quot;${ARGS} --OmegakBlochFile OKBFile&quot;
   ARGS=&quot;${ARGS} --HalfSpace Aluminum&quot;
+  scuff-ldos ${ARGS}
+</code></pre>
+
+<h4 id="command-line-arguments-for-fully-numerical-calculation-using-discretized-surface-meshes">Command-line arguments for fully numerical calculation using discretized surface meshes:</h4>
+<pre><code class="bash">  #!/bin/bash
+  ARGS=&quot;&quot;
+  ARGS=&quot;${ARGS} --geometry AlHalfSpace_40.scuffgeo&quot; 
+  ARGS=&quot;${ARGS} --EPFile  EPFile&quot;
+  ARGS=&quot;${ARGS} --OmegakBlochFile OKBFile&quot;
   scuff-ldos ${ARGS}
 </code></pre>
 
@@ -555,24 +723,32 @@ appended to the file below the first set of data).</p>
 component of the electric dyadic Green's function)
 versus the <script type="math/tex">y</script>-component of the Bloch vector
 as computed using the analytical and <a class="wikilink" href="../../../scuff-em/">scuff-em</a>
-approaches.
-=======</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>f86803d1cef0c7c65a7e721df61196204158b754</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
+approaches.</p>
 <p><img alt="aluminum LDOS data" src="../AluminumLDOS.png" /></p>
+<hr />
+<h1 id="launching-a-brillouin-zone-integrated-run">Launching a Brillouin-zone integrated run</h1>
+<p>Finally, we'll ask <a class="wikilink" href="../../../scuff-ldos/">scuff-ldos</a> to perform
+the Brillouin-zone integrations at each frequency
+to compute the full LDOS at that frequency.
+To do this we simply use <code>--OmegaFile`` instead
+of</code>--OmegakBlochFile`` to specify a list of 
+frequencies instead of a list of 
+<script type="math/tex">(\omega,\mathbf{k}_{\small{\hbox{B}}})</script>
+points; by not specifying individual Bloch vectors
+we are implicitly asking <a class="wikilink" href="../../../scuff-ldos/">scuff-ldos</a> to perform
+the Brillouin-zone integral at each frequency.</p>
+<p>Thus we go like this:</p>
+<pre><code class="bash">  #!/bin/bash
+  ARGS=&quot;&quot;
+  ARGS=&quot;${ARGS} --geometry AlHalfSpace_40.scuffgeo&quot; 
+  ARGS=&quot;${ARGS} --EPFile  EPFile&quot;
+  ARGS=&quot;${ARGS} --OmegaFile OmegaFile&quot;
+  scuff-ldos ${ARGS}
+</code></pre>
+
+<p>where <a href="../OmegaFile"><code>OmegaFile</code></a> is a simple text
+file specifying a list of angular frequencies in
+units of <script type="math/tex">3\cdot 10^{14}</script> rad/sec.</p>
               
             </div>
           </div>

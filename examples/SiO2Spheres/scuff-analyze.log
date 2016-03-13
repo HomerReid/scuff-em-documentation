@@ -1,7 +1,0 @@
-07/11/15::00:43:13: Added /home/homer/work/scuff-em-sandbox/mshFiles to mesh search path. 
-07/11/15::00:43:13: Found mesh file /home/homer/work/scuff-em-sandbox/mshFiles/Sphere_501.msh 
-07/11/15::00:43:13: Found mesh file /home/homer/work/scuff-em-sandbox/mshFiles/Sphere_501.msh 
-07/11/15::00:43:13: Flipped 668 panel normals to comport with region definitions. 
-07/11/15::00:43:13: Noting that surface 1 (UpperSphere) is a duplicate of surface 0 (LowerSphere)... 
-07/11/15::00:45:34: Added /home/homer/work/scuff-em-sandbox/mshFiles to mesh search path. 
-07/11/15::00:45:34: error: could not open file Sphere_1479.msh (aborting) 

@@ -67,7 +67,10 @@
             
                 <li class="toctree-l3"><a href="#tutorial-examples">Tutorial Examples</a></li>
                 
-                    <li><a class="toctree-l4" href="#command-line-application-reference">Command-line application reference</a></li>
+            
+                <li class="toctree-l3"><a href="#command-line-application-reference">Command-line application reference</a></li>
+                
+                    <li><a class="toctree-l4" href="#validation-test-suite">Validation Test Suite</a></li>
                 
                     <li><a class="toctree-l4" href="#api-reference">API reference</a></li>
                 
@@ -217,7 +220,14 @@
         
             
     <li class="toctree-l1 ">
-        <a class="" href="reference/IncidentFields/">Incident Fields</a>
+        <a class="" href="reference/IncidentFields/">Incident fields</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="reference/BrillouinZoneIntegration/">Brillouin zone integration</a>
         
     </li>
 
@@ -303,6 +313,77 @@
             
     <li class="toctree-l1 ">
         <a class="" href="applications/scuff-analyze/scuff-analyze/">scuff-analyze</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Validation tests</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="tests/Overview/">Overview of the test suite</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="tests/MieScattering/MieScattering/">Mie scattering</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="tests/FresnelScattering/FresnelScattering/">Fresnel scattering</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="tests/CasimirSpheres/CasimirSpheres/">Equilibrium Casimir forces between spheres</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="tests/CasimirPlates/CasimirPlates/">Equilibrium Casimir forces between plates</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="tests/CPSphere/CPSphere/">Equilibrium Casimir-Polder potential near a sphere</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="tests/CPPlate/CPPlate/">Equilibrium Casimir-Polder potential near a plate</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="tests/NEQSpheres/NEQSpheres/">Heat transfer and non-equilibrium Casimir forces between spheres</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="tests/libscuff/libscuff/">Low-level tests of the core library</a>
         
     </li>
 
@@ -416,6 +497,7 @@
 <li><a href="reference/Materials/">Material descriptions</a></li>
 <li><a href="reference/Transformations/">Geometrical transformations</a></li>
 <li><a href="reference/IncidentFields/">Incident Fields</a></li>
+<li><a href="reference/BrillouinZoneIntegration/">Brillouin-zone integration</a></li>
 </ul>
 <h1 id="tutorial-examples">Tutorial Examples</h1>
 <ul>
@@ -431,7 +513,7 @@
 <li><a href="examples/HalfSpaceLDOS/HalfSpaceLDOS/">LDOS and dyadic Green functions above an infinite aluminum half-space</a></li>
 <li><a href="examples/PlatonicSolids/PlatonicSolids/">Electrostatic polarizability of platonic solids</a></li>
 </ul>
-<h2 id="command-line-application-reference">Command-line application reference</h2>
+<h1 id="command-line-application-reference">Command-line application reference</h1>
 <ul>
 <li>
 <p><a href="applications/GeneralReference/">General reference for <span class="SC">scuff-em</span> command-line applications</a></p>
@@ -482,6 +564,18 @@
 </ul>
 </li>
 </ul>
+<h2 id="validation-test-suite">Validation Test Suite</h2>
+<ul>
+<li><a href="tests/Overview/">Overview of the <span class="CodeName">scuff-em</span> test suite</a></li>
+<li><a href="tests/MieScattering/MieScattering/">Mie scattering</a></li>
+<li><a href="tests/FresnelScattering/FresnelScattering/">Fresnel scattering</a></li>
+<li><a href="tests/CasimirSpheres/CasimirSpheres/">Equilibrium Casimir forces between spheres</a></li>
+<li><a href="tests/CasimirPlates/CasimirPlates/">Equilibrium Casimir forces between plates</a></li>
+<li><a href="tests/CPSphere/CPSphere/">Equilibrium Casimir-Polder potential near a sphere</a></li>
+<li><a href="tests/CPPlate/CPPlate/">Equilibrium Casimir-Polder potential near a plate</a></li>
+<li><a href="tests/NEQSpheres/NEQSpheres/">Heat transfer and non-equilibrium Casimir forces between spheres</a></li>
+<li><a href="tests/libscuff/libscuff/">Low-level tests of the <span class="CodeName">scuff-em</span> core library</a></li>
+</ul>
 <h2 id="api-reference">API reference</h2>
 <ul>
 <li><a href="API/libscuff/"><span class="SC">libscuff</span></a> - Accessing <a class="wikilink" href="./scuff-em/">scuff-em</a> from C++ and python programs</li>
@@ -498,7 +592,8 @@
 <li><a href="./tex/lsInnards.pdf"><span class="SC">libscuff</span> Implementation and Technical Details</a> - a technical memo describing many details of the core library implementation</li>
 <li><a href="./tex/PFT.pdf">Computation of power, force, and torque in <span class="SC">scuff-em</span></a> - a technical memo describing methods for computing power, force and torque, with applications to both classical scattering and non-equilibrium fluctuational electrodynamics</li>
 <li><a href="./tex/NearFields.pdf">Computation of fields near panels in <span class="SC">scuff-em</span></a> - a technical memo describing the computation of fields near triangular panels in discretized surface meshes</li>
-<li><a href="./tex/scuff-ldos.pdf">Computation of Green's Functions and LDOS in <span class="SC">scuff-em</span></a> - a technical memo describing the implementation of the <a href="./applications/scuff-ldos"><span class="SC">scuff-ldos</span></a> code for computing dyadic Green's functions and local photonic densities of states </li>
+<li><a href="./tex/scuff-ldos.pdf">Computation of Green's Functions and LDOS in <span class="SC">scuff-em</span></a> - a technical memo describing the implementation of the <a href="./applications/scuff-ldos"><span class="SC">scuff-ldos</span></a> code for computing dyadic Green's functions and local photonic densities of states</li>
+<li><a href="./tex/scuff-transmission.pdf">Computation of reflection and transmission coefficients in <span class="SC">scuff-em</span></a> - a technical memo describing the implementation of the <a href="./applications/scuff-transmission"><span class="SC">scuff-transmission</span></a> code for computing plane-wave transmission and reflection coefficients</li>
 </ul>
               
             </div>
@@ -561,5 +656,5 @@
 
 <!--
 MkDocs version : 0.14.0
-Build Date UTC : 2016-03-01 09:37:21.831838
+Build Date UTC : 2016-03-13 22:41:45.978725
 -->
