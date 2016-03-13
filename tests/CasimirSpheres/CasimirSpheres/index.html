@@ -507,12 +507,23 @@ using <a class="wikilink" href="../../../scuff-cas3d/">scuff-cas3d</a> as follow
  % scuff-cas3d --geometry E10Spheres_501.scuffgeo --translist Spheres.trans --energy --zforce
 </code></pre>
 
-<p>Here the two <code>.scuffgeo</code> files describe the two geometric configurations
+<p>Here the two <code>.scuffgeo</code> files 
+(<a href="../PECSpheres_501.scuffgeo"><code>PECSpheres_501.scuffgeo</code></a> and <a href="../E10Spheres_501.scuffgeo"><code>E10Spheres_501.scuffgeo</code></a>]
+describe the two geometric configurations
 (two PEC spheres and two dielectric spheres of radius <script type="math/tex">R=1\, \mu</script>m 
 separated by an initial center-center distance of <script type="math/tex">d</script>=3 <script type="math/tex">\mu</script>m) while
-<code>Spheres.trans</code> specifies the list of center-center separation distances
-<script type="math/tex">d</script> at which we compute the energy and force.</p>
-<p>The above calculations</p>
+<a href="../Spheres.trans"><code>Spheres.trans</code></a> specifies the list of center-center 
+separation distances <script type="math/tex">d</script> at which we compute the energy and force.
+(Both geometries refer to the same surface mesh file for the 
+sphere, <a href="../Sphere_327.msh"><code>Sphere_327.msh</code></a>.</p>
+<p>The above calculations produce output files named 
+<a href="../PECSpheres_327.out"><code>PECSpheres_327.out</code></a> and 
+<a href="../E10Spheres_327.out"><code>E10Spheres_327.out</code></a>. Plotting against
+the theoretical predictions of Emig et. al (referenced above)
+yields good agreement:</p>
+<p><img alt="CasimirSphereData.png" src="../CasimirSphereData.png" />.</p>
+<p>Here's the <a class="wikilink" href="../../../gnuplot/">gnuplot</a> script I used to produce this 
+plot: <a href="../Plotter.gp"><code>Plotter.gp</code></a>.</p>
               
             </div>
           </div>

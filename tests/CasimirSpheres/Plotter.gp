@@ -13,7 +13,7 @@ EE10(x)=CE7/(x**7);
 FE10(x)=7.0*CE7/(x**8);
 
 ###################################################
-# data file #######################################
+# data files ######################################
 ###################################################
 PECDATA='PECSpheres_327.out'
 E10DATA='E10Spheres_327.out'
@@ -22,23 +22,15 @@ set format '%g'
 
 set xlabel  'Center-center separation d'
 
-#set ylabel  'Energy (\hbar c / R)'
-#set y2label 'Force (\hbar c / R^2)'
-#set logscale xy
-#set logscale y2
-
-unset y2tics
-set ylabel 'Force $(\hbar c/R^2)$'
+set ylabel 'Force (\hbar c/R)'
 set xrange [3:]
 set xtics (3,5,10,30,50,100)
 
 set key at 50,0.01 spacing 5
 
 set terminal x11 1
-set title   'Casimir force between $R=1\,\mu$m spheres'
+set title   'Casimir force between R=1 micron spheres'
 plot PECDATA u 1:(abs($2)) t 'PEC (SCUFF)'  w p pt 7 ps 1.5 \
     ,FPEC(x) lw 2          t 'PEC (theory)' \
-    ,E10DATA u 1:(abs($2)) t '$\epsilon$=10 (SCUFF)'  w p pt 7 ps 1.5 \
-    ,FE10(x) lw 2          t '$\epsilon$=10 (theory)'
-
-call 'latex' 'CasimirData'
+    ,E10DATA u 1:(abs($2)) t 'Epsilon=10 (SCUFF)'  w p pt 7 ps 1.5 \
+    ,FE10(x) lw 2          t 'Epsilon=10 (theory)'

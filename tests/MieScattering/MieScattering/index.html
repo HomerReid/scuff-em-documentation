@@ -318,15 +318,6 @@
         
             <ul>
             
-                <li class="toctree-l3"><a href="#exact-solution">Exact solution</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#scuff-em-solution">scuff-em solution</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#comparison">Comparison</a></li>
-                
-            
             </ul>
         
     </li>
@@ -478,56 +469,6 @@ to compute the PFT for a lossy dielectric sphere
 irradiated by a circularly-polarized plane wave
 and compares the results to the predictions of 
 Mie scattering theory.</p>
-<h2 id="exact-solution">Exact solution</h2>
-<p>We consider a sphere centered at the origin irradiated by
-a left-circularly-polarized plane wave at frequency <script type="math/tex">\omega</script>,
-<script type="math/tex; mode=display"> \mathbf{E\sups{inc}}(\vb x)=
-    \frac{1}{\sqrt{2}E_0\Big( \mathbf{\hat{x}} + i\mathbf{\hat{y}\Big)
-    e^{ikz}
-</script>
-with <script type="math/tex">k=\omega/c</script> the vacuum wavenumber.</p>
-<p>For a dielectric sphere of radius <script type="math/tex">R</script>, Mie theory
-(see, for example,
-<a href="http://onlinelibrary.wiley.com/book/10.1002/9783527618156">Bohren and Huffman</a> and
-<a href="http://journals.aps.org/pra/abstract/10.1103/PhysRevA.30.2508">Marston and Crichton</a>) predicts that
-the cross sections for extinction, scattering, absorption,
-force, and torque are
-<script type="math/tex; mode=display"> \begin{array}{ccc}
-  C_{\text{\tiny{ext}}}
-  &=&
- \frac{2\pi}{k^2} \sum (2n+1)\text{Re }(a_n + b_n)
- \\[5pt]
- \end{array}
-</script>
-where <script type="math/tex">a_n, b_n</script> are the Mie scattering coefficients:</p>
-<h2 id="scuff-em-solution"><span class="SC">scuff-em</span> solution</h2>
-<p>The power, force, and torque on a gold sphere of radius
-1 <script type="math/tex">\mu</script> m may be computed with <a class="wikilink" href="../../../scuff-scatter/">scuff-scatter</a> by placing the 
-following content into a little file called <code>scuff-scatter.args</code>:</p>
-<pre><code class="bash"> % geometry GoldSphere_501.scuffgeo
- % PFTFile  GoldSphere_501.PFT
- % OmegaFile MyOmegaFile
- % pwDirection    0 0 1
- % pwPolarization 0.7071 0.7071i 0
-</code></pre>
-
-<p>Here the file
-<a href="../E10HalfSpace_40.scuffgeo"><code>E10HalfSpace_40.scuffgeo</code></a>
-describes the <a href="../../../reference/Geometries/"><span class="SC">scuff-em"</span> geometry</a> 
-(it refers to a mesh file named
-<a href="../Square_40.msh"><code>Square_40.msh</code></a>) 
-and the command-line arguments ask for a calculation at 
-angular frequency <script type="math/tex">\omega=1\cdot 3\times 10^{14}</script> rad/sec
-and at 20 incident angles in the range <script type="math/tex">0\le \theta\le 88</script> degrees.</p>
-<h2 id="comparison">Comparison</h2>
-<p>Running the above command yields the file
-<a href="../E10HalfSpace_40.transmission"><code>E10HalfSpace_40.transmission</code></a>.
-Plotting in <a href="https://www.gnuplot.info"><span class="SC">gnuplot</sc></a> yields 
-a comparison of <a class="wikilink" href="../../../scuff-transmission/">scuff-transmission</a> data (point) to 
-theoretical predictions (curves):</p>
-<p><img alt="FresnelData.png" src="../FresnelData.png" /></p>
-<p>Here is the <a class="wikilink" href="../../../gnuplot/">gnuplot</a> script that I use to produce this 
-plot: <a href="../PlotFresnelData.gp">PlotFresnelData.gp</a>.</p>
               
             </div>
           </div>
