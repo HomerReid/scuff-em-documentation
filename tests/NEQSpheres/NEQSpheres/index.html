@@ -360,6 +360,12 @@
         
             <ul>
             
+                <li class="toctree-l3"><a href="#analytical-solution">Analytical solution</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#scuff-em-solution">scuff-em solution</a></li>
+                
+            
             </ul>
         
     </li>
@@ -459,7 +465,57 @@
           <div role="main">
             <div class="section">
               
-                
+                <h1 id="non-equilibrium-fluctuation-induced-interactions-between-spheres-heat-radiation-and-non-equilibrium-casimir-forces">Non-equilibrium fluctuation-induced interactions between spheres: heat radiation and non-equilibrium Casimir forces</h1>
+<p>This test validates the <a class="wikilink" href="../../../scuff-neq/">scuff-neq</a> application module
+of the <a class="wikilink" href="../../../scuff-em/">scuff-em</a> code suite by using it to compute
+<strong>(a)</strong> the temperature-dependent rate of heat radiation
+from individual spheres,
+<strong>(b)</strong> radiative heat-transfer rates and non-equilibrium
+Casimir forces between spheres at various separation 
+distances.</p>
+<h2 id="analytical-solution">Analytical solution</h2>
+<p>Analytical formulas for single-sphere heat radiation
+and sphere-sphere heat-transfer rates and non-equilibrium 
+Casimir forces were obtained by M. Krueger and are
+discussed in this paper:</p>
+<ul>
+<li><a href="../{http://link.aps.org/doi/10.1103/PhysRevB.86.115423">M. Krueger, G. Bimonte, T. Emig, and M. Kardar, "Trace formulas for nonequilibrium {C}asimir interactions, heat radiation, and heat transfer for arbitrary objects", Physical Review B \textbf{86} 115423 (2012)</a></li>
+</ul>
+<p>The formulas are a bit complicated to reproduce here, but here
+is a simple <a href="http://julialang.org"><span class="SC">julia</span></a>
+code that implements them:</p>
+<ul>
+<li><a href="../KruegerFormulas.jl"><code>KruegerFormulas.jl</code></a></li>
+</ul>
+<p>This code may be used to</p>
+<h2 id="scuff-em-solution"><span class="SC">scuff-em</span> solution</h2>
+<p>Values of the flux quantity $\phi^{\text{\small 
+heat radiation
+and between two dielectric spheres may be computed
+using <a class="wikilink" href="../../../scuff-cas3d/">scuff-cas3d</a> as follows:</p>
+<pre><code class="bash"> % scuff-neq --geometry SiO2Sphere_501.scuffgeo --OmegaFile OmegaFile
+</code></pre>
+
+<pre><code class="bash"> % scuff-neq --geometry SiO2Spheres_501.scuffgeo --OmegaFile OmegaFile
+</code></pre>
+
+<p>Here the two <code>.scuffgeo</code> files 
+(<a href="../PECSpheres_501.scuffgeo"><code>PECSpheres_501.scuffgeo</code></a> and <a href="../E10Spheres_501.scuffgeo"><code>E10Spheres_501.scuffgeo</code></a>]
+describe the two geometric configurations
+(two PEC spheres and two dielectric spheres of radius <script type="math/tex">R=1\, \mu</script>m 
+separated by an initial center-center distance of <script type="math/tex">d</script>=3 <script type="math/tex">\mu</script>m) while
+<a href="../Spheres.trans"><code>Spheres.trans</code></a> specifies the list of center-center 
+separation distances <script type="math/tex">d</script> at which we compute the energy and force.
+(Both geometries refer to the same surface mesh file for the 
+sphere, <a href="../Sphere_327.msh"><code>Sphere_327.msh</code></a>.</p>
+<p>The above calculations produce output files named 
+<a href="../PECSpheres_327.out"><code>PECSpheres_327.out</code></a> and 
+<a href="../E10Spheres_327.out"><code>E10Spheres_327.out</code></a>. Plotting against
+the theoretical predictions of Emig et. al (referenced above)
+yields good agreement:</p>
+<p><img alt="CasimirSphereData.png" src="../CasimirSphereData.png" />.</p>
+<p>Here's the <a class="wikilink" href="../../../gnuplot/">gnuplot</a> script I used to produce this 
+plot: <a href="../Plotter.gp"><code>Plotter.gp</code></a>.</p>
               
             </div>
           </div>

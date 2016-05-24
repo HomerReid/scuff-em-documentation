@@ -204,13 +204,18 @@
         
             <ul>
             
-                <li class="toctree-l3"><a href="#plane-waves">Plane waves</a></li>
+                <li class="toctree-l3"><a href="#built-in-types-of-incident-field">Built-in types of incident field</a></li>
+                
+                    <li><a class="toctree-l4" href="#plane-waves">Plane waves</a></li>
+                
+                    <li><a class="toctree-l4" href="#gaussian-beams">Gaussian beams</a></li>
+                
+                    <li><a class="toctree-l4" href="#point-sources">Point sources</a></li>
                 
             
-                <li class="toctree-l3"><a href="#gaussian-beams">Gaussian beams</a></li>
+                <li class="toctree-l3"><a href="#specifying-an-entire-list-of-incident-fields">Specifying an entire list of incident fields</a></li>
                 
-            
-                <li class="toctree-l3"><a href="#point-sources">Point sources</a></li>
+                    <li><a class="toctree-l4" href="#example-of-an-incident-field-file">Example of an incident-field file</a></li>
                 
             
                 <li class="toctree-l3"><a href="#using-incident-fields-in-api-programs">Using incident fields in API programs</a></li>
@@ -485,8 +490,34 @@ built-in types of incident fields:</p>
 <li><a href="#GaussianBeams">Gaussian beams</a></li>
 <li>The fields of <a href="#PointSources">point electric or magnetic dipole sources.</a></li>
 </ul>
+<p>If you only need to run scattering calculations with a single
+type of incident field, you can just specify that field on
+the command line, as described in the sections below. If you
+want to run scattering calculations with multiple types of
+incident field (for example, perhaps at each frequency you
+want to consider two different plane-wave polarizations,
+or three different point-source locations) you will want
+to write an 
+<a href="#IFFile">incident-field file</a> describing an entire <em>list</em>
+of incident fields.</p>
+<div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#incident-fields-in-scuff-em">Incident fields in <span class="SC">scuff-em</span></a></li>
+<li><a href="#built-in-types-of-incident-field">Built-in types of incident field</a><ul>
+<li><a href="#plane-waves">Plane waves</a></li>
+<li><a href="#gaussian-beams">Gaussian beams</a></li>
+<li><a href="#point-sources">Point sources</a></li>
+</ul>
+</li>
+<li><a href="#specifying-an-entire-list-of-incident-fields">Specifying an entire list of incident fields</a><ul>
+<li><a href="#example-of-an-incident-field-file">Example of an incident-field file</a></li>
+</ul>
+</li>
+<li><a href="#using-incident-fields-in-api-programs">Using incident fields in API programs</a></li>
+</ul>
+</div>
 <p>It is also easy to <a href="#RollingYourOwn">define your own custom incident fields</a>
 for use in API programs.</p>
+<h1 id="built-in-types-of-incident-field">Built-in types of incident field</h1>
 <p><a name="PlaneWaves"></p>
 <h2 id="plane-waves">Plane waves</h2>
 <p><a class="wikilink" href="../../scuff-scatter/">scuff-scatter</a> command-line syntax:</p>
@@ -585,8 +616,89 @@ possible to a define a magnetic point source as follows:</p>
 <pre><code class="c">  PointSource *PS=new PointSource(X0, P0);
 </code></pre>
 
+<p><a name="IFFile"></p>
+<h1 id="specifying-an-entire-list-of-incident-fields">Specifying an entire list of incident fields</h1>
+<p>A feature of the 
+<a href="../../forDevelopers/Implementation/">surface-integral-equation solver implemented by <span class="SC">scuff-em</sc></a>
+is that, once the computational work needed to solve a single
+scattering problem (for a given geometry at given frequency irradiated
+by a single incident field) has been done, there is relatively little
+computational cost required to solve additional problems (for the same 
+geometry at the same frequency) with different incident fields.
+To exploit this feature, you may write an "incident-field file"
+(a simple text file) describing multiple types of incident field 
+with which to irradiate your geometry.</p>
+<h2 id="example-of-an-incident-field-file">Example of an incident-field file</h2>
+<p><a href="../IFFile">Here's an example</a> of an incident-field file describing 9 
+different incident fields. If you specify this file
+using the <code>--IFFile</code> command-line option to
+<a href="../../applications/scuff-scatter/scuff-scatter/"><span class="SC">scuff-scatter</span></a>,
+then every calculation you request (scattered fields,
+power/force/torque, visualization, etc.) will be 
+done 7 times at each frequency, once for each field.</p>
+<pre><code>EX    PW    0  0  1       1          0          0
+EY    PW    0  0  1       0          1          0
+LC    PW    0  0  1       0.7071     0.7071i    0
+RC    PW    0  0  1       0.7071    -0.7071i    0
+
+PS1   PS    1.1 2.2 3.3   0.4+0.5i   0.7        -0.8
+PS2   MPS   1.1 2.2 3.3   0.4+0.5i   0.7        -0.8
+
+GB    GB    0.0 0.0 0.0   0.0 0.0 1.0    1.0 0.0 0.0    0.5
+
+COMPOUND1
+  PW    0   0  1      1        0        0
+  PS    1.1 2.2 3.3   0.4+0.5i 0.7      -0.8
+END
+
+COMPOUND2
+  PW    0   0  1      0        1        0
+  PS    1.1 2.2 3.3   0.4+0.5i 0.7      -0.8
+END
+</code></pre>
+
+<p>Here's how to understand the 9 incident fields described
+by this file.</p>
+<ul>
+<li>
+<p>The first several lines define various types of incident
+fields in which there is only a single field source. For 
+this type of incident field, the first word on the 
+line is an 
+arbitrary user-specified label (such as <code>EX</code> or <code>PS1</code>)
+that will be used to identify data corresponding to 
+this incident field in output files.
+The second word on the line is one of the four 
+keywords <code>PW|PS|MPS|GB</code>. The remainder of the line
+consists of numerical parameters:</p>
+<ul>
+<li>
+<p>For <a href="#PlaneWaves">plane waves</a> (keyword <code>PW</code>) there are 6 numerical parameters: <code>nx ny nz Ex Ey Ez</code>. In the example above, <code>EX</code> and <code>EY</code> are linearly-polarized plane waves, while <code>LC</code> and <code>RC</code> are left- and right-circularly polarized waves.</p>
+</li>
+<li>
+<p>For <a href="#PointSource">electric-dipole point sources</a> (keyword <code>PS</code>) there are 6 numerical parameters: <code>xx yy zz Px Py Pz</code>.</p>
+</li>
+<li>
+<p>For <a href="#PointSource">magnetic-dipole point sources</a> (keyword <code>MPS</code>) there are 6 numerical parameters: <code>xx yy zz Mx My Mz</code>.</p>
+</li>
+<li>
+<p>For <a href="#GaussianBeam">gaussian beams</a> (keyword <code>GB</code>) there are 10 numerical parameters: <code>Cx Cy Cz nx ny nz Ex Ey Ez W</code>.    </p>
+</li>
+</ul>
+</li>
+<li>
+<p>The final two sections of the file describe <em>compound</em> fields---that is,
+incident fields produced by more than one source acting simultaneously.
+These types of fields are described by putting their label (here
+<code>COMPOUND1</code> or <code>COMPOUND2</code>) on line by itself, then specifying
+as many <code>PW|PS|MPS|GB</code> lines as you like, and finally closing 
+the compound-field definition with the <code>END</code> keyword.
+For example, the field we labeled <code>COMPOUND1</code> consists of a
+planewave acting simultaneously with the field of a point source.</p>
+</li>
+</ul>
 <p><a name="RollingYourOwn"></p>
-<h2 id="using-incident-fields-in-api-programs">Using incident fields in API programs</h2>
+<h1 id="using-incident-fields-in-api-programs">Using incident fields in API programs</h1>
 <p>Please see 
 <a href="http://homerreid.com/scuff-em/libscuff/IncField.shtml">here</a>
 for further details and examples of how incident fields are manipulated in API codes, including an example of how to create your

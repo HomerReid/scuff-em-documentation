@@ -1,0 +1,132 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Cartesian-multipole-moment PFT}
+\label{MomentPFTSection}
+
+The fact that $\text{Im }\mb G(\vb x, \vb x^\prime)$
+in equations (\ref{EMTPFTScattering1}) is nonsingular
+at $x=x^\prime$ suggests the possibility of a
+multipole expansion relating PFTs to the low-order
+moments of the current distribution. In this section 
+we investigate this possibility for the nonmagnetic
+case ($\vb M=0$).
+
+Inserting the short-distance expansion (\ref{ImGExpansion})
+into (\ref{EMTPFTScattering1}a) and keeping only terms of lowest
+order in $k$ yields
+%====================================================================%
+\begin{align}
+  P\sups{scat}
+&\approx
+\frac{k^2 Z_0}{12 \pi}
+  \underbrace{ \int J_i^*(\vb x) d\vb x }_{i\omega p^*_i}
+  \underbrace{ \int J_i  (\vb x^\prime) d\vb x^\prime }_{-i\omega p_i}
+\\
+&=-\frac{c^2 k^4 Z_0}{12 \pi}|\vb p|^2
+\label{PMultipole}
+\end{align}
+%====================================================================%
+where $\vb p=-\frac{1}{i\omega} \int \vb J dV$ is the
+dipole moment of the induced current distribution.
+Equation (\ref{PMultipole}) is just the usual result for 
+the total power radiated by a 
+point dipole~\cite{Jackson1999}.
+
+Proceeding similarly for the force, from (\ref{ImGExpansion})
+one first finds
+%====================================================================%
+$$ \partial_i G_{jk} = \frac{k^3}{60\pi}
+   \Big( r_j \delta_{ik} + r_k \delta_{ij} - 4r_i \delta_{jk} \Big)
+   + O(k^5)
+$$
+%====================================================================%
+whereupon (\ref{EMTPFTScattering1}b) reads
+%====================================================================%
+\begin{align}
+  F_i\sups{scat}
+&\approx
+-\frac{k^3 Z_0}{120 \pi c}
+  \text{Im }
+  \int \bigg\{  J^*_j(\vb x)(\vb x-\vb x^\prime)_j J_i(\vb x^\prime)
+\\
+&\hspace{1in}
+               +J^*_i(\vb x)(\vb x-\vb x^\prime)_j J_j(\vb x^\prime)
+\nn
+&\hspace{1in}
+              -4J^*_j(\vb x)(\vb x-\vb x^\prime)_i J_j(\vb x^\prime)
+       \bigg\}\,d\vb x \, d\vb x^\prime
+\nn
+&= -\frac{k^3 Z_0}{60 \pi c}\text{Im }
+   \Big[  \mc M^*_{jj} \mc M_i  + \mc M^*_{ij} \mc M_j
+        -4\mc M^*_{ji} \mc M_j \Big]
+\label{ForceMultipole1}
+\end{align}
+where I defined 
+%====================================================================%
+$$ \mc M_{i}  \equiv \int J_i(\vb x)     \, dV, \qquad
+   \mc M_{ij} \equiv \int J_i(\vb x) x_j \, dV.
+$$
+%====================================================================%
+The quantity $\mc M_i$ is related to the electric dipole moment $\vb p$ by 
+$$\vb p_i = -\frac{1}{i\omega} \mc M_i.$$
+On the other hand, $\mc M_{ij}$ is related to the magnetic
+dipole and electric quadrupole moments; in essence,
+the magnetic dipole moment $\vb m$ 
+is the antisymmetric part of $\mc M_{ij}$,
+while the electric quadrupole moment $Q_{ij}$ 
+is the symmetric part.
+In terms of the standard definitions~\cite{Jackson1999} one finds
+%====================================================================%
+\begin{align*}
+ m_i 
+&= \frac{1}{2}\varepsilon_{ijk}\int x_i J_j(\vb x) dV 
+\\
+&= \frac{1}{2}\varepsilon_{ijk}\mc M_{ji}
+\\
+&= -\frac{1}{2}\varepsilon_{ijk}\mc M_{ij}
+\\
+ Q_{ij} 
+&=
+ -\frac{1}{i\omega} 
+ \int \Big\{ 3J_i x_j + 3x_i J_j - 2J_k x_k \delta_{ij} \Big\} \, dV
+\\
+&=
+ -\frac{1}{i\omega}
+  \Big[ 3\mc M_{ij} + 3\mc M_{ji} - 2\delta_{ij} \mc M_{kk} \Big].
+\end{align*}
+%====================================================================%
+Using these definitions in (\ref{ForceMultipole1}) and performing
+some algebra, one finds the lowest-order terms in the multipole 
+expansion of the self-force:
+%====================================================================%
+\begin{align}
+  F_i\sups{scat}
+\label{ForceMultipole1}
+&\approx
+\frac{k^4 Z_0}{12\pi}\text{Re}\Big( \vb m^* \times \vb p \Big)_i
++
+\frac{c k^5 Z_0}{120\pi}\text{Im}\Big( \vb Q^* \vb p \Big)_i
+\end{align}
+%====================================================================%
+The quantity in the second term involves the matrix-vector product 
+of the 3$\times $3 matrix $\vb Q^*$ with the 3-vector $\vb p$.
+
+Finally, for the torque, inserting (\ref{ImGExpansion}) into
+(\ref{EMTPFTScattering1}b) yields
+%====================================================================%
+\begin{align}
+  \mc T_i\sups{scat}
+&\approx
+-\frac{k Z_0}{12 \pi c}\varepsilon_{ijk}
+  \text{Im }\left\{ 
+\left[\int \vb J^*_j dV\right] \left[\int \vb J_k dV\right]
+            \right\}
+\nn
+&= -\frac{c k^3 Z_0}{6 \pi}
+    \Big(\text{Re }\vb p \times \text{Im }\vb p\Big)_i.
+\label{TorqueMultipole}
+\end{align}
+%====================================================================%
+

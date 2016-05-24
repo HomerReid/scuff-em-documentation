@@ -248,7 +248,10 @@
                 <li class="toctree-l3"><a href="#options-requesting-power-force-and-torque-data">Options requesting power, force, and torque data</a></li>
                 
             
-                <li class="toctree-l3"><a href="#2-scuff-scatter-examples">2. scuff-scatter examples</a></li>
+                <li class="toctree-l3"><a href="#2-scuff-scatter-advanced-mode">2. scuff-scatter advanced mode</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#3-scuff-scatter-examples">3. scuff-scatter examples</a></li>
                 
             
             </ul>
@@ -523,6 +526,15 @@ describing the shapes and material properties of the scattering objects in your 
 <p>Visualization files plotting field components and Poynting fluxes on arbitrary user-specified surface meshes.</p>
 </li>
 </ul>
+<p>For more sophisticated users, <a class="wikilink" href="../../../scuff-scatter/">scuff-scatter</a> also offers
+an <em>advanced mode</em> of operation that exposes---at the
+command-line level---some of the key efficiencies of the
+<a href="../../../forDevelopers/Implementation/">surface-integral-equation formulation</a>
+implemented by the
+<a href="../../../API/libscuff/"><span class="SC">scuff-em</sc> core library</a>.
+This offers significant speedup for certain types of computations,
+at the expense of a slightly more effort required to set
+up your calculation.</p>
 <div class="toc"><span class="toctitle">Table of Contents</span><ul>
 <li><a href="#1-scuff-scatter-command-line-options">1. <span class="SC">scuff-scatter</span> command-line options</a><ul>
 <li><a href="#common-options">Common options</a></li>
@@ -532,7 +544,8 @@ describing the shapes and material properties of the scattering objects in your 
 <li><a href="#options-requesting-power-force-and-torque-data">Options requesting power, force, and torque data</a></li>
 </ul>
 </li>
-<li><a href="#2-scuff-scatter-examples">2. <span class="SC">scuff-scatter</span> examples</a></li>
+<li><a href="#2-scuff-scatter-advanced-mode">2. <span class="SC">scuff-scatter</span> advanced mode</a></li>
+<li><a href="#3-scuff-scatter-examples">3. <span class="SC">scuff-scatter</span> examples</a></li>
 </ul>
 </div>
 <p><a name="Options"></a></p>
@@ -616,8 +629,144 @@ compute and report components of the scattered and total
 fields. This option may be specified more than once to 
 define multiple sets of field evaluation points. </p>
 <h2 id="options-requesting-power-force-and-torque-data">Options requesting power, force, and torque data</h2>
+<pre><code class="bash"> --PFTFile     MyGeometry.PFT
+ --EMTPFTFile  MyGeometry.EMTPFT
+ --OPFTFile    MyGeometry.OPFT
+ --DSIPFTFile  MyGeometry.DSIPFT
+</code></pre>
+
+<p>Each of these options requests that power, force, and torque (PFT)
+data be written to a file of the specified name. The resulting
+files all have the same file format---reporting absorbed and
+scattered power, force (radiation pressure), and torque
+for all objects in the geometry at all frequencies you
+requested (see the file header for details)---but differ 
+in the algorithm used to compute the force:</p>
+<ul>
+<li>
+<p>The "energy-momentum-transfer" PFT (EMTPFT) method
+computes powers, forces and torques by considering the
+Joule heating of, and Lorentz force on, the
+surface currents in the presence of the total 
+fields. (This is the default, so the <code>--PFTFile</code> 
+option is synonymous with <code>--EMTPFTFile</code>.)</p>
+</li>
+<li>
+<p>The "displaced-surface-integral" PFT (DSIPFT) method
+computes PFTs by integrating the Poynting vector
+and Maxwell stress tensor over a bounding surface 
+surrounding the body.</p>
+</li>
+<li>
+<p>The "overlap" PFT (OPFT) method computes PFTs
+directly from the surface currents by exploiting
+the relationship between the surface currents
+and the total electric and magnetic fields at 
+body surfaces.</p>
+</li>
+</ul>
+<p><a name="AdvancedMode"></a></p>
+<h1 id="2-scuff-scatter-advanced-mode">2. <span class="SC">scuff-scatter</span> advanced mode</h1>
+<p>For some types of calculation it is possible to achieve
+significant computational accelerations by taking advantage
+of certain efficiencies inherent in the particular 
+mathematical strategy used by the 
+<a href="../../../API/libscuff/"><span class="SC">scuff-em</sc> core library</a>
+to solve Maxwell's equations---namely, the
+discretized surface-integral-equation (SIE) formulation.</p>
+<p>You can read about all the gory details of SIE solvers 
+<a href="../../../forDevelopers/Implementation/">here</a>, but for the purposes of 
+this discussion all you really need to know is this: For a
+given material geometry irradiated by a given incident field 
+at a given frequency, <a class="wikilink" href="../../../scuff-em/">scuff-em</a> assembles and solves a 
+linear system of the form
+<script type="math/tex; mode=display"> \mathbf{M}(\omega) \mathbf{c} = \mathbf{f}^{\text{inc}}</script>
+where </p>
+<ul>
+<li>
+<p><strong>c</strong> represents the unknown surface currents for which we are solving,</p>
+</li>
+<li>
+<p>the RHS vector <strong>f</strong> depends on the geometry, the frequency, and the incident field,</p>
+</li>
+<li>
+<p>the matrix <strong>M</strong> depends on the scattering geometry and the frequency but not on the incident field.
+More specifically, for a scattering geometry consisting of <em>N</em> objects
+(or <em>N</em> surfaces in a 
+<a href="../../../reference/Geometries/">regions-and-surfaces geometry specification</a>),
+the matrix <strong>M</strong> has an <em>N&times;N</em> block structure in which the <em>(m,n)</em> block
+describes the interactions of object <em>m</em> with object <em>n</em>.</p>
+</li>
+</ul>
+<p>Armed with just this much knowledge, we can understand the
+two key efficiencies possible in SIE scattering calculations:</p>
+<ul>
+<li>
+<p><strong>(1)</strong> First, suppose that, in a geometry consisting of 2 or more bodies,
+we would like to perform calculations for various different
+relative geometric configurations of the bodies---for example,
+different separation distances or rotation angles between bodies---at
+the same frequency.
+The diagonal blocks of the <strong>M</strong> matrix, which represent 
+the self-interactions of objects and are the most costly
+blocks to compute, are <em>independent</em> of the relative 
+configuration of the various objects in the geometry,
+and thus need only be computed <em>once</em> for a given
+geometry at a given frequency, after which they may be
+reused for any number of calculations involving 
+rearrangements of the relative positions and orientations
+of the bodies.    </p>
+<p>Thus, if we are interested in running calculations
+for a sphere-cube geometry at (say) 7 different
+values of the surface-surface separation, it greatly
+behooves us to assemble the diagonal (self-interaction)
+blocks just <em>once</em> per frequency, then reuse 
+these blocks for each of the 7 separation distances.
+The sphere-cube interaction block of the matrix
+must be recomputed at each separation distance, but 
+this is relatively cheap compared to the cost of 
+computing the sphere-sphere and cube-cube 
+self-interaction blocks.   </p>
+</li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li>
+<p><strong>(2)</strong> In the equation above, the LHS is <em>independent</em> of
+the incident field. This means that, once we have 
+assembled and LU-factorized the <strong>M</strong> matrix 
+for given geometry at a given frequency (a procedure
+which scales asymptotically like <script type="math/tex">\sim T^3</script> with <script type="math/tex">T</script> 
+the total number of triangles in our surface meshes) 
+we can solve scattering problems for any number of
+incident fields with cost <script type="math/tex">\sim T^2</script> per incident
+field---that is, essentially <em>for free</em> compared
+to the cost of assembling and factorizing the matrix.</p>
+<p>Thus, if we are interested in observing the 
+scattering properties of our geometry under irradiation
+by 7 different types of incident field (say,
+plane waves originating from 7 different angles)
+it greatly behooves us to form and LU-factorize
+the <strong>M</strong> matrix just <em>once</em> for this frequency,
+then reuse the factorized matrix to solve the linear
+system above for the 7 different types of incident field.</p>
+</li>
+</ul>
+<p>To take advantage of efficiency <strong>(a)</strong>, <a class="wikilink" href="../../../scuff-scatter/">scuff-scatter</a>
+supports the command-line option</p>
+<pre><code>  --transfile MyTransFile
+</code></pre>
+
+<p>where <code>MyTransFile</code> is a 
+<a href="../../../reference/Transformations/">list of geometrical transformations</a>.</p>
+<p>To take advantage of efficiency <strong>(b)</strong>, <a class="wikilink" href="../../../scuff-scatter/">scuff-scatter</a>
+supports the command-line option</p>
+<pre><code>  --IFFile    MyIFFile
+</code></pre>
+
+<p>where <code>MyIFFile</code> is a <a href="../../../reference/IncidentFields/">list of incident fields</a>.</p>
 <p><a name="Examples"></a></p>
-<h1 id="2-scuff-scatter-examples">2. <span class="SC">scuff-scatter</span> examples</h1>
+<h1 id="3-scuff-scatter-examples">3. <span class="SC">scuff-scatter</span> examples</h1>
 <ul>
 <li><a href="../../../examples/MieScattering/MieScattering/">Mie scattering</a></li>
 <li><a href="../../../examples/DielectricShell/DielectricShell/">Electrostatics of a spherical dielectric shell</a></li>
