@@ -227,6 +227,13 @@
     </li>
 
         
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../FAQ/">FAQ</a>
+        
+    </li>
+
+        
     </ul>
 <li>
           
@@ -588,6 +595,13 @@ variable:</p>
 <pre><code class="bash">% export GOMP_CPU_AFFINITY=0-7
 </code></pre>
 
+<p><a name="Disabling Python"></a></p>
+<h4 id="disabling-the-python-interface-to-speed-the-build-process">Disabling the python interface to speed the build process</h4>
+<p>Compiling the python interface is slow---it accounts for
+more than half of the build time on some systems.
+If you don't need the python interface to <a class="wikilink" href="../../scuff-em/">scuff-em</a>,
+use the option <code>--without-python</code> when running <code>configure</code>
+to accelerate the build process.</p>
 <p><a name="Debugging"></a></p>
 <h4 id="building-for-debugging">Building for debugging</h4>
 <p>If you would like to run <a class="wikilink" href="../../scuff-em/">scuff-em</a> API codes in a debugger

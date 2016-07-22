@@ -212,6 +212,13 @@
     </li>
 
         
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/FAQ/">FAQ</a>
+        
+    </li>
+
+        
     </ul>
 <li>
           
@@ -251,7 +258,7 @@
                 
                     <li><a class="toctree-l4" href="#common-options">Common options</a></li>
                 
-                    <li><a class="toctree-l4" href="#options-requesting-special-calculations">Options requesting special calculations</a></li>
+                    <li><a class="toctree-l4" href="#options-requesting-analytical-ldos-calculations">Options requesting analytical LDOS calculations</a></li>
                 
             
                 <li class="toctree-l3"><a href="#3-scuff-ldos-output-files">3. scuff-ldos output files</a></li>
@@ -493,23 +500,43 @@ extended material bodies.</p>
 <p>A <code>.scuffgeo</code> file describing your geometry.</p>
 </li>
 <li>
+<p>A list of evaluation points <script type="math/tex">\mathbf x</script> at which you want to know
+  the LDOS.</p>
+</li>
+<li>
 <p>One or more angular frequencies <script type="math/tex">\omega</script> at which to perform
   calculations.</p>
 </li>
 <li>
-<p>A list of evaluation points <script type="math/tex">\mathbf x</script> at which you want to know
-  the LDOS.</p>
+<p>Optionally, for periodic geometries, you may additionally specify
+  a list of Bloch wavevectors at which to evaluate wavevector-resolved
+  contributions to the LDOS. If you do not specify such a list,
+  <a class="wikilink" href="../../../scuff-ldos/">scuff-ldos</a> will evaluate an integral over the Brillouin zone
+  to compute the total LDOS at each <script type="math/tex">(\omega, \mathbf x)</script> point.</p>
 </li>
 </ul>
 <p>The outputs you get back from a <a class="wikilink" href="../../../scuff-ldos/">scuff-ldos</a> calculation may
 include</p>
 <ul>
-<li>The LDOS at each <script type="math/tex">(\omega, \mathbf x)</script> point.</li>
-<li>For periodic geometries, the contributions of individual
-  Bloch wavevectors <script type="math/tex">\mathbf k_{\text{Bloch}}</script> to the LDOS at
-  each <script type="math/tex">(\omega,\mathbf x)</script> point.</li>
-<li>Optionally, more complete information on the scattering parts 
-  of the dyadic Green's functions (DGFs).</li>
+<li>
+<p>The LDOS at each <script type="math/tex">(\omega, \mathbf x)</script> point.</p>
+</li>
+<li>
+<p>For periodic geometries, the contributions of individual
+  Bloch wavevectors <script type="math/tex">\mathbf k_{\text{Bloch}}</script> to the LDOS.
+  If you supplied a list of Bloch vectors as an input,
+  you will get wavevector-resolved information for each point
+  in your list; otherwise, you will get wavevector-resolved 
+  information for each point chosen automatically by 
+  <a class="wikilink" href="../../../scuff-ldos/">scuff-ldos</a> in its numerical-cubature evaluation of 
+  the Brillouin-zone integral.</p>
+</li>
+<li>
+<p>Optionally, the full Cartesian components of the scattering
+  parts of the dyadic Green's functions (DGFs) [the 
+  electric / magnetic LDOS is proportional to the imaginary part 
+  of the trace of the electric / magnetic DGFs].</p>
+</li>
 </ul>
 <p>For testing purposes, <a class="wikilink" href="../../../scuff-ldos/">scuff-ldos</a> also includes built-in
 functionality to compute the LDOS for some geometries that
@@ -519,7 +546,7 @@ ground planes and infinite-area dielectric half-spaces).</p>
 <li><a href="#1-what-scuff-ldos-actually-computes">1. What <span class="SC">scuff-ldos</span> actually computes</a></li>
 <li><a href="#2-scuff-ldos-command-line-options">2. <span class="SC">scuff-ldos</span> command-line options</a><ul>
 <li><a href="#common-options">Common options</a></li>
-<li><a href="#options-requesting-special-calculations">Options requesting special calculations</a></li>
+<li><a href="#options-requesting-analytical-ldos-calculations">Options requesting analytical LDOS calculations</a></li>
 </ul>
 </li>
 <li><a href="#3-scuff-ldos-output-files">3. <span class="SC">scuff-ldos</span> output files</a><ul>
@@ -597,7 +624,6 @@ for the full (BZ-integrated) LDOS are written to the
 --Omega
 --OmegaFile
 --OmegakBlochFile
---BZSymmetry
 --AbsTol
 --RelTol
 --FileBase
@@ -628,9 +654,14 @@ computations at just the points you
 specified. In this case you wil get back a
 <code>.byOmegakBloch</code> file, but not an
 <code>.LDOS</code> file.</p>
-<h3 id="options-requesting-special-calculations">Options requesting special calculations</h3>
-<p class="toc"><code>--HalfSpace PEC
---HalfSpace Aluminum</code></p>
+<h3 id="options-requesting-analytical-ldos-calculations">Options requesting analytical LDOS calculations</h3>
+<p>````
+--GroundPlane</p>
+<p>--HalfSpace PEC
+--HalfSpace Aluminum</p>
+<p class="toc">--SkipBZIntegration
+  ````</p>
+<p>As noted above, for testing purposes <a class="wikilink" href="../../../scuff-ldos/">scuff-ldos</a> incorporates</p>
 <p>The first option here instructs <a class="wikilink" href="../../../scuff-ldos/">scuff-ldos</a> to 
 bypass the usual LDOS calculation it would otherwise 
 perform and instead to compute the LDOS of an

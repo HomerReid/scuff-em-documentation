@@ -211,10 +211,28 @@
         
             <ul>
             
-                <li class="toctree-l3"><a href="#command-line-options-for-customizing-built-in-bz-integration">Command-line options for customizing built-in BZ integration</a></li>
+                <li class="toctree-l3"><a href="#command-line-options-for-customizing-internal-bz-integration">Command-line options for customizing internal BZ integration</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#understanding-the-internal-bz-integration-algorithms">Understanding the internal BZ integration algorithms</a></li>
+                
+                    <li><a class="toctree-l4" href="#integration-methods-for-1d-brillouin-zones">Integration methods for 1D Brillouin zones</a></li>
+                
+                    <li><a class="toctree-l4" href="#symmetry-factors-for-1d-brillouin-zones">Symmetry factors for 1D Brillouin zones</a></li>
+                
+                    <li><a class="toctree-l4" href="#integration-methods-for-2d-brillouin-zones">Integration methods for 2D Brillouin zones</a></li>
+                
+                    <li><a class="toctree-l4" href="#symmetry-factors-for-2d-brillouin-zones">Symmetry factors for 2D Brillouin zones</a></li>
                 
             
             </ul>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../FAQ/">FAQ</a>
         
     </li>
 
@@ -467,7 +485,7 @@
 integrals over the Brillouin zone (BZ) of a 1D or 2D
 reciprocal lattice, i.e.</p>
 <p>
-<script type="math/tex; mode=display"> Q(\omega) = \int_{\hbox{BZ}} \mathcal{Q}(\omega, \bf{k}) \,d\bf{k}.</script>
+<script type="math/tex; mode=display">Q(\omega) = \int_{\hbox{BZ}} \mathcal{Q}(\omega, \bf{k}) \,d\bf{k}.</script>
 </p>
 <p>Examples of calculations that require
 Brillouin-zone integrations include</p>
@@ -476,7 +494,7 @@ Brillouin-zone integrations include</p>
 <p>the Casimir force per unit imaginary frequency
 <script type="math/tex">\omega=i\xi</script> 
 on an extended object in
-<a href="../../applications/scuff-cas3D/scuff-cas3D/"><span class="SC">scuff-cas3D</span></a></p>
+<a href="../../applications/scuff-cas3D/scuff-cas3D/"><span class="SC">scuff-cas3d</span></a></p>
 </li>
 <li>
 <p>the Casimir-Polder potential per unit imaginary frequency
@@ -507,8 +525,8 @@ options for evaluating such cubatures:   </p>
 <li>
 <p>You can design and implement your own cubature scheme
 involving your own custom-chosen weights and points
-<script type="math/tex">\{W_n, \bf k_n\}</script>. In this case, you will typically
-use the <code>--byOmegakBloch</code> command-line option to instruct
+<script type="math/tex">\{W_n, \bf k_n\}</script>. In this case, you will use 
+the <code>--byOmegakBloch</code> command-line option to instruct
 a <a class="wikilink" href="../../scuff-em/">scuff-em</a> application code to report values of the
 quantity <script type="math/tex">\mathcal Q(\omega, \bf k_n)</script> at each of your points
 (this output will typically be written to file with
@@ -525,75 +543,250 @@ an output file with extension <code>.byOmega</code> or <code>.byXi</code>.
 You will <em>also</em> get an output file named <code>.byOmegakBloch</code>
 or <code>.byXikBloch</code> that reports the Bloch-vector-resolved
 integrand samples <script type="math/tex">\mathcal Q(\omega, \bf k_n)</script>
-chosen internally by the <a class="wikilink" href="../../scuff-em/">scuff-em</a> BZ integrator.   </p>
+chosen internally by the <a class="wikilink" href="../../scuff-em/">scuff-em</a> BZ integrator.</p>
 </li>
 </ul>
-<h3 id="command-line-options-for-customizing-built-in-bz-integration">Command-line options for customizing built-in BZ integration</h3>
-<p>If you choose the second option above, you may use the following
-set of command-line options, recognized by all application
-codes in the <a class="wikilink" href="../../scuff-em/">scuff-em</a> suite, to customize the cubature
-scheme used by <a class="wikilink" href="../../scuff-em/">scuff-em</a> to evaluate the Brillouin-zone integral.</p>
-<p class="toc"><code>--BZIMethod TC
---BZIMethod CC
---BZIMethod Adaptive</code></p>
-<p>This option specifies the type of cubature rule used to
-evaluate the Brillouin-zone integral:</p>
+<h3 id="command-line-options-for-customizing-internal-bz-integration">Command-line options for customizing internal BZ integration</h3>
+<p>If you choose the second option above, you may specify
+various command-line options to customize the algorithm
+used by <a class="wikilink" href="../../scuff-em/">scuff-em</a> to select the cubature points and
+weights <script type="math/tex">\{W_n, \mathbf{k}_n\}</script>. The options are 
+listed here and discussed in more detail below.</p>
+<pre><code class="bash">--BZIMethod [CC | TC | Radial]
+</code></pre>
+
+<p>Selects the integration algorithm (see below for details).</p>
+<pre><code class="bash">--BZIOrder NN
+</code></pre>
+
+<p>Sets the order (accuracy parameter) of the integration
+algorithm to <code>NN</code>. The allowed values of <code>NN</code> here depend
+on the integration algorithm you chose (see below).</p>
+<pre><code class="bash">--BZIRelTol xx
+--BZIAbsTol xx
+--BZIMaxEvals NN
+</code></pre>
+
+<p>For adaptive integration algorithms in which the 
+order is determined internally (see below), these 
+options allow you to specify relative and absolute
+error tolerances and an upper limit on the number of 
+integrand samples that will be used.</p>
+<pre><code class="bash">--BZSymmetryFactor [2|4|8]
+</code></pre>
+
+<p>This option lets you tell <a class="wikilink" href="../../scuff-em/">scuff-em</a> that your
+integrand function <script type="math/tex">\mathcal Q(\mathbf k)</script>
+is invariant under 2, 4, or 8-fold rotational 
+symmetry transformations applied to <script type="math/tex">\mathbf k</script>. 
+See below for more details on what this means.</p>
+<h3 id="understanding-the-internal-bz-integration-algorithms">Understanding the internal BZ integration algorithms</h3>
+<p>To help you understand how to configure the various
+command-line options above, this section
+describes the various integration algorithms available
+and how they are affected by the command-line parameters.</p>
+<h5 id="integration-methods-for-1d-brillouin-zones">Integration methods for 1D Brillouin zones</h5>
+<p>For one-dimensional Brillouin zones, there is only one
+BZ integration method available---namely,
+<a href="http://homerreid.com/teaching/18.330/Notes/ClenshawCurtis.pdf">Clenshaw-Curtis quadrature</a>
+(<code>--BZIMethod CC</code>, the default)
+with the number of integrand samples either fixed
+or chosen adaptively until user-specified error tolerances
+are achieved.</p>
+<p>More specifically, you may say either</p>
+<ul>
+<li><code>--BZIOrder [11 | 13 | 15 | ... | 97 | 99]</code></li>
+</ul>
+<p>or </p>
+<ul>
+<li><code>--BZIOrder 0</code></li>
+</ul>
+<p>The former option selects fixed-order CC cubature
+with 11, 13, ... 99 sample points. (This number must 
+be an odd integer between 11 and 99 inclusive.)</p>
+<p>The latter option (<code>--BZIOrder 0</code>) selects adaptive
+CC cubature
+using <a href="http://ab-initio.mit.edu/wiki/index.php/Cubature">this algorithm</a>.
+In this case the number of sample points will be chosen
+automatically subject to the values you select for the
+<code>--BZIRelTol</code>, <code>--BZIAbsTol</code>, and <code>--BZIMaxEvals</code>
+command-line options.</p>
+<h5 id="symmetry-factors-for-1d-brillouin-zones">Symmetry factors for 1D Brillouin zones</h5>
+<p>For 1D Brillouin zones, the only allowed 
+value of the <code>--BZSymmetryFactor</code> option is <code>2</code>,
+indicating that your integrand is symmetric under
+sign flip of the Bloch wavevector, i.e.
+<script type="math/tex">\mathcal Q(k_x) = \mathcal Q(-k_x)</script>.
+In this case the BZ integration may be restricted to 
+the range <script type="math/tex">0\le k_x \le \frac{\pi}{L_x}.</script>
+</p>
+<h4 id="integration-methods-for-2d-brillouin-zones">Integration methods for 2D Brillouin zones</h4>
+<p>The following integration methods are implemented for 
+2D Brillouin zones. (See below for pictures of where
+the various methods place their sample points.)</p>
 <ul>
 <li>
-<p>For geometries with two-dimensional lattice periodicity,
-  <code>--BZIMethod TC</code> selects a "triangle cubature" rule in which
-  the Brillouin zone is divided into two triangles, over which
-  the integral is evaluated using a fixed-order cubature scheme.
-  This method is the default for geometries with 2D periodicity.</p>
-</li>
-<li>
-<p><code>--BZIMethod CC</code> selects fixed-order Clenshaw-Curtis quadrature.
-  This option is available for geometries of both 1D and 2D
-  periodicity.
-  For 2D lattices, the BZ integral is evaluated
-  using two nested 1D Clenshaw-Curtis quadrature rules.
-  This method is the default for geometries with 1D periodicity.</p>
-</li>
-<li>
-<p><code>--BZIMethod Adaptive</code> selects an adaptive cubature scheme
-  that automatically choose sample points and keeps going
-  until a specified convergence tolerance is achieved.
-  This option is available for geometries of both 1D and 2D
-  periodicity.    </p>
+<p><strong>Clenshaw-Curtis cubature</strong> (<code>--BZIMethod CC</code>)</p>
+<p>Nested 2D fixed-order or adaptive Clenshaw-Curtis cubature.</p>
+<p>For fixed-order nested CC cubature with <code>NN</code> sample points
+per dimension, say <code>--BZIOrder NN</code>. Here <code>NN</code> must be 
+an odd integer between 11 and 99 inclusive.</p>
+<p>For adaptive 2D CC cubature (subject to your specified values
+of <code>--BZIRelTol</code>, <code>--BZIAbsTol</code>, and <code>--BZIMaxEvals</code>)
+say <code>--BZIOrder 0.</code>    </p>
 </li>
 </ul>
-<p class="toc"><code>--BZIOrder NN</code></p>
-<p>For integration methods that use fixed-order cubature rules
-  (<code>--BZIMethod TC</code> or <code>--BZIMethod CC</code>), this option may be 
-  used to specify the order of the cubature rule.  </p>
-<p>For Clenshaw-Curtis cubature (<code>--BZIMethod CC</code>), the order <code>NN</code>
-  may be any odd integer between 9 and 99. (In this case 
-  the "order" actually refers to the number of sample points in the
-  cubature rule.)    </p>
-<p>For triangle cubature (<code>--BZIMethod TC</code>), the order <code>NN</code>
-  may be 1, 2, 4, 5, 7, 9, 13, 14, 16, 20, or 25. In this
-  case the "order" is the degree of polynomial that is integrated
-  exactly by the cubature rule, not the number of sample points.</p>
-<p class="toc"><code>--BZIRelTol     1.0e-2
---BZIMaxEvals   1000</code></p>
-<p>These options may be used to specify stopping criteria for
-  adaptive integration methods (<code>--BZIMethod adaptive</code>).
-  <code>--BZIRelTol</code> sets the relative convergence tolerance,
-  while <code>--BZIMaxEvals</code> sets the upper limit on the number of 
-  integrand samples the integrator may use.</p>
-<p class="toc"><code>--BZSymmetric
---FullBZ</code></p>
-<p>These options may be used to describe symmetries of the integrand function <script type="math/tex">\mathcal{Q}(\bf k)</script>.</p>
-<p>For geometries with 2D square-lattice periodicity, <code>--BZSymmetric</code> may be used to specify that the Brillouin-zone integrand is symmetric under interchange of <script type="math/tex">k_x</script> and <script type="math/tex">k_y</script> (i.e. <script type="math/tex">\mathcal{Q}(k_x, k_y)=\mathcal{Q}(k_y, k_x)</script>, saving a factor of approximately 2 in evaluating the BZ cubature. </p>
-<p>[Note that symmetry requires both that <strong>(a)</strong> the surface meshes in the geometry are symmetric under inversion about the line <script type="math/tex">x=y</script>, and <strong>(b)</strong> the integrand <script type="math/tex">\mathcal{Q}(\bf k)</script> is symmetric under inversion about the line <script type="math/tex">k_x=k_y.</script> Condition <strong>(b)</strong> is not always satisfied even for geometries that satisfy condition <strong>(a)</strong>; an example would be the calculation of LDOS at a point <script type="math/tex">\bf x</script> that does not lie on the line <script type="math/tex">x=y.</script>]</p>
-<p>The default behavior of <a class="wikilink" href="../../scuff-em/">scuff-em</a> is to integrate over just the <em>irreducible</em> portion of the Brillouin zone and double or quadruple the result to get the full BZ integral. You can override this behavior by specifying <code>--FullBZ,</code> in which case the integral over the full Brillouin zone will be computed at 2x or 4x greater cost.</p>
-<p>For a 1D lattice with lattice constant <script type="math/tex">L</script>, 
-the full Brillouin zone is the region <script type="math/tex">0\le k \le \frac{2\pi}{L}</script>, and the irreducible Brillouin zone is the region <script type="math/tex">0\le k \le \frac{\pi}{L}.</script>
-For a 2D rectangular lattice with direct lattice constants <script type="math/tex">L_x, L_y</script>,
-the full Brillouin zone is the rectangle in the <script type="math/tex">(k_x,k_y)</script> plane with corners at the origin and at 
-<script type="math/tex">(k_x,k_y)=(\frac{2\pi}{L_x},\frac{2\pi}{L_y})</script>,
-while the irreducible Brillouin zone is the rectangle with corners at the origin and at 
-<script type="math/tex">(k_x,k_y)=(\frac{\pi}{L_x},\frac{\pi}{L_y})</script>.</p>
+<p>&nbsp;</p>
+<ul>
+<li>
+<p><strong>Triangle cubature</strong> (<code>--BZIMethod TC</code>)</p>
+<p>This algorithm divides the Brillouin zone into 8
+triangles and applies a fixed-order triangle cubature scheme
+to each triangle, omitting repetition of triangles
+that are symmetry-equivalent given the value you specified
+for <code>--BZSymmetryFactor</code> (see pictures below).</p>
+<p>For this algorithm, the allowed values of
+<code>--BZIOrder</code> are 1, 2, 4, 5, 7, 9, 13, 14, 16, 20, or 25.</p>
+</li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li>
+<p><strong>Radial cubature</strong> (<code>--BZIMethod Radial</code>)</p>
+<p>This algorithm uses a polar decomposition
+<script type="math/tex">(k_x,k_y) \to (k_\rho, k_\theta)</script> to
+evaluate the BZ integral as two nested 1D integrals,
+one over <script type="math/tex">k_\rho</script> and the second over <script type="math/tex">k_\theta</script>.
+(The <script type="math/tex">k_\rho</script> integral is evaluated via
+ Clenshaw-Curtis quadrature, and the <script type="math/tex">k_\theta</script> 
+ quadrature is evaluated using rectangular-rule quadrature,
+ not necessarily of the same order).</p>
+<p>This algorithm is useful for integrands that are strongly 
+peaked near the origin of the Brillouin zone and highly
+attenuated near the boundaries, so that most of the integral
+comes from the region near the origin.</p>
+<p>For this algorithm, the number of integration points
+used for the <script type="math/tex">k_\rho</script> and <script type="math/tex">k_\theta</script> integrals (call these
+numbers <script type="math/tex">N_\rho</script> and <script type="math/tex">N_\theta</script>) are encoded 
+into the value passed to <code>--BZIOrder</code>
+in the form <script type="math/tex">100\times N_\rho + N_\theta,</script>
+where <script type="math/tex">N_\rho</script> and <script type="math/tex">N_\theta</script> are each odd integers 
+between 11 and 99 inclusive.</p>
+<p>Thus, for example, <code>--BZIOrder 3321</code> specifies that the
+<script type="math/tex">k_\rho</script> integral is to be evaluated via 33-point CC
+cubature, while the <script type="math/tex">k_\theta</script> integral is to be evaluated
+via 21-point rectangular-rule cubature.</p>
+</li>
+</ul>
+<h4 id="symmetry-factors-for-2d-brillouin-zones">Symmetry factors for 2D Brillouin zones</h4>
+<p>For 2D geometries, the option <code>--BZSymmetryFactor</code> may
+take the value 2, 4, or 8, specifying that the Brillouin-zone
+integrand <script type="math/tex">\mathcal{Q}(k_x, k_y)</script> obeys symmetries as follows:</p>
+<ul>
+<li>
+<p><code>--BZSymmetryFactor 2</code>: </p>
+<p>We have
+<script type="math/tex">\mathcal{Q}(k_x,k_y) = \mathcal{Q}(k_x,-k_y),</script> so the BZ integration
+may be restricted to just the right half of the BZ.</p>
+</li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li>
+<p><code>--BZSymmetryFactor 4</code>:</p>
+<p>We have
+<script type="math/tex">\mathcal{Q}(k_x,k_y) = \mathcal{Q}(\pm k_x, \pm k_y),</script> 
+so the BZ integration
+may be restricted to just the upper-right quadrant of the BZ.</p>
+</li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li>
+<p><code>--BZSymmetryFactor 8</code>:</p>
+<p>In addition to symmetry under sign changes, the integrand
+is symmetric under <script type="math/tex">k_x\leftrightarrow k_y</script>,
+so the BZ integration
+may be restricted to the triangular region
+<script type="math/tex">0\le k_y \le k_x \le \frac{\pi}{L_x}.</script>
+(This is only possible for square lattices.)</p>
+</li>
+</ul>
+<h5 id="locations-of-quadrature-points-for-2d-brillouin-zones">Locations of quadrature points for 2D Brillouin zones</h5>
+<p>Here are some diagrams indicating the Bloch wavevectors
+that will be sampled by the internal algorithms for Brillouin-zone
+integration with various values of the command-line parameters:</p>
+<pre><code class="bash">--BZIMethod CC    --BZIOrder  21    --BZSymmetryFactor 1
+</code></pre>
+
+<p><img alt="CC21.SF1.png" src="../BZIDiagrams/CC21.SF1.png" /></p>
+<p>&nbsp;</p>
+<pre><code class="bash">--BZIMethod CC    --BZIOrder  21    --BZSymmetryFactor 2
+</code></pre>
+
+<p><img alt="CC21.SF1.png" src="../BZIDiagrams/CC21.SF2.png" /></p>
+<p>&nbsp;</p>
+<pre><code class="bash">--BZIMethod CC    --BZIOrder  21    --BZSymmetryFactor 4
+</code></pre>
+
+<p><img alt="CC21.SF1.png" src="../BZIDiagrams/CC21.SF4.png" />
+&nbsp;</p>
+<pre><code class="bash">--BZIMethod CC    --BZIOrder  21    --BZSymmetryFactor 8
+</code></pre>
+
+<p><img alt="CC21.SF1.png" src="../BZIDiagrams/CC21.SF8.png" />
+&nbsp;</p>
+<pre><code class="bash">--BZIMethod TC    --BZIOrder  20    --BZSymmetryFactor 1
+</code></pre>
+
+<p><img alt="TC20.SF1.png" src="../BZIDiagrams/TC20.SF1.png" /></p>
+<p>&nbsp;</p>
+<pre><code class="bash">--BZIMethod TC    --BZIOrder  20    --BZSymmetryFactor 2
+</code></pre>
+
+<p><img alt="TC20.SF2.png" src="../BZIDiagrams/TC20.SF2.png" /></p>
+<p>&nbsp;</p>
+<pre><code class="bash">--BZIMethod TC    --BZIOrder  20    --BZSymmetryFactor 4
+</code></pre>
+
+<p><img alt="TC20.SF4.png" src="../BZIDiagrams/TC20.SF4.png" />
+&nbsp;</p>
+<pre><code class="bash">--BZIMethod TC    --BZIOrder  20    --BZSymmetryFactor 8
+</code></pre>
+
+<p><img alt="TC20.SF8.png" src="../BZIDiagrams/TC20.SF8.png" />
+&nbsp;</p>
+<pre><code class="bash">--BZIMethod Radial --BZIOrder 3111 --BZSymmetryFactor 1
+</code></pre>
+
+<p><img alt="Radial.3111.SF1.png" src="../BZIDiagrams/Radial.3111.SF1.png" /></p>
+<p>&nbsp;</p>
+<pre><code class="bash">--BZIMethod Radial --BZIOrder 3111 --BZSymmetryFactor 2
+</code></pre>
+
+<p><img alt="Radial.3111.SF2.png" src="../BZIDiagrams/Radial.3111.SF2.png" /></p>
+<p>&nbsp;</p>
+<pre><code class="bash">--BZIMethod Radial --BZIOrder 3111 --BZSymmetryFactor 4
+</code></pre>
+
+<p><img alt="Radial.3111.SF4.png" src="../BZIDiagrams/Radial.3111.SF4.png" /></p>
+<p>&nbsp;</p>
+<pre><code class="bash">--BZIMethod Radial --BZIOrder 3111 --BZSymmetryFactor 8
+</code></pre>
+
+<p><img alt="Radial.3111.SF8.png" src="../BZIDiagrams/Radial.3111.SF8.png" /></p>
+<p>&nbsp;</p>
+<h5 id="locations-of-quadrature-points-for-1d-brillouin-zones">Locations of quadrature points for 1D Brillouin zones</h5>
+<pre><code class="bash">--BZIMethod CC    --BZIOrder  31    --BZSymmetryFactor 1
+</code></pre>
+
+<p><img alt="CC31.SF1.1D.png" src="../BZIDiagrams/CC31.SF1.1D.png" /></p>
+<p>&nbsp;</p>
+<pre><code class="bash">--BZIMethod CC    --BZIOrder  31    --BZSymmetryFactor 2
+</code></pre>
+
+<p><img alt="CC31.SF2.png" src="../BZIDiagrams/CC31.SF2.1D.png" /></p>
+<p>&nbsp;</p>
               
             </div>
           </div>
@@ -601,7 +794,7 @@ while the irreducible Brillouin zone is the rectangle with corners at the origin
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../applications/GeneralReference/" class="btn btn-neutral float-right" title="General command-line reference"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../FAQ/" class="btn btn-neutral float-right" title="FAQ"/>Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../IncidentFields/" class="btn btn-neutral" title="Incident fields"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -649,7 +842,7 @@ while the irreducible Brillouin zone is the rectangle with corners at the origin
         <span><a href="../IncidentFields/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../../applications/GeneralReference/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../FAQ/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
