@@ -485,9 +485,13 @@
 integrals over the Brillouin zone (BZ) of a 1D or 2D
 reciprocal lattice, i.e.</p>
 <p>
-<script type="math/tex; mode=display">Q(\omega) = \int_{\hbox{BZ}} \mathcal{Q}(\omega, \bf{k}) \,d\bf{k}.</script>
+<script type="math/tex; mode=display">Q(\omega) = \int_\text{BZ} \overline{Q}(\omega, \mathbf{k}_\text{B}) 
+ \,d\mathbf{k}_\text{B}</script>
 </p>
-<p>Examples of calculations that require
+<p>where we generically use the overlined symbol
+<script type="math/tex">\overline{Q}(\mathbf{k}_\text{B})</script> to denote
+the contribution of Bloch vector <script type="math/tex">\mathbf{k}_\text{B}</script>
+to quantity <script type="math/tex">Q</script>. Examples of calculations that require
 Brillouin-zone integrations include</p>
 <ul>
 <li>
@@ -513,46 +517,45 @@ at user-specified evaluation points in
 <p>In general, Brillouin-zone integrations are evaluated
 by numerical cubature---that is, as weighted sums of
 integrand samples:
-<script type="math/tex; mode=display"> Q(\omega) \approx \sum W_n \mathcal Q(\omega, \bf k_n)</script>
-where <script type="math/tex">\{W_n, \bf k_n\}</script> are the weights and points in
+<script type="math/tex; mode=display"> Q(\omega) \approx \sum w_n \overline Q(\omega, \mathbf{k}_n)</script>
+where <script type="math/tex">\{w_n, \mathbf{k}_n\}</script> are the weights and points in
 a cubature rule for the Brillouin zone of your reciprocal
 lattice, and where each integrand sample
-<script type="math/tex">\mathcal Q(\omega, \bf k_n)</script> is computed by performing a
+<script type="math/tex">\overline Q(\omega, \bf k_n)</script> is computed by performing a
 single <a class="wikilink" href="../../scuff-em/">scuff-em</a> calculation at a fixed Bloch
 wavevector. The <a class="wikilink" href="../../scuff-em/">scuff-em</a> workflow offers two 
 options for evaluating such cubatures:   </p>
 <ul>
-<li>
-<p>You can design and implement your own cubature scheme
+<li>You can design and implement your own cubature scheme
 involving your own custom-chosen weights and points
-<script type="math/tex">\{W_n, \bf k_n\}</script>. In this case, you will use 
+<script type="math/tex">\{w_n, \bf k_n\}</script>. In this case, you will use 
 the <code>--byOmegakBloch</code> command-line option to instruct
 a <a class="wikilink" href="../../scuff-em/">scuff-em</a> application code to report values of the
-quantity <script type="math/tex">\mathcal Q(\omega, \bf k_n)</script> at each of your points
+quantity <script type="math/tex">\overline Q(\omega, \bf k_n)</script> at each of your points
 (this output will typically be written to file with
 extension <code>.byOmegakBloch</code> or <code>.byXikBloch</code>),
 then compute the weighted sums yourself in e.g.
-<a href="http://julialang.org"><span class="SC">julia</span></a>.    </p>
-</li>
-<li>
-<p>Alternatively, you can ask <a class="wikilink" href="../../scuff-em/">scuff-em</a> to perform the
+<a href="http://julialang.org"><span class="SC">julia</span></a>.    </li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li>Alternatively, you can ask <a class="wikilink" href="../../scuff-em/">scuff-em</a> to perform the
 BZ integration internally, using one of several
 built-in cubature schemes. In this case the BZ-integrated
 quantities <script type="math/tex">Q(\omega)</script> will typically be written to 
 an output file with extension <code>.byOmega</code> or <code>.byXi</code>.
 You will <em>also</em> get an output file named <code>.byOmegakBloch</code>
 or <code>.byXikBloch</code> that reports the Bloch-vector-resolved
-integrand samples <script type="math/tex">\mathcal Q(\omega, \bf k_n)</script>
-chosen internally by the <a class="wikilink" href="../../scuff-em/">scuff-em</a> BZ integrator.</p>
-</li>
+integrand samples <script type="math/tex">\overline Q(\omega, \bf k_n)</script>
+chosen internally by the <a class="wikilink" href="../../scuff-em/">scuff-em</a> BZ integrator.</li>
 </ul>
 <h3 id="command-line-options-for-customizing-internal-bz-integration">Command-line options for customizing internal BZ integration</h3>
 <p>If you choose the second option above, you may specify
 various command-line options to customize the algorithm
 used by <a class="wikilink" href="../../scuff-em/">scuff-em</a> to select the cubature points and
-weights <script type="math/tex">\{W_n, \mathbf{k}_n\}</script>. The options are 
+weights <script type="math/tex">\{w_n, \mathbf{k}_n\}</script>. The options are 
 listed here and discussed in more detail below.</p>
-<pre><code class="bash">--BZIMethod [CC | TC | Radial]
+<pre><code class="bash">--BZIMethod [CC | TC | Polar | Polar2]
 </code></pre>
 
 <p>Selects the integration algorithm (see below for details).</p>
@@ -576,9 +579,9 @@ integrand samples that will be used.</p>
 </code></pre>
 
 <p>This option lets you tell <a class="wikilink" href="../../scuff-em/">scuff-em</a> that your
-integrand function <script type="math/tex">\mathcal Q(\mathbf k)</script>
+integrand function <script type="math/tex">\overline Q(\mathbf k_\text{B})</script>
 is invariant under 2, 4, or 8-fold rotational 
-symmetry transformations applied to <script type="math/tex">\mathbf k</script>. 
+symmetry transformations applied to <script type="math/tex">\mathbf k_\text{B}</script>. 
 See below for more details on what this means.</p>
 <h3 id="understanding-the-internal-bz-integration-algorithms">Understanding the internal BZ integration algorithms</h3>
 <p>To help you understand how to configure the various
@@ -604,7 +607,7 @@ are achieved.</p>
 <p>The former option selects fixed-order CC cubature
 with 11, 13, ... 99 sample points. (This number must 
 be an odd integer between 11 and 99 inclusive.)</p>
-<p>The latter option (<code>--BZIOrder 0</code>) selects adaptive
+<p>The latter option selects adaptive
 CC cubature
 using <a href="http://ab-initio.mit.edu/wiki/index.php/Cubature">this algorithm</a>.
 In this case the number of sample points will be chosen
@@ -616,7 +619,7 @@ command-line options.</p>
 value of the <code>--BZSymmetryFactor</code> option is <code>2</code>,
 indicating that your integrand is symmetric under
 sign flip of the Bloch wavevector, i.e.
-<script type="math/tex">\mathcal Q(k_x) = \mathcal Q(-k_x)</script>.
+<script type="math/tex">\overline Q(k_x) = \overline Q(-k_x)</script>.
 In this case the BZ integration may be restricted to 
 the range <script type="math/tex">0\le k_x \le \frac{\pi}{L_x}.</script>
 </p>
@@ -652,7 +655,7 @@ for <code>--BZSymmetryFactor</code> (see pictures below).</p>
 <p>&nbsp;</p>
 <ul>
 <li>
-<p><strong>Radial cubature</strong> (<code>--BZIMethod Radial</code>)</p>
+<p><strong>Polar cubature</strong> (<code>--BZIMethod Polar</code>)</p>
 <p>This algorithm uses a polar decomposition
 <script type="math/tex">(k_x,k_y) \to (k_\rho, k_\theta)</script> to
 evaluate the BZ integral as two nested 1D integrals,
@@ -678,15 +681,56 @@ cubature, while the <script type="math/tex">k_\theta</script> integral is to be 
 via 21-point rectangular-rule cubature.</p>
 </li>
 </ul>
+<p>&nbsp;</p>
+<ul>
+<li>
+<p><strong> Polar cubature with change of variables
+     <script type="math/tex">k_\rho \to k_z</script> </strong> (<code>--BZIMethod Polar2</code>)</p>
+<p>This is the same as <code>--BZIMethod Polar</code>, but with
+two modifications: <strong>(a)</strong> The <script type="math/tex">k_\rho</script> integral 
+is split into two separate integrals covering the
+ranges <script type="math/tex">k_\rho < k_0</script> and <script type="math/tex">k_\rho >k_0</script> 
+(where <script type="math/tex">k_0\equiv \frac{\omega}{c}</script> is the vacuum photon
+wavenumber at the frequency in question).
+<strong>(b)</strong> In each of the two <script type="math/tex">k_\rho</script> integrals we
+make the change of variables
+<script type="math/tex; mode=display"> k_\rho \to k_z\equiv \sqrt{|k_0^2 - k_\rho^2|}.</script>
+</p>
+<p>These modifications are useful
+for cases in which the free-space wavevector <script type="math/tex">k_0</script>
+falls within the Brillouin zone. In these cases,
+the convergence of the <script type="math/tex">k_\rho</script> integral is
+degraded by the phenomena known as "Wood anomalies"
+in optics or "van Hove singularities" in solid-state
+physics, and changing variables to <script type="math/tex">k_z</script> introduces
+a Jacobian factor that neutralizes these singularities
+to yield a better-behaved integrand.    </p>
+</li>
+</ul>
+<p><strong> Special <script type="math/tex">N_\theta</script> values for rotationally-invariant integrands </strong></p>
+<p>As discussed above, for the <code>Polar</code> and <code>Polar2</code> integration methods
+the value of the <code>--BZIOrder</code> option is interpreted as the composite 
+quantity <script type="math/tex">100\times N_\rho + N_\theta</script>,
+where <script type="math/tex">N_\rho</script> and <script type="math/tex">N_\theta</script> are odd integers in the range <script type="math/tex">[11,99]</script>
+specifying the number of cubature points used for the <script type="math/tex">k_\rho</script> and 
+<script type="math/tex">k_\theta</script> integrals (or set to 0 to request adaptive quadrature).</p>
+<p>For <em>fully</em> rotationally-symmetric geometries in which the BZ integrand
+<script type="math/tex">\overline{Q}</script> is independent of <script type="math/tex">k_\theta</script>, you can specify
+<script type="math/tex">N_\theta=\{2,4,6\}</script> to indicate that the <script type="math/tex">k_\theta</script> integral
+is to be evaluated by a 1-point cubature with the single <script type="math/tex">k_\theta</script>
+sample taken at <script type="math/tex">k_\theta=\{0,\frac{\pi}{2},\frac{\pi}{4}\}</script>.</p>
+<p>(Of course, no geometry discretized into triangles can actually
+be fully rotationally invariant, but pretending so may be a
+reasonable approximation in some cases, such as <a href="../../examples/HalfSpaceLDOS/HalfSpaceLDOS/">this one</a>.)</p>
 <h4 id="symmetry-factors-for-2d-brillouin-zones">Symmetry factors for 2D Brillouin zones</h4>
 <p>For 2D geometries, the option <code>--BZSymmetryFactor</code> may
 take the value 2, 4, or 8, specifying that the Brillouin-zone
-integrand <script type="math/tex">\mathcal{Q}(k_x, k_y)</script> obeys symmetries as follows:</p>
+integrand <script type="math/tex">\overline{Q}(k_x, k_y)</script> obeys symmetries as follows:</p>
 <ul>
 <li>
 <p><code>--BZSymmetryFactor 2</code>: </p>
 <p>We have
-<script type="math/tex">\mathcal{Q}(k_x,k_y) = \mathcal{Q}(k_x,-k_y),</script> so the BZ integration
+<script type="math/tex">\overline{Q}(k_x,k_y) = \overline{Q}(k_x,-k_y),</script> so the BZ integration
 may be restricted to just the right half of the BZ.</p>
 </li>
 </ul>
@@ -695,22 +739,20 @@ may be restricted to just the right half of the BZ.</p>
 <li>
 <p><code>--BZSymmetryFactor 4</code>:</p>
 <p>We have
-<script type="math/tex">\mathcal{Q}(k_x,k_y) = \mathcal{Q}(\pm k_x, \pm k_y),</script> 
+<script type="math/tex">\overline{Q}(k_x,k_y) = \overline{Q}(\pm k_x, \pm k_y),</script> 
 so the BZ integration
 may be restricted to just the upper-right quadrant of the BZ.</p>
 </li>
 </ul>
 <p>&nbsp;</p>
 <ul>
-<li>
-<p><code>--BZSymmetryFactor 8</code>:</p>
-<p>In addition to symmetry under sign changes, the integrand
-is symmetric under <script type="math/tex">k_x\leftrightarrow k_y</script>,
-so the BZ integration
-may be restricted to the triangular region
-<script type="math/tex">0\le k_y \le k_x \le \frac{\pi}{L_x}.</script>
-(This is only possible for square lattices.)</p>
-</li>
+<li><code>--BZSymmetryFactor 8</code>: 
+    In addition to symmetry under sign changes, the integrand
+    is symmetric under <script type="math/tex">k_x\leftrightarrow k_y</script>,
+    so the BZ integration
+    may be restricted to the triangular region
+    <script type="math/tex">0\le k_y \le k_x \le \frac{\pi}{L_x}.</script>
+    (This is only possible for square lattices.)</li>
 </ul>
 <h5 id="locations-of-quadrature-points-for-2d-brillouin-zones">Locations of quadrature points for 2D Brillouin zones</h5>
 <p>Here are some diagrams indicating the Bloch wavevectors
@@ -731,6 +773,7 @@ integration with various values of the command-line parameters:</p>
 
 <p><img alt="CC21.SF1.png" src="../BZIDiagrams/CC21.SF4.png" />
 &nbsp;</p>
+<p><a name="IrreducibleBZ"></p>
 <pre><code class="bash">--BZIMethod CC    --BZIOrder  21    --BZSymmetryFactor 8
 </code></pre>
 
@@ -756,26 +799,46 @@ integration with various values of the command-line parameters:</p>
 
 <p><img alt="TC20.SF8.png" src="../BZIDiagrams/TC20.SF8.png" />
 &nbsp;</p>
-<pre><code class="bash">--BZIMethod Radial --BZIOrder 3111 --BZSymmetryFactor 1
+<pre><code class="bash">--BZIMethod Polar --BZIOrder 3111 --BZSymmetryFactor 1
 </code></pre>
 
-<p><img alt="Radial.3111.SF1.png" src="../BZIDiagrams/Radial.3111.SF1.png" /></p>
+<p><img alt="Polar.3111.SF1.png" src="../BZIDiagrams/Polar.3111.SF1.png" /></p>
 <p>&nbsp;</p>
-<pre><code class="bash">--BZIMethod Radial --BZIOrder 3111 --BZSymmetryFactor 2
+<pre><code class="bash">--BZIMethod Polar --BZIOrder 3111 --BZSymmetryFactor 2
 </code></pre>
 
-<p><img alt="Radial.3111.SF2.png" src="../BZIDiagrams/Radial.3111.SF2.png" /></p>
+<p><img alt="Polar.3111.SF2.png" src="../BZIDiagrams/Polar.3111.SF2.png" /></p>
 <p>&nbsp;</p>
-<pre><code class="bash">--BZIMethod Radial --BZIOrder 3111 --BZSymmetryFactor 4
+<pre><code class="bash">--BZIMethod Polar --BZIOrder 3111 --BZSymmetryFactor 4
 </code></pre>
 
-<p><img alt="Radial.3111.SF4.png" src="../BZIDiagrams/Radial.3111.SF4.png" /></p>
+<p><img alt="Polar.3111.SF4.png" src="../BZIDiagrams/Polar.3111.SF4.png" /></p>
 <p>&nbsp;</p>
-<pre><code class="bash">--BZIMethod Radial --BZIOrder 3111 --BZSymmetryFactor 8
+<pre><code class="bash">--BZIMethod Polar --BZIOrder 3111 --BZSymmetryFactor 8
 </code></pre>
 
-<p><img alt="Radial.3111.SF8.png" src="../BZIDiagrams/Radial.3111.SF8.png" /></p>
+<p><img alt="Polar.3111.SF8.png" src="../BZIDiagrams/Polar.3111.SF8.png" /></p>
 <p>&nbsp;</p>
+<p><strong>Note:</strong> The next four diagrams are for a frequency of
+<script type="math/tex">\frac{\omega}{c}\approx 0.32\cdot \frac{2\pi}{L}</script>. The accumulation
+of points near <script type="math/tex">|\mathbf{k}_\text{B}|=\frac{\omega}{c}</script>
+is noticeable for the <code>Polar2</code> integration strategy.</p>
+<pre><code class="bash">--BZIMethod Polar2 --BZIOrder 1111 --BZSymmetryFactor 1
+</code></pre>
+
+<p><img alt="Polar2.1111.SF1.png" src="../BZIDiagrams/Polar2.SF1.png" /></p>
+<pre><code class="bash">--BZIMethod Polar2 --BZIOrder 1111 --BZSymmetryFactor 2
+</code></pre>
+
+<p><img alt="Polar2.1111.SF2.png" src="../BZIDiagrams/Polar2.SF2.png" /></p>
+<pre><code class="bash">--BZIMethod Polar2 --BZIOrder 1111 --BZSymmetryFactor 4
+</code></pre>
+
+<p><img alt="Polar2.1111.SF4.png" src="../BZIDiagrams/Polar2.SF4.png" /></p>
+<pre><code class="bash">--BZIMethod Polar2 --BZIOrder 1111 --BZSymmetryFactor 8
+</code></pre>
+
+<p><img alt="Polar2.1111.SF8.png" src="../BZIDiagrams/Polar2.SF8.png" /></p>
 <h5 id="locations-of-quadrature-points-for-1d-brillouin-zones">Locations of quadrature points for 1D Brillouin zones</h5>
 <pre><code class="bash">--BZIMethod CC    --BZIOrder  31    --BZSymmetryFactor 1
 </code></pre>

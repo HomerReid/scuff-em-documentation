@@ -218,7 +218,13 @@
         
             <ul>
             
-                <li class="toctree-l3"><a href="#what-units-does-scuff-em-use-for-physical-quantities-like-length-frequency-power-etc">What units does scuff-em use for physical quantities like length, frequency, power, etc?</a></li>
+                <li class="toctree-l3"><a href="#what-units-does-scuff-em-use-for-physical-quantities-like-length-frequency-field-strengths-power-force-torque-etc">What units does scuff-em use for physical quantities like length, frequency, field strengths, power, force, torque, etc?</a></li>
+                
+                    <li><a class="toctree-l4" href="#length-and-frequency">Length and frequency</a></li>
+                
+                    <li><a class="toctree-l4" href="#electric-and-magnetic-field-strengths">Electric and magnetic field strengths</a></li>
+                
+                    <li><a class="toctree-l4" href="#power-force-torque">Power, force, torque</a></li>
                 
             
                 <li class="toctree-l3"><a href="#im-working-on-a-big-project-involving-multiple-calculations-on-a-geometry-with-various-different-values-of-geometric-parameters-material-properties-and-meshing-fineness-its-getting-unwieldy-to-have-all-of-these-geo-and-msh-and-scuffgeo-files-cluttering-up-my-project-directory-how-would-you-suggest-organizing-things">I'm working on a big project involving multiple calculations on a geometry with various different values of geometric parameters, material properties, and meshing fineness. It's getting unwieldy to have all of these .geo and .msh and .scuffgeo files cluttering up my project directory. How would you suggest organizing things?</a></li>
@@ -473,7 +479,9 @@
             <div class="section">
               
                 <h1 id="frequently-asked-questions-about-scuff-em">Frequently asked questions about <a class="wikilink" href="../../scuff-em/">scuff-em</a></h1>
-<h2 id="what-units-does-scuff-em-use-for-physical-quantities-like-length-frequency-power-etc">What units does <a class="wikilink" href="../../scuff-em/">scuff-em</a> use for physical quantities like length, frequency, power, etc?</h2>
+<p><a name="Units"></p>
+<h2 id="what-units-does-scuff-em-use-for-physical-quantities-like-length-frequency-field-strengths-power-force-torque-etc">What units does <a class="wikilink" href="../../scuff-em/">scuff-em</a> use for physical quantities like length, frequency, field strengths, power, force, torque, etc?</h2>
+<h3 id="length-and-frequency">Length and frequency</h3>
 <p>Short answer: The default units are <script type="math/tex">L_0=1\, \mu\text{m}</script> for length
 and <script type="math/tex">\omega_0=3\cdot 10^{14}</script> rad/sec (=<script type="math/tex">c/L_0)</script> for angular frequency.</p>
 <p>Thus, if you write a 
@@ -501,11 +509,107 @@ including perfectly-conducting (<code>PEC</code>) bodies and
 frequency-independent dielectrics
 (such as <code>CONST_EPS_10+1i</code>), the scale invariance
 of Maxwell's equations means that the same
-computational results </p>
+computational results can be interpreted on different
+length scales. For example, if your mesh file
+describes a sphere of radius <code>0.9' and you run
+a [[scuff-em]] calculation at angular frequency</code>1.2`, 
+then the results can be equally well interpreted as describing</p>
+<ul>
+<li>
+<p>a sphere of radius 0.9 <script type="math/tex">\mu</script>m at an angular frequency of
+<script type="math/tex">1.2 \cdot 3\cdot 10^{14}</script> rad/sec, or</p>
+</li>
+<li>
+<p>a sphere of radius 0.9 mm at an angular frequency of
+<script type="math/tex">1.2 \cdot 3\cdot 10^{11}</script> rad/sec, or</p>
+</li>
+<li>
+<p>a sphere of radius 0.9 nm at an angular frequency of
+<script type="math/tex">1.2 \cdot 3\cdot 10^{17}</script> rad/sec, etc. (Of course,
+the continuum</p>
+</li>
+</ul>
 <p>However, this scale invariance is broken by
-frequency-dependent dielectric functions, such
-as the <code>SILICON</code> material definition in 
-<a href="../../examples/SiliconSlabs/SiliconSlabs/">this example</a>.</p>
+frequency-dependent dielectric functions 
+(or frequency-dependent permeabilities) such
+as the <code>SILICON</code> material definition in
+<a href="../../examples/SiliconSlabs/SiliconSlabs/">this example</a>. The convention
+adopted by <a class="wikilink" href="../../scuff-em/">scuff-em</a> is that
+<a href="../Materials/#Parsed"><script type="math/tex">\omega</script> values in frequency-dependent material
+definitions are always interpreted in units of radians/second</a>,
+<em>not</em> specialized units like <script type="math/tex">3 \cdot 10^{14} rad/sec</script>.
+Thus, if your calculation involves a frequency-dependent 
+material function (either a [user-defined function][UserDefined] or
+a [datafile][Tabulated]),
+then <a class="wikilink" href="../../scuff-em/">scuff-em</a> will eventually need to convert the numerical
+values you specify for <code>--Omega</code> inputs into absolute
+angular frequencies. For this purpose, <a class="wikilink" href="../../scuff-em/">scuff-em</a> generally
+makes the scale-breaking assumption that numerical <code>--Omega</code> values
+are given in units of <script type="math/tex">\omega_0=3\cdot 10^{14}</script> rad/sec,
+corresponding to the default length scale of <script type="math/tex">L_0=1\,\mu</script>m.
+(The one exception to this rule is
+[<span class=SC>scuff-rf</span>][scuff-rf], which uses
+length and frequency units more appropriate for RF modeling;
+this is discussed in the 
+[<span class=SC>scuff-rf</span> documentation][scuff-rf].)</p>
+<h3 id="electric-and-magnetic-field-strengths">Electric and magnetic field strengths</h3>
+<p>The only code in the <a class="wikilink" href="../../scuff-em/">scuff-em</a> suite that directly outputs
+numerical values of electric and magnetic field components is
+<a href="../../applications/scuff-scatter/scuff-scatter/"><span class=SC>scuff-scatter</span></a>. For this
+code, there is always a user-specified incident field with
+a user-specified numerical field-strength parameter, and the
+units of electric-field components reported by <a class="wikilink" href="../../scuff-scatter/">scuff-scatter</a>
+are understood simply to be the same as the units of the incident-field
+specifications.
+The units of magnetic-field components are the units of electric-field
+components divided by ohms (volts/amperes); thus, if <strong>E</strong>-field 
+components have units of volts/micron then <strong>H</strong>-field components
+have units of amps/micron.</p>
+<p>Thus, to run a <a class="wikilink" href="../../scuff-scatter/">scuff-scatter</a> calculation to model the
+scattering of an incident plane wave of amplitude 1 volt/micron,
+use the command-line option <code>--pwPolarization 0 0 1</code>
+and interpret the numbers reported for <strong>E</strong>-field (<strong>H</strong>-field)
+components in units of volts/micron (amps/micron).
+Alternatively, to describe the scattering of a plane wave of 
+amplitude 1 volt/meter, use the same command-line options,
+but now interprety the output numbers in units of 
+volts/meter (amps/meter).</p>
+<h3 id="power-force-torque">Power, force, torque</h3>
+<p>The units in which numerical values of power, force, and torque are
+reported differ slightly for different codes in the <a class="wikilink" href="../../scuff-em/">scuff-em</a> suite:</p>
+<ul>
+<li>
+<p>For <a href="../../applications/scuff-scatter/scuff-scatter/"><span class=SC>scuff-scatter</span></a>,
+and torque in</p>
+</li>
+<li>
+<p>For <a href="../../applications/scuff-cas3D/scuff-cas3D/"><span class=SC>scuff-cas3D</span></a>,</p>
+<ul>
+<li>
+<p>equilibrium Casimir energies are reported in units of 
+  <script type="math/tex">\hbar c/1\,\mu\text{m}</script>=0.1973 eV = 3.16\cdot 10^{-20}$ joules,</p>
+</li>
+<li>
+<p>equilibrium Casimir forces are reported in units of 
+  <script type="math/tex">\hbar c/(1\,\mu\text{m})^2</script>=31.6 femtoNewtons</p>
+</li>
+<li>
+<p>equilibrium Casimir torques are reported in units of
+  <script type="math/tex">\hbar c/(1\,\mu\text{m})</script>=31.6 femtoNewtons&times; microns.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="../../applications/scuff-neq/scuff-neq/"><span class=SC>scuff-neq</span></a> reports power in watts,
+force in nanoNewtons, torque in nanoNewtons&times;microns.
+(More specifically, what <a class="wikilink" href="../../scuff-neq/">scuff-neq</a> actually reports are
+<strong>fluxes</strong> of energy and momentum; these are quantities
+that need to be multiplied by energy prefactors and integrated
+over angular frequencies to yield heat-transfer rates, forces, and torques;
+this is discussed in more detail in the 
+<a href="../../applications/scuff-neq/scuff-neq/"><span class=SC>scuff-neq</span></a> documentation.</p>
+</li>
+</ul>
 <h2 id="im-working-on-a-big-project-involving-multiple-calculations-on-a-geometry-with-various-different-values-of-geometric-parameters-material-properties-and-meshing-fineness-its-getting-unwieldy-to-have-all-of-these-geo-and-msh-and-scuffgeo-files-cluttering-up-my-project-directory-how-would-you-suggest-organizing-things">I'm working on a big project involving multiple calculations on a geometry with various different values of geometric parameters, material properties, and meshing fineness. It's getting unwieldy to have all of these <code>.geo</code> and <code>.msh</code> and <code>.scuffgeo</code> files cluttering up my project directory. How would you suggest organizing things?</h2>
 <p>Here is what I typically do:</p>
 <ul>

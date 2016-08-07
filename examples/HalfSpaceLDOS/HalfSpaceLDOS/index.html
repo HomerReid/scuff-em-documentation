@@ -147,7 +147,13 @@
         
             <ul>
             
-                <li class="toctree-l3"><a href="#gmsh-geometry-file-for-unit-cell-geometry">gmsh geometry file for unit-cell geometry</a></li>
+                <li class="toctree-l3"><a href="#greens-functions-and-ldos">Green's functions and LDOS</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#computing-greens-functions">Computing Green's functions</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#gmsh-geometry-files-for-unit-cell-geometries">gmsh geometry files for unit-cell geometries</a></li>
                 
             
                 <li class="toctree-l3"><a href="#scuff-em-geometry-files">scuff-em geometry files</a></li>
@@ -155,15 +161,9 @@
             
                 <li class="toctree-l3"><a href="#list-of-evaluation-points">List of evaluation points</a></li>
                 
-            
-                <li class="toctree-l3"><a href="#launching-a-bloch-vector-resolved-run">Launching a Bloch-vector-resolved run</a></li>
+                    <li><a class="toctree-l4" href="#studying-the-integrand-to-select-the-optimal-cubature-rule">Studying the integrand to select the optimal cubature rule</a></li>
                 
-                    <li><a class="toctree-l4" href="#command-line-arguments-for-quasi-analytical-calculation-using-plane-wave-decomposition">Command-line arguments for quasi-analytical calculation using plane-wave decomposition:</a></li>
-                
-                    <li><a class="toctree-l4" href="#command-line-arguments-for-fully-numerical-calculation-using-discretized-surface-meshes">Command-line arguments for fully numerical calculation using discretized surface meshes:</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#launching-a-brillouin-zone-integrated-run">Launching a Brillouin-zone integrated run</a></li>
+                    <li><a class="toctree-l4" href="#running-full-brillouin-zone-integrated-calculations">Running full Brillouin-zone-integrated calculations</a></li>
                 
             
             </ul>
@@ -485,120 +485,238 @@
           <div role="main">
             <div class="section">
               
-                <h1>Photonic LDOS above a dielectric half-space</h1>
+                <h1>Dyadic Green's Functions and LDOS above a material half-space</h1>
 
 <p>In this example, we exploit <a class="wikilink" href="../../../scuff-em/">scuff-em</a>'s
 <a href="../../../reference/Geometries/#Extended">support for 2D periodic geometries</a>
 by using <a href="../../../applications/scuff-ldos/scuff-ldos/"><span class="SC">scuff-ldos</span></a>
-to compute the electromagnetic local density
-of states (LDOS) at evaluation points lying above an
+to compute dyadic Green's functions (DGFs) and 
+electromagnetic local densities of states (LDOS) 
+at evaluation points lying above an
 infinite planar dielectric interface.</p>
-<p>Because this geometry happens to be amenable to an analytical 
+<p>Because this geometry happens to be amenable to an analytical
 treatment, we will also <em>check</em> the numerical results of
 <a class="wikilink" href="../../../scuff-em/">scuff-em</a> against the results of analytical calculations of
 the LDOS.</p>
 <p>The files for this example may be found in the
 <code>share/scuff-em/examples/HalfSpaceLDOS</code> subdirectory
 of your <a class="wikilink" href="../../../scuff-em/">scuff-em</a> installation.</p>
-<p>Also, the computational procedure implemented by <a href="../../../applications/scuff-ldos/scuff-ldos/">scuff-ldos</a>
-is described in this memo:
-<a href="../../../tex/scuff-ldos.pdf">Computation of Green's Functions and LDOS in <span class="SC">scuff-em</span></a>.</p>
-<h3 id="slight-complication-the-need-for-brillouin-zone-integration-in-periodic-geometries">Slight complication: The need for Brillouin-zone integration in periodic geometries</h3>
-<p>In general, the quantity in which we will be interested
-is the LDOS at a single point <script type="math/tex">\bf x</script> in space---basically,
-the scattered field at <script type="math/tex">\bf x</script> due to a point dipole
-source at <script type="math/tex">\bf x</script>. For a compact geometry such as a 
-dielectric nanoparticle, this requires just a single 
-scattering calculation (technically 6 calculations
-with different incident fields, but calculations with
-additional incident fields come basically for free
-once we've assembled and factorized the BEM matrix).</p>
-<p>However, the situation is slightly more complicated for
-periodic geometries. To compute the LDOS at a point
-in the vicinity of (say) an infinitely extended
-(periodically replicated) surface, we need to solve a
-scattering problem in which the incident field is not 
-Bloch-periodic, but is instead the field of a localized 
-point source, which certainly does not obey
-Bloch-periodic boundary conditions.
-However, when working with periodic geometries in <a class="wikilink" href="../../../scuff-em/">scuff-em</a>,
-each individual scattering problem has the property
-that <em>everything</em> in the problem---including the incident
-field---must be Bloch-periodic with a specific Bloch vector
-<script type="math/tex">\bf k_{\hbox{B}}</script>. Thus, when we do a single scattering
-problem with a point-source incident field in a 
-periodic <a class="wikilink" href="../../../scuff-em/">scuff-em</a> geometry at Bloch vector
-<script type="math/tex">\bf k_{\hbox{B}}</script>, the incident field is really
-the field of an infinite phased <em>array</em> of point sources, 
-with the source in lattice cell <script type="math/tex">\bf L</script> phased
-by the Bloch factor <script type="math/tex">e^{i\bf k_B\cdot \bf L}.</script>
-This is not the incident field we want to consider 
-when computing LDOS.</p>
-<p>Of course, it is still possible to get what we want---the
-response of our geometry to a non-periodic point source---but
-it requires summing the results of many scattering problems,
-with each problem phased in such a way as to cancel out
-the effects of all source in all lattice cells except the 
-particular cell we want. In other words, to get the 
-LDOS at a single point in a periodic geometry
-requires a <em>Brillouin-zone integration</em>, in which
-we perform and sum the results of many scattering calculations
-at various Bloch vectors <script type="math/tex">\bf k_B</script> lying in the 
-Brillouin zone of the reciprocal lattice.</p>
-<p>There are two ways to do calculations like this in <a class="wikilink" href="../../../scuff-em/">scuff-em</a>:</p>
+<h3 id="review-what-we-are-computing-and-why-we-need-brillouin-zone-integration">Review: What we are computing and why we need Brillouin-zone integration</h3>
+<p>For the benefit of users who may be wondering why numerical Brillouin-zone
+integration is needed for this calculation, this section briefly reviews
+some of the theoretical background. 
+(This material is discussed in more detail in the memo
+<a href="../../../tex/scuff-ldos.pdf">Computation of Green's Functions and LDOS in <span class="SC">scuff-em</span></a>).
+If you just want to get started running the calculations in <a class="wikilink" href="../../../scuff-em/">scuff-em</a>, 
+feel free to <a href="#GMSHFiles">skip to the next section</a>.</p>
+<h4 id="greens-functions-and-ldos">Green's functions and LDOS</h4>
+<p>The scattering dyadic Green's function
+<script type="math/tex">\boldsymbol{\mathcal G}^{\text E}(\omega;
+             \mathbf{x}_{\text D},
+             \mathbf{x}_{\text S})</script>
+of a material geometry
+is a <script type="math/tex">3\times 3</script> matrix whose <script type="math/tex">i,j</script> entry is proportional to the
+<script type="math/tex">i</script>-component of the scattered electric field 
+at <script type="math/tex">\mathbf{x}_{\text D}</script> due to a 
+<script type="math/tex">j</script>-directed point electric dipole source at
+<script type="math/tex">\mathbf{x}_{\text S}</script>, all quantities having
+time dependence <script type="math/tex">\sim e^{-i\omega t}</script>. (We could also 
+consider the magnetic Green's function
+<script type="math/tex">\boldsymbol{\mathcal G}^{\text M}</script>,
+which describes the scattered <em>magnetic</em> fields
+arising from a point <em>magnetic</em> dipole excitation.)
+The subscripts "D" and "S" label the "destination" and 
+"source" points; if these coincide
+<script type="math/tex">(\mathbf{x}_{\text D}=\mathbf{x}_{\text S})</script>,
+we are talking about <em>one-point DGFs</em>; otherwise
+we have <em>two-point DGFs.</em></p>
+<p>The one-point scattering DGFs for a material geometry contain
+information on how the bodies in the geometry modify
+the electromagnetic local density of states (LDOS)
+in the vicinity of the body. More specifically,
+the full LDOS <script type="math/tex">\rho(\mathbf{x})</script> at a point <script type="math/tex">\mathbf{x}</script>
+may be decomposed as a sum of electric and magnetic
+contributions, which themselves may be further decomposed
+into vacuum and scattering contributions:
+<script type="math/tex; mode=display"> \begin{array}{lcl}
+\rho(\omega; \mathbf{x}) &=& \rho^\text{E}(\omega; \mathbf{x}) + \rho^\text{M}(\omega; \mathbf{x})
+\\[5pt]
+\rho^{\text{E,M}}(\mathbf{x})
+ &=&   \rho_0(\omega)
+     + \Delta \rho^\text{E,M}(\omega; \mathbf{x})
+\\[5pt]
+\rho_0(\omega) &=&\frac{\omega^2}{\pi^2 c^3}
+\\[5pt]
+\Delta \rho^{\text{E,M}}(\omega; \mathbf{x})
+ &=& \frac{\omega}{\pi}
+     \text{Tr Im }\boldsymbol{\mathcal{G}}^\text{E,M}(\omega; \mathbf{x}, \mathbf{x})
+\end{array}</script>
+</p>
+<h4 id="computing-greens-functions">Computing Green's functions</h4>
+<p>The electric and magnetic DGFs for a given source point
+(and any number of destination points)
+collectively describe the results of 6 scattering
+problems (with incident fields produced by electric and
+magnetic dipoles oriented in each of the 3 cartesian
+directions), and---for <em>compact</em> geometries---could
+be computed in <span class=SC>scuff-em</span> simply by
+assembling 6 right-hand-side vectors, solving the 
+BEM system for the corresponding surface currents, and
+computing the scattered fields at all desired destination
+points. </p>
+<p>However, the situation is more complicated for
+infinitely extended geometries. 
+<a href="../../../reference/Geometries/#Extended">Recall</a> that such
+geometries are described in <a class="wikilink" href="../../../scuff-em/">scuff-em</a> by a
+unit-cell geometry together with a basis of vectors 
+for a (one- or two-dimensional) lattice <script type="math/tex">\mathcal{L}</script>.
+By restricting our attention to scattering problems
+in which the incident fields (and thus all fields and
+currents) satisfies the Bloch-periodicity
+condition 
+<script type="math/tex; mode=display">f(\mathbf{x}+\mathbf{L})
+  =
+  e^{i\mathbf{k}_\text{B}\cdot \mathbf{L}}f(\mathbf{x})
+  \quad\text{ for all } \quad
+  \mathbf{L}\in\mathcal{L}
+</script>
+for some Bloch wavevector <script type="math/tex">\mathbf{k}_\text{B}</script>,
+we can get away with solving only for the surface
+currents within the unit cell, the currents
+everywhere else being then fixed by the Bloch periodicity.
+This is the basic magic trick that allows infinite
+geometries to be modeled on finite computers.</p>
+<p>Of course, the restriction to scattering problems involving
+only Bloch-periodic incident fields is in fact highly restrictive;
+indeed, it excludes the particular problem we must solve
+to compute DGFs and LDOS, in which the incident field emanates
+from a point source at <script type="math/tex">\mathbf{x}_\text{S}</script> and is certainly 
+not Bloch-periodic. But here we can avail to the linearity
+of Maxwell's equations and the magic of Fourier analysis.
+Instead of solving a scattering problem involving the field
+of a point source at <script type="math/tex">\mathbf{x}_\text{S}</script>, we consider
+the field of an infinite phased <em>array</em> of point sources,
+located at points <script type="math/tex">\{\mathbf{x}_\text{S} + \mathbf{L}\}</script>
+with phases <script type="math/tex">e^{i\mathbf{k}_\text{B} \cdot \mathbf{L}}</script>,
+for all <script type="math/tex">\mathbf{L}\in \mathcal{L}</script>. This <em>is</em> a
+Bloch-periodic field, so we can take it as the incident
+field in a <a class="wikilink" href="../../../scuff-em/">scuff-em</a> scattering problem, 
+and the 
+resulting scattered fields at <script type="math/tex">\mathbf{x}_\text{D}</script>
+define the <em>Bloch-periodic scattering DGFs</em>
+<script type="math/tex">\overline{\boldsymbol{\mathcal{G}}}(\omega; \mathbf{k}_\text{B};
+\mathbf{x}_\text{D}, \mathbf{x}_\text{S}).</script>
+To recover the non-periodic DGF <script type="math/tex">\boldsymbol{\mathcal{G}}</script>
+from <script type="math/tex">\overline{\boldsymbol{\mathcal{G}}}</script>, we now
+imagine solving and summing the results of
+many scattering problems involving our infinite array
+of point sources phased with many different Bloch vectors 
+<script type="math/tex">\mathbf{k}_\text{B}</script>, chosen cleverly to ensure that the
+contributions of the single point source at <script type="math/tex">\mathbf{x}_\text{S}</script> add
+constructively, while the contributions of all <em>other</em> 
+point sources in the array add destructively
+and cancel. The formal expression of this procedure
+is a sort of inverse Fourier transform relating
+<script type="math/tex">\boldsymbol{\mathcal{G}}</script> to the average of
+<script type="math/tex">\overline{\boldsymbol{\mathcal{G}}}(\mathbf{k}_\text{B})</script> 
+over the Brillouin zone (BZ) of the reciprocal lattice:
+<script type="math/tex; mode=display"> \boldsymbol{\mathcal G}(\omega; \mathbf{x}_\text{D}, \mathbf{x}_\text{S})
+  =\frac{1}{V_\text{BZ}}
+   \int_\text{BZ}
+   \overline{\boldsymbol{\mathcal G}}(\omega; \mathbf{k}_\text{B};
+                           \mathbf{x}_\text{D},
+                           \mathbf{x}_\text{S})
+   \, d\mathbf{k}_\text{B}
+   \qquad (1)
+</script>
+or, evaluating the integral approximately by numerical cubature,
+<script type="math/tex; mode=display"> \boldsymbol{\mathcal G}(\omega; \mathbf{x}_\text{D}, \mathbf{x}_\text{S})
+   \approx \frac{1}{V_\text{BZ}}
+   \sum_{m} w_m 
+   \overline{\boldsymbol{\mathcal G}}(\omega; \mathbf{k}_{\text{B}m}; \mathbf{x}_\text{D},
+                           \mathbf{x}_\text{S})
+</script>
+where <script type="math/tex">\{\mathbf{k}_{\text{B}m}, w_m\}</script> are the points and weights in a
+cubature rule for integration over the Brillouin zone.
+Thus, getting the LDOS at a single point in a periodic geometry
+requires summing the results of many scattering calculations at
+various Bloch vectors <script type="math/tex">\mathbf{k}_{\text{B}m}</script> lying in the Brillouin 
+zone of the reciprocal lattice.</p>
+<p>The question of how to choose the cubature rule---that is, the set of
+Bloch vectors <script type="math/tex">\{\mathbf{k}_{\text{B}m}\}</script> at which the integrand
+is sampled and the weights <script type="math/tex">\{w_m\}</script> with which the samples are 
+combined---to yield accurate integral estimates without exorbitant 
+computational cost is a tricky one, and one whose answer varies from 
+problem to problem. There are two ways to proceed:</p>
 <ul>
-<li>
-<p>You can design your own cubature scheme for integration over
+<li>You can design your own cubature scheme for integration over
 the Brillouin zone, and simply ask <a class="wikilink" href="../../../scuff-ldos/">scuff-ldos</a> to give you
-values of the integrand at specific Bloch vectors <script type="math/tex">\bf k_B</script>.
+values of the integrand 
+<script type="math/tex">\overline{\boldsymbol{\mathcal{G}}}(\mathbf{k}_\text{B})</script>
+at specific Bloch vectors <script type="math/tex">\bf k_\text{B}</script>.
 In this case you will pass the <code>--OmegakBlochFile</code> command-line
-argument to <a class="wikilink" href="../../../scuff-ldos/">scuff-ldos</a></p>
-</li>
-<li>
-<p>Alternatively, you can use the built-in Brillouin-zone integrator
-in <a class="wikilink" href="../../../scuff-em/">scuff-em</a> to perform the BZ integral automatically,
-resulting in reports</p>
-</li>
+argument to <a class="wikilink" href="../../../scuff-ldos/">scuff-ldos</a>, and you will get back a data file
+(with extension <code>.byOmegakBloch</code>) reporting values of 
+<script type="math/tex">\overline{\boldsymbol{\mathcal{G}}}</script> at each <script type="math/tex">\bf k_\text{B}</script>
+point you specified. (See below for examples).</li>
 </ul>
-<p>The general topic of Brillouin-zone integration in <a class="wikilink" href="../../../scuff-em/">scuff-em</a> codes is
-discussed in more detail 
-on the page 
-<a href="../../../reference/BrillouinZoneIntegration.md.">Brillouin-zone integration in <span class="SC">scuff-em</span></a></p>
+<p>&nbsp;</p>
+<ul>
+<li>Alternatively, you can use the built-in Brillouin-zone integrator
+in <a class="wikilink" href="../../../scuff-ldos/">scuff-ldos</a> to perform the BZ integral automatically. In this
+case you will get back a data file with extension <code>.LDOS</code>
+reporting values of <script type="math/tex">\boldsymbol{\mathcal{G}}</script> and <script type="math/tex">\Delta\rho</script>
+at each frequency and evaluation point you specified, <em>plus</em> a 
+data file with extension <code>.byOmegakBloch</code> reporting the Bloch
+vectors <script type="math/tex">\bf k_\text{B}</script> at which the internal integrator
+sampled the integrand and the values of
+<script type="math/tex">\overline{\boldsymbol{\mathcal{G}}}(\bf k_\text{B})</script> 
+at each sample point. 
+In this case you will probably want to set various command-line 
+options to optimize the integral evaluation; this is illustrated
+below and discussed in more detail on the page 
+<a href="../../../reference/BrillouinZoneIntegration/">Brillouin-zone integration in <span class="SC">scuff-em</span></a>.</li>
+</ul>
 <hr />
-<h1 id="gmsh-geometry-file-for-unit-cell-geometry"><a class="wikilink" href="../../../gmsh/">gmsh</a> geometry file for unit-cell geometry</h1>
-<p>The <a class="wikilink" href="../../../gmsh/">gmsh</a> geometry file <a href="../Square_N.geo"><code>Square_N.geo</code></a>
-describes the portion of the half-space interface
-that lies within the <em>unit cell,</em>
-i.e. the cell that is infinitely periodically
-replicated to yield the full geometry.</p>
-<p>I call this file <code>Square_N.geo</code> to remind myself that 
-it contains a parameter <code>N</code> that describes the meshing 
-fineness; more specifically, <code>N</code> defines the number of 
-segments per unit length. (The file also contains 
-a parameter named <code>L</code> that defines the unit-cell
-length in microns; here we will keep this parameter
-fixed at <script type="math/tex">L</script>=1 micron.)</p>
-<p>To produce a discretized surface-mesh
-representation of this geometry, we run it through 
-<a class="wikilink" href="../../../gmsh/">gmsh</a>, using the <a class="wikilink" href="../../../gmsh/">gmsh</a> command-line argument
-<code>-setnumber</code> to fix a value for the <code>N</code> parameter.</p>
-<pre><code class="bash">% gmsh -2 -setnumber N 4 Square_N.geo -o Square.msh
-% RenameMesh Square.msh
+<p><a name="GMSHFiles"></p>
+<h1 id="gmsh-geometry-files-for-unit-cell-geometries"><a class="wikilink" href="../../../gmsh/">gmsh</a> geometry files for unit-cell geometries</h1>
+<p>To compute DGFs and LDOS in a half-space geometry,
+we will describe the interface between the upper (vacuum)
+and lower (dielectric) regions of our geometry as the
+infinite periodic replication of a unit-cell mesh 
+over the sites of a 2D square lattice.
+Because this particular geometry has infinite translational
+symmetry, we are free to choose the lattice constant 
+<script type="math/tex">L=L_x=L_y</script> however we like; here we will consider 
+the two values <script type="math/tex">L=10</script> nm and <script type="math/tex">L=100</script> nm.</p>
+<p>The <a class="wikilink" href="../../../gmsh/">gmsh</a> geometry file <a href="../Square_L_N.geo"><code>Square_L_N.geo</code></a>
+describes a square with user-adjustable parameters 
+<code>L</code> and <code>N</code> that may be configured using the <code>-setnumber</code>
+option on the <a class="wikilink" href="../../../gmsh/">gmsh</a> command line to define the square
+side length and the number of triangle edges per side length 
+(the meshing fineness). To produce unit-cell meshes for
+the two desired lattice constants, I go like this:</p>
+<pre><code class="bash">% gmsh -2 -setnumber L 0.1 -setnumber N 4 Square_L_N.geo -o Square_L0P1.msh 
+% RenameMesh Square_L0P1.msh
 
-% gmsh -2 -setnumber N 8 Square_N.geo -o Square.msh
-% RenameMesh Square.msh
+% gmsh -2 -setnumber L 0.01 -setnumber N 4 Square_L_N.geo -o Square_L0P01.msh 
+% RenameMesh Square_L0P01.msh
 </code></pre>
 
 <p>(Here <a href="../../../examples/SiO2Spheres/RenameMesh"><code>RenameMesh</code></a> is a simple <code>bash</code> script
 that uses <a class="wikilink" href="../../../scuff-analyze/">scuff-analyze</a> to count the number of interior
 edges in a surface mesh and rename the mesh file accordingly.)
-These commands produce the files <code>Square_40.msh</code>
-and <code>Square_176.msh</code>.
-These meshes may be visualized in <a class="wikilink" href="../../../gmsh/">gmsh</a>:</p>
-<pre><code class="bash">% gmsh Square_40.msh
-% gmsh Square_176.msh
+These commands produce the files 
+<code>Square_L0P1_40.msh</code> and <code>Square_L0P01_40.msh.</code> I also repeat the 
+process with <code>-setnumber N 8</code> to yield finer meshes (with 176 instead
+of 40 interior edges).
+These meshes may be visualized in <a class="wikilink" href="../../../gmsh/">gmsh</a> by saying e.g.</p>
+<pre><code class="bash">% gmsh Square_L0P1.40.msh
+% gmsh Square_L0P01.176.msh
 </code></pre>
 
+<p><img alt="Square_L0P1_40.png" src="../Square_L0P1_40.png" />
+<img alt="Square_L0P01_176.png" src="../Square_L0P01_176.png" /></p>
 <p>Note the following:</p>
 <ul>
 <li>
@@ -614,29 +732,48 @@ These meshes may be visualized in <a class="wikilink" href="../../../gmsh/">gmsh
    in <a class="wikilink" href="../../../gmsh/">gmsh</a>, as in the <code>.geo</code> file above.</p>
 </li>
 <li>
-<p>In this case the unit cell dimensions are 
-   <script type="math/tex">L_x\times L_y</script> where <script type="math/tex">L_x=L_y=1\, \mu\text{m}</script>.
-   (More generally, <script type="math/tex">L_x</script> and <script type="math/tex">L_y</script> may be any arbitrary
-   nonzero values, and they need not equal each other.)</p>
+<p>Among the various possible ways to discretize a square
+intro triangles, I have chosen one that preserves as 
+much symmetry as possible---specifically, the mesh 
+is symmetric under the transformations
+<script type="math/tex">x \leftrightarrow -x</script>, <script type="math/tex">y \leftrightarrow -y</script>, and
+<script type="math/tex">x \leftrightarrow y</script>. This is important for exploiting
+symmetries to reduce the cost of Brillouin-zone integration
+(see below).</p>
 </li>
 </ul>
+<p>The <code>.msh</code> files needed to run the calculations in this
+tutorial may be found in the <code>mshFiles/</code> subfolder
+of the <code>HalfSpaceLDOS</code> example distributed with
+<a class="wikilink" href="../../../scuff-em/">scuff-em</a>.</p>
 <hr />
 <h1 id="scuff-em-geometry-files"><a class="wikilink" href="../../../scuff-em/">scuff-em</a> geometry files</h1>
-<p>The 
+<p>For each unit-cell mesh I create
 <a href="../../../reference/Geometries/"><span class="SC">scuff-em</span> geometry files</a>
-describing an infinite-area PEC ground plane at <script type="math/tex">z</script>=0
-are 
-<a href="../PECPlate_40.scuffgeo"><code>PECPlate_40.scuffgeo</code></a>
-and 
-<a href="../PECPlate_176.scuffgeo"><code>PECPlate_176.scuffgeo</code></a>.</p>
-<p>The 
-<a href="../../../reference/Geometries/"><span class="SC">scuff-em</span> geometry files</a>
-describing an infinite aluminum half-space occupying
-the region <script type="math/tex">z<0</script> are 
-<a href="../AlHalfSpace_40.scuffgeo"><code>AlHalfSpace_40.scuffgeo</code></a>
-and 
-<a href="../AlHalfSpace_176.scuffgeo"><code>AlHalfSpace_176.scuffgeo</code></a>.</p>
-<p>Here's the content of the file <code>AlHalfSpace_176.scuffgeo</code>:</p>
+describing three material geometries:</p>
+<ul>
+<li>
+<p>an infinite-area perfectly electrically conducting (PEC) plate at height <script type="math/tex">z=0</script>;</p>
+</li>
+<li>
+<p>an infinite lossless dielectric (<script type="math/tex">\epsilon \equiv 10</script>) filling
+  space for <script type="math/tex">z<0</script>, with vacuum for <script type="math/tex">z>0</script>;</p>
+</li>
+<li>
+<p>same as previous, but now with lossy metal (aluminum) instead
+  of lossless dielectric.</p>
+</li>
+</ul>
+<p>The resulting <code>.scuffgeo</code> files may be found in the 
+<code>scuffgeoFiles/</code> subfolder of the <code>HalfSpaceLDOS</code>
+example directory.
+For example, the PEC-plate geometry at the coarser resolution
+with the longer lattice constant is
+<a href="../scuffgeoFiles/PECPlate_L0P1_40.scuffgeo"><code>PECPlate_L0P1_40.scuffgeo</code></a>,
+while the aluminum half-space geometry at the finer resolution
+with the shorter lattice constant is
+<a href="../scuffgeoFiles/AlHalfSpace_L0P01_176.scuffgeo"><code>AlHalfSpace_L0P01_176.scuffgeo</code></a>.
+The latter file looks like this:</p>
 <pre><code class="bash"># this comes from Phys Rev B **68** 245405
 MATERIAL ALUMINUM
     wp = 1.747e16; 
@@ -645,117 +782,267 @@ MATERIAL ALUMINUM
 ENDMATERIAL
 
 LATTICE
-    VECTOR 1.0  0.0
-    VECTOR 0.0  1.0 
+    VECTOR 0.01 0.00
+    VECTOR 0.00 0.01
 ENDLATTICE
 
-REGION Exterior       MATERIAL Aluminum
 REGION UpperHalfSpace MATERIAL Vacuum
+REGION Exterior       MATERIAL Aluminum
 
 SURFACE Plate
-    MESHFILE Square_176.msh
-    REGIONS Exterior Aluminum
+    MESHFILE Square_L0P01_176.msh
+    REGIONS Exterior UpperHalfSpace
 ENDSURFACE
 </code></pre>
 
 <hr />
 <h1 id="list-of-evaluation-points">List of evaluation points</h1>
-<p>We'll compute the LDOS at two points, located 
-a distance of 0.1 <script type="math/tex">\mu</script>m and 1 <script type="math/tex">\mu</script>m above the 
-origin on the <script type="math/tex">z</script> axis. The <code>EPFile</code> looks like
-this:</p>
-<pre><code>0.0 0.0 0.1
-0.0 0.0 1.0
+<p>We'll compute one-point DGFs and LDOS at four points,
+located at distances of 1, 10, 100, and 1000 nm above
+the surface on the <script type="math/tex">z</script>-axis (<script type="math/tex">x=y=0</script>). Thus our evaluation-point
+file (<code>EPFile</code>) looks like this:</p>
+<pre><code class="bash">0.0 0.0 0.001
+0.0 0.0 0.010
+0.0 0.0 0.100
+0.0 0.0 1.000
 </code></pre>
 
 <hr />
-<h1 id="launching-a-bloch-vector-resolved-run">Launching a Bloch-vector-resolved run</h1>
-<p>Before running a full Brillouin-zone-integrated
-calculation to get the full LDOS at a given
-frequency <script type="math/tex">\omega</script>, we'll first run calculations
-at a set of pre-specified individual Bloch vectors
-<script type="math/tex">\mathbf k_{\small{\text{B}}}</script> in the Brillouin zone.</p>
-<p>We'll take <script type="math/tex">\omega=3\times 10^{14}</script> rad/sec
-(or <script type="math/tex">\omega=1</script> in <a class="wikilink" href="../../../scuff/">scuff</a> units) and 
-will consider Bloch
-vectors of the form <script type="math/tex">\mathbf k_{\small{\text{B}}}=(0,k_y)</script> for 
-values of <script type="math/tex">k_y</script> running from <script type="math/tex">0</script> to <script type="math/tex">\pi/L</script>
-(where <script type="math/tex">L</script>=1 <script type="math/tex">\mu</script>m is the lattice constant
-in this case).
-Thus we create a text file called <a href="../OKBFile"><code>OKBFile</code></a> 
-that looks like this:</p>
-<pre><code>1.0 0.0 0.00
-1.0 0.0 0.10
+<h2 id="studying-the-integrand-to-select-the-optimal-cubature-rule">Studying the integrand to select the optimal cubature rule</h2>
+<p>Ultimately we will want to launch a full
+Brillouin-zone-integrated calculation to get
+the total LDOS at our desired evaluation points 
+and frequencies. However, before doing this we
+should acquire some insight into the behavior of
+the integrand so that we can make intelligent
+choices for the various 
+<a href="../../../reference/BrillouinZoneIntegration/">options controlling Brillouin-zone integration</a>.</p>
+<h3 id="checking-brillouin-zone-symmetry">Checking Brillouin-zone symmetry</h3>
+<p>A first thing to check is the <em>symmetry</em> of the
+integrand within the Brillouin zone (BZ).
+As discussed <a href="../../../reference/BrillouinZoneIntegration/">here</a>, the built-in cubature
+routines for 2D BZ integration in <a class="wikilink" href="../../../scuff-em/">scuff-em</a>
+can exploit 2, 4, or 8-fold rotational symmetry.
+In this case, because</p>
+<ul>
+<li>
+<p><strong>(1)</strong> the underlying (real-space) geometry is symmetric
+under <script type="math/tex">x\leftrightarrow -x</script>, <script type="math/tex">y\leftrightarrow -y</script>,
+and <script type="math/tex">x\leftrightarrow y</script>,</p>
+</li>
+<li>
+<p><strong>(2)</strong> we have chosen a mesh discretization that 
+preserves these symmetries, and</p>
+</li>
+<li>
+<p><strong>(3)</strong> we are computing a one-point DGF, </p>
+</li>
+</ul>
+<p>we expect the BZ integrand 
+<script type="math/tex">\overline{\boldsymbol{\mathcal{G}}}(k_x,k_y)</script>
+to have 8-fold rotational symmetry, and thus
+we should be able to restrict the domain of the 
+BZ integration to just the <em>irreducible</em> Brillouin
+zone (a triangular wedge having 1/8 the total area
+of the BZ, as shown <a href="../../../reference/BrillouinZoneIntegration/#IrreducibleBZ">here</a>) and multiply by 8 
+to get the full BZ integral. </p>
+<p>To test this, we'll run a quick first calculation in which
+we compute just the integrand <script type="math/tex">\boldsymbol{\mathcal{G}}(k_x,k_y)</script>
+at 8 <script type="math/tex">(k_x,k_y)</script> points related by symmetry. Specifically,
+for a square lattice with lattice constant <script type="math/tex">L=100\text{ nm}</script>
+(reciprocal lattice constant <script type="math/tex">\Gamma=\frac{2\pi}{100\text{ nm}}</script>)
+we'll consider the point
+<script type="math/tex; mode=display">(k_x,k_y)=(0.40\Gamma,0.27\Gamma)\approx(25,17)\,\mu\text{m}^{-1}</script>
+and the 7 other points obtained by flipping signs and interchanging
+components. Here's a picture showing the locations of these 8 points
+within in the BZ:</p>
+<p><img alt="EightPoints.png" src="../EightPoints.png" /></p>
+<p>Working at angular frequency <script type="math/tex">\omega=10 \cdot 3\times 10^{14}</script> rad/sec,
+we create a little text file named <a href="../EightPoints"><code>EightPoints</code></a> listing the
+<script type="math/tex">(\omega, k_x, k_y)</script> values at which we want to sample the BZ integrand:</p>
+<pre><code class="bash">10 +25 +17
+10 +17 +25
+10 -17 +25
+10 -25 +17
+10 -25 -17
+10 -17 -25
+10 +17 -25
+10 +25 -17
+</code></pre>
+
+<p>Now run <a class="wikilink" href="../../../scuff-ldos/">scuff-ldos</a>:</p>
+<pre><code class="bash">% scuff-ldos --geometry scuffgeoFiles/AlHalfSpace_L0P1_40.scuffgeo --OmegakBlochFile EightPoints --EPFile EPFile
+</code></pre>
+
+<p>This produces the file <code>AlHalfSpace_L0P1_40.byOmegakBloch</code>,
+in which each individual line reports <script type="math/tex">\overline{\mathcal{G}}</script> values
+for a single evaluation point, frequency, and Bloch vector.
+Looking at just the portion of the file corresponding to the
+evaluation point at <script type="math/tex">z=100</script> nm, we see this:</p>
+<p><img alt="EightPointsOutput.png" src="../EightPointsOutput.png" /></p>
+<p>This shows that, as expected, the Brillouin-zone integrands for
+the electric and magnetic LDOS <script type="math/tex">\rho^\text{E,M}</script> are
+invariant---up to small numerical errors on the order 
+of around 1%, which are reduced to around 0.1% when we re-run
+the calculation on the finer [N=176] mesh---under the 8-fold
+symmetry relating the various Brillouin-zone points here. 
+Later we will exploit this symmetry by specifying the command-line
+option <code>--BZSymmetryFactor 8</code> to reduce the cost of
+evaluating the full BZ integral.</p>
+<p>Incidentally, notice that the individual components of the DGFs (such as
+<script type="math/tex">\overline{\mathcal{G}}_{xx}</script>) do <em>not</em> obey the full set of symmetries obeyed by the LDOS. You will need to take this into account if your goal is to compute DGFs and not just LDOS.</p>
+<h3 id="observing-the-variation-of-the-integrand-with-mathbfk_textb">Observing the variation of the integrand with <script type="math/tex">|\mathbf{k}_\text{B}|</script>
+</h3>
+<p>Another diagnostic test is to inspect the variation of the integrand with the magnitude of the Bloch vector. For this purpose we'll compute the integrand at points lying on the <script type="math/tex">x</script>-axis between the origin and the edge of the BZ, again working with the <script type="math/tex">L=100</script> nm lattice at <script type="math/tex">\omega=10</script>.  We create a file called <code>XAxisPoints</code> specifying the (<script type="math/tex">\omega,k_x,k_y</script>) points we want to sample: </p>
+<pre><code class="bash">10  00.0  0.0
+10  1.57  0.0
+10  3.14  0.0
 ...
-1.0 0.0 3.14
+10  29.8  0.0
+10  31.4  0.0
 </code></pre>
 
-<p>As a sanity check, we will do two <a class="wikilink" href="../../../scuff-ldos/">scuff-ldos</a> runs,
-one in which the LDOS is computed using a semi-analytical
-approach (plane-wave decomposition) and another in which
-the LDOS is computed using the <a class="wikilink" href="../../../scuff-em/">scuff-em</a> core
-library. The semi-analytical approach is implemented
-by <a href="../../../applications/scuff-ldos/scuff-ldos/">scuff-ldos</a> and is requested by giving all the same
-command-line arguments you would give to do an ordinary
-<a href="../../../applications/scuff-ldos/scuff-ldos/">scuff-ldos</a> calculation, but with the additional argument
-<code>--HalfSpace Aluminum.</code> (Note that you must specify a <code>.scuffgeo</code>
-file for the <code>--HalfSpace</code> calculation, even though the 
-meshed geometry is not used in this calculation; the
-<code>.scuffgeo</code> file is used to specify the lattice.)</p>
-<h4 id="command-line-arguments-for-quasi-analytical-calculation-using-plane-wave-decomposition">Command-line arguments for quasi-analytical calculation using plane-wave decomposition:</h4>
-<pre><code class="bash">  #!/bin/bash
-  ARGS=&quot;&quot;
-  ARGS=&quot;${ARGS} --geometry AlHalfSpace_40.scuffgeo&quot; 
-  ARGS=&quot;${ARGS} --EPFile  EPFile&quot;
-  ARGS=&quot;${ARGS} --OmegakBlochFile OKBFile&quot;
-  ARGS=&quot;${ARGS} --HalfSpace Aluminum&quot;
-  scuff-ldos ${ARGS}
+<p>Run <a class="wikilink" href="../../../scuff-ldos/">scuff-ldos</a>:</p>
+<pre><code class="bash">% scuff-ldos --geometry scuffgeoFiles/AlHalfSpace_L0P1_40.scuffgeo --OmegakBlochFile XAxisPoints --EPFile EPFile
 </code></pre>
 
-<h4 id="command-line-arguments-for-fully-numerical-calculation-using-discretized-surface-meshes">Command-line arguments for fully numerical calculation using discretized surface meshes:</h4>
-<pre><code class="bash">  #!/bin/bash
-  ARGS=&quot;&quot;
-  ARGS=&quot;${ARGS} --geometry AlHalfSpace_40.scuffgeo&quot; 
-  ARGS=&quot;${ARGS} --EPFile  EPFile&quot;
-  ARGS=&quot;${ARGS} --OmegakBlochFile OKBFile&quot;
-  scuff-ldos ${ARGS}
+<p>This produces the file <code>AlHalfSpace_L0P1_40.byOmegakBloch.</code>
+We plot the BZ integrand for the electric LDOS 
+<script type="math/tex">\rho^\text{E}(\mathbf{k})</script> versus <script type="math/tex">k_x</script> at <script type="math/tex">z=100</script> nm: </p>
+<pre><code class="bash">% gnuplot
+gnuplot&gt; FILE='AlHalfSpace_L0P1_40.byOmegakBloch'
+gnuplot&gt; set yrange [-100:100]
+gnuplot&gt; plot FILE u ($3==0.1 ? $6 : 1/0):8 w lp pt 7 ps 1
 </code></pre>
 
-<p>Both of these runs produce an output file 
-named <code>AlHalfSpace_40.byOmegakBloch.</code> (If you
-don't rename the file after the first run, 
-the data from the second run will simply be 
-appended to the file below the first set of data).</p>
-<p>Here's a plot of <script type="math/tex">\mathcal{G}^E_{zz}</script> (the <script type="math/tex">zz</script>
-component of the electric dyadic Green's function)
-versus the <script type="math/tex">y</script>-component of the Bloch vector
-as computed using the analytical and <a class="wikilink" href="../../../scuff-em/">scuff-em</a>
-approaches.</p>
-<p><img alt="aluminum LDOS data" src="../AluminumLDOS.png" /></p>
+<p><img alt="RhoEVskX.png" src="../RhoEVskX.png" /></p>
+<p>Whoops! There seems to be some sort of blowup happening
+near <script type="math/tex">k_x=10</script>, i.e. near the point <script type="math/tex">k_x=\frac{\omega}{c}</script>
+where the Bloch wavelength coincides with the free-space
+photon wavelength. Zooming in on the region near <script type="math/tex">k_x=10</script>,
+the data look like this (where we have additionally plotted
+data for evaluation points at a couple of other heights
+off the surface):</p>
+<p><img alt="RhoEVskXLogScale.png" src="../RhoEVskXLogScale.png" /></p>
+<p>The important things to read off from this plot are:</p>
+<ul>
+<li>
+<p>As <script type="math/tex">|\mathbf{k}_\text{B}|\to k_0\equiv \frac{\omega}{c}</script> from below, the integrand
+  blows up like <script type="math/tex">1/\sqrt{k_0 - |\mathbf{k}_\text{B}|}.</script>
+</p>
+</li>
+<li>
+<p>On the other side of <script type="math/tex">k_0</script>, the integrand decays exponentially
+  at a <script type="math/tex">z</script>-dependent rate.</p>
+</li>
+</ul>
+<p>This behavior is expected for cases in which the photon wavenumber
+lies within the Brillouin zone; the square-root blowup in
+the LDOS is just the usual van Hove singularity, while 
+the exponential decay for larger <script type="math/tex">k</script> arises because plane waves
+with transverse wavelength shorter than the free-space 
+photon wavelength are evanescent (not propagating) waves
+that decay exponentially with distance from the surface.</p>
+<p>(BTW, <a href="../XAxisPlotter.gp">here</a> is the <span class=SC>gnuplot</span>
+script that produces the two plots above.)</p>
 <hr />
-<h1 id="launching-a-brillouin-zone-integrated-run">Launching a Brillouin-zone integrated run</h1>
-<p>Finally, we'll ask <a class="wikilink" href="../../../scuff-ldos/">scuff-ldos</a> to perform
-the Brillouin-zone integrations at each frequency
-to compute the full LDOS at that frequency.
-To do this we simply use <code>--OmegaFile`` instead
-of</code>--OmegakBlochFile`` to specify a list of 
-frequencies instead of a list of 
-<script type="math/tex">(\omega,\mathbf{k}_{\small{\hbox{B}}})</script>
-points; by not specifying individual Bloch vectors
-we are implicitly asking <a class="wikilink" href="../../../scuff-ldos/">scuff-ldos</a> to perform
-the Brillouin-zone integral at each frequency.</p>
-<p>Thus we go like this:</p>
-<pre><code class="bash">  #!/bin/bash
-  ARGS=&quot;&quot;
-  ARGS=&quot;${ARGS} --geometry AlHalfSpace_40.scuffgeo&quot; 
-  ARGS=&quot;${ARGS} --EPFile  EPFile&quot;
-  ARGS=&quot;${ARGS} --OmegaFile OmegaFile&quot;
-  scuff-ldos ${ARGS}
+<h2 id="running-full-brillouin-zone-integrated-calculations">Running full Brillouin-zone-integrated calculations</h2>
+<p>Now it's time to launch runs for full BZ-integrated LDOS. For
+this purpose we will want to set appropriate values for the
+<a href="../../../reference/BrillouinZoneIntegration/">command-line options controlling Brillouin-zone integration</a>.
+We have already determined that the integrand has 
+8-fold symmetry, so we will be specifying <code>--BZSymmetryFactor 8.</code>
+The next task is to choose a cubature
+rule ("BZ integration method"), i.e. a strategy for sampling
+the integrand at appropriately-chosen <script type="math/tex">|\mathbf{k}_\text{B}|</script>
+points to estimate the integral accurately with as few
+samples as possible.</p>
+<p>The presence of the <script type="math/tex">|\mathbf{k}_\text{B}|=k_0</script> singularity
+in the Brillouin zone makes this a good candidate for
+the <code>Polar2</code> strategy, which performs the BZ integral
+using a polar decomposition
+<script type="math/tex">\mathbf{k}_\text{B}=(k_\rho, k_\theta)</script>,
+with the integrals over the regions <script type="math/tex">k_\rho < k_0</script> 
+and <script type="math/tex">k_\rho>k_0</script> handled separately, and with the 
+change of variables <script type="math/tex">k_\rho \to k_z=\sqrt{|k_0^2 - k_\rho^2|}</script>
+to neutralize the square-root singularity at 
+<script type="math/tex">k_\rho = k_0.</script> In this case the integrals
+over <script type="math/tex">k_z</script> and <script type="math/tex">k_\theta</script> are performed using 
+<script type="math/tex">N_\rho</script> and <script type="math/tex">N_\theta</script> evaluation points, 
+respectively, where <script type="math/tex">N_\rho</script> and <script type="math/tex">N_\theta</script> 
+are combined into a single value specified as 
+the <code>--BZIOrder</code> command-line option, i.e.
+<script type="math/tex; mode=display"> \texttt{--BZIOrder} = N_\rho \times 100 + N_\theta.</script>
+For example, to use 31 points for the radial integral
+and 11 points for the <script type="math/tex">\theta</script> integral, we would
+say <code>--BZIOrder 3111</code>.</p>
+<p>(Actually, in this particular case, we expect to have
+full rotational symmetry, i.e. the integrand should be 
+independent of <script type="math/tex">k_\theta</script>, and thus we can specify
+the special value <script type="math/tex">N_\theta=2</script> to request that the
+<script type="math/tex">k_\theta</script> integral be evaluated by a one-point
+cubature sampling just the point <script type="math/tex">k_\theta=0</script>.)</p>
+<p>Choosing an 11-point integration rule for the
+radial integral and the above-discussed 1-point
+cubature for the <script type="math/tex">\theta</script> integral, our <a class="wikilink" href="../../../scuff-ldos/">scuff-ldos</a>
+command-line looks like this:</p>
+<pre><code class="bash">% scuff-ldos --geometry scuffgeoFiles/AlHalfSpace_L0P1_40.scuffgeo --OmegaFile OmegaFile --EPFile EPFile --BZIMethod Polar2 --BZIOrder 1102
 </code></pre>
 
-<p>where <a href="../OmegaFile"><code>OmegaFile</code></a> is a simple text
-file specifying a list of angular frequencies in
-units of <script type="math/tex">3\cdot 10^{14}</script> rad/sec.</p>
+<p>As a comparison, I will also run calculations with
+<script type="math/tex">N_\rho=0</script>. This selects an <em>adaptive</em> integration
+algorithm for the radial integral, which determines
+the number and location of the sample points
+automatically to achieve user-specified relative
+and absolute error tolerances, which are set with the 
+<code>--BZIRelTol</code> and <code>--BZIAbsTol</code> command-line options:</p>
+<pre><code class="bash">% scuff-ldos --geometry scuffgeoFiles/AlHalfSpace_L0P1_40.scuffgeo --OmegaFile OmegaFile --EPFile EPFile --BZIMethod Polar2 --BZIOrder 0002 --BZIRelTol 1.0e-2 --BZIRelTol 1.0e-8
+</code></pre>
+
+<p>I also run calculations on the finer-resolution mesh (the <code>_176.scuffgeo</code> files) and the 
+mesh with lattice constant <script type="math/tex">L=0.01\,\mu\text{m}</script> (the <code>L0P01</code> files).</p>
+<p>Here's a plot of the LDOS enhancement at <script type="math/tex">z=10 nm</script>:</p>
+<p><img alt="AluminumLDOS_Z0P01.png" src="../AluminumLDOS_Z0P01.png" /></p>
+<p>The green dots are for the calculation with all numerical
+resolution parameters
+set to their maximum (most accurate and most expensive) values: 
+finest mesh, smallest lattice constant, and adaptive BZ cubature. 
+These points agree well with the analytical prediction up to the 
+highest frequencies, where they start to deviate.</p>
+<p>The other data symbols are the results of calculations in
+which one fineness parameter is relaxed to a less-expensive 
+value:</p>
+<ul>
+<li>The blue triangles are for the geometry with lattice constant
+<script type="math/tex">L=100</script> nm (but still using a fine mesh with adaptive cubature).
+Evidently this degrades the quality of the numerical data
+completely. That makes sense, since the evaluation point 
+is at a height <script type="math/tex">z=10</script> nm above the surface. For larger <script type="math/tex">z</script> 
+values the data values for the two lattice constants are in 
+better agreement.</li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li>The orange triangles are for the geometry with lattice
+constant <script type="math/tex">L=10</script> nm, but now meshed at coarser resolution
+(resulting in <script type="math/tex">N=40</script> triangle edges instead of <script type="math/tex">N=176</script> for
+the finer case). Evidently this doesn't degrade the 
+quality of the data <em>at all</em>, so for this case we can 
+run calculations with the (significantly cheaper) coarser
+mesh at no cost in accuracy. </li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li>The yellow stars are for the <script type="math/tex">L=10</script> nm geometry with
+the fine (<script type="math/tex">N=176</script>) mesh resolution, but with the BZ integration
+performed using a fixed-order numerical integration (<script type="math/tex">N_\rho=31</script> samples)
+instead of adaptive quadrature
+for the radial part of the BZ integral. Evidently this 
+yields data that agree with the more accurate adaptive-quadrature
+data at most frequencies, but deviate over a range of 
+frequencies in the range <script type="math/tex">\omega\in[10,40]</script>
+and again at high frequencies.</li>
+</ul>
               
             </div>
           </div>
