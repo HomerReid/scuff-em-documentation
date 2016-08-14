@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>scuff-integrate - SCUFF-EM documentation</title>
+  
+
+  <link rel="shortcut icon" href="../../../scuffEM.ico">
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/highlight.css">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "applications/scuff-integrate/scuff-integrate"
+  </script>
+  
+  <script src="../../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../../js/highlight.pack.js"></script>
+  <script src="../../../js/theme.js"></script> 
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+  <script src="../../../mathjaxhelper.js"></script>
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+
+      <p align="center"
+      <a href="../../..">
+         <img align="center" height="auto" width="100%"  
+              src="../../../img/scuffEMNavBar.png"
+      </a>
+
+      <div class="wy-side-nav-search">
+        <a href="../../.." class="icon icon-home"> SCUFF-EM documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../../..">SCUFF-EM documentation</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Examples</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../examples/MieScattering/MieScattering/">Mie scattering</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../examples/DielectricShell/DielectricShell/">Electrostatics of a spherical dielectric shell</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../examples/ThinFilm/ThinFilm/">Spatially-resolved study of plane-wave transmission through an infinite-area thin dielectric film</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../examples/DiffractionPatterns/DiffractionPatterns/">Imaging diffraction patterns of discs, disc arrays, and hole arrays in metal screens</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../examples/CubeTorus/">Casimir forces in a compact geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../examples/SiliconBeams/SiliconBeams/">Casimir forces in a 1D extended geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../examples/SiliconSlabs/SiliconSlabs/">Casimir forces in a 2D extended geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../examples/NanostructureCasimirPolder/NanostructureCasimirPolder/">Casimir-Polder potentials in dielectric nanostructures</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../examples/SiO2Spheres/SiO2Spheres/">Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../examples/TipSubstrate/TipSubstrate/">Spatial distribution of heat flux from a warm tip over a cold substrate</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../examples/HalfSpaceLDOS/HalfSpaceLDOS/">LDOS and dyadic Green functions above an infinite aluminum half-space</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../examples/PlatonicSolids/PlatonicSolids/">Electrostatic polarizability of platonic solids</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>General reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/TopLevel/">Top-level overview</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/Installing/">Installation</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/Geometries/">Geometry descriptions</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/Materials/">Material designations</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/Transformations/">Geometric transformations</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/IncidentFields/">Incident fields</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/BrillouinZoneIntegration/">Brillouin zone integration</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/FAQ/">FAQ</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Command-line application reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../GeneralReference/">General command-line reference</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../scuff-scatter/scuff-scatter/">scuff-scatter</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../scuff-transmission/scuff-transmission/">scuff-transmission</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../scuff-ldos/scuff-ldos/">scuff-ldos</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../scuff-tmatrix/scuff-tmatrix/">scuff-tmatrix</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../scuff-cas3D/scuff-cas3D/">scuff-cas3D</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../scuff-caspol/scuff-caspol/">scuff-caspol</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../scuff-neq/scuff-neq/">scuff-neq</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../scuff-RF/scuff-RF/">scuff-RF</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../scuff-static/scuff-static/">scuff-static</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../scuff-analyze/scuff-analyze/">scuff-analyze</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 current">
+        <a class="current" href="./">scuff-integrate</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#integrating-a-single-function-of-frequency">Integrating a single function of frequency</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#integrating-multiple-functions-of-frequency">Integrating multiple functions of frequency</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#giving-names-to-data-columns">Giving names to data columns</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#integrating-functions-of-frequency-and-other-parameters">Integrating functions of frequency and other parameters</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#integrating-scuff-neq-data">Integrating scuff-neq data</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#scuff-integrate-command-line-reference">scuff-integrate Command-Line Reference</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#only-numerical-data-columns-are-counted-as-columns">Only numerical data columns are counted as columns</a></li>
+                
+            
+            </ul>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Validation tests</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../tests/Overview/">Overview of the test suite</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../tests/MieScattering/MieScattering/">Mie scattering</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../tests/FresnelScattering/FresnelScattering/">Fresnel scattering</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../tests/CasimirSpheres/CasimirSpheres/">Equilibrium Casimir forces between spheres</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../tests/CasimirPlates/CasimirPlates/">Equilibrium Casimir forces between plates</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../tests/CPSphere/CPSphere/">Equilibrium Casimir-Polder potential near a sphere</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../tests/CPPlate/CPPlate/">Equilibrium Casimir-Polder potential near a plate</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../tests/NEQSpheres/NEQSpheres/">Heat transfer and non-equilibrium Casimir forces between spheres</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../tests/libscuff/libscuff/">Low-level tests of the core library</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>API reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../API/libscuff/">libscuff</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>For developers</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../forDevelopers/Implementation/">Implementation</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../forDevelopers/DataStructures/">Data Structures</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../forDevelopers/Documentation/">Documentation</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../..">SCUFF-EM documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.."><span class="SmallCaps">scuff-em</span> documentation</a> &raquo;</li>
+    
+      
+        
+          <li>Command-line application reference &raquo;</li>
+        
+      
+    
+    <li>scuff-integrate</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/homerreid/scuff-em/" class="icon icon-github"> Edit on GitHub</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1> Integrating frequency-dependent data with <span class="SC">scuff-integrate</span></h1>
+
+<p>Many application codes in the <a class="wikilink" href="../../../scuff-em/">scuff-em</a> suite compute
+physical quantities defined by definite integrals over real
+or imaginary frequencies, with the numerical value of the
+integrand at each point obtained by solving individual
+<a class="wikilink" href="../../../scuff-em/">scuff-em</a> scattering problems at that frequency. For example,</p>
+<ul>
+<li><a href="../../scuff-cas3D/scuff-cas3D/"> <span class=SC>scuff-cas3d</span> </a> and 
+<a href="../../scuff-caspol/scuff-caspol/"> <span class=SC>scuff-caspol</span> </a>
+compute zero-temperature Casimir quantities by integrating 
+contributions from imaginary frequencies <script type="math/tex">\xi</script>:</li>
+</ul>
+<!--%====================================================================%-->
+
+<p>
+<script type="math/tex; mode=display"> Q = \int_0^\infty I(\xi) \, d\xi </script>
+<!--%====================================================================%--></p>
+<p>Here <script type="math/tex">Q</script> is a zero-temperature Casimir energy/force/torque (<a class="wikilink" href="../../../scuff-cas3d/">scuff-cas3d</a>)
+or Casimir-Polder potential (<a class="wikilink" href="../../../scuff-caspol/">scuff-caspol</a>) and <script type="math/tex">I(\xi)</script> is the 
+spectral density of contributions to <script type="math/tex">Q</script> from fluctuations at 
+imaginary frequency <script type="math/tex">\xi</script>, which may be obtained by solving
+<a class="wikilink" href="../../../scuff-em/">scuff-em</a> scattering calculations at imaginary frequency <script type="math/tex">\xi</script>.</p>
+<ul>
+<li><a href="../../scuff-neq/scuff-neq/"> <span class=SC>scuff-neq</span> </a> computes
+the total rate of energy or momentum transfer
+from a source body <script type="math/tex">s</script> to a destination body <script type="math/tex">d</script> 
+by integrating contributions from real frequencies <script type="math/tex">\omega</script>:</li>
+</ul>
+<!--%====================================================================%-->
+
+<p>
+<script type="math/tex; mode=display"> Q^{s\rightarrow d}
+   = \int_0^\infty
+     \Big[ \Theta(T_s,\omega) - \Theta(T_\text{env},\omega) \Big]
+     \Phi^{s\rightarrow d}(\omega) \, d\omega
+   \qquad (1)
+</script>
+<!--%====================================================================%-->
+Here <script type="math/tex">Q^{s\rightarrow d}</script> is the contribution of body <script type="math/tex">s</script> to
+quantity <script type="math/tex">Q</script> (a heat-transfer rate, force, or torque) for body <script type="math/tex">d</script>,
+<script type="math/tex">\Theta(T,\omega)=\frac{\hbar\omega}{e^{\hbar\omega/kT}-1}</script>
+is the Bose-Einstein statistical factor, <script type="math/tex">T_s</script> and <script type="math/tex">T_\text{env}</script>
+are the temperatures of the source body and the environment,
+and <script type="math/tex">\Phi(\omega)</script> is a "generalized flux" quantity that may be 
+computed by solving <a class="wikilink" href="../../../scuff-em/">scuff-em</a> scattering calculations
+at frequency <script type="math/tex">\omega</script>.</p>
+<p>The integrals over <script type="math/tex">\xi</script> and <script type="math/tex">\omega</script> are evaluated by
+numerical cubature---that is, as weighted sums of integrand
+samples. In a perfect world, it would be possible for 
+<a class="wikilink" href="../../../scuff-em/">scuff-em</a> application codes to choose appropriate 
+integration strategies automatically, hiding these details
+from the user and reporting just the frequency-integrated
+quantities <script type="math/tex">Q</script>. This is in fact the strategy that was
+adopted in early incarnations of the <a class="wikilink" href="../../../scuff-em/">scuff-em</a> codes.</p>
+<p>In the real world, however, the behavior of integrand 
+functions like <script type="math/tex">I(\xi)</script> and <script type="math/tex">\Phi(\omega)</script> varies widely
+from problem to problem, depending on factors such
+as the shapes and materials of bodies in the scattering
+geometry and the quantity being computed. For this reason,
+it's hard for <a class="wikilink" href="../../../scuff-em/">scuff-em</a> to make intelligent automatic
+choices of integration strategies, and attempts to do so 
+without user input may result in misleading or even
+flat-out incorrect data.</p>
+<p>For this reason, the modern approach to frequency integration
+in <a class="wikilink" href="../../../scuff-em/">scuff-em</a> is to ask users to define a
+list of frequencies at which to sample the integrand; this
+list is passed to <a class="wikilink" href="../../../scuff-em/">scuff-em</a> application codes using the 
+<code>--XiFile</code> or <code>--OmegaFile</code> command-line options, and in 
+response the code produces an output file reporting values
+of the integrand at the specified points. The frequency 
+integral may then be calculated as as post-processing step
+using the information reported in the frequency-resolved
+data files, and this is the task for which <a class="wikilink" href="../../../scuff-integrate/">scuff-integrate</a>
+exists.</p>
+<div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#scuff-integrate-tutorial-walkthrough"><span class=SC>scuff-integrate</span> tutorial walkthrough</a><ul>
+<li><a href="#integrating-a-single-function-of-frequency">Integrating a single function of frequency</a></li>
+<li><a href="#integrating-multiple-functions-of-frequency">Integrating multiple functions of frequency</a></li>
+<li><a href="#giving-names-to-data-columns">Giving names to data columns</a></li>
+<li><a href="#integrating-functions-of-frequency-and-other-parameters">Integrating functions of frequency and other parameters</a></li>
+<li><a href="#integrating-scuff-neq-data">Integrating scuff-neq data</a></li>
+</ul>
+</li>
+<li><a href="#scuff-integrate-command-line-reference"><span class=SC>scuff-integrate</span> Command-Line Reference</a></li>
+<li><a href="#only-numerical-data-columns-are-counted-as-columns">Only numerical data columns are counted as columns</a></li>
+</ul>
+</div>
+<h2 id="scuff-integrate-tutorial-walkthrough"><span class=SC>scuff-integrate</span> tutorial walkthrough</h2>
+<h3 id="integrating-a-single-function-of-frequency">Integrating a single function of frequency</h3>
+<p>The simplest usage of <a class="wikilink" href="../../../scuff-integrate/">scuff-integrate</a> is to integrate
+a single function of frequency <script type="math/tex">f(x)</script>
+[where <script type="math/tex">x</script> denotes either real or imaginary frequency].
+Suppose we have a file called <code>fData</code> in which
+are tabulated numerical pairs <script type="math/tex">(x_n, f_n)</script>, <script type="math/tex">n=1,2,\cdots,N</script>, 
+where <script type="math/tex">f_n=f(x_n)</script>:</p>
+<pre><code class="bash">x1 f1 
+x2 f2 
+...
+xN fN 
+</code></pre>
+
+<p>Then to compute <script type="math/tex">\int_{x_1}^{x_N} f(x) \, dx</script> we can just 
+go like this:</p>
+<pre><code class="bash">% scuff-integrate --datafile fData --freqColumn 1 --dataColumn 2
+</code></pre>
+
+<p>This will produce a file named <code>fData.Integrated</code> containing
+a single line of data: the integrated value of <script type="math/tex">f</script>.</p>
+<p>If the frequency and/or integrand values are printed in
+different columns of the data file, just adjust the 
+<code>--freqColumn</code> and <code>--dataColumn</code> options accordingly. For
+example, if the data file looks like this: </p>
+<pre><code class="bash">&lt;stuff&gt; &lt;stuff&gt; x1 &lt;stuff&gt; &lt;stuff&gt; f1 &lt;stuff&gt; ...
+&lt;stuff&gt; &lt;stuff&gt; x2 &lt;stuff&gt; &lt;stuff&gt; f2 &lt;stuff&gt; ...
+...
+&lt;stuff&gt; &lt;stuff&gt; xN &lt;stuff&gt; &lt;stuff&gt; fN &lt;stuff&gt; ...
+</code></pre>
+
+<p>you would use <code>--freqcolumn 3 --datacolumn 6.</code> 
+In this case, the content of the other columns (the <code>&lt;stuff&gt;</code>
+in the above snippet) is ignored.</p>
+<h3 id="integrating-multiple-functions-of-frequency">Integrating multiple functions of frequency</h3>
+<p>More generally, frequency-resolved data files produced by
+<a class="wikilink" href="../../../scuff-em/">scuff-em</a> codes will contain data on multiple functions
+<script type="math/tex">f_1, \cdots, f_p(x)</script>. (For example, in <a class="wikilink" href="../../../scuff-cas3d/">scuff-cas3d</a> 
+each line of the data file may contain data on both
+Casimir energy and Casimir force.)</p>
+<p>You can integrate all of these
+at once simply by specifying multiple <code>--dataColumn</code>
+options. For example, if you have functions <script type="math/tex">f</script> and <script type="math/tex">g</script>
+and you have a file named <code>fgData</code> with the format</p>
+<pre><code class="bash">x1 f1 g1 
+x2 f2 g2 
+...
+xN fN gN 
+</code></pre>
+
+<p>then you can say</p>
+<pre><code class="bash">% scuff-integrate --datafile fgData --freqColumn 1 --dataColumn 2 --datacolumn 3
+</code></pre>
+
+<p>and the resulting output file <code>fgData.Integrated</code>
+will report values for both <script type="math/tex">\int f(x)\,dx</script> and <script type="math/tex">\int g(x)\,dx</script>.</p>
+<h3 id="giving-names-to-data-columns">Giving names to data columns</h3>
+<p>In the legend at the top of the <code>.Integrated</code> output file,
+the values of the various integrated functions will by default
+be labeled <code>data 0</code>, <code>data 1</code>, etc. If you want to give more
+descriptive names, just follow each <code>--dataColumn</code> option
+with a <code>--dataName</code> option. </p>
+<p>For example, if your force and torque
+integrands are respectively reported on columns 8 and 11
+of your data file, say 
+<code>--dataColumn 8 --dataName Force --dataColumn 11 --dataName Torque</code>.</p>
+<h3 id="integrating-functions-of-frequency-and-other-parameters">Integrating functions of frequency and other parameters</h3>
+<p>In many cases we will have functions that depend on various
+parameters beside frequency. (In <a class="wikilink" href="../../../scuff-cas3d/">scuff-cas3d</a>, for example,
+we might compute Casimir forces between particles separated
+by various distances <script type="math/tex">d</script>, so the integrand function may 
+be thought of as a function <script type="math/tex">f(d,x)</script> of both distance and frequency.)</p>
+<p>For example, suppose your data file is called <code>pxfgData</code> and 
+looks something like</p>
+<pre><code>p1 x1 f11 g11
+p1 x2 f12 g12
+....
+p1 xN f1N g1N
+p2 x1 f21 g21
+p2 x2 f22 g22
+....
+p2 xN f2N g2N
+....
+pM xN fMN gMN
+</code></pre>
+
+<p>where <code>p1,</code> <code>p2,</code> ..., <code>pM</code> denote <script type="math/tex">M</script> distinct values
+of some parameter <script type="math/tex">p</script> and <code>fmn,gmn</code> are the numerical
+integrand values <script type="math/tex">f(p_m, x_n), g(p_m,x_n)</script>. 
+In this case you can't simply say
+<code>--freqColumn2 --dataColumn 3 --dataColumn 4,</code> because then
+data for all parameter values will be mashed all together and 
+integrated as a single function of frequency, yielding nonsense.</p>
+<p>Instead, you handle this situation by specifying the additional
+command-line parameter <code>--tagColumn 1</code> to tell <code>scuff-integrate</code>
+to interpret data lines with different values in column 1 
+as samples of different functions:</p>
+<pre><code class="bash">% scuff-integrate --datafile pxfgData --tagcolumn 1 --freqColumn 2 --dataColumn 3 --dataColumn 4
+</code></pre>
+
+<p>In this case, the output file <code>pxfgData.Integrated</code> will report
+<script type="math/tex">x</script>-integrated values of <script type="math/tex">f</script> and <script type="math/tex">g</script> separately for each value of
+<script type="math/tex">p</script>.</p>
+<p>If your integrands depend on multiple parameters <script type="math/tex">(p,q,\cdots)</script>,
+you may specify multiple <code>--tagColumn</code> options to specify
+the columns in which values of the various parameters live.
+Then each line of the <code>.Integrated</code> output file will report
+<script type="math/tex">x</script>-integrated values of all functions for a single tuple of 
+parameter values <script type="math/tex">(p,q,\cdots).</script>
+</p>
+<h3 id="integrating-scuff-neq-data">Integrating <a class="wikilink" href="../../../scuff-neq/">scuff-neq</a> data</h3>
+<p><a class="wikilink" href="../../../scuff-integrate/">scuff-integrate</a> incorporates special functionality
+for handling the particular frequency-resolved data files
+produced by <a href="../../scuff-neq/scuff-neq/"><span class=SC>scuff-neq</span></a>.
+In this case, for a geometry containing <script type="math/tex">N</script> bodies,
+each line of the <code>.SIFlux</code> output file is tagged with
+a data field of the form <script type="math/tex">sd</script> (where <script type="math/tex">s</script> and <script type="math/tex">d</script> are
+integers between 1 and <script type="math/tex">N</script>) to label the contributions
+of sources in body <script type="math/tex">s</script> to the power, force, and/or torque
+(PFT) on body <script type="math/tex">d</script>. (For example, lines for which this field reads
+<code>13</code> give contributions of body 1 to the PFT for body 3).
+The actual data quantities reported in the
+<code>.SIFlux</code> file are the generalized fluxes <script type="math/tex">\Phi^{s\rightarrow d}</script>
+in equation (1) above, and to evaluate the <script type="math/tex">\omega</script> integral
+here we need to know the temperatures of the environment
+and of all bodies in the geometry, which enter through 
+the Bose-Einstein factors in (1).</p>
+<p>To handle these complications, <a class="wikilink" href="../../../scuff-integrate/">scuff-integrate</a>
+supports the following additional command-line options:</p>
+<ul>
+<li>
+<p><code>--sdColumn xx</code> </p>
+<p>Specifies that the <script type="math/tex">sd</script> indicator field appears on
+column <code>xx</code> of the data file. (The default is <code>--sdColumn 3</code>,
+matching the default file format of the <code>.SIFlux</code> files
+produced by <a class="wikilink" href="../../../scuff-neq/">scuff-neq</a>, so for those files this option
+may be omitted.)</p>
+</li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li>
+<p><code>--Temperature TEnv T1 ... TN</code></p>
+<p>Specifies the temperatures of the environment and of all
+bodies in the geometry. Temperature values are interpreted
+in units of Kelvin; for a geometry consisting of bodies
+of temperatures 150 and 300 Kelvin in a cold environment,
+say <code>--Temperature 0 150 300</code>.</p>
+</li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li>
+<p><code>--TemperatureFile TFile</code></p>
+<p>Specifies a file containing multiple temperature configurations
+at which to compute total PFTs. For an <script type="math/tex">N</script>-body geometry,
+each line of <code>TFile</code> should contain <script type="math/tex">N+1</script> space-separated
+numbers in the same format as the arguments to the <code>--Temperature</code>
+option, i.e. <code>TEnv T1 ... TN.</code></p>
+<p>For example, to compute PFTs in a two-body geometry with the
+temperature of body 1 scanned from 10 to 300 Kelvin, the
+temperature of body 2 held fixed at room temperature, and the
+environment temperature fixed at 0, <code>TFile</code> would look like</p>
+</li>
+</ul>
+<pre><code class="bash">0 10  300
+0 20  300
+...
+0 300 300
+</code></pre>
+
+<h2 id="scuff-integrate-command-line-reference"><span class=SC>scuff-integrate</span> Command-Line Reference</h2>
+<h2 id="only-numerical-data-columns-are-counted-as-columns">Only numerical data columns are counted as columns</h2>
+<p>There is one potentially confusing aspect of the way
+<a class="wikilink" href="../../../scuff-integrate/">scuff-integrate</a> interprets column indices as specified
+by command-line arguments such as <code>--FreqColumn</code> or <code>DataColumn</code>.
+This is that <em><a class="wikilink" href="../../../scuff-integrate/">scuff-integrate</a> treats non-numerical data columns
+as white space</em>, and in particular does not include data columns
+containing text strings when counting column indices.</p>
+<p>Thus, for example, if your data file contains frequency and
+integrand data in the second and third columns, with the first
+column containing a character string, like this:</p>
+<pre><code class="bash">DEFAULT 0.1 3.45e-5
+DEFAULT 0.2 7.82e-5
+DEFAULT 0.3 1.10e-4
+...
+</code></pre>
+
+<p>then <a class="wikilink" href="../../../scuff-integrate/">scuff-integrate</a> ignores the <code>DEFAULT</code> column and considers
+the first column with numerical data to be column 1, so here
+you would say <code>--freqColumn 1 --dataColumn 2.</code></p>
+<p>In contrast, if your data file looks instead like this: </p>
+<pre><code class="bash">4.00000 0.1 3.45e-5
+4.00000 0.2 7.82e-5
+4.00000 0.3 1.10e-4
+...
+</code></pre>
+
+<p>you would want to say <code>--freqColumn 2 --dataColumn 3.</code></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../../tests/Overview/" class="btn btn-neutral float-right" title="Overview of the test suite"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../scuff-analyze/scuff-analyze/" class="btn btn-neutral" title="scuff-analyze"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    <!-- Copyright etc -->
+    </p>
+  </div>
+
+  <a href="http://homerreid.com/scuff-em"> 
+    <span class="SmallCaps">scuff-em</span>
+  </a> documentation, by
+  <a href="http://homerreid.com">Homer Reid</a>
+
+  <p>
+  <font size=-1>
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> 
+  using a customized theme modeled 
+  after the 
+  <a href="https://github.com/snide/sphinx_rtd_theme">theme</a>
+  provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  </font>
+
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../../scuff-analyze/scuff-analyze/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../../tests/Overview/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

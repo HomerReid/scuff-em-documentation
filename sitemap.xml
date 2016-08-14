@@ -4,7 +4,7 @@
     
     <url>
      <loc>None/</loc>
-     <lastmod>2016-08-09</lastmod>
+     <lastmod>2016-08-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -13,73 +13,73 @@
         
     <url>
      <loc>None/examples/MieScattering/MieScattering/</loc>
-     <lastmod>2016-08-09</lastmod>
+     <lastmod>2016-08-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/examples/DielectricShell/DielectricShell/</loc>
-     <lastmod>2016-08-09</lastmod>
+     <lastmod>2016-08-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/examples/ThinFilm/ThinFilm/</loc>
-     <lastmod>2016-08-09</lastmod>
+     <lastmod>2016-08-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/examples/DiffractionPatterns/DiffractionPatterns/</loc>
-     <lastmod>2016-08-09</lastmod>
+     <lastmod>2016-08-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/examples/CubeTorus/</loc>
-     <lastmod>2016-08-09</lastmod>
+     <lastmod>2016-08-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/examples/SiliconBeams/SiliconBeams/</loc>
-     <lastmod>2016-08-09</lastmod>
+     <lastmod>2016-08-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/examples/SiliconSlabs/SiliconSlabs/</loc>
-     <lastmod>2016-08-09</lastmod>
+     <lastmod>2016-08-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/examples/NanostructureCasimirPolder/NanostructureCasimirPolder/</loc>
-     <lastmod>2016-08-09</lastmod>
+     <lastmod>2016-08-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/examples/SiO2Spheres/SiO2Spheres/</loc>
-     <lastmod>2016-08-09</lastmod>
+     <lastmod>2016-08-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/examples/TipSubstrate/TipSubstrate/</loc>
-     <lastmod>2016-08-09</lastmod>
+     <lastmod>2016-08-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/examples/HalfSpaceLDOS/HalfSpaceLDOS/</loc>
-     <lastmod>2016-08-09</lastmod>
+     <lastmod>2016-08-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/examples/PlatonicSolids/PlatonicSolids/</loc>
-     <lastmod>2016-08-09</lastmod>
+     <lastmod>2016-08-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -89,49 +89,49 @@
         
     <url>
      <loc>None/reference/TopLevel/</loc>
-     <lastmod>2016-08-09</lastmod>
+     <lastmod>2016-08-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/reference/Installing/</loc>
-     <lastmod>2016-08-09</lastmod>
+     <lastmod>2016-08-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/reference/Geometries/</loc>
-     <lastmod>2016-08-09</lastmod>
+     <lastmod>2016-08-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/reference/Materials/</loc>
-     <lastmod>2016-08-09</lastmod>
+     <lastmod>2016-08-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/reference/Transformations/</loc>
-     <lastmod>2016-08-09</lastmod>
+     <lastmod>2016-08-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/reference/IncidentFields/</loc>
-     <lastmod>2016-08-09</lastmod>
+     <lastmod>2016-08-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/reference/BrillouinZoneIntegration/</loc>
-     <lastmod>2016-08-09</lastmod>
+     <lastmod>2016-08-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/reference/FAQ/</loc>
-     <lastmod>2016-08-09</lastmod>
+     <lastmod>2016-08-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -141,67 +141,73 @@
         
     <url>
      <loc>None/applications/GeneralReference/</loc>
-     <lastmod>2016-08-09</lastmod>
+     <lastmod>2016-08-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/applications/scuff-scatter/scuff-scatter/</loc>
-     <lastmod>2016-08-09</lastmod>
+     <lastmod>2016-08-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/applications/scuff-transmission/scuff-transmission/</loc>
-     <lastmod>2016-08-09</lastmod>
+     <lastmod>2016-08-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/applications/scuff-ldos/scuff-ldos/</loc>
-     <lastmod>2016-08-09</lastmod>
+     <lastmod>2016-08-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/applications/scuff-tmatrix/scuff-tmatrix/</loc>
-     <lastmod>2016-08-09</lastmod>
+     <lastmod>2016-08-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/applications/scuff-cas3D/scuff-cas3D/</loc>
-     <lastmod>2016-08-09</lastmod>
+     <lastmod>2016-08-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/applications/scuff-caspol/scuff-caspol/</loc>
-     <lastmod>2016-08-09</lastmod>
+     <lastmod>2016-08-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/applications/scuff-neq/scuff-neq/</loc>
-     <lastmod>2016-08-09</lastmod>
+     <lastmod>2016-08-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/applications/scuff-RF/scuff-RF/</loc>
-     <lastmod>2016-08-09</lastmod>
+     <lastmod>2016-08-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/applications/scuff-static/scuff-static/</loc>
-     <lastmod>2016-08-09</lastmod>
+     <lastmod>2016-08-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/applications/scuff-analyze/scuff-analyze/</loc>
-     <lastmod>2016-08-09</lastmod>
+     <lastmod>2016-08-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>None/applications/scuff-integrate/scuff-integrate/</loc>
+     <lastmod>2016-08-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -211,55 +217,55 @@
         
     <url>
      <loc>None/tests/Overview/</loc>
-     <lastmod>2016-08-09</lastmod>
+     <lastmod>2016-08-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/tests/MieScattering/MieScattering/</loc>
-     <lastmod>2016-08-09</lastmod>
+     <lastmod>2016-08-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/tests/FresnelScattering/FresnelScattering/</loc>
-     <lastmod>2016-08-09</lastmod>
+     <lastmod>2016-08-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/tests/CasimirSpheres/CasimirSpheres/</loc>
-     <lastmod>2016-08-09</lastmod>
+     <lastmod>2016-08-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/tests/CasimirPlates/CasimirPlates/</loc>
-     <lastmod>2016-08-09</lastmod>
+     <lastmod>2016-08-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/tests/CPSphere/CPSphere/</loc>
-     <lastmod>2016-08-09</lastmod>
+     <lastmod>2016-08-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/tests/CPPlate/CPPlate/</loc>
-     <lastmod>2016-08-09</lastmod>
+     <lastmod>2016-08-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/tests/NEQSpheres/NEQSpheres/</loc>
-     <lastmod>2016-08-09</lastmod>
+     <lastmod>2016-08-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/tests/libscuff/libscuff/</loc>
-     <lastmod>2016-08-09</lastmod>
+     <lastmod>2016-08-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -269,7 +275,7 @@
         
     <url>
      <loc>None/API/libscuff/</loc>
-     <lastmod>2016-08-09</lastmod>
+     <lastmod>2016-08-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -279,19 +285,19 @@
         
     <url>
      <loc>None/forDevelopers/Implementation/</loc>
-     <lastmod>2016-08-09</lastmod>
+     <lastmod>2016-08-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/forDevelopers/DataStructures/</loc>
-     <lastmod>2016-08-09</lastmod>
+     <lastmod>2016-08-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/forDevelopers/Documentation/</loc>
-     <lastmod>2016-08-09</lastmod>
+     <lastmod>2016-08-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
