@@ -724,12 +724,13 @@ may be omitted.)</p>
 <p>&nbsp;</p>
 <ul>
 <li>
-<p><code>--Temperature TEnv T1 ... TN</code></p>
-<p>Specifies the temperatures of the environment and of all
-bodies in the geometry. Temperature values are interpreted
-in units of Kelvin; for a geometry consisting of bodies
-of temperatures 150 and 300 Kelvin in a cold environment,
-say <code>--Temperature 0 150 300</code>.</p>
+<p><code>--Temperature N T</code></p>
+<p>If <script type="math/tex">N\ge 1</script>, this sets the temperature of the <script type="math/tex">N</script>th object/surface in the geometry to <code>T</code>
+Kelvin.
+(Here objects/surfaces are indexed using a 1-based convention; to set the temperature
+of the first object/surface specified in the <code>.scuffgeo</code> file to room temperature
+you would say <code>--Temperature 1 300.</code>)</p>
+<p>If <script type="math/tex">N=0</script>, this instead sets the temperature of the environment to <code>T</code>.</p>
 </li>
 </ul>
 <p>&nbsp;</p>
