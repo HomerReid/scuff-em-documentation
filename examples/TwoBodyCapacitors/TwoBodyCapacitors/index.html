@@ -21,7 +21,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "examples/TwoBodyCapacitor/TwoBodyCapacitor"
+    var mkdocs_page_name = "examples/TwoBodyCapacitors/TwoBodyCapacitors"
   </script>
   
   <script src="../../../js/jquery-2.1.1.min.js"></script>
@@ -168,6 +168,9 @@
                 
             
                 <li class="toctree-l3"><a href="#plotting-the-data">Plotting the data</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#capacitance-of-a-two-sphere-capacitor">Capacitance of a two-sphere capacitor</a></li>
                 
             
             </ul>
@@ -496,7 +499,7 @@
 to compute the capacitance of parallel-plate and two-sphere
 capacitors. </p>
 <p>The files for this example may be found in the
-<code>share/scuff-em/examples/TwoBodyCapacitor</code> subdirectory
+<code>share/scuff-em/examples/TwoBodyCapacitors</code> subdirectory
 of your <a class="wikilink" href="../../../scuff-em/">scuff-em</a> installation.</p>
 <h1 id="capacitance-of-a-parallel-plate-capacitor">Capacitance of a parallel-plate capacitor</h1>
 <p>I consider a parallel-plate capacitor consisting of
@@ -566,6 +569,41 @@ due to finite mesh resolution and are reduced in the finer-mesh
 calculation. On the other hand, the deviations at large <script type="math/tex">d</script> are
 due to the finite size of the plates and are not changed by 
 computing at finer resolution.</p>
+<h1 id="capacitance-of-a-two-sphere-capacitor">Capacitance of a two-sphere capacitor</h1>
+<p>The <code>share/scuff-em/examples/TwoBodyCapacitors</code> subdirectory
+of your <a class="wikilink" href="../../../scuff-em/">scuff-em</a> installation also contains input files
+for computing the self- and mutual capacitances of a capacitor
+consisting of two conducting spheres of radius <script type="math/tex">R</script> separated by a 
+surface-surface separation distance <script type="math/tex">d</script> (center-center separation <script type="math/tex">d+2R</script>).
+Analytical formulas for the self-capacitance <script type="math/tex">C_{11}=C_{22}</script> and mutual
+capacitance <script type="math/tex">C_{12}=C_{21}</script> for this case may be found in this paper
+from 1926:</p>
+<ul>
+<li>A. Russell, "The problem of the spherical condenser", <em>Journal of the Institution of Electrical Engineers</em> &nbsp; <strong> 64 </strong> &nbsp; 727 (1926). DOI: <a href="http://dx.doi.org/10.1049/jiee-1.1926.0065">10.1049/jiee-1.1926.0065</a></li>
+</ul>
+<p>The <span class=SC>scuff-static</span> computation proceeds as above with
+new geometry and transformation files:</p>
+<ul>
+<li><a href="../TwoSphereCapacitor_501.scuffgeo"><code>TwoSphereCapacitor_501.scuffgeo</code></a></li>
+<li><a href="../TwoSphereCapacitor_2604.scuffgeo"><code>TwoSphereCapacitor_2604.scuffgeo</code></a></li>
+<li><a href="../TwoSphereCapacitor.trans"><code>TwoSphereCapacitor.trans</code></a></li>
+</ul>
+<pre><code class="bash">% for N in 501 2604
+% do
+%   ARGS=&quot;&quot;
+%   ARGS=&quot;${ARGS} --geometry  TwoSphereCapacitor_${N}.scuffgeo&quot;
+%   ARGS=&quot;${ARGS} --TransFile TwoSphereCapacitor.trans&quot;
+%   ARGS=&quot;${ARGS} --CapFile   TwoSphereCapacitor_${N}.out&quot;
+%   scuff-static ${ARGS}
+% done
+</code></pre>
+
+<p>This time we'll plot both <script type="math/tex">C_{11}(d)</script> and <script type="math/tex">C_{12}(d)</script> and
+compare against the large-<script type="math/tex">d</script> and small-<script type="math/tex">d</script> analytical formulas
+in the paper of Russel above.</p>
+<p><img alt="TwoSphereCapacitorData.png" src="../TwoSphereCapacitorData.png" /></p>
+<p>Here's the <a href="http://www.gnuplot.info"><span class=SC>gnuplot</span></a> script I used
+to make this plot: <a href="../TwoSphereCapacitor.gp"><code>TwoSphereCapacitor.gp</code></a>.</p>
               
             </div>
           </div>
