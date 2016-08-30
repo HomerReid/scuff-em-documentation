@@ -8,6 +8,22 @@
 \newcommand{\iD}{_{i\text{\tiny D}}}
 \newcommand{\jS}{_{j\text{\tiny S}}}
 
+\newcommand{\OP}{\vb O\sups{power}}
+\newcommand{\OG}{\overline{G}}
+\newcommand{\SG}{\overline{\vb G}}
+\newcommand{\IF}{^{i\text{\scriptsize F}}}
+\newcommand{\IT}{^{i\text{\scriptsize T}}}
+\newcommand{\lm}{_{\ell m}}
+\newcommand{\lmp}{_{\ell^\prime m^\prime}}
+\newcommand{\OutD}{^{\hbox{\scriptsize{out}}\dagger}}
+
+\renewcommand{\hslash}{\,\backslash\hspace{-0.06in}h}
+\newcommand{\jslash}{\backslash\hspace{-0.05in}j}
+\newcommand{\Rbar}{\overline{R}}
+\newcommand{\Rslash}{\backslash\hspace{-0.08in}R}
+
+\newcommand{\regstar}{^{\hbox{\scriptsize reg}*}}
+
 \graphicspath{{figures/}}
 
 %------------------------------------------------------------
@@ -21,9 +37,11 @@
 %- Document header  -----------------------------------------
 %------------------------------------------------------------
 %------------------------------------------------------------
-\title {Computation of Green's Functions and LDOS in {\sc scuff-em}}
+\title {Electromagnetism in the Spherical-Wave Basis: \\
+        {\large A (Somewhat Random) Compendium of Reference Formulas}
+       }
 \author {Homer Reid}
-\date {September 27, 2014}
+\date {August 1, 2016}
 
 %------------------------------------------------------------
 %------------------------------------------------------------
@@ -33,8 +51,16 @@
 
 \begin{document}
 \pagestyle{myheadings}
-\markright{Homer Reid: Periodic GF and LDOS computations in {\sc scuff-em}}
+\markright{Homer Reid: E\&M in the Spherical-Wave Basis}
 \maketitle
+
+\begin{abstract}
+This memo consolidates and collects for reference
+a somewhat random hodgepodge of formulas and results
+in the spherical-wave approach to electromagnetism
+that I have found useful over the years in developing
+and testing {\sc scuff-em} and {\sc buff-em}.
+\end{abstract}
 
 \tableofcontents
 
@@ -42,1683 +68,245 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
-\section{Homogeneous Green's functions}
+\section{Vector Spherical Wave Solutions to Maxwell's Equations}
+\label{SphericalMaxwellAppendix}
 
-Before doing anything we recall our notation and conventions
-for dyadic Green's functions.
-In a homogeneous material region with relative permittivity
-and permeability $\{\epsilon^r, \mu^r\}$, electric and magnetic
-volume currents $\vb J, \vb M$ give rise to electric and magnetic
-fields $\vb E, \vb H$ according to 
-$$
-\left\{\begin{array}{c} E_i(\vb x) \\[5pt] H_i(\vb x) \end{array}\right\}
-=
-\int
-\left(\begin{array}{cc}
- \Gamma_{ij}\supt{EE}(\vb x, \vb x^\prime) &
- \Gamma_{ij}\supt{EM}(\vb x, \vb x^\prime) \\[5pt]
- \Gamma_{ij}\supt{ME}(\vb x, \vb x^\prime) &
- \Gamma_{ij}\supt{MM}(\vb x, \vb x^\prime)
-\end{array}\right)
-\left(\begin{array}{c} J_i(\vb x) \\[5pt] M_i(\vb x) \end{array}\right)
-dV
-$$
-where
+Many authors define pairs of three-vector-valued functions
+$\{\vb M_{\ell m}(\vb x), \vb N_{\ell m}(\vb x)\}$
+describing exact solutions of Maxwell's equations 
+in spherical coordinates for 
+a homogeneous medium with wavenumber $k$, i.e.
 %====================================================================%
-\begin{subequations}
-\begin{align}
- \vbGamma\supt{EE} &= ikZ_0 Z^r \mb G \\
- \vbGamma\supt{EM} &= ik        \mb C \\
- \vbGamma\supt{ME} &= -ik       \mb C \\
- \vbGamma\supt{MM} &= \frac{ik}{Z_0 Z^r} \mb G
-\end{align}
-\label{GammaFromGC}
-\end{subequations}
+$$\Big[\nabla \times \nabla \times + k^2 \Big]
+  \left\{\begin{array}{c} \vb M \\ \vb N\end{array}\right\} = 0.$$
 %====================================================================%
-where $k=\sqrt{\epsilon^r \mu^r}\cdot \omega$
-is the photon wavenumber in the medium, 
-$Z^r=\sqrt\frac{\mu^r}{\epsilon^r}$ is the dimensionless relative
-wave impedance,
-$Z_0\approx 377\,\Omega$ is the impedance of free space, and
-the $\mb G$ and $\mb C$ tensors are
-%====================================================================%
-\begin{subequations}
-\begin{align}
-\mb G_{ij}(k,\vb r) 
- &= \frac{e^{ikr}}{4\pi (ik)^2 r^3}
-    \bigg[ \Big(1-ikr + (ikr)^2 \Big)\delta_{ij}
-          +\Big(-3 + 3ikr - (ikr)^2 \Big)\frac{r_i r_j}{r^2}
-    \bigg]
-\\
-\mb C_{ij}(k,\vb r) 
- &= \frac{e^{ikr}}{4\pi (ik) r^3} \varepsilon_{ijk} r_k.
-\end{align}
-\label{GCDef}
-\end{subequations}
-%====================================================================%
+These functions always involve spherical Bessel functions and
+spherical harmonics, but the precise definitions (including
+sign conventions and normalization factors) vary from author
+to author. In this section I set down the particular
+conventions that I use. In the next section I give
+explicit closed-form expressions for small $\ell$.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
-\section{Scattering Green's functions and LDOS in the non-periodic case}
-
-In the presence of scatterers, the scattering parts of the electric
-and magnetic dyadic Green's functions (DGFs) are
+\paragraph{Vector spherical harmonics}
 %====================================================================%
 \begin{align*}
- \mc G_{ij}\supt{E}(\omega; \vb x, \vb x^\prime)
-   \equiv
-   \frac{1}{ikZ_0 Z^r}
-  &\left( \parbox{0.65\textwidth}
-    { $i$-component of scattered $\vb E$-field at $\vb x$
-      due to a unit-strength $j$-directed point \textbf{electric} 
-      dipole radiator
-      at $\vb x^\prime$, all quantities having time dependence
-      $\sim e^{-i\omega t}$
-    }
-   \right)
-\\[5pt]
+  \vb X\lm(\theta, \varphi) 
+&= \frac{i}{\ell(\ell+1)}\nabla \times 
+     \Big\{Y\lm(\theta, \varphi) \vbhat{r}\Big\}
+\\
+%--------------------------------------------------------------------%
+  \vb Z\lm(\theta, \varphi) &= \vbhat{r} \times \vb X\lm(\theta, \varphi)
+\end{align*}
+%====================================================================%
+
+\noindent More explicitly, the components of $\vb X$ and $\vb Z$ are
+%====================================================================%
+\begin{align*}
+\vb X\lm(\theta, \phi) 
+&= 
+   \frac{i}{\sqrt{\ell(\ell+1)}}
+   \left[  \frac{im}{\sin\theta}Y_{\ell m} \vbhatt{\theta}
+           -\pard{Y_{\ell m}}{\theta}\vbhatt{\varphi}
+   \right]
+\\
+\vb Z\lm(\theta, \phi) 
+&=
+   \frac{i}{\sqrt{\ell(\ell+1)}}
+   \left[   \pard{Y_{\ell m}}{\theta}\vbhatt{\theta}
+           +\frac{im}{\sin\theta}Y_{\ell m} \vbhatt{\varphi}
+   \right].
+\end{align*}
+%====================================================================%
+Their divergences are:
+
+\paragraph{Radial functions}
+%====================================================================%
+\begin{align*}
+ R_\ell \sups{outgoing}(kr)  &= h^{(1)}_\ell(kr) \\
+ R_\ell \sups{incoming}(kr)  &= h^{(2)}_\ell(kr) \\
+ R_\ell \sups{regular}(kr)   &= j_\ell(kr).
+\end{align*}
+%====================================================================%
+I also define the shorthand symbols
+%====================================================================%
+$$ \overline{R}_\ell(kr)
+   \equiv 
+   \frac{1}{kr}\left|R_\ell(x) + \frac{d}{dx}R_\ell(x)\right|_{x=kr}
+   \qquad
+   \Rslash_\ell(kr) = -\frac{\sqrt{l(l+1)}}{kr} R_\ell(kr).
+$$
+%====================================================================%
+
+\paragraph{Vector spherical wave functions}
+%====================================================================%
+\begin{align*} 
+ \vb M\lm(k; \vb r) 
+&\equiv R_\ell(kr) \vb X\lm(\Omega) 
+\\
+%--------------------------------------------------------------------%
+ \vb N\lm(k; \vb r) &\equiv 
+i\overline{R}_\ell(kr) \vb Z\lm(\Omega) + \Rslash_\ell(kr) Y\lm(\Omega) \vbhat{r} 
+\end{align*} 
+%====================================================================%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Explicit expression for small $\ell$}
+
+\paragraph{The first few radial functions}
+
+%====================================================================%
+$$\begin{array}{lclclcl}
+% R\sups{regular}_0(kr) 
+%&=&
+% \displaystyle{ \frac{\sin kr}{kr} }
+%&\qquad&
+% \displaystyle{ \overline{R}\sups{regular}_0(kr)  }
+%&=&
+% \displaystyle{ \frac{i\cos kr}{kr} }
+%\\[10pt]
 %%--------------------------------------------------------------------%
- \mc G_{ij}\supt{M}(\omega; \vb x, \vb x^\prime)
-   \equiv
-   \frac{Z_0 Z^r}{ik}
-  &\left( \parbox{0.65\textwidth}
-    { $i$-component of scattered $\vb H$-field at $\vb x$
-      due to a unit-strength $j$-directed point \textbf{magnetic}
-      dipole radiator
-      at $\vb x^\prime$, all quantities having time dependence
-      $\sim e^{-i\omega t}$
-    }
-   \right)
-\end{align*}
-%====================================================================%
-Note that the prefactors in the definitions here are the reciprocals
-of those in (\ref{GammaFromGC}a,d), and that
-$\bmc G\supt{E,M}$ both have dimensions of inverse
-length.
-
-The enhancement of the local density of states (LDOS)
-at frequency $\omega$ and at a point $\vb x$ in a 
-scattering geometry is related to the scattering DGFs according 
-to\footnote{K Joulain et al.,``Definition and measurement of the local 
-density of electromagnetic states close to an interface,''
-Physical Review B \textbf{68} 245405 (2003)}
-%====================================================================%
-$$
-   \texttt{LDOS}(\omega; \vb x)
-   \equiv 
-   \frac{\rho(\omega; \vb x)}{\rho_0(\omega)}
-   \equiv 
-   \frac{\pi}{k_0^2}\text{Tr }\text{Im }
-   \Big[ \bmc G\supt{E}(\omega; \vb x, \vb x)
-        +\bmc G\supt{M}(\omega; \vb x, \vb x)
-   \Big]
-$$
-%====================================================================%
-where $\rho_0(\omega)\equiv k^3_0/(\pi c)$ is the free-space
-LDOS and $k_0=\omega/c$ is the free-space wavenumber at the
-frequency in question.
-
-In {\sc scuff-em} the dyadic GFs may be computed easily by solving a
-scattering problem in which the incident fields arise from a point dipole
-radiator at a source point $\vb x\subt{S}$.
-For example, to compute $\mc G\supt{E}$ we take the incident fields 
-to be the fields of a unit-strength $j$-directed point electric dipole 
-source at $\vb s\supt{S}$:
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\numeq{EHED}
-{
- \vb E\sups{inc}(\vb x) =
- \vb E\supt{ED}\Big(\vb x; \{\vb x\subt{S}, \vbhat{x}_j\} \Big),
- \qquad
- \vb H\sups{inc}(\vb x) =
- \vb H\supt{ED}\Big(\vb x; \{\vb x\subt{S}, \vbhat{x}_j\} \Big)
-}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-where $\{\vb E, \vb H\}\supt{ED}\Big(\vb x; \{\vb x_0, \vb p_0\}\Big)$
-are the fields of a point electric dipole radiator 
-at $\vb x_0$ with dipole moment $\vb p_0$. 
-(Expressions for these fields are given in 
-Appendix \ref{DipoleFieldsAppendix}).
-Then we simply solve an ordinary {\sc scuff-em} scattering
-problem with the incident fields given by equation 
-(\ref{EHED}) and compute the scattered---not total!---fields
-at the evaluation point $\vb x\subt{D}$. The three components of the
-$\vb E$-field at $\vb x\subt{D}$, divided by $ikZ_0 Z_r$, yield the
-three vertical entries of the $j$th column of the
-$3\times 3$ matrix 
-$\bmc G\sups{E}(\omega; \vb x\subt{D}, \vb x\subt{S}.)$
-Calculating $\bmc G\sups{M}$ is similar except that we use 
-a point magnetic source to supply the incident field 
-and compute the scattered $\vb H$ field instead of the 
-scattered $\vb E$ field.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
-\section{Extension to the periodic case}
-
-In the Bloch-periodic module of {\sc scuff-em}, \textit{all}
-fields and currents are assumed to be Bloch-periodic, i.e.
-if $Q(\vb x)$ denotes any field or current component at $\vb x$,
-then we have the built-in assumption
-%====================================================================%
-\numeq{BlochCondition}
-{Q(\vb x + \vb L) = e^{i\vb k\subt{B} \cdot \vb L}Q(\vb x)}
-%====================================================================%
-where $\vb L$ is any lattice vector and 
-$\vb k\subt{B}$ is the Bloch wavevector.
-
-The fields of a point dipole, equation (\ref{EHED}), do \textit{not}
-satisfy (\ref{BlochCondition}), and hence may not be used in
-Bloch-periodic {\sc scuff-em} calculations. Instead, what we can 
-simulate in the periodic case are the fields of an infinite
-phased \textit{array} of point electric dipoles,
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{subequations}
-\begin{align}
- \vb E\supt{EDA}\Big(\vb x; \{ \vb x_0, \vb p_0, \vb k\subt{B}\}\Big)
-&=\sum_{\vb L} e^{i\vb k\subt{B}\cdot \vb L}
-  \, \vb E\supt{ED}\Big(\vb x; \{\vb x\subt{0}+\vb L, \vb p_0\} \Big),
-\\
- \vb H\supt{EDA}\Big(\vb x; \{ \vb x_0, \vb p_0, \vb k\subt{B}\}\Big)
-&=\sum_{\vb L} e^{i\vb k\subt{B}\cdot \vb L}
-  \, \vb H\supt{ED}\Big(\vb x; \{\vb x\subt{0}+\vb L, \vb p_0\} \Big),
-\end{align}
-\label{EHEDA}
-\end{subequations}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-(where ``EDA'' stands for ``electric dipole array''). The quantities
-we can compute in a single {\sc scuff-em} scattering calculation
-are now the periodically phased versions of the DGFs, i.e.
-(suppressing $\omega$ arguments),
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\numeq{ScriptGBarDef}
-{
- \overline{\mc G_{ij}\supt{E}}(\vb x, \vb x^\prime, \vb k\subt{B})
- \equiv \sum_{\vb L} e^{i\vb k\subt{B}\cdot \vb L}
-  \mc G_{ij}\supt{E}(\vb x, \vb x^\prime+\vb L), 
-}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-with $\overline{\mc G_{ij}\supt{M}}$ defined similarly.
-(Here and elsewhere, barred symbols denote Bloch-periodic 
-quantities.) To recover the non-periodic Green's function---that
-is, the response of our periodic geometry to a \textit{non-periodic}
-point source---we must perform a Brillouin-zone 
-integration:\footnote{To derive these equations, multiply both sides
-of (\ref{ScriptGBarDef}) by $e^{-i\vb k\subt{B} \cdot \vb L^\prime}$,
-integrate both sides over the Brillouin zone, and use the
-condition 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-$$\int\subt{BZ} e^{i\vb k\subt{B}\cdot (\vb L-\vb L^\prime)}\,d\vb k
-  =\mc{V}\subt{BZ} \, \delta(\vb L,\vb L^\prime)
-$$
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-where $\mc V\subt{BZ}$ is the Brillouin-zone volume [for example,
-a square lattice with basis vectors
-$\{\vb L_1, \vb L_2\}=\{L_x\vbhat{x}, L_y\vbhat{y}\}$ has
-$\mc V\subt{BZ}=4\pi^2/(L_x L_y)$].
-Setting $\vb L^\prime=0$ recovers (\ref{BZIntegration}).}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\numeq{BZIntegration}
-{
-  \mc G_{ij}\supt{E}(\vb x, \vb x^\prime)
- =\frac{1}{\mc V\subt{BZ}} 
-   \int\subt{BZ} 
-   \overline{\mc G_{ij}\supt{E}}(\vb x, \vb x^\prime, \vb k\subt{B})
-   \, d\vb k\subt{B}
-}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-and similarly for $\mc G\supt{M}.$
-
-\subsection*{Reciprocity of homogeneous Green's functions}
-
-The non-periodic Green's functions $\mb G, \mb C$ 
-satisfy the reciprocity relations
-%====================================================================%
-\begin{align*}
-  \mb K_{ji}(\vb r) = \mb K_{ij}(-\vb r).
-\end{align*}
-%====================================================================%
-($\mb K=\mb G,\mb C$). Their periodic counterparts satisfy
-%====================================================================%
-\begin{align*}
- \overline{\mb K}_{ji}(\vb r; \vb k\subt{B})
- &= \sum_{\vb L} e^{i\vb k\subt{B}\cdot \vb L}
-    \mb K_{ji}(\vb r - \vb L)
-\\
- &= \sum_{\vb L} e^{i\vb k\subt{B}\cdot \vb L}
-    \mb K_{ij}(-\vb r + \vb L)
-\\
- &= \sum_{\vb L} e^{-i\vb k\subt{B}\cdot \vb L}
-    \mb K_{ij}(-\vb r - \vb L)
-\\
- &= \overline{\mb K}_{ij}(-\vb r; -\vb k\subt{B}).
-\end{align*}
-%====================================================================%
-
-\subsection*{Evaluation of BZ integrals}
-
-The {\sc scuff-em} API offers a routine for computing the integrand of
-(\ref{BZIntegration}) for given evaluation and source points
-$\vb x, \vb x^\prime$ and Bloch vector $\vb k\subt{B}$. To get the 
-full Green's function on the LHS requires a numerical cubature
-over the Brillouin zone.
-
-For a 2D square lattice with lattice vectors 
-$\vb L_1=L_x\vbhat{x}, \vb L_2=L_y\vbhat{x},$
-a set of reciprocal-lattice basis vectors is 
-$\vbGamma_1=\pf{2\pi}{L_x} \vbhat{x},
- \vbGamma_2=\pf{2\pi}{L_y} \vbhat{y}$,
-and Brillouin-zone integrals take the form
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-$$ \frac{1}{\mc V\subt{BZ}} 
-   \int\subt{BZ} f(\vb k\subs{B}) \, d \vb k\subt{B}
-  =4\int_0^{1/2} \, d u_1 \, \int_0^{1/2} \, d u_2 \, 
-   f\Big( u_1\vbGamma_1 + u_2\vbGamma_2 \Big)
-$$
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
-\section{Vector-matrix-vector product formula for dyadic Green's functions}
-
-In the discretized BEM framework we can write convenient
-vector-matrix-vector product formulas for the scattering parts
-of the electric and magnetic DGFs. I first derive these for
-the non-periodic case, then discuss the modifications required
-to extend to periodic geometries.
-
-%=================================================
-%=================================================
-%=================================================
-\subsection{The non-periodic case}
-
-\subsection*{VMVP formula for $\bmc G\supt{E}$}
-
-Consider first the electric DGF
-$\bmc G\supt{E}_{ij}(\vb x\subt{D}, \vb x\subt{S})$,
-where the subscripts stand for ``destination'' and ``source.''
-To get at this, we must solve a scattering problem in which 
-the incident fields are the fields radiated by a 
-$j$-directed point dipole source $\vb p=p_0\vbhat{n}_j$
-at $\vb x\subt{S}$:
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\numeq{VMVEHInc}
-{
- \left\{\begin{array}{c}
- E_\ell\sups{inc}(\vb x) \\[8pt] 
- H_\ell\sups{inc}(\vb x)
- \end{array}\right\}
+% R\sups{outgoing}_0(kr) 
+%&=&
+% \displaystyle{ \frac{-i e^{ikr}}{kr} }
+%&\qquad&
+% \displaystyle{ \overline{R}\sups{outgoing}_0(kr) }
+%&=&
+% \displaystyle{ \frac{ie^{ikr}}{kr} }
+%\\[10pt]
+%%--------------------------------------------------------------------%
+% R\sups{incoming}_0(kr) 
+%&=&
+% \displaystyle{ \frac{e^{-ikr}}{kr} }
+%&\qquad&
+% \displaystyle{ \overline{R}\sups{outgoing}_0(kr) }
+%&=&
+% \displaystyle{ \frac{e^{-ikr}}{kr} } 
+%\\[10pt]
 %--------------------------------------------------------------------%
-= -i\omega p_0
-  \left\{\begin{array}{c}
-   \Gamma_{\ell j}\supt{EE}(\vb x, \vb x\subt{S}) \\[8pt]
-   \Gamma_{\ell j}\supt{ME}(\vb x, \vb x\subt{S})
-  \end{array}\right\}
+ R\sups{regular}_1(kr) 
+&=&
+ \displaystyle{ -\frac{i(ikr)\cos(kr) + \sin (kr)}{(ikr)^2} }
+&\qquad&
+ \displaystyle{ \overline{R}\sups{regular}_1(kr)  }
+&=&
+ \displaystyle{ \frac{(ikr)\cos(kr) - \Big[-1-(ikr)^2\Big] \sin(kr)}
+                     {k^3 r^3}
+              }
+\\[10pt]
 %--------------------------------------------------------------------%
-= (-i\omega p_0)
-  \left\{\begin{array}{r}
-  ik Z_0 Z^r\mb G_{\ell j}(\vb x, \vb x\subt{S}) 
-   \\[8pt]
-   -ik\mb C_{\ell j}(\vb x, \vb x\subt{S})
-  \end{array}\right\}
-}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The scattered electric field
-at $\vb x\subt{D}$ is obtained from the surface currents
-$\vb K, \vb N$ according to 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{align}
- E_i\sups{scat}(\vb x\subt{D})
-%--------------------------------------------------------------------%
-&=\int 
-  \left\{\begin{array}{c}
-   \Gamma_{i \ell}\supt{EE}(\vb x\subt{D}, \vb x) 
-   \\[8pt]
-   \Gamma_{i \ell}\supt{EM}(\vb x\subt{D}, \vb x) 
-  \end{array}\right\}^T
-  \left\{\begin{array}{c}
-   K_\ell(\vb x) 
-   \\[8pt]
-   N_\ell(\vb x)
-  \end{array}\right\}
-  \, d\vb x
-\\
-%--------------------------------------------------------------------%
-&= 
-  \int 
-  \left\{\begin{array}{r}
-  ikZ_0 Z^r\mb G_{i \ell}(\vb x\subt{D}, \vb x) 
-   \\[8pt]
-  +ik\mb C_{i \ell}(\vb x\subt{D}, \vb x) 
-  \end{array}\right\}^T
-  \left\{\begin{array}{r}
-K_\ell(\vb x)
-   \\[8pt]
-N_\ell(\vb x) 
-  \end{array}\right\}
-  \, d\vb x 
-\intertext{Insert the expansions
-           $\vb K(\vb x)=\sum k_a \vb b_a(\vb x)$, 
-           $\vb N(\vb x)=-Z_0 \sum n_a \vb b_a(\vb x)$:}
-%--------------------------------------------------------------------%
-&= \sum_{a}
-  \left\{\begin{array}{r}
-  ikZ_0 Z^r g_a(\vb x\subt{D}, \vbhat{n}_i)
-   \\[8pt]
-  -ikZ_0 c_a(\vb{x}\subt{D}, \vbhat{n}_i)
-  \end{array}\right\}^T
-  \left\{\begin{array}{r}
-   k_a 
-   \\[8pt]
-   n_a
-  \end{array}\right\}
-\label{EScatKN}
-\end{align}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-where I defined
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{align*}
-  g_a(\vb{x}\subt{D}, \vbhat{n}_i)
-\equiv \int \mb G_{i \ell}(\vb x\subt{D}, \vb x) b_{a\ell}(\vb x) \, d\vb x,
-  \qquad
-  c_a(\vb{x}\subt{D}, \vbhat{n}_i)
-\equiv\int \mb C_{i \ell}(\vb x\subt{D}, \vb x) b_{a\ell}(\vb x) \, d\vb x.
-\end{align*}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The surface-current expansion coefficients are obtained by solving
-the BEM system:
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\numeq{VMVBEMSystem}
-{
- \left(\begin{array}{c} k_a \\ n_a\end{array}\right)
-= -W_{ab} \left(\begin{array}{l} e_b \\ h_b\end{array}\right).
-}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Here $\vb W$ is the inverse BEM matrix and $e_b, h_b$ are the 
-projections of the incident field onto the basis functions:
+ R\sups{outgoing}_1(kr) 
+&=&
+ \displaystyle{ \Big[-1 + ikr - (ikr)^2\Big] \frac{e^{ikr}}{k^3 r^3} }
+&\qquad&
+ \displaystyle{ \overline{R}\sups{outgoing}_1(kr) }
+&=&
+ \displaystyle{ \Big[-ikr + (ikr)^2\Big]\frac{e^{ikr}}{k^3r^3} }
+\end{array}$$
+%====================================================================%
+
+\paragraph{The first few outgoing functions}
+
+In what follows, the $Q_n$ are dimensionless polynomial factors:
 %====================================================================%
 \begin{subequations}
 \begin{align}
- e_b 
-&\equiv \frac{1}{Z_0} \Inp{\vb b_m}{\vb E\sups{inc}}
- = (-i\omega p_0)(ikZ^r)
-  \underbrace{\int b_{b\ell}(\vb x) \mb G_{\ell j}(\vb x, \vb x\subt{S}) \,dx}
-            _{g_{b}(\vb x\subt{S}, \vbhat{n}_j)}
-\nn
-&= (-i\omega p_0)(ikZ^r) g_b(\vb x\subt{S}, \vbhat{n}_j)
-\\[6pt]
- h_b 
-&\equiv \hphantom{\frac{1}{Z_0}} \Inp{\vb b_m}{\vb H\sups{inc}}
- =(-i\omega p_0)(ik) 
-  \underbrace{\left[-\int b_{b\ell}(\vb x) 
-                  \mb C_{\ell j}(\vb x, \vb x\subt{S}) \,dx\right] 
-             }_{-c_b(\vb x\subs{s}, \vbhat{n}_j)}
-\nn
-&= -(-i\omega p_0)(ik) c_b(\vb x\subt{S}, \vbhat{n}_j). 
+ Q_1(x) &= 1-x \\
+ Q_{2a}(x) &= 1-x+x^2 \\
+ Q_{2b}(x) &= 3-3x+x^2 \\
+ Q_3(x) &= 6-6x+3x^2-x^3
 \end{align}
-\label{ebhb}%
-\end{subequations}
-Note that the $g_b,c_b$ quantities are the same as the $g_a, c_a$
-computed above; this follows from reciprocity,
-$\mb O_{ij}(\vb x, \vb y)=\mb O_{ji}(\vb y, \vb x)$
- for $\mb O=\{\mb G, \mb C\}$.
-
-Inserting (\ref{VMVBEMSystem}) and (\ref{ebhb}) into
-(\ref{EScatKN}), the scattered field at $x\subt{D}$
-takes the form of a vector-matrix-vector product,
-%====================================================================%
-\begin{align}
-  \left\{\begin{array}{c}
- E_i\sups{scat}(\vb x\subt{D}) \\[8pt]
- H_i\sups{scat}(\vb x\subt{D})
- \end{array}\right\}
-&=(i\omega p_0) \cdot \frac{1}{Z_0}
-  \underbrace{
-  \left\{\begin{array}{c}
-     ikZ_0 Z^r
-     g_a(\vb x\subt{D}, \vbhat{n}_i) \\[4pt]
-    -ikZ_0 c_a(\vb x\subt{D}, \vbhat{n}_i) 
-  \end{array}\right\}^T
-             }_{\equiv (\vb r\supt{E}\iD)_a}
-  \left(
- \vphantom{
-  \left\{\begin{array}{c} 
-    ik Z_0 Z^r
-     g_a(\vb x\subt{D}, \vbhat{n}_i) \\[4pt]
-    -ikZ_0 c_a(\vb x\subt{D}, \vbhat{n}_i) 
-  \end{array}\right\}^T
-          }
-         W_{ab}
-  \right)
-  \underbrace{
-  \left\{\begin{array}{c} 
-    ikZ_0 Z^r g_b(\vb x\subt{S}, \vbhat{n}_j) \\[4pt]
-    -ik Z_0 c_b(\vb x\subt{S}, \vbhat{n}_j) 
-  \end{array}\right\}
-             }_{\equiv (\vb r\supt{E}\jS)_b}
-\label{GEVMVP}
-\end{align}
-and the scattering part of the electric DGF reads
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\numeq{GijEVMVP}
-{
- \mc G_{ij}\supt{E}(\vb x\subt{D}, \vb x\subt{S})
-= \frac{E_i\sups{scat}}{(ikZ_0 Z^r)(-i\omega p_0)}
-= -\frac{1}{ikZ_0^2 Z^r}
-   \Big( \vb r\iD\supt{E} \cdot \vb W \cdot \vb r\jS\supt{E} \Big)
-}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-I think of the vectors $\vb r\supt{E}\iD$ and $\vb r\supt{E}\jS$ 
-as ``reduced-field'' vectors; their dot product with a vector
-of surface-current coefficients yields the $i,j$ components of 
-the scattered electric fields at $x\supt{D,S}$.
-
-\subsection*{VMVP formula for $\bmc G\supt{M}$}
-
-Computing the magnetic Green's function entails the following
-modifications:
-\begin{itemize}
- \item The incident fields now arise from a point magnetic source
-       of strength $m_0$. This changes equation (\ref{VMVEHInc})
-       to read
-%====================================================================%
-$$
- \left\{\begin{array}{c}
- E_\ell\sups{inc}(\vb x) \\[8pt]
- H_\ell\sups{inc}(\vb x)
- \end{array}\right\}
-= -i\omega m_0
-  \left\{\begin{array}{r}
-   \Gamma_{\ell j}\supt{EM}(\vb x, \vb x\subt{S}) \\[8pt]
-   \Gamma_{\ell j}\supt{MM}(\vb x, \vb x\subt{S})
-  \end{array}\right\}
-= (-i\omega m_0)
-  \left\{\begin{array}{r}
-     ik \mb C_{\ell j}(\vb x, \vb x\subt{S}) \\[8pt]
-  \frac{ik}{Z_0 Z^r} \mb G_{\ell j}(\vb x, \vb x\subt{S})
-  \end{array}\right\}
-$$
-%====================================================================%
- \item The quantity I want to compute is the scattered magnetic
-       field. This replaces equation (\ref{EScatKN}) with
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{align}
- H_i\sups{scat}(\vb x\subt{D})
-%--------------------------------------------------------------------%
-&=\int 
-  \left\{\begin{array}{c}
-   \Gamma_{i \ell}\supt{ME}(\vb x\subt{D}, \vb x) 
-   \\[8pt]
-   \Gamma_{i \ell}\supt{MM}(\vb x\subt{D}, \vb x) 
-  \end{array}\right\}^T
-  \left\{\begin{array}{c}
-   K_\ell(\vb x) 
-   \\[8pt]
-   N_\ell(\vb x)
-  \end{array}\right\}
-  \, d\vb x
-\\
-%--------------------------------------------------------------------%
-&= \sum_{a}
-  \left\{\begin{array}{r}
-  -ik c_a(\vb {x}\subt{D}, \vbhat{n}_i)
-   \\[8pt]
-  -\frac{ik}{Z^r} g_a(\vb {x}\subt{D}, \vbhat{n}_i)
-  \end{array}\right\}^T
-  \left\{\begin{array}{r}
-   k_a 
-   \\[8pt]
-   n_a
-  \end{array}\right\}
-\label{HScatKN}
-\end{align}
-\end{itemize}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The expression analogous to (\ref{GEVMVP}) for the scattered
-magnetic field due to a magnetic source then reads
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{align*}
- H\sups{scat}_i
-&=+\frac{1}{Z_0}
-  \underbrace{
-  \left(\begin{array}{c} 
-   -ik c_a(\vb x\subt{D}, \vbhat{n}_i)  \\[4pt]
-   -\frac{1}{ik Z^r}  g_a(\vb x\subt{D}, \vbhat{n}_i)
-  \end{array}\right)^T
-             }_{\equiv (\vb r\supt{H}\iD)_a}
-%%====================================================================%
-  \left(
- \vphantom{
-  \left\{\begin{array}{c} 
-     g_a(\vb x\subt{D}, \vbhat{n}_i) \\[4pt]
-    -c_a(\vb x\subt{D}, \vbhat{n}_i) 
-  \end{array}\right\}^T
-          }
-         W_{ab}
-  \right)
-%====================================================================%
-  \underbrace{
-  \left(\begin{array}{c} 
-   -ik  c_b(\vb x\subt{S}, \vbhat{n}_j)  \\[4pt]
-   -\frac{1}{ik Z^r} g_b(\vb x\subt{S}, \vbhat{n}_j)
-  \end{array}\right)
-             }_{\equiv (\vb r\supt{H}\jS)_b}
-\end{align*}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-so the scattering part of the magnetic DGF reads
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\numeq{GijHVMVP}
-{
- \mc G_{ij}\supt{H}(\vb x\subt{D}, \vb x\subt{S})
-= +\frac{Z_0 Z^r}{ik(-i\omega m_0)} H_i\sups{scat}
-= +\frac{Z^r}{ik}
-   \Big( \vb r\iD\supt{H} \cdot \vb W \cdot \vb r\jS\supt{H} \Big).
-}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%=================================================
-%=================================================
-%=================================================
-\subsection{The periodic case}
-
-In the derivation of equations (\ref{GijEVMVP}) 
-and (\ref{GijHVMVP}), we used the reciprocity of the 
-homogeneous Green's functions, i.e.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{align*}
- \mb K_{ij}(\vb x, \vb y) &= \mb K_{ji}(\vb y, \vb x).
-\end{align*}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-For this periodic Green's function this statement takes the 
-modified form
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{align*}
- \overline{\mb K}_{ij}(\vb x, \vb y; \vb k\subt{B}) 
- &= \overline{\mb K}_{ji}(\vb y, \vb x; -\vb k\subt{B}).
-\end{align*}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-Thus the periodic version of (\ref{GijEVMVP}) reads
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\numeq{GijEVMVPPeriodic}
-{
- \overline{\mc G}_{ij}\supt{E}(\vb x\subt{D}, \vb x\subt{S}; \vb k\subt{B})
-= -\frac{1}{ikZ_0^2 Z^r}
-   \Big( \vb r\iD\supt{E}(\vb k\subt{B}) 
-              \cdot \vb W(\vb k\subt{B}) 
-   \cdot \vb r\jS\supt{E}(-\vb k\subt{B})\Big)
-}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-and the periodic version of (\ref{GijHVMVP}) is similar.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
-\section{API Routines for computing dyadic Green's functions}
-
-The {\sc scuff-em} API routine that computes the quantity
-$\overline{\mathcal{G}\supt{E}_{ij}}(\vb x, \vb x^\prime, k\supt{B})$
-in equation (\ref{BZIntegration}) is 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\smallskip 
-\begin{center}
-\begin{verbcode}
-void RWGGeometry::GetDyadicGFs(double XEval[3], double XSource[3],
-                               cdouble Omega, double kBloch[2],
-                               HMatrix *M, HVector *KN,
-                               cdouble GEScat[3][3],
-                               cdouble GMScat[3][3],
-                               cdouble GETot[3][3],
-                               cdouble GMTot[3][3]);
-\end{verbcode}
-\end{center}
-\smallskip
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-For cases in which $\vb x=\vb x^\prime$ and we need only the 
-scattering parts of the DGFs, there is a simpler interface:
-
-\smallskip 
-\begin{center}
-\begin{verbcode}
-void RWGGeometry::GetDyadicGFs(double X[3], cdouble Omega, 
-                               double *kBloch,
-                               HMatrix *M, HVector *KN,
-                               cdouble GEScat[3][3], 
-                               cdouble GMScat[3][3]);
-\end{verbcode}
-\end{center}
-\smallskip 
-
-In this routine, the input parameters are as follows:
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{itemize}
- \item \texttt{X[0..2]} are the Cartesian coordinates of the evaluation point
- \item \texttt{Omega} is the angular frequency in units of $3\times 10^{14}$ rad/sec
- \item \texttt{kBloch[0,1]} are the $x$ and $y$ components of the Bloch vector
- \item \texttt{M} is the LU-factorized BEM matrix---that is, the result of 
-       calling \texttt{AssembleBEMMatrix()} followed by \texttt{LUFactorize()})
- \item \texttt{KN} is a user-allocated RHS vector (allocated, for example,
-       by saying \texttt{KN=G->AllocateRHSVector}) which is used internally
-       as a workspace and needs only to be allocated, not initialized in any way
-\end{itemize}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-The output parameters are:
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{itemize}
- \item \texttt{GEScat[i][j], GMScat[i][j]]} are the Cartesian components of the 
-       electric and magnetic scattering DGFs.
-\end{itemize}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\appendix
-\newpage 
-\section{Fields of a phased array of point dipole radiators}
-\label{DipoleFieldsAppendix}
-
-To compute dyadic Green's functions in periodic geometries,
-{\sc scuff-ldos} solves a scattering problem in which the
-incident fields originate from a an infinite phased array
-of point sources. Here I describe the calculation of these
-infinite fields. This calculation is implemented by the 
-\texttt{PointSource} 
-class in the {\sc libincfield} module in {\sc scuff-em}.
-
-\subsection*{Fields of a single point dipole}
-
-First consider a single point electric dipole radiator (not an array)
-with dipole moment $\vb p_0$ at a point $\vb x_0$ in a
-medium with relative permittivity and permeability
-$\epsilon^r, \mu^r$
-(as usual suppressing time-dependence factors
-of $e^{-i\omega t}$). The fields at $\vb x$ due to this source are 
-%====================================================================%
-\begin{align*}
-  \vb E\supt{ED}(\vb x; \vb x_0, \vb p_0)
-   &= \frac{|\vb p_0|}{\epsilon_0 \epsilon^r}
-      \cdot \frac{e^{ikr}}{4\pi r^3} \cdot 
-      \Big[ f_1(ikr) \vbhat{p_0} + f_2(ikr)(\vbhat{r}\cdot \vbhat{p_0})\vbhat{r} \Big]
-\\
-  \vb H\supt{ED}(\vb x; \vb x_0, \vb p_0)
-   &= \frac{1}{Z_0 Z^r }\cdot \frac{|\vb p_0|}{\epsilon_0 \epsilon^r}
-      \cdot \frac{e^{ikr}}{4\pi r^3} \cdot 
-      \Big[ f_3(ikr) (\vbhat{r}\times\vbhat{p_0})\Big]
-\end{align*}
-%====================================================================%
-$$ \vb r=|\vb x-\vb x_0|, \qquad r=|\vb r|, \qquad \vbhat{r}=\frac{\vb r}{r},$$
-$$ f_1(x)=-1+x-x^2, \qquad f_2(x)=3-3x+x^2, \qquad f_3(x)=x-x^2.$$
-%====================================================================%
-An alternative way to understand these fields is to think of the point dipole
-$\vb p_0$ at $\vb x_0$ as a localized volume current distribution, 
-%====================================================================%
-\numeq{JFromp0}{\vb J(\vb x) = -i\omega \vb p_0 \delta(\vb x-\vb x_0)}
-%====================================================================%
-in which case it is easy to compute the fields at $\vb x$ by
-convolving with the usual (free-space) dyadic
-Green's functions relating currents to fields:
-%====================================================================%
-\begin{subequations}
-\begin{align}
- E_i(\vb x) 
-&= 
- \int \Gamma_{ij}\supt{EE}(\vb x, \vb x^\prime) J_j(\vb x^\prime) d\vb x^\prime
-\nn
-&=-i\omega \Gamma_{ij}\supt{EE}(\vb x, \vb x_0) p_{0j}
-\nn
-&=(-i\omega)(ikZ_0Z^r) G_{ij}(\vb x, \vb x_0) p_{0j}
-\nn
-&=+k^2 \cdot \frac{|\vb p_0|}{\epsilon_0 \epsilon^r } \cdot G_{ij}(\vb x, \vb x_0) \hat{p}_{0j}
-\\[8pt]
-H_i(\vb x) 
- &=
-\int \Gamma_{ij}\supt{ME}(\vb x, \vb x^\prime) J_j(\vb x^\prime) d\vb x^\prime
-\nn
-&=-i\omega \Gamma_{ij}\supt{ME}(\vb x, \vb x_0) p_{0j}
-\nn
-&=(-i\omega)(-ik)  C_{ij}(\vb x, \vb x_0) p_{0j}
-\nn
-&=-\frac{k^2}{Z_0 Z^r} 
-   \cdot 
-   \frac{|\vb p|}{\epsilon_0 \epsilon^r}
-   \cdot C_{ij}(\vb x, \vb x_0) \hat{p}_{0j}
-\end{align}
-\label{DipoleFieldsFromGC}
-\end{subequations}
-%====================================================================%
-where the $\vb G$ and $\vb C$ dyadics are related to the
-scalar Helmholtz Green's function according to
-%====================================================================%
-\numeq{GCFromG0}
-{
-  G_{ij}(\vb r)
-   = \Big[ \delta_{ij} +\frac{1}{k^2} \partial_i \partial_j \Big] G_0(\vb r),
-\qquad
-   C_{ij}(\vb r)
-   = \frac{1}{ik}\varepsilon_{ijk} \partial_k G_0(\vb r).
-}
-%====================================================================%
-Note that the $\vb E$ and $\vb H$ fields due to an electric 
-current distribution $\vb J$ are
-%====================================================================%
-\numeq{EHFromGC}
-{ \vb E(\vb x)=ik Z_0 \int \vb G(\vb x-\vb x^\prime) \cdot \vb J(\vb x^\prime),
-  \qquad
-  \vb H(\vb x)=-ik \int \vb C(\vb x-\vb x^\prime) \cdot \vb J(\vb x^\prime).
-}
-%====================================================================%
-   
-
-\subsection*{Fields of a phased array of point dipoles, take 1}
-
-Now consider the fields of a phased array of electric dipoles
-of dipole moment $\vb p_0$ located at $\vb x_0$ in the lattice 
-unit cell.
-A first way to get the fields of this array is 
-to start with equations (\ref{DipoleFieldsFromGC}) and
-(\ref{GCFromG0}), but replace the non-periodic scalar
-Green's function $G_0$ with its Bloch-periodic version,
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-$$ G_0(\vb x-\vb x^\prime) \qquad \longrightarrow \qquad 
-   \overline{G_0}(\vb x, \vb x^\prime; \vb k\subt{B}) \equiv
-   \sum_{\vb L} e^{i \vb k\subt{B} \cdot \vb L} \, G_0(\vb x- \vb x^\prime-\vb L).
-$$
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Then the components of the fields of an electric dipole array, 
-equation (\ref{EHEDA}), read
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{align*}
- E_i\supt{EDA}(\vb x)
- &=k^2 \cdot \frac{|\vb p_0|}{\epsilon_0 \epsilon^r } 
-    \left[ \delta_{ij} + \frac{1}{k^2}\partial_i \partial_j
-    \right] \overline{G}_{0}(\vb x-\vb x^\prime)\hat{p}_{0j}
-\\
- H_i\supt{EDA}(\vb x)
- &=\frac{ik}{Z_0 Z^r}
-    \cdot \frac{|\vb p_0|}{\epsilon_0 \epsilon^r } \cdot
-    \epsilon_{ijk} \partial_k \overline{G}_{0}(\vb x-\vb x^\prime)
-    \hat{p}_{0j}.
-\end{align*}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection*{Fields of a phased array of point dipoles, take 2}
-
-An alternative way to get the fields of a point array of dipoles,
-which is useful for the half-space calculation of the following
-section, is to start with the two-dimensional Fourier representation 
-of the (non-periodic) homogeneous dyadic Green's functions.
-These follow from the two-dimensional Fourier representation of 
-of the non-periodic scalar Green's function:
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-$$ G_0(\vb r)=\frac{e^{ik_0 |\vb r|}}{4\pi |\vb r|}
-   =
-   \frac{i}{2}
-   \int_{\mathbb R^2} \frac{d^2 \vb k}{(2\pi)^2}
-    \frac{e^{i(k_x x + k_y y + ik_z|z|)}}{k_z},
-   \qquad
-   k_z\equiv \sqrt{k_0^2 - k_x^2 - k_y^2}
-$$
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Applying (\ref{GCFromG0}), 
-we obtain the 2D Fourier expansion of the dyadic Green's functions:
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\numeq{GCInfiniteKIntegrals}
-{
-\vb G(\vbrho, z)
- = \int_{\mathbb{R}^2}
-     \frac{d\vb k}{(2\pi)^2} \vb g(\vbrho, z; \vb k),
-\qquad
-\vb C(\vbrho, z)
- = \int_{\mathbb{R}^2}
-     \frac{d\vb k}{(2\pi)^2} \vb c(\vbrho, z; \vb k),
-}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{subequations}
-\begin{align}
-\vb g(\vbrho, z; \vb k)
-&= \pf{i}{2k_0^2 k_z}
-   \left(\begin{array}{ccc}
-    k_0^2-k_x^2      & -k_x k_y     & \mp k_z k_x \\
-    -k_y k_x         & k_0^2-k_y^2  & \mp k_z k_y \\
-    \mp  k_x k_z     & \mp k_y k_z  & k_0^2-k_z^2
-    \end{array}\right) e^{i\vb k \cdot \vbrho} e^{i k_z |z|}
-\\[5pt]
-\vb c(\vbrho, z; \vb k)
- &= \pf{i}{2k_0 k_z}
-     \left(\begin{array}{ccc}
-         0 & \pm k_z & -k_y \\
-  \mp k_z  & 0       &  k_x \\
-      k_y  & -k_x    &  0 
-     \end{array}\right) e^{i\vb k \cdot \vbrho} e^{i k_z |z|}
-\end{align}
-\label{gc}
-\end{subequations}
-%====================================================================%
-where the $\pm$ sign is $\text{sign}(z).$
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Now reinterpret the infinite integrals over the entire $k_x, k_y$ plane in
-(\ref{GCInfiniteKIntegrals}) as finite integrals over just the Brillouin
-zone;
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\numeq{GCFiniteKIntegrals}
-{
-\vb G(\vbrho, z)
- = \int_0^{\Gamma_x} \, dk_x \, \int_0^{\Gamma_y} \, dk_y \,
-     \frac{d\vb k}{(2\pi)^2} \overline{\vb g}(\vbrho, z; \vb k),
-\qquad
-\vb C(\vbrho, z)
- = \int_0^{\Gamma_x} \, dk_x \, \int_0^{\Gamma_y} \, dk_y \,
-     \frac{d\vb k}{(2\pi)^2} \overline{\vb c}(\vbrho, z; \vb k),
-}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{align*}
- \overline{\vb g}(\vbrho, z; k_x, k_y)
- &= \sum_{n_x, n_y=-\infty}^{\infty}
-     \vb g\Big(\vbrho, z; k_x + n_x\vbGamma_x, k_y + n_y \vbGamma_y\Big), 
-\\
- \overline{\vb c}(\vbrho, z; k_x, k_y) 
- &= \sum_{n_x, n_y=-\infty}^{\infty}
-     \vb c\Big(\vbrho, z; k_x + n_x\vbGamma_x, k_y + n_y \vbGamma_y\Big).
-\end{align*}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-If I think of (\ref{GCFiniteKIntegrals}) as equations of the form
-(\ref{BZIntegration}), i.e. equations relating non-barred quantities
-to Brillouin-zone integrals over barred quantities, I can
-identify the Bloch-periodic versions of the dyadic Green's functions
-as 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-$$
-\overline{\vb G}\Big(\vbrho, z; \vb k\supt{B}\Big)
-=\frac{\mc V\supt{BZ}}{(2\pi)^2}
-  \overline{\vb g}\big(\vbrho, z; \vb k\supt{B}\big), 
-\qquad
-\overline{\vb C}\Big(\vbrho, z; \vb k\supt{B}\Big)
-=\frac{\mc V\supt{BZ}}{(2\pi)^2}
-  \overline{\vb c}\big(\vbrho, z; \vb k\supt{B}\big).
-$$
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
-\section{Analytical formulas for scattering part of
-         DGFs above a homogeneous half space}
-
-For testing purposes it is very convenient to have
-analytical formulas for the DGFs above a half space
-with spatially homogeneous permittivity and permeability 
-$\epsilon,\mu$.\footnote{In compiling these formulas I 
-referred to these references:
-\begin{itemize}
- \item H. Safari et al., ``Van der Waals potentials of 
-       paramagnetic atoms,'' 
-       \textit{Phys. Rev. A} \textbf{78} 062901 (2008).
- \item S. Scheel et al., 
-       ``Macroscopic Quantum Electrodynamics---Concepts and 
-       Applications,'' \textit{Acta Physica Slovaca} \textbf{58}
-       675 (2008).
- \end{itemize}} 
-These formulas are implemented in {\sc scuff-ldos} and
-may be accessed by adding the command-line option
-\texttt{--HalfSpace MyMaterial}
-(where \texttt{MyMaterial} is a {\sc scuff-em} material
-designation like \texttt{Gold} or \texttt{CONST\_EPS\_10+1I}).
-
-%=================================================
-%=================================================
-%=================================================
-\subsection{2D integrals over the entire $\vb q$ plane}
-
-The expressions in this section are actually not useful
-for practical computations (the integrals converge too 
-slowly), but I quote them here as a springboard for the 
-alternative expressions of the following subsections.
-
-%====================================================================%
-\begin{subequations}
-\begin{align}
-\bmc G^{E}(\vbrho, z; \vbrho^\prime, z^\prime)
-&=\int_{\mathbb{R}^2} \wt{\bmc G}\sups{E}(\vb q) \, d \vb q
-\\
-\bmc G^{M}(\vbrho, z; \vbrho^\prime, z^\prime)
-&=\int_{\mathbb{R}^2} \wt{\bmc G}\sups{M}(\vb q) \, d \vb q
-\end{align}
-\label{GEGMHalfSpaceIntegrals2D}
-\end{subequations}
-%====================================================================%
-\begin{subequations}
-\begin{align}
-\wt{\bmc G}\sups{E}(\vb q)
-&=\frac{i}{8\pi^2 q_z}
-  e^{i\vb q \cdot (\vbrho-\vbrho^\prime) - q_z(z+z^\prime)}
-  \Big\{ r\subt{TE} \vb M\supt{TE} + r\subt{TM} \vb M\supt{TM} \Big\}
-\\[5pt]
-\wt{\bmc G}\sups{M}(\vb q)
-&=\frac{i}{8\pi^2 q_z}
-  e^{i\vb q \cdot (\vbrho-\vbrho^\prime) - q_z(z+z^\prime)}
-  \Big\{ r\subt{TM} \vb M\supt{TE} + r\subt{TE} \vb M\supt{TM} \Big\}
-\end{align}
-\label{GEGMHalfSpaceIntegrands2D}
 \end{subequations}
 %====================================================================%
 \begin{align*}
- \vb M\supt{TE}
-&\equiv
- \left(\begin{array}{c}
- -\wh{q}_y \\ \wh{q}_x \\ 0 
- \end{array}\right)
-%--------------------------------------------------------------------%
- \left(\begin{array}{c}
- -\wh{q}_y \\ \wh{q}_x \\ 0 
- \end{array}\right)^T
-\\
-%====================================================================%
-&=\left(\begin{array}{ccc}
-  \sin^2 \theta & -\cos\theta \sin\theta & 0 \\
-  -\cos\theta \sin\theta & \cos^2 \theta & 0 \\
-  0 & 0 & 0 
-  \end{array}\right)
+ \vb M\sups{outgoing}_{1,\pm 1}(\vb r)
+  &=\sqrt\frac{3}{16\pi}\pf{e^{ikr}}{k^2 r^2} e^{\pm i\phi}
+    \left(\begin{array}{c}
+    0          \\
+    -iQ_1(ikr) \\
+    \pm Q_1(ikr) \cos\theta 
+    \end{array}\right)
 \\[5pt]
 %--------------------------------------------------------------------%
- \vb M\supt{TM}
-&\equiv
- \frac{1}{k_0^2}
- \left(\begin{array}{c}
-  -q_z \wh{q}_x \\
-  -q_z \wh{q}_y \\
-   q   
- \end{array}\right)
- \left(\begin{array}{c}
-  -q_z \wh{q}_x \\
-  -q_z \wh{q}_y \\
-   q   
- \end{array}\right)^T
+ \vb M\sups{outgoing}_{1,0}(\vb r)
+  &=\sqrt\frac{3}{8\pi}\pf{e^{ikr}}{k^2 r^2}
+    \left(\begin{array}{c}
+    0       \\
+    0       \\
+    Q_1(ikr) \sin\theta 
+    \end{array}\right)
 \\
 %--------------------------------------------------------------------%
-&= \frac{1}{k_0^2}
-  \left(\begin{array}{ccc}
-  q_z^2 \cos^2 \theta          & q_z^2 \sin\theta \cos\theta & -q q_z \cos\theta \\
-  q_z^2 \sin \theta \cos\theta & q_z^2 \sin^2\theta          & -q q_z \sin\theta \\
-  -q q_z \cos\theta            & -q q_z \sin\theta           & q^2
-  \end{array}\right)
-\end{align*}
-%====================================================================%
-
-%====================================================================%
-$$ q \equiv |\vb q|,
-   \qquad 
-   q_z        \equiv \sqrt{ q^2 - k^2 },
-   \qquad
-   q_z^\prime \equiv \sqrt{ q^2 - \epsilon \mu k^2},
-$$
-$$
-   r\subt{TE} \equiv \frac{\mu q_z - q_z^\prime}{\mu q_z + q_z^\prime},
-   \qquad
-   r\subt{TM} \equiv \frac{\epsilon q_z - q_z^\prime}{\epsilon q_z + q_z^\prime}.
-$$
-%====================================================================%
-
-%=================================================
-%=================================================
-%=================================================
-\subsection{2D integrals over the Brillouin zone}
-
-For comparison with {\sc scuff-ldos} it is convenient
-to recast the infinite 2D integrals in (\ref{GEGMHalfSpaceIntegrals2D})
-as integrals over a Brillouin zone:\footnote{Since the geometry
-in question has continuous translational symmetry, this can be
-the Brillouin zone for \textit{any} lattice we like. In 
-{\sc scuff-ldos} the lattice is defined by the geometry 
-in the \texttt{.scuffgeo} file. This is why the 
-\texttt{--geometry} command-line option must be specified 
-for \texttt{--HalfSpace} calculations, even though the 
-discretized geometry is otherwise not referenced.}
-
-%====================================================================%
-\begin{subequations}
-\begin{align}
-\bmc G^{E}(\vbrho, z; \vbrho^\prime, z^\prime)
-&=\int\subs{BZ} \wh{\bmc G}\sups{E}(\vb q) \, d \vb q
+ \vb N\sups{outgoing}_{1,\pm 1}(\vb r)
+  &=\sqrt\frac{3}{16\pi}\pf{e^{ikr}}{k^3 r^3} e^{\pm i\phi}
+    \left(\begin{array}{c}
+    \mp 2iQ_1(ikr)\sin \theta 			\\
+    \pm iQ_{2a}(ikr) \cos\theta			\\
+    -Q_{2a}(ikr)
+    \end{array}\right)
 \\
-\bmc G^{M}(\vbrho, z; \vbrho^\prime, z^\prime)
-&=\int\subs{BZ} \wh{\bmc G}\sups{M}(\vb q) \, d \vb q
-\end{align}
-\label{GEGMHalfSpaceIntegralsBZ}
-\end{subequations}
-%====================================================================%
-\begin{subequations}
-\begin{align}
-\wh{\bmc G}\sups{E}(\vb k\subt{B})
-&=\sum_{\vbGamma} \wt{\bmc {G}}\sups{E}(\vb k\subt{B} + \vbGamma), 
-\\
-\wh{\bmc G}\sups{M}(\vb k\subt{B})
-&=\sum_{\vbGamma} \wt{\bmc {G}}\sups{M}(\vb k\subt{B} + \vbGamma)
-\end{align}
-\label{GEGMHalfSpaceIntegrandsBZ}%
-\end{subequations}
-%====================================================================%
-The quantities $\wh{\bmc G}(\vb k\subt{B})$ may be directly
-compared to the Brillouin-zone integrand values reported
-by {\sc scuff-ldos} in the \texttt{.byOmegakBloch} output file.
-
-%=================================================
-%=================================================
-%=================================================
-\subsection{1D integrals over $|\vb q|$}
-
-The Brillouin-zone-resolved integrand values of the 
-previous section are useful for checking the 
-predictions of {\sc scuff-ldos} for individual 
-Brillouin-zone points. However, if our goal is actually
-to evaluate the full $\vb q$ integrals to get the
-total DGFs at a given frequency, it is more efficient
-instead to write the $\vb q$-plane integrals
-(\ref{GEGMHalfSpaceIntegrals2D})
-in polar coordinates and integrate out the angular
-variable, leaving a 1D integral over the radial variable.
-This is effected by using the following table of integrals:
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-$$
- \int_0^{2\pi} e^{i(qx\cos\theta  + qy\cos\theta)} 
- \left\{\begin{array}{c}
- 1 \\[5pt]
- \cos\theta \\[5pt]
- \sin\theta \\[5pt]
- \cos^2\theta \\[5pt]
- \cos\theta \sin\theta \\[5pt]
- \sin^2\theta \\
- \end{array}\right\}
 %--------------------------------------------------------------------%
-= 2\pi \left\{ \begin{array}{c}
-    J_0 (q\rho)         \\[5pt]
-    i J_1(q\rho) \wh{x} \\[5pt]
-    i J_1(q\rho) \wh{y} \\[5pt]
-    \left[J_0(q\rho) - \frac{2}{q\rho} J_1(q\rho) - J_2(q\rho)\right]\frac{\wh x^2}{2} 
-    + \frac{J_1(q\rho)}{q\rho} \\[5pt]
-    \left[J_0(q\rho) - \frac{2}{q\rho} J_1(q\rho) - J_2(q\rho)\right]\frac{\wh x \wh y}{2}
-    \\[5pt]
-    \left[J_0(q\rho) - \frac{2}{q\rho} J_1(q\rho) - J_2(q\rho)\right]\frac{\wh y^2}{2} 
-    + \frac{J_1(q\rho)}{q\rho}
-  \end{array}\right\}
-$$
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-the 2D integrals (\ref{GEGMHalfSpaceIntegrals2D}) can be reduced to 1D integrals:
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{align}
- \bmc G\supt{E}
-&=\frac{i}{4\pi} \int_0^\infty \frac{qdq}{q_z} e^{-q_z(z+z^\prime)}
-  \left\{ r\subt{TE} \wt{\vb M}\supt{TE}
-         +r\subt{TM} \wt{\vb M}\supt{TM}
-  \right\}
+ \vb N\sups{outgoing}_{1,0}(\vb r)
+  &=\sqrt\frac{3}{8\pi}\pf{e^{ikr}}{k^3 r^3}
+    \left(\begin{array}{c}
+    2iQ_1(ikr)\cos \theta		\\
+    +iQ_{2a}(ikr)\sin\theta	\\
+    0
+    \end{array}\right)
+\\[5pt]
+%--------------------------------------------------------------------%
+ \vb M\sups{outgoing}_{2,\pm 2}(\vb r)
+  &=\sqrt\frac{5}{16\pi}\pf{e^{ikr}}{k^3 r^3} e^{\pm 2i\phi}
+    \left(\begin{array}{c}
+    0 				  \\
+   \pm  iQ_{2b}(ikr)\sin\theta	  \\
+    -Q_{2b}(ikr)\cos\theta\sin\theta
+    \end{array}\right)
 \\
- \bmc G\supt{E}
-&=\frac{i}{4\pi} \int_0^\infty \frac{qdq}{q_z} e^{-q_z(z+z^\prime)}
-  \left\{ r\subt{TM} \wt{\vb M}\supt{TE}
-         +r\subt{TE} \wt{\vb M}\supt{TM}
-  \right\}
-\end{align}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-where $\wt{\vb M}$ is the matrix $\vb M$ defined above
-with all $\theta$ factors replaced by the corresponding
-entry in the Bessel-function table above.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
-\section{Rewriting infinite 2D $\vb k$-integrals as Brillouin-zone integrals}
-\label{RewritingAppendix}
-
-One frequently encounters quantities expressed as infinite 
-$\vb q-$space integrals, i.e. integrals over a two-dimensional
-wavevector $\vb q$ that ranges over all of $\mathbb{R}_2$:
-%====================================================================%
-\begin{align*}
- I&= \int_{\mathbb{R}^2} d^2 \vb q \, Q(\vb q).
-\intertext{Examples include equations (\ref{GEGMHalfSpaceIntegrals2D}).
-To rewrite such integrals in a form 
-that facilitates comparison with {\sc scuff-ldos} calculations,
-it is convenient to recast them as Brillouin-zone
-integrations:}
-%====================================================================%
- I &= \int\subt{BZ} d^2 \vb k\subt{B} \, \overline{Q}(\vb k\subt{B}),
-\intertext{where $\overline{Q}(\vb k\subt{B})$ is the sum of the integrand
-function $Q(\vb q)$ evaluated at $\vb k\subt{B}$ 
-and all images of $\vb k\subt{B}$
-under translation by reciprocal-lattice vectors:}
-\overline{Q}(\vb k\subt{B})&=
-\sum_{n_1=-\infty}^\infty
-\sum_{n_2=-\infty}^\infty Q\big (\vb k\subt{B} + n_1\vbGamma_1 + n_2\vbGamma_2\big)
+%--------------------------------------------------------------------%
+ \vb M\sups{outgoing}_{2,\pm 1}(\vb r)
+  &=\sqrt\frac{5}{16\pi}\pf{e^{ikr}}{k^3 r^3} e^{\pm i\phi}
+    \left(\begin{array}{c}
+    0                            \\
+    -iQ_{2b}(ikr)\cos\theta  \\
+    \pm Q_{2b}(ikr)\cos 2\theta
+    \end{array}\right)
+\\
+%--------------------------------------------------------------------%
+ \vb M\sups{outgoing}_{2,0}(\vb r)
+  &=\sqrt\frac{15}{8\pi}\pf{e^{ikr}}{k^3 r^3}
+    \left(\begin{array}{c}
+    0 \\ 
+    0 \\ 
+    -Q_{2b}(ikr)\cos \theta \sin\theta
+    \end{array}\right)
+\\[5pt]
+%--------------------------------------------------------------------%
+ \vb N\sups{outgoing}_{2,\pm 2}(\vb r)
+  &=\sqrt\frac{5}{16\pi}\pf{e^{ikr}}{k^4 r^4} e^{\pm 2i\phi}
+    \left(\begin{array}{c}
+   3iQ_{2b}(ikr) \sin^2 \theta                          \\
+   -iQ_3(ikr) \cos\theta \sin\theta   \\
+   \pm Q_3(ikr) \sin\theta 
+    \end{array}\right)
+\\
+%--------------------------------------------------------------------%
+ \vb N\sups{outgoing}_{2,\pm 1}(\vb r)
+  &=\sqrt\frac{5}{16\pi}\pf{e^{ikr}}{k^4 r^4} e^{\pm i\phi}
+    \left(\begin{array}{c}
+   \mp 3iQ_{2b}(ikr) \sin 2\theta               \\
+   \pm iQ_3(ikr) \cos 2\theta  \\
+   -Q_3(ikr) \cos\theta
+    \end{array}\right)
+\\
+%--------------------------------------------------------------------%
+ \vb N\sups{outgoing}_{2,0}(\vb r)
+  &=\sqrt\frac{15}{8\pi}\pf{e^{ikr}}{k^4 r^4}
+    \left(\begin{array}{c}
+   iQ_{2b}(ikr)(3\cos^2 \theta -1)                    \\
+   iQ_3(ikr) \cos \theta \sin\theta \\
+   0
+    \end{array}\right).
 \end{align*}
-where $\vbGamma_1, \vbGamma_2$ are a basis for the reciprocal lattice.
-(We have here considered the 2D-periodic case, but the 1D-periodic
-case is similar).
 \end{document}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
-\newcommand{\EE}{\mathbb{E}}
-\section{Analytical expressions for the dyadic Green's functions of a dielectric 
-         half-space}
-%
-%\subsection{General formalism}
-%
-%$$ \EE\sups{reg}_{p\alpha}(\vb r), \EE\sups{out}_{p\alpha}(\vb r)$$
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\numeq{GExpansion1}
-%{ \vb G(\vb r, \vb r^\prime) 
-%  =
-%  \sum_{p\alpha}
-%  \EE\sups{reg}_{p\alpha}(\vb r_<) \EE\sups{out}_{p\alpha}(\vb r_>)
-%}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\subsection*{DGFs at exterior points}
-%
-%If the object is irradiated by $\EE\sups{reg}_{p\alpha}$
-%then the scattered field is
-%$\sum_{p^\prime} T_{p^\prime p} \EE\sups\out_{p^\prime\alpha}$
-%where $T_{p^\prime p}$ is the $T$ matrix.
-%
-%\numeq{GExpansion2}
-%{ \bmc G(\vb r, \vb r^\prime)
-% = \sum_{pp^\prime \alpha}
-%   T_{pp^\prime}
-%   \EE\sups{out}_{p\alpha}(\vb r)
-%   \EE\sups{out}_{p^\prime\alpha}(\vb r^\prime)
-%}
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\subsection*{DGFs at interior points}
-%
-%If the object is irradiated from within by $\EE\sups{out}_{p\alpha}$
-%then the scattered field (at interior points) is
-%$\sum_{p^\prime} \overline{T}_{p^\prime p} \EE\sups\out_{p^\prime\alpha}$
-%where $\overline{T}_{p^\prime p}$ is a sort of modified
-%version of the $T$ matrix. [This is the quantity labeled
-%$\mc F^{ii}$ in Rahi et al., PRD \textbf{80} 085021 (2009).]
-%
-%\subsection*{Curvilinear to cartesian conversion}
-%
-%$$ \bmc G\sups{cartesian}(\vb r, \vb r^\prime) 
-%   = 
-%   \vbLambda(\vb r) \bmc G\sups{curvilinear}(\vb r, \vb r^\prime)
-%   \vbLambda^\dagger(\vb r^\prime)
-%$$
-%
-%where $\vbmLambda(\vb r)$ is the $3\times 3$ matrix that 
-%converts a $3$-vector of cartesian vector components into
-%a $3$-vector of curvilinear components of the same vector
-%at $\vb r$.
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\subsection{Dielectric sphere}
-%
-%In this case $\alpha=\{\ell m\}$ where both $\ell,m$ are discrete.
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\subsection{Dielectric cylinder}
-%
-%%In this case $\alpha=\{\nu k_z}$, where $\nu$ is discrete and 
-%%$k_z$ is continuous. The regular and outgoing waves are 
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%$$
-% \mathbb{E}_{M\alpha}(\rho, \varphi, z)
-% = \Big[   i\nu\frac{Z_\nu(\zeta)}{\zeta}\vbhatt{\rho}
-%                  - Z_\nu^\prime(\zeta) \vbhatt{\varphi}
-%      \Big]e^{i\nu\varphi} e^{ik_z z} 
-%\\
-% \mathbb{E}_{N\alpha}(\rho, \varphi, z)
-% =\frac{1}{ik_0}
-%      \Big[ -ik_z Z_\nu^\prime(\zeta)          \vbhatt{\rho}
-%            +\nu k_z \frac{Z_\nu(\zeta)}{\zeta} \vbhatt{\varphi}
-%            - k_\rho Z_\nu(\zeta)\vbhat{z}
-%      \Big] e^{i\nu\varphi} e^{ik_z z} 
-%$$
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%with
-%$$ 
-% \zeta \equiv k_\rho \rho,
-% \qquad
-% k_\rho\equiv \sqrt{k_0^2 - k_z^2},
-% \qquad
-% Z(\zeta) =
-% \begin{cases}
-%   H^{(1)}_\nu(\zeta), \qquad &\text{outgoing} \\
-%   H^{(2)}_\nu(\zeta), \qquad &\text{incoming} \\
-%   J_\nu      (\zeta), \qquad &\text{regular}
-% \end{cases}
-%$$
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%The $T$-matrix elements are 
-%
-%\subsection{Dielectric half-space}
-%
-%In this case $\alpha=\{k_x, k_y\}=\vb k$ where
-%both $k_x, k_y$ are continuous.
-
-For testing purposes it is useful to have analytical expressions
-for the dyadic Green's functions above an infinite half space.
-These are obtained via a two-step process:
-
-\begin{enumerate}
- \item First we express the fields of a point source above a 
-       dielectric half-space as a superposition of plane waves;
-       in particular, the fields impinging upon the half-space
-       are a linear combination of downward-traveling plane waves.
- \item Then we reason that each individual plane wave is
-       reflected from the interface with the usual Fresnel 
-       reflection coefficient, and thus the scattered field
-       is just the same superposition of plane waves with which
-       we began, except that \textbf{(1)} now the plane waves
-       are traveling \textit{upward}, and \textbf{(2)} each plane
-       wave comes multiplied by the Fresnel reflection coefficients    
-       for the dielectric interface.
-\end{enumerate}
-
-This procedure is worked out in more detail in the following
-sections.
-
-%=================================================
-%=================================================
-%=================================================
-\subsection{Plane-wave decomposition of non-periodic point-source fields}
-
-Note: In what follows,
-$\vb k=(k_x,k_y)$ is a \textit{two-dimensional} vector and we have
-%====================================================================%
-$$ k_z \equiv \sqrt{k_0^2 - |\vb k|^2}, 
-%--------------------------------------------------------------------%
-   \qquad
-%--------------------------------------------------------------------%
-   \vb k\subt{3D}\equiv
-   \left(\begin{array}{c}k_x \\ k_y \\ \pm k_z \end{array}\right), 
-%--------------------------------------------------------------------%
-   \qquad
-%--------------------------------------------------------------------%
-   \pm \equiv
-   \begin{cases}
-     +, \quad & z\ge 0 \\ 
-     -, \quad & z<   0
-   \end{cases}.
-$$
-%====================================================================%
-For arbitrary $\vb k$ I now define generalized\footnote{These 
-are ``generalized'' plane waves in the sense that $k_z$ is 
-imaginary for sufficiently large $\vb k$, in which case the 
-waves are evanescent.} transverse-electric and
-transverse-magnetic plane waves propagating in the direction
-of $\vb k\subt{3D}$:
-%====================================================================%
-$$\begin{array}{ccccccc}
- \vb E^{\pm} \subt{TE}(\vb x; \vb k)
-   &\equiv& E_0 \vb P(\vb k) e^{i\vb k \cdot \vbrho \, \pm \, ik_z z},
-   &\qquad&
- \vb H^{\pm} \subt{TE}(\vb x; \vb k)
-   &\equiv& H_0 \overline{\vb P}(\vb k) e^{i\vb k \cdot \vbrho \, \pm \, ik_z z},
-\\[8pt]
-%--------------------------------------------------------------------%
- \vb E^{\pm} \subt{TM}(\vb x; \vb k)
-   &\equiv& -E_0 \overline{\vb P}(\vb k) e^{i\vb k \cdot \vbrho \, \pm \, ik_z z},
-   &\qquad&
- \vb H^{\pm} \subt{TM}(\vb x; \vb k)
-   &\equiv& H_0 \vb P(\vb k) e^{i\vb k \cdot \vbrho \, \pm \, ik_z z},
-\end{array}$$
-%====================================================================%
-$$ E_0 \equiv 1 \text{ volt/$\mu$m}, \qquad H_0\equiv \frac{E_0}{Z_0}.$$
-%====================================================================%
-where $\vb P$ and $\overline{\vb P}$ are unit-magnitude
-polarization vectors with the properties
-that \textbf{(1)} both $\vb P$ and $\overline{\vb P}$ are
-orthogonal to $\vb k\subt{3D}$, and
-\textbf{(2)} $\vb P$ is orthogonal to $\vbhat{z}$ (i.e. ``transverse'').
-%====================================================================%
-$$ \vb P(\vb k) \equiv
-   \frac{1}{|\vb k|}
-   \left(\begin{array}{c}-k_y \\ k_x \\ 0 \end{array}\right),
-   \qquad
-   \overline{\vb P}(\vb k) \equiv
-   \frac{1}{k_0}\Big[ \vb k\subt{3D} \times \vb P(\vb k) \Big]
-   =
-   \frac{1}{k_0 |\vb k|}
-   \left(\begin{array}{c} \mp k_x k_z \\ \mp k_y k_z \\ k_x^2 + k_y^2 
-         \end{array}\right)
-$$
-%====================================================================%
-The trick is now to notice that the columns of the $3\times 3$ matrices
-in equation (\ref{gc}) may be written as linear combinations of
-$\vb P$ and $\overline{\vb P}$. For example, the leftmost column
-of the matrix that enters the definition of $\vb g$ is
-%====================================================================%
-\numeq{gColumnDecomposition}
-{  \left(\begin{array}{c}
-    k_0^2 - k_x^2 \\ -k_y k_x \\ \mp k_x k_z
-   \end{array}\right)
-   =
-       -\pf{k_0^2 k_y}{|\vb k|} \vb P(\vb k)
-     \mp\pf{k_0k_x k_z}{|\vb k|}\overline{\vb P}(\vb k).
-}
-%====================================================================%
-The fields of an $\vbhat{x}$-directed point dipole source
-$\vb p_0=p_0\vbhat{x}$
-(a single point source, not an array) located a height $z_0$ above the
-$xy$ plane then read, from (\ref{EHFromGC}) and (\ref{JFromp0}),
-%====================================================================%
-\begin{align*}
- \vb E\supt{ED}\Big(\vb x; \{z_0\vbhat{z};\vbhat{x}\}\Big) 
- &= ik_0 Z_0\left(\begin{array}{c} G_{xx} \\ G_{yx} \\ G_{zx} \end{array}\right)
-    (-i\omega p_0)
- = \frac{p_0}{\epsilon_0}k_0^2
-   \left(\begin{array}{c} G_{xx} \\ G_{yx} \\ G_{zx} \end{array}\right)
-\\
-\intertext{Insert (\ref{GCInfiniteKIntegrals}):}
- \vb E\supt{ED}\Big(\vb x; \{z_0\vbhat{z};\vbhat{x}\}\Big)
- &= \frac{p_0}{\epsilon_0} k_0^2 \int_{\mathbb{R}^2} \, \frac{d\vb k}{(2\pi)^2}
-    \left(\begin{array}{c} g_{xx} \\ g_{yx} \\ g_{zx} \end{array}\right)
-    e^{i\vb k\cdot \vbrho \pm ik_z(z-z_0)}
-\intertext{Insert (\ref{gc}) and (\ref{gColumnDecomposition}):}
- &= \frac{p_0}{\epsilon_0} \int_{\mathbb{R}^2} \, \frac{d\vb k}{(2\pi)^2}
-    \pf{i}{2 k_z}
-    \left[ -\pf{k_0^2 k_y}{|\vb k|} \vb P(\vb k)
-           \mp\pf{k_0k_x k_z}{|\vb k|}\overline{\vb P}(\vb k)
-    \right] e^{i\vb k\cdot \vbrho}e^{ik_z|z-z_0|}.
-\end{align*}
-%====================================================================%
-Continuing to play this game for point sources of all possible
-orientations and expressing the results in terms of the generalized
-plane waves we defined earlier then yields a full plane-wave decomposition
-of the fields of a point source:
-%====================================================================%
-\begin{subequations}
-\begin{align}
- \vb E\supt{ED}\Big(\vb x; \big\{ z_0 \vbhat{z}, \vbhat{x} \big\}\Big)
-&=\pf{k_0^2 p_0}{\epsilon_0 E_0}
- \int \frac{d \vb k}{(2\pi)^2} 
-   \bigg\{ C^{x}\subt{TE}(\vb k)
-           \vb E^\pm\subt{TE}\Big(\vb x-z_0\vbhat{z}; \vb k\Big)
-          - 
-           C^{x;\pm}\subt{TM}(\vb k)
-           \vb E^\pm\subt{TM}\Big(\vb x-z_0\vbhat{z}; \vb k\Big)
-   \bigg\}
-\\
- \vb E\supt{ED}\Big(\vb x; \big\{ z_0 \vbhat{z}, \vbhat{y} \big\}\Big)
-&= \pf{k_0^2 p_0}{\epsilon_0 E_0}
-   \int \frac{d \vb k}{(2\pi)^2} 
-   \bigg\{ C^{y}\subt{TE}(\vb k)
-           \vb E^\pm\subt{TE}\Big(\vb x-z_0\vbhat{z}; \vb k\Big)
-          - 
-           C^{y;\pm}\subt{TM}(\vb k)
-           \vb E^\pm\subt{TM}\Big(\vb x-z_0\vbhat{z}; \vb k\Big)
-   \bigg\}
-\\
- \vb E\supt{ED}\Big(\vb x; \big\{ z_0 \vbhat{z}, \vbhat{z} \big\}\Big)
-&= \pf{k_0^2 p_0}{\epsilon_0 E_0}
-   \int \frac{d \vb k}{(2\pi)^2} 
-   \bigg\{ C^{z}\subt{TE}(\vb k)
-           \vb E^\pm\subt{TE}\Big(\vb x-z_0\vbhat{z}; \vb k\Big)
-          - 
-           C^{z}\subt{TM}(\vb k)
-           \vb E^\pm\subt{TM}\Big(\vb x-z_0\vbhat{z}; \vb k\Big)
-   \bigg\}
-\end{align}
-\label{IncidentFieldsPWD}
-\end{subequations}
-%====================================================================%
-where the scalar coefficients are
-%====================================================================%
-$$\begin{array}{ccccccc}
- \displaystyle{ C^{x}\subt{TE} }
- &=& 
-  \displaystyle{ -\frac{ i k_y}{2|\vb k|k_z} }
- &\qquad&
- \displaystyle{ C^{x;\pm}\subt{TM} }
- &=& 
- \displaystyle{ \mp \frac{ i k_x }{2k_0 |\vb k|} }
-\\[10pt]
-%--------------------------------------------------------------------%
- \displaystyle{ C^{y}\subt{TE} }
- &=& 
-  \displaystyle{ \frac{ i k_x}{2|\vb k|k_z} }
- &\qquad&
- \displaystyle{ C^{y;\pm}\subt{TM} }
- &=& 
- \displaystyle{ \mp \frac{ i k_y }{2k_0|\vb k|} }
-\\[10pt]
-%--------------------------------------------------------------------%
- \displaystyle{ C^{z}\subt{TE} }
- &=& 0
- &\qquad&
- \displaystyle{ C^{z}\subt{TM} }
- &=& \displaystyle{ \frac{ i |\vb k|  }{2 k_0 k_z} }.
-\end{array}$$
-%====================================================================%
-In these equations, the $\pm$ sign is $+$ for evaluation points 
-located above the source $(z>z_0)$ and $-$ for evaluation points
-located below the source. In particular, assuming the 
-source lies in the \textit{upper} half-space ($z_0>0$), 
-the fields impinging on a dielectric interface at $z=0$
-involve the $-$ sign.
-
-The units of the source-strength prefactor are
-($\text{C}$=charge, $\text{V}$=voltage, $\text{L}$=length)
-%====================================================================%
-\begin{align*}
-\left[\pf{k_0^2 p_0}{\epsilon_0 E_0}\right]
-&= \Big[k_0^2 p_0\Big]\Big[\epsilon_0\Big]^{-1} \Big[E_0\Big]^{-1} 
-\\
-&= \frac{\text{L}^{-2} \text{C}\cdot \text{L}}
-        {\text{C} \text{V}^{-1} \text{L}^{-1} \text{V} \text{L}^{-1}}
-\\
-&= \text{length}.
-\end{align*}
-%====================================================================%
-
-%=================================================
-%=================================================
-%=================================================
-\subsection{Plane-wave decomposition of non-periodic DGFs}
-
-The point of the above decomposition is that each
-plane wave is reflected from a dielectric interface
-at $z=0$ with the usual Fresnel reflection coefficients
-$r\supt{TE,TM}(\vb k)$, and thus the scattered fields 
-are
-%====================================================================%
-\begin{subequations}
-\begin{align}
- \vb E\sups{scat,x}(\vbrho,z)
-&=\pf{k_0^2 p_0}{\epsilon_0}
-   \int \frac{d\vb k}{(2\pi)^2}
-   \bigg\{   r\subt{TE}(\vb k) C^{x}\subt{TE}(\vb k) \vb P(\vb k)
-           + r\subt{TM}(\vb k) C^{x;-}\subt{TM}(\vb k) \overline{\vb P}(\vb k)
-    \bigg\}e^{i\vb k \cdot \vbrho +2ik_z z}
-\\
-  \vb E\sups{scat,y}(\vbrho, z)
-&=\pf{k_0^2 p_0}{\epsilon_0}
-    \int \frac{d \vb k}{(2\pi)^2} 
-    \bigg\{   r\subt{TE}(\vb k) C^{y}\subt{TE}(\vb k) \vb P(\vb k)
-           + r\subt{TM}(\vb k) C^{y;-}\subt{TM}(\vb k) \overline{\vb P}(\vb k)
-    \bigg\}e^{i\vb k \cdot \vbrho +2ik_z z}
- \\
-  \vb E\sups{scat,z}(\vbrho, z)
-&=\pf{k_0^2 p_0}{\epsilon_0}
-    \int \frac{d \vb k}{(2\pi)^2} 
-    \bigg\{   r\subt{TE}(\vb k) C^{z}\subt{TE}(\vb k) \vb P(\vb k)
-            + r\subt{TM}(\vb k) C^{z;-}\subt{TM}(\vb k) \overline{\vb P}(\vb k)
-    \bigg\}e^{i\vb k \cdot \vbrho +2ik_z z}
-\end{align}
-\label{ScatteredFieldsPWD}
-\end{subequations}
-%====================================================================%
-where the Fresnel coefficients are
-%====================================================================%
-$$ r\subt{TE}(\vb k)= 
-   \frac{ \sqrt{k_0^2 - \vb k^2} - \sqrt{\epsilon k_0^2 - \vb k^2}}
-        { \sqrt{k_0^2 - \vb k^2} + \sqrt{\epsilon k_0^2 - \vb k^2}},
-  \qquad
-   r\subt{TM}(\vb k)= 
-   \frac{ \epsilon \sqrt{k_0^2 - \vb k^2} - \sqrt{\epsilon k_0^2 - \vb k^2}}
-        { \epsilon \sqrt{k_0^2 - \vb k^2} + \sqrt{\epsilon k_0^2 - \vb k^2}}.
-$$
-%====================================================================%
-The scattering part of the electric DGF is related to the scattered 
-$\vb E$-field according to
-$\bmc G\supt{E} = \frac{1}{(-i\omega p_0)(i\omega \mu_0)}\vb E\sups{scat}.$
-or
-\numeq{GEijFourier}
-{ \mc G_{ij}\supt{E}(\vbrho, z) =
-    \int \frac{d \vb k}{(2\pi)^2} 
-    \bigg\{   r\subt{TE}(\vb k) C^{j}\subt{TE}(\vb k) P_i(\vb k)
-            + r\subt{TM}(\vb k) C^{j;-}\subt{TM}(\vb k) \overline{P}_i(\vb k)
-    \bigg\}e^{i\vb k \cdot \vbrho +2ik_z z}.
-}
-A similar derivation yields the scattering part of the magnetic DGF:
-\numeq{GMijFourier}
-{ \mc G_{ij}\supt{M}(\vbrho, z) =
-    \int \frac{d \vb k}{(2\pi)^2} 
-    \bigg\{   r\subt{TE}(\vb k) C^{j}\subt{TE}(\vb k) \overline{P}_i(\vb k)
-            - r\subt{TM}(\vb k) C^{j;-}\subt{TM}(\vb k) P_i(\vb k)
-    \bigg\}e^{i\vb k \cdot \vbrho +2ik_z z}.
-}
-
-%=================================================
-%=================================================
-%=================================================
-\subsection{Plane-wave decomposition of periodic DGFs}
-
-The scattering DGFs for a Bloch-phased \textit{array} of point sources
-are
-%====================================================================%
-\begin{align*}
-  \overline{\bmc G}\supt{E}(\vbrho, z; \vb k\subt{B}) 
-&= \sum_{\vb L} e^{i\vb k\subt{B}\cdot \vb L}\bmc G(\vbrho-\vb L, z)
-\end{align*}
-%====================================================================%
-Insert (\ref{GijFourier}) and use
-$ \sum_{\vb L} e^{i(\vb k - \vb k\subt{B})\cdot \vb L}
-   = \mc V\subt{BZ}\sum_{\vbGamma} \delta(\vb k-\vb k\subt{B}-\vbGamma):
-$
-%====================================================================%
-\numeq{GBarijLatticeSum}
-{ \overline{\mc G}_{ij}\supt{E}(\vbrho, z) =
-  \mc V\subt{BZ} \sum_{\vb k = \vb k\subt{B}+\vbGamma}
-    \bigg\{   r\subt{TE}(\vb k) C^{j}\subt{TE}(\vb k) P_i(\vb k)
-            + r\subt{TM}(\vb k) C^{j;-}\subt{TM}(\vb k) \overline{P}_i(\vb k)
-    \bigg\}e^{i\vb k \cdot \vbrho +2ik_z z}.
-}
-%====================================================================%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
-\section{Test: LDOS above an infinite half-space}
-
-At a height $z$ above an infinite dielectric half-space
-with relative permittivity $\epsilon$ (and $\mu=1$)
-the enhancement of the electric LDOS may be expressed
-as an integral over a dimensionless parameter 
-$\kappa$:\footnote{K. Joulain et al.,``Definition and 
-measurement of the local density of electromagnetic states
- close to an interface,'' Physical Review B \textbf{68} 245405 (2003)}
-%====================================================================%
-\numeq{JoulainLDOS}
-{
- \frac{\rho\supt{E}(z; \omega)}{\rho_0(\omega)}
-  =\frac{1}{4}\int_0^\infty \kappa F(\kappa) \, d\kappa,
-}
-%====================================================================%
-\numeq{JoulainFKappa}
-{
-  F(\kappa)=
-   \frac{1}{\kappa_z}
-   \begin{cases}
-         2 + \text{Re }\Big( r\subt{TE} e^{2 i k_z z} \Big)
-           + \Big(2\kappa^2-1\Big) \text{Re }\Big( r\subt{TM} e^{2ik_z z}\Big)
-         , \qquad &\kappa < 1 \\[10pt]
-    \Big[   \text{Im }\big( r\subt{TE} \big)
-           + \big(2\kappa^2-1\big) \text{Im }\big( r\subt{TM} \Big)
-    \Big]e^{-2k_z z}, \qquad &\kappa > 1
-   \end{cases}
-}
-%====================================================================%
-where 
-%====================================================================%
-$$ \kappa_z \equiv 
-   \begin{cases}
-     \sqrt{1-\kappa^2}, \qquad &\kappa < 1, \\
-     \sqrt{\kappa^2-1}, \qquad &\kappa > 1, 
-   \end{cases}
-   \qquad
-   \kappa^\prime_z \equiv 
-   \begin{cases}
-     \sqrt{\epsilon-\kappa^2}, \qquad &\kappa < 1, \\
-     \sqrt{\kappa^2-\epsilon}, \qquad &\kappa > 1, 
-   \end{cases}
-   \qquad
-   k_z \equiv k_0\kappa_z,
-   \qquad
-   k_0 \equiv \frac{\omega}{c},
-$$  
-%====================================================================%
-$$ r\subt{TE} = \frac{\kappa_z - \kappa_z^\prime}{\kappa_z + \kappa_z^\prime}
-   \qquad
-   r\subt{TM} = \frac{\epsilon \kappa_z - \kappa_z^\prime}{\epsilon \kappa_z + \kappa_z^\prime}
-$$
-%====================================================================%
-The integral in (\ref{JoulainLDOS}) is computing the LDOS as a trace in 
-the plane-wave basis; the integral over $\kappa$ is essentially a sum over 
-all possible plane-wave wavevectors $\vb k$, and the multiple terms in 
-(\ref{JoulainFKappa}) account for the two possible polarizations for each 
-wavevector. More specifically, if we think in terms of the usual 
-Fresnel-scattering picture of a plane wave incident on a planar interface, 
-then $\kappa$ is the sine of the incident angle and $\kappa_z$ is its 
-cosine, i.e. the wavevector of the plane wave 
-is 
-%====================================================================
-$$ \vb k = (k_x, k_y, k_z) = k_0(\sin\theta, 0, \cos\theta)
-   =k_0(\kappa, 0, \kappa_z)
-$$
-%====================================================================
-and $r\subt{TE}$ and $r\subt{TM}$ are the Fresnel coefficients for reflection
-of TE and TM waves from the half-space. 
-This interpretation applies to the $0\le \kappa<1$ contribution to 
-the integral in (\ref{JoulainLDOS}). 
-
-However, the trace in equation (\ref{JoulainLDOS}) also contains
-contributions from modes that cannot be excited by irradiating
-the interface from the outside with a plane wave (corresponding
-to the $\kappa>1$ portion of the integral). These are 
-\textit{evanescent} waves for which the in-plane wavenumber
-$k_\parallel=\kappa k_0$ is greater than the free-space wavenumber 
-$k_0$. The fields associated with these modes decay exponentially
-as we move away from the half-space into the vacuum region. 

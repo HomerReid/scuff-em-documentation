@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Mie scattering - SCUFF-EM documentation</title>
+  <title>Capacitance of two-body capacitors - SCUFF-EM documentation</title>
   
 
   <link rel="shortcut icon" href="../../../scuffEM.ico">
@@ -21,7 +21,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "tests/MieScattering/MieScattering"
+    var mkdocs_page_name = "examples/TwoBodyCapacitor/TwoBodyCapacitor"
   </script>
   
   <script src="../../../js/jquery-2.1.1.min.js"></script>
@@ -73,91 +73,104 @@
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../../../examples/MieScattering/MieScattering/">Mie scattering</a>
+        <a class="" href="../../MieScattering/MieScattering/">Mie scattering</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../../../examples/DielectricShell/DielectricShell/">Electrostatics of a spherical dielectric shell</a>
+        <a class="" href="../../DielectricShell/DielectricShell/">Electrostatics of a spherical dielectric shell</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../../../examples/ThinFilm/ThinFilm/">Spatially-resolved study of plane-wave transmission through an infinite-area thin dielectric film</a>
+        <a class="" href="../../ThinFilm/ThinFilm/">Spatially-resolved study of plane-wave transmission through an infinite-area thin dielectric film</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../../../examples/DiffractionPatterns/DiffractionPatterns/">Imaging diffraction patterns of discs, disc arrays, and hole arrays in metal screens</a>
+        <a class="" href="../../DiffractionPatterns/DiffractionPatterns/">Imaging diffraction patterns of discs, disc arrays, and hole arrays in metal screens</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../../../examples/CubeTorus/">Casimir forces in a compact geometry</a>
+        <a class="" href="../../CubeTorus/">Casimir forces in a compact geometry</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../../../examples/SiliconBeams/SiliconBeams/">Casimir forces in a 1D extended geometry</a>
+        <a class="" href="../../SiliconBeams/SiliconBeams/">Casimir forces in a 1D extended geometry</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../../../examples/SiliconSlabs/SiliconSlabs/">Casimir forces in a 2D extended geometry</a>
+        <a class="" href="../../SiliconSlabs/SiliconSlabs/">Casimir forces in a 2D extended geometry</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../../../examples/NanostructureCasimirPolder/NanostructureCasimirPolder/">Casimir-Polder potentials in dielectric nanostructures</a>
+        <a class="" href="../../NanostructureCasimirPolder/NanostructureCasimirPolder/">Casimir-Polder potentials in dielectric nanostructures</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../../../examples/SiO2Spheres/SiO2Spheres/">Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres</a>
+        <a class="" href="../../SiO2Spheres/SiO2Spheres/">Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../../../examples/TipSubstrate/TipSubstrate/">Spatial distribution of heat flux from a warm tip over a cold substrate</a>
+        <a class="" href="../../TipSubstrate/TipSubstrate/">Spatial distribution of heat flux from a warm tip over a cold substrate</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../../../examples/HalfSpaceLDOS/HalfSpaceLDOS/">LDOS and dyadic Green functions above an infinite aluminum half-space</a>
+        <a class="" href="../../HalfSpaceLDOS/HalfSpaceLDOS/">LDOS and dyadic Green functions above an infinite aluminum half-space</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../../../examples/PlatonicSolids/PlatonicSolids/">Electrostatic polarizability of platonic solids</a>
+        <a class="" href="../../PlatonicSolids/PlatonicSolids/">Electrostatic polarizability of platonic solids</a>
         
     </li>
 
         
             
-    <li class="toctree-l1 ">
-        <a class="" href="../../../examples/TwoBodyCapacitor/TwoBodyCapacitor/">Capacitance of two-body capacitors</a>
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Capacitance of two-body capacitors</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#creating-scuff-em-input-files">Creating scuff-em input files</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#running-the-calculation">Running the calculation</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#plotting-the-data">Plotting the data</a></li>
+                
+            
+            </ul>
         
     </li>
 
@@ -328,67 +341,63 @@
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../../Overview/">Overview of the test suite</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 current">
-        <a class="current" href="./">Mie scattering</a>
-        
-            <ul>
-            
-            </ul>
+        <a class="" href="../../../tests/Overview/">Overview of the test suite</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../../FresnelScattering/FresnelScattering/">Fresnel scattering</a>
+        <a class="" href="../../../tests/MieScattering/MieScattering/">Mie scattering</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../../CasimirSpheres/CasimirSpheres/">Equilibrium Casimir forces between spheres</a>
+        <a class="" href="../../../tests/FresnelScattering/FresnelScattering/">Fresnel scattering</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../../CasimirPlates/CasimirPlates/">Equilibrium Casimir forces between plates</a>
+        <a class="" href="../../../tests/CasimirSpheres/CasimirSpheres/">Equilibrium Casimir forces between spheres</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../../CPSphere/CPSphere/">Equilibrium Casimir-Polder potential near a sphere</a>
+        <a class="" href="../../../tests/CasimirPlates/CasimirPlates/">Equilibrium Casimir forces between plates</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../../CPPlate/CPPlate/">Equilibrium Casimir-Polder potential near a plate</a>
+        <a class="" href="../../../tests/CPSphere/CPSphere/">Equilibrium Casimir-Polder potential near a sphere</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../../NEQSpheres/NEQSpheres/">Heat transfer and non-equilibrium Casimir forces between spheres</a>
+        <a class="" href="../../../tests/CPPlate/CPPlate/">Equilibrium Casimir-Polder potential near a plate</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../../libscuff/libscuff/">Low-level tests of the core library</a>
+        <a class="" href="../../../tests/NEQSpheres/NEQSpheres/">Heat transfer and non-equilibrium Casimir forces between spheres</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../tests/libscuff/libscuff/">Low-level tests of the core library</a>
         
     </li>
 
@@ -462,11 +471,11 @@
     
       
         
-          <li>Validation tests &raquo;</li>
+          <li>Examples &raquo;</li>
         
       
     
-    <li>Mie scattering</li>
+    <li>Capacitance of two-body capacitors</li>
     <li class="wy-breadcrumbs-aside">
       
         
@@ -480,16 +489,83 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="power-force-and-torque-in-mie-scattering">Power, force, and torque in Mie scattering</h1>
-<p>This test validates the algorithms implemented in
-<a class="wikilink" href="../../../scuff-em/">scuff-em</a> for computing the power, force, and torque (PFT)
-on bodies irradiated by external fields. The test 
-uses the 
-[<span class="SC">scuff-scatter</span>][scuff-scatter] application module
-to compute the PFT for a lossy dielectric sphere
-irradiated by a circularly-polarized plane wave
-and compares the results to the predictions of 
-Mie scattering theory.</p>
+                <h1>Capacitance of parallel-plate and two-sphere capacitors</h1>
+
+<p>In this example, we exploit <a class="wikilink" href="../../../scuff-em/">scuff-em</a>'s
+<a href="../../../applications/scuff-static/scuff-static/">electrostatics module</a>
+to compute the capacitance of parallel-plate and two-sphere
+capacitors. </p>
+<p>The files for this example may be found in the
+<code>share/scuff-em/examples/TwoBodyCapacitor</code> subdirectory
+of your <a class="wikilink" href="../../../scuff-em/">scuff-em</a> installation.</p>
+<h1 id="capacitance-of-a-parallel-plate-capacitor">Capacitance of a parallel-plate capacitor</h1>
+<p>I consider a parallel-plate capacitor consisting of
+two square conducting plates of side length <script type="math/tex">L</script> separated by
+various distances <script type="math/tex">d</script>. Neglecting fringing-field (i.e.
+finite-size) effects, the capacitance is <script type="math/tex">C(d)=\epsilon_0 \frac{L^2}{d}.</script>
+</p>
+<h2 id="creating-scuff-em-input-files">Creating <span class=SC>scuff-em</span> input files</h2>
+<p>Because <a href="../../../reference/FAQ/#Units">electrostatics is scale-invariant</a>,
+I can choose length units arbitrarily, and I will choose
+units in which <script type="math/tex">L=1</script>. 
+To specify my geometry thus
+requires meshed representations of squares of side
+length 1, which I generate (at two different meshing
+resolutions) like this in <a href="http://www.geuz.org/gmsh"><span class=SC>gmsh</span></a>:</p>
+<pre><code class="bash">% gmsh -setnumber N 10 -2 Square_N.geo -o Square.msh 
+% RenameMesh Square.msh
+% gmsh -setnumber N 20 -2 Square_N.geo -o Square.msh 
+% RenameMesh Square.msh
+</code></pre>
+
+<p>Here <a href="../Square_N.geo"><code>Square_N.geo</code></a> is the
+<span class=SC>gmsh</span> input file
+and <a href="../RenameMesh"><code>RenameMesh</code></a> is a little script that uses
+[<span class=SC>scuff-analyze</span>][scuff-analyze] to
+count the number of interior edges in a surface mesh and
+rename the file accordingly.</p>
+<p>This produces files named
+<code>Square_280.msh</code> and <code>Square_1160.msh</code>.
+Now write 
+<a href="../../../reference/Geometries"><span class=SC>scuff-em</span> geometry files</a>:</p>
+<p>+<a href="../TwoPlateCapacitor_280.scuffgeo"><code>TwoPlateCapacitor_280.scuffgeo</code></a></p>
+<p>+<a href="../TwoPlateCapacitor_1160.scuffgeo"><code>TwoPlateCapacitor_1160.scuffgeo</code></a></p>
+<p>and a
+<a href="../../../reference/Transformations">list of geometrical transformations</a>
+describing 20 values of the plate-plate spacing <script type="math/tex">d</script>
+ranging from <script type="math/tex">d=0.01L</script> to <script type="math/tex">d=L</script>:</p>
+<p>+<a href="../TwoPlateCapacitor.trans"><code>TwoPlateCapacitor.trans</code></a></p>
+<p>Before running calculations, double-check that our <code>.scuffgeo</code>
+and <code>.trans</code> files file correctly describe the range of geometries
+we want to study:</p>
+<pre><code class="bash">% scuff-analyze --geometry TwoPlateCapacitor_280.scuffgeo --transfile TwoPlateCapacitor.trans 
+% gmsh TwoPlateCapacitor_280.transformed.pp
+</code></pre>
+
+<p><img alt="CapacitorMesh.png" src="../CapacitorMesh.png" /></p>
+<h2 id="running-the-calculation">Running the calculation</h2>
+<pre><code class="bash">% for N in 280 1160
+% do
+%   ARGS=&quot;&quot;
+%   ARGS=&quot;${ARGS} --geometry  TwoPlateCapacitor_${N}.scuffgeo&quot;
+%   ARGS=&quot;${ARGS} --TransFile TwoPlateCapacitor.trans&quot;
+%   ARGS=&quot;${ARGS} --CapFile   TwoPlateCapacitor_${N}.out&quot;
+%   scuff-static ${ARGS}
+% done
+</code></pre>
+
+<h2 id="plotting-the-data">Plotting the data</h2>
+<pre><code class="bash">% gnuplot
+gnuplot&gt; set logscale xy
+gnuplot&gt; plot 'TwoPlateCapacitor_280.out' u 1:(abs($3)) t 'SCUFF, N=280' w p pt 7 ps 1, 'TwoPlateCapacitor_1160.out' u 1:(abs($3)) t 'SCUFF, N=1160' w p pt 6 ps 2, 1/x w l lw 2 t 'Theoretical Prediction'
+</code></pre>
+
+<p><img alt="TwoPlateCapacitorData.png" src="../TwoPlateCapacitorData.png" /></p>
+<p>The deviations from the theoretical prediction at small <script type="math/tex">d</script> are
+due to finite mesh resolution and are reduced in the finer-mesh
+calculation. On the other hand, the deviations at large <script type="math/tex">d</script> are
+due to the finite size of the plates and are not changed by 
+computing at finer resolution.</p>
               
             </div>
           </div>
@@ -497,10 +573,10 @@ Mie scattering theory.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../FresnelScattering/FresnelScattering/" class="btn btn-neutral float-right" title="Fresnel scattering"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../../reference/TopLevel/" class="btn btn-neutral float-right" title="Top-level overview"/>Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../../Overview/" class="btn btn-neutral" title="Overview of the test suite"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../PlatonicSolids/PlatonicSolids/" class="btn btn-neutral" title="Electrostatic polarizability of platonic solids"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -542,10 +618,10 @@ Mie scattering theory.</p>
           <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../../Overview/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../../PlatonicSolids/PlatonicSolids/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../../FresnelScattering/FresnelScattering/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../../../reference/TopLevel/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
