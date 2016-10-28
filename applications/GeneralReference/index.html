@@ -162,6 +162,13 @@
     </li>
 
         
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../examples/BUSymposium/BUSymposium/">Tutorial examples for BU photonics symposium, 2016/10/25</a>
+        
+    </li>
+
+        
     </ul>
 <li>
           
@@ -822,13 +829,20 @@ that may be viewed in <a class="wikilink" href="../../gmsh/">gmsh</a>.</p>
 <h1 id="6-environment-variables">6. Environment variables</h1>
 <p>Here are some environment-variable settings that 
 affect the behavior of <a class="wikilink" href="../../scuff-em/">scuff-em</a>.</p>
-<pre><code class="bash">% export SCUFF_MESH_PATH=/path/to/msh/files
+<pre><code class="bash">% export SCUFF_GEO_PATH=/path/to/scuffgeo/files
+% export SCUFF_MESH_PATH=/path/to/msh/files
+% export SCUFF_MATPROP_PATH=/path/to/matprop/files
 </code></pre>
 
 <blockquote>
-<p>Specifies a directory in which to look for mesh files
-(such as <code>.msh</code> files produced by <a class="wikilink" href="../../gmsh/">gmsh</a>) 
-referred to by <code>.scuffgeo</code> files.</p>
+<p>These environment variables may be used to specify
+colon-separated lists of directories in which
+<span class=SC>scuff-em</span> will look for
+various types of input files:
+[<code>.scuffgeo</code> geometry files][Geometries] (<code>SCUFF_GEO_PATH</code>),
+<code>.msh</code> surface-mesh files (<code>SCUFF_MESH_PATH</code>),
+and
+[material-property files]<a href="../SCUFF_MATPROP_PATH">Materials</a>.</p>
 </blockquote>
 <pre><code class="bash">% export SCUFF_LOGLEVEL=&quot;NONE&quot;
 % export SCUFF_LOGLEVEL=&quot;TERSE&quot;

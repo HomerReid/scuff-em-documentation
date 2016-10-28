@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Tutorial examples for BU photonics symposium, 2016/10/25 - SCUFF-EM documentation</title>
+  
+
+  <link rel="shortcut icon" href="../../../scuffEM.ico">
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/highlight.css">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "examples/BUSymposium/BUSymposium"
+  </script>
+  
+  <script src="../../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../../js/highlight.pack.js"></script>
+  <script src="../../../js/theme.js"></script> 
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+  <script src="../../../mathjaxhelper.js"></script>
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+
+      <p align="center"
+      <a href="../../..">
+         <img align="center" height="auto" width="100%"  
+              src="../../../img/scuffEMNavBar.png"
+      </a>
+
+      <div class="wy-side-nav-search">
+        <a href="../../.." class="icon icon-home"> SCUFF-EM documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../../..">SCUFF-EM documentation</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Examples</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../MieScattering/MieScattering/">Mie scattering</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../DielectricShell/DielectricShell/">Electrostatics of a spherical dielectric shell</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../ThinFilm/ThinFilm/">Spatially-resolved study of plane-wave transmission through an infinite-area thin dielectric film</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../DiffractionPatterns/DiffractionPatterns/">Imaging diffraction patterns of discs, disc arrays, and hole arrays in metal screens</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../CubeTorus/">Casimir forces in a compact geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../SiliconBeams/SiliconBeams/">Casimir forces in a 1D extended geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../SiliconSlabs/SiliconSlabs/">Casimir forces in a 2D extended geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../NanostructureCasimirPolder/NanostructureCasimirPolder/">Casimir-Polder potentials in dielectric nanostructures</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../SiO2Spheres/SiO2Spheres/">Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../TipSubstrate/TipSubstrate/">Spatial distribution of heat flux from a warm tip over a cold substrate</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../HalfSpaceLDOS/HalfSpaceLDOS/">LDOS and dyadic Green functions above an infinite aluminum half-space</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../PlatonicSolids/PlatonicSolids/">Electrostatic polarizability of platonic solids</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../TwoBodyCapacitors/TwoBodyCapacitors/">Capacitance of two-body capacitors</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Tutorial examples for BU photonics symposium, 2016/10/25</a>
+        
+            <ul>
+            
+            </ul>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>General reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/TopLevel/">Top-level overview</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/Installing/">Installation</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/Geometries/">Geometry descriptions</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/Materials/">Material designations</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/Transformations/">Geometric transformations</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/IncidentFields/">Incident fields</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/BrillouinZoneIntegration/">Brillouin zone integration</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/FAQ/">FAQ</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Command-line application reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/GeneralReference/">General command-line reference</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-scatter/scuff-scatter/">scuff-scatter</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-transmission/scuff-transmission/">scuff-transmission</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-ldos/scuff-ldos/">scuff-ldos</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-tmatrix/scuff-tmatrix/">scuff-tmatrix</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-cas3D/scuff-cas3D/">scuff-cas3D</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-caspol/scuff-caspol/">scuff-caspol</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-neq/scuff-neq/">scuff-neq</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-RF/scuff-RF/">scuff-RF</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-static/scuff-static/">scuff-static</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-analyze/scuff-analyze/">scuff-analyze</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-integrate/scuff-integrate/">scuff-integrate</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Validation tests</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../tests/Overview/">Overview of the test suite</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../tests/MieScattering/MieScattering/">Mie scattering</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../tests/FresnelScattering/FresnelScattering/">Fresnel scattering</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../tests/CasimirSpheres/CasimirSpheres/">Equilibrium Casimir forces between spheres</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../tests/CasimirPlates/CasimirPlates/">Equilibrium Casimir forces between plates</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../tests/CPSphere/CPSphere/">Equilibrium Casimir-Polder potential near a sphere</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../tests/CPPlate/CPPlate/">Equilibrium Casimir-Polder potential near a plate</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../tests/NEQSpheres/NEQSpheres/">Heat transfer and non-equilibrium Casimir forces between spheres</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../tests/libscuff/libscuff/">Low-level tests of the core library</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>API reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../API/libscuff/">libscuff</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>For developers</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../forDevelopers/Implementation/">Implementation</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../forDevelopers/DataStructures/">Data Structures</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../forDevelopers/Documentation/">Documentation</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../forDevelopers/SingularIntegrals/">Code for computing singular integrals</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../..">SCUFF-EM documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.."><span class="SmallCaps">scuff-em</span> documentation</a> &raquo;</li>
+    
+      
+        
+          <li>Examples &raquo;</li>
+        
+      
+    
+    <li>Tutorial examples for BU photonics symposium, 2016/10/25</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/homerreid/scuff-em/" class="icon icon-github"> Edit on GitHub</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <p align="center">
+<h2> BU Photonics Symposium </h2>
+<h1> <span class=SC>scuff-em</span> and <span class=SC>buff-em</span>:
+Open-Source CAD Tools for Integral-Equation Modeling in Physics and Engineering
+</h1>
+<h2> October 25, 2016</h2>
+
+<p align="center">
+<h2> Schedule </h2>
+
+<table border="1">
+<tr>
+ <td>9-10:15 AM</td>
+ <td><b>Overview of integral-equation techniques and introduction
+        to <span class=SC>scuff-em / buff-em</span>.
+     </b> 
+     <ul> 
+      <li> What are integral-equation methods? How do they
+           compare to finite-difference / finite-element methods?
+      <li> For what problems should I choose integral-equation solvers
+           over other options?
+      <li> What are <span class=SC>scuff-em</span> and
+           <span class=SC>buff-em</span>?
+      <li> What steps are involved in a typical
+           <span class=SC>scuff/buff</span> calculation?
+      <li> A first example:
+           <a href="#MieScattering">Mie scattering in
+                                    <span class=SC>scuff-em</span>
+           </a>
+     </ul> 
+ </td>
+</tr>
+<tr>
+ <td>10:15-10:30 AM</td>
+ <td>Coffee break
+ </td>
+</tr>
+<tr>
+ <td>10:30-11:15 AM</td>
+ <td><b>Tutorial walkthrough 1: Plasmonics and nanoantennas</b>
+     <ul> 
+      <li> Scattering and absorption by
+      <li> For what problems should I choose integral-equation solvers?
+      <li> What are <span class=SC>scuff-em</span> and
+           <span class=SC>buff-em</span>?
+     </ul> 
+ </td>
+</tr>
+
+
+</table border="1">
+
+## <span class=SC>scuff-em</span> in the cloud: Running <span class=SC>scuff-em</span> calculations on Amazon AWS Nodes
+
+Although many nontrivial <span class=SC>scuff-em</span>
+calculations---including all of the
+[tutorial examples in the <span class=SC>scuff-em</span> documentation][SCUFFTutorialExamples]---can
+be run quickly (few minutes or less) on a typical laptop or desktop workstation,
+eventually you may want to run some larger-scale calculations.
+For example, 
+
++ you may want to [crank up the resolution of the surface meshes in a scattering problem][HighResolutionExample]
+  to get high numerical precision, or 
+
++ you may want to [run large-scale parameter sweeps][ParameterSweep]
+  involving thousands of <span class=SC>scuff-em</span>
+  calculations at various values of geometrical or other parameters, or
+
++ you may be computing quantities that require both
+  [frequency and Brillouin-zone integration][HeatTransferProblem],
+  thus involving thousands of <span class=SC>scuff-em</span>
+  calculations at various frequencies and Bloch vectors.
+
+A very convenient way to run large-scale calculations
+without building your own supercomputer
+is to use an on-demand cloud-computing resource offering
+pay-as-you-go access to remote compute nodes.
+One example of such a resource is
+[Amazon Web Services][https://aws.amazon.com] (AWS),
+where you can buy a few hour's worth of access to a
+quite powerful server at inexpensive prices. For example,
+as discussed below,
+the cost of a machine with 16 [Haswell][haswell] cores
+and 30 GB memory can be as low as $0.10/hour
+(10 cents per hour).
+(This is using AWS [spot instances][SpotInstance], for which
+current pricing information is available [here][SpotPricing].)
+
+### Launch an AWS instance with the [Simpetus][Simpetus] Platform
+
+The very first time you ever do this you will need to spend
+about 10 minutes going through a totally straightforward procedure
+to set up an AWS account and "launch an EC2 instance running
+the [Simpetus Electromagnetic Simulation Platform][SimpetusESP]."
+I put this in quotes for the benefit of cloud-computing neophytes
+(like me!) to communicate that you don't have to understand all 
+the jargon here, or to follow precisely what is happening---all
+you need to know is that, at the end of this process,
+a server will have been magically created somewhere in the
+cloud for you (and only for you, with no other users) with
+pre-installed versions of
+<span class=SC>scuff-em</span> and other modeling tools
+like 
+[<span class=SC>meep</span>][MEEP]
+and 
+[<span class=SC>mpb</span>][MPB].
+You will have an IP address that you can use to log in to
+this server, upload files to this server, run calculations
+on this server, and download the results.
+Once you're finished, you will "terminate the EC2 instance",
+whereupon, poof! The server instantly disintegrates back into
+the primordial soup of the cloud, taking with it all files
+you uploaded or that were produced by your calculations
+You will be charged for only the time elapsed between
+launch and termination.
+
+The entire procedure for launching your AWS instance
+is carefully explained in
+[this series of follow-along tutorial walkthrough videos][SimpetusVideos]
+on the Simpetus youtube channel.
+If you are already familiar with things like SSH keypairs
+you can probably start with
+[this video](https://www.youtube.com/watch?v=T9ZcLGxt8Kg),
+which will get you up and running with an EC2 instance.
+
+In what follows I will refer to the EC2 instance created 
+in this way as your "cloud server."
+
+### Upload and run initialization script on cloud server
+
+Once your cloud server is running, the next step is to
+upload and run the following <span class=SC>bash</span> script:
+
++ [`InitializeSCUFFonAWS.sh`](InitializeSCUFFonAWS.sh)
+
+This script fetches the latest version of
+<span class=SC>scuff-em</span> from the
+[<span class=SC>scuff-em</span> GitHub page](http://github.com/homerreid/scuff-em)
+and builds it on the EC2 instance with 
+appropriate compilation options. (As a bonus, the script
+also fetches and installs the awesome
+[<span class=SC>openblas</span>](https://github.com/xianyi/OpenBLAS)
+package for automatically architecture-optimized linear algebra,
+significantly accelerating large-scale
+<span class=SC>scuff-em</span> calculations.)
+
+Assuming you are logging in to your EC2 instance from a terminal
+on your Linux or Mac laptop, the process of uploading and 
+running the script looks like this:
+
++1. Copy script from your local machine to the cloud server:
+
+
+wzxhzdk:0
+
+
+Here `123.45.67.89` is the IP address of the server you launched,
+and `keypair.pem` is the SSH key-pair file you will have created
+in the launching process. Note the colon at the far end of the
+command line.
+
+Of course, you could also use a GUI-based file-transfer tool like
+[<span class=SC>winscp</span>](https://winscp.net/eng/index.php)
+to upload the script from Windows without using a terminal.
+
++2. Login to cloud server
+
+
+wzxhzdk:1
+
+
++3. Run initialization script on server:
+
+
+wzxhzdk:2
+
+
+This script takes about 10 minutes to run (on a node with 16 CPU cores).
+Once it is finished, the <span class=SC>scuff-em</span> installation
+will be present starting at your root filesystem, i.e.
+
++ the binary executable programs will be in `${HOME}/bin`
+
++ the examples will be in `${HOME}/share/scuff-em`,
+
+etc.
+
+Also, the script adds `${HOME}/bin` to your path, so that you
+can run <span class=SC>scuff-em</span> commands from any directory
+without needing to specify the `${HOME}/bin` prefix.
+
+# Polarization response of a GaAs nanowire with and without surrounding
+gold antennas
+
+Nanowire/antenna mesh:
+
+![Nanowire/antenna mesh](NanowireAntennaMesh.png)
+
+Fields inside nanowire:
+
+![NanowireFields](NanowireFIelds1.png)
+
+# Metamaterial rotator
+
+This example mimics the terahertz polarization rotator reported in
+this paper:
+
++ Y. J. Chiang and T. J. Yen, "A composite-metamaterial-based terahertz-wave
+polarization rotator with an ultrathin thickness, an excellent conversion
+ratio, and enhanced transmission", *Applied Physics Letters* **102** 011129 (2013).
+DOI:[http://dx.doi.org/10.1063/1.4774300](http://dx.doi.org/10.1063/1.4774300)
+
+Unit-cell mesh:
+
+![Metamaterial rotator unit cell](MMRUnitCellMedium.png)
+
+A section of the full lattice geometry simulated by <span class=SC>scuff-em</span>
+
+![Metamaterial rotator lattice](MMRMesh.png)
+
+[SCUFFTutorialExamples]:    http://homerreid.github.io/scuff-em-documentation/#tutorial-examples
+[HighResolutionExample]:    http://homerreid.github.io/scuff-em-documentation/#tutorial-examples
+[SimpetusESP]:          https://aws.amazon.com/marketplace/pp/B01KHWH0AS?qid=1476230986915&sr=0-1&ref_=srh_res_product_title
+[Simpetus]:         http://SimpetusCloud.com
+[Haswell]:          https://en.wikipedia.org/wiki/Haswell_(microarchitecture)
+[SpotInstance]:         http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances.html
+[SpotPricing]:          https://aws.amazon.com/ec2/spot/pricing/
+[MEEP]:             http://ab-initio.mit.edu/wiki/index.php/Meep
+[MPB]:              http://ab-initio.mit.edu/wiki/index.php/MPB
+[SimpetusVideos]:       https://www.youtube.com/channel/UCgYdMSoCb4ytVBTlwA1FRZg
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../../reference/TopLevel/" class="btn btn-neutral float-right" title="Top-level overview"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../TwoBodyCapacitors/TwoBodyCapacitors/" class="btn btn-neutral" title="Capacitance of two-body capacitors"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    <!-- Copyright etc -->
+    </p>
+  </div>
+
+  <a href="http://homerreid.com/scuff-em"> 
+    <span class="SmallCaps">scuff-em</span>
+  </a> documentation, by
+  <a href="http://homerreid.com">Homer Reid</a>
+
+  <p>
+  <font size=-1>
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> 
+  using a customized theme modeled 
+  after the 
+  <a href="https://github.com/snide/sphinx_rtd_theme">theme</a>
+  provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  </font>
+
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../../TwoBodyCapacitors/TwoBodyCapacitors/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../../reference/TopLevel/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

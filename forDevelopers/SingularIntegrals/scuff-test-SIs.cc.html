@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>~/public_html/research/codes/scuff-EM/SingularIntegrals/scuff-singular-integrals/scuff-test-SIs.cc.html</title>
+<meta name="Generator" content="Vim/7.3">
+<meta name="plugin-version" content="vim7.3_v10">
+<meta name="syntax" content="cpp">
+<meta name="settings" content="use_css">
+<style type="text/css">
+<!--
+pre { font-family: monospace; color: #00ffff; background-color: #000000; }
+body { font-family: monospace; color: #00ffff; background-color: #000000; }
+.Special { color: #ff0000; }
+.Comment { color: #80a0ff; }
+.Type { color: #60ff60; font-weight: bold; }
+.Constant { color: #ff00ff; }
+.PreProc { color: #ff80ff; }
+-->
+</style>
+</head>
+<body>
+<pre>
+<span class="PreProc">#include </span><span class="Constant">&lt;stdio.h&gt;</span>
+<span class="PreProc">#include </span><span class="Constant">&lt;stdlib.h&gt;</span>
+
+<span class="PreProc">#include </span><span class="Constant">&quot;TaylorDuffy.h&quot;</span>
+
+<span class="Type">int</span> main(<span class="Type">int</span> argc, <span class="Type">char</span> *argv[])
+{
+  <span class="Comment">/*</span><span class="Comment"> panel vertices </span><span class="Comment">*/</span>
+  <span class="Type">int</span> WhichCase = <span class="Constant">2</span>; <span class="Comment">// 2 common vertices</span>
+  <span class="Type">double</span> V1[<span class="Constant">3</span>]  =  { <span class="Constant">0.0</span>,  <span class="Constant">0.0</span>,  <span class="Constant">0.0</span> };
+  <span class="Type">double</span> V2[<span class="Constant">3</span>]  =  { <span class="Constant">0.1</span>,  <span class="Constant">0.0</span>,  <span class="Constant">0.0</span> };
+  <span class="Type">double</span> V3[<span class="Constant">3</span>]  =  { <span class="Constant">0.05</span>, <span class="Constant">0.1</span>,  <span class="Constant">0.0</span> };
+  <span class="Type">double</span> V3P[<span class="Constant">3</span>] =  { <span class="Constant">0.05</span>, -<span class="Constant">0.1</span>, <span class="Constant">0.05</span> };
+
+  <span class="Comment">/*</span><span class="Comment"> specification of which integrals we want </span><span class="Comment">*/</span>
+  <span class="Type">int</span> NumPKs        = <span class="Constant">2</span>;
+  <span class="Type">int</span> PIndex[<span class="Constant">2</span>]     = {TD_UNITY, TD_PMCHWG1};
+  <span class="Type">int</span> KIndex[<span class="Constant">2</span>]     = {TD_RP,    TD_HELMHOLTZ};
+  cdouble KParam[<span class="Constant">2</span>] = { -<span class="Constant">1.0</span>,    <span class="Constant">1.0</span>};
+
+  <span class="Comment">/*</span><span class="Comment"> output buffers </span><span class="Comment">*/</span>
+  cdouble Result[<span class="Constant">2</span>], Error[<span class="Constant">2</span>];
+
+  <span class="Comment">/*</span><span class="Comment"> fill in argument structure </span><span class="Comment">*/</span>
+  TaylorDuffyArgStruct MyTDArgs, *TDArgs=&amp;MyTDArgs;
+  InitTaylorDuffyArgs(TDArgs);
+  TDArgs-&gt;WhichCase = WhichCase;
+  TDArgs-&gt;V1        = V1;
+  TDArgs-&gt;V2        = V2;
+  TDArgs-&gt;V3        = V3;
+  TDArgs-&gt;V3P       = V3P;
+  TDArgs-&gt;NumPKs    = NumPKs;
+  TDArgs-&gt;PIndex    = PIndex;
+  TDArgs-&gt;KIndex    = KIndex;
+  TDArgs-&gt;KParam    = KParam;
+  TDArgs-&gt;Result    = Result;
+  TDArgs-&gt;Error     = Error;
+
+  <span class="Comment">/*</span><span class="Comment"> evaluate the integrals </span><span class="Comment">*/</span>
+  TaylorDuffy( TDArgs );
+
+  <span class="Comment">/*</span><span class="Comment"> print the results </span><span class="Comment">*/</span>
+  printf(<span class="Constant">&quot;Integral 1: </span><span class="Special">%+.8e</span><span class="Constant"> (error </span><span class="Special">%.1e</span><span class="Constant">) </span><span class="Special">\n</span><span class="Constant">&quot;</span>,
+          real(Result[<span class="Constant">0</span>]),real(Error[<span class="Constant">0</span>]));
+  printf(<span class="Constant">&quot;Integral 2: {</span><span class="Special">%+.8e</span><span class="Constant">, </span><span class="Special">%+.8e</span><span class="Constant">} (error {</span><span class="Special">%.1e</span><span class="Constant">.,</span><span class="Special">%.1e</span><span class="Constant">}) </span><span class="Special">\n</span><span class="Constant">&quot;</span>,
+          real(Result[<span class="Constant">1</span>]),imag(Result[<span class="Constant">1</span>]),real(Error[<span class="Constant">1</span>]),imag(Error[<span class="Constant">1</span>]));
+
+
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,62 @@
+$Assumptions = {    Element[kr,Reals]      && kr>0
+                 && Element[kz,Reals]      && kz>0
+                 && Element[R,Reals]       && R>0
+                 && Element[Rho,Reals]     && Rho>0
+                 && Element[ReEps,Reals]
+                 && Element[ImEps,Reals] && ImEps>0
+                 && Element[Delta,Reals] 
+                 && Element[a,Reals]     && a>0
+               };
+
+(***************************************************)
+(* radial functions ********************************)
+(***************************************************)
+RReg[Nu_, a_]:=BesselJ[Nu,a];
+ROut[Nu_, a_]:=HankelH1[Nu,a]; 
+
+(***************************************************)
+(* regular vector spherical wave functions         *)
+(***************************************************)
+MM[Nu_, kr_, kz_, Rho_, T_, z_] := Module [ {k},
+  k=Sqrt[kr*kr+kz*kz];
+ { (Nu*k/(Rho*kr*kr))*RReg[Nu,kr*Rho],
+   (I*k/kr)*D[RReg[Nu,x],x]/.{x->kr*Rho},
+   0
+ }*Exp[I*(Nu*T + kz*z)]
+];
+
+N[Nu_, kr_, kz_, Rho_, T_, z_] := 
+ { (I*kz/kr)*D[RReg[Nu,x],x]/.{x->kr*Rho},
+   (-Nu*kz/(Rho*kr*kr))*RReg[Nu,kr*Rho],
+   RReg[Nu,kr*Rho]
+ }*Exp[I*(Nu*T + kz*z)];
+
+MMOut[Nu_, kr_, kz_, Rho_, T_, z_] := Module [ {k},
+  k=Sqrt[kr*kr+kz*kz];
+ { (Nu*k/(Rho*kr*kr))*ROut[Nu,kr*Rho],
+   (I*k/kr)*D[ROut[Nu,x],x]/.{x->kr*Rho},
+   0
+ }*Exp[I*(Nu*T + kz*z)]
+];
+
+NNOut[Nu_, kr_, kz_, Rho_, T_, z_] := 
+ { (I*kz/kr)*D[ROut[Nu,x],x]/.{x->kr*Rho},
+   (-Nu*kz/(Rho*kr*kr))*ROut[Nu,kr*Rho],
+   ROut[Nu,kr*Rho]
+ }*Exp[I*(Nu*T + kz*z)];
+
+
+(***************************************************)
+(* scattering coefficients                         *)
+(* P*MReg + C*MOut = A*MRegIn                      *)
+(* P*NReg + C*NOut = A*NRegIn/ZIn                  *)
+(***************************************************)
+AC[Eps_,Mu_,k0_,kz_,Nu_,R_]:=Module[{n,Z,krOut,krIn,M,V},
+        Z  = Sqrt[ Mu/Eps ];
+     krOut = Sqrt[ k0*k0 - kz*kz ];
+     krIn  = Sqrt[ Eps*Mu*k0*k0 - kz*kz ];
+   M= {{ MM[Nu,krIn,kz,R,0,0][[1]],   -MMOut[Nu,krOut,kz,R,0,0][[1]]},
+       { NN[Nu,krIn,kz,R,0,0][[1]]/Z, -NNOut[Nu,krOut,kz,R,0,0][[1]]}};
+   V= { MM[Nu,krOut,kz,T,0,0][[1]], NN[Nu,krOut,kz,T,0,0][[1]]};
+   Inverse[M].V
+];
