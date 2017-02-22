@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Tutorial examples for BU photonics symposium, 2016/10/25 - SCUFF-EM documentation</title>
+  <title>Capacitance of a PCB stripline trace - SCUFF-EM documentation</title>
   
 
   <link rel="shortcut icon" href="../../../scuffEM.ico">
@@ -21,7 +21,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "examples/BUSymposium/BUSymposium"
+    var mkdocs_page_name = "examples/StriplineCapacitor/StriplineCapacitor"
   </script>
   
   <script src="../../../js/jquery-2.1.1.min.js"></script>
@@ -164,9 +164,21 @@
         
             
     <li class="toctree-l1 current">
-        <a class="current" href="./">Tutorial examples for BU photonics symposium, 2016/10/25</a>
+        <a class="current" href="./">Capacitance of a PCB stripline trace</a>
         
             <ul>
+            
+                <li class="toctree-l3"><a href="#gmsh-and-scuff-em-geometry-files">gmsh and scuff-em geometry files</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#calculation-of-capacitance-matrix">Calculation of capacitance matrix</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#field-visualization">Field visualization</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#capacitance-vs-pcb-thickness">Capacitance vs. PCB thickness</a></li>
+                
             
             </ul>
         
@@ -480,7 +492,7 @@
         
       
     
-    <li>Tutorial examples for BU photonics symposium, 2016/10/25</li>
+    <li>Capacitance of a PCB stripline trace</li>
     <li class="wy-breadcrumbs-aside">
       
         
@@ -494,236 +506,221 @@
           <div role="main">
             <div class="section">
               
-                <p align="center">
-<h2> BU Photonics Symposium </h2>
-<h1> <span class=SC>scuff-em</span> and <span class=SC>buff-em</span>:
-Open-Source CAD Tools for Integral-Equation Modeling in Physics and Engineering
-</h1>
-<h2> October 25, 2016</h2>
+                <h1 id="capacitance-of-a-pcb-stripline-trace">Capacitance of a PCB stripline trace</h1>
+<p>In this example, we use <a class="wikilink" href="../../../scuff-static/">scuff-static</a> to compute the
+capacitance of a metal trace on an FR4 printed circuit board (PCB)
+with ground plane. Here's a schematic depiction:</p>
+<p><img alt="Stripline capacitor figure" src="../StriplineCapacitorFigure.png" /></p>
+<p>Here the green region is dielectric, the yellow region
+is an (infinitesimally thin) metallic trace on the upper surface
+of the dielectric, and black indicates a ground plane
+on the bottom surface of the dielectric.</p>
+<h2 id="gmsh-and-scuff-em-geometry-files"><a class="wikilink" href="../../../gmsh/">gmsh</a> and <span class="SC">scuff-em</span> geometry files</h2>
+<p>Due to the presence of <a href="../../../reference/Geometries#Complex">multi-material junctions</a>
+(points at which three or more material regions meet, which in the 
+figure above occur along the edges of the metal trace and the
+ground plane), the geometry cannot be described as a collection
+of 3D volumes bounded by closed surfaces, and instead requires
+a more sophisticated geometry description in terms of
+<a href="../../../reference/Geometries#Complex"><em>regions</em> and <em>surfaces</em></a>. More specifically, there
+are only two regions in the problem (the exterior vacuum region
+and the dielectric), but there are three distinct surfaces:
+ <strong>(1)</strong> the metal trace, <strong>(2)</strong> the dielectric-air interface, 
+and <strong>(3)</strong> the ground plane.
+To define a <a class="wikilink" href="../../../scuff-em/">scuff-em</a> geometry description
+for this case, we need separate meshes for each of these
+three surfaces. The following picture shows these three surface
+meshes, displaced for clarity from their positions in the actual
+geometry:</p>
+<p><img alt="Stripline capacitor surfaces" src="../StriplineCapacitorSurfaces.png" /></p>
+<p>Here's a <a href="http://www.geuz.org/gmsh"><span class="SC">gmsh</span></a> geometry file
+defining the various surfaces we need; note that this file makes
+three <code>Physical Surface</code> statements to define surfaces <strong>(1)</strong>, <strong>(2)</strong>, 
+and <strong>(3)</strong> above. </p>
+<ul>
+<li><a href="../StriplineCapacitor.geo"><code>StriplineCapacitor.geo</code></a></li>
+</ul>
+<p>This file contains user-specifiable parameters
+<code>W</code>, <code>L</code>, <code>T</code>, and <code>B</code> corresponding to the geometric quantities 
+labeled in the figure above, as well as a user-specifiable parameter <code>N</code>
+setting the number of triangles per unit length. I generate surface
+meshes at two different resolutions like this:</p>
+<pre><code class="bash">% gmsh -2 -setnumber N 2 StriplineCapacitor.geo
+% gmsh -2 -setnumber N 4 StriplineCapacitor.geo
+</code></pre>
 
-<p align="center">
-<h2> Schedule </h2>
+<p>These produce <code>.msh</code> files containing respectively 1948 and 7856
+inner triangle edges (you can get this information by running
+<code>scuff-analyze --mesh StriplineCapacitor.msh</code>), so I rename them
+to <code>StriplineCapacitor_1948.msh</code> and 
+<code>StriplineCapacitor_7856.msh.</code></p>
+<p>Next I write a <a href="../../../reference/Geometries"><span class="SC">scuff-em</span> geometry file</a>
+for each meshing resolution. This file defines the two regions and
+the three surfaces defined above, specifying that the meshes for
+each surface
+are to be read from the <code>.msh</code> file with the appropriate <code>Physical Surface</code>
+tag.
+For the coarser-resolution mesh the file is called
+ <a href="../StriplineCapacitor_1948.scuffgeo"><code>StriplineCapacitor_1948.scuffgeo</code></a>,
+and it looks like this:</p>
+<pre><code>REGION Exterior   MATERIAL Vacuum
+REGION Dielectric MATERIAL CONST_EPS_4
 
-<table border="1">
-<tr>
- <td>9-10:15 AM</td>
- <td><b>Overview of integral-equation techniques and introduction
-        to <span class=SC>scuff-em / buff-em</span>.
-     </b> 
-     <ul> 
-      <li> What are integral-equation methods? How do they
-           compare to finite-difference / finite-element methods?
-      <li> For what problems should I choose integral-equation solvers
-           over other options?
-      <li> What are <span class=SC>scuff-em</span> and
-           <span class=SC>buff-em</span>?
-      <li> What steps are involved in a typical
-           <span class=SC>scuff/buff</span> calculation?
-      <li> A first example:
-           <a href="#MieScattering">Mie scattering in
-                                    <span class=SC>scuff-em</span>
-           </a>
-     </ul> 
- </td>
-</tr>
-<tr>
- <td>10:15-10:30 AM</td>
- <td>Coffee break
- </td>
-</tr>
-<tr>
- <td>10:30-11:15 AM</td>
- <td><b>Tutorial walkthrough 1: Plasmonics and nanoantennas</b>
-     <ul> 
-      <li> Scattering and absorption by
-      <li> For what problems should I choose integral-equation solvers?
-      <li> What are <span class=SC>scuff-em</span> and
-           <span class=SC>buff-em</span>?
-     </ul> 
- </td>
-</tr>
+OBJECT Trace
+    MESHFILE StriplineCapacitor_1948.msh
+    MESHTAG 1
+ENDOBJECT
 
+SURFACE RightBoundary
+    MESHFILE StriplineCapacitor_1948.msh
+    MESHTAG 2
+    REGIONS Exterior Dielectric
+ENDSURFACE
 
-</table border="1">
+SURFACE LeftBoundary
+    MESHFILE StriplineCapacitor_1948.msh
+    MESHTAG 2
+    ROTATED 180 ABOUT 0 0 1
+    REGIONS Exterior Dielectric
+ENDSURFACE
 
-## <span class=SC>scuff-em</span> in the cloud: Running <span class=SC>scuff-em</span> calculations on Amazon AWS Nodes
+OBJECT GroundPlane
+    MESHFILE StriplineCapacitor_1948.msh
+    MESHTAG 3
+ENDOBJECT
+</code></pre>
 
-Although many nontrivial <span class=SC>scuff-em</span>
-calculations---including all of the
-[tutorial examples in the <span class=SC>scuff-em</span> documentation][SCUFFTutorialExamples]---can
-be run quickly (few minutes or less) on a typical laptop or desktop workstation,
-eventually you may want to run some larger-scale calculations.
-For example, 
+<p>Some notes on this geometry description:</p>
+<ul>
+<li>
+<p>Since the default material for an <code>OBJECT</code> or <code>SURFACE</code>
+is PEC (<strong>P</strong>erfectly <strong>E</strong>lectrically <strong>C</strong>onducting), I
+don't need to include a <code>Material</code> specification for the
+trace or the ground plane.</p>
+</li>
+<li>
+<p>I have broken up surface 2 (dielectric--vacuum interface)
+ into two halves, described by identical surface meshes 
+ with one rotated 180 degrees around the <em>z</em> axis. This is 
+not necessary, but it saves a little time in the matrix 
+assembly, as the diagonal matrix blocks corresponding to the
+two half-surfaces are identical and thus only need to be 
+computed once.</p>
+</li>
+<li>
+<p>This geometry specification is perfectly adequate for
+electrostatic problems, but would be not quite right for
+finite-frequency problems. For such problems I would 
+instead want to define the trace and ground plane 
+as regions of (in this case, infinite) surface conductivity
+on a closed dielectric boundary surface.</p>
+</li>
+<li>
+<p>Having written this <code>.scuffgeo</code> file for the coarser of my two
+surface meshes, I can obtain one for the finer mesh by going like
+this:</p>
+</li>
+</ul>
+<pre><code> BASE=StriplineCapacitor
+ sed 's/1948/7856/g' ${BASE}_1948.scuffgeo &gt; ${BASE}_7856.scuffgeo
+</code></pre>
 
-+ you may want to [crank up the resolution of the surface meshes in a scattering problem][HighResolutionExample]
-  to get high numerical precision, or 
+<h2 id="calculation-of-capacitance-matrix">Calculation of capacitance matrix</h2>
+<p>To compute the capacitance matrices for the two mesh resolutions,
+go like this from the shell command line:</p>
+<pre><code class="bash">for N in 1948 7856 
+do
+ GEOM=StriplineCapacitor_${N}
+ scuff-static --geometry ${GEOM}.scuffgeo --CapFile ${GEOM}.CapMatrix
+done
+</code></pre>
 
-+ you may want to [run large-scale parameter sweeps][ParameterSweep]
-  involving thousands of <span class=SC>scuff-em</span>
-  calculations at various values of geometrical or other parameters, or
-
-+ you may be computing quantities that require both
-  [frequency and Brillouin-zone integration][HeatTransferProblem],
-  thus involving thousands of <span class=SC>scuff-em</span>
-  calculations at various frequencies and Bloch vectors.
-
-A very convenient way to run large-scale calculations
-without building your own supercomputer
-is to use an on-demand cloud-computing resource offering
-pay-as-you-go access to remote compute nodes.
-One example of such a resource is
-[Amazon Web Services][https://aws.amazon.com] (AWS),
-where you can buy a few hour's worth of access to a
-quite powerful server at inexpensive prices. For example,
-as discussed below,
-the cost of a machine with 16 [Haswell][haswell] cores
-and 30 GB memory can be as low as $0.10/hour
-(10 cents per hour).
-(This is using AWS [spot instances][SpotInstance], for which
-current pricing information is available [here][SpotPricing].)
-
-### Launch an AWS instance with the [Simpetus][Simpetus] Platform
-
-The very first time you ever do this you will need to spend
-about 10 minutes going through a totally straightforward procedure
-to set up an AWS account and "launch an EC2 instance running
-the [Simpetus Electromagnetic Simulation Platform][SimpetusESP]."
-I put this in quotes for the benefit of cloud-computing neophytes
-(like me!) to communicate that you don't have to understand all 
-the jargon here, or to follow precisely what is happening---all
-you need to know is that, at the end of this process,
-a server will have been magically created somewhere in the
-cloud for you (and only for you, with no other users) with
-pre-installed versions of
-<span class=SC>scuff-em</span> and other modeling tools
-like 
-[<span class=SC>meep</span>][MEEP]
+<p>This produces files
+<code>StripLineCapacitor_1948.CapMatrix</code>
 and 
-[<span class=SC>mpb</span>][MPB].
-You will have an IP address that you can use to log in to
-this server, upload files to this server, run calculations
-on this server, and download the results.
-Once you're finished, you will "terminate the EC2 instance",
-whereupon, poof! The server instantly disintegrates back into
-the primordial soup of the cloud, taking with it all files
-you uploaded or that were produced by your calculations
-You will be charged for only the time elapsed between
-launch and termination.
+<code>StripLineCapacitor_7856.CapMatrix</code>
+reporting capacitance-matrix entries.</p>
+<p>These files look something like this:</p>
+<pre><code class="bash"># scuff-static run on hikari (02/18/17::18:46:43)# indices of conducting surfaces: # data file columns: 
+# 0 Trace
+# 1 GroundPlane
+# 01: C_{0,0} 
+# 02: C_{0,1} 
+# 03: C_{1,1} 
+3.644861e+01 -3.080723e+01 1.142077e+02 
+</code></pre>
 
-The entire procedure for launching your AWS instance
-is carefully explained in
-[this series of follow-along tutorial walkthrough videos][SimpetusVideos]
-on the Simpetus youtube channel.
-If you are already familiar with things like SSH keypairs
-you can probably start with
-[this video](https://www.youtube.com/watch?v=T9ZcLGxt8Kg),
-which will get you up and running with an EC2 instance.
+<p>The three numbers reported here are the capacitance-matrix
+entries <script type="math/tex">C_{11}</script>, <script type="math/tex">C_{12}</script>, <script type="math/tex">C_{22}</script> divided by <script type="math/tex">\epsilon_0.</script>
+The capacitance from trace to ground plane is
+<script type="math/tex; mode=display">
+ \begin{array}{lcl} 
+ C &=& \displaystyle{
+        \frac{1}{\frac{1}{C_{11}} + \frac{1}{C_{22}} - \frac{2}{C_{12}}}
+                    }
+\\[5pt]
+   &=& \displaystyle{
+         \frac{1}{   \frac{1}{\texttt{36.45}}
+                   + \frac{1}{\texttt{114.2}}
+                   + \frac{2}{\texttt{30.81}}
+                 }  }
+       \cdot \texttt{8.85e-12}
+\\[5pt]
+   &=& 0.89 \texttt{pf}
+ \end{array}
+</script>
+</p>
+<h2 id="field-visualization">Field visualization</h2>
+<p>Here's a cross-sectional plot of electrostatic potential
+with the trace and ground plane maintained at potentials
+of 1 and 0 volt respectively:</p>
+<p><img alt="Stripline field visualization" src="../StriplineFields.png" /></p>
+<p>This plot is generated as follows:</p>
+<pre><code class="bash">ARGS=&quot;&quot;
+ARGS=&quot;${ARGS} --geometry StriplineCapacitor_7876.scuffgeo&quot;
+ARGS=&quot;${ARGS} --PotFile MyPotentialFile&quot;
+ARGS=&quot;${ARGS} --FVMesh FVMesh.msh&quot;
+scuff-static ${ARGS}
+</code></pre>
 
-In what follows I will refer to the EC2 instance created 
-in this way as your "cloud server."
-
-### Upload and run initialization script on cloud server
-
-Once your cloud server is running, the next step is to
-upload and run the following <span class=SC>bash</span> script:
-
-+ [`InitializeSCUFFonAWS.sh`](InitializeSCUFFonAWS.sh)
-
-This script fetches the latest version of
-<span class=SC>scuff-em</span> from the
-[<span class=SC>scuff-em</span> GitHub page](http://github.com/homerreid/scuff-em)
-and builds it on the EC2 instance with 
-appropriate compilation options. (As a bonus, the script
-also fetches and installs the awesome
-[<span class=SC>openblas</span>](https://github.com/xianyi/OpenBLAS)
-package for automatically architecture-optimized linear algebra,
-significantly accelerating large-scale
-<span class=SC>scuff-em</span> calculations.)
-
-Assuming you are logging in to your EC2 instance from a terminal
-on your Linux or Mac laptop, the process of uploading and 
-running the script looks like this:
-
-+1. Copy script from your local machine to the cloud server:
-
-
-wzxhzdk:0
-
-
-Here `123.45.67.89` is the IP address of the server you launched,
-and `keypair.pem` is the SSH key-pair file you will have created
-in the launching process. Note the colon at the far end of the
-command line.
-
-Of course, you could also use a GUI-based file-transfer tool like
-[<span class=SC>winscp</span>](https://winscp.net/eng/index.php)
-to upload the script from Windows without using a terminal.
-
-+2. Login to cloud server
-
-
-wzxhzdk:1
-
-
-+3. Run initialization script on server:
-
-
-wzxhzdk:2
-
-
-This script takes about 10 minutes to run (on a node with 16 CPU cores).
-Once it is finished, the <span class=SC>scuff-em</span> installation
-will be present starting at your root filesystem, i.e.
-
-+ the binary executable programs will be in `${HOME}/bin`
-
-+ the examples will be in `${HOME}/share/scuff-em`,
-
-etc.
-
-Also, the script adds `${HOME}/bin` to your path, so that you
-can run <span class=SC>scuff-em</span> commands from any directory
-without needing to specify the `${HOME}/bin` prefix.
-
-# Polarization response of a GaAs nanowire with and without surrounding
-gold antennas
-
-Nanowire/antenna mesh:
-
-![Nanowire/antenna mesh](NanowireAntennaMesh.png)
-
-Fields inside nanowire:
-
-![NanowireFields](NanowireFIelds1.png)
-
-# Metamaterial rotator
-
-This example mimics the terahertz polarization rotator reported in
-this paper:
-
-+ Y. J. Chiang and T. J. Yen, "A composite-metamaterial-based terahertz-wave
-polarization rotator with an ultrathin thickness, an excellent conversion
-ratio, and enhanced transmission", *Applied Physics Letters* **102** 011129 (2013).
-DOI:[http://dx.doi.org/10.1063/1.4774300](http://dx.doi.org/10.1063/1.4774300)
-
-Unit-cell mesh:
-
-![Metamaterial rotator unit cell](MMRUnitCellMedium.png)
-
-A section of the full lattice geometry simulated by <span class=SC>scuff-em</span>
-
-![Metamaterial rotator lattice](MMRMesh.png)
-
-[SCUFFTutorialExamples]:    http://homerreid.github.io/scuff-em-documentation/#tutorial-examples
-[HighResolutionExample]:    http://homerreid.github.io/scuff-em-documentation/#tutorial-examples
-[SimpetusESP]:          https://aws.amazon.com/marketplace/pp/B01KHWH0AS?qid=1476230986915&sr=0-1&ref_=srh_res_product_title
-[Simpetus]:         http://SimpetusCloud.com
-[Haswell]:          https://en.wikipedia.org/wiki/Haswell_(microarchitecture)
-[SpotInstance]:         http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances.html
-[SpotPricing]:          https://aws.amazon.com/ec2/spot/pricing/
-[MEEP]:             http://ab-initio.mit.edu/wiki/index.php/Meep
-[MPB]:              http://ab-initio.mit.edu/wiki/index.php/MPB
-[SimpetusVideos]:       https://www.youtube.com/channel/UCgYdMSoCb4ytVBTlwA1FRZg
+<p>Here <a href="../MyPotentialFile"><code>MyPotentialFile</code></a> is a text file 
+specifying the conductor potentials and <code>FVMesh.msh</code> is a 
+field-visualization screen mesh produced by <a class="wikilink" href="../../../gmsh/">gmsh</a> from 
+the file <a href="../FVMesh.geo"><code>FVMesh.geo</code></a>.</p>
+<h2 id="capacitance-vs-pcb-thickness">Capacitance vs. PCB thickness</h2>
+<p>Here's a <a class="wikilink" href="../../../bash/">bash</a> script that computes capacitance vs. PCB
+thickness:</p>
+<ul>
+<li><a href="../CapVsT.sh"><code>CapVsT.sh</code></a></li>
+</ul>
+<p>For each thickness value <code>T</code> in the file <code>TFile,</code>
+this script</p>
+<ul>
+<li>
+<p>runs <a class="wikilink" href="../../../gmsh/">gmsh</a> to create a new surface mesh for a PCB stripline
+   with thickness <code>T</code></p>
+</li>
+<li>
+<p>runs <a class="wikilink" href="../../../scuff-static/">scuff-static</a> to compute the capacitance matrix for this thickness</p>
+</li>
+<li>
+<p>extracts the data from the <code>.CapMatrix</code> file output and writes 
+   it together with <code>T</code> to an overall output file.</p>
+</li>
+</ul>
+<p>According to <a href="http://www.analog.com/media/en/training-seminars/tutorials/MT-094.pdf">this memo</a>, the 
+capacitance per unit length (CPUL)
+of a stripline trace with the geometry shown above is</p>
+<p>
+<script type="math/tex; mode=display"> \texttt{CPUL} = 
+   \frac{1}{25.4}\cdot\frac{0.67(\epsilon_r + 1.41)}
+                           {\ln \left[5.98H/(0.8W + T)\right]}
+   \qquad \text{pf/mm}
+</script>
+where <script type="math/tex">\epsilon_r</script> is the relative dielectric constant
+and <script type="math/tex">T=0</script> for an infinitesimally thin trace.
+(The factor 1/25.4 converts units from pf/inch to pf/mm).</p>
+<hr />
               
             </div>
           </div>
