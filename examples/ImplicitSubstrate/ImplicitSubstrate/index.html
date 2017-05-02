@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Capacitance of a PCB stripline trace - SCUFF-EM documentation</title>
+  <title>Implicit handling of multilayer dielectric substrates - SCUFF-EM documentation</title>
   
 
   <link rel="shortcut icon" href="../../../scuffEM.ico">
@@ -21,7 +21,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "examples/StriplineCapacitor/StriplineCapacitor"
+    var mkdocs_page_name = "examples/ImplicitSubstrate/ImplicitSubstrate"
   </script>
   
   <script src="../../../js/jquery-2.1.1.min.js"></script>
@@ -163,31 +163,34 @@
 
         
             
-    <li class="toctree-l1 current">
-        <a class="current" href="./">Capacitance of a PCB stripline trace</a>
-        
-            <ul>
-            
-                <li class="toctree-l3"><a href="#gmsh-and-scuff-em-geometry-files">gmsh and scuff-em geometry files</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#calculation-of-capacitance-matrix">Calculation of capacitance matrix</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#field-visualization">Field visualization</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#capacitance-vs-pcb-thickness">Capacitance vs. PCB thickness</a></li>
-                
-            
-            </ul>
+    <li class="toctree-l1 ">
+        <a class="" href="../../StriplineCapacitor/StriplineCapacitor/">Capacitance of a PCB stripline trace</a>
         
     </li>
 
         
             
-    <li class="toctree-l1 ">
-        <a class="" href="../../ImplicitSubstrate/ImplicitSubstrate/">Implicit handling of multilayer dielectric substrates</a>
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Implicit handling of multilayer dielectric substrates</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#layered-substrates-in-scuff-em-the-substrate-file">Layered substrates in scuff-em: The .substrate file</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#examples-of-substrate-files">Examples of .substrate files</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#running-scuff-static-calculations-with-implicit-substrates-the-substrate-option">Running scuff-static calculations with implicit substrates: The --substrate option</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#first-computational-example-electric-fields-near-a-charged-metallic-plate">First computational example: Electric fields near a charged metallic plate</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#second-computational-example-capacitance-of-metallic-pad-on-grounded-pcb">Second computational example: Capacitance of metallic pad on grounded PCB</a></li>
+                
+            
+            </ul>
         
     </li>
 
@@ -499,7 +502,7 @@
         
       
     
-    <li>Capacitance of a PCB stripline trace</li>
+    <li>Implicit handling of multilayer dielectric substrates</li>
     <li class="wy-breadcrumbs-aside">
       
         
@@ -513,220 +516,145 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="capacitance-of-a-pcb-stripline-trace">Capacitance of a PCB stripline trace</h1>
-<p>In this example, we use <a class="wikilink" href="../../../scuff-static/">scuff-static</a> to compute the
-capacitance of a metal trace on an FR4 printed circuit board (PCB)
-with ground plane. Here's a schematic depiction:</p>
-<p><img alt="Stripline capacitor figure" src="../StriplineCapacitorFigure.png" /></p>
-<p>Here the green region is dielectric, the yellow region
-is an (infinitesimally thin) metallic trace on the upper surface
-of the dielectric, and black indicates a ground plane
-on the bottom surface of the dielectric.</p>
-<h2 id="gmsh-and-scuff-em-geometry-files"><a class="wikilink" href="../../../gmsh/">gmsh</a> and <span class="SC">scuff-em</span> geometry files</h2>
-<p>Due to the presence of <a href="../../../reference/Geometries#Complex">multi-material junctions</a>
-(points at which three or more material regions meet, which in the 
-figure above occur along the edges of the metal trace and the
-ground plane), the geometry cannot be described as a collection
-of 3D volumes bounded by closed surfaces, and instead requires
-a more sophisticated geometry description in terms of
-<a href="../../../reference/Geometries#Complex"><em>regions</em> and <em>surfaces</em></a>. More specifically, there
-are only two regions in the problem (the exterior vacuum region
-and the dielectric), but there are three distinct surfaces:
- <strong>(1)</strong> the metal trace, <strong>(2)</strong> the dielectric-air interface, 
-and <strong>(3)</strong> the ground plane.
-To define a <a class="wikilink" href="../../../scuff-em/">scuff-em</a> geometry description
-for this case, we need separate meshes for each of these
-three surfaces. The following picture shows these three surface
-meshes, displaced for clarity from their positions in the actual
-geometry:</p>
-<p><img alt="Stripline capacitor surfaces" src="../StriplineCapacitorSurfaces.png" /></p>
-<p>Here's a <a href="http://www.geuz.org/gmsh"><span class="SC">gmsh</span></a> geometry file
-defining the various surfaces we need; note that this file makes
-three <code>Physical Surface</code> statements to define surfaces <strong>(1)</strong>, <strong>(2)</strong>, 
-and <strong>(3)</strong> above. </p>
-<ul>
-<li><a href="../StriplineCapacitor.geo"><code>StriplineCapacitor.geo</code></a></li>
-</ul>
-<p>This file contains user-specifiable parameters
-<code>W</code>, <code>L</code>, <code>T</code>, and <code>B</code> corresponding to the geometric quantities 
-labeled in the figure above, as well as a user-specifiable parameter <code>N</code>
-setting the number of triangles per unit length. I generate surface
-meshes at two different resolutions like this:</p>
-<pre><code class="bash">% gmsh -2 -setnumber N 2 StriplineCapacitor.geo
-% gmsh -2 -setnumber N 4 StriplineCapacitor.geo
-</code></pre>
-
-<p>These produce <code>.msh</code> files containing respectively 1948 and 7856
-inner triangle edges (you can get this information by running
-<code>scuff-analyze --mesh StriplineCapacitor.msh</code>), so I rename them
-to <code>StriplineCapacitor_1948.msh</code> and 
-<code>StriplineCapacitor_7856.msh.</code></p>
-<p>Next I write a <a href="../../../reference/Geometries"><span class="SC">scuff-em</span> geometry file</a>
-for each meshing resolution. This file defines the two regions and
-the three surfaces defined above, specifying that the meshes for
-each surface
-are to be read from the <code>.msh</code> file with the appropriate <code>Physical Surface</code>
-tag.
-For the coarser-resolution mesh the file is called
- <a href="../StriplineCapacitor_1948.scuffgeo"><code>StriplineCapacitor_1948.scuffgeo</code></a>,
-and it looks like this:</p>
-<pre><code>REGION Exterior   MATERIAL Vacuum
-REGION Dielectric MATERIAL CONST_EPS_4
-
-OBJECT Trace
-    MESHFILE StriplineCapacitor_1948.msh
-    MESHTAG 1
-ENDOBJECT
-
-SURFACE RightBoundary
-    MESHFILE StriplineCapacitor_1948.msh
-    MESHTAG 2
-    REGIONS Exterior Dielectric
-ENDSURFACE
-
-SURFACE LeftBoundary
-    MESHFILE StriplineCapacitor_1948.msh
-    MESHTAG 2
-    ROTATED 180 ABOUT 0 0 1
-    REGIONS Exterior Dielectric
-ENDSURFACE
-
-OBJECT GroundPlane
-    MESHFILE StriplineCapacitor_1948.msh
-    MESHTAG 3
-ENDOBJECT
-</code></pre>
-
-<p>Some notes on this geometry description:</p>
+                <h1 id="implicit-treatment-of-layered-dielectric-substrates-in-scuff-static">Implicit treatment of layered dielectric substrates in <span class="SC">scuff-static</span></h1>
+<p>In this example, we exploit <a class="wikilink" href="../../../scuff-static/">scuff-static</a>'s ability to
+handle multilayered material substrates <em>implicitly</em>---with
+no explicit meshing of substrate layers required---to allow 
+highly efficient modeling of the electrostatics of
+complex-shaped metallic traces on printed circuit boards.</p>
+<p>The input files for the calculations discussed here
+may be
+found in the <code>share/scuff-em/examples/ImplicitSubstrate</code> subdirectory
+of your <span class=SC>scuff-em</span> installation.</p>
+<p>Also, the mathematical techniques involved are discussed
+in <a href="../../../tex/StaticDielectricSubstrate.pdf">this memo</a>.</p>
+<h2 id="layered-substrates-in-scuff-em-the-substrate-file">Layered substrates in <span class="SC">scuff-em</span>: The <code>.substrate</code> file</h2>
+<p>Layered substrates in <a class="wikilink" href="../../../scuff-em/">scuff-em</a> consist of zero or
+more planar material layers, of arbitrary user-specified
+thicknesses and permittivities, optionally terminated
+by a perfectly-conducting ground plane. All layers are
+infinitely extended in the <em>x</em> and <em>y</em> directions.</p>
+<p><img alt="Layered dielectric substrate cartoon" src="../../../tex/figures/DielectricSubstrateCartoon.png" /></p>
+<p>As is clear from this figure, an <em>N</em>-layered substrate is fully specified
+by giving, for layers <em>n=1,2,...,N</em>,</p>
 <ul>
 <li>
-<p>Since the default material for an <code>OBJECT</code> or <code>SURFACE</code>
-is PEC (<strong>P</strong>erfectly <strong>E</strong>lectrically <strong>C</strong>onducting), I
-don't need to include a <code>Material</code> specification for the
-trace or the ground plane.</p>
-</li>
+<script type="math/tex">z_n</script>, the <script type="math/tex">z</script>-coordinate of the upper surface of the <script type="math/tex">n</script>th layer</li>
 <li>
-<p>I have broken up surface 2 (dielectric--vacuum interface)
- into two halves, described by identical surface meshes 
- with one rotated 180 degrees around the <em>z</em> axis. This is 
-not necessary, but it saves a little time in the matrix 
-assembly, as the diagonal matrix blocks corresponding to the
-two half-surfaces are identical and thus only need to be 
-computed once.</p>
-</li>
-<li>
-<p>This geometry specification is perfectly adequate for
-electrostatic problems, but would be not quite right for
-finite-frequency problems. For such problems I would 
-instead want to define the trace and ground plane 
-as regions of (in this case, infinite) surface conductivity
-on a closed dielectric boundary surface.</p>
-</li>
-<li>
-<p>Having written this <code>.scuffgeo</code> file for the coarser of my two
-surface meshes, I can obtain one for the finer mesh by going like
-this:</p>
-</li>
+<script type="math/tex">\epsilon_n</script>, the permittivity of the <script type="math/tex">n</script>th layer</li>
 </ul>
-<pre><code> BASE=StriplineCapacitor
- sed 's/1948/7856/g' ${BASE}_1948.scuffgeo &gt; ${BASE}_7856.scuffgeo
+<p>together with</p>
+<ul>
+<li>an optional specification of the <script type="math/tex">z</script>-coordinate of the terminating
+  ground plane, if present</li>
+<li>an optional specification of the dielectric function 
+  <script type="math/tex">\epsilon_A</script> of
+  the ambient (or "above") medium, if it is not vacuum.</li>
+</ul>
+<p>This information is specified to <a class="wikilink" href="../../../scuff-em/">scuff-em</a> in the form
+of a simple text file conventionally given the file extension <code>.substrate.</code>
+Each line of this file [blank lines and comments (lines beginning with <code>#</code>)
+are ignored] describes one of the following items:</p>
+<p><strong>(a)</strong> a single layer in a multilayered substrate, specified by the
+<em>z</em>-coordinate of its upper surface and a 
+<a href="../../../reference/Materials"><span class=SC>scuff-em</span> material designation</a>, or</p>
+<p><strong>(b)</strong> the permittivity of the ambient (above) medium (if not
+vacuum) specified by the keyword <code>MEDIUM</code> followed by a
+<a href="../../../reference/Materials"><span class=SC>scuff-em</span> material designation</a>, or</p>
+<p><strong>(c)</strong> the <em>z</em>-coordinate of the optional ground plane followed by 
+the keyword <code>GROUNDPLANE.</code></p>
+<h2 id="examples-of-substrate-files">Examples of <code>.substrate</code> files</h2>
+<ul>
+<li>An infinite dielectric half-space of relative permittivity <script type="math/tex">\epsilon</script>=10
+occupying the region <script type="math/tex">z<0</script>:</li>
+</ul>
+<pre><code>0.0 CONST_EPS_10
 </code></pre>
 
-<h2 id="calculation-of-capacitance-matrix">Calculation of capacitance matrix</h2>
-<p>To compute the capacitance matrices for the two mesh resolutions,
-go like this from the shell command line:</p>
-<pre><code class="bash">for N in 1948 7856 
-do
- GEOM=StriplineCapacitor_${N}
- scuff-static --geometry ${GEOM}.scuffgeo --CapFile ${GEOM}.CapMatrix
-done
+<ul>
+<li>A finite-thickness (1 length unit) slab of <script type="math/tex">\epsilon=10</script> suspended in space with vacuum
+above and below:</li>
+</ul>
+<pre><code> 0.0 CONST_EPS_10
+-1.0 VACUUM
 </code></pre>
 
-<p>This produces files
-<code>StripLineCapacitor_1948.CapMatrix</code>
-and 
-<code>StripLineCapacitor_7856.CapMatrix</code>
-reporting capacitance-matrix entries.</p>
-<p>These files look something like this:</p>
-<pre><code class="bash"># scuff-static run on hikari (02/18/17::18:46:43)# indices of conducting surfaces: # data file columns: 
-# 0 Trace
-# 1 GroundPlane
-# 01: C_{0,0} 
-# 02: C_{0,1} 
-# 03: C_{1,1} 
-3.644861e+01 -3.080723e+01 1.142077e+02 
+<ul>
+<li>A finite-thickness (1 length unit) slab of <script type="math/tex">\epsilon=10</script> terminated below
+by a ground plane:</li>
+</ul>
+<pre><code> 0.0 CONST_EPS_10
+-1.0 GROUNDPLANE
 </code></pre>
 
-<p>The three numbers reported here are the capacitance-matrix
-entries <script type="math/tex">C_{11}</script>, <script type="math/tex">C_{12}</script>, <script type="math/tex">C_{22}</script> divided by <script type="math/tex">\epsilon_0.</script>
-The capacitance from trace to ground plane is
-<script type="math/tex; mode=display">
- \begin{array}{lcl} 
- C &=& \displaystyle{
-        \frac{1}{\frac{1}{C_{11}} + \frac{1}{C_{22}} - \frac{2}{C_{12}}}
-                    }
-\\[5pt]
-   &=& \displaystyle{
-         \frac{1}{   \frac{1}{\texttt{36.45}}
-                   + \frac{1}{\texttt{114.2}}
-                   + \frac{2}{\texttt{30.81}}
-                 }  }
-       \cdot \texttt{8.85e-12}
-\\[5pt]
-   &=& 0.89 \texttt{pf}
- \end{array}
-</script>
+<ul>
+<li>An alternating stack of silicon dioxide and silicon layers above 
+an infinitely-thick slab of silicon:</li>
+</ul>
+<pre><code> 0.0 SIO2
+-0.1 SILICON
+-0.2 SIO2
+-0.3 SILICON
+</code></pre>
+
+<h2 id="running-scuff-static-calculations-with-implicit-substrates-the-substrate-option">Running <span class="SC">scuff-static</span> calculations with implicit substrates: The <code>--substrate</code> option</h2>
+<p>To run electrostatics calculations in the presence of a multilayer
+dielectric substrate described by the file <code>MySubstrate.substrate</code>,
+simply add the option <code>--substrate MySubstrate.substrate</code>
+to the <span class=SC>scuff-static</span> command line.</p>
+<h2 id="first-computational-example-electric-fields-near-a-charged-metallic-plate">First computational example: Electric fields near a charged metallic plate</h2>
+<p>In this simple example, I consider a small finite-size metallic plate
+maintained at a constant potential of +1V in the vicinity of</p>
+<p><strong>(a)</strong> no substrate</p>
+<p><strong>(b)</strong> an infinite dielectric half-space of relative permittivity
+        <script type="math/tex">\epsilon_r=10</script> filling the lower half-space <script type="math/tex">z\lt 0</script>
 </p>
-<h2 id="field-visualization">Field visualization</h2>
-<p>Here's a cross-sectional plot of electrostatic potential
-with the trace and ground plane maintained at potentials
-of 1 and 0 volt respectively:</p>
-<p><img alt="Stripline field visualization" src="../StriplineFields.png" /></p>
-<p>This plot is generated as follows:</p>
-<pre><code class="bash">ARGS=&quot;&quot;
-ARGS=&quot;${ARGS} --geometry StriplineCapacitor_7876.scuffgeo&quot;
-ARGS=&quot;${ARGS} --PotFile MyPotentialFile&quot;
-ARGS=&quot;${ARGS} --FVMesh FVMesh.msh&quot;
-scuff-static ${ARGS}
+<p><strong>(c)</strong> a finite-thickness (thickness one length unit)
+        slab of relative permittivity <script type="math/tex">\epsilon_r=10</script>
+        filling the lower half-space <script type="math/tex">z\lt 0</script>
+</p>
+<p><strong>(d)</strong> a finite-thickness slab of <script type="math/tex">\epsilon_r=10</script> lying atop a ground plane.</p>
+<p>Input files for this example may be
+found in the <code>share/scuff-em/examples/ImplicitSubstrate</code> subdirectory
+of your <a href="../../../reference/Installing"><span class=SC>scuff-em</span> installation.</a>.</p>
+<p>The <span class=SC>bash</span> script I use to run this example is 
+<code>RunScript</code>: </p>
+<pre><code>#!/bin/bash
+
+CODE=scuff-static
+
+ARGS=&quot;&quot;
+ARGS=&quot;${ARGS} --geometry       Square_40.scuffgeo&quot;
+ARGS=&quot;${ARGS} --potentialfile  PotentialFile&quot;
+ARGS=&quot;${ARGS} --EPFile         EPFile&quot;
+
+
+${CODE} ${ARGS} --filebase None
+
+for SUBSTRATE in E10HalfSpace E10SlabGP E10Slab
+do
+  ${CODE} ${ARGS} --substrate ${SUBSTRATE}.substrate --filebase ${SUBSTRATE}
+done
+
 </code></pre>
 
-<p>Here <a href="../MyPotentialFile"><code>MyPotentialFile</code></a> is a text file 
-specifying the conductor potentials and <code>FVMesh.msh</code> is a 
-field-visualization screen mesh produced by <a class="wikilink" href="../../../gmsh/">gmsh</a> from 
-the file <a href="../FVMesh.geo"><code>FVMesh.geo</code></a>.</p>
-<h2 id="capacitance-vs-pcb-thickness">Capacitance vs. PCB thickness</h2>
-<p>Here's a <a class="wikilink" href="../../../bash/">bash</a> script that computes capacitance vs. PCB
-thickness:</p>
-<ul>
-<li><a href="../CapVsT.sh"><code>CapVsT.sh</code></a></li>
-</ul>
-<p>For each thickness value <code>T</code> in the file <code>TFile,</code>
-this script</p>
+<p>and the results are plotted in 
+<span class=SC>gnuplot</span> by saying <code>load Plotter.gp</code>,
+where <code>Plotter.gp</code> is <a href="../Plotter.gp">this script</a>.</p>
+<p><img alt="Dielectric slab" src="../E10Substrate.png" /></p>
+<p>Take-home messages:</p>
 <ul>
 <li>
-<p>runs <a class="wikilink" href="../../../gmsh/">gmsh</a> to create a new surface mesh for a PCB stripline
-   with thickness <code>T</code></p>
+<p>In the presence of the <script type="math/tex">\epsilon=10</script> substrate, the potential exhibits
+  a kink at the air-substrate interface (<script type="math/tex">z=0</script>) that is absent for the
+  "No substrate" curve.</p>
 </li>
 <li>
-<p>runs <a class="wikilink" href="../../../scuff-static/">scuff-static</a> to compute the capacitance matrix for this thickness</p>
-</li>
-<li>
-<p>extracts the data from the <code>.CapMatrix</code> file output and writes 
-   it together with <code>T</code> to an overall output file.</p>
+<p>In the presence of the implicit ground plane at <script type="math/tex">z=-1</script>, 
+  the potential properly tends to zero at <script type="math/tex">z=-1</script> (yellow curve).</p>
 </li>
 </ul>
-<p>According to <a href="http://www.analog.com/media/en/training-seminars/tutorials/MT-094.pdf">this memo</a>, the 
-capacitance per unit length (CPUL)
-of a stripline trace with the geometry shown above is</p>
-<p>
-<script type="math/tex; mode=display"> \texttt{CPUL} = 
-   \frac{1}{25.4}\cdot\frac{0.67(\epsilon_r + 1.41)}
-                           {\ln \left[5.98H/(0.8W + T)\right]}
-   \qquad \text{pf/mm}
-</script>
-where <script type="math/tex">\epsilon_r</script> is the relative dielectric constant
-and <script type="math/tex">T=0</script> for an infinitesimally thin trace.
-(The factor 1/25.4 converts units from pf/inch to pf/mm).</p>
+<h2 id="second-computational-example-capacitance-of-metallic-pad-on-grounded-pcb">Second computational example: Capacitance of metallic pad on grounded PCB</h2>
 <hr />
               
             </div>
@@ -735,10 +663,10 @@ and <script type="math/tex">T=0</script> for an infinitesimally thin trace.
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../ImplicitSubstrate/ImplicitSubstrate/" class="btn btn-neutral float-right" title="Implicit handling of multilayer dielectric substrates"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../../reference/TopLevel/" class="btn btn-neutral float-right" title="Top-level overview"/>Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../../TwoBodyCapacitors/TwoBodyCapacitors/" class="btn btn-neutral" title="Capacitance of two-body capacitors"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../StriplineCapacitor/StriplineCapacitor/" class="btn btn-neutral" title="Capacitance of a PCB stripline trace"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -780,10 +708,10 @@ and <script type="math/tex">T=0</script> for an infinitesimally thin trace.
           <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../../TwoBodyCapacitors/TwoBodyCapacitors/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../../StriplineCapacitor/StriplineCapacitor/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../../ImplicitSubstrate/ImplicitSubstrate/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../../../reference/TopLevel/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
