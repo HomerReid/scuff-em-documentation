@@ -626,7 +626,7 @@ CODE=scuff-static
 ARGS=&quot;&quot;
 ARGS=&quot;${ARGS} --geometry       Square_40.scuffgeo&quot;
 ARGS=&quot;${ARGS} --potentialfile  PotentialFile&quot;
-ARGS=&quot;${ARGS} --EPFile         EPFile&quot;
+ARGS=&quot;${ARGS} --EPFile         EPFile.Fields&quot;
 
 
 ${CODE} ${ARGS} --filebase None
@@ -638,12 +638,20 @@ done
 
 </code></pre>
 
-<p>and the results are plotted in 
-<span class=SC>gnuplot</span> by saying <code>load Plotter.gp</code>,
-where <code>Plotter.gp</code> is <a href="../Plotter.gp">this script</a>.</p>
+<p>This computes the electrostatic potential and fields along a line
+of evaluation points at fixed <script type="math/tex">x,y</script> coordinates running from 
+<script type="math/tex">z=2</script> (above the plate) to <script type="math/tex">z=-1</script> (the ground plane) 
+and passing through the plate at <script type="math/tex">z=1</script> and the dielectric interface
+at <script type="math/tex">z=0</script>.
+The results are plotted in 
+<span class=SC>gnuplot</span> by saying <code>load Plotter.Fields</code>,
+where <code>Plotter.Fields</code> is <a href="../Plotter.Fields">this script</a>.</p>
 <p><img alt="Dielectric slab" src="../E10Substrate.png" /></p>
 <p>Take-home messages:</p>
 <ul>
+<li>
+<p>The potential rises to <script type="math/tex">\phi=1</script> at the location of the plate (<script type="math/tex">z=1</script>).</p>
+</li>
 <li>
 <p>In the presence of the <script type="math/tex">\epsilon=10</script> substrate, the potential exhibits
   a kink at the air-substrate interface (<script type="math/tex">z=0</script>) that is absent for the
