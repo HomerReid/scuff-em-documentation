@@ -601,24 +601,24 @@ lying atop a perfectly-conducting ground plane.
 Neglecting finite-size effects, the capacitance
 per unit area (in units of <script type="math/tex">1/\epsilon_0</script>, the permittivity of free space)
 should be
-<script type="math/tex; mode=display"> \lim_{A\to \infty} \frac{C(A)}{A \epsilon_0} = \frac{\epsilon_r}{h}.</script>
+<script type="math/tex; mode=display"> \lim_{A\to \infty} \frac{C(L)}{\epsilon_0 L^2} = \frac{\epsilon_r}{h}.</script>
 </p>
 <p>For the substrate described by the file <code>SiliconGP.substrate</code> 
 (<script type="math/tex">h=1, \epsilon_r=11.7</script>) we expect to find the numerical value
-<script type="math/tex; mode=display">\lim_{A\to \infty} \frac{C(A)}{A \epsilon_0} = 11.7 \qquad\textbf{(1)}</script>
+<script type="math/tex; mode=display">\lim_{L\to \infty} \frac{C(L)}{\epsilon_0 L^2} = 11.7 \qquad\textbf{(1)}</script>
 </p>
 <p>However, the finite size of the upper plate will cause calculated
 values to deviate from this prediction by an amount which (for fixed <script type="math/tex">h</script>)
-<a href="http://ieeexplore.ieee.org/document/6540485/">we expect to scale asymptotically like <script type="math/tex">\frac{1}{A}</script>:</a>
-<script type="math/tex; mode=display"> \text{for finite } A: \,\,
-   \frac{C}{A \epsilon_0} = \frac{\epsilon_r}{h} + \frac{\beta}{A}
+<a href="http://ieeexplore.ieee.org/document/6540485/">we expect to scale asymptotically like <script type="math/tex">\frac{1}{L}</script>:</a>
+<script type="math/tex; mode=display"> \text{for finite } L: \,\,
+   \frac{C}{\epsilon_0 L^2} = \frac{\epsilon_r}{h} + \frac{\beta}{L}
    +\text{higher-order terms}
    \qquad \textbf{(2)}
 </script>
 where <script type="math/tex">\beta</script> is a constant.
 Thus we will use <a class="wikilink" href="../../../scuff-em/">scuff-em</a> to compute the capacitance per
 unit area for various finite values of <script type="math/tex">L</script>, fit these data
-to the functional form <script type="math/tex">C_0+\beta/L^2</script>, and identify the
+to the functional form <script type="math/tex">C_0+\beta/L</script>, and identify the
 constant <script type="math/tex">C_0</script> in the fit as the <script type="math/tex">L\to\infty</script> value of 
 the capacitance per unit area.</p>
 <p>Here's the <a class="wikilink" href="../../../python/">python</a> code named <a href="../PPCapacitance.py"><code>PPCapacitance.py</code></a>
@@ -694,10 +694,10 @@ DataFile.close()
 
 ###################################################
 # fit CPUA versus L data to the form
-#  C(L) = CInfinity + Beta/L^2
+#  C(L) = CInfinity + Beta/L
 ###################################################
-def FunctionalForm(x, CInf, Beta):
-    return CInf + Beta/(x*x)
+def FunctionalForm(L, CInf, Beta):
+    return CInf + Beta/L
 
 CInfBeta = curve_fit(FunctionalForm, LVector, CPUAVector)[0]
 CInf=CInfBeta[0]
@@ -708,10 +708,39 @@ print &quot;Capacitance per unit area, extracted to L=infinity limit = &quot;, f
 </code></pre>
 
 <h2 id="results">Results</h2>
+<p>Running the python script from the command line produces, eventually,
+the following output:</p>
 <pre><code class="bash">% python PPCapacitor.py
+...
+...
+...
+Capacitance per unit area, extracted to L=infinity limit =  11.764354485
 </code></pre>
 
+<p>Comparing against equation <strong>(1)</strong>, we see that we recover the
+correct theoretical value to 3 decimal places.</p>
+<p>Also produced is a file named <code>PPCapacitor.CvsL</code>, which
+tabulates the finite-<script type="math/tex">L</script> values of the capacitance. Here's
+a plot of these data, together with the fitting function
+and the <script type="math/tex">L\to\infty</script> extrapolation:</p>
 <p><img alt="Plot of capacitance data and functional fit" src="../PPCapacitorData.png" /></p>
+<p>(Here's the <a href="../Plotter.PPCapacitance"><span class=SC>gnuplot</span> script</a>
+that produces this plot).</p>
+<p>Take-home messages:</p>
+<ul>
+<li>
+<p>The <script type="math/tex">L\to\infty</script> extrapolation recovers the correct infinite-area 
+result to an accuracy of better than 1%.</p>
+</li>
+<li>
+<p>\textit{Without} this extrapolation, we would incur much more severe
+errors. For example, if we were to approximate the <script type="math/tex">L\to\infty</script>
+capacitance by the capacitance computed for the largest
+value of <script type="math/tex">L</script> considered here (<script type="math/tex">L=20</script>), we would incur an error
+of 9.8%, some 20&times; greater than the error in the infinite-<script type="math/tex">L</script>
+extrapolation.</p>
+</li>
+</ul>
 <hr />
               
             </div>
