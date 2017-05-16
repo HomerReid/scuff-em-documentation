@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Implicit handling of multilayer dielectric substrates - SCUFF-EM documentation</title>
+  <title>Finite-size effects in stripline capacitors - SCUFF-EM documentation</title>
   
 
   <link rel="shortcut icon" href="../../../scuffEM.ico">
@@ -21,7 +21,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "examples/ImplicitSubstrate/ImplicitSubstrate"
+    var mkdocs_page_name = "examples/pythonCapacitance/pythonCapacitance"
   </script>
   
   <script src="../../../js/jquery-2.1.1.min.js"></script>
@@ -170,34 +170,34 @@
 
         
             
-    <li class="toctree-l1 current">
-        <a class="current" href="./">Implicit handling of multilayer dielectric substrates</a>
-        
-            <ul>
-            
-                <li class="toctree-l3"><a href="#layered-substrates-in-scuff-em-the-substrate-file">Layered substrates in scuff-em: The .substrate file</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#examples-of-substrate-files">Examples of .substrate files</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#running-scuff-static-calculations-with-implicit-substrates-the-substrate-option">Running scuff-static calculations with implicit substrates: The --substrate option</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#first-computational-example-electric-fields-near-a-charged-metallic-plate">First computational example: Electric fields near a charged metallic plate</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#second-computational-example-capacitance-of-metallic-pad-on-grounded-pcb">Second computational example: Capacitance of metallic pad on grounded PCB</a></li>
-                
-            
-            </ul>
+    <li class="toctree-l1 ">
+        <a class="" href="../../ImplicitSubstrate/ImplicitSubstrate/">Implicit handling of multilayer dielectric substrates</a>
         
     </li>
 
         
             
-    <li class="toctree-l1 ">
-        <a class="" href="../../pythonCapacitance/pythonCapacitance/">Finite-size effects in stripline capacitors</a>
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Finite-size effects in stripline capacitors</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#layout-of-input-files">Layout of input files</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#customizable-gmsh-geometry-for-rectangular-plates">Customizable gmsh geometry for rectangular plates</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#implicit-substrate-definition-files">Implicit substrate definition files</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#parallel-plate-capacitor">Parallel-plate capacitor</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#results">Results</a></li>
+                
+            
+            </ul>
         
     </li>
 
@@ -509,7 +509,7 @@
         
       
     
-    <li>Implicit handling of multilayer dielectric substrates</li>
+    <li>Finite-size effects in stripline capacitors</li>
     <li class="wy-breadcrumbs-aside">
       
         
@@ -523,158 +523,195 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="implicit-treatment-of-layered-dielectric-substrates-in-scuff-static">Implicit treatment of layered dielectric substrates in <span class="SC">scuff-static</span></h1>
-<p>In this example, we exploit <a class="wikilink" href="../../../scuff-static/">scuff-static</a>'s ability to
-handle multilayered material substrates <em>implicitly</em>---with
-no explicit meshing of substrate layers required---to allow 
-highly efficient modeling of the electrostatics of
-complex-shaped metallic traces on printed circuit boards.</p>
-<p>The input files for the calculations discussed here
-may be
-found in the <code>share/scuff-em/examples/ImplicitSubstrate</code> subdirectory
-of your <span class=SC>scuff-em</span> installation.</p>
-<p>Also, the mathematical techniques involved are discussed
-in <a href="../../../tex/StaticDielectricSubstrate.pdf">this memo</a>.</p>
-<p><a name="SubstrateFile"></p>
-<h2 id="layered-substrates-in-scuff-em-the-substrate-file">Layered substrates in <span class="SC">scuff-em</span>: The <code>.substrate</code> file</h2>
-<p>Layered substrates in <a class="wikilink" href="../../../scuff-em/">scuff-em</a> consist of zero or
-more planar material layers, of arbitrary user-specified
-thicknesses and permittivities, optionally terminated
-by a perfectly-conducting ground plane. All layers are
-infinitely extended in the <em>x</em> and <em>y</em> directions.</p>
-<p><img alt="Layered dielectric substrate cartoon" src="../../../tex/figures/DielectricSubstrateCartoon.png" /></p>
-<p>As is clear from this figure, an <em>N</em>-layered substrate is fully specified
-by giving, for layers <em>n=1,2,...,N</em>,</p>
+                <h1 id="studying-finite-size-effects-in-metal-on-substrate-capacitors-using-data-fitting-in-python">Studying finite-size effects in metal-on-substrate capacitors using data fitting in python</h1>
+<p>In this example, we use the <a class="wikilink" href="../../../python/">python</a> interface to
+<span class=SC>scuff-em</span>---specifically, to the
+<a href="../../../applications/scuff-static/scuff-static/"><span class=SC>scuff-em</span> electrostatics module</a>---to
+study finite-size effects in capacitors formed by metal traces on 
+(infinite-area) dielectric substrates with and without ground planes.</p>
+<p>Our calculation will exploit <a class="wikilink" href="../../../scuff-em/">scuff-em</a>'s capability for
+<a href="../../ImplicitSubstrate/ImplicitSubstrate/">implicit treatment of layered dielectric substrates</a>,
+eliminating the need to mesh substrate layers or ground planes
+and greatly reducing computational cost. </p>
+<p>Our goal will be to estimate the capacitance per unit length or area
+for infinite-size capacitors of various shapes.
+We will do this by using the 
+<span class=SC>python</span> interface to <a class="wikilink" href="../../../scuff-em/">scuff-em</a>
+to fit numerical data for several finite values of
+the length <script type="math/tex">L</script> or area <script type="math/tex">A</script> to a functional form in <script type="math/tex">L</script> or <script type="math/tex">A</script>, then 
+taking the limits <script type="math/tex">L,A\to \infty</script>.</p>
+<h3 id="layout-of-input-files">Layout of input files</h3>
+<p>The input files for the calculations discussed here may be
+found in the <code>share/scuff-em/examples/pythonCapacitance</code> subdirectory
+of your <span class=SC>scuff-em</span> installation.
+The various files here are organized into the following subdirectories:</p>
 <ul>
-<li>
-<script type="math/tex">z_n</script>, the <script type="math/tex">z</script>-coordinate of the upper surface of the <script type="math/tex">n</script>th layer</li>
-<li>
-<script type="math/tex">\epsilon_n</script>, the permittivity of the <script type="math/tex">n</script>th layer</li>
+<li><code>geoFiles</code>: <a href="http://www.geuz.org/gmsh"><span class=SC>gmsh</span></a> geometry files</li>
+<li><code>mshFiles</code>: <span class=SC>gmsh</span> mesh files</li>
+<li><code>scuffgeoFiles</code>: <a class="wikilink" href="../../../scuff-em/">scuff-em</a> geometry files</li>
+<li><code>substrateFiles</code>: <a href="../../ImplicitSubstrate/ImplicitSubstrate/#SubstrateFile"><span class=SC>scuff-em</span> substrate-definition files</a></li>
 </ul>
-<p>together with</p>
-<ul>
-<li>an optional specification of the <script type="math/tex">z</script>-coordinate of the terminating
-  ground plane, if present</li>
-<li>an optional specification of the dielectric function 
-  <script type="math/tex">\epsilon_A</script> of
-  the ambient (or "above") medium, if it is not vacuum.</li>
-</ul>
-<p>This information is specified to <a class="wikilink" href="../../../scuff-em/">scuff-em</a> in the form
-of a simple text file conventionally given the file extension <code>.substrate.</code>
-Each line of this file [blank lines and comments (lines beginning with <code>#</code>)
-are ignored] describes one of the following items:</p>
-<p><strong>(a)</strong> a single layer in a multilayered substrate, specified by the
-<em>z</em>-coordinate of its upper surface and a 
-<a href="../../../reference/Materials"><span class=SC>scuff-em</span> material designation</a>, or</p>
-<p><strong>(b)</strong> the permittivity of the ambient (above) medium (if not
-vacuum) specified by the keyword <code>MEDIUM</code> followed by a
-<a href="../../../reference/Materials"><span class=SC>scuff-em</span> material designation</a>, or</p>
-<p><strong>(c)</strong> the <em>z</em>-coordinate of the optional ground plane followed by 
-the keyword <code>GROUNDPLANE.</code></p>
-<h2 id="examples-of-substrate-files">Examples of <code>.substrate</code> files</h2>
-<ul>
-<li>An infinite dielectric half-space of relative permittivity <script type="math/tex">\epsilon</script>=10
-occupying the region <script type="math/tex">z<0</script>:</li>
-</ul>
-<pre><code>0.0 CONST_EPS_10
+<h3 id="customizable-gmsh-geometry-for-rectangular-plates">Customizable <span class=SC>gmsh</span> geometry for rectangular plates</h3>
+<p>The <code>geoFiles</code> subdirectory contains a <a class="wikilink" href="../../../gmsh/">gmsh</a> geometry file named
+<a href="../Rectangle.geo"><code>Rectangle.geo</code></a> which we will use to produce
+surface meshes describing infinitesimally thin metallic traces of
+various thicknesses. This file contains adjustable parameters
+to allow the dimensions and meshing fineness to be specified on the
+<a class="wikilink" href="../../../gmsh/">gmsh</a> command line. Here are two examples:</p>
+<pre><code class="bash"># square of side length 10 with 4 triangles per unit area:
+
+% gmsh -2 Rectangle.geo -o Square.msh \
+       -setnumber Lx 10 -setnumber Ly 10 -setnumber N 4
+
+# center conductor for coplanar transmission line: width 1, length 10
+
+% gmsh -2 Rectangle.geo -o Center.msh \
+       -setnumber Lx 1 -setnumber Ly 10 -setnumber N 4
 </code></pre>
 
-<ul>
-<li>A finite-thickness (1 length unit) slab of <script type="math/tex">\epsilon=10</script> suspended in space with vacuum
-above and below:</li>
-</ul>
-<pre><code> 0.0 CONST_EPS_10
--1.0 VACUUM
+<h3 id="implicit-substrate-definition-files">Implicit substrate definition files</h3>
+<p>The geometries we consider will consist of one or more metal
+plates lying on the upper surface of an infinite-area dielectric
+substrate, possibly with a perfectly-conducting ground
+plane underneath.
+The substrate, which will be handled implicitly by <a class="wikilink" href="../../../scuff-em/">scuff-em</a>
+using the method described <a href="../../../tex/StaticDielectricSubstrate.pdf">in this memo</a>
+and demonstrated <a href="../../ImplicitSubstrate/ImplicitSubstrate/">in this example</a>,
+is described by a <a href="../../ImplicitSubstrate/ImplicitSubstrate/#SubstrateFile">simple text file</a>.
+We will consider two substrate files: one describing a
+freestanding finite-thickness layer of silicon 
+(relative permittivity <script type="math/tex">\epsilon=11.7</script>):</p>
+<pre><code class="bash">0.0   CONST_EPS_11.7
+-1.0  VACUUM
 </code></pre>
 
-<ul>
-<li>A finite-thickness (1 length unit) slab of <script type="math/tex">\epsilon=10</script> terminated below
-by a ground plane:</li>
-</ul>
-<pre><code> 0.0 CONST_EPS_10
--1.0 GROUNDPLANE
+<p>and one describing the same layer but now with a ground plane 
+underneath:</p>
+<pre><code class="bash">0.0   CONST_EPS_11.7
+-1.0  GROUNDPLANE
 </code></pre>
 
-<ul>
-<li>An alternating stack of silicon dioxide and silicon layers above 
-an infinitely-thick slab of silicon:</li>
-</ul>
-<pre><code> 0.0 SIO2
--0.1 SILICON
--0.2 SIO2
--0.3 SILICON
-</code></pre>
-
-<h2 id="running-scuff-static-calculations-with-implicit-substrates-the-substrate-option">Running <span class="SC">scuff-static</span> calculations with implicit substrates: The <code>--substrate</code> option</h2>
-<p>To run electrostatics calculations in the presence of a multilayer
-dielectric substrate described by the file <code>MySubstrate.substrate</code>,
-simply add the option <code>--substrate MySubstrate.substrate</code>
-to the <span class=SC>scuff-static</span> command line.</p>
-<p>You may set the environment variable <code>SCUFF_SUBSTRATE_PATH</code>
-to define a colon-separated list of directories in which
-to search for <code>.substrate</code> files. (The current working
-directory is always searched first.)</p>
-<h2 id="first-computational-example-electric-fields-near-a-charged-metallic-plate">First computational example: Electric fields near a charged metallic plate</h2>
-<p>In this simple example, I consider a small finite-size metallic plate
-maintained at a constant potential of +1V in the vicinity of</p>
-<p><strong>(a)</strong> no substrate</p>
-<p><strong>(b)</strong> an infinite dielectric half-space of relative permittivity
-        <script type="math/tex">\epsilon_r=10</script> filling the lower half-space <script type="math/tex">z\lt 0</script>
+<p>These two files are named <code>Silicon.substrate</code> and <code>SiliconGP.substrate</code>
+and live in the <code>substrateFiles</code> subdirectory of the <code>pythonCapacitance</code> example folder.</p>
+<h2 id="parallel-plate-capacitor">Parallel-plate capacitor</h2>
+<p>Our first calculation will be for a parallel-plate capacitor consisting
+of a metal square of side length <script type="math/tex">L</script> and area <script type="math/tex">A=L^2</script> on a dielectric
+substrate of height <script type="math/tex">h</script> and relative permittivity <script type="math/tex">\epsilon</script>
+lying atop a perfectly-conducting ground plane.
+Neglecting finite-size effects, the capacitance
+per unit area (in units of <script type="math/tex">1/\epsilon_0</script>, the permittivity of free space)
+should be
+<script type="math/tex; mode=display"> \lim_{A\to \infty} \frac{C(A)}{A \epsilon_0} = \frac{\epsilon_r}{h}.</script>
 </p>
-<p><strong>(c)</strong> a finite-thickness (thickness one length unit)
-        slab of relative permittivity <script type="math/tex">\epsilon_r=10</script>
-        filling the lower half-space <script type="math/tex">z\lt 0</script>
+<p>For the substrate described by the file <code>SiliconGP.substrate</code> 
+(<script type="math/tex">h=1, \epsilon_r=11.7</script>) we expect to find the numerical value
+<script type="math/tex; mode=display">\lim_{A\to \infty} \frac{C(A)}{A \epsilon_0} = 11.7 \qquad\textbf{(1)}</script>
 </p>
-<p><strong>(d)</strong> a finite-thickness slab of <script type="math/tex">\epsilon_r=10</script> lying atop a ground plane.</p>
-<p>Input files for this example may be
-found in the <code>share/scuff-em/examples/ImplicitSubstrate</code> subdirectory
-of your <a href="../../../reference/Installing"><span class=SC>scuff-em</span> installation.</a>.</p>
-<p>The <span class=SC>bash</span> script I use to run this example is 
-<code>RunScript</code>: </p>
-<pre><code>#!/bin/bash
+<p>However, the finite size of the upper plate will cause calculated
+values to deviate from this prediction by an amount which (for fixed <script type="math/tex">h</script>)
+<a href="http://ieeexplore.ieee.org/document/6540485/">we expect to scale asymptotically like <script type="math/tex">\frac{1}{A}</script>:</a>
+<script type="math/tex; mode=display"> \text{for finite } A: \,\,
+   \frac{C}{A \epsilon_0} = \frac{\epsilon_r}{h} + \frac{\beta}{A}
+   +\text{higher-order terms}
+   \qquad \textbf{(2)}
+</script>
+where <script type="math/tex">\beta</script> is a constant.
+Thus we will use <a class="wikilink" href="../../../scuff-em/">scuff-em</a> to compute the capacitance per
+unit area for various finite values of <script type="math/tex">L</script>, fit these data
+to the functional form <script type="math/tex">C_0+\beta/L^2</script>, and identify the
+constant <script type="math/tex">C_0</script> in the fit as the <script type="math/tex">L\to\infty</script> value of 
+the capacitance per unit area.</p>
+<p>Here's the <a class="wikilink" href="../../../python/">python</a> code named <a href="../PPCapacitance.py"><code>PPCapacitance.py</code></a>
+that does this. For a set of
+<script type="math/tex">L</script> values, this script <strong>(1)</strong> invokes <a class="wikilink" href="../../../gmsh/">gmsh</a> to produce
+a surface mesh for an <script type="math/tex">L\times L</script> square, <strong>(2)</strong> calls routines
+in the <a class="wikilink" href="../../../scuff-em/">scuff-em</a> <a class="wikilink" href="../../../python/">python</a> module to get the capacitance 
+matrix for the resulting geometry. (Since the geometry only 
+has one conductor, the capacitance matrix is a <script type="math/tex">1\times 1</script> matrix.) 
+Then we use the <code>curve_fit</code>
+routine provided by <a class="wikilink" href="../../../scipy/">scipy</a> to fit the data to the functional
+form <strong>(2)</strong> and extract our estimate of the capacitance per
+unit area in the <script type="math/tex">L\to\infty</script> limit.</p>
+<pre><code class="python">##################################################
+# python code for studying finite-size capacitors in scuff-em
+# Homer Reid 20170515
+##################################################
+import os;
+import numpy;
+from scipy.optimize import curve_fit;
+import subprocess;
+import scuff;
 
-CODE=scuff-static
+###################################################
+# set some environment variables so that SCUFF-EM knows where
+# to look for input files
+# (this assumes we are running from the share/examples/pythonCapacitance
+#  directory of the scuff-em installation, so that e.g.
+#  geoFiles and mshFiles are subdirectories of the current
+#  working directory; this assumption is also made by the
+#  gmsh shell commands below)
+###################################################
+os.environ[&quot;SCUFF_MESH_PATH&quot;]=&quot;mshFiles&quot;
+os.environ[&quot;SCUFF_GEO_PATH&quot;]=&quot;scuffgeoFiles&quot;
+os.environ[&quot;SCUFF_SUBSTRATE_PATH&quot;]=&quot;substrateFiles&quot;
 
-ARGS=&quot;&quot;
-ARGS=&quot;${ARGS} --geometry       Square_40.scuffgeo&quot;
-ARGS=&quot;${ARGS} --potentialfile  PotentialFile&quot;
-ARGS=&quot;${ARGS} --EPFile         EPFile.Fields&quot;
+Fineness = 3      # meshing fineness (triangle edges per unit length)
 
+###################################################
+# loop over square side lengths L
+###################################################
+LMin     = 10
+LMax     = 20
+LPoints  = 11
+LVector=[]
+CPUAVector=[]   # 'capacitance per unit area'
+DataFile = open('PPCapacitor.CvsL','w')
+DataFile.truncate();
+for L in numpy.linspace(LMin, LMax, LPoints).tolist():
+#
+    #--------------------------------------------------
+    # run gmsh to generate mesh file for square of side L
+    #--------------------------------------------------
+    subprocess.call(['gmsh', '-2', 'geoFiles/Rectangle.geo',
+                     '-setnumber', 'LX', str(L),
+                     '-setnumber', 'LY', str(L),
+                     '-setnumber', 'N',  str(Fineness),
+                     '-o', 'mshFiles/PPCapacitor.msh'])
+#
+    #--------------------------------------------------
+    # use scuff-em to compute capacitance
+    #--------------------------------------------------
+    print &quot;Computing capacitance at L=&quot;, format(L)
+    Solver=scuff.SSSolver(&quot;PPCapacitor.scuffgeo&quot;, &quot;SiliconGP.substrate&quot;);
+    CMatrix=Solver.GetCapacitanceMatrix()
+    CPUA=CMatrix[0,0] / (L*L)
+    LVector.append(L)
+    CPUAVector.append(CPUA)
+    DataFile.write('%-10s %-10s\n' % (format(L), format(CPUA)));
+    DataFile.flush()
 
-${CODE} ${ARGS} --filebase None
+DataFile.close()
 
-for SUBSTRATE in E10HalfSpace E10SlabGP E10Slab
-do
-  ${CODE} ${ARGS} --substrate ${SUBSTRATE}.substrate --filebase ${SUBSTRATE}
-done
+###################################################
+# fit CPUA versus L data to the form
+#  C(L) = CInfinity + Beta/L^2
+###################################################
+def FunctionalForm(x, CInf, Beta):
+    return CInf + Beta/(x*x)
+
+CInfBeta = curve_fit(FunctionalForm, LVector, CPUAVector)[0]
+CInf=CInfBeta[0]
+
+print &quot;\n*\n*\n&quot;
+print &quot;Capacitance per unit area, extracted to L=infinity limit = &quot;, format(CInf)
 
 </code></pre>
 
-<p>This computes the electrostatic potential and fields along a line
-of evaluation points at fixed <script type="math/tex">x,y</script> coordinates running from 
-<script type="math/tex">z=2</script> (above the plate) to <script type="math/tex">z=-1</script> (the ground plane) 
-and passing through the plate at <script type="math/tex">z=1</script> and the dielectric interface
-at <script type="math/tex">z=0</script>.
-The results are plotted in 
-<span class=SC>gnuplot</span> by saying <code>load Plotter.Fields</code>,
-where <code>Plotter.Fields</code> is <a href="../Plotter.Fields">this script</a>.</p>
-<p><img alt="Dielectric slab" src="../E10Substrate.png" /></p>
-<p>Take-home messages:</p>
-<ul>
-<li>
-<p>The potential rises to <script type="math/tex">\phi=1</script> at the location of the plate (<script type="math/tex">z=1</script>).</p>
-</li>
-<li>
-<p>In the presence of the <script type="math/tex">\epsilon=10</script> substrate, the potential exhibits
-  a kink at the air-substrate interface (<script type="math/tex">z=0</script>) that is absent for the
-  "No substrate" curve.</p>
-</li>
-<li>
-<p>In the presence of the implicit ground plane at <script type="math/tex">z=-1</script>, 
-  the potential properly tends to zero at <script type="math/tex">z=-1</script> (yellow curve).</p>
-</li>
-</ul>
-<h2 id="second-computational-example-capacitance-of-metallic-pad-on-grounded-pcb">Second computational example: Capacitance of metallic pad on grounded PCB</h2>
+<h2 id="results">Results</h2>
+<pre><code class="bash">% python PPCapacitor.py
+</code></pre>
+
+<p><img alt="Plot of capacitance data and functional fit" src="../PPCapacitorData.png" /></p>
 <hr />
               
             </div>
@@ -683,10 +720,10 @@ where <code>Plotter.Fields</code> is <a href="../Plotter.Fields">this script</a>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../pythonCapacitance/pythonCapacitance/" class="btn btn-neutral float-right" title="Finite-size effects in stripline capacitors"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../../reference/TopLevel/" class="btn btn-neutral float-right" title="Top-level overview"/>Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../../StriplineCapacitor/StriplineCapacitor/" class="btn btn-neutral" title="Capacitance of a PCB stripline trace"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../ImplicitSubstrate/ImplicitSubstrate/" class="btn btn-neutral" title="Implicit handling of multilayer dielectric substrates"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -728,10 +765,10 @@ where <code>Plotter.Fields</code> is <a href="../Plotter.Fields">this script</a>
           <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../../StriplineCapacitor/StriplineCapacitor/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../../ImplicitSubstrate/ImplicitSubstrate/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../../pythonCapacitance/pythonCapacitance/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../../../reference/TopLevel/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
