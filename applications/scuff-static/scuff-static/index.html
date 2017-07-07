@@ -183,6 +183,13 @@
     </li>
 
         
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../examples/PaulTrap/PaulTrap/">Electrostatic fields of an electrode array</a>
+        
+    </li>
+
+        
     </ul>
 <li>
           
@@ -324,16 +331,19 @@
         
             <ul>
             
-                <li class="toctree-l3"><a href="#common-options">Common options</a></li>
+                <li class="toctree-l3"><a href="#options-defining-the-geometry">Options defining the geometry</a></li>
                 
             
-                <li class="toctree-l3"><a href="#options-requesting-capacitance-matrix-output">Options requesting capacitance-matrix output</a></li>
+                <li class="toctree-l3"><a href="#options-defining-individual-excitations-for-type-1-calculations">Options defining individual excitations for type-1 calculations</a></li>
                 
             
-                <li class="toctree-l3"><a href="#options-requesting-polarizability-output">Options requesting polarizability output</a></li>
+                <li class="toctree-l3"><a href="#options-defining-multiple-excitations-for-type-1-calculations">Options defining multiple excitations for type-1 calculations</a></li>
                 
             
-                <li class="toctree-l3"><a href="#options-requesting-computation-of-electrostatic-fields">Options requesting computation of electrostatic fields</a></li>
+                <li class="toctree-l3"><a href="#options-defining-outputs-for-type-1-calculation">Options defining outputs for type-1 calculation</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#options-requesting-outputs-for-type-2-calculations">Options requesting outputs for type-2 calculations</a></li>
                 
             
                 <li class="toctree-l3"><a href="#2-examples-of-calculations-using-scuff-static">2. Examples of calculations using scuff-static</a></li>
@@ -530,37 +540,118 @@
 <p><a class="wikilink" href="../../../scuff-static/">scuff-static</a> is a tool within the
 <a class="wikilink" href="../../../scuff-em/">scuff-em</a> code suite for solving
 a broad class of electrostatics problems.</p>
-<p>The calculations that <a class="wikilink" href="../../../scuff-static/">scuff-static</a> can
-perform include the following:</p>
+<p>The various calculations that <a class="wikilink" href="../../../scuff-static/">scuff-static</a> may
+be divided into two categories: 
+<strong>(1)</strong> calculations that yield
+the response of the geometry to one or more 
+specific excitation stimuli ("type-1" calculations),
+and 
+<strong>(2)</strong> calculations
+that yield intrinsic properties of the material geometry,
+independent of any external excitation ("type-2"
+calculations).</p>
+<p><strong>Type-1 calculations</strong></p>
+<p>For type-1 calculations, you pass command-line options
+to <span class=SC>scuff-static</span> that specify a specific
+electrostatic "excitation." A single excitation consists of
+one or both of the following:</p>
 <ul>
 <li>
-<p>Compute the capacitance matrix (i.e. the self- and mutual-
-capacitances) of a collection of conductors.</p>
+<p>a set of electrostatic potential values at which to maintain
+   the conductors in the geometry (option <code>--potfile</code>);
+   conductors for which no value is specified are maintained 
+   at 0V by default.</p>
 </li>
 <li>
-<p>Compute the DC polarizability of a conducting or
-dielectric body.</p>
-</li>
-<li>
-<p>Compute the electrostatic potential and field
-at arbitrary user-specified points in the vicinity
-of conducting or dielectric bodies, with the
-conductors maintained at arbitrary user-specified
-potentials and (optionally) an arbitrary user-specified
-external forcing field.</p>
-</li>
-<li>
-<p>Compute the <em>C-matrix</em>, a sort of electrostatic
-version of the
-<a href="../../scuff-tmatrix/scuff-tmatrix/">"T-matrix"</a>
-used to characterize the scattering properties
-of bodies at nonzero frequencies. The C-matrix
-was shown in
-<a href="http://dx.doi.org/10.1103/PhysRevLett.114.151602">this paper</a>
-to be related to quantum-mechanical entanglement
-entropy.</p>
+<p>a description of an external electrostatic field,
+   which may be a superposition of</p>
+<ul>
+<li>the field of one or point charges (<code>--monopole</code>),</li>
+<li>the field of one or point dipoles (<code>--dipole</code>),</li>
+<li>a spatially-constant electrostatic field (<code>--ConstField</code>)</li>
+<li>an spatially-varying electrostatic potential defined by a
+    user-specified functional form (<code>--PhiExt</code>).</li>
+</ul>
 </li>
 </ul>
+<p>You may also use the <code>--ExcitationFile</code> option to
+specify a <em>list</em> of excitations, each consisting of one or both
+of the above ingredients. This is equivalent to running
+<span class=SC>scuff-static</span> multiple times
+with options specifying a single excitation 
+(<code>--potfile</code>, <code>--monopole</code>, etc.) each time---but is much <em>faster</em>,
+because of the structure of BEM solvers: once we have
+done the set-up work needed to solve for one
+excitation (namely, forming and factorizing the 
+<a href="../scuff-static.pdf">BEM matrix</a>), solving for any number
+of additional excitations is essentially "free" computationally.</p>
+<p>Having specified one or more excitations for a type-1
+calculation, you may request multiple types of output,
+which will be computed separately for each excitation:</p>
+<ul>
+<li>
+<p>Values of the electrostatic potential <script type="math/tex">\phi(\mathbf x)</script> and
+  electric field <script type="math/tex">\mathbf E(\mathbf x)</script> components
+  at arbitrary user-specified <strong>E</strong>valuation <strong>P</strong>oints <script type="math/tex">\mathbf x</script> 
+  inside or outside material bodies, output in the form of
+  numerical data in a text file (option <code>--EPFile</code>)</p>
+</li>
+<li>
+<p>Field visualization files plotting the potential and
+  fields on one or more arbitrary user-specified <strong>F</strong>ield-<strong>V</strong>isualization
+  mesh(es) (option <code>--FVMesh</code>), with the field-visualization
+  mesh(es)
+  optionally subject to one or more 
+  <a href="../../../reference/Transformations/">geometric transformations</a>
+  (option <code>--FVMeshTransFile</code>)</p>
+</li>
+<li>
+<p>Surface-charge visualization files showing
+  the distribution of electrostatic surface charges
+  induced by the excitation (option <code>--PlotFile</code>)</p>
+</li>
+</ul>
+<p><strong>Type-2 calculations</strong></p>
+<p>In contrast to type-1 calculations, type-2 calculations
+do not involve any user-specified excitation. The available
+type-2 calculations are:</p>
+<ul>
+<li>
+<p>Computation of the capacitance matrix for the conductors 
+  in the geometry (option <code>--capfile</code>)</p>
+</li>
+<li>
+<p>Computation of the DC polarizabilities of the bodies 
+  (both conductors and dielectrics) in the geometry (option <code>--polfile</code>)</p>
+</li>
+<li>
+<p>Computation of the <em>C-matrix</em>, a sort of electrostatic
+  version of the <a href="../../scuff-tmatrix/scuff-tmatrix/">"T-matrix"</a>
+  used to characterize the scattering properties
+  of bodies at nonzero frequencies (options <code>--CMatrixFile</code>
+  and/or <code>--CMatrixHDF5File</code>). The C-matrix
+  was shown in <a href="http://dx.doi.org/10.1103/PhysRevLett.114.151602">this paper</a>
+  to be related to quantum-mechanical entanglement entropy.</p>
+</li>
+</ul>
+<p><strong>Geometrical transformations</strong></p>
+<p>For both type-1 and type-2 calculations, you may use
+the optional <code>--transfile</code> option to specify a list
+of <a href="../../../reference/Transformations/">geometric transformations</a>
+to be applied to the scattering geometry; you will then
+get back results for each specified output quantity
+under each transformation.</p>
+<p><strong>Implicit dielectric substrates</strong></p>
+<p>You may use the optional <code>--substrate</code> option to specify
+that your geometry exists in the presence of
+a substrate consisting
+of one or more (infinite-area) stacked dielectric layers with an
+optional ground plane. This substrate will be treated <em>implicitly</em>
+by <span class=SC>scuff-static</span>; your <code>.scuffgeo</code> file
+and the <code>.msh</code> files it specifies need only define the
+(finite-area) conducting and/or dielectric objects
+that lie above (or within the substrate.</p>
+<p><strong>Under the hood: Implementation of <span class=SC>scuff-static</span></strong></p>
 <p>As a technical detail, we note that the implementation of
 <a class="wikilink" href="../../../scuff-static/">scuff-static</a> actually differs in some significant ways
 from the other codes in the <a class="wikilink" href="../../../scuff-em/">scuff-em</a> suite; in particular,
@@ -589,10 +680,11 @@ and the execution of the various types of calculation
 (capacitance, polarizability, etc.) that the code can do.</p>
 <div class="toc"><span class="toctitle">Table of Contents</span><ul>
 <li><a href="#1-scuff-static-command-line-options">1. <span class="SC">scuff-static</span> command-line options</a><ul>
-<li><a href="#common-options">Common options</a></li>
-<li><a href="#options-requesting-capacitance-matrix-output">Options requesting capacitance-matrix output</a></li>
-<li><a href="#options-requesting-polarizability-output">Options requesting polarizability output</a></li>
-<li><a href="#options-requesting-computation-of-electrostatic-fields">Options requesting computation of electrostatic fields</a></li>
+<li><a href="#options-defining-the-geometry">Options defining the geometry</a></li>
+<li><a href="#options-defining-individual-excitations-for-type-1-calculations">Options defining individual excitations for type-1 calculations</a></li>
+<li><a href="#options-defining-multiple-excitations-for-type-1-calculations">Options defining multiple excitations for type-1 calculations</a></li>
+<li><a href="#options-defining-outputs-for-type-1-calculation">Options defining outputs for type-1 calculation</a></li>
+<li><a href="#options-requesting-outputs-for-type-2-calculations">Options requesting outputs for type-2 calculations</a></li>
 </ul>
 </li>
 <li><a href="#2-examples-of-calculations-using-scuff-static">2. Examples of calculations using <span class="SC">scuff-static</span></a></li>
@@ -601,77 +693,156 @@ and the execution of the various types of calculation
 <hr />
 <p><a name="CommandLineOptions"></a></p>
 <h1 id="1-scuff-static-command-line-options">1. <span class="SC">scuff-static</span> command-line options</h1>
-<h3 id="common-options">Common options</h3>
-<p><a class="wikilink" href="../../../scuff-static/">scuff-static</a> recognizes the following subset of the
-<a href="../../GeneralReference/#CommonOptions">list of commonly accepted options to
- <span class="SC">scuff-em</span> command-line codes</a>.</p>
-<p class="toc"><code>--geometry
---TransFile
---EPFile</code></p>
-<h3 id="options-requesting-capacitance-matrix-output">Options requesting capacitance-matrix output</h3>
-<p class="toc"><code>--CapFile    MyCapacitanceMatrix.dat
---TransFile  MyTransFile.trans</code></p>
+<h3 id="options-defining-the-geometry">Options defining the geometry</h3>
+<pre><code class="bash">--geometry    MyGeometry.scuffgeo
+--substrate   MySubstrate.substrate
+--TransFile   Transformations.trans
+</code></pre>
+
+<p>The mandatory <code>--geometry</code> option specifies a
+ <a href="../../../reference/Geometries/"><span class=SC>scuff-em</span> geometry file</a>
+defining one or more surface meshes that comprise
+your geometry.</p>
+<p>The optional <code>--substrate</code> option specifies an 
+file describing a substrate consisting of zero or
+more dielectric layers stacked atop an optional
+ground plane; see <a href="../../../examples/ImplicitSubstrate/ImplicitSubstrate/">here</a>
+for an example.</p>
+<p>The optional <code>--TransFile</code> option specifies a list
+of <a href="../../../reference/Transformations/">geometric transformations</a>
+to be applied to your geometry; each output calculation
+you request will be repeated once for each
+geometric transformation.</p>
+<h3 id="options-defining-individual-excitations-for-type-1-calculations">Options defining individual excitations for type-1 calculations</h3>
+<p><a name="Type1Excitations"></a></p>
+<p>To run a "type-1" calculation with just a single
+excitation, you may specify any combination
+of the following options.</p>
+<pre><code class="bash">--PotFile    MyPotFile
+--ConstField Ex Ey Ez
+--Monopole   x y z Q
+--Dipole     x y z Px Py Pz
+--PhiExt     PhiExpression(x,y,z)
+</code></pre>
+
+<p>Here <code>MyPotFile</code> should be a simple text file
+consisting of a list of (surface label, potential value) pairs,
+where the surface label is the label assigned to a surface
+in the <code>.scuffgeo</code> file. For example, if your geometry
+contains conductors labeled <code>UpperSurface</code> and <code>LowerSurface</code>,
+which you wish to maintain at 1.2 volts and -3.4 volts
+respectively, then <code>MyPotFile</code> would look like this:</p>
+<pre><code class="bash"> UpperSurface  1.2
+ LowerSurface -3.4
+</code></pre>
+
+<p>Any conductors that are not specified in the <code>--PotFile</code>
+are maintained at 0 volts by default.</p>
+<p><code>--ConstField Ex Ey Ez</code> specifies a spatially-constant
+    external electrostatic field with components
+    <strong>E</strong>=(<code>Ex</code>,<code>Ey</code>,<code>Ez</code>).</p>
+<p><code>--Monopole x y z Q</code> specifies a point charge of strength <code>Q</code>
+    at cartesian coordinates (<code>x</code>,<code>y</code>,<code>z</code>).</p>
+<p><code>--Dipole x y z px py pz</code> specifies a point dipole
+    at cartesian coordinates (<code>x</code>,<code>y</code>,<code>z</code>) 
+    with dipole moment <strong>p</strong>=(<code>px</code>,<code>py</code>,<code>pz</code>).</p>
+<p><code>--PhiExt MyPhiExpression(x,y,z)</code> specifies a spatially-varying
+    electrostatic potential defined by the given function of cartesian
+    coordinates <code>x</code>, <code>y</code>, <code>z</code>. Example: <code>--PhiExt cos(3*x)*cosh(3*y)</code></p>
+<h3 id="options-defining-multiple-excitations-for-type-1-calculations">Options defining multiple excitations for type-1 calculations</h3>
+<p><a href="ExcitationFile"></a></p>
+<pre><code class="bash"> --ExcitationFile MyExcitationFile
+</code></pre>
+
+<p>Specifies that <code>MyExcitationFile</code> contains a list of
+excitations. The file should consist of one or more 
+clauses of the form <code>EXCITATION Label ... ENDEXCITATION</code>
+where <code>Label</code> is an arbitrary label you assign to the
+excitation (which will be used to tag the corresponding
+output data). Each clause should contain one or more
+lines, each defining either <strong>(a)</strong> a {ConductorLabel, PhiValue}
+pair, or <strong>(b)</strong> an external-field specification.
+(Note that all external-field specifications defined within
+a single <code>EXCITATION</code> clause are present <em>simultaneously</em>
+when that excitation is active.)</p>
+<p>Here's an example of an excitation file for a geometry
+containing conductors labeled <code>UpperSurface</code> and <code>LowerSurface</code>:</p>
+<pre><code class="bash"> EXCITATION UpperOnly
+   UpperSurface   1
+ ENDEXCITATION
+
+ EXCITATION LowerOnly
+   LowerSurface  -1
+ ENDEXCITATION
+
+ EXCITATION Both
+   UpperSurface   1
+   LowerSurface  -1
+ ENDEXCITATION
+
+ EXCITATION BothWithMonopoles
+   UpperSurface   1
+   LowerSurface  -1
+   Monopole       0 0 +1 1
+   Monopole       0 0 -1 1
+ ENDEXCITATION
+
+ EXCITATION Ex
+   CONSTFIELD     1.0 0.0 0.0
+ ENDEXCITATION
+
+ EXCITATION EyAndDipole
+   CONSTFIELD     0.0  1.0 0.0
+   DIPOLE         -0.1 0.2 0.3 0.4 -0.5 0.2
+ ENDEXCITATION
+</code></pre>
+
+<h3 id="options-defining-outputs-for-type-1-calculation">Options defining outputs for type-1 calculation</h3>
+<pre><code class="bash">--EPFile     MyEPFile
+</code></pre>
+
+<p>Requests that the electrostatic potential and field 
+components be computed at each evaluation point
+listed in the file <code>MyEPFile</code>, which is a simple text
+file containing three numbers per line (the coordinates 
+of a single evaluation point.) The resulting output file
+will contain a header explaining how to interpret its contents.</p>
+<pre><code class="bash">--FVMesh          MyFVMesh.msh
+--FVMeshTransFile MyFVMeshTransFile
+</code></pre>
+
+<p>Requests that electrostatic fields be computed
+on a <strong>F</strong>ield-<strong>V</strong>isualization mesh described by the 
+<a href="http://geuz.org/gmsh"><span class=SC>gmsh</span></a> mesh
+file <code>MyFVMesh.msh.</code> This will produce
+in an output file with extension <code>.pp</code> that can be opened directly
+in <a class="wikilink" href="../../../gmsh/">gmsh</a> to visualize the fields in any region of space.</p>
+<p>The optional <code>FVMeshTransFile</code> defines a list of
+ <a href="../../../reference/Transformations/">geometric transformations</a> to be applied
+to <code>MyFVMesh.msh.</code> This allows you to obtain visualization data on a
+large region foliated by multiple translated or rotated copies of a
+single mesh screen.</p>
+<pre><code class="bash">--PlotFile   MyPlotFile.pp
+</code></pre>
+
+<p>Requests creation of a <a class="wikilink" href="../../../gmsh/">gmsh</a> visualization file named <code>MyPlotFile.pp</code>
+plotting the induced charge density on all conducting and
+dielectric surfaces in the geometry.</p>
+<h3 id="options-requesting-outputs-for-type-2-calculations">Options requesting outputs for type-2 calculations</h3>
+<pre><code class="bash">--CapFile    MyCapacitanceMatrix.dat
+</code></pre>
+
 <p>If you specify a file name using <code>--CapFile</code>, <a class="wikilink" href="../../../scuff-static/">scuff-static</a>
 will compute the full capacitance matrix for your geometry
 and write the data to the specified file. (The file will be
 overwritten if it already exists.)</p>
-<p>The optional <code>--TransFile</code> option may be used to specify a
-list of
-<a href="../../../reference/Transformations/">geometrical transformations</a>
-to be applied to your geometry. In this case, the full capacitance
-matrix will be computed for each specified transformation.</p>
-<h3 id="options-requesting-polarizability-output">Options requesting polarizability output</h3>
-<p class="toc"><code>--PolFile    MyPolFile.dat</code></p>
+<pre><code class="bash">--PolFile    MyPolFile.dat
+</code></pre>
+
 <p>If you specify a file name using <code>--PolFile</code>, <a class="wikilink" href="../../../scuff-static/">scuff-static</a>
 will compute the DC polarizability of each object in your
 geometry and write the data to the specified file. (The file
 will be overwritten if it already exists.)</p>
-<h3 id="options-requesting-computation-of-electrostatic-fields">Options requesting computation of electrostatic fields</h3>
-<p class="toc"><code>--EPFile     MyEPFile
---PlotFile   MyPlotFile.pp
---PotFile    MyPotFile
---ConstField [X|Y|Z]
---PhiExt     PhiFile</code></p>
-<p>If you specify a list of field evaluation points using
-<code>--EPFile MyEPFile</code>, then <a class="wikilink" href="../../../scuff-static/">scuff-static</a> will compute
-the electrostatic potential and field at each evaluation
-point and write the results to a file named <code>MyEPFile.out</code>.
-(The file will be overwritten if it already exists.)
-The file will contain a header explaining how to interpret
-its contents.</p>
-<p>The <code>--PlotFile</code> option may be used to request
-creation of a <a class="wikilink" href="../../../gmsh/">gmsh</a> visualization file plotting
-the induced charge density on all conducting and
-dielectric surfaces in the geometry.
-If you say <code>--PlotFile MyPlotFile.pp</code>, then you
-will get a file named <code>MyPlotFile.pp</code> which
-may be opened in <a class="wikilink" href="../../../gmsh/">gmsh</a> for visualization purposes.</p>
-<p>By default, all conductor surfaces will be held
-at zero potential. If you wish to set one or more
-conductor surfaces to non-zero potential, you may do this
-by saying <code>--PotFile MyPotFile</code> (here "pot" is short
-for "potential). <code>MyPotFile</code> should be simply a
-list of (surface label, potential value) pairs,
-like this:</p>
-<p class="toc"><code>UpperSurface  1.2
- LowerSurface -3.4</code></p>
-<p>where <code>UpperSurface</code> and <code>LowerSurface</code> are the
-labels you assigned to the surfaces in question
-in the <code>.scuffgeo</code> file. (The label is the string
-following the <code>OBJECT</code> or <code>SURFACE</code> keyword
-in the <code>.scuffgeo</code> file.) This would set the
-conductor surface <code>UpperSurface</code> to a potential of
-1.2 volts and the conductor surface <code>LowerSurface</code>
-to a potential of -3.4 volts.</p>
-<p>By default, the calculation will be performed with
-no external electrostatic field. You can say e.g.
-<code>--ConstField X</code> to request that the calculation
-be performed in the presence of a constant unit-strength
-electrostatic field pointing in the positive <script type="math/tex">x</script>
-direction.</p>
-<p>Alternatively, you may use the <code>--PhiExt</code> option
-to specify the name of a file describing a more
-complicated (non-constant) external field.</p>
 <hr />
 <p><a name="Examples"></a></p>
 <h1 id="2-examples-of-calculations-using-scuff-static">2. Examples of calculations using <span class="SC">scuff-static</span></h1>

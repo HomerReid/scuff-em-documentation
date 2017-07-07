@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Electrostatic fields of an electrode array - SCUFF-EM documentation</title>
+  
+
+  <link rel="shortcut icon" href="../../../scuffEM.ico">
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/highlight.css">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "examples/PaulTrap/PaulTrap"
+  </script>
+  
+  <script src="../../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../../js/highlight.pack.js"></script>
+  <script src="../../../js/theme.js"></script> 
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+  <script src="../../../mathjaxhelper.js"></script>
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+
+      <p align="center"
+      <a href="../../..">
+         <img align="center" height="auto" width="100%"  
+              src="../../../img/scuffEMNavBar.png"
+      </a>
+
+      <div class="wy-side-nav-search">
+        <a href="../../.." class="icon icon-home"> SCUFF-EM documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../../..">SCUFF-EM documentation</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Examples</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../MieScattering/MieScattering/">Mie scattering</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../DielectricShell/DielectricShell/">Electrostatics of a spherical dielectric shell</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../ThinFilm/ThinFilm/">Spatially-resolved study of plane-wave transmission through an infinite-area thin dielectric film</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../DiffractionPatterns/DiffractionPatterns/">Imaging diffraction patterns of discs, disc arrays, and hole arrays in metal screens</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../CubeTorus/">Casimir forces in a compact geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../SiliconBeams/SiliconBeams/">Casimir forces in a 1D extended geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../SiliconSlabs/SiliconSlabs/">Casimir forces in a 2D extended geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../NanostructureCasimirPolder/NanostructureCasimirPolder/">Casimir-Polder potentials in dielectric nanostructures</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../SiO2Spheres/SiO2Spheres/">Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../TipSubstrate/TipSubstrate/">Spatial distribution of heat flux from a warm tip over a cold substrate</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../HalfSpaceLDOS/HalfSpaceLDOS/">LDOS and dyadic Green functions above an infinite aluminum half-space</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../PlatonicSolids/PlatonicSolids/">Electrostatic polarizability of platonic solids</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../TwoBodyCapacitors/TwoBodyCapacitors/">Capacitance of two-body capacitors</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../StriplineCapacitor/StriplineCapacitor/">Capacitance of a PCB stripline trace</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../ImplicitSubstrate/ImplicitSubstrate/">Implicit handling of multilayer dielectric substrates</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../pythonCapacitance/pythonCapacitance/">Finite-size effects in stripline capacitors</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Electrostatic fields of an electrode array</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#simple-scuff-em-geometry-file">Simple scuff-em geometry file</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#improved-scuff-em-geometry-file">Improved scuff-em geometry file</a></li>
+                
+                    <li><a class="toctree-l4" href="#visually-confirming-the-geometry-description">Visually confirming the geometry description</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#phase-1-calculation-computing-fields-of-individual-conductors">Phase 1 calculation: Computing fields of individual conductors</a></li>
+                
+                    <li><a class="toctree-l4" href="#running-multiple-calculations-at-once-the-excitation-file">Running multiple calculations at once: The excitation file</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#phase-2-calculation-external-sources-and-field-visualization">Phase 2 calculation: External sources and field visualization</a></li>
+                
+            
+            </ul>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>General reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/TopLevel/">Top-level overview</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/Installing/">Installation</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/Geometries/">Geometry descriptions</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/Materials/">Material designations</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/Transformations/">Geometric transformations</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/IncidentFields/">Incident fields</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/BrillouinZoneIntegration/">Brillouin zone integration</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/FAQ/">FAQ</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Command-line application reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/GeneralReference/">General command-line reference</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-scatter/scuff-scatter/">scuff-scatter</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-transmission/scuff-transmission/">scuff-transmission</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-ldos/scuff-ldos/">scuff-ldos</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-tmatrix/scuff-tmatrix/">scuff-tmatrix</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-cas3D/scuff-cas3D/">scuff-cas3D</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-caspol/scuff-caspol/">scuff-caspol</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-neq/scuff-neq/">scuff-neq</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-RF/scuff-RF/">scuff-RF</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-static/scuff-static/">scuff-static</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-analyze/scuff-analyze/">scuff-analyze</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-integrate/scuff-integrate/">scuff-integrate</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Validation tests</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../tests/Overview/">Overview of the test suite</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../tests/MieScattering/MieScattering/">Mie scattering</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../tests/FresnelScattering/FresnelScattering/">Fresnel scattering</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../tests/CasimirSpheres/CasimirSpheres/">Equilibrium Casimir forces between spheres</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../tests/CasimirPlates/CasimirPlates/">Equilibrium Casimir forces between plates</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../tests/CPSphere/CPSphere/">Equilibrium Casimir-Polder potential near a sphere</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../tests/CPPlate/CPPlate/">Equilibrium Casimir-Polder potential near a plate</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../tests/NEQSpheres/NEQSpheres/">Heat transfer and non-equilibrium Casimir forces between spheres</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../tests/libscuff/libscuff/">Low-level tests of the core library</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>API reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../API/libscuff/">libscuff</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>For developers</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../forDevelopers/Implementation/">Implementation</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../forDevelopers/DataStructures/">Data Structures</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../forDevelopers/Documentation/">Documentation</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../forDevelopers/SingularIntegrals/">Code for computing singular integrals</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../..">SCUFF-EM documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.."><span class="SmallCaps">scuff-em</span> documentation</a> &raquo;</li>
+    
+      
+        
+          <li>Examples &raquo;</li>
+        
+      
+    
+    <li>Electrostatic fields of an electrode array</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/homerreid/scuff-em/" class="icon icon-github"> Edit on GitHub</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1>Electrostatic fields of an electrode array</h1>
+
+<p>In this example we use <a class="wikilink" href="../../../scuff-static/">scuff-static</a> to compute the electrostatic
+fields in the vicinity of a complicated electrode array with the
+various electrodes held at various external potentials.</p>
+<p>More specifically, the calculation will proceed in two stages:</p>
+<ol>
+<li>
+<p>First, for each of the <em>N</em> electrodes in the device
+   we will compute the fields produced by maintaining that
+   electrode at a potential of 1 volt, with all other electrodes 
+   grounded.
+   This will produce <em>N</em> separate datasets, each reporting
+   the electrostatic potential and <strong>E</strong>-field components
+   at our desired evaluation points.
+   The 
+   <a href="../../../tex/scuff-static.pdf">structure of the boundary-element-method (BEM) solver implemented by <span class=SC>scuff-static</span></a>
+   ensures that this calculation is fast, even for large <em>N</em>:
+   once we have assembled and factorized the BEM matrix
+   for a given geometry, we can solve any number of electrostatic
+   problems involving different excitations of that geometry essentially
+   "for free."</p>
+</li>
+<li>
+<p>Then we will run a second calculation in which all electrodes
+   are maintained at specific voltages and---in addition---an
+   externally-sourced electrostatic field is present. For
+   this case we will generate graphic visualization files
+   illustrating the fields in the vicinity of the device.</p>
+</li>
+</ol>
+<p>The geometry considered in this example is a model of a
+<a href="https://en.wikipedia.org/wiki/Quadrupole_ion_trap">Paul trap</a>;
+I am grateful to Anton Grounds for suggesting this
+application and for providing the sophisticated
+parameterized <a class="wikilink" href="../../../gmsh/">gmsh</a> file describing the geometry.</p>
+<p>The files for this example may be found in the
+<code>share/scuff-em/examples/PaulTrap</code> subdirectory
+of your <a class="wikilink" href="../../../scuff-em/">scuff-em</a> installation.</p>
+<h2 id="gmsh-geometry-and-mesh-files"><span class=SC>gmsh</span> geometry and mesh files</h2>
+<p>The <a href="http://www.geuz.org/gmsh"><span class=SC>gmsh</span></a>
+geometry file <a href="../Trap.geo">Trap.geo</a> describes
+a collection of conductor surfaces constituting a Paul trap.
+This file contains a user-specifiable parameter <code>ELCNT</code>
+that may be used to set the number of electrodes; to create
+a mesh for a 8-electrode geometry, we say</p>
+<pre><code class="bash">% gmsh -2 -setnumber ELCNT 4 Trap.geo -o Trap_4.msh
+</code></pre>
+
+<p>(Note that the total number of electrodes is twice the value
+specified for <code>ELCNT</code>).
+This produces the <a class="wikilink" href="../../../gmsh/">gmsh</a> mesh file <code>Trap_4.msh</code>, which we can
+open in <a class="wikilink" href="../../../gmsh/">gmsh</a> to visualize: </p>
+<pre><code class="bash">% gmsh Trap_4.msh
+</code></pre>
+
+<p><img alt="Trap_4.msh image" src="../PaulTrapMesh.png" /></p>
+<h2 id="simple-scuff-em-geometry-file">Simple <span class=SC>scuff-em</span> geometry file</h2>
+<p>The <a class="wikilink" href="../../../gmsh/">gmsh</a> file <code>Trap.geo</code> is designed to ensure that
+each separate metallic strip in the geometry---including
+each of the 8 identically-shaped electrodes, plus each of 
+the 7 strips of varying thicknesses running down the center
+of the structure---is meshed as a separate
+entity and assigned a unique (integer) identifier. Thus, one way to
+write a <a href="../../../reference/Geometries"><span class=SC>scuff-em</span> geometry file</a>
+for this geometry would be simply to include each of the 15
+distinct surfaces in <code>OBJECT...ENDOBJECT</code> clauses, each clause
+referencing a unique entity in the mesh. This strategy
+is pursued by the file <a href="../Trap_4.scuffgeo">Trap_4.scuffgeo</a>,
+which looks like this:</p>
+<pre><code class="bash">OBJECT GND
+    MESHFILE Trap_4.msh
+    MESHTAG 1
+ENDOBJECT
+
+OBJECT Rot2
+    MESHFILE Trap_4.msh
+    MESHTAG 2
+ENDOBJECT
+
+OBJECT Rot3
+    MESHFILE Trap_4.msh
+    MESHTAG 3
+ENDOBJECT
+
+OBJECT RF
+    MESHFILE Trap_4.msh
+    MESHTAG 4
+ENDOBJECT
+
+OBJECT Rot1
+    MESHFILE Trap_4.msh
+    MESHTAG 5
+ENDOBJECT
+
+OBJECT Rot4
+    MESHFILE Trap_4.msh
+    MESHTAG 6
+ENDOBJECT
+
+OBJECT UpperDC1
+    MESHFILE Trap_4.msh
+    MESHTAG 7
+ENDOBJECT
+
+OBJECT LowerDC1
+    MESHFILE Trap_4.msh
+    MESHTAG 8
+ENDOBJECT
+
+OBJECT UpperDC2
+    MESHFILE Trap_4.msh
+    MESHTAG 9
+ENDOBJECT
+
+OBJECT LowerDC2
+    MESHFILE Trap_4.msh
+    MESHTAG 10
+ENDOBJECT
+
+OBJECT UpperDC3
+    MESHFILE Trap_4.msh
+    MESHTAG 11
+ENDOBJECT
+
+OBJECT LowerDC3
+    MESHFILE Trap_4.msh
+    MESHTAG 12
+ENDOBJECT
+
+OBJECT UpperDC4
+    MESHFILE Trap_4.msh
+    MESHTAG 13
+ENDOBJECT
+
+OBJECT LowerDC4
+    MESHFILE Trap_4.msh
+    MESHTAG 14
+ENDOBJECT
+</code></pre>
+
+<p>Note that, although each of the <code>OBJECT</code> clauses references
+the same mesh file, the different values of the <code>MESHTAG</code>
+field select distinct entities within that file, so that each
+of the 15 <code>OBJECT</code>s are treated by <a class="wikilink" href="../../../scuff-em/">scuff-em</a> as
+(The values of the <code>MESHTAG</code> identifiers are defined
+in <code>.geo</code> files by <a class="wikilink" href="../../../gmsh/">gmsh</a>'s <code>Physical Surface</code> construct;
+see <a href="../Trap.geo">Trap.geo</a> for an example).</p>
+<h2 id="improved-scuff-em-geometry-file">Improved <span class=SC>scuff-em</span> geometry file</h2>
+<p>The file <code>Trap_4.scuffgeo</code> above defines a perfectly workable
+<a class="wikilink" href="../../../scuff-em/">scuff-em</a> geometry, and running calculations with this
+file will yield results identical to those obtained below.</p>
+<p>However, the strategy pursued by <code>Trap_4.scuffgeo</code> is <em>not</em>
+the optimal way to define this geometry to <a class="wikilink" href="../../../scuff-em/">scuff-em</a>,
+because it ignores significant potential for computational
+cost savings afforded by the structure of the geometry.
+Indeed, as we see from the image above, the geometry
+here contains many copies of <em>identical</em> shapes that
+are simply rotated and/or translated with respect to one
+another in space. For geometries of this sort, it
+is best <em>not</em> to define separate mesh entities for each
+of the various identical copies of structures, but rather
+to inform <a class="wikilink" href="../../../scuff-em/">scuff-em</a> of the redundancies that are present
+so that the code can make maximal reuse of computations
+carried out for identical structures.</p>
+<p>More specifically, we will modify the above file as follows:</p>
+<ul>
+<li>
+<p>Instead of defining each of the 8 electrodes to be a separate
+entity in the mesh, we will reference just <em>one</em> of the electrode
+rectangles in the mesh file, together with <code>DISPLACED</code> statements
+indicating how identical copies of that entity are to be translated
+in space to define the 8 electrodes in the positions shown above.</p>
+</li>
+<li>
+<p>Similarly, instead of defining separate meshed entities
+for each of the long runners in the center of the geometry,
+we will take advantage of the 180<script type="math/tex">^\circ</script> rotational symmetry
+by referencing only one copy of each distinct shape
+together with <code>ROTATED</code> statements indicating how identical
+copies of that shape are to be rotated in space to define the
+desired configuration of the runners.</p>
+</li>
+</ul>
+<p>As a result, <a class="wikilink" href="../../../scuff-em/">scuff-em</a> will need to read and store only
+5 distinct entities from the mesh file, together with
+instructions for displacements and rotations. This is a major
+reduction in complexity from the 15 distinct mesh structures
+involved in the simple <code>.scuffgeo</code> file above. (The primary
+computational efficiency here is that identical mesh
+structures--independent of displacement or rotation---contribute
+identical diagonal blocks to the BEM system matrix; if
+<a class="wikilink" href="../../../scuff-em/">scuff-em</a> knows that an object in a geometry has 7 identical
+mates, then it need only compute the corresponding matrix
+block <em>once</em> instead of 8 times, yielding huge cost reductions.
+<a class="wikilink" href="../../../scuff-em/">scuff-em</a> also detects and exploits redundancies in <em>off-diagonal</em>
+matrix blocks.)</p>
+<p>The file that implements this improved strategy is <a href="../Trap_4_Improved.scuffgeo"><code>Trap_4_Improved.scuffgeo</code></a>,
+and it looks like this:</p>
+<pre><code class="bash">OBJECT UpperDC1
+    MESHFILE Trap_4.msh
+    MESHTAG 7
+ENDOBJECT
+
+OBJECT LowerDC1
+    MESHFILE Trap_4.msh
+    MESHTAG 7
+    DISPLACED 0 -1656 0
+ENDOBJECT
+
+OBJECT UpperDC2
+    MESHFILE Trap_4.msh
+    MESHTAG 7
+    DISPLACED 220 0 0 
+ENDOBJECT
+
+OBJECT LowerDC2
+    MESHFILE Trap_4.msh
+    MESHTAG 7
+    DISPLACED 0 -1656 0
+    DISPLACED 220 0 0 
+ENDOBJECT
+
+OBJECT UpperDC3
+    MESHFILE Trap_4.msh
+    MESHTAG 7
+    DISPLACED 440 0 0 
+ENDOBJECT
+
+OBJECT LowerDC3
+    MESHFILE Trap_4.msh
+    MESHTAG 7
+    DISPLACED 0 -1656 0
+    DISPLACED 440 0 0 
+ENDOBJECT
+
+OBJECT UpperDC4
+    MESHFILE Trap_4.msh
+    MESHTAG 7
+    DISPLACED 660 0 0 
+ENDOBJECT
+
+OBJECT LowerDC4
+    MESHFILE Trap_4.msh
+    MESHTAG 7
+    DISPLACED 0 -1656 0
+    DISPLACED 660 0 0 
+ENDOBJECT
+
+OBJECT GND
+    MESHFILE Trap_4.msh
+    MESHTAG 1
+ENDOBJECT
+
+OBJECT Rot1
+    MESHFILE Trap_4.msh
+    MESHTAG 5
+ENDOBJECT
+
+OBJECT Rot2
+    MESHFILE Trap_4.msh
+    MESHTAG 2
+ENDOBJECT
+
+OBJECT Rot3
+    MESHFILE Trap_4.msh
+    MESHTAG 2
+    ROTATED 180 ABOUT 0 0 1
+ENDOBJECT
+
+OBJECT Rot4
+    MESHFILE Trap_4.msh
+    MESHTAG 5
+    ROTATED 180 ABOUT 0 0 1
+ENDOBJECT
+
+OBJECT RF
+    MESHFILE Trap_4.msh
+    MESHTAG 4
+ENDOBJECT
+</code></pre>
+
+<p>As anticipated above, note that this file references
+only 5 distinct <code>MESHTAG</code> values instead of the 15 distinct
+values referenced by the original <code>Trap_4.scuffgeo</code> file.</p>
+<h3 id="visually-confirming-the-geometry-description">Visually confirming the geometry description</h3>
+<p>Before proceeding, we should certainly pause to check
+that the geometry defined by the improved geometry file
+does indeed look like what we want. We do this by
+running the <a href="../../../applications/scuff-analyze/scuff-analyze/"><span class=SC>scuff-analyze</span></a> utility
+with the <code>--WriteGMSHFiles</code> command-line option:</p>
+<pre><code class="bash">% scuff-analyze --geometry Trap_4_Improved.scuffgeo --WriteGMSHFiles
+</code></pre>
+
+<p>This produces a file named <code>Trap_4_Improved.pp</code>, which we open
+in <code>gmsh</code> for visual confirmation:</p>
+<pre><code class="bash">% gmsh Trap_4_Improved.pp
+</code></pre>
+
+<p><img alt="Trap_4_Improved.png" src="../Trap_4_Improved.png" /></p>
+<h2 id="phase-1-calculation-computing-fields-of-individual-conductors">Phase 1 calculation: Computing fields of individual conductors</h2>
+<p>The first phase of our calculation will be to determine the
+electrostatic field configurations produced by holding each of the
+individual electrodes at a potential of 1 V with all other electrodes
+grounded. This will yield 8 distinct field configurations,
+which we can sample at an arbitrary set of evaluation points
+or visualize in graphical form; the electrostatic field
+obtained by driving all conductors with arbitrary specified
+voltages will be a weighted linear combination of
+these 8 configurations, so we can use the elemental fields
+to optimize a set of electrode voltages to yield a given
+field profile (phase 2, below).</p>
+<h3 id="running-multiple-calculations-at-once-the-excitation-file">Running multiple calculations at once: The excitation file</h3>
+<p>One obvious way to do this calculation would be to run <a class="wikilink" href="../../../scuff-static/">scuff-static</a>
+8 times, each time using the <a href="../../../applications/scuff-static/scuff-static/#Type1Excitations"><code>--PotFile</code></a>
+command-line option to define a different set of conductor potentials.</p>
+<p>However, such an approach would be inefficient given the structure
+of the <a href="../../../tex/scuff-static.pdf">boundary-element method (BEM) implemented by
+<span class=SC>scuff-static</span></a>. In BEM solvers, almost all of the
+computational cost goes into assembling and factorizing the
+system matrix, which knows only about the geometry itself
+and is <em>independent</em> of any excitation that may furnish the
+stimulus in an electrostatics problem (such as externally-sourced
+fields or sets of prescribed conductor potentials).
+Thus, in cases where we wish to consider the response of a
+geometry to multiple stimuli, it is efficient to do the
+calculations all at once; having paid the cost of forming and
+factorizing the system matrix, we can solve electrostatics
+problems for any number of distinct stimuli essentially <strong>for free.</strong></p>
+<p>To allow this efficiency to be exploited in command-line calculations,
+<a class="wikilink" href="../../../scuff-static/">scuff-static</a> allows users to specify an
+<a href="../../../applications/scuff-static/scuff-static/#ExcitationFile"><em>excitation file</em></a>
+describing one or more stimuli to be applied to the geometry
+sequentially. For the purposes of our first calculation,
+the excitation file will specify 8 separate stimuli, each
+consisting of a choice of one conductor to be held at 
+a potential of <code>1.0</code> V (by default, any conductors not
+specified are maintained at 0 V). This file is called 
+<a href="../Phase1.Excitations"><code>Phase1.Excitations</code></a>:</p>
+<pre><code class="bash">EXCITATION UpperDC1
+    UpperDC1 1.0
+ENDEXCITATION
+
+EXCITATION LowerDC1
+    LowerDC1 1.0
+ENDEXCITATION
+
+EXCITATION UpperDC2
+    UpperDC2 1.0
+ENDEXCITATION
+
+EXCITATION LowerDC2
+    LowerDC2 1.0
+ENDEXCITATION
+
+EXCITATION UpperDC3
+    UpperDC3 1.0
+ENDEXCITATION
+
+EXCITATION LowerDC3
+    LowerDC3 1.0
+ENDEXCITATION
+
+EXCITATION UpperDC4
+    UpperDC4 1.0
+ENDEXCITATION
+
+EXCITATION LowerDC4
+    LowerDC4 1.0
+ENDEXCITATION
+</code></pre>
+
+<p>This file is passed to <span class=SC>scuff-em</span> via
+the <code>--ExcitationFile</code> command-line option.
+Notice that each <code>EXCITATION</code> is labeled by an arbitrary user-defined
+tag, which will be used to identify the output produced under that
+excitation.</p>
+<p>Speaking of outputs, we will want to tell <a class="wikilink" href="../../../scuff-static/">scuff-static</a> what we'd
+like it to compute for each excitation. In this case I'll ask for
+two types of output:</p>
+<ul>
+<li>
+<p>numerical values of the electrostatic potential and field at a set
+of evaluation points I choose; I will choose a line of points lying
+slightly above the structure and running down the center conductor.
+I put the coordinates of these points into a text file called <a href="../MyEPFile"><code>MyEPFile</code></a>
+and say <code>--EPFile MyEPFile</code> on the <span class=SC>scuff-static</span>
+command line.</p>
+</li>
+<li>
+<p>graphical visualization files showing the distribution of surface charge
+induced on the geometry by each exciting stimulus. (See below for a
+different type of graphical visualization output.) To request
+this I use the <code>--PlotFile</code> option to specify the visualization output
+file name (here I call it <code>MyPlotFile.pp</code>).</p>
+</li>
+</ul>
+<p>Here's a script <a href="../Phase1.RunScript">(<code>Phase1.RunScript</code>)</a>
+that runs the phase-1 calculation:</p>
+<pre><code class="bash">#!/bin/bash
+
+ARGS=&quot;&quot;
+ARGS=&quot;${ARGS} --geometry Trap_4_Improved.scuffgeo&quot;
+ARGS=&quot;${ARGS} --ExcitationFile Phase1.Excitations&quot;
+ARGS=&quot;${ARGS} --EPFile MyEPFile&quot;
+ARGS=&quot;${ARGS} --PlotFile MyPlotFile.pp&quot;
+scuff-static ${ARGS}
+</code></pre>
+
+<p>This script takes about 3 seconds to run on my laptop.
+When it's finished, you have two new output files:</p>
+<ul>
+<li>
+<p><code>Trap_4_Improved.MyEPFile.out</code> is a text data file reporting
+values of the electrostatic potential and field components
+at each evaluation point in <code>MyEPFile</code> for each excitation.  </p>
+</li>
+<li>
+<p><code>MyPlotFile.pp</code> is a <a class="wikilink" href="../../../gmsh/">gmsh</a> visualization file plotting the 
+induced charge density for each of the 8 excitations. For example,
+here's what it looks like when the electrode named <code>LowerDC2</code> is 
+driven:</p>
+</li>
+</ul>
+<p><img alt="ChargeDensityPlot.png" src="../ChargeDensityPlot.png" /></p>
+<h2 id="phase-2-calculation-external-sources-and-field-visualization">Phase 2 calculation: External sources and field visualization</h2>
+<p>Having determined the fields produced by each electrode in isolation,
+in practice we would now presumably do some sort of design calculation
+to identify the optimal voltages at which to drive each electrode
+for our desired application. As a follow-up calculation, we'll
+now do a run in which <strong>(a)</strong> each conductor is set to a nonzero
+voltage, <strong>(b)</strong> additional external field sources are present, <strong>(c)</strong>
+we wish to visualize the electrostatic fields over a region of 
+space.</p>
+<p>Items <strong>(a)</strong> and <strong>(b)</strong> are handled by writing an excitation
+file <a href="../Phase2.Excitations">(<code>Phase2.Excitations</code>)</a> that specifies,
+in addition to prescribed conductor potentials, several
+external field sources that are also present in the geometry:
+a point monopole, a point dipole, a constant electric field, and
+an arbitrary user-specified function.
+(Needless to say, this contrived assortment of sources is intended
+primarily to illustrate the types of external-field sources
+that may be specified in excitation files). </p>
+<pre><code class="bash">EXCITATION KitchenSink
+
+# conductor potentials 
+
+    UpperDC1   0.5
+    LowerDC1  -0.7
+    UpperDC2  -0.3
+    LowerDC2   0.5
+    UpperDC3   0.2
+    LowerDC3  -0.4
+    UpperDC4  -0.6
+    LowerDC4   1.0
+
+# point charge at X=(-400,1000,250) with charge -300
+    monopole -400.0 1000.0 250.0   -300
+
+# z-directed point dipole at X=(-400,-1000,-400)
+    dipole  -300.0 -1000.0 -400.0  0.0 0.0 10000.0
+
+# small constant background field in Z-direction
+    constant_field 0 0.0 1.0e-4
+
+# arbitrary user-specified function of x, y, z, r, Rho, Theta Phi
+        phi 1.0e-8*Rho*Rho*cos(2.0*Phi)
+
+ENDEXCITATION
+
+</code></pre>
+
+<p>Item <strong>(c)</strong> is handled by using <a class="wikilink" href="../../../gmsh/">gmsh</a> to define a <em>field-visualization
+mesh</em>---in essence, a screen on which we want an image of the electrostatic
+field configuration, although it need not be planar---together with a
+set of [geometrical transformations] specifying how the screen is to
+be moved throughout space to yield quasi-3D visual information on the 
+field configuration. In this case, the mesh is described by 
+the simple <a class="wikilink" href="../../../gmsh/">gmsh</a> geometry file <a href="../Screen.geo"><code>Screen.geo</code></a>,
+which we turn into <code>Screen.msh</code> by running <code>gmsh -2 Screen.geo</code>,
+and the transformation file <a href="../Screen.trans"><code>Screen.trans</code></a>
+specifies three geometrical transformations in which the screen
+is rotated and displaced to define the three walls of the diorama
+shown in the figure below.</p>
+<p>The script that runs the calculation is <a href="../Phase2.RunScript"><code>Phase2.RunScript</code></a>:</p>
+<pre><code class="bash">#!/bin/bash
+
+ARGS=&quot;&quot;
+ARGS=&quot;${ARGS} --geometry Trap_4_Improved.scuffgeo&quot;
+ARGS=&quot;${ARGS} --ExcitationFile Phase2.Excitations&quot;
+ARGS=&quot;${ARGS} --FVMesh Screen.msh&quot;
+ARGS=&quot;${ARGS} --FVMeshTransFile Screen.trans&quot;
+scuff-static ${ARGS}
+</code></pre>
+
+<p>This produces several files with extension <code>.pp;</code> we open them
+all simultaneously in <a class="wikilink" href="../../../gmsh/">gmsh</a> together with the original geometry
+mesh to get some graphical insight into the spatial variation of the
+fields in our problem.</p>
+<pre><code class="bash"> % gmsh Trap_4*.pp Trap_4.msh
+</code></pre>
+
+<p>Click the image below for higher resolution:</p>
+<p><a href="../KitchenSink.png"><img src="../KitchenSink.png"></a></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../../reference/TopLevel/" class="btn btn-neutral float-right" title="Top-level overview"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../pythonCapacitance/pythonCapacitance/" class="btn btn-neutral" title="Finite-size effects in stripline capacitors"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    <!-- Copyright etc -->
+    </p>
+  </div>
+
+  <a href="http://homerreid.com/scuff-em"> 
+    <span class="SmallCaps">scuff-em</span>
+  </a> documentation, by
+  <a href="http://homerreid.com">Homer Reid</a>
+
+  <p>
+  <font size=-1>
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> 
+  using a customized theme modeled 
+  after the 
+  <a href="https://github.com/snide/sphinx_rtd_theme">theme</a>
+  provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  </font>
+
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../../pythonCapacitance/pythonCapacitance/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../../reference/TopLevel/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>
