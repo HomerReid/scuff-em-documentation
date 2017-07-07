@@ -572,7 +572,7 @@ parameterized <a class="wikilink" href="../../../gmsh/">gmsh</a> file describing
 of your <a class="wikilink" href="../../../scuff-em/">scuff-em</a> installation.</p>
 <h2 id="gmsh-geometry-and-mesh-files"><span class=SC>gmsh</span> geometry and mesh files</h2>
 <p>The <a href="http://www.geuz.org/gmsh"><span class=SC>gmsh</span></a>
-geometry file <a href="../Trap.geo">Trap.geo</a> describes
+geometry file <a href="../Trap.geo"><code>Trap.geo</code></a> describes
 a collection of conductor surfaces constituting a Paul trap.
 This file contains a user-specifiable parameter <code>ELCNT</code>
 that may be used to set the number of electrodes; to create
@@ -599,7 +599,7 @@ write a <a href="../../../reference/Geometries"><span class=SC>scuff-em</span> g
 for this geometry would be simply to include each of the 15
 distinct surfaces in <code>OBJECT...ENDOBJECT</code> clauses, each clause
 referencing a unique entity in the mesh. This strategy
-is pursued by the file <a href="../Trap_4.scuffgeo">Trap_4.scuffgeo</a>,
+is pursued by the file <a href="../Trap_4.scuffgeo"><code>Trap_4.scuffgeo</code></a>,
 which looks like this:</p>
 <pre><code class="bash">OBJECT GND
     MESHFILE Trap_4.msh
@@ -675,10 +675,11 @@ ENDOBJECT
 <p>Note that, although each of the <code>OBJECT</code> clauses references
 the same mesh file, the different values of the <code>MESHTAG</code>
 field select distinct entities within that file, so that each
-of the 15 <code>OBJECT</code>s are treated by <a class="wikilink" href="../../../scuff-em/">scuff-em</a> as
+of the 15 <code>OBJECTs</code> are treated by <a class="wikilink" href="../../../scuff-em/">scuff-em</a> as
+distinct identities.
 (The values of the <code>MESHTAG</code> identifiers are defined
 in <code>.geo</code> files by <a class="wikilink" href="../../../gmsh/">gmsh</a>'s <code>Physical Surface</code> construct;
-see <a href="../Trap.geo">Trap.geo</a> for an example).</p>
+see <a href="../Trap.geo"><code>Trap.geo</code></a> for an example).`</p>
 <h2 id="improved-scuff-em-geometry-file">Improved <span class=SC>scuff-em</span> geometry file</h2>
 <p>The file <code>Trap_4.scuffgeo</code> above defines a perfectly workable
 <a class="wikilink" href="../../../scuff-em/">scuff-em</a> geometry, and running calculations with this
@@ -726,7 +727,7 @@ identical diagonal blocks to the BEM system matrix; if
 <a class="wikilink" href="../../../scuff-em/">scuff-em</a> knows that an object in a geometry has 7 identical
 mates, then it need only compute the corresponding matrix
 block <em>once</em> instead of 8 times, yielding huge cost reductions.
-<a class="wikilink" href="../../../scuff-em/">scuff-em</a> also detects and exploits redundancies in <em>off-diagonal</em>
+<a class="wikilink" href="../../../scuff-static/">scuff-static</a> also detects and exploits redundancies in <em>off-diagonal</em>
 matrix blocks.)</p>
 <p>The file that implements this improved strategy is <a href="../Trap_4_Improved.scuffgeo"><code>Trap_4_Improved.scuffgeo</code></a>,
 and it looks like this:</p>
@@ -990,13 +991,13 @@ that may be specified in excitation files). </p>
 # point charge at X=(-400,1000,250) with charge -300
     monopole -400.0 1000.0 250.0   -300
 
-# z-directed point dipole at X=(-400,-1000,-400)
+# z-directed point dipole at X=(-300,-1000,-400)
     dipole  -300.0 -1000.0 -400.0  0.0 0.0 10000.0
 
 # small constant background field in Z-direction
-    constant_field 0 0.0 1.0e-4
+    constant_field 0 0 1.0e-4
 
-# arbitrary user-specified function of x, y, z, r, Rho, Theta Phi
+# arbitrary user-specified function of x, y, z, r, Rho, Theta, Phi
         phi 1.0e-8*Rho*Rho*cos(2.0*Phi)
 
 ENDEXCITATION
@@ -1006,12 +1007,12 @@ ENDEXCITATION
 <p>Item <strong>(c)</strong> is handled by using <a class="wikilink" href="../../../gmsh/">gmsh</a> to define a <em>field-visualization
 mesh</em>---in essence, a screen on which we want an image of the electrostatic
 field configuration, although it need not be planar---together with a
-set of [geometrical transformations] specifying how the screen is to
-be moved throughout space to yield quasi-3D visual information on the 
+set of <a href="../../../reference/Transformations">geometrical transformations</a> specifying how the screen 
+is to be replicated throughout space to yield quasi-3D visual information on the 
 field configuration. In this case, the mesh is described by 
 the simple <a class="wikilink" href="../../../gmsh/">gmsh</a> geometry file <a href="../Screen.geo"><code>Screen.geo</code></a>,
-which we turn into <code>Screen.msh</code> by running <code>gmsh -2 Screen.geo</code>,
-and the transformation file <a href="../Screen.trans"><code>Screen.trans</code></a>
+which we turn into <code>Screen.msh</code> by running <code>gmsh -2 Screen.geo</code>.
+Then, the transformation file <a href="../Screen.trans"><code>Screen.trans</code></a>
 specifies three geometrical transformations in which the screen
 is rotated and displaced to define the three walls of the diorama
 shown in the figure below.</p>
