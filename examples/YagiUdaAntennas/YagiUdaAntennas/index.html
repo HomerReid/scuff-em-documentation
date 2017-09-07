@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Z-parameters and directivity of Yagi-Uda antennas - SCUFF-EM documentation</title>
+  
+
+  <link rel="shortcut icon" href="../../../scuffEM.ico">
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/highlight.css">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "examples/YagiUdaAntennas/YagiUdaAntennas"
+  </script>
+  
+  <script src="../../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../../js/highlight.pack.js"></script>
+  <script src="../../../js/theme.js"></script> 
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+  <script src="../../../mathjaxhelper.js"></script>
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+
+      <p align="center"
+      <a href="../../..">
+         <img align="center" height="auto" width="100%"  
+              src="../../../img/scuffEMNavBar.png"
+      </a>
+
+      <div class="wy-side-nav-search">
+        <a href="../../.." class="icon icon-home"> SCUFF-EM documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../../..">SCUFF-EM documentation</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Examples</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../MieScattering/MieScattering/">Mie scattering</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../DielectricShell/DielectricShell/">Electrostatics of a spherical dielectric shell</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../ThinFilm/ThinFilm/">Spatially-resolved study of plane-wave transmission through an infinite-area thin dielectric film</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../DiffractionPatterns/DiffractionPatterns/">Imaging diffraction patterns of discs, disc arrays, and hole arrays in metal screens</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../CubeTorus/">Casimir forces in a compact geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../SiliconBeams/SiliconBeams/">Casimir forces in a 1D extended geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../SiliconSlabs/SiliconSlabs/">Casimir forces in a 2D extended geometry</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../NanostructureCasimirPolder/NanostructureCasimirPolder/">Casimir-Polder potentials in dielectric nanostructures</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../SiO2Spheres/SiO2Spheres/">Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../TipSubstrate/TipSubstrate/">Spatial distribution of heat flux from a warm tip over a cold substrate</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../HalfSpaceLDOS/HalfSpaceLDOS/">LDOS and dyadic Green functions above an infinite aluminum half-space</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../PlatonicSolids/PlatonicSolids/">Electrostatic polarizability of platonic solids</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../TwoBodyCapacitors/TwoBodyCapacitors/">Capacitance of two-body capacitors</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../StriplineCapacitor/StriplineCapacitor/">Capacitance of a PCB stripline trace</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../ImplicitSubstrate/ImplicitSubstrate/">Implicit handling of multilayer dielectric substrates</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../pythonCapacitance/pythonCapacitance/">Finite-size effects in stripline capacitors</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../PaulTrap/PaulTrap/">Electrostatic fields of an electrode array</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Z-parameters and directivity of Yagi-Uda antennas</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#gmsh-geometry-and-mesh-files">gmsh geometry and mesh files</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#visualize-scuff-em-geometries">Visualize scuff-em geometries:</a></li>
+                
+                    <li><a class="toctree-l4" href="#antenna-with-n2-directors">Antenna with N=2 directors:</a></li>
+                
+                    <li><a class="toctree-l4" href="#antenna-with-n4-directors">Antenna with N=4 directors:</a></li>
+                
+                    <li><a class="toctree-l4" href="#just-the-dipole-element-in-isolation">Just the dipole element in isolation:</a></li>
+                
+                    <li><a class="toctree-l4" href="#port-file">Port file</a></li>
+                
+                    <li><a class="toctree-l4" href="#first-run-to-compute-s-and-z-parameters">First run to compute S- and Z-parameters</a></li>
+                
+                    <li><a class="toctree-l4" href="#second-run-to-compute-radiation-patterns">Second run to compute radiation patterns</a></li>
+                
+                    <li><a class="toctree-l4" href="#python-driven-directivity-optimization">Python-driven directivity optimization</a></li>
+                
+            
+            </ul>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>General reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/TopLevel/">Top-level overview</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/Installing/">Installation</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/Geometries/">Geometry descriptions</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/Materials/">Material designations</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/Transformations/">Geometric transformations</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/IncidentFields/">Incident fields</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/BrillouinZoneIntegration/">Brillouin zone integration</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../reference/FAQ/">FAQ</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Command-line application reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/GeneralReference/">General command-line reference</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-scatter/scuff-scatter/">scuff-scatter</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-transmission/scuff-transmission/">scuff-transmission</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-ldos/scuff-ldos/">scuff-ldos</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-tmatrix/scuff-tmatrix/">scuff-tmatrix</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-cas3D/scuff-cas3D/">scuff-cas3D</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-caspol/scuff-caspol/">scuff-caspol</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-neq/scuff-neq/">scuff-neq</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-RF/scuff-RF/">scuff-RF</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-static/scuff-static/">scuff-static</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-analyze/scuff-analyze/">scuff-analyze</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-integrate/scuff-integrate/">scuff-integrate</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Validation tests</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../tests/Overview/">Overview of the test suite</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../tests/MieScattering/MieScattering/">Mie scattering</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../tests/FresnelScattering/FresnelScattering/">Fresnel scattering</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../tests/CasimirSpheres/CasimirSpheres/">Equilibrium Casimir forces between spheres</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../tests/CasimirPlates/CasimirPlates/">Equilibrium Casimir forces between plates</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../tests/CPSphere/CPSphere/">Equilibrium Casimir-Polder potential near a sphere</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../tests/CPPlate/CPPlate/">Equilibrium Casimir-Polder potential near a plate</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../tests/NEQSpheres/NEQSpheres/">Heat transfer and non-equilibrium Casimir forces between spheres</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../tests/libscuff/libscuff/">Low-level tests of the core library</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>API reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../API/libscuff/">libscuff</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>For developers</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../forDevelopers/Implementation/">Implementation</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../forDevelopers/DataStructures/">Data Structures</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../forDevelopers/Documentation/">Documentation</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../forDevelopers/SingularIntegrals/">Code for computing singular integrals</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../..">SCUFF-EM documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.."><span class="SmallCaps">scuff-em</span> documentation</a> &raquo;</li>
+    
+      
+        
+          <li>Examples &raquo;</li>
+        
+      
+    
+    <li>Z-parameters and directivity of Yagi-Uda antennas</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/homerreid/scuff-em/" class="icon icon-github"> Edit on GitHub</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="s-parameters-directivity-and-radiated-field-patterns-of-yagi-uda-antennas">S-parameters, directivity, and radiated field patterns of Yagi-Uda antennas</h1>
+<p>In this example we'll use the
+<a href="http://homerreid.com/scuff-em/scuff-RF"><span class=SC>scuff-rf</span> application module</a>
+ within the 
+<span class=SC>scuff-em</span>
+suite to investigate a Yagi-Uda antenna design.
+We will consider both free-standing antennas and antennas
+printed on PCBs, with the effect of the PCB handled
+implicitly using <a href="../../../tex/StaticDielectricSubstrate.pdf"><span class=SC>scuff-em</span>'s support
+for implicit treatment of multilayer dielectric substrates.</a>
+We will look at both <strong>(a)</strong> input impedance vs. frequency, <strong>(b)</strong>
+radiation patterns and directivity for antennas driven at a given 
+frequency with given port currents.</p>
+<p>The files for this example may be found in 
+the <code>share/scuff-em/examples/YagiUdaAntennas</code> directory
+of your <a class="wikilink" href="../../../scuff-em/">scuff-em</a> installation.</p>
+<h2 id="gmsh-geometry-and-mesh-files"><span class=SC>gmsh</span> geometry and mesh files</h2>
+<p>The <a class="wikilink" href="../../../gmsh/">gmsh</a> geometry file <a href="../PlanarYUAntenna.geo">PlanarYUAntenna.geo</a>
+describes three separate structures: a dipole antenna
+with a small feed inlet that will be the driven element
+in our Yagi-Uda antenna, a reflector, and a director.</p>
+<pre><code class="bash">% gmsh -clscale 1   -2 PlanarYUAntenna.geo -o PlanarYUAntenna_Medium.msh
+% gmsh -clscale 0.5 -2 PlanarYUAntenna.geo -o PlanarYUAntenna_Fine.msh
+</code></pre>
+
+<p>The various <a class="wikilink" href="../../../scuff-em/">scuff-em</a> geometry files below then describe Yagi-Uda
+antennas consisting of the driven dipole element, optionally
+with a reflector, and optionally with one or more directors.</p>
+<ul>
+<li>
+<p><a class="wikilink" href="../../../scuff-em/">scuff-em</a> geometry file for Yagi-Uda antenna with reflector and 2 directors: <a href="../YUAntenna_N2_Medium.scuffgeo"><code>YUAntenna_N2_Medium.scuffgeo</code></a></p>
+</li>
+<li>
+<p><a class="wikilink" href="../../../scuff-em/">scuff-em</a> geometry file for Yagi-Uda antenna with reflector and 4 directors: <a href="../YUAntenna_N4_Medium.scuffgeo"><code>YUAntenna_N4_Medium.scuffgeo</code></a></p>
+</li>
+<li>
+<p><a class="wikilink" href="../../../scuff-em/">scuff-em</a> geometry file for just the dipole element of the YU antenna alone: <a href="../DipoleAntenna_Medium.scuffgeo"><code>DipoleAntenna_Medium.scuffgeo</code></a></p>
+</li>
+</ul>
+<h2 id="visualize-scuff-em-geometries">Visualize <span class=SC>scuff-em</span> geometries:</h2>
+<h4 id="antenna-with-n2-directors">Antenna with <script type="math/tex">N=2</script> directors:</h4>
+<pre><code class="bash">% export SCUFF_MESH_PATH=./mshFiles
+% scuff-analyze --geometry scuffgeoFiles/YUAntenna_N2_Medium.scuffgeo --WriteGMSHFiles
+% gmsh YUAntenna_N2_Medium.pp
+</code></pre>
+
+<p><img alt="YUAntenna_N2_Medium.png" src="../YUAntenna_N2_Medium.png" /></p>
+<h4 id="antenna-with-n4-directors">Antenna with <script type="math/tex">N=4</script> directors:</h4>
+<pre><code class="bash">% export SCUFF_MESH_PATH=./mshFiles
+% scuff-analyze --geometry scuffgeoFiles/YUAntenna_N4_Medium.scuffgeo --WriteGMSHFiles
+% gmsh YUAntenna_N4_Medium.pp
+</code></pre>
+
+<p><img alt="YUAntenna_N4_Medium.png" src="../YUAntenna_N4_Medium.png" /></p>
+<h4 id="just-the-dipole-element-in-isolation">Just the dipole element in isolation:</h4>
+<pre><code class="bash">% export SCUFF_MESH_PATH=./mshFiles
+% scuff-analyze --geometry scuffgeoFiles/DipoleAntenna_Medium.scuffgeo --WriteGMSHFiles
+% gmsh DipoleAntenna_Medium.pp
+</code></pre>
+
+<p><img alt="DipoleAntenna.png" src="../DipoleAntenna_Medium.png" /></p>
+<h3 id="port-file">Port file</h3>
+<p>The file <a href="../Dipole.ports"><code>Dipole.ports</code></a> specifies
+the RF ports of the structure; in this case there is
+just one port, whose positive and negative terminals
+are the upper and lower edges of the feed gap in the 
+driven dipole element.</p>
+<p>To verify that <a class="wikilink" href="../../../scuff-rf/">scuff-rf</a> interprets the <code>.ports</code> file
+correctly to describe the actual ports we intended, we
+do a quick run of <a class="wikilink" href="../../../scuff-rf/">scuff-rf</a> with the <code>--PlotPorts</code> option:</p>
+<pre><code> % export SCUFF_MESH_PATH=./mshFiles
+ % scuff-rf --geometry scuffgeoFiles/YUAntenna_N2_Medium.scuffgeo --PortFile portFiles/Dipole.ports --PlotPorts
+ % gmsh YUAntenna_N2_Medium.pp YUAntenna_N2_Medium.ports.pp
+</code></pre>
+
+<p><img alt="Ports.png" src="../Ports.png" /></p>
+<p>The red- and blue-highlighted regions of the structure are the
+positive and negative terminals of the port.</p>
+<h3 id="first-run-to-compute-s-and-z-parameters">First run to compute <script type="math/tex">S</script>- and <script type="math/tex">Z</script>-parameters</h3>
+<p>The simple shell script <a href="../RunScript.SZParms"><code>RunScript.SZParms</code></a>
+computes <script type="math/tex">S</script>- and <script type="math/tex">Z</script>-parameters for the various structures
+over a range of frequencies. I plot the results in
+<a href="../www.gnuplot.info"><span class=SC>gnuplot</span></a> using
+this script: <a href="../Plotter.zparms"><code>Plotter.zparms</code></a>.</p>
+<pre><code class="bash"> % RunScript.SZParms
+ % gnuplot
+ gnuplot&gt; load 'Plotter.zparms'
+</code></pre>
+
+<p><img alt="DipoleAntennaZParameters.png" src="../DipoleAntennaZParameters.png" /></p>
+<p><img alt="YUAntennaZParameters.png" src="../YUAntennaZParameters.png" /></p>
+<h3 id="second-run-to-compute-radiation-patterns">Second run to compute radiation patterns</h3>
+<p>Based on the <script type="math/tex">Z</script>-parameter data, it looks like the <script type="math/tex">N=2</script> Yagi
+antenna wants to radiate at a frequency around 3.2 GHz. So let's
+drive the antenna with a unit-strength current at that frequency
+and visualize the resulting radiation patterns by plotting
+outgoing Poynting flux on a hemispherical surface.
+The simple shell script <a href="../RunScript.FieldPatterns"><code>RunScript.FieldPatterns</code></a>
+does this for the various antennas:</p>
+<pre><code class="bash">#!/bin/bash
+
+CODE=scuff-rf
+
+BASE=.
+export GEODIR=${BASE}/scuffgeoFiles
+export SCUFF_MESH_PATH=${BASE}/mshFiles
+
+ARGS=&quot;&quot;
+ARGS=&quot;${ARGS} --portfile ${BASE}/portFiles/Dipole.ports&quot;
+ARGS=&quot;${ARGS} --portcurrentFile ${BASE}/portcurrentFiles/Dipole.PortCurrents&quot;
+ARGS=&quot;${ARGS} --FVMesh Hemisphere.msh&quot;
+
+for GEOM in DipoleAntenna YUAntenna_N2 YUAntenna_N4
+do
+  ${CODE} ${ARGS} --geometry ${GEODIR}/${GEOM}_Medium.scuffgeo
+done
+</code></pre>
+
+<p>Notes:</p>
+<ul>
+<li>The file <a href="../Dipole.PortCurrents"><code>Dipole.PortCurrents</code></a> is a
+list of frequencies at which to run calculations and the currents 
+to force into each port at those frequencies. For a geometry
+with <script type="math/tex">N</script> ports, each line of this file has <script type="math/tex">2N+1</script> columns: the 
+frequency in GHz followed by the real and imaginary parts of 
+the current to force into each port. For the case at hand, we
+want to run at just the single frequency <script type="math/tex">f</script>=3.2 GHz with 
+a unit-strength current forced into port 1, so the <code>.PortCurrents</code> 
+file looks simply like </li>
+</ul>
+<pre><code> 3.2 1.0 0.0
+</code></pre>
+
+<ul>
+<li>The field-visualization mesh <code>Hemisphere.msh</code> is a <a class="wikilink" href="../../../gmsh/">gmsh</a> surface
+  mesh produced from the <a class="wikilink" href="../../../gmsh/">gmsh</a> geometry file 
+  <a href="../Hemisphere.geo"><code>Hemisphere.geo</code></a>. You can get higher-resolution images
+  by meshing this file with higher resolution.</li>
+</ul>
+<p>Running the above script produces files with names 
+like <code>YUAntenna_N2_Medium.Hemisphere.pp</code>
+showing outgoing Poynting flux plotted over the hemisphere mesh.
+Here's a composite image showing results for the isolated dipole
+and the <script type="math/tex">N=2</script> Yagi-Uda antennas, with
+the antenna meshes superposed (and enlarged by a factor of 5&times; to 
+make it easier to see them). The simple dipole antenna radiates
+isotropically, while the Yagi antenna exhibits high directivity.</p>
+<p><img alt="YUAntennaRadiationPatterns.png" src="../YUAntennaRadiationPatterns.png" /></p>
+<h3 id="python-driven-directivity-optimization">Python-driven directivity optimization</h3>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../../reference/TopLevel/" class="btn btn-neutral float-right" title="Top-level overview"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../PaulTrap/PaulTrap/" class="btn btn-neutral" title="Electrostatic fields of an electrode array"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    <!-- Copyright etc -->
+    </p>
+  </div>
+
+  <a href="http://homerreid.com/scuff-em"> 
+    <span class="SmallCaps">scuff-em</span>
+  </a> documentation, by
+  <a href="http://homerreid.com">Homer Reid</a>
+
+  <p>
+  <font size=-1>
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> 
+  using a customized theme modeled 
+  after the 
+  <a href="https://github.com/snide/sphinx_rtd_theme">theme</a>
+  provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  </font>
+
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../../PaulTrap/PaulTrap/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../../reference/TopLevel/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

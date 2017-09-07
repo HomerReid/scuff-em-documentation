@@ -1,0 +1,117 @@
+(**************************************************)
+(**************************************************)
+(**************************************************)
+GTwiddleK2E[Eps_,Mu_,Omega_,k_,qx_,qy_,qz_,Sign_]:=(
+  (-Omega*Mu/(2*qz))
+ *( {{1,0,0},{0,1,0},{0,0,1}}
+   -{ {qx*qx,qx*qy,Sign*qx*qz},
+      {qy*qx,qy*qy,Sign*qy*qz},
+      {Sign*qz*qx,Sign*qz*qy,qz*qz}
+    }/(k*k)
+  )
+)
+
+GTwiddleN2E[Eps_,Mu_,Omega_,k_,qx_,qy_,qz_,Sign_]:=(
+  (1/2)
+ *( { {0,    -Sign,     qy/qz},
+      {Sign,     0,    -qx/qz},
+      {-qy/qz, qx/qz,    0   }
+    }
+  )
+)
+
+GTwiddleK2H[Eps_,Mu_,Omega_,k_,qx_,qy_,qz_,Sign_]:=(
+  (-1/2)
+ *( { {0,    -Sign,     qy/qz},
+      {Sign,     0,    -qx/qz},
+      {-qy/qz, qx/qz,    0   }
+    }
+  )
+)
+
+GTwiddleN2H[Eps_,Mu_,Omega_,k_,qx_,qy_,qz_,Sign_]:=(
+  (-Omega*Eps/(2*qz))
+ *( {{1,0,0},{0,1,0},{0,0,1}}
+   -{ {qx*qx,qx*qy,Sign*qx*qz},
+      {qy*qx,qy*qy,Sign*qy*qz},
+      {Sign*qz*qx,Sign*qz*qy,qz*qz}
+    }/(k*k)
+  )
+)
+
+(**************************************************)
+(**************************************************)
+(**************************************************)
+(*qz[k_,qx_,qy_]:=Sqrt[k*k - qx*qx - qy*qy];*)
+Upper22[G_]:={ {G[[1,1]], G[[1,2]]},
+               {G[[2,1]], G[[2,2]]}
+             };
+
+Upper23[G_]:={ {G[[1,1]], G[[1,2]], G[[1,3]]},
+               {G[[2,1]], G[[2,2]], G[[2,3]]}
+             };
+
+MK=(  Upper22[GTwiddleK2E[EpsA,MuA,Omega,kA,qx,qy,qzA,+1]]
+     +Upper22[GTwiddleK2E[Eps1,Mu1,Omega,k1,qx,qy,qz1,-1]]
+   )
+
+MN=(  Upper22[GTwiddleN2H[EpsA,MuA,Omega,kA,qx,qy,qzA,+1]]
+     +Upper22[GTwiddleN2H[Eps1,Mu1,Omega,k1,qx,qy,qz1,-1]]
+   )
+
+(***************************************************)
+
+(***************************************************)
+(* Fourier components of tangential fields due to  *)
+(* point sources p, m in ambient medium            *)
+(***************************************************)
+EParTwiddle[p_,m_]:=(I/Omega)*
+(  Upper23[ GTwiddleK2E[EpsA,MuA,Omega,kA,qx,qy,qzA,-1]].p
+  +Upper23[ GTwiddleN2E[EpsA,MuA,Omega,kA,qx,qy,qzA,-1]].m
+);
+
+HParTwiddle[p_,m_]:=(I/Omega)*
+(  Upper23[ GTwiddleK2H[EpsA,MuA,Omega,kA,qx,qy,qzA,-1]].p
+  +Upper23[ GTwiddleN2H[EpsA,MuA,Omega,kA,qx,qy,qzA,-1]].m
+);
+
+(***************************************************)
+(***************************************************)
+(***************************************************)
+KTwiddle[p_,m_]:=Inverse[MK].(-EParTwiddle[p,m]);
+NTwiddle[p_,m_]:=Inverse[MN].(-HParTwiddle[p,m]);
+
+Rules1={ MuA->1, Mu1->1, EpsA->1, kA->k0, k1->Sqrt[Eps1]*k0,
+         qx^2 + qy^2 -> q2
+       }
+
+Rules2={qzA->Sqrt[k0*k0*-qx*qx-qy*qy], qz1->Sqrt[Eps1*k0*k0-qx*qx-qy*qy]};
+
+NRules={MuA->1, Mu1->1, EpsA->1, Eps1->1,
+        kA->k0, k1->k0, Omega->k0,
+        qzA->Sqrt[k0*k0-q2], qz1->Sqrt[k0*k0-q2],
+        q2->(qx*qx+qy*qy), qx->0.8, qy->0.9, k0->1.1}
+
+p={0,1,0};
+m={0,0,0};
+KT = FullSimplify[ KTwiddle[p,m]];
+NT = FullSimplify[ NTwiddle[p,m]];
+KTFull={KT[[1]], KT[[2]], 0};
+NTFull={NT[[1]], NT[[2]], 0};
+
+(* check that this vanishes *)
+EKTwiddleScatAbove=(
+ (GTwiddleK2E[EpsA,MuA,Omega,kA,qx,qy,qzA,+1].KTFull) /. {NRules}
+)
+
+ENTwiddleScatAbove=(
+ (GTwiddleN2E[EpsA,MuA,Omega,kA,qx,qy,qzA,+1].NTFull) /. {NRules}
+)
+
+EKTwiddleScatBelow=(
+ (GTwiddleK2E[EpsA,MuA,Omega,kA,qx,qy,qzA,-1].KTFull) /. {NRules}
+)
+
+ENTwiddleScatBelow=(
+ (GTwiddleN2E[EpsA,MuA,Omega,kA,qx,qy,qzA,-1].NTFull) /. {NRules}
+)
