@@ -1,0 +1,104 @@
+## Switch to a more informative command-line prompt
+
+# macOS Sierra 10.12.3, Xcode 8.1
+# 
+
+```bash
+% export PS1='$HISTCMD '`hostname`' $PWD <> '
+34 mac-56-129-14.mit.edu /Users/homereid <> 
+```
+
+## Install command-line tools in Apple developer suite
+
+```bash
+xcode-select --install
+```
+
+## Install some prerequisite packages
+
+```bash
+% brew update
+% brew install gcc --without-multilib
+% brew install autoconf automake gmsh hdf5 openblas
+```
+
+```bash
+ For compilers to find this software you may need to set:
+     LDFLAGS:  -L/usr/local/opt/openblas/lib
+     CPPFLAGS: -I/usr/local/opt/openblas/include
+```
+
+## Optional but highly recommended: Install OpenMPI 
+
+```bash
+% wget https://www.open-mpi.org/software/ompi/v3.0/downloads/openmpi-3.0.0.tar.bz2
+% bunzip2 -c openmpi-3.0.0.tar.bz2 | tar xvf -
+% cd openmpi-3.0.0
+% ./configure --prefix=${HOME}/codes
+% make install -j 4
+``` 
+
++ 
++ The phrase `--prefix=${HOME}/codes` in the 4th line says that we want the package to install itself in the `codes` subdirectory of our home directory (i.e. `/Users/homereid/codes` in my case). I find this to be a convenient destination for installing open-source packages, but you can specify any alternative destination you like.
++ The option `-j 4` in the last line assumes your machine has 4 CPU cores available for compilation. If instead you have e.g. 2 or 8 cores change this to `-j 2` or `-j 8`. You can find out how many cores you have using `sysctl:`
+
+```bash
+% sysctl -n hw.cpu
+4
+```
+
+If the MPI was successful, you can now set some environment variables
+to
+
+```bash
+% export CC=${HOME}/codes/bin/mpicc
+% export CXX=${HOME}/codes/bin/mpicxx
+```
+
+## Fetch and build latest version of SCUFF-EM source distribution
+
+```bash
+ % git clone https://GitHub.com/HomerReid/scuff-em.git
+ % cd scuff-em
+ % export CC="gcc-7 -fopenmp"
+ % export CXX="g++-7 -fopenmp"
+ % export CPPFLAGS="-I/usr/local/opt/openblas/include"
+ % export LDFLAGS"=-L/usr/local/opt/openblas/lib"
+ % export BLAS_LIBS="-lopenblas"
+ % sh autogen.sh --prefix=${HOME}/codes
+ % make install -j 4
+```
+
+
+```top
+Processes: 316 total, 3 running, 4 stuck, 309 sleeping, 1403 threads         12:29:14
+Load Avg: 3.30, 2.56, 2.93  CPU usage: 91.87% user, 5.91% sys, 2.21% idle
+SharedLibs: 249M resident, 46M data, 60M linkedit.
+MemRegions: 42918 total, 3887M resident, 174M private, 1518M shared.
+PhysMem: 12G used (1883M wired), 3933M unused.
+VM: 843G vsize, 621M framework vsize, 0(0) swapins, 0(0) swapouts.
+Networks: packets: 8142915/2134M in, 622338/341M out.
+Disks: 13435970/58G read, 584107/23G written.
+
+PID    COMMAND      %CPU  TIME     #TH   #WQ  #PORT MEM    PURG   CMPRS  PGRP  PPID
+83844  scuff-rf     368.3 00:18.89 7/7   0    22    10M    0B     0B     83844 7377
+83816  ocspd        0.0   00:00.02 2     1    32    1852K  0B     0B     83816 1
+80987  bash         0.0   00:00.12 1     0    16    816K   0B     0B     80987 80986
+80986  login        0.0   00:00.01 2     1    29    1064K  0B     0B     80986 7374
+```
+
+#export CC=${HOME}/codes/bin/mpicc
+#export CXX=${HOME}/codes/bin/mpicxx
+export CC="gcc-7 -fopenmp"
+export CXX="g++-7 -fopenmp"
+          
+#        
+export CPPFLAGS="-I/usr/local/opt/openblas/include"
+export LDFLAGS="-L/usr/local/opt/openblas/lib"
+             
+sh ./autogen.sh --prefix=${HOME}/codes
+
+export PATH=${PATH}:${HOME}/codes/bin
+cd ${HOME}/codes/share/scuff-em/examples/YagiUdaAntennas
+
+
