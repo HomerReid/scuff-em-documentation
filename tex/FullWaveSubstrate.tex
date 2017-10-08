@@ -6,6 +6,7 @@
 \graphicspath{{figures/}}
 \renewcommand{\wt}{\widetilde}
 \newcommand{\vbCSlash}{\backslash\hspace{-0.085in}\vb C}
+\newcommand{\JSlash}{\backslash\hspace{-0.085in}J}
 
 %------------------------------------------------------------
 %------------------------------------------------------------
@@ -215,11 +216,11 @@ where $\vbrho=(x,y)$ and the components of $\bmc S$ are
 I will adopt the convention that the lower (upper) bounding surface
 for each region is the positive (negative) bounding surface
 for that region in the usual sense of {\sc scuff-em} regions and
-surfaces (in which the sign of a (surface,region) pair $(\mc S, \mc R)$ 
+surfaces (in which the sign of a \{surface,region\} pair $\{\mc S, \mc R\}$ 
 is the sign with which surface currents on $\mc S$ contribute to
-fields in $\mc R$.
+fields in $\mc R$).
 Thus, at a point $\vb x=(\vbrho,z)$ in the interior of layer $n$
-($z_{n-1} < z < z_n$), the six-vector of total fields
+($z_{n-1} > z > z_n$), the six-vector of total fields
 $\bmc F=\hbox{\scriptsize{
  $\left(\begin{array}{c} \vb E \\ \vb H\end{array}\right)$}}
 $
@@ -228,14 +229,14 @@ reads
 \numeq{Fn}
 {  \bmc F_n(\vbrho, z)
   =
-  - \bmc G_n(z_{n-1}) \star \bmc S_{n-1}
-  + \bmc G_n(z_{n}) \star \bmc S_{n}
+  - \bmc G^n(z_{n-1}) \star \bmc S_{n-1}
+  + \bmc G^n(z_{n}) \star \bmc S_{n}
   + \bmc F\sups{ext}_n(\vbrho, z)
 }
 %====================================================================%
 where $\bmc F\sups{ext}_n$
 are the externally-sourced (incident) fields
-due to sources in layer $n$, $\bmc G_n$ is the dyadic
+due to sources in layer $n$, $\bmc G^n$ is the homogeneous dyadic
 Green's function for material layer $n$, and $\star$
 is shorthand for the convolution operation
 %====================================================================%
@@ -251,64 +252,56 @@ is shorthand for the convolution operation
 %====================================================================%
 where the integral extends over the entire interfacial plane.
 I will evaluate convolutions of this form using the
-2D Fourier representation\footnote{An equivalent alternative
-expression for $\wt{\bmc G}$ in equation(\ref{GFourier}b) is
-$$\wt{\bmc G}=\frac{1}{2}\left(\begin{array}{cc}
- -\frac{\omega \mu}{q_z}\wt{\vb G} & \wt{\vbCSlash} \\
- -\wt{\vbCSlash} & -\frac{\epsilon \mu}{q_z}\wt{\vb G}
-  \end{array}\right),
-  \qquad \vbCSlash^\pm =
-  \left(\begin{array}{ccc} 
-      0 & \mp 1 & \sin\theta \\ 
-  \pm 1 & 0     &-\cos\theta \\ 
-  -\sin\theta & \cos\theta & 0
- \end{array}\right),
-  \qquad
- \sin\theta=\frac{q_y}{q_z}, \qquad 
- \cos\theta=\frac{q_x}{q_z}.$$.}of $\bmc G$:
+2D Fourier representation of $\bmc G$:
 %====================================================================%
 \begin{subequations}
 \begin{align}
-  \bmc G_n(\vbrho, z)
+  \bmc G^n(\vbrho, z)
  &=
   \int \frac{d^2 \vb q}{(2\pi)^2}
-  \wt{\bmc G_n}(\vb q, z) e^{i\vb q \cdot \vbrho}
+  \wt{\bmc G^n}(\vb q, z) e^{i\vb q \cdot \vbrho}
 \\
 %--------------------------------------------------------------------%
-   \wt{\bmc G}_n(\vb q, z)
-&= \frac{i}{2q_z}
+   \wt{\bmc G^n}(\vb q, z)
+&= \frac{1}{2}
    \left(\begin{array}{cc}
-   ikZ_0 Z_n \wt{\vb G}^\pm & ik\wt{\vb C}^\pm \\
-  -ik\wt{ \vb C}^\pm & \frac{ik}{Z_0 Z_n}\wt{\vb G}^\pm
+      -\frac{\omega \mu_0 \mu_n}{q_{zn}} \wt{\vb G}^\pm
+    & +\wt{\vb C}^\pm 
+    \\[5pt]
+      -\wt{\vb C}^\pm
+    & -\frac{\omega \epsilon_0 \epsilon_n}{q_{zn}} \wt{\vb G}^\pm
    \end{array}\right)e^{iq_z |z|}
 \\[10pt]
 %--------------------------------------------------------------------%
-   \wt{\vb G}^\pm(k, \vb q) 
+   \wt{\vb G}^\pm(\vb q, k)
 &= \left(\begin{array}{ccc}
-   1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1
+   1 & 0 & 0 \\[2pt] 0 & 1 & 0 \\[2pt] 0 & 0 & 1
    \end{array}\right)
    -
    \frac{1}{k^2}
    \left(\begin{array}{ccc}
-    q_x^2    & q_xq_y       & \pm q_x q_z \\
-    q_y q_x  & q_y^2        & \pm q_y q_z \\
+    q_x^2    & q_xq_y       & \pm q_x q_z \\[2pt]
+    q_y q_x  & q_y^2        & \pm q_y q_z \\[2pt]
  \pm q_z q_x  & \pm q_z q_y  & q_z^2 
    \end{array}\right)
 \\[10pt]
 %--------------------------------------------------------------------%
-   \wt{\vb C}^\pm(k, \vb q) 
+   \wt{\vb C}^\pm(\vb q, k)
 &=
-   \frac{1}{k} 
    \left(\begin{array}{ccc}
-   0           & \pm q_z &    -q_y \\
-   \mp iq_z    & 0       &     q_x \\
-        q_y    & -q_x    &      0
+   0           & \mp 1     &    +q_y/q_z \\[2pt]
+   \pm 1       & 0         &    -q_x/q_z \\[2pt]
+  -q_y/q_z     & +q_x/q_z  &           0
   \end{array}\right)
-\\
-  q_z &\equiv \sqrt{k^2 - |\vb q|^2},
- \qquad \pm = \text{sign} z.
 \end{align}
 \label{GFourier}
+\begin{equation}
+  k_n\equiv \sqrt{\epsilon_0 \epsilon_n \mu_0 \mu_n}\cdot \omega,
+  \qquad 
+  q_z \equiv \sqrt{k^2 - |\vb q|^2},
+ \qquad 
+  \pm = \text{sign} z.
+\end{equation}
 \end{subequations}
 %====================================================================%
 \noindent With this representation, convolutions like (\ref{ConvolutionDef})
@@ -323,8 +316,10 @@ become products in Fourier space:
 \end{align*}
 %====================================================================%
 
-\paragraph{Matching tangential fields at layer boundaries}
+\paragraph{Surface currents from incident fields.}
 
+To determine the surface currents induced by given incident-field
+sources, I apply boundary conditions.
 The boundary condition at $z=z_n$ is that the tangential $\vb E, \vb H$
 fields be continuous: in Fourier space, we have
 %====================================================================%
@@ -358,117 +353,355 @@ Then equation (\ref{BCEquation}) reads
 %====================================================================%
 \begin{align*}
 &
--\wt{\bmc G}_{n\parallel}(z_n-z_{n-1})\cdot \wt{\bmc S}_{n-1}
-+\wt{\bmc G}_{n\parallel}(0^+) \cdot \wt{\bmc S}_{n}
+-\wt{\bmc G^n}_{\parallel}(z_n-z_{n-1})\cdot \wt{\bmc S}_{n-1}
++\wt{\bmc G^n}_{\parallel}(0^+) \cdot \wt{\bmc S}_{n}
 +\wt{\bmc F}\sups{ext}_{n\parallel}(z_n)
 \\
 &\qquad=
--\wt{\bmc G}_{n+1\parallel}(0^-) \cdot \wt{\bmc S}_{n}
-+\wt{\bmc G}_{n+1\parallel}(z_n-z_{n+1})\cdot \wt{\bmc S}_{n+1}
+-\wt{\bmc G^{n+1}}{\parallel}(0^-) \cdot \wt{\bmc S}_{n}
++\wt{\bmc G^{n+1}}{\parallel}(z_n-z_{n+1})\cdot \wt{\bmc S}_{n+1}
 +\wt{\bmc F}\sups{ext}_{n+1\parallel}(z_n)
 \end{align*}
+or
 %====================================================================%
-Writing down this equation for all $N$ layers yields a $4N\times 4N$ 
-system of linear equations (with triadiagonal $4\times 4$ block form)
-relating the surface currents on all layers
-to the external fields due to sources in all regions
-$(z_{mn}\equiv z_m=z_n)$:
+\numeq{MSFSlice}
+{
+  \vb M_{n,n-1}  \cdot \wt{\bmc S}_{n-1}
+ +\vb M_{n,n}    \cdot \wt{\bmc S}_{n}
+ +\vb M_{n,n+1}  \cdot \wt{\bmc S}_{n+1}
+ =  \wt{\bmc F}\sups{ext}_{n+1\parallel}(z_n)
+   -\wt{\bmc F}\sups{ext}_{n\parallel}(z_n)
+}
+%====================================================================%
+with the $4\times 4$ matrix blocks\footnote{The $4\times 4$ $\vb M$
+blocks here have $2\times 2$ block structure:
+%====================================================================%
+\begin{align}
+ \vb M_{n, n}
+   &= \sum_{r\in \{n, n+1\}}
+     \frac{1}{2}
+     \left(\begin{array}{cc}
+     -\frac{\omega\epsilon_r}{Z_0 q_{zr}}\vb g(k_r, \vb q)
+   & 0
+ \\
+     0
+   & -\frac{\omega\mu_r Z_0 }{q_{zr}}\vb g(k_r, \vb q)
+   \end{array}\right)
+\\
+ \vb M_{n, n \pm 1}
+   &= \frac{1}{2}
+     \left(\begin{array}{cc}
+     -\frac{\omega\epsilon_r}{Z_0 q_{zr}}\vb g(k_r, \vb q)
+   & \vb c^\pm
+ \\
+     -\vb  c^\pm
+   & -\frac{\omega\mu_r Z_0 }{q_{zn^*}}\vb g(k_r, \vb q)
+     \end{array}\right)e^{iq_{zr}|z_n-z_{n\pm 1}|}
+\end{align}
+%====================================================================%
+where I put
+$  r \equiv  \begin{cases} n,   \qquad &\text{ for } \vb M_{n,n-1} \\
+                           n+1, \qquad &\text{ for } \vb M_{n,n+1}
+              \end{cases}.
+$
+and 
+%====================================================================%
+$$ \vb g(k; \vb q) =
+   \vb 1 - \frac{\vb q\vb q^\dagger}{k^2},
+   \qquad 
+   \vb c^\pm
+   =\left(\begin{array}{cc} 0 & \mp 1 \\ \pm 1 & 0 \end{array}\right)
+$$}
+%====================================================================%
 %====================================================================%
 \begin{subequations}
 \begin{align}
-&
- \Big[ \wt{\bmc G}_{0\parallel}(0^+)
-      +\wt{\bmc G}_{1\parallel}(0^-)
- \Big]\wt{\bmc S}_1
- -\wt{\bmc G}_{1\parallel}(z_{12})\wt{\bmc S}_2
-   = \wt{\bmc F}_{1\parallel}(z_1) - \wt{\bmc F}_{0\parallel}(z_1)
+  \vb M_{n,n-1} &= -\wt{\bmc G^n}_{\parallel}(z_n-z_{n-1}) 
 \\
-&
- -\wt{\bmc G}_{1\parallel}(-z_{12})\wt{\bmc S}_1
- + \Big[ \wt{\bmc G}_{1\parallel}(0^+)
-        +\wt{\bmc G}_{2\parallel}(0^-)
-   \Big]\wt{\bmc S}_2
- -\wt{\bmc G}_{2\parallel}(z_{23})\wt{\bmc S}_3
-   = \wt{\bmc F}_{2 \parallel}(z_2) - \wt{\bmc F}_{1\parallel}(z_2)
+  \vb M_{n,n} &= +\wt{\bmc G^n}_{\parallel}(0^+)
+                 +\wt{\bmc G^n}_{\parallel}(0^-)
 \\
-&\hspace{1in}\vdots \hspace{1in} \vdots \hspace{1in} \vdots \hspace{1in}
-\nonumber\\[5pt]
-&
- -\wt{\bmc G}_{n\parallel}(-z_{n-1,n})\wt{\bmc S}_n
- + \Big[ \wt{\bmc G}_{n\parallel}(0^+)
-        +\wt{\bmc G}_{n+1\parallel}(0^-)
-   \Big]\wt{\bmc S}_n
- -\wt{\bmc G}_{n+1\parallel}(z_{n,n+1})\wt{\bmc S}_{n+1}
-   = \wt{\bmc F}_{n \parallel}(z_n) - \wt{\bmc F}_{n-1,\parallel}(z_n)
-%\\
-%\intertext{If a ground plane is present, the final two equations
-%in the hierarchy read}
-% -\wt{\bmc G}_{(N-1)\parallel}(-z_{N-1,N})\wt{\bmc S}_{N-1}
-% + \Big[ \wt{\bmc G}_{N-1\parallel}(0^+)
-%        +\wt{\bmc G}_{N\parallel}(0^-)
-%   \Big]\wt{\bmc S}_N
-% -\wt{\bmc G}_{N\parallel}(z_{N,N+1})\wt{\bmc S}_{N+1}
-%   &= \wt{\bmc F}_{N \parallel}(z_N) - \wt{\bmc F}_{N-1,\parallel}(z_N)
-%\\
-% -\wt{\bmc G}_{N\parallel}(-z_{N+1,N}) \wt{\bmc S}_{N}
-% +\wt{\bmc G}_{N\parallel}(0^+) \wt{\bmc S}_{N+1}
-%   &= - \wt{\bmc F}_{N,\parallel}(z_{N+1})
-%\intertext{If a ground plane is absent, the final equation
-%in the hierarchy reads}
-% -\wt{\bmc G}_{(N-1)\parallel}(-z_{N-1,N})\wt{\bmc S}_{N-1}
-% + \Big[ \wt{\bmc G}_{N-1\parallel}(0^+)
-%        +\wt{\bmc G}_{N\parallel}(0^-)
-%   \Big]\wt{\bmc S}_N
-%   &= \wt{\bmc F}_{N \parallel}(z_N) - \wt{\bmc F}_{N-1,\parallel}(z_N)
+  \vb M_{n,n+1} &= -\wt{\bmc G^n}_{\parallel}(z_n-z_{n+1}) 
 \end{align}
-\label{MatchingConditions}
+\label{MChunks}
 \end{subequations}
 %====================================================================%
-Here $\wt{\bmc F}_{\parallel r\to s}$
-denotes the (Fourier-space representation of the) tangential components
-of the region-$r$-sourced external fields evaluated at $z=z_s$,
-and $\vb M_{s^\prime, s}$ describes the contributions of surface currents
-at $z=z_s$ to the tangential fields at $z=z_s^\prime$; that is,
-$\vb M_{s^\prime, s}$ is a $4\times 4$ matrix that operates on
-$\wt{\bmc S}_s$ to yield the (Fourier components of) the 
-contribution of $\bmc S_s$ to the tangential fields at $z_{s^\prime}$.
-This matrix has $2\times 2$ block structure:
+Writing down equation (\ref{MSFSlice}) equation for all $N$ dielectric
+interfaces yields a $4N\times 4N$ 
+system of linear equations, with triadiagonal $4\times 4$ block form,
+relating the surface currents on all layers
+to the external fields due to sources in all regions:
 %====================================================================%
-\begin{align}
- \vb M_{s \pm 1, s}
- &=\frac{1}{2}
-   \left(\begin{array}{cc}
-     \frac{i k_r Z_0 Z_r}{q_{zr}}\vb g(\vb q)  & \pm \vb c
+\numeq{Msf}{\vb M\cdot \vb s = \vb f}
+%====================================================================%
+where $\vb M$ is the $4N\times 4N$ block-tridiagonal matrix
+(\ref{MChunks}) and where the $4N$-vectors $\vb s$, $\vb f$ read
+%====================================================================%
+$$ 
+   \vb s=\left(\begin{array}{c}
+   \wt{\bmc S}_1 \\ \wt{\bmc S}_2 \\ \wt{\bmc S}_3 \\ \vdots \\
+   \wt{\bmc S}_N
+   \end{array}\right),
+\qquad 
+   \vb f=\left(\begin{array}{c}
+  -\wt{\bmc F}_{1\parallel}(z_1)
 \\
-     \mp \vb c & \frac{i k_r}{Z_0 Z_r q_{zr}}\vb g(\vb q)
-  \end{array}\right),
-  \qquad r=\text{min}\{s\pm 1, s\}
+   \wt{\bmc F}_{1\parallel}(z_2)
+  -\wt{\bmc F}_{2\parallel}(z_2)
 \\
-%====================================================================%
- \vb M_{ss}
-&=
- \sum_{r\in \{s-1, s\}}
-   \left(\begin{array}{cc}
-     \frac{i k_r Z_0 Z_r}{q_{zr}}\vb g(\vb q)  & 0
+   \wt{\bmc F}_{2\parallel}(z_3)
+  -\wt{\bmc F}_{3\parallel}(z_3)
 \\
-     0         & \frac{i k_r}{Z_0 Z_r q_{zr}}\vb g(\vb q)
-  \end{array}\right)
-\end{align}
+  \vdots
+\\
+   \wt{\bmc F}_{N,\parallel}(z_{N-1})
+  -\wt{\bmc F}_{N\parallel}(z_{N-1})
+   \end{array}\right).
+$$
 %====================================================================%
-where $\vb g$ and $\vb c$ denote 2$\times$2 matrices:
+Solving (\ref{Msf}) yields the induced surface currents on all
+layers in terms of the incident fields:
 %====================================================================%
-\numeq{gcDef}
-{ \vb g(k; \vb q)
-  =
-  \vb 1 - \frac{\vb q\vb q^\dagger}{k^2},
-  \qquad 
-  \vb c^\pm(k; \vb q)
-  =\frac{q_z(k;\vb q)}{k}
-   \left(\begin{array}{cc} 0 & \pm 1 \\ \mp 1 & 0 \end{array}\right)
+$$ \vb s = \vb W \cdot \vb f \qtq{where} \vb W\equiv \vb M^{-1} $$
+%====================================================================%
+or, more explicitly,
+%====================================================================%
+\numeq{sWf}
+{
+ \wt{\bmc S}_n = \sum_{m} W_{nm} \vb f_m
 }
 %====================================================================%
 
-\subsection*{DGF for sources above single layer}
+%====================================================================%
+%====================================================================%
+%====================================================================%
+\subsubsection*{Surface currents induced by point sources}
+
+For DGF computations the incident fields arise from
+a single point source---say, a $j$-directed source
+in region $s$.
+Then the only nonzero length-$4$ blocks of the RHS vector in
+(\ref{Msf}) are $\vb f_{s-1}, \vb f_s$ with components
+($\ell=\{1,2,4,5\}$)
+%====================================================================%
+\numeq{fsm1fs}
+ { \Big(\vb f_{s-1}\Big)_\ell = -\wt {\mc G_{\ell j}^{s}}_{\parallel}(z\subt{S}-z_{s-1}),
+   \qquad
+   \Big(\vb f_{s}\Big)_\ell   = +\wt {\mc G_{\ell j}^s}_{\parallel}(z\subt{S}-z_{s})
+ }
+%====================================================================%
+and the surface currents on interface layer $n$ are obtained
+by solving (\ref{sWf}):
+%====================================================================%
+\begin{align}
+ \wt{\bmc S}_n 
+&= \vb W_{n,s-1} \, \vb f_{s-1} + \vb W_{n,s} \, \vb f_{s}
+\nn
+&= -\sum_{p=0}^1 (-1)^p \vb W_{n,s-1+p}
+    \cdot
+    \wt{\bmc G^s}_{\parallel, j}(z\subt{S}-z_{s-1+p})
+\label{SWG}
+\end{align}
+%====================================================================%
+
+%====================================================================%
+%====================================================================%
+%====================================================================%
+\subsubsection*{Fields due to surface currents}
+
+Given the surface currents induced by a $j$-directed point
+source at $\vb x\subt{S}$, I evaluate the fields due to
+these currents to get DGF components.
+If the evaluation point $\vb x\subt{D}$ lies in region $d$,
+then the fields receive contributions from the surface currents
+at $z_{d-1}$ and $z_d$, propagated by the homogeneous DGF
+for region $d$:
+%====================================================================%
+\begin{align*}
+\wt{\bmc F}(z\subt{D}) 
+&= -\wt{\bmc G^d}(z\subt{D} - z_{d-1}) \cdot \wt{\bmc S}_{d-1}
+   +\wt{\bmc G^d}(z\subt{D} - z_d)     \cdot \wt{\bmc S}_{d}
+\intertext{(The minus sign in the first term arises because, in my convention,
+surface currents on the upper surface of a region contribute to the fields
+in that region with a minus sign). Inserting (\ref{SWG}), the $i$ component
+here---which is the $ij$ component of the substrate DGF---is}
+\wt{\mc G\sups{subs}}_{ij}(z\subt{D},z\subt{S})
+\equiv
+\wt{\mc F_i}(z\subt{D})
+&= \sum_{q=0}^1 (-1)^{p+q}
+   \wt{\bmc G^d}_{i,\parallel} (z_{d-1+q}-z\subt{D})
+   \vb W_{d-1+q,s-1+p}
+   \wt{\bmc G^s}_{\parallel, j} (z\subt{S} - z_{s-1+p})
+\end{align*}
+%====================================================================%
+Inverse-Fourier-transforming back to real space yields
+%====================================================================%
+\numeq{IFT2D}
+{
+  \bmc G\sups{subs}(\vbrho\subt{D}, z\subt{D}; \vbrho\subt{S},z\subt{S})
+= \int \frac{d^2 \vb q}{(2\pi)^2}
+  \wt{\bmc G\sups{subs}}
+      (\vb q; z\subt{D};z\subt{S}) e^{i\vb q \cdot (\vbrho \subt{D}-\vbrho\subt{S})}.
+}
+
+%====================================================================%
+%====================================================================%
+%====================================================================%
+\subsubsection*{Reduction to 1D integrals}
+
+To reduce the two-dimensional $\vb q$ integrals to 1D integrals,
+it is useful to think about the vector structure of integrand
+of (\ref{IF2TD}).
+The $6\times 6$ integrand consists of 4 $3\times 3$ quadrants,
+%====================================================================%
+$$ \wt{\bmc G}=
+    \left(\begin{array}{cc}
+     \wt{\bmc G\supt{EE}} & \wt{\bmc G\supt{EM}}  \\
+     \wt{\bmc G\supt{ME}} & \wt{\bmc G\supt{MM}}
+    \end{array}\right)
+$$
+%====================================================================%
+Each $3\times 3$ quadrant has the structure
+%====================================================================%
+$$ \wt{\bmc G}\supt{PQ}=
+   \left(\begin{array}{ccc}
+   g^0_{xx} + g^2_{xx} \hat{q}_x \hat{q}_x & 
+   g^0_{xy} + g^2_{xy} \hat{q}_x \hat{q}_y & 
+   g^0_{xz} + g^1_{xz} \hat{q}_x \\
+   g^0_{yx} + g^2_{yx} \hat{q}_y \hat{q}_x &
+   g^0_{yy} + g^2_{yy} \hat{q}_y \hat{q}_y &
+   g^0_{yz} + g^1_{yz} \hat{q}_y \\
+   g^0_{xz} + g^1_{xz} \hat{q}_x &
+   g^0_{yz} + g^1_{yz} \hat{q}_y & 
+   g^0_{zz}
+   \end{array}\right)
+$$
+%====================================================================%
+where $\hat{q}_{x,y}  = \frac{q_{x,y}}{|\vb q|}$ and
+where $g_{ij}^{0,1,2}$ depend on $|\vb q|$ but not separately
+on $q_x, q_y.$
+The integral of e.g. the $xz$ component in (\ref{IF2TD}) then takes the form
+%====================================================================%
+\begin{align*}
+ \mc G^{pq}_{xz}
+&= \int \frac{d^2 \vb q}{(2\pi)^2}
+  e^{i\vb q \cdot \vbrho} \Big[ g^0_{xz} + g^1_{xz} \hat{q}_x\Big]
+\\
+&= \int_0^\infty \frac{q dq}{2\pi}
+   \Bigg[ g^0_{xz}(q)\cdot 
+          \underbrace{ \frac{1}{2\pi}
+                       \int_0^{2\pi} e^{iq\rho\cos\theta}\,d\theta
+                     }_{J_0(q\rho)}
+         +g^1_{xz}(q)
+          \underbrace{ \frac{1}{2\pi}
+                       \int_0^{2\pi} \cos\theta \, e^{iq\rho\cos\theta}\,d\theta
+                     }_{iJ_1(q\rho)}
+   \Bigg]
+\\
+&=\int_0^\infty \frac{qdq}{2\pi}
+   \Big[  g^0_{xz}(q) J_0(q\rho) + ig^1_{xz}(q) J_1(q\rho) \Big]
+\end{align*}
+%====================================================================%
+where I used the table of integrals in Figure \ref{BesselIntegralTable}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection*{Evaluation of 1D integrals}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{align}
+ \int_0^\infty f(q) qdq
+&= \underbrace{\int_0^{q_0} f(q) qdq}_{\mc I^1}
+  +\underbrace{\int_{q_0}^\infty f(q) qdq}_{\mc I^2}
+\\
+\mc I^1&\xrightarrow{q=\sqrt{q_0^2 - q_z^2}, \qquad q\,dq=q_z \, dq_z}
+ q_0^2 \int_0^1 f(q(u)) u\,du, 
+ \qquad q_z\equiv uq_0, 
+ \qquad q(u)\equiv q_0\sqrt{1-u^2}
+\\
+\mc I^2&\xrightarrow{q=q_0\left(1 + \frac{u}{1-u}\right),
+                     qdq=\frac{q_0^2}{(1-u)^3}}
+ q_0^2 \int_0^1 \frac{f\big(q(u)\big)}{(1-u)^3}du:w
+,
+ \qquad q(u)\equiv q_0\pf{1}{1-u}, q_z\equiv i\sqrt{q_0^2 + q^2(u)}
+\end{align}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}
+$$
+ \frac{1}{2\pi} 
+ \int_0^{2\pi} e^{i q \rho \cos(\theta_q -\theta_\rho)}
+ \left\{\begin{array}{c}
+ 1 \\[5pt]
+ \cos\theta_q \\[5pt]
+ \sin\theta_q \\[5pt]
+ \cos^2\theta_q \\[5pt]
+ \cos\theta_q \sin\theta_q \\[5pt]
+ \sin^2\theta_q \\
+ \end{array}\right\}
+ d\theta_q 
+%--------------------------------------------------------------------%
+= \left\{ \begin{array}{l}
+    J_0 (q\rho)                           \\[5pt]
+    i J_1(q\rho) \cos \theta_\rho          \\[5pt]
+    i J_1(q\rho) \sin \theta_\rho          \\[5pt]
+    - J_2(q\rho) \cos^2\theta_\rho + \frac{J_1(q\rho)}{q\rho} \\[5pt]
+    -J_2(q\rho) \cos\theta_\rho \sin \theta_\rho              \\[5pt]
+    - J_2(q\rho) \sin^2 \theta_\rho + \frac{J_1(q\rho)}{q\rho} 
+  \end{array}\right\},
+$$
+\caption{Table of integrals used to reduce 2D integrals over $\vb q$ to
+         1D integrals over $|q|$.}
+\label{BesselIntegralTable}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+surface currents $\bmc S={\wt{\vb K} \choose \wt{\vb N}}$.
+The quantities $\wt{\vb K}$ and $\wt{\vb N}$ are 2-vectors
+and must be linear combinations of the only 2-vectors in
+the problem,
+which are $\vbhat{q}\equiv \frac{\vb q}{|\vb q|}$,
+$\vbhat{n}$ (the orientation of the point source), and 
+$\vbhat{n}\times \vbhat{q}$.
+Thus I expect a vector structure of the form
+%====================================================================%
+\begin{subequations}
+\begin{align}
+ \wt{\vb K} &=  k\supt{A}(q)\vbhat{n}_\parallel + k\supt{B}(q)\vbhat{q}
+               +k\supt{C}(q)(\vbhat{n}\times \vbhat{q})
+\\
+ \wt{\vb N} &=  n\supt{A}(q)\vbhat{n}_\parallel + n\supt{B}(q)\vbhat{q}
+               +n\supt{C}(q)(\vbhat{n}\times \vbhat{q})
+\end{align}
+\label{KNVectorStructure}
+\end{subequations}
+%====================================================================%
+where $\{k,n\}\supt{A,B,C}$ are scalar-valued functions of $q=|\vb q|$
+alone (i.e. they do not depend separately on $q_x, q_y$).
+(The $\parallel$ subscript on $\vbhat{n}$ in the first
+term is just a reminder that that term vanishes for $z$-directed
+point sources.)
+
+The point of the explicit decomposition (\ref{KNVectorStructure})
+is that it allows us to reduce the 2D integrals in (\ref{IFT2D})
+to 1D integrals using the following table (here $f$ is a 
+general scalar-valued function of $|\vb q|$):
+%====================================================================%
+\begin{align*}
+  \int \frac{d^2 \vb q}{(2\pi)^2} f(\vb q) \, \vb G^\pm(\vb q, k) \cdot \vbhat{n}
+\end{align*}
+
+%====================================================================%
+%====================================================================%
+%====================================================================%
+\subsection*{Special case: DGF for sources above single layer}
 
 The simplest case is that in which we have only a single
 material interface, i.e. the geometry consists of two
@@ -595,7 +828,7 @@ $$ q_z \equiv \sqrt{k^2 - |\vb q|^2},
 %--------------------------------------------------------------------%
    \qquad
 %--------------------------------------------------------------------%
-   \vb q\subt{3D}\equiv
+   \vb q\supt{3D}\equiv
    \left(\begin{array}{c}q_x \\ q_y \\ \pm q_z \end{array}\right), 
 %--------------------------------------------------------------------%
    \qquad
@@ -611,8 +844,8 @@ For arbitrary $\vb q$ I define generalized\footnote{These
 are ``generalized'' plane waves in the sense that $q_z$ is 
 imaginary for sufficiently large $\vb q$, in which case the 
 waves are evanescent.} transverse-electric and
-transverse-magnetic plane waves propagating in the direction
-of $\vb q\subt{3D}$:
+transverse-magnetic plane waves propagating with wavevector
+$\vb q\supt{3D}$:
 %====================================================================%
 $$\begin{array}{ccccccc}
  \vb E^{\pm} \subt{TE}(\vb x; k; \vb q)
@@ -631,13 +864,13 @@ $$\begin{array}{ccccccc}
 %====================================================================%
 $$ \vb x=(\vbrho, z),
    \qquad
-   E_0 \equiv 1 \text{ volt/$\mu$m}, \qquad H_0\equiv \frac{E_0}{Z_0}.
+   E_0 \equiv 1 \text{ volt/$\mu$m}, \qquad H_0\equiv \frac{E_0}{Z_0}
 $$
 %====================================================================%
 where $\vb P$ and $\overline{\vb P}$ are unit-magnitude
 polarization vectors with the properties
 that \textbf{(1)} both $\vb P$ and $\overline{\vb P}$ are
-orthogonal to $\vb k\subt{3D}$, and
+orthogonal to $\vb k\supt{3D}$, and
 \textbf{(2)} $\vb P$ is orthogonal to $\vbhat{z}$ (i.e. ``transverse'').
 %====================================================================%
 $$ \vb P(k, \vb q) \equiv
@@ -645,7 +878,7 @@ $$ \vb P(k, \vb q) \equiv
    \left(\begin{array}{c}-q_y \\ q_x \\ 0 \end{array}\right),
    \qquad
    \overline{\vb P}(k, \vb q) \equiv
-   \frac{1}{k}\Big[ \vb q\subt{3D} \times \vb P(\vb q) \Big]
+   \frac{1}{k}\Big[ \vb q\supt{3D} \times \vb P(\vb q) \Big]
    =
    \frac{1}{k |\vb q|}
    \left(\begin{array}{c} \mp q_x q_z \\ \mp q_y q_z \\ q_x^2 + q_y^2 
@@ -707,33 +940,33 @@ three Cartesian directions:
 \begin{align}
  \vb E\supt{ED}\Big(\vb x_d; \big\{p_0 \vbhat{x}, \vb x_s \big\}\Big)
 &=\pf{k^2 p_0}{\epsilon_0 E_0}
- \int \frac{d \vb k}{(2\pi)^2} 
-   \bigg\{ C^{x}\subt{TE}(\vb k)
+ \int \frac{d \vb q}{(2\pi)^2} 
+   \bigg\{ C^{x}\subt{TE}(\vb q)
            \vb E^\pm\subt{TE}\Big(\vb x_d-\vb x_s; k; \vb q\Big)
           + 
-           C^{x;\pm}\subt{TM}(\vb k)
+           C^{x;\pm}\subt{TM}(\vb q)
            \vb E^\pm\subt{TM}\Big(\vb x_d-\vb x_s; k; \vb q\Big)
    \bigg\}
 \\[5pt]
 %--------------------------------------------------------------------%
  \vb E\supt{ED}\Big(\vb x_d; \big\{p_0 \vbhat{y}, \vb x_s \big\}\Big)
 &=\pf{k^2 p_0}{\epsilon_0 E_0}
- \int \frac{d \vb k}{(2\pi)^2} 
-   \bigg\{ C^{y}\subt{TE}(\vb k)
+ \int \frac{d \vb q}{(2\pi)^2} 
+   \bigg\{ C^{y}\subt{TE}(\vb q)
            \vb E^\pm\subt{TE}\Big(\vb x_d-\vb x_s; k; \vb q\Big)
           + 
-           C^{y;\pm}\subt{TM}(\vb k)
+           C^{y;\pm}\subt{TM}(\vb q)
            \vb E^\pm\subt{TM}\Big(\vb x_d-\vb x_s; k; \vb q\Big)
    \bigg\}
 \\[5pt]
 %--------------------------------------------------------------------%
  \vb E\supt{ED}\Big(\vb x_d; \big\{p_0 \vbhat{z}, \vb x_s \big\}\Big)
 &=\pf{k^2 p_0}{\epsilon_0 E_0}
- \int \frac{d \vb k}{(2\pi)^2} 
-   \bigg\{ C^{z}\subt{TE}(\vb k)
+ \int \frac{d \vb q}{(2\pi)^2} 
+   \bigg\{ C^{z}\subt{TE}(\vb q)
            \vb E^\pm\subt{TE}\Big(\vb x_d-\vb x_s; k; \vb q\Big)
           + 
-           C^{z}\subt{TM}(\vb k)
+           C^{z}\subt{TM}(\vb q)
            \vb E^\pm\subt{TM}\Big(\vb x_d-\vb x_s; k; \vb q\Big)
    \bigg\}
 \end{align}
@@ -745,27 +978,27 @@ where the scalar coefficients are
 $$\begin{array}{ccccccc}
  \displaystyle{ C^{x}\subt{TE} }
  &=& 
-  \displaystyle{ -\frac{ i q_y}{2|\vb k|q_z} }
+  \displaystyle{ -\frac{ i q_y}{2|\vb q|q_z} }
  &\qquad&
  \displaystyle{ C^{x;\pm}\subt{TM} }
  &=& 
- \displaystyle{ \mp \frac{ i q_x }{2k |\vb k|} }
+ \displaystyle{ \mp \frac{ i q_x }{2k |\vb q|} }
 \\[10pt]
 %--------------------------------------------------------------------%
  \displaystyle{ C^{y}\subt{TE} }
  &=& 
-  \displaystyle{ \frac{ i q_x}{2|\vb k|q_z} }
+  \displaystyle{ \frac{ i q_x}{2|\vb q|q_z} }
  &\qquad&
  \displaystyle{ C^{y;\pm}\subt{TM} }
  &=& 
- \displaystyle{ \mp \frac{ i q_y }{2k|\vb k|} }
+ \displaystyle{ \mp \frac{ i q_y }{2k|\vb q|} }
 \\[10pt]
 %--------------------------------------------------------------------%
  \displaystyle{ C^{z}\subt{TE} }
  &=& 0
  &\qquad&
  \displaystyle{ C^{z}\subt{TM} }
- &=& \displaystyle{ \frac{ i |\vb k|  }{2 k q_z} }.
+ &=& \displaystyle{ \frac{ i |\vb q|  }{2 k q_z} }.
 \end{array}$$
 %====================================================================%
 In these equations, the $\pm$ sign is $+$ for evaluation points 
@@ -827,28 +1060,36 @@ and thus the scattered fields are
 \label{ScatteredFieldsPWD}
 \end{subequations}
 %====================================================================%
-The scattering part of the electric DGF is related to the scattered 
-$\vb E$-field according to
-$\bmc G\supt{E} = \frac{1}{(-i\omega p_0)(i\omega \mu_0)}\vb E\sups{scat}.$
+The substrate contribution to the electric-electric DGF is related to
+the scattered $\vb E$-field according to
+$\bmc G\supt{EE} = \frac{1}{(-i\omega p_0)(i\omega \mu_0)}\vb E\sups{scat}.$
 or
 %====================================================================%
-\numeq{GEijFourier}
-{ \mc G_{ij}\supt{E}(\vbrho, z) =
-    \int \frac{d \vb k}{(2\pi)^2} 
-    \bigg\{   r\subt{TE}(\vb k) C^{j}\subt{TE}(\vb k) P_i(\vb k)
-            + r\subt{TM}(\vb k) C^{j;-}\subt{TM}(\vb k) \overline{P}_i(\vb k)
-    \bigg\}e^{i\vb k \cdot \vbrho +2iq_z z}.
+\begin{subequations}
+\begin{align}
+  \mc G_{ij}\supt{E}(\vbrho, z) 
+&= \int \frac{d \vb q}{(2\pi)^2} 
+    \bigg\{   r\subt{TE}(\vb q) C^{j}\subt{TE}(\vb q) P_i(\vb q)
+            + r\subt{TM}(\vb q) C^{j;-}\subt{TM}(\vb q) \overline{P}_i(\vb q)
+    \bigg\}e^{i\vb q \cdot \vbrho +2iq_z z}.
+\intertext{
+Similar arguments yield the scattering parts of the other
+quadrants of the DGF:
 }
-%====================================================================%
-A similar derivation yields the scattering part of the magnetic DGF:
-%====================================================================%
-\numeq{GMijFourier}
-{ \mc G_{ij}\supt{M}(\vbrho, z) =
-    \int \frac{d \vb q}{(2\pi)^2} 
+ \mc G_{ij}\supt{ME}(\vbrho, z) 
+&= \int \frac{d \vb q}{(2\pi)^2} 
     \bigg\{   r\subt{TE}(\vb q) C^{j}\subt{TE}(\vb q) \overline{P}_i(\vb q)
             - r\subt{TM}(\vb q) C^{j;-}\subt{TM}(\vb q) P_i(\vb q)
     \bigg\}e^{i\vb q \cdot \vbrho +2iq_z z}.
-}
+\\
+ \mc G_{ij}\supt{EM}(\vbrho, z) 
+&=
+    \int \frac{d \vb q}{(2\pi)^2}
+    \bigg\{   r\subt{TE}(\vb q) C^{j}\subt{TE}(\vb q) \overline{P}_i(\vb q)
+            - r\subt{TM}(\vb q) C^{j;-}\subt{TM}(\vb q) P_i(\vb q)
+    \bigg\}e^{i\vb q \cdot \vbrho +2iq_z z}.
+\end{align}
+\end{subequations}
 %====================================================================%
 
 %=================================================
@@ -858,32 +1099,67 @@ A similar derivation yields the scattering part of the magnetic DGF:
 \subsection{Reduction of 2D integrals to 1D integrals}
 \label{TwoDToOneDSection}
 
-It is easy to implement the procedures outlined in the previous
-two sections to yield numerical values for the $6\times 6$
-
-%====================================================================%
-\numeq{GStructure}
-{ \wt{\mc G}_{ij}(\vb q)
-  =   g_1(|\vb q|)\delta_{ij}
-    + g_2(|\vb q|)q_i q_j
-    + g_3(|\vb q|)\varepsilon_{ijk} q_k
-}
+Consider the momentum-space surface currents
+$\wt{\vb K_n}(\vb q), \wt{\vb N_n}(\vb q)$
+induced on material interface $n$ by a source (in any region)
+oriented in the $\vbhat{n}$ direction.
+Since $\wt{\vb K_n}$ and $\wt{\vb N_n}$ are 2-vector-valued
+quantities, and since $\vbhat{n}$ and $\vb q$ are the
+only vectors in the problem, 
+we can infer that
+$\wt{\vb K_n}$ and $\wt{\vb N_n}$ must be linear
+combinations of $\vbhat{n}$, $\vb{q}$, and $\vbhat{n}\times \vb q$,
+i.e. we have the structure
 %====================================================================%
 \begin{align*}
-g_1(\vb q)
-&= \frac{1}{2k^2} \big( k^2 \delta_{ij} - q_i q_j \big)\wt{\mc G}_{ij}
+ \wt{K_i} &= 
+    K\supt{A}(|\vb q|) \hat{n}_i
+   +K\supt{B}(|\vb q|) q_i
+   +K\supt{C}(|\vb q|) (\vbhat{n} \times \vb q)_i
 \\
-g_2(\vb q)
-&= \frac{1}{2k^4} \big( 3q_i q_j - k^2 \delta_{ij}\big)\wt{\mc G}_{ij}
-\\
-g_3(\vb q)
-&= \frac{\varepsilon_{ijk}}{6q_k}\Big( \wt{\mc G}_{ij} - \wt{\mc G}_{ji} \Big)
+ \wt{N_i} &= 
+    N\supt{A}(|\vb q|) \hat{n}_i
+   +N\supt{B}(|\vb q|) q_i
+   +N\supt{C}(|\vb q|) (\vbhat{n} \times \vb q)_i
 \end{align*}
 %====================================================================%
+where $\{K,N\}\supt{A,B,C}$ are scalar functions of $|\vb q|$. More
+specifically, we have
+\paragraph{For $\vbhat{n}=\vbhat{x}$:}
+%====================================================================%
+$$ \left(\begin{array}{c} \wt{K_{xx}} \\ \wt{K_{yx}} \end{array}\right)
+   = K\supt{A} \left(\begin{array}{c} 1   \\ 0   \end{array}\right)
+    +K\supt{B} \left(\begin{array}{c} q_x \\ q_y \end{array}\right)
+    -K\supt{C} \left(\begin{array}{c} 0   \\ 1   \end{array}\right)
+$$
+%====================================================================%
+
+\paragraph{For $\vbhat{n}=\vbhat{y}$:}
+
+%====================================================================%
+$$ \left(\begin{array}{c} \wt{K_{xy}} \\ \wt{K_{yy}} \end{array}\right)
+   = K\supt{A} \left(\begin{array}{c} 0   \\ 1   \end{array}\right)
+    +K\supt{B} \left(\begin{array}{c} q_x \\ q_y \end{array}\right)
+    +K\supt{C} \left(\begin{array}{c} 1   \\ 0   \end{array}\right)
+$$
+%====================================================================%
+
+\paragraph{For $\vbhat{n}=\vbhat{z}$:}
+%====================================================================%
+$$ \left(\begin{array}{c} \wt{K_{xz}} \\ \wt{K_{yz}} \end{array}\right)
+   = K\supt{D} \left(\begin{array}{c} q_x \\ q_y \end{array}\right)
+    +K\supt{E} \left(\begin{array}{c} q_y \\ -q_x \end{array}\right)
+$$
+%====================================================================%
+The point of this decomposition is that, given numerical values
+for $\wt{K_{ij}}$ for some $\vb q=(q_x, q_y)$, we can extract the
+scalar quantities $K\supt{A,B,C,D,E}$ by going like this:
+%$$ K\supt{B}=
 
 %=================================================
 %=================================================
 %=================================================
+\newpage
 \subsection{Evaluation of 1D integrals}
 \label{OneDIntegralSection}
 
@@ -1069,8 +1345,8 @@ according to
 {  \bmc F = \bmc G \star \bmc S
 }
 %====================================================================%
-where $\bmc G$ is the 6x6 dyadic Green's function for the medium
-and 
+where $\bmc G$ is the 6x6 dyadic Green's function for the homogeneous
+medium and 
 %====================================================================%
 \numeq{ConvolutionDef}
 {
@@ -1210,20 +1486,29 @@ read
 %====================================================================%
 %====================================================================%
 %====================================================================%
+\newpage
 \section{Plane-wave reflection coefficients for layered material substrates}
 \label{ReflectionCoefficientAppendix}
 
 \subsection{Reflection coefficients for a single material interface}
 
 If the substrate consists of just a single semi-infinite material layer
-with relative material properties $\{\epsilon_r,\mu_r\}$, then
-the reflection coefficients in (\ref{ScatteredFieldsPWD}) are
+with relative material properties $\{\epsilon_r,\mu_r\}$ (and vacuum
+above), then the reflection coefficients in (\ref{ScatteredFieldsPWD}) 
 are just the usual Fresnel coefficients:
 %====================================================================%
 $$
-   r\subt{TE}(k,\vb q) \equiv \frac{\mu q_z - q_z^\prime}{\mu q_z + q_z^\prime},
+   r\subt{TE}(\omega,\vb q) \equiv \frac{\mu_r q_z - q_z^\prime}{\mu q_z + q_z^\prime},
    \qquad
-   r\subt{TM}(k,\vb q) \equiv \frac{\epsilon q_z - q_z^\prime}{\epsilon q_z + q_z^\prime}.
+   r\subt{TM}(\omega,\vb q) \equiv \frac{\epsilon_r q_z - q_z^\prime}{\epsilon q_z + q_z^\prime}
+$$
+$$ q_z=
+   \sqrt{k_0^2 - |\vb q|^2},
+   \qquad
+   q_z^\prime=
+   \sqrt{\epsilon_r \mu_r k_0^2 - \vb q^2},
+   \qquad
+   k_0\equiv\frac{\omega}{c}.
 $$
 %====================================================================%
 

@@ -218,9 +218,6 @@
         
             <ul>
             
-                <li class="toctree-l3"><a href="#0-try-scuff-em-online-before-installing-anything">0. Try scuff-em online before installing anything!</a></li>
-                
-            
                 <li class="toctree-l3"><a href="#1-external-packages">1. External packages</a></li>
                 
             
@@ -534,19 +531,14 @@
             <div class="section">
               
                 <h2 id="installing-scuff-em">Installing <a class="wikilink" href="../../scuff-em/">scuff-em</a></h2>
-<h2 id="0-try-scuff-em-online-before-installing-anything">0. Try <span class="SC">scuff-em</span> online before installing anything!</h2>
-<p><a href="http://www.johannesfeist.eu/">Johannes Feist</a> has set up
-an interactive online notebook using <a href="http://mybinder.org/">MyBinder</a>
-that you can use to run some simple <a class="wikilink" href="../../scuff-em/">scuff-em</a> calculations on
-the cloud without having to install anything. This free service
-offers limited computing power, so you won't want to attempt any
-heavy calculations here, but you can follow Johannes' tutorial
-to observe the flow of a typical <a class="wikilink" href="../../scuff-em/">scuff-em</a> calculation,
-play around with your own calculations, and get a feel for what 
-using <a class="wikilink" href="../../scuff-em/">scuff-em</a> will like once you have installed it on your 
-machine.</p>
-<p>Here's the link:
-<a href="http://mybinder.org/repo/jfeist/scuff-em-mybinder">http://mybinder.org/repo/jfeist/scuff-em-mybinder</a>.</p>
+<p>The <span class=SC>scuff-em</span> source distribution is packaged with the standard
+<a href="https://www.gnu.org/software/automake/manual/html_node/Autotools-Introduction.html"><span class=SC>gnu autotools</span></a>
+build environment. If you have experience installing <span class=SC>autotools</span>-based
+software packages, you should have no trouble installing <span class=SC>scuff-em</span>.
+If you <em>aren't</em> an <span class=SC>autotools</span> expert you should still be
+able to install <span class=SC>scuff-em</span> with little difficulty.</p>
+<p><strong>If you have any trouble installing <span class=SC>scuff-em</span>, please
+<a href="https://github.com/HomerReid/scuff-em/issues">file an issue on the <span class=SC>scuff-em</span> GitHub page.</a>.</strong></p>
 <h2 id="1-external-packages">1. External packages</h2>
 <p><a class="wikilink" href="../../scuff-em/">scuff-em</a> relies on a small number of well-established free 
 software packages to implement certain non-essential functionality. 
@@ -554,9 +546,14 @@ software packages to implement certain non-essential functionality.
 but in this case the code will be somewhat crippled.</p>
 <ul>
 <li>
-<p>If you actually want to solve scattering problems (instead of 
+<p>If you actually want to solve scattering problems (instead of
   just setting them up), you will need
-  <a href="http://www.netlib.org/lapack">LAPACK/BLAS</a>.</p>
+  <a href="http://www.netlib.org/lapack">LAPACK/BLAS</a> or an equivalent
+  replacement such as the Intel MKL. If you do not already have your
+  own favorite solution for this, I highly recommend the excellent
+  open-source (<span class=SC>openblas</span>)(http://www.openblas.net/)
+  package, which includes both LAPACK and BLAS and automatically
+  tunes itself for optimal performance on your hardware.</p>
 </li>
 <li>
 <p>If you want the capacity to write output files in the 
@@ -576,7 +573,7 @@ but in this case the code will be somewhat crippled.</p>
   <a class="wikilink" href="../../scuff-em/">scuff-em</a> documentation.</p>
 </li>
 </ul>
-<p>On Debian/Ubuntu Linux systems, you can fetch all of these packages by doing a </p>
+<p>On Debian/Ubuntu Linux systems, you can fetch all of these packages by doing a</p>
 <pre><code class="bash">% sudo apt-get install liblapack-dev libblas-dev libhdf5-serial-dev python-dev gmsh
 </code></pre>
 
@@ -610,43 +607,36 @@ and the demonstration examples for the various application programs
 will be in <code>PREFIX/share/scuff-em/examples</code>
 (where <code>PREFIX</code> is the directory you specified using the 
 <code>--prefix</code> option above).</p>
-<p>If you have trouble installing <a class="wikilink" href="../../scuff-em/">scuff-em</a>,
-please file an issue on the 
-<a href="https://github.com/HomerReid/scuff-em/"><span class="SC">scuff-em</span> GitHub page</a>.</p>
+<p><strong>If you have trouble installing <a class="wikilink" href="../../scuff-em/">scuff-em</a>, please 
+[file an issue on the <a href="https://github.com/HomerReid/scuff-em/issues"><span class="SC">scuff-em</span> GitHub page</a>.</strong></p>
 <h3 id="build-options">Build options</h3>
 <p>You may specify options to the <code>autogen.sh</code>
 (or <code>configure</code>) command to guide the compilation process. 
 For a full list of available options,
 type <code>configure --help.</code> Here we summarize some of the
 more salient possibilities.</p>
-<p><a name="Threading"></a></p>
-<h4 id="multithreading-openmp-vs-pthreads">Multithreading: <a class="wikilink" href="../../openmp/">openmp</a> vs. <a class="wikilink" href="../../pthreads/">pthreads</a></h4>
-<p>The <a class="wikilink" href="../../scuff-em/">scuff-em</a> core library 
-uses multithreading for all steps in the
-<a href="scuff-em/libscuff/MainFlow.shtml">main flow</a> of
-the BEM scattering procedure. You can use <code>configure</code>
-options to select whether this multithreading is implemented
-using <a class="wikilink" href="../../openmp/">openmp</a> or <a class="wikilink" href="../../pthreads/">pthreads</a>. The former is the default,
-while the latter may be enabled like this:</p>
-<pre><code class="bash">% ./configure --without-openmp --with-pthreads
+<h4 id="using-the-mpi-compilers">Using the MPI compilers</h4>
+<p>In some cases---in particular, if the HDF5 installation on your
+system is built for an MPI environment instead of a serial
+environment---you may need to use the MPI-aware compilers
+when building <span class=SC>scuff-em</span>. To do this,
+just set the <code>CC</code> and <code>CXX</code> environment variables to
+the names of the MPI C and C++ compilers (usually <code>mpicc</code> and <code>mpic++</code>). For example:</p>
+<pre><code class="bash">% export CC=mpicc
+% export CXX=mpic++
+% ./configure [usual configure options]
 </code></pre>
 
-<p>The default <a class="wikilink" href="../../openmp/">openmp</a>
-multithreading tends to play better with other multithreaded 
-software packages and is definitely the right choice if you 
-will be operating on a shared machine with some CPU cores 
-occupied by other users. 
-(You can monitor performance by inspecting
-<a href="../../applications/GeneralReference/#LogFiles"><code>.log</code> files</a>.</p>
-<p>Support for <a class="wikilink" href="../../pthreads/">pthreads</a>
-is a legacy feature that will be discontinued in future versions of 
-<a class="wikilink" href="../../scuff-em/">scuff-em</a>.</p>
-<p>Note: in some cases you may need to tweak certain environment 
-variables to achieve maximal 
-<a class="wikilink" href="../../openmp/">openmp</a> performance.
+<h4 id="disabling-openmp">Disabling OpenMP</h4>
+<p><span class=SC>scuff-em</span> makes heavy use
+<a href="http://www.openmp.org/"><span class=SC>openmp</span>-based shared-memory multithreading</a> to accelerate tasks such as BEM matrix assembly. Compiling with OpenMP support is enabled by default, but if you wish to <em>disable</em> it you may use the <code>--without-openmp</code> option to <code>configure.</code> (But you will be sacrificing a lot of speed if your system has more than one CPU core available!)</p>
+<p>Note: after building with OpenMP support, in some cases you 
+may need to tweak
+certain environment variables to achieve maximal
+<a class="wikilink" href="../../openmp/">openmp</a> performance when running <span class=SC>scuff-em</span>
+codes.
 For example, on my workstation (which has 8 CPU cores),
-in order to get <a class="wikilink" href="../../openmp/">openmp</a> codes
-to use all 8 cores I need to set the following environment
+in order to use all 8 cores I need to set the following environment
 variable:</p>
 <pre><code class="bash">% export GOMP_CPU_AFFINITY=0-7
 </code></pre>
@@ -669,8 +659,8 @@ with <a class="wikilink" href="../../GDB/">GDB</a>. </p>
 <p>Here is the script that works for me to achieve these goals:</p>
 <pre><code class="bash">#!/bin/bash
 
-CC=&quot;gcc -ggdb -O0&quot;
-CXX=&quot;g++ -ggdb -O0&quot;
+export CC=&quot;gcc -ggdb -O0&quot;
+export CXX=&quot;g++ -ggdb -O0&quot;
 export CFLAGS=&quot;-O0&quot;
 export CXXFLAGS=&quot;-O0&quot;
 sh autogen.sh --enable-debug --without-openmp --disable-shared

@@ -1,5 +1,5 @@
 (**************************************************)
-(**************************************************)
+(* 3x3 sectors of the 6x6 homogeneous dyadic GF   *)
 (**************************************************)
 GTwiddleK2E[Eps_,Mu_,Omega_,k_,qx_,qy_,qz_,Sign_]:=(
   (-Omega*Mu/(2*qz))
@@ -40,7 +40,7 @@ GTwiddleN2H[Eps_,Mu_,Omega_,k_,qx_,qy_,qz_,Sign_]:=(
 )
 
 (**************************************************)
-(**************************************************)
+(* extract upper 2x2 and 2x3 sectors of a matrix  *)
 (**************************************************)
 (*qz[k_,qx_,qy_]:=Sqrt[k*k - qx*qx - qy*qy];*)
 Upper22[G_]:={ {G[[1,1]], G[[1,2]]},
@@ -51,67 +51,74 @@ Upper23[G_]:={ {G[[1,1]], G[[1,2]], G[[1,3]]},
                {G[[2,1]], G[[2,2]], G[[2,3]]}
              };
 
-MK=(  Upper22[GTwiddleK2E[EpsA,MuA,Omega,kA,qx,qy,qzA,+1]]
-     +Upper22[GTwiddleK2E[Eps1,Mu1,Omega,k1,qx,qy,qz1,-1]]
+Upper32[G_]:={ {G[[1,1]], G[[1,2]]},
+               {G[[2,1]], G[[2,2]]},
+               {G[[3,1]], G[[3,2]]}
+             };
+
+
+MK=(  Upper22[GTwiddleK2E[Eps1,Mu1,Omega,k1,qx,qy,qz1,+1]]
+     +Upper22[GTwiddleK2E[Eps2,Mu2,Omega,k2,qx,qy,qz2,-1]]
    )
 
-MN=(  Upper22[GTwiddleN2H[EpsA,MuA,Omega,kA,qx,qy,qzA,+1]]
-     +Upper22[GTwiddleN2H[Eps1,Mu1,Omega,k1,qx,qy,qz1,-1]]
+MN=(  Upper22[GTwiddleN2H[Eps1,Mu1,Omega,k1,qx,qy,qz1,+1]]
+     +Upper22[GTwiddleN2H[Eps2,Mu2,Omega,k2,qx,qy,qz2,-1]]
    )
 
 (***************************************************)
-
+(* Fourier components of tangential incident fields, *)
+(* i.e. fields due to point sources p, m in ambient*)
+(* medium, assuming evaluation point lies *below*  *)
+(* source point and omitting exp(i*qz*|z|) factor  *)
 (***************************************************)
-(* Fourier components of tangential fields due to  *)
-(* point sources p, m in ambient medium            *)
-(***************************************************)
-EParTwiddle[p_,m_]:=(I/Omega)*
-(  Upper23[ GTwiddleK2E[EpsA,MuA,Omega,kA,qx,qy,qzA,-1]].p
-  +Upper23[ GTwiddleN2E[EpsA,MuA,Omega,kA,qx,qy,qzA,-1]].m
+EIncParTwiddle[p_,m_]:=(I/Omega)*
+(  Upper23[ GTwiddleK2E[Eps1,Mu1,Omega,k1,qx,qy,qz1,-1]].p
+  +Upper23[ GTwiddleN2E[Eps1,Mu1,Omega,k1,qx,qy,qz1,-1]].m
 );
 
-HParTwiddle[p_,m_]:=(I/Omega)*
-(  Upper23[ GTwiddleK2H[EpsA,MuA,Omega,kA,qx,qy,qzA,-1]].p
-  +Upper23[ GTwiddleN2H[EpsA,MuA,Omega,kA,qx,qy,qzA,-1]].m
+HIncParTwiddle[p_,m_]:=(I/Omega)*
+(  Upper23[ GTwiddleK2H[Eps1,Mu1,Omega,k1,qx,qy,qz1,-1]].p
+  +Upper23[ GTwiddleN2H[Eps1,Mu1,Omega,k1,qx,qy,qz1,-1]].m
 );
 
 (***************************************************)
+(* Fourier coefficients of surface currents        *)
 (***************************************************)
+KTwiddle[p_,m_]:=Inverse[MK].(-EIncParTwiddle[p,m]);
+NTwiddle[p_,m_]:=Inverse[MN].(-HIncParTwiddle[p,m]);
+
 (***************************************************)
-KTwiddle[p_,m_]:=Inverse[MK].(-EParTwiddle[p,m]);
-NTwiddle[p_,m_]:=Inverse[MN].(-HParTwiddle[p,m]);
+(* Fourier coefficients of fields at dest point,   *)
+(* assuming dest point lies above surface currents *)
+(***************************************************)
+EScatTwiddleAbove[p_,m_]:=(
+  Upper32[GTwiddleK2E[Eps1,Mu1,Omega,k1,qx,qy,qz1,+1]].KTwiddle[p,m]
+ +Upper32[GTwiddleN2E[Eps1,Mu1,Omega,k1,qx,qy,qz1,+1]].NTwiddle[p,m]
+)
 
-Rules1={ MuA->1, Mu1->1, EpsA->1, kA->k0, k1->Sqrt[Eps1]*k0,
-         qx^2 + qy^2 -> q2
-       }
+EScatTwiddleBelow[p_,m_]:=(
+  Upper32[GTwiddleK2E[Eps2,Mu2,Omega,k2,qx,qy,qz2,-1]].KTwiddle[p,m]
+ +Upper32[GTwiddleN2E[Eps2,Mu2,Omega,k2,qx,qy,qz2,-1]].NTwiddle[p,m]
+)
 
-Rules2={qzA->Sqrt[k0*k0*-qx*qx-qy*qy], qz1->Sqrt[Eps1*k0*k0-qx*qx-qy*qy]};
+Rules1={Mu2->1, Mu1->1, Eps1->1, k1->k0, k2->n2*k0, Omega->k0,
+        q2->(qx*qx+qy*qy)};
 
-NRules={MuA->1, Mu1->1, EpsA->1, Eps1->1,
-        kA->k0, k1->k0, Omega->k0,
-        qzA->Sqrt[k0*k0-q2], qz1->Sqrt[k0*k0-q2],
+Rules2={qz2->Sqrt[k0*k0*-qx*qx-qy*qy], qz1->Sqrt[Eps1*k0*k0-qx*qx-qy*qy]};
+
+Rules3={Mu2->1, Mu1->1, Eps1->1, 
+        k1->Omega, k2->Sqrt[Eps2]*Omega, Eps2->2.3, Omega->1.1,
+        (qx*qx+qy*qy)->q2,
+		q2->3.4,qz1->Sqrt[1.2*1.2-3.4],qz2->Sqrt[2.3*2.3-3.4]}
+ 
+qzRules={qz2->Sqrt[n2*n2*k0*k0-q2], qz1->Sqrt[k0*k0-q2]}
+
+(*, qx->0.8, qy->0.9, k0->1.1}*)
+
+NRules={Mu2->1, Mu1->1, Eps2->1, Eps1->1,
+        k2->k0, k1->k0, Omega->k0,
+        qz2->Sqrt[k0*k0-q2], qz1->Sqrt[k0*k0-q2],
         q2->(qx*qx+qy*qy), qx->0.8, qy->0.9, k0->1.1}
 
-p={0,1,0};
-m={0,0,0};
-KT = FullSimplify[ KTwiddle[p,m]];
-NT = FullSimplify[ NTwiddle[p,m]];
-KTFull={KT[[1]], KT[[2]], 0};
-NTFull={NT[[1]], NT[[2]], 0};
-
 (* check that this vanishes *)
-EKTwiddleScatAbove=(
- (GTwiddleK2E[EpsA,MuA,Omega,kA,qx,qy,qzA,+1].KTFull) /. {NRules}
-)
-
-ENTwiddleScatAbove=(
- (GTwiddleN2E[EpsA,MuA,Omega,kA,qx,qy,qzA,+1].NTFull) /. {NRules}
-)
-
-EKTwiddleScatBelow=(
- (GTwiddleK2E[EpsA,MuA,Omega,kA,qx,qy,qzA,-1].KTFull) /. {NRules}
-)
-
-ENTwiddleScatBelow=(
- (GTwiddleN2E[EpsA,MuA,Omega,kA,qx,qy,qzA,-1].NTFull) /. {NRules}
-)
+E -lrtacatTwiddleAbove[{1,0,0},{0,0,0}] /. NRules
