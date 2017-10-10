@@ -218,12 +218,47 @@
         
             <ul>
             
-                <li class="toctree-l3"><a href="#1-external-packages">1. External packages</a></li>
+                <li class="toctree-l3"><a href="#external-packages">External packages</a></li>
                 
             
-                <li class="toctree-l3"><a href="#2-cloning-the-github-repository-and-building-the-code">2. Cloning the GitHub repository and building the code</a></li>
+                <li class="toctree-l3"><a href="#status-of-the-github-repository">Status of the GitHub repository</a></li>
                 
-                    <li><a class="toctree-l4" href="#build-options">Build options</a></li>
+            
+                <li class="toctree-l3"><a href="#setting-up-an-informative-command-line-prompt">Setting up an informative command-line prompt</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#configure-options">Configure options</a></li>
+                
+                    <li><a class="toctree-l4" href="#specifying-the-installation-prefix">Specifying the installation prefix</a></li>
+                
+                    <li><a class="toctree-l4" href="#using-the-mpi-compilers">Using the MPI compilers</a></li>
+                
+                    <li><a class="toctree-l4" href="#disabling-the-python-interface-to-speed-the-build-process">Disabling the python interface to speed the build process</a></li>
+                
+                    <li><a class="toctree-l4" href="#parallel-make">Parallel make</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#2-installing-on-debianubuntu-based-linux-systems">2. Installing on Debian/Ubuntu-based Linux systems</a></li>
+                
+                    <li><a class="toctree-l4" href="#a-use-apt-get-to-install-external-packages">A. Use apt-get to install external packages</a></li>
+                
+                    <li><a class="toctree-l4" href="#b-clone-the-github-repository-and-build-the-code">B. Clone the GitHub repository and build the code</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#3-installing-on-macos">3. Installing on MacOS</a></li>
+                
+                    <li><a class="toctree-l4" href="#a-use-xcode-and-homebrew-to-install-external-packages">A. Use xcode and homebrew to install external packages</a></li>
+                
+                    <li><a class="toctree-l4" href="#b-clone-the-github-repository-and-build-the-code_1">B. Clone the GitHub repository and build the code</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#4-installing-on-windows">4. Installing on Windows</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#5-run-a-scuff-em-computational-example-and-check-cpu-utilization">5. Run a scuff-em computational example and check CPU utilization</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#6-building-for-debugging">6. Building for debugging</a></li>
                 
             
             </ul>
@@ -530,19 +565,56 @@
           <div role="main">
             <div class="section">
               
-                <h2 id="installing-scuff-em">Installing <a class="wikilink" href="../../scuff-em/">scuff-em</a></h2>
+                <h1>Installing <span class=SC>scuff-em</span></h1>
+
 <p>The <span class=SC>scuff-em</span> source distribution is packaged with the standard
 <a href="https://www.gnu.org/software/automake/manual/html_node/Autotools-Introduction.html"><span class=SC>gnu autotools</span></a>
 build environment. If you have experience installing <span class=SC>autotools</span>-based
-software packages, you should have no trouble installing <span class=SC>scuff-em</span>.
-If you <em>aren't</em> an <span class=SC>autotools</span> expert you should still be
-able to install <span class=SC>scuff-em</span> with little difficulty.</p>
-<p><strong>If you have any trouble installing <span class=SC>scuff-em</span>, please
-<a href="https://github.com/HomerReid/scuff-em/issues">file an issue on the <span class=SC>scuff-em</span> GitHub page.</a>.</strong></p>
-<h2 id="1-external-packages">1. External packages</h2>
-<p><a class="wikilink" href="../../scuff-em/">scuff-em</a> relies on a small number of well-established free 
-software packages to implement certain non-essential functionality. 
-<a class="wikilink" href="../../scuff-em/">scuff-em</a> can be compiled and installed without any of these packages, 
+software packages, you should have no trouble installing <span class=SC>scuff-em</span>
+via your typical procedures, although you are encouraged to skim 
+the <a href="#GeneralComments">general comments</a> section below before you start.</p>
+<p>If you <em>aren't</em> an <span class=SC>autotools</span> expert, you should still be
+able to install <span class=SC>scuff-em</span> without much trouble by following
+the OS-specific instructions below.</p>
+<p><strong>In either case, if you have any trouble installing <span class=SC>scuff-em</span>,
+please <a href="https://github.com/HomerReid/scuff-em/issues">file an issue on the <span class=SC>scuff-em</span> GitHub page</a>.</strong></p>
+<div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#1-general-comments-about-installing-scuff-em">1. General comments about installing <span class=SC>scuff-em</span></a><ul>
+<li><a href="#external-packages">External packages</a></li>
+<li><a href="#status-of-the-github-repository">Status of the GitHub repository</a></li>
+<li><a href="#setting-up-an-informative-command-line-prompt">Setting up an informative command-line prompt</a></li>
+<li><a href="#configure-options">Configure options</a><ul>
+<li><a href="#specifying-the-installation-prefix">Specifying the installation prefix</a></li>
+<li><a href="#using-the-mpi-compilers">Using the MPI compilers</a></li>
+<li><a href="#disabling-the-python-interface-to-speed-the-build-process">Disabling the python interface to speed the build process</a></li>
+<li><a href="#parallel-make">Parallel make</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#2-installing-on-debianubuntu-based-linux-systems">2. Installing on Debian/Ubuntu-based Linux systems</a><ul>
+<li><a href="#a-use-apt-get-to-install-external-packages">A. Use <span class=SC>apt-get</span> to install external packages</a></li>
+<li><a href="#b-clone-the-github-repository-and-build-the-code">B. Clone the GitHub repository and build the code</a></li>
+</ul>
+</li>
+<li><a href="#3-installing-on-macos">3. Installing on MacOS</a><ul>
+<li><a href="#a-use-xcode-and-homebrew-to-install-external-packages">A. Use <span class=SC>xcode</span> and <span class=SC>homebrew</span> to install external packages</a></li>
+<li><a href="#b-clone-the-github-repository-and-build-the-code_1">B. Clone the GitHub repository and build the code</a></li>
+</ul>
+</li>
+<li><a href="#4-installing-on-windows">4. Installing on Windows</a></li>
+<li><a href="#5-run-a-scuff-em-computational-example-and-check-cpu-utilization">5. Run a <span class=SC>scuff-em</span> computational example and check CPU utilization</a></li>
+<li><a href="#6-building-for-debugging">6. Building for debugging</a></li>
+</ul>
+</div>
+<p><a name="#GeneralComments"></a></p>
+<h1 id="1-general-comments-about-installing-scuff-em">1. General comments about installing <span class=SC>scuff-em</span></h1>
+<h2 id="external-packages">External packages</h2>
+<p><a class="wikilink" href="../../scuff-em/">scuff-em</a> relies on a small number of well-established free open-source
+software packages to implement certain non-essential functionality (see
+the OS-specific instructions below for guidance on how to install these).
+<a class="wikilink" href="../../scuff-em/">scuff-em</a> 
+can be compiled and installed without any of these packages, 
 but in this case the code will be somewhat crippled.</p>
 <ul>
 <li>
@@ -556,13 +628,13 @@ but in this case the code will be somewhat crippled.</p>
   tunes itself for optimal performance on your hardware.</p>
 </li>
 <li>
-<p>If you want the capacity to write output files in the 
+<p>If you want the capacity to write output files in the
   standard HDF5 binary format, you will need
   <a href="http://www.hdfgroup.org/HDF5">HDF5</a>.</p>
 </li>
 <li>
 <p>If you want to compile the <a class="wikilink" href="../../python/">python</a> interface, you will need the
-  <a class="wikilink" href="../../python/">python</a> development files.</p>
+  <a class="wikilink" href="../../python/">python</a> development files and the <a class="wikilink" href="../../numpy/">numpy</a> package.</p>
 </li>
 <li>
 <p>Although not required to install, compile, or use
@@ -573,72 +645,113 @@ but in this case the code will be somewhat crippled.</p>
   <a class="wikilink" href="../../scuff-em/">scuff-em</a> documentation.</p>
 </li>
 </ul>
-<p>On Debian/Ubuntu Linux systems, you can fetch all of these packages by doing a</p>
-<pre><code class="bash">% sudo apt-get install liblapack-dev libblas-dev libhdf5-serial-dev python-dev gmsh
-</code></pre>
-
-<blockquote>
-<p>Note: In some cases it seems the <code>gmsh</code> package conflicts with 
-the <code>libhdf5-serial-dev</code> package. In this case, just 
-remove <code>gmsh</code> from the above <code>apt-get</code> statement; you can 
-install it by hand following the instructions
-on the <a href="http://geuz.org/gmsh">GMSH website</a>.
-(Note that <a class="wikilink" href="../../gmsh/">gmsh</a>, though very useful, 
-is not necessary to compile or run <a class="wikilink" href="../../scuff-em/">scuff-em</a>.)</p>
-</blockquote>
-<h2 id="2-cloning-the-github-repository-and-building-the-code">2. Cloning the GitHub repository and building the code</h2>
-<p><a class="wikilink" href="../../scuff-em/">scuff-em</a> is hosted on <a href="https://github.com/HomerReid/scuff-em/">GitHub</a>.
+<h2 id="status-of-the-github-repository">Status of the GitHub repository</h2>
+<p>After installing external packages, you will fetch the <span class=SC>scuff-em</span>
+source code from its repository hosted on <a href="https://github.com/HomerReid/scuff-em/">GitHub</a> (see specific
+instructions below).
 The current build status of the <a class="wikilink" href="../../scuff-em/">scuff-em</a> master branch is:</p>
 <p><img alt="Build Status" src="https://travis-ci.org/HomerReid/scuff-em.svg?branch=master" /></p>
-<p>To fetch and install the latest version of the 
-code, execute the following steps. (Replace the string
-<code>/path/to/scuff-em-installation-directory</code>
-with your desired installation directory.)</p>
-<pre><code class="bash">% git clone https://homerreid@github.com/HomerReid/scuff-em.git
-% cd scuff-em
-% sh autogen.sh --prefix=/path/to/scuff-em-installation-directory
-% make install
+<p><a name="UsefulPrompt"></a></p>
+<h2 id="setting-up-an-informative-command-line-prompt">Setting up an informative command-line prompt</h2>
+<p>Regardless of the specific OS you're running (Linux, MacOS,
+or Windows), the installation process will involve typing
+commands at a prompt in a console window. Unfortunately, 
+in most cases the default prompt is not particularly
+informative---in particular, it doesn't tell you the
+current working directory (which can be easy to forget
+when switching among folders in a complex build process)
+or the current host name (which can be easy to forget
+when you're frequently logging in and out of remote
+machines.) Thus, for command-line work I find it useful
+to set up a prompt that includes this information, which
+you can do as follows:</p>
+<pre><code class="bash">% export PS1='$HISTCMD '`hostname`' $PWD &lt;&gt; '
+34 mac-56-129-14.mit.edu /Users/homereid &lt;&gt; 
 </code></pre>
 
-<p>If this succeeds, the executable versions of the application
-programs (such as <code>scuff-scatter</code>, <code>scuff-rf</code>, etc.) will be 
-installed in the directory <code>PREFIX/bin/</code> 
-and the demonstration examples for the various application programs 
-will be in <code>PREFIX/share/scuff-em/examples</code>
-(where <code>PREFIX</code> is the directory you specified using the 
-<code>--prefix</code> option above).</p>
-<p><strong>If you have trouble installing <a class="wikilink" href="../../scuff-em/">scuff-em</a>, please 
-[file an issue on the <a href="https://github.com/HomerReid/scuff-em/issues"><span class="SC">scuff-em</span> GitHub page</a>.</strong></p>
-<h3 id="build-options">Build options</h3>
-<p>You may specify options to the <code>autogen.sh</code>
-(or <code>configure</code>) command to guide the compilation process. 
-For a full list of available options,
-type <code>configure --help.</code> Here we summarize some of the
-more salient possibilities.</p>
+<p>Note that the prompt now tells me my current working
+directory (<code>/Users/homereid</code>) and the name of the
+machine (<code>mac-56-129-14.mit.edu</code>) so I don't lose track
+of where I am. (The <code>34</code> refers to the number of commands
+I've executed in this console session thus far.)</p>
+<p>If you find the above command useful, you may copy
+it into your <code>${HOME}/.bashrc</code> file, in which case
+the informative prompt will be set up automatically 
+whenever you open a console window.</p>
+<h2 id="configure-options">Configure options</h2>
+<p>After fetching the source tree, you will run a command that automatically sniffs out
+the environment on your machine to <em>configure</em> the procedure that will be used to
+build <span class=SC>scuff-em</span>. As detailed in the OS-specific instructions 
+below, this command takes the form</p>
+<pre><code class="bash"> % sh autogen.sh [OPTIONS]
+</code></pre>
+
+<p>the first time you run it after fetching the source, or simply</p>
+<pre><code class="bash"> % configure [OPTIONS]
+</code></pre>
+
+<p>on subsequent builds. For the most part, this step will
+ <em>automatically</em> handle the various things that need to be done to setup the
+build process, but you may <em>guide</em> the process by specifying
+various options manually (in the space labeled <code>[OPTIONS]</code> above).
+Here are a few of the more salient options you may wish to specify
+to customize your build.</p>
+<h4 id="specifying-the-installation-prefix">Specifying the installation prefix</h4>
+<p>If the build process succeeds, all files needed to
+run <span class=SC>scuff-em</span> calculations---including
+executable programs, library files, and example calculations---will
+be automatically installed in subdirectories of a top-level
+directory known as the <em>prefix.</em> The default prefix is <code>/usr/local/,</code>
+but you may wish to install <span class=SC>scuff-em</span>
+in a different location---in particular, you will <em>need</em> to do this
+if you don't have administrator privileges on the machine you 
+are using. This may be done via the configure option <code>--prefix=/path/to/scuff/installation.</code></p>
+<p>For example, to install <span class=SC>scuff-em</span> in
+a subdirectory of your home directory named <code>scuff-em-installation,</code>
+you can say</p>
+<pre><code class="bash">% configure --prefix=${HOME}/scuff-em-installation [other options]
+</code></pre>
+
+<p>In this case, after the <span class=SC>scuff-em</span> installation
+has completed, the various installed files will be in the following
+locations:</p>
+<ul>
+<li>
+<p>Binary executable files (like <code>scuff-scatter</code> and <code>scuff-rf</code>) will be in <code>${HOME}/scuff-em-installation/bin.</code></p>
+</li>
+<li>
+<p>Library files (like <code>libscuff.so</code>) will be in <code>${HOME}/scuff-em-installation/lib.</code></p>
+</li>
+<li>
+<p>The <span class=SC>scuff-em</span> example files (like <code>YagiUdaAntennas</code>) will be in <code>${HOME}/scuff-em-installation/share/scuff-em/examples.</code></p>
+</li>
+</ul>
+<p>If you go this route, you will probably want to add the location
+of the <span class=SC>scuff-em</span> binary executables to your execution
+path by saying</p>
+<pre><code class="bash"> % export PATH=${PATH}:${HOME}/scuff-em-installation/bin
+</code></pre>
+
+<p>Now you will be able to run command-line codes like <code>scuff-rf</code>
+from any directory and the OS will know where to find the
+program file.</p>
+<p><a name="openMPI"></a></p>
 <h4 id="using-the-mpi-compilers">Using the MPI compilers</h4>
-<p>In some cases---in particular, if the HDF5 installation on your
-system is built for an MPI environment instead of a serial
-environment---you may need to use the MPI-aware compilers
-when building <span class=SC>scuff-em</span>. To do this,
+<p><span class=SC>scuff-em</span> makes heavy use of
+<a href="http://www.openmp.org/"><span class=SC>openmp</span>-based shared-memory multithreading</a> to accelerate tasks
+such as BEM matrix assembly. Compiling with OpenMP support is enabled by default, but if you wish to <em>disable</em> it
+you may use the <code>--without-openmp</code> option to <code>configure.</code> (But you will be sacrificing a lot of speed if your 
+system has more than one CPU core available!)</p>
+<p>In some cases, you may need to use the MPI-aware compilers when 
+building <span class=SC>scuff-em</span>; this is true, in particular,
+if you are using a parallel version of the HDF5 libraries.
+In this case, 
 just set the <code>CC</code> and <code>CXX</code> environment variables to
-the names of the MPI C and C++ compilers (usually <code>mpicc</code> and <code>mpic++</code>). For example:</p>
+the names of the MPI C and C++ compilers (usually <code>mpicc</code> and <code>mpic++</code>) before
+configuring:</p>
 <pre><code class="bash">% export CC=mpicc
 % export CXX=mpic++
-% ./configure [usual configure options]
-</code></pre>
-
-<h4 id="disabling-openmp">Disabling OpenMP</h4>
-<p><span class=SC>scuff-em</span> makes heavy use
-<a href="http://www.openmp.org/"><span class=SC>openmp</span>-based shared-memory multithreading</a> to accelerate tasks such as BEM matrix assembly. Compiling with OpenMP support is enabled by default, but if you wish to <em>disable</em> it you may use the <code>--without-openmp</code> option to <code>configure.</code> (But you will be sacrificing a lot of speed if your system has more than one CPU core available!)</p>
-<p>Note: after building with OpenMP support, in some cases you 
-may need to tweak
-certain environment variables to achieve maximal
-<a class="wikilink" href="../../openmp/">openmp</a> performance when running <span class=SC>scuff-em</span>
-codes.
-For example, on my workstation (which has 8 CPU cores),
-in order to use all 8 cores I need to set the following environment
-variable:</p>
-<pre><code class="bash">% export GOMP_CPU_AFFINITY=0-7
+% ./configure [OPTIONS]
 </code></pre>
 
 <p><a name="Disabling Python"></a></p>
@@ -646,10 +759,173 @@ variable:</p>
 <p>Compiling the python interface is slow---it accounts for
 more than half of the build time on some systems.
 If you don't need the python interface to <a class="wikilink" href="../../scuff-em/">scuff-em</a>,
-use the option <code>--without-python</code> when running <code>configure</code>
+use the configure option <code>--without-python</code> 
 to accelerate the build process.</p>
+<h4 id="parallel-make">Parallel make</h4>
+<p>As described in the OS-specific instructions below,
+after the configure process is finished you will type <code>make install</code>
+to proceed with the actual build and installation of the code.
+If your machine has more than one CPU core, you can accelerate
+this process by saying e.g.</p>
+<pre><code class="bash">% make -j 8 install
+</code></pre>
+
+<p>(replace <code>8</code> by the actual number of CPU cores on your machine).</p>
+<!------------------------------------------------------>
+
+<!------------------------------------------------------>
+
+<!------------------------------------------------------>
+
+<p><a name="Linux"></a></p>
+<h1 id="2-installing-on-debianubuntu-based-linux-systems">2. Installing on Debian/Ubuntu-based Linux systems</h1>
+<h3 id="a-use-apt-get-to-install-external-packages">A. Use <span class=SC>apt-get</span> to install external packages</h3>
+<p>On Debian/Ubuntu Linux systems, you can fetch all of the external packages mentioned above as follows:</p>
+<pre><code class="bash">% sudo apt-get install libopenblas-dev libhdf5-openmpi-dev python-dev python3-scipy gmsh
+</code></pre>
+
+<h3 id="b-clone-the-github-repository-and-build-the-code">B. Clone the GitHub repository and build the code</h3>
+<p>The procedure should now be as simple as </p>
+<pre><code class="bash">% git clone https://github.com/HomerReid/scuff-em.git
+% cd scuff-em
+% sh autogen.sh --prefix=${HOME}/scuff-em-installation
+% make -j 8 install
+</code></pre>
+
+<p>(In the last line, replace <code>8</code> with the number of CPU cores
+on your machine.)</p>
+<p>As discussed above, if this succeeds, the executable files
+for the <span class=SC>scuff-em</span> application modules
+(such as <code>scuff-scatter</code>, <code>scuff-rf</code>, etc.) will be 
+installed in the directory <code>${HOME}/scuff-em-installation/bin/,</code>
+and the demonstration examples for the various application programs 
+will be in <code>${HOME}/scuff-em-installation/share/scuff-em/examples.</code>
+At this point you may proceed to <a href="../PerformanceCheck">running a computational example
+and verifying CPU utilization</a>.</p>
+<!------------------------------------------------------>
+
+<!------------------------------------------------------>
+
+<!------------------------------------------------------>
+
+<p><a name="MacOS"></a></p>
+<h1 id="3-installing-on-macos">3. Installing on MacOS</h1>
+<p>The following installation procedure succeeded for me
+on MacOS Sierra 10.12.3 with 
+<a href="https://developer.apple.com/xcode">XCode version 8.1</a>
+and 
+<a href="https://brew.sh/">HomeBrew</a> pre-installed.
+All commands are to be
+entered at the console prompt of a terminal window
+(and, if you wish, after <a href="#UsefulPrompt">setting up an informative prompt</a> to help you keep track of where you are in the filesystem).</p>
+<h3 id="a-use-xcode-and-homebrew-to-install-external-packages">A. Use <span class=SC>xcode</span> and <span class=SC>homebrew</span> to install external packages</h3>
+<h4>A1. Install command-line tools for Apple developer suite</h4>
+
+<pre><code class="bash"> % xcode-select --install
+</code></pre>
+
+<h4>A2. Use homebrew to install required open-source packages</h4>
+
+<pre><code class="bash"> % brew update
+ % brew install gcc --without-multilib
+ % brew install autoconf automake hdf5 openblas
+</code></pre>
+
+<p>The second command here appears to be necessary---even if
+GCC is already installed on your system---to build anything
+with OpenMPI support, which <a href="../openMPI">(as noted above)</a>
+is important for achieving good <span class=SC>scuff-em</span>
+performance on machines with more than one CPU core.</p>
+<p>You will most likely also want to install
+<a href="http://gmsh.info/"><span class=SC>gmsh</span></a>. (Although
+<a class="wikilink" href="../../gmsh/">gmsh</a> is available within HomeBrew, the HomeBrew-installed 
+version seemed to be lacking graphics support when I tried it, 
+so instead I installed it from the 
+<a href="http://gmsh.info/"><span class=SC>gmsh</span> website</a>, but YMMV.)</p>
+<h3 id="b-clone-the-github-repository-and-build-the-code_1">B. Clone the GitHub repository and build the code</h3>
+<p>On the system I used (MacOS Sierra 10.12.3, XCode version
+8.1), the setup protocol outlined above has the following quirks:</p>
+<ul>
+<li>OpenMPI codes must be compiled with <code>gcc-7</code> or <code>g++-7</code> with the <code>-fopenp</code> compiler flag.</li>
+<li>The Homebrew installation of <span class=SC>openblas</span> leaves it in a nonstandard location, which must then be specified explicitly when building codes.</li>
+</ul>
+<p>The following script accomodates these quirks
+while fetching the latest <span class=SC>scuff-em</span> source
+repository from GitHub, building, and installing in the
+parent directory specified by the <code>--prefix</code> option below:</p>
+<pre><code class="bash">#!/bin/bash
+
+export CC=&quot;gcc-7 -fopenmp&quot;
+export CXX=&quot;g++-7 -fopenmp&quot;
+export CPPFLAGS=&quot;-I/usr/local/opt/openblas/include&quot;
+export LDFLAGS&quot;=-L/usr/local/opt/openblas/lib&quot;
+export BLAS_LIBS=&quot;-lopenblas&quot;
+
+git clone https://GitHub.com/HomerReid/scuff-em.git
+cd scuff-em
+sh autogen.sh --prefix=${HOME}/scuff-em-installation
+
+make install -j 4
+</code></pre>
+
+<p>As discussed above, for a system with e.g. 8 CPU cores
+you would say <code>make -j 8</code> instead of <code>make -j 4</code> in
+the last line.</p>
+<p>If this succeeds , you may proceed to <a href="../PerformanceCheck">running a computational example
+and verifying CPU utilization</a>.</p>
+<!------------------------------------------------------>
+
+<!------------------------------------------------------>
+
+<!------------------------------------------------------>
+
+<p><a name="Windows"></a></p>
+<h1 id="4-installing-on-windows">4. Installing on Windows</h1>
+<!------------------------------------------------------>
+
+<!------------------------------------------------------>
+
+<!------------------------------------------------------>
+
+<p><a name="PerformanceCheck"></a></p>
+<h1 id="5-run-a-scuff-em-computational-example-and-check-cpu-utilization">5. Run a <span class=SC>scuff-em</span> computational example and check CPU utilization</h1>
+<p>If the build and installation succeed, you're in business
+to run a <span class=SC>scuff-em</span> calculation
+and verify that your machine's resources are being 
+fully utilized. For example, to compute 
+<a href="../../examples/YagiUdaAntennas">input impedance vs. frequency for a Yagi-Uda antenna</a>, try:</p>
+<pre><code class="bash">export PATH=${PATH}:${HOME}/scuff-em-installation/bin
+cd ${HOME}/scuff-em-installation/share/scuff-em/examples/YagiUdaAntennas
+. RunScript.SZParms
+</code></pre>
+
+<p>This calculation should take anywhere between 10 seconds and a minute
+depending on your CPU configuration. While the calculation is 
+running in one terminal window, open a second terminal window and
+run <code>top</code> to monitor system performance---in particular,
+to verify that <code>scuff-rf</code> is properly using all of your CPU 
+cores. On the system I used, which has 4 CPU cores, this looks
+like this:</p>
+<p><img alt="Screen shot of top output" src="../TopOnMacOS.png" /></p>
+<p>The red-framed portion of the display here is the part you
+care about: you want the CPU utilization reported
+for <code>scuff-rf</code> to be close to <script type="math/tex">N\times 100\%</script>, where <script type="math/tex">N</script> is the
+number of CPU cores on your machine. If you see something like this,
+then <span class=SC>scuff-em</span> was built properly to 
+take advantage of your machine's resources. On the other hand,
+if the CPU utilization reported for <code>scuff-rf</code> bounces around
+near 100 %, then (assuming your machine has more than one CPU 
+core!) your <span class=SC>scuff-em</span> build is suboptimal---calculations
+will work and will yield correct answers, but at a fraction
+the speed that should be available on your machine.</p>
+<!------------------------------------------------------>
+
+<!------------------------------------------------------>
+
+<!------------------------------------------------------>
+
 <p><a name="Debugging"></a></p>
-<h4 id="building-for-debugging">Building for debugging</h4>
+<h1 id="6-building-for-debugging">6. Building for debugging</h1>
 <p>If you would like to run <a class="wikilink" href="../../scuff-em/">scuff-em</a> API codes in a debugger
 like <a href="https://www.gnu.org/software/gdb"><span class="SC">gdb</sc></a>,
 you will want to modify the build options to <strong>(a)</strong> include
@@ -659,8 +935,8 @@ with <a class="wikilink" href="../../GDB/">GDB</a>. </p>
 <p>Here is the script that works for me to achieve these goals:</p>
 <pre><code class="bash">#!/bin/bash
 
-export CC=&quot;gcc -ggdb -O0&quot;
-export CXX=&quot;g++ -ggdb -O0&quot;
+CC=&quot;gcc -ggdb -O0&quot;
+CXX=&quot;g++ -ggdb -O0&quot;
 export CFLAGS=&quot;-O0&quot;
 export CXXFLAGS=&quot;-O0&quot;
 sh autogen.sh --enable-debug --without-openmp --disable-shared
