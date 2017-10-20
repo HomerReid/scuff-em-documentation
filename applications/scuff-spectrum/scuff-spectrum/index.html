@@ -838,6 +838,11 @@ error is evidently tiny, and we can be confident that Beyn's
 method has converged even with just the 14 quadrature points
 we used. (For larger contours we would probably need
 more points.)</p>
+<p>Also, in this case Beyn's method only found a single eigenvalue
+within the contour. If we had considered a larger contour,
+there would most probably have been several lines of data
+each with the 4-number format shown above, corresponding to
+multiple eigenvalues identified within the contour.</p>
 <h3 id="mesh-convergence">Mesh convergence</h3>
 <p>Of course, even if Beyn's method converges to many-digit
 precision on an eigenmode, we don't necessarily 
@@ -967,12 +972,17 @@ cavity mode:</p>
 </tbody>
 </table>
 <p>These results demonstrate that the Beyn method implemented by 
-<a class="wikilink" href="../../../scuff-spectrum/">scuff-spectrum</a> is able to achieve at least 4-digit precision
-in determining mode frequencies, despite the modest computational
-burden.</p>
+<a class="wikilink" href="../../../scuff-spectrum/">scuff-spectrum</a> easily achieves 4-digit precision
+in determining mode frequencies, despite the modest 
+computational burden (equivalent to solving scattering 
+problems at 14 different frequencies). This is <em>much</em> 
+better accuracy than we could hope to get for the 
+same computational cost from a brute-force frequency-scan
+method.</p>
 <h3 id="running-scuff-spectrum-to-analyze-eigenmode-field-patterns">Running <span class=SC>scuff-spectrum</span> to analyze eigenmode field patterns</h3>
-<p>Having identified the <em>frequencies</em> (eigenvalues) of
-our structure with high precision, we will next want to look
+<p>Moreover,
+having identified the <em>frequencies</em> (eigenvalues) of
+our structure with high precision, we can now look
 at the <em>surface currents</em> (eigenvectors) and the <em>field patterns</em>
 they produce. <a class="wikilink" href="../../../scuff-spectrum/">scuff-spectrum</a> offers several command-line
 options to facilitate this analysis, many of which are 
