@@ -1,17 +1,17 @@
 (**************************************************)
 (* 3x3 sectors of the 6x6 homogeneous dyadic GF   *)
 (**************************************************)
-GTwiddleK2E[Eps_,Mu_,Omega_,k_,qx_,qy_,qz_,Sign_]:=(
-  (-Omega*Mu/(2*qz))
+GTwiddleK2E[Eps_,Mu_,Omega_,qx_,qy_,qz_,Sign_]:=(
+  (-Omega*Z0*Mu/(2*qz))
  *( {{1,0,0},{0,1,0},{0,0,1}}
    -{ {qx*qx,qx*qy,Sign*qx*qz},
       {qy*qx,qy*qy,Sign*qy*qz},
       {Sign*qz*qx,Sign*qz*qy,qz*qz}
-    }/(k*k)
+    }/(Eps*Mu*Omega*Omega)
   )
 )
 
-GTwiddleN2E[Eps_,Mu_,Omega_,k_,qx_,qy_,qz_,Sign_]:=(
+GTwiddleN2E[qx_,qy_,qz_,Sign_]:=(
   (1/2)
  *( { {0,    -Sign,     qy/qz},
       {Sign,     0,    -qx/qz},
@@ -20,7 +20,7 @@ GTwiddleN2E[Eps_,Mu_,Omega_,k_,qx_,qy_,qz_,Sign_]:=(
   )
 )
 
-GTwiddleK2H[Eps_,Mu_,Omega_,k_,qx_,qy_,qz_,Sign_]:=(
+GTwiddleK2H[qx_,qy_,qz_,Sign_]:=(
   (-1/2)
  *( { {0,    -Sign,     qy/qz},
       {Sign,     0,    -qx/qz},
@@ -29,13 +29,13 @@ GTwiddleK2H[Eps_,Mu_,Omega_,k_,qx_,qy_,qz_,Sign_]:=(
   )
 )
 
-GTwiddleN2H[Eps_,Mu_,Omega_,k_,qx_,qy_,qz_,Sign_]:=(
-  (-Omega*Eps/(2*qz))
+GTwiddleN2H[Eps_,Mu_,Omega_,qx_,qy_,qz_,Sign_]:=(
+  (-Omega*Eps/(2*qz*Z0))
  *( {{1,0,0},{0,1,0},{0,0,1}}
    -{ {qx*qx,qx*qy,Sign*qx*qz},
       {qy*qx,qy*qy,Sign*qy*qz},
       {Sign*qz*qx,Sign*qz*qy,qz*qz}
-    }/(k*k)
+    }/(Eps*Mu*Omega*Omega)
   )
 )
 
@@ -56,13 +56,12 @@ Upper32[G_]:={ {G[[1,1]], G[[1,2]]},
                {G[[3,1]], G[[3,2]]}
              };
 
-
-MK=(  Upper22[GTwiddleK2E[Eps1,Mu1,Omega,k1,qx,qy,qz1,+1]]
-     +Upper22[GTwiddleK2E[Eps2,Mu2,Omega,k2,qx,qy,qz2,-1]]
+MK=(  Upper22[GTwiddleK2E[Eps1,Mu1,Omega,qx,qy,qz1,+1]]
+     +Upper22[GTwiddleK2E[Eps2,Mu2,Omega,qx,qy,qz2,-1]]
    )
 
-MN=(  Upper22[GTwiddleN2H[Eps1,Mu1,Omega,k1,qx,qy,qz1,+1]]
-     +Upper22[GTwiddleN2H[Eps2,Mu2,Omega,k2,qx,qy,qz2,-1]]
+MN=(  Upper22[GTwiddleN2H[Eps1,Mu1,Omega,qx,qy,qz1,+1]]
+     +Upper22[GTwiddleN2H[Eps2,Mu2,Omega,qx,qy,qz2,-1]]
    )
 
 (***************************************************)
@@ -72,13 +71,13 @@ MN=(  Upper22[GTwiddleN2H[Eps1,Mu1,Omega,k1,qx,qy,qz1,+1]]
 (* source point and omitting exp(i*qz*|z|) factor  *)
 (***************************************************)
 EIncParTwiddle[p_,m_]:=(I/Omega)*
-(  Upper23[ GTwiddleK2E[Eps1,Mu1,Omega,k1,qx,qy,qz1,-1]].p
-  +Upper23[ GTwiddleN2E[Eps1,Mu1,Omega,k1,qx,qy,qz1,-1]].m
+(  Upper23[ GTwiddleK2E[Eps1,Mu1,Omega,qx,qy,qz1,-1]].p
+  +Upper23[ GTwiddleN2E[qx,qy,qz1,-1]].m
 );
 
 HIncParTwiddle[p_,m_]:=(I/Omega)*
-(  Upper23[ GTwiddleK2H[Eps1,Mu1,Omega,k1,qx,qy,qz1,-1]].p
-  +Upper23[ GTwiddleN2H[Eps1,Mu1,Omega,k1,qx,qy,qz1,-1]].m
+(  Upper23[ GTwiddleK2H[qx,qy,qz1,-1]].p
+  +Upper23[ GTwiddleN2H[Eps1,Mu1,Omega,qx,qy,qz1,-1]].m
 );
 
 (***************************************************)
@@ -92,13 +91,13 @@ NTwiddle[p_,m_]:=Inverse[MN].(-HIncParTwiddle[p,m]);
 (* assuming dest point lies above surface currents *)
 (***************************************************)
 EScatTwiddleAbove[p_,m_]:=(
-  Upper32[GTwiddleK2E[Eps1,Mu1,Omega,k1,qx,qy,qz1,+1]].KTwiddle[p,m]
- +Upper32[GTwiddleN2E[Eps1,Mu1,Omega,k1,qx,qy,qz1,+1]].NTwiddle[p,m]
+  Upper32[GTwiddleK2E[Eps1,Mu1,Omega,qx,qy,qz1,+1]].KTwiddle[p,m]
+ +Upper32[GTwiddleN2E[qx,qy,qz1,+1]].NTwiddle[p,m]
 )
 
 EScatTwiddleBelow[p_,m_]:=(
-  Upper32[GTwiddleK2E[Eps2,Mu2,Omega,k2,qx,qy,qz2,-1]].KTwiddle[p,m]
- +Upper32[GTwiddleN2E[Eps2,Mu2,Omega,k2,qx,qy,qz2,-1]].NTwiddle[p,m]
+  Upper32[GTwiddleK2E[Eps2,Mu2,Omega,qx,qy,qz2,-1]].KTwiddle[p,m]
+ +Upper32[GTwiddleN2E[qx,qy,qz2,-1]].NTwiddle[p,m]
 )
 
 Rules1={Mu2->1, Mu1->1, Eps1->1, k1->k0, k2->n2*k0, Omega->k0,
@@ -110,6 +109,10 @@ Rules3={Mu2->1, Mu1->1, Eps1->1,
         k1->Omega, k2->Sqrt[Eps2]*Omega, Eps2->2.3, Omega->1.1,
         (qx*qx+qy*qy)->q2,
 		q2->3.4,qz1->Sqrt[1.2*1.2-3.4],qz2->Sqrt[2.3*2.3-3.4]}
+
+StaticLimit={Mu1->1, Mu2->1, Eps1->1, qz1->I*q, qz2->I*q, qx->q, qy->0
+            };
+             
  
 qzRules={qz2->Sqrt[n2*n2*k0*k0-q2], qz1->Sqrt[k0*k0-q2]}
 
@@ -121,4 +124,4 @@ NRules={Mu2->1, Mu1->1, Eps2->1, Eps1->1,
         q2->(qx*qx+qy*qy), qx->0.8, qy->0.9, k0->1.1}
 
 (* check that this vanishes *)
-E -lrtacatTwiddleAbove[{1,0,0},{0,0,0}] /. NRules
+ETwiddleAbove[{1,0,0},{0,0,0}] /. NRules

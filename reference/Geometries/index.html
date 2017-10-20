@@ -240,7 +240,12 @@
                     <li><a class="toctree-l4" href="#meshing-constraints-for-surfaces-that-straddle-the-unit-cell-boundary">Meshing constraints for surfaces that straddle the unit-cell boundary</a></li>
                 
             
-                <li class="toctree-l3"><a href="#4-syntax-reference-for-the-scuffgeo-file-format">4. Syntax reference for the .scuffgeo file format</a></li>
+                <li class="toctree-l3"><a href="#4-implicit-handling-of-multilayered-material-substrates">4. Implicit handling of multilayered material substrates</a></li>
+                
+                    <li><a class="toctree-l4" href="#checking-substrate-specifications-with-scuff-analyze">Checking substrate specifications with scuff-analyze</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#5-syntax-reference-for-the-scuffgeo-file-format">5. Syntax reference for the .scuffgeo file format</a></li>
                 
                     <li><a class="toctree-l4" href="#meshpath-statement">MESHPATH statement</a></li>
                 
@@ -255,7 +260,7 @@
                     <li><a class="toctree-l4" href="#materialendmaterial-sections">MATERIAL...ENDMATERIAL sections</a></li>
                 
             
-                <li class="toctree-l3"><a href="#5-a-compendium-of-sample-scuffgeo-files">5. A compendium of sample .scuffgeo files</a></li>
+                <li class="toctree-l3"><a href="#6-a-compendium-of-sample-scuffgeo-files">6. A compendium of sample .scuffgeo files</a></li>
                 
             
             </ul>
@@ -372,6 +377,13 @@
             
     <li class="toctree-l1 ">
         <a class="" href="../../applications/scuff-static/scuff-static/">scuff-static</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/scuff-spectrum/scuff-spectrum/">scuff-spectrum</a>
         
     </li>
 
@@ -604,6 +616,7 @@ files that describe each of these types of geometries.</p>
 <li> <a href="#Simple">Simple geometries: One or more compact objects (possibly nested)</a>
 <li> <a href="#Complex">More complex geometries: multi-material junctions</a>
 <li> <a href="#Extended">Extended geometries: periodic boundary conditions</a>
+<li> <a href="#Substrate">Implicit handling of multilayered dielectric substrates</a>
 <li> <a href="#Reference"><code>.scuffgeo</code> file syntax reference</a>
 <li> <a href="#Examples">A compendium of <code>.scuffgeo</code> files</a>
 
@@ -1048,8 +1061,108 @@ side of the unit-cell boundary.</em> One way to think about this is
 that the periodically-repeated images of the unit-cell geometry must 
 all fit together "nicely" at the unit-cell boundaries, as indicated 
 in the right panel of the figure above.</p>
+<p><a name="Substrate"></a></p>
+<h1 id="4-implicit-handling-of-multilayered-material-substrates">4. Implicit handling of multilayered material substrates</h1>
+<p>As of October 2017, <span class=SC>scuff-em</span> now offers
+built-in support for calculations in the presence of a
+multilayered material substrate, with the effect of the
+substrate handled <em>implicitly</em> through the use of an
+appropriately modified Green's function.</p>
+<p>A multilayered material substrate consists of one or
+more layers of homogeneous material, stacked in the <em>z</em>
+direction and with infinite extent in the <em>x</em> and <em>y</em>
+directions; each layer may have arbitrary user-specified
+frequency-dependent dielectric permittivity and magnetic 
+permeability described by a 
+<a href="../Materials/"><span class=SC>scuff-em</span> material designation</a>.
+The substrate may optionally be terminated below
+by a perfectly conducting ground plane; if a ground
+plane is not present, the lowest material layer
+in the stack extends to negative infinity in 
+the <script type="math/tex">z</script>-direction (i.e. it is a half-space). (If you
+want to describe a substrate consisting of <script type="math/tex">N</script>
+finite-thickness layers, just add an <script type="math/tex">N+1</script>th layer
+of vacuum.)</p>
+<p>To include a substrate in your geometry,
+simply include a <code>SUBSTRATE...ENDSUBSTRATE</code> clause
+in your <code>.scuffgeo</code> file. Each intermediate line in
+this clause should either be of the form</p>
+<pre><code class="bash"> zValue   MaterialName
+</code></pre>
+
+<p>to add a layer of material <code>MaterialName</code> whose
+uppermost surface has <em>z</em>-coordinate <code>zValue</code>; or</p>
+<pre><code class="bash"> zGP      GROUNDPLANE 
+</code></pre>
+
+<p>to specify that your substrate has a perfectly-conducting
+ground plane at <em>z</em>=<code>zGP</code>. (All other layers must lie
+above <code>zGP.</code>)</p>
+<p>Here are some examples of <code>SUBSTRATE</code> definition
+sections in <code>.scuffgeo</code> files.</p>
+<ul>
+<li>An SiO2 layer of thickness 2 length units atop an
+infinite silicon half-space, with the upper surface of the
+SiO2 lying at <script type="math/tex">z=0</script>:</li>
+</ul>
+<pre><code class="bash">SUBSTRATE
+  0.0  SiO2
+ -2.0  Silicon
+ENDSUBSTRATE
+</code></pre>
+
+<ul>
+<li>Same as above, but now with a finite-thickness silicon
+layer of thickness 5 length units terminated below by
+a ground plane:</li>
+</ul>
+<pre><code class="bash">SUBSTRATE
+  0.0  SiO2
+ -2.0  Silicon
+ -7.0  GROUNDPLANE
+ENDSUBSTRATE
+</code></pre>
+
+<ul>
+<li>Same as above, but now without the ground plane, so that 
+finite-thickness silicon layer is simply suspended in air
+with vacuum below:</li>
+</ul>
+<pre><code class="bash">SUBSTRATE
+  0.0  SiO2
+ -2.0  Silicon
+ -7.0  VACUUM
+ENDSUBSTRATE
+</code></pre>
+
+<h3 id="checking-substrate-specifications-with-scuff-analyze">Checking substrate specifications with <span class=SC>scuff-analyze</span></h3>
+<p>If your <code>.scuffgeo</code> file contains a <code>SUBSTRATE</code> section,
+it will be properly interpreted by <code>scuff-analyze,</code>
+which will print a little description of your multilayered
+structure. For example, running <code>scuff-analyze</code> on a
+<code>.scuffgeo</code> file containing the above <code>SUBSTRATE</code> 
+clause yields, after the usual <code>scuff-analyze</code> data dump,
+the following output:</p>
+<pre><code class="bash">***********************************************
+*  SUBSTRATE:
+***********************************************
+Region  0 (VACUUM              ): [       inf &lt; z &lt; 0         ]
+Region  1 (SiO2                ): [         0 &lt; z &lt; -2        ]
+Region  2 (Silicon             ): [        -2 &lt; z &lt; -7        ]
+Region  3 (Vacuum              ): [        -7 &lt; z &lt; -inf      ]
+</code></pre>
+
+<p>Note that the infinite half-space lying above the
+substrate (which in this case is vacuum)
+is considered the first (uppemost) region of the
+substrate.</p>
+<p>For more information on the implementation
+of material substrates in <span class=SC>scuff-em</span>,
+see these memos:</p>
+<p>+<a href="../../tex/StaticDielectricSubstrate.pdf">"Implicit handling of multilayered dielectric substrates in <span class=SC>scuff-static</span>"</a></p>
+<p>+<a href="../../tex/FullWaveSubstrate.pdf">"Implicit handling of multilayered dielectric substrates in full-wave <span class=SC>scuff-em</span>"</a></p>
 <p><a name="Reference"></a></p>
-<h1 id="4-syntax-reference-for-the-scuffgeo-file-format">4. Syntax reference for the <code>.scuffgeo</code> file format</h1>
+<h1 id="5-syntax-reference-for-the-scuffgeo-file-format">5. Syntax reference for the <code>.scuffgeo</code> file format</h1>
 <p>A <code>.scuffgeo</code> file consists of one or more multiline
 <em>sections</em> (delimited by starting and ending keywords)
 plus zero or more single-line <em>statements</em>.</p>
@@ -1177,7 +1290,7 @@ through the origin and through the point with cartesian coordinates
 see <a href="../Materials/">here</a>.</p>
 </blockquote>
 <p><a name="Examples"></a> </p>
-<h1 id="5-a-compendium-of-sample-scuffgeo-files">5. A compendium of sample <code>.scuffgeo</code> files</h1>
+<h1 id="6-a-compendium-of-sample-scuffgeo-files">6. A compendium of sample <code>.scuffgeo</code> files</h1>
 <p>The images corresponding to the <code>.scuffgeo</code> files below were 
 obtained using the <code>scuff-analyze</code> utility distributed with 
 the <a class="wikilink" href="../../scuff-em/">scuff-em</a> suite, like this:</p>

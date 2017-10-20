@@ -419,9 +419,9 @@ $$}
   \vb M_{n,n-1} &= -\wt{\bmc G^n}_{\parallel}(z_n-z_{n-1}) 
 \\
   \vb M_{n,n} &= +\wt{\bmc G^n}_{\parallel}(0^+)
-                 +\wt{\bmc G^n}_{\parallel}(0^-)
+                 +\wt{\bmc G^{n+1}}_{\parallel}(0^-)
 \\
-  \vb M_{n,n+1} &= -\wt{\bmc G^n}_{\parallel}(z_n-z_{n+1}) 
+  \vb M_{n,n+1} &= -\wt{\bmc G^{n+1}}_{\parallel}(z_n-z_{n+1}) 
 \end{align}
 \label{MChunks}
 \end{subequations}
@@ -445,17 +445,18 @@ $$
 \qquad 
    \vb f=\left(\begin{array}{c}
   -\wt{\bmc F}_{1\parallel}(z_1)
+  +\wt{\bmc F}_{2\parallel}(z_1)
 \\
-   \wt{\bmc F}_{1\parallel}(z_2)
   -\wt{\bmc F}_{2\parallel}(z_2)
+  +\wt{\bmc F}_{3\parallel}(z_2)
 \\
-   \wt{\bmc F}_{2\parallel}(z_3)
   -\wt{\bmc F}_{3\parallel}(z_3)
+  +\wt{\bmc F}_{3\parallel}(z_4)
 \\
   \vdots
 \\
-   \wt{\bmc F}_{N,\parallel}(z_{N-1})
-  -\wt{\bmc F}_{N\parallel}(z_{N-1})
+  -\wt{\bmc F}_{N-1,\parallel}(z_{N-1})
+  +\wt{\bmc F}_{N\parallel}(z_{N-1})
    \end{array}\right).
 $$
 %====================================================================%
@@ -485,9 +486,9 @@ Then the only nonzero length-$4$ blocks of the RHS vector in
 ($\ell=\{1,2,4,5\}$)
 %====================================================================%
 \numeq{fsm1fs}
- { \Big(\vb f_{s-1}\Big)_\ell = -\wt {\mc G_{\ell j}^{s}}_{\parallel}(z\subt{S}-z_{s-1}),
+ { \Big(\vb f_{s-1}\Big)_\ell = -\wt {\mc G_{\ell j}^{s}}_{\parallel}( z_{s-1}-z\subt{S}),
    \qquad
-   \Big(\vb f_{s}\Big)_\ell   = +\wt {\mc G_{\ell j}^s}_{\parallel}(z\subt{S}-z_{s})
+   \Big(\vb f_{s}\Big)_\ell   = +\wt {\mc G_{\ell j}^s}_{\parallel}(z_s-z\subt{S})
  }
 %====================================================================%
 and the surface currents on interface layer $n$ are obtained
@@ -497,7 +498,7 @@ by solving (\ref{sWf}):
  \wt{\bmc S}_n 
 &= \vb W_{n,s-1} \, \vb f_{s-1} + \vb W_{n,s} \, \vb f_{s}
 \nn
-&= -\sum_{p=0}^1 (-1)^p \vb W_{n,s-1+p}
+&= \sum_{p=0}^1 (-1)^{p+1} \vb W_{n,s-1+p}
     \cdot
     \wt{\bmc G^s}_{\parallel, j}(z\subt{S}-z_{s-1+p})
 \label{SWG}
@@ -521,6 +522,9 @@ for region $d$:
 \wt{\bmc F}(z\subt{D}) 
 &= -\wt{\bmc G^d}(z\subt{D} - z_{d-1}) \cdot \wt{\bmc S}_{d-1}
    +\wt{\bmc G^d}(z\subt{D} - z_d)     \cdot \wt{\bmc S}_{d}
+\\
+&= \sum_{q=0}^1  (-1)^{q+1}
+   \wt{\bmc G^d}(z\subt{D} - z_{d+q-1}) \cdot \wt{\bmc S}_{d+q-1}
 \intertext{(The minus sign in the first term arises because, in my convention,
 surface currents on the upper surface of a region contribute to the fields
 in that region with a minus sign). Inserting (\ref{SWG}), the $i$ component
@@ -528,10 +532,10 @@ here---which is the $ij$ component of the substrate DGF---is}
 \wt{\mc G\sups{subs}}_{ij}(z\subt{D},z\subt{S})
 \equiv
 \wt{\mc F_i}(z\subt{D})
-&= \sum_{q=0}^1 (-1)^{p+q}
-   \wt{\bmc G^d}_{i,\parallel} (z_{d-1+q}-z\subt{D})
+&= \sum_{p,q=0}^1 (-1)^{p+q}
+   \wt{\bmc G^d}_{i,\parallel} (z\subt{D}-z_{d-1+q})
    \vb W_{d-1+q,s-1+p}
-   \wt{\bmc G^s}_{\parallel, j} (z\subt{S} - z_{s-1+p})
+   \wt{\bmc G^s}_{\parallel, j} (z_{s-1+p} - z\subt{S})
 \end{align*}
 %====================================================================%
 Inverse-Fourier-transforming back to real space yields

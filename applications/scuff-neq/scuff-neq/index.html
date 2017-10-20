@@ -328,13 +328,9 @@
                 
                     <li><a class="toctree-l4" href="#common-options">Common options</a></li>
                 
-                    <li><a class="toctree-l4" href="#options-specifying-input-fields">Options specifying input fields</a></li>
-                
                     <li><a class="toctree-l4" href="#options-requesting-output-quantities">Options requesting output quantities</a></li>
                 
                     <li><a class="toctree-l4" href="#option-requesting-visualization-output">Option requesting visualization output</a></li>
-                
-                    <li><a class="toctree-l4" href="#options-specifying-object-temperatures">Options specifying object temperatures</a></li>
                 
                     <li><a class="toctree-l4" href="#options-controlling-the-computation-of-power-force-and-torque">Options controlling the computation of power, force, and torque</a></li>
                 
@@ -345,7 +341,7 @@
                 
                     <li><a class="toctree-l4" href="#the-log-file">The .log file</a></li>
                 
-                    <li><a class="toctree-l4" href="#output-files-for-spatially-integrated-pfts-the-siflux-siintegrand-and-neqpft-files">Output files for spatially-integrated PFTs: The .SIFlux, .SIIntegrand, and .NEQPFT files</a></li>
+                    <li><a class="toctree-l4" href="#output-files-for-spatially-integrated-pfts-the-siflux-file">Output files for spatially-integrated PFTs: The .SIFlux file</a></li>
                 
                     <li><a class="toctree-l4" href="#output-files-for-spatially-resolved-pfts-the-srflux-srintegrand-and-pvmst-files">Output files for spatially-resolved PFTs: The .SRFlux, .SRIntegrand, and .PVMST files</a></li>
                 
@@ -370,6 +366,13 @@
             
     <li class="toctree-l1 ">
         <a class="" href="../../scuff-static/scuff-static/">scuff-static</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../scuff-spectrum/scuff-spectrum/">scuff-spectrum</a>
         
     </li>
 
@@ -576,11 +579,14 @@ information on heat-transfer rates and NEQ Casimir forces (in which case
 you will specify a list of frequencies and will get back a list of 
 frequency-specific values of energy and momentum fluxes) or 
 <strong>(b)</strong> frequency-integrated information, in which case you will assign 
-temperatures to each body in your geometry and <a class="wikilink" href="../../../scuff-neq/">scuff-neq</a> will 
+temperatures to each body in your geometry and 
 numerically integrate the fluxes, weighted by appropriate Bose-Einstein 
-factors, to obtain the total heat-transfer rate or NEQ Casimir force. 
-(For more details, see 
-<a href="#WhatItComputes">What <span class="SC">scuff-neq</span> actually computes</a>.)</p>
+factors, to obtain the total heat-transfer rate or NEQ Casimir force.
+(<a class="wikilink" href="../../../scuff-neq/">scuff-neq</a> doesn't actually do the frequency integration---that's
+handled by the separate utility code 
+<a href="../../scuff-integrate/scuff-integrate/"><span class=SC>scuff-integrate</span></a>,
+as discussed below in the section 
+<a href="#WhatItComputes">what <span class="SC">scuff-neq</span> actually computes</a>.)</p>
 </li>
 <li>
 <p>As in <a class="wikilink" href="../../../scuff-cas3d/">scuff-cas3d</a>, you can specify an optional list of 
@@ -596,11 +602,14 @@ transformation you specify.</p>
 information on energy and momentum fluxes. More specifically, 
 you can specify to <a class="wikilink" href="../../../scuff-neq/">scuff-neq</a> a 
 <a href="../../GeneralReference/#EvaluationPoints">list of evaluation points</a>
-and you will get back values of the (thermally and 
-temporally averaged) Poynting flux and Maxwell stress tensor 
-at each point you requested.</p>
+and you will get back values of the frequency-resolved
+Poynting flux and Maxwell stress tensor
+at each spatial point you requested, which
+<a href="../../scuff-integrate/scuff-integrate/"><span class=SC>scuff-integrate</span></a>
+will integrate to yield thermally- and temporally-averaged
+quantities.</p>
 <p>In addition to numerical output on heat-transfer rates and
-Casimir quantities, you can also request visualization outputs
+Casimir quantities, you can also request <em>visualization</em> outputs
 that plot the spatial distribution of the heat or momentum flux.</p>
 <p>For Casimir forces and torques, the quantities computed by 
 <a class="wikilink" href="../../../scuff-neq/">scuff-neq</a> are only the <em>non-equilibrium</em> contributions to 
@@ -635,17 +644,15 @@ as discussed in more detail below.</p>
 <li><a href="#1-what-scuff-neq-actually-computes">1. What <span class="SC">scuff-neq</span> actually computes</a></li>
 <li><a href="#2-scuff-neq-command-line-options">2. <span class="SC">scuff-neq</span> command-line options</a><ul>
 <li><a href="#common-options">Common options</a></li>
-<li><a href="#options-specifying-input-fields">Options specifying input fields</a></li>
 <li><a href="#options-requesting-output-quantities">Options requesting output quantities</a></li>
 <li><a href="#option-requesting-visualization-output">Option requesting visualization output</a></li>
-<li><a href="#options-specifying-object-temperatures">Options specifying object temperatures</a></li>
 <li><a href="#options-controlling-the-computation-of-power-force-and-torque">Options controlling the computation of power, force, and torque</a></li>
 <li><a href="#other-options">Other options</a></li>
 </ul>
 </li>
 <li><a href="#3-scuff-neq-output-files">3. <span class="SC">scuff-neq</span> output files</a><ul>
 <li><a href="#the-log-file">The .log file</a></li>
-<li><a href="#output-files-for-spatially-integrated-pfts-the-siflux-siintegrand-and-neqpft-files">Output files for spatially-integrated PFTs: The .SIFlux, .SIIntegrand, and .NEQPFT files</a></li>
+<li><a href="#output-files-for-spatially-integrated-pfts-the-siflux-file">Output files for spatially-integrated PFTs: The .SIFlux file</a></li>
 <li><a href="#output-files-for-spatially-resolved-pfts-the-srflux-srintegrand-and-pvmst-files">Output files for spatially-resolved PFTs: The .SRFlux, .SRIntegrand, and .PVMST files</a></li>
 <li><a href="#units-of-output-quantities">Units of output quantities</a></li>
 </ul>
@@ -740,8 +747,14 @@ is the extent to which <script type="math/tex">\langle Q\rangle</script>
 the sum in its definition ranges only over 
 the source bodies in the geometry, not including
 the environment contribution.
-<script type="math/tex">\langle Q \rangle^{\small NEQ}</script> is the
-quantity that is computed by <a class="wikilink" href="../../../scuff-neq/">scuff-neq</a>.</p>
+The job of <a class="wikilink" href="../../../scuff-neq/">scuff-neq</a> is to compute
+the quantity <script type="math/tex">\Phi_s(\omega)</script>---known as a <em>generalized flux</em>---
+that enters the integral defining <script type="math/tex">\langle Q\rangle^{\small NEQ}</script>;
+<a class="wikilink" href="../../../scuff-neq/">scuff-neq</a> will do this computation at each of multiple
+frequencies that you specify in advance. These data are then used by 
+the separate <a class="wikilink" href="../../../scuff-integrate/">scuff-integrate</a> utility to evaluate
+the actual <script type="math/tex">\omega</script> integrals and compute thermally-averaged 
+power, force, and torque quantities at various temperatures.</p>
 <p><a name="CommandLineOptions"></a></p>
 <h1 id="2-scuff-neq-command-line-options">2. <span class="SC">scuff-neq</span> command-line options</h1>
 <h3 id="common-options">Common options</h3>
@@ -754,17 +767,6 @@ quantity that is computed by <a class="wikilink" href="../../../scuff-neq/">scuf
 --Cache
 --ReadCache
 --WriteCache</code></p>
-<h3 id="options-specifying-input-fields">Options specifying input fields</h3>
-<p><a class="wikilink" href="../../../scuff-scatter/">scuff-scatter</a> recognizes the following options specifying
-various types of incident fields. You may specify more than
-one type of incident field, in which case your geometry will
-be illuminated by the simultaneous superposition of all the 
-fields you specify.</p>
-<p>For more details on how to use the following options 
-and the precise mathematical expressions for the fields
-they describe,
-see [Incident fields in <span class="SC">scuff-em</span>][IncidentFields].</p>
-<p>These options are </p>
 <h3 id="options-requesting-output-quantities">Options requesting output quantities</h3>
 <p class="toc"><code>--PAbs  
 --PRad  
@@ -792,31 +794,6 @@ the spatial distribution of the Poynting flux or
 Maxwell stress on the surfaces of objects or 
 the displaced bounding surfaces over which those quantities
 are integrated to compute the total PFT quantity.</p>
-<h3 id="options-specifying-object-temperatures">Options specifying object temperatures</h3>
-<p class="toc"><code>--Temperature UpperSphere 300
---Temperature LowerSphere 100
---Temperature ENVIRONMENT 100</code></p>
-<blockquote>
-<p>The first two options here set the temperatures
-of the objects labeled <code>UpperSphere</code> and
-<code>LowerSphere</code> in the <code>.scuffgeo</code> file.
-<strong>Temperature specifications are interpreted in 
-units of Kelvin</strong>, so <code>300</code> corresponds to 
-room temperature.</p>
-<p>The third option here sets the temperature of
-the environment in which the objects are embedded.
-(The keywords <code>MEDIUM</code> and <code>EXTERIOR</code> may be used
-here interchangeably with <code>ENVIRONMENT</code>).</p>
-<p>Note that the temperatures of all objects, and of
-the environment, are zero by default. This means that,
-if you request a full frequency-integrated calculation
-(which you do by omitting the <code>--omega</code> or <code>--omegaFile</code>
-option) and you do not specify any <code>--temperature</code> 
-options, the code will chug for a while (computing 
-temperature-independent fluxes at various frequencies)
-before reporting strictly zero values for all
-quantities! This is probably not what you want.</p>
-</blockquote>
 <h3 id="options-controlling-the-computation-of-power-force-and-torque">Options controlling the computation of power, force, and torque</h3>
 <p class="toc"><code>--ForceDSI</code></p>
 <p class="toc"><code>--DSIPoints 302
@@ -883,12 +860,18 @@ to the total PFTs on those bodies themselves.</p>
 <p>Like all command-line codes in the <a class="wikilink" href="../../../scuff-em/">scuff-em</a> suite,
 <a class="wikilink" href="../../../scuff-cas3d/">scuff-cas3d</a> writes a <a href="../../GeneralReference/#LogFiles"><code>.log</code> file</a> that you
 can monitor to keep track of your calculation's progress.</p>
-<h3 id="output-files-for-spatially-integrated-pfts-the-siflux-siintegrand-and-neqpft-files">Output files for spatially-integrated PFTs: The <code>.SIFlux</code>, <code>.SIIntegrand</code>, and <code>.NEQPFT</code> files</h3>
+<h3 id="output-files-for-spatially-integrated-pfts-the-siflux-file">Output files for spatially-integrated PFTs: The <code>.SIFlux</code> file</h3>
 <p>If you requested the computation of any spatially-integrated
 PFTs (by setting command-line options such as <code>--PAbs</code> or <code>--YForce</code>),
-you will get back files reporting various contributions to 
-these quantities.
-To understand what is written to these files, let <script type="math/tex">Q_d</script> be
+you will get back a file with extension <code>.SIFlux</code> (for 
+"fpatially-integrated flux") reporting values
+of the <em>generalized fluxes </em><script type="math/tex">\Phi(\omega)</script> at each frequency you requested.
+Generalized fluxes represent frequency-resolved contributions to 
+thermally-averaged rates of energy and momentum transfer; 
+as noted, above, they are multiplied by Bose-Einstein
+factors and integrated over frequency to yield full 
+thermally and temporally-averaged data.</p>
+<p>To understand what is written to these files, let <script type="math/tex">Q_d</script> be
 the spatially-integrated PFT on a destination body <script type="math/tex">d</script>,
 and write the FSC decomposition of the thermal average
 of <script type="math/tex">Q_d</script> in the form</p>

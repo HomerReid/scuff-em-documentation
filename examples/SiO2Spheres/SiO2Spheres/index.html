@@ -357,6 +357,13 @@
         
             
     <li class="toctree-l1 ">
+        <a class="" href="../../../applications/scuff-spectrum/scuff-spectrum/">scuff-spectrum</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
         <a class="" href="../../../applications/scuff-analyze/scuff-analyze/">scuff-analyze</a>
         
     </li>
@@ -587,21 +594,32 @@ You can visualize this configuration by typing e.g.</p>
 <hr />
 <h2 id="spectral-density-of-radiated-power">Spectral density of radiated power</h2>
 <p>As described in the 
-<a href="../../../applications/scuff-neq/scuff-neq/"><span class="CodeName">scuff-neq</span> documentation</a>,
-<a class="wikilink" href="../../../scuff-neq/">scuff-neq</a> computes the total power radiated by
-finite-temperature objects as an integral over angular frequencies
+<a href="../../../applications/scuff-neq/scuff-neq/"><span class="SC">scuff-neq</span> documentation</a>,
+<a class="wikilink" href="../../../scuff-neq/">scuff-neq</a> computes temperature-independent quantities
+known as <em>generalized fluxes,</em> commonly denoted <script type="math/tex">\Phi(\omega)</script>, 
+which describe the ability 
+of systems to exchange energy and momentum via radiation
+at specific frequencies
+The <em>total</em> power radiated by a finite-temperature object is 
+obtained as an integral over angular frequencies
 <script type="math/tex">\omega,</script> in which the integrand involves a
 temperature-dependent Bose-Einstein factor 
-and a temperature-independent dimensionless flux <script type="math/tex">\Phi.</script> 
-To calculate this radiated-power flux at a given set
-of frequencies, we say</p>
-<pre><code class="bash"> % scuff-neq --geometry SiO2Sphere_501.scuffgeo --OmegaFile --PRad
+and a temperature-independent dimensionless flux <script type="math/tex">\Phi.</script>
+The distribution of labor in the <span class=SC>scuff-em</span>
+suite is that <span class=SC>scuff-neq</span> computes
+frequency-dependent generalized flux data and writes these
+in the form of data files, while a separate tool named
+[<span class=SC>scuff-integrate</span>][scuffIntegrate]
+post-processes the flux data to yield temperature-dependent
+heat-transfer rates, powers, and torques.</p>
+<p>To use <span class=SC>scuff-neq</span> to calculate radiated-power flux 
+at a given set of frequencies, we say simply</p>
+<pre><code class="bash"> % scuff-neq --geometry SiO2Sphere_501.scuffgeo --OmegaFile MyOmegaFile
 </code></pre>
 
-<p>where <a href="../OmegaFile"><code>OmegaFile</code></a> is a list of
-angular frequencies. (Here <code>--PRad</code> says that we 
-are interested in the radiated power).
-This produces the file
+<p>where <a href="../OmegaFile"><code>MyOmegaFile</code></a> is a list of
+angular frequencies.</p>
+<p>This produces the file
 <code>SiO2Sphere_501.SiFlux</code>, which looks something
 like this:</p>
 <pre><code class="bash"># scuff-neq run on superhr2 (07/11/15::00:31:36)
