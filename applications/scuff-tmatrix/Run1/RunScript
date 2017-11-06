@@ -1,0 +1,17 @@
+#!/bin/bash
+
+export BASE=..
+export SCUFF_MESH_PATH=${BASE}/mshFiles
+export SCUFF_GEO_PATH=${BASE}/scuffgeoFiles
+
+for N in 327 1362
+do
+  for MAT in E10 E10M5
+  do
+    ARGS=""
+    ARGS="${ARGS} --geometry ${MAT}Sphere_${N}.scuffgeo"
+    ARGS="${ARGS} --OmegaFile ${BASE}/OmegaFile"
+    ARGS="${ARGS} --lmax 2"
+    ${SEI}/scuff-tmatrix ${ARGS}
+  done
+done

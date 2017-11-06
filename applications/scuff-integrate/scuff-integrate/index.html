@@ -582,14 +582,14 @@ by integrating contributions from real frequencies <script type="math/tex">\omeg
 <!--%====================================================================%-->
 
 <p>
-<script type="math/tex; mode=display"> Q^{s\rightarrow d}
+<script type="math/tex; mode=display"> Q_{s\rightarrow d}
    = \int_0^\infty
      \Big[ \Theta(T_s,\omega) - \Theta(T_\text{env},\omega) \Big]
-     \Phi^{s\rightarrow d}(\omega) \, d\omega
+     \Phi_{s\rightarrow d}(\omega) \, d\omega
    \qquad (1)
 </script>
 <!--%====================================================================%-->
-Here <script type="math/tex">Q^{s\rightarrow d}</script> is the contribution of body <script type="math/tex">s</script> to
+Here <script type="math/tex">Q_{s\rightarrow d}</script> is the contribution of body <script type="math/tex">s</script> to
 quantity <script type="math/tex">Q</script> (a heat-transfer rate, force, or torque) for body <script type="math/tex">d</script>,
 <script type="math/tex">\Theta(T,\omega)=\frac{\hbar\omega}{e^{\hbar\omega/kT}-1}</script>
 is the Bose-Einstein statistical factor, <script type="math/tex">T_s</script> and <script type="math/tex">T_\text{env}</script>
@@ -760,7 +760,7 @@ of sources in body <script type="math/tex">s</script> to the power, force, and/o
 (PFT) on body <script type="math/tex">d</script>. (For example, lines for which this field reads
 <code>13</code> give contributions of body 1 to the PFT for body 3).
 The actual data quantities reported in the
-<code>.SIFlux</code> file are the generalized fluxes <script type="math/tex">\Phi^{s\rightarrow d}</script>
+<code>.SIFlux</code> file are the generalized fluxes <script type="math/tex">\Phi_{s\rightarrow d}</script>
 in equation (1) above, and to evaluate the <script type="math/tex">\omega</script> integral
 here we need to know the temperatures of the environment
 and of all bodies in the geometry, which enter through 

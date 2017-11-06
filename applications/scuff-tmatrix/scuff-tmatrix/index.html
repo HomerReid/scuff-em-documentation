@@ -303,6 +303,27 @@
         
             <ul>
             
+                <li class="toctree-l3"><a href="#options-controlling-the-scattering-geometry">Options controlling the scattering geometry</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#option-describing-the-range-of-spherical-wave-indices">Option describing the range of spherical-wave indices</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#2-scuff-tmatrix-output-files">2. scuff-tmatrix Output Files</a></li>
+                
+                    <li><a class="toctree-l4" href="#1-t-matrix-data-in-text-form">1. T-matrix data in text form</a></li>
+                
+                    <li><a class="toctree-l4" href="#2-t-matrix-data-in-binary-form">2. T-matrix data in binary form</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#3-scuff-tmatrix-examples">3. scuff-tmatrix Examples</a></li>
+                
+                    <li><a class="toctree-l4" href="#4a-dielectric-and-magnetic-spheres">4a. Dielectric and magnetic spheres</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#4-reading-t-matrix-data-into-julia">4. Reading T-Matrix data into julia</a></li>
+                
+            
             </ul>
         
     </li>
@@ -529,10 +550,385 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="scuff-tmatrix">scuff-tmatrix</h1>
-<p>The documentation for <a class="wikilink" href="../../../scuff-tmatrix/">scuff-tmatrix</a> has not yet been
-ported from its earlier version. For the time being, please
-<a href="http://homerreid.com/scuff-em/scuff-tmatrix">access the earlier version of the documentation.</a></p>
+                <h1>Computing T-Matrices of arbitrary objects with <span class=SC>scuff-tmatrix</span> </h1>
+
+<p>The well-known <a href="http://en.wikipedia.org/wiki/T-matrix_method"><em>T-matrix method</em></a> is a widely used
+technique for solving problems involving electromagnetic scattering from
+compact objects. In this method, the scattering properties of a compact
+body are encapsulated in its <em>T-matrix</em>, whose entries give the
+amplitudes of the <em>outgoing</em> spherical waves that arise from irradiating
+the object with a single <em>regular</em> spherical wave.</p>
+<p><span class="SC">scuff-tmatrix</span> is a specialized tool within
+the <span class="SC">scuff-em</span> code suite for computing the
+<em>T</em>-matrix of arbitrarily-shaped objects with arbitrary
+frequency-dependent material properties.</p>
+<p>To compute the <em>T-</em>matrix of an object (or a collection of objects)
+using <span class="SC">scuff-tmatrix,</span> you will</p>
+<ol>
+<li>
+<p>create a <a href="../../../reference/scuffEMGeometries.shtml">geometry file</a>
+    describing the shapes and material properties of the scattering
+    objects in your geometry;</p>
+</li>
+<li>
+<p>run <span class="SC">scuff-tmatrix</span> with command-line
+    options specifying the geometry, the maximum spherical-wave
+    index <script type="math/tex">\ell^{\text{max}}</script> of the
+    spherical waves to consider (which determines the dimension of the 
+    computed <em>T-</em>matrix), and the frequency range over which to run computations.</p>
+</li>
+</ol>
+<p>You will get back</p>
+<ol>
+<li>
+<p>a text file listing the <em>T-</em>matrix elements <script type="math/tex">T_{\alpha\beta}(\omega)</script>,
+    at all frequencies <script type="math/tex">\omega</script> you requested,
+    for all pairs of vector-spherical-wave indices
+    <script type="math/tex">\alpha=\{\ell_\alpha,m_\alpha,P_\alpha\}, \beta=\{\ell_\beta,m_\beta,P_\beta\}</script>
+    satisfying 
+    <script type="math/tex; mode=display"> 1\le \ell \le \ell^{\text{max}}, 
+       \quad 
+       -\ell \le m \le +\ell,
+       \quad 
+       P\in \{M,N\}
+    </script>
+</p>
+</li>
+<li>
+<p>optionally, a binary <code>.HDF5</code> file containing the <em>T-</em>matrix data
+    together with simple scripts for importing the data into 
+    <span class="SC">julia.</span></p>
+</li>
+</ol>
+<div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#1-scuff-tmatrix-command-line-options">1. <span class="SC">scuff-tmatrix</span> Command-Line Options</a><ul>
+<li><a href="#options-controlling-the-scattering-geometry">Options controlling the scattering geometry</a></li>
+<li><a href="#option-describing-the-range-of-spherical-wave-indices">Option describing the range of spherical-wave indices</a></li>
+</ul>
+</li>
+<li><a href="#2-scuff-tmatrix-output-files">2. <span class="SC">scuff-tmatrix</span> Output Files</a><ul>
+<li><a href="#1-t-matrix-data-in-text-form">1. T-matrix data in text form</a></li>
+<li><a href="#2-t-matrix-data-in-binary-form">2. T-matrix data in binary form</a><ul>
+<li><a href="#ordering-and-indexing-of-spherical-waves">Ordering and indexing of spherical waves</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#3-scuff-tmatrix-examples">3. <span class="SC">scuff-tmatrix</span> Examples</a><ul>
+<li><a href="#4a-dielectric-and-magnetic-spheres">4a. Dielectric and magnetic spheres</a><ul>
+<li><a href="#analytical-expressions-for-t-matrix-elements">Analytical expressions for T-matrix elements</a></li>
+<li><a href="#geometry-and-mesh-files">Geometry and mesh files</a></li>
+<li><a href="#frequency-list">Frequency list</a></li>
+<li><a href="#run-scuff-tmatrix">Run <span class=SC>scuff-tmatrix</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#4-reading-t-matrix-data-into-julia">4. Reading T-Matrix data into <span class="SC">julia</span></a></li>
+</ul>
+</div>
+<p><a name="Options"></a></p>
+<h1 id="1-scuff-tmatrix-command-line-options">1. <span class="SC">scuff-tmatrix</span> Command-Line Options</h1>
+<p>The following table summarizes all command-line options currently
+available in <span class="SC">scuff-tmatrix.</span></p>
+<p>As is true for all programs in the <span
+class="SC">scuff-em</span> suite, command-line options may be
+specified in a text file catted to standard input; see
+<a href="../../GeneralReference#CommandLineOptionsByFile">here</a>
+for an example of how this works.</p>
+<h3 id="options-controlling-the-scattering-geometry">Options controlling the scattering geometry</h3>
+<pre><code>--geometry MyGeometry.scuffgeo
+</code></pre>
+
+<p>Specifies the <a href="../../../reference/Geometries">geometry file</a> describing the
+scattering geometry. This option is always mandatory.</p>
+<p><em>Options specifying the frequencies considered</em></p>
+<pre><code>--Omega xx 
+
+--OmegaFile MyFile
+</code></pre>
+
+<p><code>--Omega</code> specifies an angular frequency at which to run computations, in units of <script type="math/tex">\omega_0 \equiv 3\times 10^{14} </script> rad/sec (<script type="math/tex">=c/1 \mu</script>m).</p>
+<p>The value specified for <code>--Omega</code> may be a <a href="../../GeneralReference#Complex">complex number.</a></p>
+<p>You may request computations at more than one frequency by using the
+<code>--Omega</code> option more than once, i.e. you may say</p>
+<pre><code class="listing">--Omega 1e-2 --Omega 1e-1 --Omega 1 --Omega 10
+
+</code></pre>
+
+<p>However, for more than a few frequencies it is more convenient to use
+the <code>--OmegaFile</code> option, which specifies a file containing an 
+entire list of <code>--Omega</code> values, one per line; blank lines and comments (lines beginning with <code>#</code>) are skipped.</p>
+<h3 id="option-describing-the-range-of-spherical-wave-indices">Option describing the range of spherical-wave indices</h3>
+<pre><code class="listing">--lMax 3
+</code></pre>
+
+<p>Request calculation of <em>T-</em>matrix entries with spherical wave indices up to and including <script type="math/tex">\ell=\ell^{\text{max}}</script>
+(and all <script type="math/tex">m</script>-values and polarizations). As described 
+<a href="#SphericalWaveOrder">below</a>, for a maximum <script type="math/tex">\ell</script>-value of <script type="math/tex">\ell^\text{max}</script>
+the <script type="math/tex">T</script>-matrix has dimension <script type="math/tex">D\times D,</script> where <script type="math/tex">D=2(\ell^{\text{max}}+1)^2 - 2</script>.</p>
+<p>If you do not specify this option, the default value is <code>lMax=3</code>.</p>
+<p><em>Options controlling output files</em></p>
+<pre><code>--FileBase MyFileBase
+</code></pre>
+
+<p>Sets the base file name for output files. <em>T</em>-matrix
+data in text format are written to <code>FileBase.TMatrix.</code>
+<em>T</em>-matrix data in binary (HDF5) format are written
+to <code>FileBase_wXXXX.HDF5</code> where <code>XXXX</code> denotes the 
+angular frequency.</p>
+<p>If not specified,
+<code>--FileBase</code> defaults to the base filename of the <code>.scuffgeo</code>
+file. </p>
+<pre><code>--WriteHDF5Files 
+</code></pre>
+
+<p>This boolean flag requests that binary <em>T</em>-matrix data be written
+to HDF5 files.
+A separate HDF5 file is created for each frequency,
+with file name <code>FileBase_wXXXX.HDF5</code> where <code>XXXX</code> denotes
+the angular frequency. T matrix data are written
+in the form of a real-valued matrix (data set) named <code>T</code>
+with dimension <script type="math/tex">D\times 2D</script>;
+for <script type="math/tex">d=0,1,\cdots,D-1,</script> columns <script type="math/tex">2d</script> and <script type="math/tex">2d+1</script> give the
+real and imaginary parts of the <script type="math/tex">T</script>-matrix entry for 
+column <script type="math/tex">d</script>. 
+Here <script type="math/tex">D=2(\ell^{\text{max}}+1)^2 - 2</script> is 
+the total number of vector spherical waves with
+<script type="math/tex">1\le \ell \le \ell^{\text{max}}.</script>
+(T-matrix rows and columns
+are indexed as shown in <a href="#Table">this table</a>.)</p>
+<p>Note that, in contrast to text-based output, binary data output is
+disabled by default; you must specify this option to enable 
+binary data output.</p>
+<p><a name="OutputFiles"></a></p>
+<h1 id="2-scuff-tmatrix-output-files">2. <span class="SC">scuff-tmatrix</span> Output Files</h1>
+<h3 id="1-t-matrix-data-in-text-form">1. <em>T-</em>matrix data in text form</h3>
+<p><span class="SC">scuff-tmatrix</span> always writes <em>T-</em>matrix
+data to a text-based output file named <code>FileBase.TMatrix,</code>
+where <code>FileBase</code> is the value you gave for the <code>--FileBase</code>
+command-line parameter. (If you didn't set this option,
+<code>FileBase</code> defaults to <code>MyGeometry</code> where <code>MyGeometry.scuffgeo</code> 
+was the name of the file you specified with the <code>--geometry</code> 
+option.)</p>
+<p>Each line of the text-based output file contains a single <em>T-</em>matrix
+element at a single frequency. The format of each line is this:</p>
+<hr />
+<p><em>Omega  A La Ma Pa   B Lb Mb Pb    real(T)   imag (T)</em></p>
+<hr />
+<p>The tuple<code>(A,La,Ma,Pa)</code> labels the spherical wave that constitutes the
+<strong>row index</strong> for the <em>T-</em>matrix entry.
+(Here <code>(La,Ma)</code>=<script type="math/tex">(\ell_\alpha,m_\alpha)</script> are the usual spherical-wave
+indices, <code>Pa</code>=<script type="math/tex">P_\alpha \in[0,1]</script> is a polarization
+index (0 or 1 for <script type="math/tex">\mathbf{M}</script> and <script type="math/tex">\mathbf{N}</script>-type 
+vector spherical waves respectively) and <code>A</code>=<script type="math/tex">\alpha</script>
+is an integer in the range <script type="math/tex">[0,D-1]</script> that uniquely
+indexes the spherical wave. (See the <a href="#Table">table</a> below).</p>
+<p>The tuple<code>(B,Lb,Mb,Pb)</code> labels the spherical wave that constitutes the
+<strong>column index</strong> for the <em>T-</em>matrix entry.</p>
+<p>The final two entries on the line are the real and imaginary parts of
+the <em>T-</em>matrix entry for the given pair of spherical waves at the given
+frequency.</p>
+<p>Physically, the <em>T-</em>matrix element with row index <script type="math/tex">\alpha</script> and column
+index <script type="math/tex">\beta</script> is the amplitude of the outgoing spherical wave with
+indices <script type="math/tex">\{\ell,m,P\}_\alpha</script> that results from illuminating your
+object with a regular spherical wave with indices
+<script type="math/tex">\{\ell,m,P\}_\beta</script>.</p>
+<p>See below for a simple shell script you can use to extract a particular
+<em>T-</em>matrix entry vs. frequency from the <code>.TMatrix</code> file.</p>
+<p>Also see below for a <a class="SC" href="http://julialang.org">julia</a> code that
+you can use to import T-matrix data into a
+<a class="SC" href="http://julialang.org">julia</a> session.</p>
+<h3 id="2-t-matrix-data-in-binary-form">2. <em>T-</em>matrix data in binary form</h3>
+<p>If you specify the <code>--WriteHDF5Files</code> command-line argument, then 
+<em>T-</em>matrix data will be written in binary <code>HDF5</code> format to 
+files named <code>FileBase_wXXXX.HDF5</code> where <code>XXXX</code> stands for 
+the angular frequency <script type="math/tex">\omega</script>.</p>
+<p><a name="#SphericalWaveOrder"></a></p>
+<h4 id="ordering-and-indexing-of-spherical-waves">Ordering and indexing of spherical waves</h4>
+<p>For a fixed single value of <script type="math/tex">\ell\ge 1</script> there are
+<script type="math/tex">=2(2\ell+1)</script> spherical waves: 
+<script type="math/tex">(2\ell+1)</script> pairs of spherical-wave indices <script type="math/tex">(\ell,m)</script> 
+times 2 polarizations (\mathbf{M},\mathbf{N}). The total number
+of distinct spherical waves <script type="math/tex">(\ell,m,P)</script>
+with <script type="math/tex">1\le \ell \le \ell^{\text{max}}</script>
+is <script type="math/tex">D=2(\ell^{\text{max}}+1)^2 - 2</script>.
+This is the dimension of the <script type="math/tex">T</script> matrix computed at each
+frequency.
+(Note that I exclude <script type="math/tex">\ell=0</script> waves from my indexing
+scheme entirely.)</p>
+<p>The rows and columns of the <script type="math/tex">T</script>-matrix are indexed
+by integers <script type="math/tex">(\alpha,\beta)</script> running from <script type="math/tex">0</script> to <script type="math/tex">D-1</script>.
+Spherical waves are ordered and indexed as follows:</p>
+<p><a name="Table"></a>
+<script type="math/tex; mode=display">\begin{array}{|c|c|}\hline
+  \alpha & (\ell,m,P) \\\hline
+  0      & (1,-1,0)   \\\hline
+  1      & (1,-1,1)   \\\hline
+  2      & (1, 0,0)   \\\hline
+  3      & (1, 0,1)   \\\hline
+  4      & (1, 1,0)   \\\hline
+  5      & (1, 1,1)   \\\hline
+  6      & (2,-2,0)   \\\hline
+ \vdots  & \vdots     \\\hline
+  15     & (2,+2,1)   \\\hline
+  16     & (3,-3,0)   \\\hline
+ \vdots  & \vdots     \\\hline
+   \end{array}
+</script>
+The integer index <script type="math/tex">\alpha</script> for a given triple
+<script type="math/tex">(\ell, m, P)</script> may be computed 
+according to
+<script type="math/tex; mode=display"> \alpha = 2\Big[\ell(\ell+1) + m - 1\Big] + P. </script>
+</p>
+<p><a name="Examples"></a></p>
+<h1 id="3-scuff-tmatrix-examples">3. <span class="SC">scuff-tmatrix</span> Examples</h1>
+<p>Here are some examples of calculations you can do with <span
+class="SC">scuff-tmatrix</span>. Input files and command-line
+runscripts for all these examples are included in the
+<code>share/scuff-em/examples</code> subdirectory of the <span
+class="SC">scuff-em</span> installation.</p>
+<h2 id="4a-dielectric-and-magnetic-spheres">4a. Dielectric and magnetic spheres</h2>
+<p>We start with the canonical textbook stalwart of scattering from a
+homogeneous sphere of uniform isotropic relative permittivity <script type="math/tex">\epsilon_r</script>
+and relative permeability <script type="math/tex">\mu_r.</script>
+</p>
+<h3 id="analytical-expressions-for-t-matrix-elements">Analytical expressions for T-matrix elements</h3>
+<p>This is an example (indeed, the only example) of a
+dielectric object whose <em>T-</em>matrix may be computed analytically, making
+it a useful benchmark for our numerical computation;
+the <script type="math/tex">T</script>-matrix is diagonal and independent of the <script type="math/tex">m</script> spherical-wave
+index, with <script type="math/tex">\ell</script>-dependent elements</p>
+<p>
+<script type="math/tex; mode=display"> T_\ell^M = 
+ -\frac{ \mu_r j_\ell(na)\overline{j_\ell}(a) - j_\ell(a)\overline{j_\ell}(na) }
+       { \mu_r j_\ell(na)\overline{h_\ell}(a) - h_\ell(a)\overline{j_\ell}(na) }
+</script>
+<script type="math/tex; mode=display">
+   T_\ell^N = 
+ -\frac{ \epsilon j_\ell(na) \overline{j_\ell}(a) - j_\ell(a)\overline{j_\ell}(na) }
+       { \epsilon j_\ell(na)\overline{h_\ell}(a) - h_\ell(a)\overline{j_\ell}(na) }
+</script>
+where <script type="math/tex">j_\ell</script>, <script type="math/tex">h_\ell</script> are the usual spherical Bessel and Hankel functions
+and 
+<script type="math/tex; mode=display"> a=\frac{\omega R}{c}, \qquad n=\sqrt{\epsilon_r \mu_r},
+   \quad \overline{f(x)} \equiv f(x) + x\frac{d}{dx}f(x).
+</script>
+</p>
+<h3 id="geometry-and-mesh-files">Geometry and mesh files</h3>
+<p>The first step is to create meshed surfaces representing
+spheres discretized with various resolutions, then write
+<a href="../../../reference/Geometries/"><span class=SC>scuff-em</span> geometry files</a>
+describing spheres of various material properties.
+This process is described in detail
+<a href="../../../examples/MieScattering/MieScattering/">here.</a>
+In this case we will use two <span class=SC>gmsh</span>
+mesh files for a sphere of radius <script type="math/tex">R=1</script>:</p>
+<ul>
+<li>
+<p><a href="../mshFiles/Sphere_327.msh"><code>Sphere_327.msh</code></a>, a moderate-resolution mesh with 327 internal triangle edges, and</p>
+</li>
+<li>
+<p><a href="../mshFiles/Sphere_1362.msh"><code>Sphere_1362.msh</code></a>, a finer mesh with 1362 internal triangle edges.</p>
+</li>
+</ul>
+<p>For each meshing resolution I will create 3 <code>.scuffgeo</code> files
+describing spheres of different materials:</p>
+<ul>
+<li>
+<p>perfect metal (PEC),</p>
+</li>
+<li>
+<p>homogeneous dielectric with <script type="math/tex">\epsilon_r=10</script>, and</p>
+</li>
+<li>
+<p>homogeneous dielectric/magnetic with <script type="math/tex">\epsilon_r=10, \mu_r=5</script>.</p>
+</li>
+</ul>
+<p><strong><a href="../scuffgeoFiles/PECSphere_327.scuffgeo"><code>PECSphere_327.scuffgeo:</code></a></strong></p>
+<pre><code class="listing">OBJECT Sphere
+        MESHFILE Sphere_327.msh
+ENDOBJECT
+</code></pre>
+
+<p><strong><a href="../scuffgeoFiles/E10Sphere_327.scuffgeo"><code>E10Sphere_327.scuffgeo:</code></a></strong></p>
+<pre><code class="listing">OBJECT Sphere
+        MESHFILE Sphere_327.msh
+        MATERIAL CONST_EPS_10
+ENDOBJECT
+</code></pre>
+
+<p><strong><a href="../scuffgeoFiles/E10M5Sphere_327.scuffgeo"><code>E10M5Sphere_327.scuffgeo:</code></a></strong></p>
+<pre><code class="listing">OBJECT Sphere
+        MESHFILE Sphere_327.msh
+        MATERIAL CONST_EPS_10_MU_5
+ENDOBJECT
+</code></pre>
+
+<h3 id="frequency-list">Frequency list</h3>
+<p>We create a simple file called
+<a href="../OmegaFile"><code>OmegaFile</code></a> containing a
+list of angular frequencies (in units of <script type="math/tex">3\cdot 10^{14}</script> rad/sec)
+at which to compute <em>T-</em>matrices:</p>
+<pre><code class="listing">0.10000000
+0.11853758
+....
+6.00000000
+</code></pre>
+
+<h3 id="run-scuff-tmatrix">Run <span class=SC>scuff-tmatrix</span></h3>
+<p>And now we launch <span class="codename">scuff-tmatrix: </span></p>
+<pre><code class="bash">% scuff-tmatrix --geometry E10Sphere_327.scuffgeo --omegafile OmegaFile --lmax 3
+
+</code></pre>
+
+<p>This produces the file <code>E10Sphere_327.TMatrix</code>, which contains one
+<em>T-</em>matrix entry per line, with a file header at the top to 
+remind you which is which:</p>
+<pre><code class="listing"># scuff-tmatrix run on hikari (11/06/17::01:34:31)
+# columns:
+# 1 omega
+# 2,3,4,5 (alpha, {L,M,P}_alpha)   (T-matrix row index)
+# 6,7,8,9 ( beta, {L,M,P}_beta)    (T-matrix columnindex)
+# 10, 11  real, imag T_{alpha, beta}
+0.1  0 1 -1 +0   0 1 -1 +0  -1.34273817e-07 +3.62883443e-04
+0.1  0 1 -1 +0   1 1 -1 +1  +1.13651828e-09 -1.05703395e-06
+...
+...
+...
+3.25  2 1 +0 0   9 2 -1 1  +8.56628506e-05 +2.48397970e-04
+...
+...
+...
+</code></pre>
+
+<p>As an example, the lowest line above is interpreted as follows:
+At angular frequency <script type="math/tex">\omega=3.25 \times 3\cdot 10^{14}</script> rad/sec,
+for the spherical-wave pair <script type="math/tex">(\alpha,\beta)=(2,9)</script>
+[where <script type="math/tex">\alpha</script> is a <script type="math/tex">\mathbf{M}</script>-type wave with <script type="math/tex">(\ell,m)=(1,0)</script>
+and <script type="math/tex">\beta</script> is an <script type="math/tex">\mathbf{N}</script>-type wave with <script type="math/tex">(\ell,m)=(2,-1)</script>,
+the <script type="math/tex">T</script>-matrix element is 
+<script type="math/tex; mode=display">T_{2,9}(3.25) = 8.5 \times 10^{-5} + 2.48\times 10^{-4} i.</script>
+</p>
+<p>To assess the impact of meshing fineness, let's re-run the example with
+a finer mesh. We will use the sphere mesh with 1362 interior edges:</p>
+<pre><code class="listing">% scuff-tmatrix --geometry E10Sphere_1362.scuffgeo --omegafile OmegaValues.dat
+</code></pre>
+
+<p>This produces the file <code>E10Sphere_1362.TMatrix</code>, with file format
+similar to the above.</p>
+<p>Here are plots of <script type="math/tex">T_1^M(\omega)</script> and <script type="math/tex">T_1^N(\omega)</script>,
+for both non-magnetic and magnetic spheres,
+as computed <strong>(1)</strong> by <span class=SC>scuff-tmatrix</span>, 
+with both coarse and finer meshes, <strong>(2)</strong> using the exact analytical
+formulas above. (Here is the <a href="../PlotTMatrix.gp"><span class=SC>gnuplot</span> script</a>
+I used to generate the plots.)</p>
+<p><img alt="T1N for Eps=10 sphere" src="../E10_T1N.png" /></p>
+<p><img alt="T1M for Eps=10 sphere" src="../E10_T1M.png" /></p>
+<p><img alt="T1N for Eps,Mu=10,5 sphere" src="../E10M5_T1N.png" /></p>
+<p><img alt="T1M for Eps,Mu=10,5 sphere" src="../E10M5_T1M.png" /></p>
+<p><a name="Julia"></a></p>
+<h1 id="4-reading-t-matrix-data-into-julia">4. Reading T-Matrix data into <span class="SC">julia</span></h1>
               
             </div>
           </div>
