@@ -1,5 +1,0 @@
-gmsh -2 -clscale 1.0 -setnumber R 0.1 Sphere_R.geo -o Sphere_R0P1.msh
-RenameMesh Sphere_R0P1.msh
-gmsh -2 -clscale 0.5 -setnumber R 0.1 Sphere_R.geo -o Sphere_R0P1.msh
-RenameMesh Sphere_R0P1.msh
-

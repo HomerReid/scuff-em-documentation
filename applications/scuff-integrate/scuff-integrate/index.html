@@ -359,25 +359,22 @@
         
             <ul>
             
-                <li class="toctree-l3"><a href="#integrating-a-single-function-of-frequency">Integrating a single function of frequency</a></li>
+                <li class="toctree-l3"><a href="#1-using-scuff-integrate-as-a-general-purpose-numerical-integrator">1. Using scuff-integrate as a general-purpose numerical integrator</a></li>
+                
+                    <li><a class="toctree-l4" href="#integrating-a-single-function-of-a-single-variable">Integrating a single function of a single variable</a></li>
                 
             
-                <li class="toctree-l3"><a href="#integrating-multiple-functions-of-frequency">Integrating multiple functions of frequency</a></li>
+                <li class="toctree-l3"><a href="#2-using-scuff-integrate-as-a-specialized-integrator-for-scuff-em-data">2. Using scuff-integrate as a specialized integrator for scuff-em data</a></li>
+                
+                    <li><a class="toctree-l4" href="#2a-integrating-scuff-neq-data">2A. Integrating scuff-neq data</a></li>
                 
             
-                <li class="toctree-l3"><a href="#giving-names-to-data-columns">Giving names to data columns</a></li>
+                <li class="toctree-l3"><a href="#3-scuff-integrate-command-line-reference">3. scuff-integrate Command-Line Reference</a></li>
                 
             
-                <li class="toctree-l3"><a href="#integrating-functions-of-frequency-and-other-parameters">Integrating functions of frequency and other parameters</a></li>
+                <li class="toctree-l3"><a href="#4-miscellaneous-notes">4. Miscellaneous notes</a></li>
                 
-            
-                <li class="toctree-l3"><a href="#integrating-scuff-neq-data">Integrating scuff-neq data</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#scuff-integrate-command-line-reference">scuff-integrate Command-Line Reference</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#only-numerical-data-columns-are-counted-as-columns">Only numerical data columns are counted as columns</a></li>
+                    <li><a class="toctree-l4" href="#only-numerical-data-columns-are-counted-as-columns">Only numerical data columns are counted as columns</a></li>
                 
             
             </ul>
@@ -550,53 +547,50 @@
           <div role="main">
             <div class="section">
               
-                <h1> Integrating frequency-dependent data with <span class="SC">scuff-integrate</span></h1>
-
+                <h1 id="integrating-frequency-dependent-data-with-scuff-integrate">Integrating frequency-dependent data with <span class="SC">scuff-integrate</span></h1>
 <p>Many application codes in the <a class="wikilink" href="../../../scuff-em/">scuff-em</a> suite compute
 physical quantities defined by definite integrals over real
 or imaginary frequencies, with the numerical value of the
 integrand at each point obtained by solving individual
 <a class="wikilink" href="../../../scuff-em/">scuff-em</a> scattering problems at that frequency. For example,</p>
 <ul>
-<li><a href="../../scuff-cas3D/scuff-cas3D/"> <span class=SC>scuff-cas3d</span> </a> and 
-<a href="../../scuff-caspol/scuff-caspol/"> <span class=SC>scuff-caspol</span> </a>
-compute zero-temperature Casimir quantities by integrating 
-contributions from imaginary frequencies <script type="math/tex">\xi</script>:</li>
-</ul>
+<li>
+<p><a href="../../scuff-cas3D/scuff-cas3D/"> <span class=SC>scuff-cas3d</span> </a> and
+  <a href="../../scuff-caspol/scuff-caspol/"> <span class=SC>scuff-caspol</span> </a>
+  compute zero-temperature Casimir quantities by integrating 
+  contributions from imaginary frequencies <script type="math/tex">\xi</script>:
 <!--%====================================================================%-->
-
-<p>
-<script type="math/tex; mode=display"> Q = \int_0^\infty I(\xi) \, d\xi </script>
-<!--%====================================================================%--></p>
-<p>Here <script type="math/tex">Q</script> is a zero-temperature Casimir energy/force/torque (<a class="wikilink" href="../../../scuff-cas3d/">scuff-cas3d</a>)
-or Casimir-Polder potential (<a class="wikilink" href="../../../scuff-caspol/">scuff-caspol</a>) and <script type="math/tex">I(\xi)</script> is the 
-spectral density of contributions to <script type="math/tex">Q</script> from fluctuations at 
-imaginary frequency <script type="math/tex">\xi</script>, which may be obtained by solving
-<a class="wikilink" href="../../../scuff-em/">scuff-em</a> scattering calculations at imaginary frequency <script type="math/tex">\xi</script>.</p>
-<ul>
-<li><a href="../../scuff-neq/scuff-neq/"> <span class=SC>scuff-neq</span> </a> computes
-the total rate of energy or momentum transfer
-from a source body <script type="math/tex">s</script> to a destination body <script type="math/tex">d</script> 
-by integrating contributions from real frequencies <script type="math/tex">\omega</script>:</li>
-</ul>
+<script type="math/tex; mode=display"> Q = \int_0^\infty I(\xi) \, d\xi \tag{1} </script>
 <!--%====================================================================%-->
-
-<p>
+  Here <script type="math/tex">Q</script> is a zero-temperature Casimir energy/force/torque (<a class="wikilink" href="../../../scuff-cas3d/">scuff-cas3d</a>)
+  or Casimir-Polder potential (<a class="wikilink" href="../../../scuff-caspol/">scuff-caspol</a>) and <script type="math/tex">I(\xi)</script> is the 
+  spectral density of contributions to <script type="math/tex">Q</script> from fluctuations at 
+  imaginary frequency <script type="math/tex">\xi</script>, which may be obtained by solving
+  <a class="wikilink" href="../../../scuff-em/">scuff-em</a> scattering calculations at imaginary frequency <script type="math/tex">\xi</script>.</p>
+</li>
+<li>
+<p><a href="../../scuff-neq/scuff-neq/"> <span class=SC>scuff-neq</span> </a> computes
+    the total rate of energy or momentum transfer
+    from a source body <script type="math/tex">s</script> to a destination body <script type="math/tex">d</script> 
+    by integrating contributions from real frequencies <script type="math/tex">\omega</script>:
+<!--%====================================================================%-->
 <script type="math/tex; mode=display"> Q_{s\rightarrow d}
    = \int_0^\infty
      \Big[ \Theta(T_s,\omega) - \Theta(T_\text{env},\omega) \Big]
      \Phi_{s\rightarrow d}(\omega) \, d\omega
-   \qquad (1)
+   \tag{2}
 </script>
 <!--%====================================================================%-->
-Here <script type="math/tex">Q_{s\rightarrow d}</script> is the contribution of body <script type="math/tex">s</script> to
-quantity <script type="math/tex">Q</script> (a heat-transfer rate, force, or torque) for body <script type="math/tex">d</script>,
-<script type="math/tex">\Theta(T,\omega)=\frac{\hbar\omega}{e^{\hbar\omega/kT}-1}</script>
-is the Bose-Einstein statistical factor, <script type="math/tex">T_s</script> and <script type="math/tex">T_\text{env}</script>
-are the temperatures of the source body and the environment,
-and <script type="math/tex">\Phi(\omega)</script> is a "generalized flux" quantity that may be 
-computed by solving <a class="wikilink" href="../../../scuff-em/">scuff-em</a> scattering calculations
-at frequency <script type="math/tex">\omega</script>.</p>
+    Here <script type="math/tex">Q_{s\rightarrow d}</script> is the contribution of body <script type="math/tex">s</script> to
+    quantity <script type="math/tex">Q</script> (a heat-transfer rate, force, or torque) for body <script type="math/tex">d</script>,
+    <script type="math/tex">\Theta(T,\omega)=\frac{\hbar\omega}{e^{\hbar\omega/kT}-1}</script>
+    is the Bose-Einstein statistical factor, <script type="math/tex">T_s</script> and <script type="math/tex">T_\text{env}</script>
+    are the temperatures of the source body and the environment,
+    and <script type="math/tex">\Phi(\omega)</script> is a "generalized flux" quantity that may be 
+    computed by solving <a class="wikilink" href="../../../scuff-em/">scuff-em</a> scattering calculations
+    at frequency <script type="math/tex">\omega</script>.</p>
+</li>
+</ul>
 <p>The integrals over <script type="math/tex">\xi</script> and <script type="math/tex">\omega</script> are evaluated by
 numerical cubature---that is, as weighted sums of integrand
 samples. In a perfect world, it would be possible for 
@@ -625,24 +619,66 @@ integral may then be calculated as as post-processing step
 using the information reported in the frequency-resolved
 data files, and this is the task for which <a class="wikilink" href="../../../scuff-integrate/">scuff-integrate</a>
 exists.</p>
+<p><strong><span class=SC>scuff-integrate</span> is a general-purpose tool, not limited to <span class=SC>scuff-em</span> applications</strong></p>
+<p>Actually, <a class="wikilink" href="../../../scuff-integrate/">scuff-integrate</a> is designed to be a general-purpose
+numerical-integration tool, not particularly tied to
+<a class="wikilink" href="../../../scuff-em/">scuff-em</a>; given a data file containing samples of
+some function <script type="math/tex">f(x)</script> at sample points <script type="math/tex">\{x_n\}</script>
+distributed over an interval <script type="math/tex">[x_a, x_b]</script>,
+<a class="wikilink" href="../../../scuff-integrate/">scuff-integrate</a> approximates the integral
+<script type="math/tex">\int_{x_a}^{x_b} f(x) \, dx</script>. (It does this by
+constructing a third-order spline interpolant through
+the data, then integrating the interpolant via numerical
+quadrature.) The code offers command-line options
+to specify how the data file is to be interpreted
+(for example, which columns are the <script type="math/tex">x</script> samples and 
+which are the <script type="math/tex">f</script> samples). There is no restriction
+on the number or spacing of the sample points; the
+variable <em>x</em> need not correspond to a real or imaginary 
+frequency, and the function <script type="math/tex">f</script> need not be a generalized
+flux, Casimir integrand, or any other quantity
+reported by a <a class="wikilink" href="../../../scuff-em/">scuff-em</a> calculation.</p>
+<p><strong>But for data files that <em>do</em> come from <span class=SC>scuff-em</span> calculations, <span class=SC>scuff-integrate</span> knows what to do automatically with minimal user input</strong></p>
+<p>In addition to the fully general-purpose mode described above,
+<a class="wikilink" href="../../../scuff-integrate/">scuff-integrate</a> also has built-in automatic support for
+certain specialized types of <span class=SC>scuff-em</span>
+data files---such as the <a href="../../scuff-neq/scuff-neq/#SIFluxFile"><code>.SIFlux</code> files produced by <span class=SC>scuff-neq</span></a>---designed
+to make it easy to run the tool to get the frequency-integrated data you want with minimal user input
+required.</p>
 <div class="toc"><span class="toctitle">Table of Contents</span><ul>
-<li><a href="#scuff-integrate-tutorial-walkthrough"><span class=SC>scuff-integrate</span> tutorial walkthrough</a><ul>
-<li><a href="#integrating-a-single-function-of-frequency">Integrating a single function of frequency</a></li>
+<li><a href="#integrating-frequency-dependent-data-with-scuff-integrate">Integrating frequency-dependent data with <span class="SC">scuff-integrate</span></a></li>
+<li><a href="#1-using-scuff-integrate-as-a-general-purpose-numerical-integrator">1. Using <span class=SC>scuff-integrate</span> as a general-purpose numerical integrator</a><ul>
+<li><a href="#integrating-a-single-function-of-a-single-variable">Integrating a single function of a single variable</a><ul>
 <li><a href="#integrating-multiple-functions-of-frequency">Integrating multiple functions of frequency</a></li>
 <li><a href="#giving-names-to-data-columns">Giving names to data columns</a></li>
 <li><a href="#integrating-functions-of-frequency-and-other-parameters">Integrating functions of frequency and other parameters</a></li>
-<li><a href="#integrating-scuff-neq-data">Integrating scuff-neq data</a></li>
 </ul>
 </li>
-<li><a href="#scuff-integrate-command-line-reference"><span class=SC>scuff-integrate</span> Command-Line Reference</a></li>
+</ul>
+</li>
+<li><a href="#2-using-scuff-integrate-as-a-specialized-integrator-for-scuff-em-data">2. Using <span class=SC>scuff-integrate</span> as a specialized integrator for <span class=SC>scuff-em</span> data</a><ul>
+<li><a href="#2a-integrating-scuff-neq-data">2A. Integrating scuff-neq data</a><ul>
+<li><a href="#specifiying-temperatures">Specifiying temperatures</a></li>
+<li><a href="#specifiying-multiple-temperature-sets">Specifiying multiple temperature sets</a></li>
+<li><a href="#spatially-integrated-flux-data-siflux-files">Spatially-integrated flux data (.SIFlux files)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#3-scuff-integrate-command-line-reference">3. <span class=SC>scuff-integrate</span> Command-Line Reference</a></li>
+<li><a href="#4-miscellaneous-notes">4. Miscellaneous notes</a><ul>
 <li><a href="#only-numerical-data-columns-are-counted-as-columns">Only numerical data columns are counted as columns</a></li>
 </ul>
+</li>
+</ul>
 </div>
-<h2 id="scuff-integrate-tutorial-walkthrough"><span class=SC>scuff-integrate</span> tutorial walkthrough</h2>
-<h3 id="integrating-a-single-function-of-frequency">Integrating a single function of frequency</h3>
+<h1 id="1-using-scuff-integrate-as-a-general-purpose-numerical-integrator">1. Using <span class=SC>scuff-integrate</span> as a general-purpose numerical integrator</h1>
+<h2 id="integrating-a-single-function-of-a-single-variable">Integrating a single function of a single variable</h2>
 <p>The simplest usage of <a class="wikilink" href="../../../scuff-integrate/">scuff-integrate</a> is to integrate
-a single function of frequency <script type="math/tex">f(x)</script>
-[where <script type="math/tex">x</script> denotes either real or imaginary frequency].
+a single function <script type="math/tex">f</script> of a single variable <script type="math/tex">x</script>; as noted
+above, this is a general-purpose use of the code, independent
+of <a class="wikilink" href="../../../scuff-em/">scuff-em</a>, in which <script type="math/tex">x</script> and <script type="math/tex">f</script> need not be a frequency and
+a generalized flux, but could have any arbitrary significance.
 Suppose we have a file called <code>fData</code> in which
 are tabulated numerical pairs <script type="math/tex">(x_n, f_n)</script>, <script type="math/tex">n=1,2,\cdots,N</script>, 
 where <script type="math/tex">f_n=f(x_n)</script>:</p>
@@ -673,12 +709,9 @@ example, if the data file looks like this: </p>
 In this case, the content of the other columns (the <code>&lt;stuff&gt;</code>
 in the above snippet) is ignored.</p>
 <h3 id="integrating-multiple-functions-of-frequency">Integrating multiple functions of frequency</h3>
-<p>More generally, frequency-resolved data files produced by
-<a class="wikilink" href="../../../scuff-em/">scuff-em</a> codes will contain data on multiple functions
-<script type="math/tex">f_1, \cdots, f_p(x)</script>. (For example, in <a class="wikilink" href="../../../scuff-cas3d/">scuff-cas3d</a> 
-each line of the data file may contain data on both
-Casimir energy and Casimir force.)</p>
-<p>You can integrate all of these
+<p>More generally, you may have multiple integrand functions 
+<script type="math/tex">f_1, \cdots, f_N</script>, each sampled at the same set of <script type="math/tex">x</script> values,
+You can integrate all of these
 at once simply by specifying multiple <code>--dataColumn</code>
 options. For example, if you have functions <script type="math/tex">f</script> and <script type="math/tex">g</script>
 and you have a file named <code>fgData</code> with the format</p>
@@ -700,16 +733,23 @@ the values of the various integrated functions will by default
 be labeled <code>data 0</code>, <code>data 1</code>, etc. If you want to give more
 descriptive names, just follow each <code>--dataColumn</code> option
 with a <code>--dataName</code> option. </p>
-<p>For example, if your force and torque
-integrands are respectively reported on columns 8 and 11
-of your data file, say 
+<p>For example, if 
+columns 8 and 11 of your data file respectively
+report values of force and torque integrands, you might say
+, say 
 <code>--dataColumn 8 --dataName Force --dataColumn 11 --dataName Torque</code>.</p>
 <h3 id="integrating-functions-of-frequency-and-other-parameters">Integrating functions of frequency and other parameters</h3>
 <p>In many cases we will have functions that depend on various
-parameters beside frequency. (In <a class="wikilink" href="../../../scuff-cas3d/">scuff-cas3d</a>, for example,
+parameters beside the integration variable, i.e. functions of the form
+<script type="math/tex">f(x;p_1, \cdots, p_N)</script> where the data file includes integrand
+samples for multiple sets of values of the <script type="math/tex">(p_1,\cdots,p_n)</script> 
+parameters. (In <a class="wikilink" href="../../../scuff-cas3d/">scuff-cas3d</a>, for example,
 we might compute Casimir forces between particles separated
 by various distances <script type="math/tex">d</script>, so the integrand function may 
-be thought of as a function <script type="math/tex">f(d,x)</script> of both distance and frequency.)</p>
+be thought of as a function <script type="math/tex">f(x,d)</script> of both distance and frequency.)
+In these cases you will generally want to evaluate <em>separate</em> integrals
+over <script type="math/tex">x</script> for each set of parameter values represented in your
+data file.</p>
 <p>For example, suppose your data file is called <code>pxfgData</code> and 
 looks something like</p>
 <pre><code>p1 x1 f11 g11
@@ -748,11 +788,66 @@ Then each line of the <code>.Integrated</code> output file will report
 <script type="math/tex">x</script>-integrated values of all functions for a single tuple of 
 parameter values <script type="math/tex">(p,q,\cdots).</script>
 </p>
-<h3 id="integrating-scuff-neq-data">Integrating <a class="wikilink" href="../../../scuff-neq/">scuff-neq</a> data</h3>
-<p><a class="wikilink" href="../../../scuff-integrate/">scuff-integrate</a> incorporates special functionality
-for handling the particular frequency-resolved data files
-produced by <a href="../../scuff-neq/scuff-neq/"><span class=SC>scuff-neq</span></a>.
-In this case, for a geometry containing <script type="math/tex">N</script> bodies,
+<h1 id="2-using-scuff-integrate-as-a-specialized-integrator-for-scuff-em-data">2. Using <span class=SC>scuff-integrate</span> as a specialized integrator for <span class=SC>scuff-em</span> data</h1>
+<p>As noted above, <a class="wikilink" href="../../../scuff-integrate/">scuff-integrate</a> has built-in knowledge
+of the structure of various data files produced by
+<span class=SC>scuff-em</span> calculations. This streamlines
+calculations by allowing you
+you to feed those data files directly into <a class="wikilink" href="../../../scuff-integrate/">scuff-integrate</a>
+without needing to tell the code which column of the data file
+is which.</p>
+<h2 id="2a-integrating-scuff-neq-data">2A. Integrating <a class="wikilink" href="../../../scuff-neq/">scuff-neq</a> data</h2>
+<p>As discussed at the top of the page, the frequency-resolved
+data reported by <a href="../../scuff-neq/scuff-neq/"><span class=SC>scuff-neq</span></a>
+are generalized fluxes describing temperature-independent
+rates of energy and momentum transfer from each body
+to each other body in your geometry. To turn these
+into total heat-transfer rates, forces, and torques
+for a given set of object and environment temperatures,
+we must <strong>(a)</strong> integrate over frequency with
+Bose-Einstein thermal weight factors appropriate for
+the given temperatures, and <strong>(b)</strong> sum the
+contributions of multiple source bodies to yield
+the total rates of power and momentum transfer to
+each destination body. 
+<span class=SC>scuff-integrate</span> already knows the
+file format of the <code>.SIFlux</code> and <code>.SRFlux</code> frequency-resolved
+data files produced by <a href="../../scuff-neq/scuff-neq/"><span class=SC>scuff-neq</span></a>,
+so there is no need to specify <code>--FreqColumn</code> and <code>--DataColumn</code>
+options. </p>
+<h3 id="specifiying-temperatures">Specifiying temperatures</h3>
+<p>Instead, the only input you need to supply (besides
+the <code>.SIFlux</code> or <code>.SRFlux</code> data file) is a specification
+of the temperatures of the bodies in your geometry,
+and of the surrounding environment. By default, all bodies
+and the environment are at absolute zero, <script type="math/tex">T=0</script> K; if
+you do not modify this situation by setting a nonzero temperature
+for at least one body (or the environment), all heat-transfer
+rates and forces/torques will be zero. The command-line option
+for setting </p>
+<ul>
+<li>
+<p><code>--Temperature N T</code></p>
+<p>If <script type="math/tex">N\ge 1</script>, this sets the temperature of the <script type="math/tex">N</script>th object/surface in the geometry to <code>T</code>
+Kelvin.
+(Here objects/surfaces are indexed using a 1-based convention; to set the temperature
+of the first object/surface specified in the <code>.scuffgeo</code> file to room temperature
+you would say <code>--Temperature 1 300.</code>)</p>
+<p>If <script type="math/tex">N=0</script>, this instead sets the temperature of the environment to <code>T</code>.</p>
+</li>
+</ul>
+<h3 id="specifiying-multiple-temperature-sets">Specifiying multiple temperature sets</h3>
+<p>A bonus feature
+of the separation between <a class="wikilink" href="../../../scuff-neq/">scuff-neq</a> and <a class="wikilink" href="../../../scuff-integrate/">scuff-integrate</a>
+is that a single set of frequency-resolved flux data (in
+an <code>.SIFlux</code> or <code>.SRFlux</code> file) can be used to obtain data on
+heat-transfer rates and forces and torques at multiple sets
+of temperatures for the bodies and the environment, simply by 
+evaluating integral (2) multiple times with different temperatures
+but the same flux data.</p>
+<h3 id="spatially-integrated-flux-data-siflux-files">Spatially-integrated flux data (<code>.SIFlux</code> files)</h3>
+<p>knows how to do this automatically </p>
+<p>In this case, for a geometry containing <script type="math/tex">N</script> bodies,
 each line of the <code>.SIFlux</code> output file is tagged with
 a data field of the form <script type="math/tex">sd</script> (where <script type="math/tex">s</script> and <script type="math/tex">d</script> are
 integers between 1 and <script type="math/tex">N</script>) to label the contributions
@@ -761,10 +856,10 @@ of sources in body <script type="math/tex">s</script> to the power, force, and/o
 <code>13</code> give contributions of body 1 to the PFT for body 3).
 The actual data quantities reported in the
 <code>.SIFlux</code> file are the generalized fluxes <script type="math/tex">\Phi_{s\rightarrow d}</script>
-in equation (1) above, and to evaluate the <script type="math/tex">\omega</script> integral
+in equation (2) above, and to evaluate the <script type="math/tex">\omega</script> integral
 here we need to know the temperatures of the environment
 and of all bodies in the geometry, which enter through 
-the Bose-Einstein factors in (1).</p>
+the Bose-Einstein factors in (2).</p>
 <p>To handle these complications, <a class="wikilink" href="../../../scuff-integrate/">scuff-integrate</a>
 supports the following additional command-line options:</p>
 <ul>
@@ -778,17 +873,6 @@ may be omitted.)</p>
 </li>
 </ul>
 <p>&nbsp;</p>
-<ul>
-<li>
-<p><code>--Temperature N T</code></p>
-<p>If <script type="math/tex">N\ge 1</script>, this sets the temperature of the <script type="math/tex">N</script>th object/surface in the geometry to <code>T</code>
-Kelvin.
-(Here objects/surfaces are indexed using a 1-based convention; to set the temperature
-of the first object/surface specified in the <code>.scuffgeo</code> file to room temperature
-you would say <code>--Temperature 1 300.</code>)</p>
-<p>If <script type="math/tex">N=0</script>, this instead sets the temperature of the environment to <code>T</code>.</p>
-</li>
-</ul>
 <p>&nbsp;</p>
 <ul>
 <li>
@@ -810,7 +894,8 @@ environment temperature fixed at 0, <code>TFile</code> would look like</p>
 0 300 300
 </code></pre>
 
-<h2 id="scuff-integrate-command-line-reference"><span class=SC>scuff-integrate</span> Command-Line Reference</h2>
+<h1 id="3-scuff-integrate-command-line-reference">3. <span class=SC>scuff-integrate</span> Command-Line Reference</h1>
+<h1 id="4-miscellaneous-notes">4. Miscellaneous notes</h1>
 <h2 id="only-numerical-data-columns-are-counted-as-columns">Only numerical data columns are counted as columns</h2>
 <p>There is one potentially confusing aspect of the way
 <a class="wikilink" href="../../../scuff-integrate/">scuff-integrate</a> interprets column indices as specified
