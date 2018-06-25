@@ -1,392 +1,1406 @@
+
+
+
+
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>Incident Fields - SCUFF-EM documentation</title>
-  
-
-  <link rel="shortcut icon" href="../../scuffEM.ico">
-  
-
-  
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
-
-  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
-  <link rel="stylesheet" href="../../css/highlight.css">
-
-  
-  <script>
-    // Current page data
-    var mkdocs_page_name = "reference/IncidentFields"
-  </script>
-  
-  <script src="../../js/jquery-2.1.1.min.js"></script>
-  <script src="../../js/modernizr-2.8.3.min.js"></script>
-  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
-  <script src="../../js/theme.js"></script> 
-  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
-  <script src="../../mathjaxhelper.js"></script>
-
-  
-</head>
-
-<body class="wy-body-for-nav" role="document">
-
-  <div class="wy-grid-for-nav">
-
+<html lang="en" class="no-js">
+  <head>
     
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
-
-      <p align="center"
-      <a href="../..">
-         <img align="center" height="auto" width="100%"  
-              src="../../img/scuffEMNavBar.png"
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="http://homerreid.github.io/scuff-em-documentation/reference/IncidentFields/">
+      
+      
+        <meta name="author" content="Homer Reid">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-0.17.3, mkdocs-material-2.7.3">
+    
+    
+      
+        <title>Incident fields - SCUFF-EM documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.8d40d89b.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.6079476c.css">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:300,400,400i,700|">
+        <style>body,input{font-family:"Noto Sans","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+      <link rel="stylesheet" href="../../css/scuff-em.css">
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <a href="#plane-waves" tabindex="1" class="md-skip">
+        Skip to content
       </a>
-
-      <div class="wy-side-nav-search">
-        <a href="../.." class="icon icon-home"> SCUFF-EM documentation</a>
-        <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
-  </form>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="http://homerreid.github.io/scuff-em-documentation" title="SCUFF-EM documentation" class="md-header-nav__button md-logo">
+          
+            <img src="../../reference/scuffEMLogo.png" width="24" height="24">
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                SCUFF-EM documentation
+              </span>
+              <span class="md-header-nav__topic">
+                Incident fields
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+          
+        
       </div>
-
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-        <ul class="current">
-          
-            <li>
-    <li class="toctree-l1 ">
-        <a class="" href="../..">SCUFF-EM documentation</a>
-        
-    </li>
-<li>
-          
-            <li>
-    <ul class="subnav">
-    <li><span>Examples</span></li>
-
-        
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
             
-    <li class="toctree-l1 ">
-        <a class="" href="../../examples/MieScattering/MieScattering/">Mie scattering</a>
-        
-    </li>
 
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../examples/DielectricShell/DielectricShell/">Electrostatics of a spherical dielectric shell</a>
-        
-    </li>
 
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../examples/ThinFilm/ThinFilm/">Spatially-resolved study of plane-wave transmission through an infinite-area thin dielectric film</a>
-        
-    </li>
+  
 
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../examples/DiffractionPatterns/DiffractionPatterns/">Imaging diffraction patterns of discs, disc arrays, and hole arrays in metal screens</a>
-        
-    </li>
 
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../examples/CubeTorus/">Casimir forces in a compact geometry</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../examples/SiliconBeams/SiliconBeams/">Casimir forces in a 1D extended geometry</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../examples/SiliconSlabs/SiliconSlabs/">Casimir forces in a 2D extended geometry</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../examples/SiO2Spheres/SiO2Spheres/">Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../examples/TipSubstrate/TipSubstrate/">Spatial distribution of heat flux from a warm tip over a cold substrate</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../examples/HalfSpaceLDOS/HalfSpaceLDOS/">LDOS and dyadic Green functions above an infinite aluminum half-space</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../examples/PlatonicSolids/PlatonicSolids/">Electrostatic polarizability of platonic solids</a>
-        
-    </li>
-
-        
-    </ul>
-<li>
-          
-            <li>
-    <ul class="subnav">
-    <li><span>General reference</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../TopLevel/">Top-level overview</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../Installing/">Installation</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../Geometries/">Geometry descriptions</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../Materials/">Material designations</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../Transformations/">Geometric transformations</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 current">
-        <a class="current" href="./">Incident Fields</a>
-        
-            <ul>
-            
-                <li class="toctree-l3"><a href="#plane-waves">Plane waves</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#gaussian-beams">Gaussian beams</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#point-sources">Point sources</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#using-incident-fields-in-api-programs">Using incident fields in API programs</a></li>
-                
-            
-            </ul>
-        
-    </li>
-
-        
-    </ul>
-<li>
-          
-            <li>
-    <ul class="subnav">
-    <li><span>Command-line application reference</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../applications/GeneralReference/">General command-line reference</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../applications/scuff-scatter/scuff-scatter/">scuff-scatter</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../applications/scuff-transmission/scuff-transmission/">scuff-transmission</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../applications/scuff-ldos/scuff-ldos/">scuff-ldos</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../applications/scuff-tmatrix/scuff-tmatrix/">scuff-tmatrix</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../applications/scuff-cas3D/scuff-cas3D/">scuff-cas3D</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../applications/scuff-caspol/scuff-caspol/">scuff-caspol</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../applications/scuff-neq/scuff-neq/">scuff-neq</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../applications/scuff-RF/scuff-RF/">scuff-RF</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../applications/scuff-static/scuff-static/">scuff-static</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../applications/scuff-analyze/scuff-analyze/">scuff-analyze</a>
-        
-    </li>
-
-        
-    </ul>
-<li>
-          
-            <li>
-    <ul class="subnav">
-    <li><span>API reference</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../API/libscuff/">libscuff</a>
-        
-    </li>
-
-        
-    </ul>
-<li>
-          
-            <li>
-    <ul class="subnav">
-    <li><span>For developers</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../forDevelopers/Implementation/">Implementation</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../forDevelopers/DataStructures/">Data Structures</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../forDevelopers/Documentation/">Documentation</a>
-        
-    </li>
-
-        
-    </ul>
-<li>
-          
-        </ul>
+  <a href="https://github.com/homerreid/scuff-em/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
       </div>
-      &nbsp;
+    
+    <div class="md-source__repository">
+      scuff-em
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href="../.." title="Home" class="md-tabs__link">
+        Home
+      </a>
+    
+  </li>
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../examples/" title="Examples" class="md-tabs__link">
+          Examples
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../tests/Overview/" title="Test suite" class="md-tabs__link">
+          Test suite
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../TopLevel/" title="General reference" class="md-tabs__link md-tabs__link--active">
+          General reference
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../applications/GeneralReference/" title="Command-line tools" class="md-tabs__link">
+          Command-line tools
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../HighLevelInterface/HighLevelInterface/" title="High-level interface" class="md-tabs__link">
+          High-level interface
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../API/libscuff/" title="Low-level API" class="md-tabs__link">
+          Low-level API
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../forDevelopers/Implementation/" title="For developers" class="md-tabs__link">
+          For developers
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    <span class="md-nav__button md-logo">
+      
+        <img src="../../reference/scuffEMLogo.png" width="48" height="48">
+      
+    </span>
+    SCUFF-EM documentation
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/homerreid/scuff-em/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      scuff-em
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Examples
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Examples
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/" title="SCUFF-EM tutorial examples" class="md-nav__link">
+      SCUFF-EM tutorial examples
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/MieScattering/MieScattering/" title="Mie scattering" class="md-nav__link">
+      Mie scattering
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/DielectricShell/DielectricShell/" title="Electrostatics of a spherical dielectric shell" class="md-nav__link">
+      Electrostatics of a spherical dielectric shell
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/ThinFilm/ThinFilm/" title="Spatially-resolved study of plane-wave transmission through an infinite-area thin dielectric film" class="md-nav__link">
+      Spatially-resolved study of plane-wave transmission through an infinite-area thin dielectric film
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/DiffractionPatterns/DiffractionPatterns/" title="Imaging diffraction patterns of discs, disc arrays, and hole arrays in metal screens" class="md-nav__link">
+      Imaging diffraction patterns of discs, disc arrays, and hole arrays in metal screens
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/CubeTorus/" title="Casimir forces in a compact geometry" class="md-nav__link">
+      Casimir forces in a compact geometry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/SiliconBeams/SiliconBeams/" title="Casimir forces in a 1D extended geometry" class="md-nav__link">
+      Casimir forces in a 1D extended geometry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/SiliconSlabs/SiliconSlabs/" title="Casimir forces in a 2D extended geometry" class="md-nav__link">
+      Casimir forces in a 2D extended geometry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/NanostructureCasimirPolder/NanostructureCasimirPolder/" title="Casimir-Polder potentials in dielectric nanostructures" class="md-nav__link">
+      Casimir-Polder potentials in dielectric nanostructures
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/SiO2Spheres/SiO2Spheres/" title="Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres" class="md-nav__link">
+      Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/TipSubstrate/TipSubstrate/" title="Spatial distribution of heat flux from a warm tip over a cold substrate" class="md-nav__link">
+      Spatial distribution of heat flux from a warm tip over a cold substrate
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/HalfSpaceLDOS/HalfSpaceLDOS/" title="LDOS and dyadic Green functions above an infinite aluminum half-space" class="md-nav__link">
+      LDOS and dyadic Green functions above an infinite aluminum half-space
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/PlatonicSolids/PlatonicSolids/" title="Electrostatic polarizability of platonic solids" class="md-nav__link">
+      Electrostatic polarizability of platonic solids
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/TwoBodyCapacitors/TwoBodyCapacitors/" title="Capacitance of two-body capacitors" class="md-nav__link">
+      Capacitance of two-body capacitors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/StriplineCapacitor/StriplineCapacitor/" title="Capacitance of a PCB stripline trace" class="md-nav__link">
+      Capacitance of a PCB stripline trace
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/ImplicitSubstrate/ImplicitSubstrate/" title="Implicit handling of multilayer dielectric substrates" class="md-nav__link">
+      Implicit handling of multilayer dielectric substrates
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/pythonCapacitance/pythonCapacitance/" title="Finite-size effects in stripline capacitors" class="md-nav__link">
+      Finite-size effects in stripline capacitors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/PaulTrap/PaulTrap/" title="Electrostatic fields of an electrode array" class="md-nav__link">
+      Electrostatic fields of an electrode array
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/YagiUdaAntennas/YagiUdaAntennas/" title="Z-parameters and directivity of Yagi-Uda antennas" class="md-nav__link">
+      Z-parameters and directivity of Yagi-Uda antennas
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/MicrostripDevices/MicrostripDevices/" title="Input impedance, mutual coupling, and radiated fields of microstrip RF devices" class="md-nav__link">
+      Input impedance, mutual coupling, and radiated fields of microstrip RF devices
+    </a>
+  </li>
+
+        
+      </ul>
     </nav>
+  </li>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../..">SCUFF-EM documentation</a>
-      </nav>
-
-      
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="breadcrumbs navigation">
-  <ul class="wy-breadcrumbs">
-    <li><a href="../.."><span class="SmallCaps">scuff-em</span> documentation</a> &raquo;</li>
     
       
-        
-          <li>General reference &raquo;</li>
-        
       
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
     
-    <li>Incident Fields</li>
-    <li class="wy-breadcrumbs-aside">
-      
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Test suite
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Test suite
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
         
-          <a href="https://github.com/homerreid/scuff-em/" class="icon icon-github"> Edit on GitHub</a>
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tests/Overview/" title="Overview of the test suite" class="md-nav__link">
+      Overview of the test suite
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tests/MieScattering/MieScattering/" title="Mie scattering" class="md-nav__link">
+      Mie scattering
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tests/FresnelScattering/FresnelScattering/" title="Fresnel scattering" class="md-nav__link">
+      Fresnel scattering
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tests/CasimirSpheres/CasimirSpheres/" title="Equilibrium Casimir forces between spheres" class="md-nav__link">
+      Equilibrium Casimir forces between spheres
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tests/CasimirPlates/CasimirPlates/" title="Equilibrium Casimir forces between plates" class="md-nav__link">
+      Equilibrium Casimir forces between plates
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tests/CPSphere/CPSphere/" title="Equilibrium Casimir-Polder potential near a sphere" class="md-nav__link">
+      Equilibrium Casimir-Polder potential near a sphere
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tests/CPPlate/CPPlate/" title="Equilibrium Casimir-Polder potential near a plate" class="md-nav__link">
+      Equilibrium Casimir-Polder potential near a plate
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tests/NEQSpheres/NEQSpheres/" title="Heat transfer and non-equilibrium Casimir forces between spheres" class="md-nav__link">
+      Heat transfer and non-equilibrium Casimir forces between spheres
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tests/libscuff/libscuff/" title="Low-level tests of the core library" class="md-nav__link">
+      Low-level tests of the core library
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
       
-    </li>
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+    
+    <label class="md-nav__link" for="nav-4">
+      General reference
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        General reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../TopLevel/" title="Top-level overview" class="md-nav__link">
+      Top-level overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Installing/" title="Installation" class="md-nav__link">
+      Installation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Geometries/" title="Geometry descriptions" class="md-nav__link">
+      Geometry descriptions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Materials/" title="Material designations" class="md-nav__link">
+      Material designations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Transformations/" title="Geometric transformations" class="md-nav__link">
+      Geometric transformations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Incident fields
+      </label>
+    
+    <a href="./" title="Incident fields" class="md-nav__link md-nav__link--active">
+      Incident fields
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#plane-waves" title="Plane waves" class="md-nav__link">
+    Plane waves
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gaussian-beams" title="Gaussian beams" class="md-nav__link">
+    Gaussian beams
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#point-sources" title="Point sources" class="md-nav__link">
+    Point sources
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#specifying-an-entire-list-of-incident-fields" title="Specifying an entire list of incident fields" class="md-nav__link">
+    Specifying an entire list of incident fields
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-of-an-incident-field-file" title="Example of an incident-field file" class="md-nav__link">
+    Example of an incident-field file
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-incident-fields-in-api-programs" title="Using incident fields in API programs" class="md-nav__link">
+    Using incident fields in API programs
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+        <li class="md-nav__item">
+          <a href="#__comments" title="Comments" class="md-nav__link md-nav__link--active">
+            Comments
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../BrillouinZoneIntegration/" title="Brillouin zone integration" class="md-nav__link">
+      Brillouin zone integration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../FAQ/" title="FAQ" class="md-nav__link">
+      FAQ
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Command-line tools
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Command-line tools
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/GeneralReference/" title="General command-line reference" class="md-nav__link">
+      General command-line reference
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-scatter/scuff-scatter/" title="scuff-scatter" class="md-nav__link">
+      scuff-scatter
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-transmission/scuff-transmission/" title="scuff-transmission" class="md-nav__link">
+      scuff-transmission
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-ldos/scuff-ldos/" title="scuff-ldos" class="md-nav__link">
+      scuff-ldos
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-tmatrix/scuff-tmatrix/" title="scuff-tmatrix" class="md-nav__link">
+      scuff-tmatrix
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-cas3D/scuff-cas3D/" title="scuff-cas3D" class="md-nav__link">
+      scuff-cas3D
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-caspol/scuff-caspol/" title="scuff-caspol" class="md-nav__link">
+      scuff-caspol
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-neq/scuff-neq/" title="scuff-neq" class="md-nav__link">
+      scuff-neq
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-rf/scuff-rf/" title="scuff-rf" class="md-nav__link">
+      scuff-rf
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-static/scuff-static/" title="scuff-static" class="md-nav__link">
+      scuff-static
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-spectrum/scuff-spectrum/" title="scuff-spectrum" class="md-nav__link">
+      scuff-spectrum
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-analyze/scuff-analyze/" title="scuff-analyze" class="md-nav__link">
+      scuff-analyze
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-integrate/scuff-integrate/" title="scuff-integrate" class="md-nav__link">
+      scuff-integrate
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      High-level interface
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        High-level interface
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../HighLevelInterface/HighLevelInterface/" title="High-Level Interface" class="md-nav__link">
+      High-Level Interface
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Low-level API
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        Low-level API
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../API/libscuff/" title="libscuff" class="md-nav__link">
+      libscuff
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../API/MainFlow/" title="MainFlow API" class="md-nav__link">
+      MainFlow API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../API/UtilityAPI/" title="Utility API" class="md-nav__link">
+      Utility API
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      For developers
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        For developers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../forDevelopers/Implementation/" title="Implementation" class="md-nav__link">
+      Implementation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../forDevelopers/DataStructures/" title="Data Structures" class="md-nav__link">
+      Data Structures
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../forDevelopers/Documentation/" title="Documentation" class="md-nav__link">
+      Documentation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../forDevelopers/SingularIntegrals/" title="Code for computing singular integrals" class="md-nav__link">
+      Code for computing singular integrals
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
   </ul>
-  <hr/>
-</div>
-          <div role="main">
-            <div class="section">
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#plane-waves" title="Plane waves" class="md-nav__link">
+    Plane waves
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gaussian-beams" title="Gaussian beams" class="md-nav__link">
+    Gaussian beams
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#point-sources" title="Point sources" class="md-nav__link">
+    Point sources
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#specifying-an-entire-list-of-incident-fields" title="Specifying an entire list of incident fields" class="md-nav__link">
+    Specifying an entire list of incident fields
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-of-an-incident-field-file" title="Example of an incident-field file" class="md-nav__link">
+    Example of an incident-field file
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-incident-fields-in-api-programs" title="Using incident fields in API programs" class="md-nav__link">
+    Using incident fields in API programs
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+        <li class="md-nav__item">
+          <a href="#__comments" title="Comments" class="md-nav__link md-nav__link--active">
+            Comments
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
               
-                <h1 id="incident-fields-in-scuff-em">Incident fields in <span class="SC">scuff-em</span></h1>
+                
+                  <a href="https://github.com/homerreid/scuff-em/edit/master/docs/reference/IncidentFields.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1> Incident fields in <span class="SC">scuff-em</span> </h1>
+
 <p>For the classical scattering problems solved by
 <a href="../../applications/scuff-scatter/scuff-scatter/"><span class="SC">scuff-scatter</span></a>
 or by C++ or python codes using the
@@ -400,21 +1414,45 @@ built-in types of incident fields:</p>
 <li><a href="#GaussianBeams">Gaussian beams</a></li>
 <li>The fields of <a href="#PointSources">point electric or magnetic dipole sources.</a></li>
 </ul>
+<p>If you only need to run scattering calculations with a single
+type of incident field, you can just specify that field on
+the command line, as described in the sections below. If you
+want to run scattering calculations with multiple types of
+incident field (for example, perhaps at each frequency you
+want to consider two different plane-wave polarizations,
+or three different point-source locations) you will want
+to write an 
+<a href="#IFFile">incident-field file</a> describing an entire <em>list</em>
+of incident fields.</p>
 <p>It is also easy to <a href="#RollingYourOwn">define your own custom incident fields</a>
 for use in API programs.</p>
+<div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#built-in-types-of-incident-field">Built-in types of incident field</a><ul>
+<li><a href="#plane-waves">Plane waves</a></li>
+<li><a href="#gaussian-beams">Gaussian beams</a></li>
+<li><a href="#point-sources">Point sources</a></li>
+</ul>
+</li>
+<li><a href="#specifying-an-entire-list-of-incident-fields">Specifying an entire list of incident fields</a><ul>
+<li><a href="#example-of-an-incident-field-file">Example of an incident-field file</a></li>
+</ul>
+</li>
+<li><a href="#using-incident-fields-in-api-programs">Using incident fields in API programs</a></li>
+</ul>
+</div>
+<h2 id="built-in-types-of-incident-field">Built-in types of incident field</h2>
 <p><a name="PlaneWaves"></p>
-<h2 id="plane-waves">Plane waves</h2>
+<h3 id="plane-waves">Plane waves</h3>
 <p><a class="wikilink" href="../../scuff-scatter/">scuff-scatter</a> command-line syntax:</p>
-<pre><code class="bash">--pwDirection nx ny nz
+<div class="codehilite"><pre><span></span>--pwDirection nx ny nz
 --pwPolarization Ex Ey Ez 
-</code></pre>
+</pre></div>
 
-<p>{.toc}</p>
 <p>C++ code:</p>
-<pre><code class="c">  double  nHat[3] = {nx, ny, nz};
-  cdouble E0[3]   = {Ex, Ey, Ez};
-  PlaneWave *PW=new PlaneWave(E0, nHat);
-</code></pre>
+<div class="codehilite"><pre><span></span>  <span class="kt">double</span>  <span class="n">nHat</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">nz</span><span class="p">};</span>
+  <span class="n">cdouble</span> <span class="n">E0</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>   <span class="o">=</span> <span class="p">{</span><span class="n">Ex</span><span class="p">,</span> <span class="n">Ey</span><span class="p">,</span> <span class="n">Ez</span><span class="p">};</span>
+  <span class="n">PlaneWave</span> <span class="o">*</span><span class="n">PW</span><span class="o">=</span><span class="n">new</span> <span class="n">PlaneWave</span><span class="p">(</span><span class="n">E0</span><span class="p">,</span> <span class="n">nHat</span><span class="p">);</span>
+</pre></div>
 
 <p>Selects the incident field to be a plane wave, with propagation vector 
 <strong>n</strong>=<em>(nx,ny,nz)</em> and <strong>E</strong>-field polarization vector <strong>E</strong>=<em>(Ex,Ey,Ez).</em></p>
@@ -423,43 +1461,46 @@ for use in API programs.</p>
 <p>where the components of the vectors <script type="math/tex">\mathbf{\hat n}</script> 
 and 
 <script type="math/tex">\mathbf{E}_0</script>
-are what you specify with the <code>--pwDirection</code> and 
-<code>--pwPolarization</code> options to <a class="wikilink" href="../../scuff-scatter/">scuff-scatter</a>. (The frequency 
-<script type="math/tex">\omega</script> is specified using other options described below; the 
-quantities <script type="math/tex">\epsilon</script> and <script type="math/tex">\mu</script> are the material properties of the exterior 
-medium at this frequency, which are determined by the material 
-property designation you give the external medium in the 
-<code>.scuffgeo</code> file; the wave impedance of the medium is 
+are what you specify with the <code class="codehilite">--pwDirection</code> and 
+<code class="codehilite">--pwPolarization</code> options to <a class="wikilink" href="../../scuff-scatter/">scuff-scatter</a>. (The frequency 
+<script type="math/tex">\omega</script> is specified elsewhere, for example using 
+command-line options like <code class="codehilite">--omega.</code> The
+quantities <script type="math/tex">\epsilon</script> and <script type="math/tex">\mu</script> are the material properties of
+the exterior medium at this frequency, which are determined by
+the material property designation you give the external medium
+in the <code class="codehilite"><span class="na">.scuffgeo</span></code> file; the wave impedance of the medium is
 <script type="math/tex">Z=\sqrt{\mu/\epsilon}\approx 377\,\Omega</script> in vacuum.)</p>
-<p>The values specified for <code>--pwPolarization</code> may be 
+<p>The values specified for <code class="codehilite">--pwPolarization</code> may be
 <a href="../../applications/GeneralReference/#Complex">complex numbers.</a></p>
-<p>As an example, the command-line options</p>
-<p class="toc"><code>--pwDirection 0 0 1 --pwPolarization 0.7071 0.7071i 0.0</code></p>
+<p>As an example, the <a class="wikilink" href="../../scuff-scatter/">scuff-scatter</a> command-line options</p>
+<div class="codehilite"><pre><span></span>--pwDirection <span class="m">0</span> <span class="m">0</span> <span class="m">1</span> --pwPolarization <span class="m">0</span>.7071 <span class="m">0</span>.7071i <span class="m">0</span>.0
+</pre></div>
+
 <p>will specify an incident field consisting of a circularly
 polarized plane wave traveling in the positive <em>z</em> direction.</p>
 <p><a name="GaussianBeams"></p>
-<h2 id="gaussian-beams">Gaussian beams</h2>
+<h3 id="gaussian-beams">Gaussian beams</h3>
 <p><a class="wikilink" href="../../scuff-scatter/">scuff-scatter</a> command-line syntax:</p>
-<pre><code class="bash">--gbCenter Cx Cy Cz
+<div class="codehilite"><pre><span></span>--gbCenter Cx Cy Cz
 --gbDirection nx ny nz
 --gbPolarization Ex Ey Ez
 --gbWaist W
-</code></pre>
+</pre></div>
 
 <p>C++ code:</p>
-<pre><code class="c">  double X0[3]={Cx, Cy, Cz};     /* beam center point */
-  double KProp[3]={nx, ny, nz};  /* beam propagation vector */
-  cdouble E0[3]={Ex, Ey, Ez};    /* complex field-strength vector */
-  double W0=W;                   /* beam waist */
-  GaussianBeam *GB=new GaussianBeam(X0, KProp, E0, W0);
-</code></pre>
+<div class="codehilite"><pre><span></span>  <span class="kt">double</span> <span class="n">X0</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="n">Cx</span><span class="p">,</span> <span class="n">Cy</span><span class="p">,</span> <span class="n">Cz</span><span class="p">};</span>     <span class="cm">/* beam center point */</span>
+  <span class="kt">double</span> <span class="n">KProp</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">nz</span><span class="p">};</span>  <span class="cm">/* beam propagation vector */</span>
+  <span class="n">cdouble</span> <span class="n">E0</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="n">Ex</span><span class="p">,</span> <span class="n">Ey</span><span class="p">,</span> <span class="n">Ez</span><span class="p">};</span>    <span class="cm">/* complex field-strength vector */</span>
+  <span class="kt">double</span> <span class="n">W0</span><span class="o">=</span><span class="n">W</span><span class="p">;</span>                   <span class="cm">/* beam waist */</span>
+  <span class="n">GaussianBeam</span> <span class="o">*</span><span class="n">GB</span><span class="o">=</span><span class="n">new</span> <span class="n">GaussianBeam</span><span class="p">(</span><span class="n">X0</span><span class="p">,</span> <span class="n">KProp</span><span class="p">,</span> <span class="n">E0</span><span class="p">,</span> <span class="n">W0</span><span class="p">);</span>
+</pre></div>
 
 <p>Selects the incident field to be a focused Gaussian beam, 
 traveling in the direction defined by the unit vector 
-<strong>n</strong>=<code>(nx,ny,nz)</code>, with <strong>E</strong>-field polarization 
-vector <strong>E</strong>=<code>(Ex,Ey,Ez)</code>, beam center point with cartesian 
-coordinates <strong>C</strong>=<code>(Cx,Cy,Cz)</code>, and beam waist <code>W</code>.</p>
-<p>The values specified for <code>--gbPolarization</code> may be
+<strong>n</strong>=<code class="codehilite">(nx,ny,nz)</code>, with <strong>E</strong>-field polarization 
+vector <strong>E</strong>=<code class="codehilite">(Ex,Ey,Ez)</code>, beam center point with cartesian 
+coordinates <strong>C</strong>=<code class="codehilite">(Cx,Cy,Cz)</code>, and beam waist <code class="codehilite">W</code>.</p>
+<p>The values specified for <code class="codehilite">--gbPolarization</code> may be
 <a href="../../applications/GeneralReference/#Complex">complex numbers.</a></p>
 <p>The <a class="wikilink" href="../../scuff-em/">scuff-em</a> implementation of the
 field of a Gaussian laser beam was contributed by 
@@ -470,99 +1511,222 @@ Beyond the Paraxial Approximation," <em>Journal of the Optical
 Society of America A</em> <strong>16</strong> 1381 (1999), <a href="http://dx.doi.org/10.1364/JOSAA.16.001381">http://dx.doi.org/10.1364/JOSAA.16.001381</a>.</li>
 </ul>
 <p><a name="PointSources"></p>
-<h2 id="point-sources">Point sources</h2>
+<h3 id="point-sources">Point sources</h3>
 <p><a class="wikilink" href="../../scuff-scatter/">scuff-scatter</a> command-line syntax:</p>
-<pre><code class="bash">--psStrength Px Py Pz
+<div class="codehilite"><pre><span></span>--psStrength Px Py Pz
 --psLocation xx yy zz
-</code></pre>
+</pre></div>
 
 <p>C++ code:</p>
-<pre><code class="c">  double  X0[3] = {xx, yy, zz};
-  cdouble P0[3] = {Px, Py, Pz};
-  PointSource *PS=new PointSource(X0, P0);
-</code></pre>
+<div class="codehilite"><pre><span></span>  <span class="kt">double</span>  <span class="n">X0</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">zz</span><span class="p">};</span>
+  <span class="n">cdouble</span> <span class="n">P0</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">Px</span><span class="p">,</span> <span class="n">Py</span><span class="p">,</span> <span class="n">Pz</span><span class="p">};</span>
+  <span class="n">PointSource</span> <span class="o">*</span><span class="n">PS</span><span class="o">=</span><span class="n">new</span> <span class="n">PointSource</span><span class="p">(</span><span class="n">X0</span><span class="p">,</span> <span class="n">P0</span><span class="p">);</span>
+</pre></div>
 
 <p>Selects the incident field to be the field of a pointlike
-electric dipole radiator with dipole moment <strong>P</strong>=<code>(Px,Py,Pz)</code>
-and located at cartesian coordinates (<code>xx,yy,zz</code>).</p>
+electric dipole radiator with dipole moment <strong>P</strong>=<code class="codehilite">(Px,Py,Pz)</code>
+and located at cartesian coordinates (<code class="codehilite">xx,yy,zz</code>).</p>
 <p>More specifically, the fields of a point source are given by</p>
 <p><img alt="Expressions for point-source fields" src="../PointSource.png" /></p>
-<p>The values specified for <code>--psStrength</code> may be
+<p>The values specified for <code class="codehilite">--psStrength</code> may be
 <a href="../../applications/GeneralReference/#Complex">complex numbers.</a></p>
 <p>You may define the incident field to be a superposition of
 the fields of multiple point sources by specifying these
-options more than once. (The <em>n</em>th occurrence of <code>--psStrength</code>
-will be paired with the <em>n</em>th occurrence of <code>--psLocation.</code>)</p>
+options more than once. (The <em>n</em>th occurrence of <code class="codehilite">--psStrength</code>
+will be paired with the <em>n</em>th occurrence of <code class="codehilite">--psLocation.</code>)</p>
 <p>In API codes (but not in <a class="wikilink" href="../../scuff-scatter/">scuff-scatter</a>) it is also
 possible to a define a magnetic point source as follows:</p>
-<pre><code class="c">  PointSource *PS=new PointSource(X0, P0);
-</code></pre>
+<div class="codehilite"><pre><span></span>  <span class="n">PointSource</span> <span class="o">*</span><span class="n">PS</span><span class="o">=</span><span class="n">new</span> <span class="n">PointSource</span><span class="p">(</span><span class="n">X0</span><span class="p">,</span> <span class="n">P0</span><span class="p">);</span>
+</pre></div>
 
+<p><a name="IFFile"></p>
+<h2 id="specifying-an-entire-list-of-incident-fields">Specifying an entire list of incident fields</h2>
+<p>A feature of the 
+<a href="../../forDevelopers/Implementation/">surface-integral-equation solver implemented by <span class="SC">scuff-em</sc></a>
+is that, once the computational work needed to solve a single
+scattering problem (for a given geometry at given frequency irradiated
+by a single incident field) has been done, there is relatively little
+computational cost required to solve additional problems (for the same 
+geometry at the same frequency) with different incident fields.
+To exploit this feature, you may write an "incident-field file"
+(a simple text file) describing multiple types of incident field 
+with which to irradiate your geometry.</p>
+<h3 id="example-of-an-incident-field-file">Example of an incident-field file</h3>
+<p><a href="../IFFile">Here's an example</a> of an incident-field file describing 9 
+different incident fields. If you specify this file
+using the <code class="codehilite">--IFFile</code> command-line option to
+<a href="../../applications/scuff-scatter/scuff-scatter/"><span class="SC">scuff-scatter</span></a>,
+then every calculation you request (scattered fields,
+power/force/torque, visualization, etc.) will be 
+done 7 times at each frequency, once for each field.</p>
+<div class="codehilite"><pre><span></span>EX    PW    0  0  1       1          0          0
+EY    PW    0  0  1       0          1          0
+LC    PW    0  0  1       0.7071     0.7071i    0
+RC    PW    0  0  1       0.7071    -0.7071i    0
+
+PS1   PS    1.1 2.2 3.3   0.4+0.5i   0.7        -0.8
+PS2   MPS   1.1 2.2 3.3   0.4+0.5i   0.7        -0.8
+
+GB    GB    0.0 0.0 0.0   0.0 0.0 1.0    1.0 0.0 0.0    0.5
+
+COMPOUND1
+  PW    0   0  1      1        0        0
+  PS    1.1 2.2 3.3   0.4+0.5i 0.7      -0.8
+END
+
+COMPOUND2
+  PW    0   0  1      0        1        0
+  PS    1.1 2.2 3.3   0.4+0.5i 0.7      -0.8
+END
+</pre></div>
+
+<p>Here's how to understand the 9 incident fields described
+by this file.</p>
+<ul>
+<li>
+<p>The first several lines define various types of incident
+fields in which there is only a single field source. For 
+this type of incident field, the first word on the 
+line is an 
+arbitrary user-specified label (such as <code class="codehilite">EX</code> or <code class="codehilite">PS1</code>)
+that will be used to identify data corresponding to 
+this incident field in output files.
+The second word on the line is one of the four 
+keywords <code class="codehilite">PW|PS|MPS|GB</code>. The remainder of the line
+consists of numerical parameters:</p>
+<ul>
+<li>
+<p>For <a href="#PlaneWaves">plane waves</a> (keyword <code class="codehilite">PW</code>) there are 6 numerical parameters: <code class="codehilite">nx ny nz Ex Ey Ez</code>. In the example above, <code class="codehilite">EX</code> and <code class="codehilite">EY</code> are linearly-polarized plane waves, while <code class="codehilite">LC</code> and <code class="codehilite">RC</code> are left- and right-circularly polarized waves.</p>
+</li>
+<li>
+<p>For <a href="#PointSource">electric-dipole point sources</a> (keyword <code class="codehilite">PS</code>) there are 6 numerical parameters: <code class="codehilite">xx yy zz Px Py Pz</code>.</p>
+</li>
+<li>
+<p>For <a href="#PointSource">magnetic-dipole point sources</a> (keyword <code class="codehilite">MPS</code>) there are 6 numerical parameters: <code class="codehilite">xx yy zz Mx My Mz</code>.</p>
+</li>
+<li>
+<p>For <a href="#GaussianBeam">gaussian beams</a> (keyword <code class="codehilite">GB</code>) there are 10 numerical parameters: <code class="codehilite">Cx Cy Cz nx ny nz Ex Ey Ez W</code>.    </p>
+</li>
+</ul>
+</li>
+<li>
+<p>The final two sections of the file describe <em>compound</em> fields---that is,
+incident fields produced by more than one source acting simultaneously.
+These types of fields are described by putting their label (here
+<code class="codehilite">COMPOUND1</code> or <code class="codehilite">COMPOUND2</code>) on line by itself, then specifying
+as many <code class="codehilite">PW|PS|MPS|GB</code> lines as you like, and finally closing 
+the compound-field definition with the <code class="codehilite">END</code> keyword.
+For example, the field we labeled <code class="codehilite">COMPOUND1</code> consists of a
+planewave acting simultaneously with the field of a point source.</p>
+</li>
+</ul>
 <p><a name="RollingYourOwn"></p>
 <h2 id="using-incident-fields-in-api-programs">Using incident fields in API programs</h2>
 <p>Please see 
 <a href="http://homerreid.com/scuff-em/libscuff/IncField.shtml">here</a>
 for further details and examples of how incident fields are manipulated in API codes, including an example of how to create your
 own custom-designed incident field.</p>
+                
+                  
+                
               
-            </div>
+              
+                
+
+
+
+  <h2 id="__comments">Comments</h2>
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = "http://homerreid.github.io/scuff-em-documentation/reference/IncidentFields/";
+      this.page.identifier =
+        "/reference/IncidentFields/";
+    };
+    (function() {
+      var d = document, s = d.createElement("script");
+      s.src = "//homerreid-github-io-scuff-em-documentation.disqus.com.disqus.com/embed.js";
+      s.setAttribute("data-timestamp", +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+
+              
+            </article>
           </div>
-          <footer>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
   
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="../../applications/GeneralReference/" class="btn btn-neutral float-right" title="General command-line reference"/>Next <span class="icon icon-circle-arrow-right"></span></a>
-      
-      
-        <a href="../Transformations/" class="btn btn-neutral" title="Geometric transformations"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-      
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../Transformations/" title="Geometric transformations" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Geometric transformations
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../BrillouinZoneIntegration/" title="Brillouin zone integration" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Brillouin zone integration
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
     </div>
   
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>
-    <!-- Copyright etc -->
-    </p>
-  </div>
-
-  <a href="http://homerreid.com/scuff-em"> 
-    <span class="SmallCaps">scuff-em</span>
-  </a> documentation, by
-  <a href="http://homerreid.com">Homer Reid</a>
-
-  <p>
-  <font size=-1>
-  Built with <a href="http://www.mkdocs.org">MkDocs</a> 
-  using a customized theme modeled 
-  after the 
-  <a href="https://github.com/snide/sphinx_rtd_theme">theme</a>
-  provided by <a href="https://readthedocs.org">Read the Docs</a>.
-  </font>
-
-</footer>
-	  
-        </div>
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="http://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
       </div>
-
-    </section>
-
+      
+        
+      
+    </div>
   </div>
-
-<div class="rst-versions" role="note" style="cursor: pointer">
-    <span class="rst-current-version" data-toggle="rst-current-version">
+</footer>
       
-          <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+    </div>
+    
+      <script src="../../assets/javascripts/application.b438e6c5.js"></script>
       
+      <script>app.initialize({version:"0.17.3",url:{base:"../.."}})</script>
       
-        <span><a href="../Transformations/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <script src="../../javascripts/MathJax.js?config=TeX-AMS_HTML"></script>
       
+        <script src="../../javascripts/mathjaxhelper.js"></script>
       
-        <span style="margin-left: 15px"><a href="../../applications/GeneralReference/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+    
       
-    </span>
-</div>
-
-</body>
+        <script>!function(e,a,t,n,o,c,i){e.GoogleAnalyticsObject=o,e.ga=e.ga||function(){(e.ga.q=e.ga.q||[]).push(arguments)},e.ga.l=1*new Date,c=a.createElement(t),i=a.getElementsByTagName(t)[0],c.async=1,c.src="https://www.google-analytics.com/analytics.js",i.parentNode.insertBefore(c,i)}(window,document,"script",0,"ga"),ga("create","UA-119340518-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview");var links=document.getElementsByTagName("a");if(Array.prototype.map.call(links,function(e){e.host!=document.location.host&&e.addEventListener("click",function(){var a=e.getAttribute("data-md-action")||"follow";ga("send","event","outbound",a,e.href)})}),document.forms.search){var query=document.forms.search.query;query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}</script>
+      
+    
+  </body>
 </html>

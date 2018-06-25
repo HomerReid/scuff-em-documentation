@@ -1,0 +1,1568 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="http://homerreid.github.io/scuff-em-documentation/examples/TwoBodyCapacitors/TwoBodyCapacitors/">
+      
+      
+        <meta name="author" content="Homer Reid">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-0.17.3, mkdocs-material-2.7.3">
+    
+    
+      
+        <title>Capacitance of two-body capacitors - SCUFF-EM documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/application.8d40d89b.css">
+      
+        <link rel="stylesheet" href="../../../assets/stylesheets/application-palette.6079476c.css">
+      
+    
+    
+      <script src="../../../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:300,400,400i,700|">
+        <style>body,input{font-family:"Noto Sans","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+      <link rel="stylesheet" href="../../../css/scuff-em.css">
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <a href="#capacitance-of-a-parallel-plate-capacitor" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="http://homerreid.github.io/scuff-em-documentation" title="SCUFF-EM documentation" class="md-header-nav__button md-logo">
+          
+            <img src="../../../reference/scuffEMLogo.png" width="24" height="24">
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                SCUFF-EM documentation
+              </span>
+              <span class="md-header-nav__topic">
+                Capacitance of two-body capacitors
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/homerreid/scuff-em/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      scuff-em
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href="../../.." title="Home" class="md-tabs__link">
+        Home
+      </a>
+    
+  </li>
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../" title="Examples" class="md-tabs__link md-tabs__link--active">
+          Examples
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../tests/Overview/" title="Test suite" class="md-tabs__link">
+          Test suite
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../reference/TopLevel/" title="General reference" class="md-tabs__link">
+          General reference
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../applications/GeneralReference/" title="Command-line tools" class="md-tabs__link">
+          Command-line tools
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../HighLevelInterface/HighLevelInterface/" title="High-level interface" class="md-tabs__link">
+          High-level interface
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../API/libscuff/" title="Low-level API" class="md-tabs__link">
+          Low-level API
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../forDevelopers/Implementation/" title="For developers" class="md-tabs__link">
+          For developers
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    <span class="md-nav__button md-logo">
+      
+        <img src="../../../reference/scuffEMLogo.png" width="48" height="48">
+      
+    </span>
+    SCUFF-EM documentation
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/homerreid/scuff-em/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      scuff-em
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      Examples
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Examples
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../" title="SCUFF-EM tutorial examples" class="md-nav__link">
+      SCUFF-EM tutorial examples
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../MieScattering/MieScattering/" title="Mie scattering" class="md-nav__link">
+      Mie scattering
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../DielectricShell/DielectricShell/" title="Electrostatics of a spherical dielectric shell" class="md-nav__link">
+      Electrostatics of a spherical dielectric shell
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ThinFilm/ThinFilm/" title="Spatially-resolved study of plane-wave transmission through an infinite-area thin dielectric film" class="md-nav__link">
+      Spatially-resolved study of plane-wave transmission through an infinite-area thin dielectric film
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../DiffractionPatterns/DiffractionPatterns/" title="Imaging diffraction patterns of discs, disc arrays, and hole arrays in metal screens" class="md-nav__link">
+      Imaging diffraction patterns of discs, disc arrays, and hole arrays in metal screens
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../CubeTorus/" title="Casimir forces in a compact geometry" class="md-nav__link">
+      Casimir forces in a compact geometry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../SiliconBeams/SiliconBeams/" title="Casimir forces in a 1D extended geometry" class="md-nav__link">
+      Casimir forces in a 1D extended geometry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../SiliconSlabs/SiliconSlabs/" title="Casimir forces in a 2D extended geometry" class="md-nav__link">
+      Casimir forces in a 2D extended geometry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../NanostructureCasimirPolder/NanostructureCasimirPolder/" title="Casimir-Polder potentials in dielectric nanostructures" class="md-nav__link">
+      Casimir-Polder potentials in dielectric nanostructures
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../SiO2Spheres/SiO2Spheres/" title="Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres" class="md-nav__link">
+      Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../TipSubstrate/TipSubstrate/" title="Spatial distribution of heat flux from a warm tip over a cold substrate" class="md-nav__link">
+      Spatial distribution of heat flux from a warm tip over a cold substrate
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../HalfSpaceLDOS/HalfSpaceLDOS/" title="LDOS and dyadic Green functions above an infinite aluminum half-space" class="md-nav__link">
+      LDOS and dyadic Green functions above an infinite aluminum half-space
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../PlatonicSolids/PlatonicSolids/" title="Electrostatic polarizability of platonic solids" class="md-nav__link">
+      Electrostatic polarizability of platonic solids
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Capacitance of two-body capacitors
+      </label>
+    
+    <a href="./" title="Capacitance of two-body capacitors" class="md-nav__link md-nav__link--active">
+      Capacitance of two-body capacitors
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#creating-scuff-em-input-files" title="Creating scuff-em input files" class="md-nav__link">
+    Creating scuff-em input files
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-the-calculation" title="Running the calculation" class="md-nav__link">
+    Running the calculation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#plotting-the-data" title="Plotting the data" class="md-nav__link">
+    Plotting the data
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+        <li class="md-nav__item">
+          <a href="#__comments" title="Comments" class="md-nav__link md-nav__link--active">
+            Comments
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../StriplineCapacitor/StriplineCapacitor/" title="Capacitance of a PCB stripline trace" class="md-nav__link">
+      Capacitance of a PCB stripline trace
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ImplicitSubstrate/ImplicitSubstrate/" title="Implicit handling of multilayer dielectric substrates" class="md-nav__link">
+      Implicit handling of multilayer dielectric substrates
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../pythonCapacitance/pythonCapacitance/" title="Finite-size effects in stripline capacitors" class="md-nav__link">
+      Finite-size effects in stripline capacitors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../PaulTrap/PaulTrap/" title="Electrostatic fields of an electrode array" class="md-nav__link">
+      Electrostatic fields of an electrode array
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../YagiUdaAntennas/YagiUdaAntennas/" title="Z-parameters and directivity of Yagi-Uda antennas" class="md-nav__link">
+      Z-parameters and directivity of Yagi-Uda antennas
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../MicrostripDevices/MicrostripDevices/" title="Input impedance, mutual coupling, and radiated fields of microstrip RF devices" class="md-nav__link">
+      Input impedance, mutual coupling, and radiated fields of microstrip RF devices
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Test suite
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Test suite
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/Overview/" title="Overview of the test suite" class="md-nav__link">
+      Overview of the test suite
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/MieScattering/MieScattering/" title="Mie scattering" class="md-nav__link">
+      Mie scattering
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/FresnelScattering/FresnelScattering/" title="Fresnel scattering" class="md-nav__link">
+      Fresnel scattering
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/CasimirSpheres/CasimirSpheres/" title="Equilibrium Casimir forces between spheres" class="md-nav__link">
+      Equilibrium Casimir forces between spheres
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/CasimirPlates/CasimirPlates/" title="Equilibrium Casimir forces between plates" class="md-nav__link">
+      Equilibrium Casimir forces between plates
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/CPSphere/CPSphere/" title="Equilibrium Casimir-Polder potential near a sphere" class="md-nav__link">
+      Equilibrium Casimir-Polder potential near a sphere
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/CPPlate/CPPlate/" title="Equilibrium Casimir-Polder potential near a plate" class="md-nav__link">
+      Equilibrium Casimir-Polder potential near a plate
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/NEQSpheres/NEQSpheres/" title="Heat transfer and non-equilibrium Casimir forces between spheres" class="md-nav__link">
+      Heat transfer and non-equilibrium Casimir forces between spheres
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/libscuff/libscuff/" title="Low-level tests of the core library" class="md-nav__link">
+      Low-level tests of the core library
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      General reference
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        General reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/TopLevel/" title="Top-level overview" class="md-nav__link">
+      Top-level overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/Installing/" title="Installation" class="md-nav__link">
+      Installation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/Geometries/" title="Geometry descriptions" class="md-nav__link">
+      Geometry descriptions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/Materials/" title="Material designations" class="md-nav__link">
+      Material designations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/Transformations/" title="Geometric transformations" class="md-nav__link">
+      Geometric transformations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/IncidentFields/" title="Incident fields" class="md-nav__link">
+      Incident fields
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/BrillouinZoneIntegration/" title="Brillouin zone integration" class="md-nav__link">
+      Brillouin zone integration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/FAQ/" title="FAQ" class="md-nav__link">
+      FAQ
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Command-line tools
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Command-line tools
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../applications/GeneralReference/" title="General command-line reference" class="md-nav__link">
+      General command-line reference
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../applications/scuff-scatter/scuff-scatter/" title="scuff-scatter" class="md-nav__link">
+      scuff-scatter
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../applications/scuff-transmission/scuff-transmission/" title="scuff-transmission" class="md-nav__link">
+      scuff-transmission
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../applications/scuff-ldos/scuff-ldos/" title="scuff-ldos" class="md-nav__link">
+      scuff-ldos
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../applications/scuff-tmatrix/scuff-tmatrix/" title="scuff-tmatrix" class="md-nav__link">
+      scuff-tmatrix
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../applications/scuff-cas3D/scuff-cas3D/" title="scuff-cas3D" class="md-nav__link">
+      scuff-cas3D
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../applications/scuff-caspol/scuff-caspol/" title="scuff-caspol" class="md-nav__link">
+      scuff-caspol
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../applications/scuff-neq/scuff-neq/" title="scuff-neq" class="md-nav__link">
+      scuff-neq
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../applications/scuff-rf/scuff-rf/" title="scuff-rf" class="md-nav__link">
+      scuff-rf
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../applications/scuff-static/scuff-static/" title="scuff-static" class="md-nav__link">
+      scuff-static
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../applications/scuff-spectrum/scuff-spectrum/" title="scuff-spectrum" class="md-nav__link">
+      scuff-spectrum
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../applications/scuff-analyze/scuff-analyze/" title="scuff-analyze" class="md-nav__link">
+      scuff-analyze
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../applications/scuff-integrate/scuff-integrate/" title="scuff-integrate" class="md-nav__link">
+      scuff-integrate
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      High-level interface
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        High-level interface
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../HighLevelInterface/HighLevelInterface/" title="High-Level Interface" class="md-nav__link">
+      High-Level Interface
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Low-level API
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        Low-level API
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../API/libscuff/" title="libscuff" class="md-nav__link">
+      libscuff
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../API/MainFlow/" title="MainFlow API" class="md-nav__link">
+      MainFlow API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../API/UtilityAPI/" title="Utility API" class="md-nav__link">
+      Utility API
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      For developers
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        For developers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../forDevelopers/Implementation/" title="Implementation" class="md-nav__link">
+      Implementation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../forDevelopers/DataStructures/" title="Data Structures" class="md-nav__link">
+      Data Structures
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../forDevelopers/Documentation/" title="Documentation" class="md-nav__link">
+      Documentation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../forDevelopers/SingularIntegrals/" title="Code for computing singular integrals" class="md-nav__link">
+      Code for computing singular integrals
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#creating-scuff-em-input-files" title="Creating scuff-em input files" class="md-nav__link">
+    Creating scuff-em input files
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-the-calculation" title="Running the calculation" class="md-nav__link">
+    Running the calculation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#plotting-the-data" title="Plotting the data" class="md-nav__link">
+    Plotting the data
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+        <li class="md-nav__item">
+          <a href="#__comments" title="Comments" class="md-nav__link md-nav__link--active">
+            Comments
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/homerreid/scuff-em/edit/master/docs/examples/TwoBodyCapacitors/TwoBodyCapacitors.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="capacitance-of-parallel-plate-and-two-sphere-capacitors">Capacitance of parallel-plate and two-sphere capacitors</h1>
+<p>In this example, we exploit <a class="wikilink" href="../../../scuff-em/">scuff-em</a>'s
+<a href="../../../applications/scuff-static/scuff-static/">electrostatics module</a>
+to compute the capacitance of parallel-plate and two-sphere
+capacitors. </p>
+<p>The files for this example may be found in the
+<code class="codehilite">share/scuff-em/examples/TwoBodyCapacitors</code> subdirectory
+of your <a class="wikilink" href="../../../scuff-em/">scuff-em</a> installation.</p>
+<h1 id="capacitance-of-a-parallel-plate-capacitor">Capacitance of a parallel-plate capacitor</h1>
+<p>I consider a parallel-plate capacitor consisting of
+two square conducting plates of side length <script type="math/tex">L</script> separated by
+various distances <script type="math/tex">d</script>. Neglecting fringing-field (i.e.
+finite-size) effects, the capacitance is <script type="math/tex">C(d)=\epsilon_0 \frac{L^2}{d}.</script>
+</p>
+<h2 id="creating-scuff-em-input-files">Creating <span class=SC>scuff-em</span> input files</h2>
+<p>Because <a href="../../../reference/FAQ/#Units">electrostatics is scale-invariant</a>,
+I can choose length units arbitrarily, and I will choose
+units in which <script type="math/tex">L=1</script>. 
+To specify my geometry thus
+requires meshed representations of squares of side
+length 1, which I generate (at two different meshing
+resolutions) like this in <a href="http://www.geuz.org/gmsh"><span class=SC>gmsh</span></a>:</p>
+<div class="codehilite"><pre><span></span>% gmsh -setnumber N <span class="m">10</span> -2 Square_N.geo -o Square.msh 
+% RenameMesh Square.msh
+% gmsh -setnumber N <span class="m">20</span> -2 Square_N.geo -o Square.msh 
+% RenameMesh Square.msh
+</pre></div>
+
+<p>Here <a href="../Square_N.geo"><code class="codehilite">Square_N.geo</code></a> is the
+<span class=SC>gmsh</span> input file
+and <a href="../RenameMesh"><code class="codehilite">RenameMesh</code></a> is a little script that uses
+[<span class=SC>scuff-analyze</span>][scuff-analyze] to
+count the number of interior edges in a surface mesh and
+rename the file accordingly.</p>
+<p>This produces files named
+<code class="codehilite">Square_280.msh</code> and <code class="codehilite">Square_1160.msh</code>.
+Now write 
+<a href="../../../reference/Geometries"><span class=SC>scuff-em</span> geometry files</a>:</p>
+<p>+<a href="../TwoPlateCapacitor_280.scuffgeo"><code class="codehilite">TwoPlateCapacitor_280.scuffgeo</code></a></p>
+<p>+<a href="../TwoPlateCapacitor_1160.scuffgeo"><code class="codehilite">TwoPlateCapacitor_1160.scuffgeo</code></a></p>
+<p>and a
+<a href="../../../reference/Transformations">list of geometrical transformations</a>
+describing 20 values of the plate-plate spacing <script type="math/tex">d</script>
+ranging from <script type="math/tex">d=0.01L</script> to <script type="math/tex">d=L</script>:</p>
+<p>+<a href="../TwoPlateCapacitor.trans"><code class="codehilite">TwoPlateCapacitor.trans</code></a></p>
+<p>Before running calculations, double-check that our <code class="codehilite"><span class="na">.scuffgeo</span></code>
+and <code class="codehilite"><span class="na">.trans</span></code> files file correctly describe the range of geometries
+we want to study:</p>
+<div class="codehilite"><pre><span></span>% scuff-analyze --geometry TwoPlateCapacitor_280.scuffgeo --transfile TwoPlateCapacitor.trans 
+% gmsh TwoPlateCapacitor_280.transformed.pp
+</pre></div>
+
+<p><img alt="CapacitorMesh.png" src="../CapacitorMesh.png" /></p>
+<h2 id="running-the-calculation">Running the calculation</h2>
+<div class="codehilite"><pre><span></span>% <span class="k">for</span> N in <span class="m">280</span> <span class="m">1160</span>
+% <span class="k">do</span>
+%   <span class="nv">ARGS</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+%   <span class="nv">ARGS</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">ARGS</span><span class="si">}</span><span class="s2"> --geometry  TwoPlateCapacitor_</span><span class="si">${</span><span class="nv">N</span><span class="si">}</span><span class="s2">.scuffgeo&quot;</span>
+%   <span class="nv">ARGS</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">ARGS</span><span class="si">}</span><span class="s2"> --TransFile TwoPlateCapacitor.trans&quot;</span>
+%   <span class="nv">ARGS</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">ARGS</span><span class="si">}</span><span class="s2"> --CapFile   TwoPlateCapacitor_</span><span class="si">${</span><span class="nv">N</span><span class="si">}</span><span class="s2">.out&quot;</span>
+%   scuff-static <span class="si">${</span><span class="nv">ARGS</span><span class="si">}</span>
+% <span class="k">done</span>
+</pre></div>
+
+<h2 id="plotting-the-data">Plotting the data</h2>
+<div class="codehilite"><pre><span></span>% gnuplot
+gnuplot&gt; <span class="nb">set</span> logscale xy
+gnuplot&gt; plot <span class="s1">&#39;TwoPlateCapacitor_280.out&#39;</span> u <span class="m">1</span>:<span class="o">(</span>abs<span class="o">(</span><span class="nv">$3</span><span class="o">))</span> t <span class="s1">&#39;SCUFF, N=280&#39;</span> w p pt <span class="m">7</span> ps <span class="m">1</span>, <span class="s1">&#39;TwoPlateCapacitor_1160.out&#39;</span> u <span class="m">1</span>:<span class="o">(</span>abs<span class="o">(</span><span class="nv">$3</span><span class="o">))</span> t <span class="s1">&#39;SCUFF, N=1160&#39;</span> w p pt <span class="m">6</span> ps <span class="m">2</span>, <span class="m">1</span>/x w l lw <span class="m">2</span> t <span class="s1">&#39;Theoretical Prediction&#39;</span>
+</pre></div>
+
+<p><img alt="TwoPlateCapacitorData.png" src="../TwoPlateCapacitorData.png" /></p>
+<p>The deviations from the theoretical prediction at small <script type="math/tex">d</script> are
+due to finite mesh resolution and are reduced in the finer-mesh
+calculation. On the other hand, the deviations at large <script type="math/tex">d</script> are
+due to the finite size of the plates and are not changed by 
+computing at finer resolution.</p>
+<h1 id="capacitance-of-a-two-sphere-capacitor">Capacitance of a two-sphere capacitor</h1>
+<p>The <code class="codehilite">share/scuff-em/examples/TwoBodyCapacitors</code> subdirectory
+of your <a class="wikilink" href="../../../scuff-em/">scuff-em</a> installation also contains input files
+for computing the self- and mutual capacitances of a capacitor
+consisting of two conducting spheres of radius <script type="math/tex">R</script> separated by a 
+surface-surface separation distance <script type="math/tex">d</script> (center-center separation <script type="math/tex">d+2R</script>).
+Analytical formulas for the self-capacitance <script type="math/tex">C_{11}=C_{22}</script> and mutual
+capacitance <script type="math/tex">C_{12}=C_{21}</script> for this case may be found in this paper
+from 1926:</p>
+<ul>
+<li>A. Russell, "The problem of the spherical condenser", <em>Journal of the Institution of Electrical Engineers</em> &nbsp; <strong> 64 </strong> &nbsp; 727 (1926). DOI: <a href="http://dx.doi.org/10.1049/jiee-1.1926.0065">10.1049/jiee-1.1926.0065</a></li>
+</ul>
+<p>The <span class=SC>scuff-static</span> computation proceeds as above with
+new geometry and transformation files:</p>
+<ul>
+<li><a href="../TwoSphereCapacitor_501.scuffgeo"><code class="codehilite">TwoSphereCapacitor_501.scuffgeo</code></a></li>
+<li><a href="../TwoSphereCapacitor_2604.scuffgeo"><code class="codehilite">TwoSphereCapacitor_2604.scuffgeo</code></a></li>
+<li><a href="../TwoSphereCapacitor.trans"><code class="codehilite">TwoSphereCapacitor.trans</code></a></li>
+</ul>
+<div class="codehilite"><pre><span></span>% <span class="k">for</span> N in <span class="m">501</span> <span class="m">2604</span>
+% <span class="k">do</span>
+%   <span class="nv">ARGS</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+%   <span class="nv">ARGS</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">ARGS</span><span class="si">}</span><span class="s2"> --geometry  TwoSphereCapacitor_</span><span class="si">${</span><span class="nv">N</span><span class="si">}</span><span class="s2">.scuffgeo&quot;</span>
+%   <span class="nv">ARGS</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">ARGS</span><span class="si">}</span><span class="s2"> --TransFile TwoSphereCapacitor.trans&quot;</span>
+%   <span class="nv">ARGS</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">ARGS</span><span class="si">}</span><span class="s2"> --CapFile   TwoSphereCapacitor_</span><span class="si">${</span><span class="nv">N</span><span class="si">}</span><span class="s2">.out&quot;</span>
+%   scuff-static <span class="si">${</span><span class="nv">ARGS</span><span class="si">}</span>
+% <span class="k">done</span>
+</pre></div>
+
+<p>This time we'll plot both <script type="math/tex">C_{11}(d)</script> and <script type="math/tex">C_{12}(d)</script> and
+compare against the large-<script type="math/tex">d</script> and small-<script type="math/tex">d</script> analytical formulas
+in the paper of Russel above.</p>
+<p><img alt="TwoSphereCapacitorData.png" src="../TwoSphereCapacitorData.png" /></p>
+<p>Here's the <a href="http://www.gnuplot.info"><span class=SC>gnuplot</span></a> script I used
+to make this plot: <a href="../TwoSphereCapacitor.gp"><code class="codehilite">TwoSphereCapacitor.gp</code></a>.</p>
+                
+                  
+                
+              
+              
+                
+
+
+
+  <h2 id="__comments">Comments</h2>
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = "http://homerreid.github.io/scuff-em-documentation/examples/TwoBodyCapacitors/TwoBodyCapacitors/";
+      this.page.identifier =
+        "/examples/TwoBodyCapacitors/TwoBodyCapacitors/";
+    };
+    (function() {
+      var d = document, s = d.createElement("script");
+      s.src = "//homerreid-github-io-scuff-em-documentation.disqus.com.disqus.com/embed.js";
+      s.setAttribute("data-timestamp", +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../../PlatonicSolids/PlatonicSolids/" title="Electrostatic polarizability of platonic solids" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Electrostatic polarizability of platonic solids
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../../StriplineCapacitor/StriplineCapacitor/" title="Capacitance of a PCB stripline trace" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Capacitance of a PCB stripline trace
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="http://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../assets/javascripts/application.b438e6c5.js"></script>
+      
+      <script>app.initialize({version:"0.17.3",url:{base:"../../.."}})</script>
+      
+        <script src="../../../javascripts/MathJax.js?config=TeX-AMS_HTML"></script>
+      
+        <script src="../../../javascripts/mathjaxhelper.js"></script>
+      
+    
+    
+      
+        <script>!function(e,a,t,n,o,c,i){e.GoogleAnalyticsObject=o,e.ga=e.ga||function(){(e.ga.q=e.ga.q||[]).push(arguments)},e.ga.l=1*new Date,c=a.createElement(t),i=a.getElementsByTagName(t)[0],c.async=1,c.src="https://www.google-analytics.com/analytics.js",i.parentNode.insertBefore(c,i)}(window,document,"script",0,"ga"),ga("create","UA-119340518-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview");var links=document.getElementsByTagName("a");if(Array.prototype.map.call(links,function(e){e.host!=document.location.host&&e.addEventListener("click",function(){var a=e.getAttribute("data-md-action")||"follow";ga("send","event","outbound",a,e.href)})}),document.forms.search){var query=document.forms.search.query;query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}</script>
+      
+    
+  </body>
+</html>

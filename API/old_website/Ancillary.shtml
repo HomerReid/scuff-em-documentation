@@ -1,0 +1,731 @@
+<!--#set 
+    var="title" 
+    value="libscuff documentation: Ancillary RWGGeometry Operations"
+  -->
+<!--#include virtual="/pagetop.shtml"-->
+
+<!-- begin main page body -->
+
+<!----------------------------------------------------------------------->
+<!-- main page table, with one row and three columns:                  -->
+<!--  navbar, trough, body.                                            -->
+<!----------------------------------------------------------------------->
+<table cellspacing="0" cellpadding="0" width="100%"><tr>
+  
+  <!----------------------------------------------------------------------->
+  <!-- left column of main page table: nav bar. --------------------------->
+  <!----------------------------------------------------------------------->
+  <td valign="top" width="180"> 
+  <!--#include virtual="/research/navbar.shtml"-->
+  </td> 
+
+  <!----------------------------------------------------------------------->
+  <!-- central column of main page table: separation trough --------------->
+  <!----------------------------------------------------------------------->
+  <td width="5%"></td>
+ 
+  <!----------------------------------------------------------------------->
+  <!-- right column of main page table: content of page. ------------------>
+  <!----------------------------------------------------------------------->
+  <td valign="top">
+    
+   <p><br> <p align="center">
+   <table align="center"> 
+     <tr> <td> <a href="scuff-em">
+               <img width="411" height="296" src="images/scuffEM.png">
+               </a>
+          </td>
+          <td width="5%"> </td>
+          <td> <h1>
+               <span class=CodeName>libscuff</span> 
+               API Documentation: 
+
+               <br>
+
+               Ancillary Operations on <code>RWGGeometry</code> objects
+               </h1>
+          </td>
+     </tr>
+   </table> 
+
+  <p> 
+  This page documents the portion of the 
+  <span class=CodeName>libscuff</span> API that handles
+  ancillary <code>RWGGeometry</code> operations that lie 
+  outside the 
+  <a href="scuff-EM/libscuff/MainFlow.shtml">main flow</a> 
+  for scattering problems.
+
+    <!----================================================================-->
+    <!---------------------------------------------------------------------->
+    <!----================================================================-->
+    <p>
+    <table align="center" class="TOC" cellpadding="5" cellspacing="5">
+
+      <tr> <th> Ancillary <code>RWGGeometry</code> Operations
+      </th></tr>
+
+      <tr> <td>
+           <a href="scuff-EM/libscuff/Ancillary.shtml#Visualization">
+            1. Visualization
+           </a>
+           </td>
+      </tr>
+
+      <tr> <td>
+           <a href="scuff-EM/libscuff/Ancillary.shtml#Transformations">
+            2. Geometrical Transformations
+           </a>
+           </td>
+      </tr>
+
+      <tr> <td>
+           <a href="scuff-EM/libscuff/Ancillary.shtml#MatProp">
+            3. Setting material properties
+           </a>
+           </td>
+      </tr>
+
+      <tr> <td>
+           <a href="scuff-EM/libscuff/Ancillary.shtml#Specialized">
+            4. Specialized routines for computing field data
+           </a>
+
+           <p>
+           <ul style="list-style-type: none;">
+            <li> <a href="scuff-EM/libscuff/Ancillary.shtml#PFT">
+                 4A. Power, Force, and Torque Transferred to Objects by the incident field
+                 </a>
+            <p>
+            <li> <a href="scuff-EM/libscuff/Ancillary.shtml#DGF">
+                 4B. Dyadic Green's functions
+                 </a>
+           </ul>
+
+           </td>
+      </tr>
+
+      <tr> <td>
+           <a href="scuff-EM/libscuff/Ancillary.shtml#PanelCubature">
+            5. Routines for evaluating numerical cubatures over panels
+           </a>
+      </td> /tr>
+
+    </table>
+
+  <!---------------------------------------------------------------------->
+  <!---------------------------------------------------------------------->
+  <!---------------------------------------------------------------------->
+  <p>
+  <h2><a name="Visualization"></a>1. Visualization </h2>
+  <hr>
+
+  <!---------------------------------------------------------------------->
+  <!---------------------------------------------------------------------->
+  <!---------------------------------------------------------------------->
+  <p>
+  <h2><a name="Transformations"></a>2. Geometrical Transformations</h2>
+  <hr>
+
+  <!---------------------------------------------------------------------->
+  <!---------------------------------------------------------------------->
+  <!---------------------------------------------------------------------->
+  <p>
+  <h2><a name="MatProp"></a>3. Setting Material Properties </h2>
+  <hr>
+
+  <p>
+  You can use the <code>SetEps</code> and <code>SetEpsMu</code> 
+  class methods of <code>RWGGeometry</code> 
+  to override the <code>MATERIAL</code> designations in 
+  <a href="scuff-EM/reference/scuffEMGeometries.shtml"><code>.scuffgeo</code> files</a>.
+
+  <p>
+  The prototypes are 
+
+  <p>
+  <pre class="CPPListing">
+    void RWGGeometry::SetEps(const char *Label, cdouble Eps, cdouble Mu);
+    void RWGGeometry::SetEps(cdouble Eps);
+
+    void RWGGeometry::SetEpsMu(const char *Label, cdouble Eps, cdouble Mu);
+    void RWGGeometry::SetEpsMu(cdouble Eps, cdouble Mu);
+  </pre>
+
+  <p>
+  The <code>Label</code> field selects the object you want to modify.
+  (This is the label assigned using the <code>OBJECT</code> keyword in the 
+  <a href="scuff-em/reference/scuffEMGeometries.shtml"><code>.scuffgeo</code> file.</a>)
+  The prototypes with no <code>Label</code> parameter are used to 
+  modify the exterior medium.
+
+  <p>
+  C++ example:
+  <p>
+  <pre class="CPPListing">
+    RWGGeometry *G = new RWGGeometry("MyGeometry.scuffgeo");
+
+    G->SetEps(3.4); // set the exterior medium to Eps = 3.4
+
+    cdouble MyEpsValue(4.5,6.7);
+    G->SetEps("OuterSphere", MyEpsValue); // set the object labeled OuterSphere to Eps = 4.5+6.7i
+
+  </pre>
+
+  <p>
+  Note that, as soon as you make any call to <code>SetEps</code> or 
+  <code>SetEpsMu</code>, any 
+  <a href="scuff-em/reference/scuffEMMaterials.shtml#Parsed">user-specified</a>
+  or 
+  <a href="scuff-em/reference/scuffEMMaterials.shtml#Tabulated">tabulated</a>
+  material designation you might previously have specified for the material
+  in question is eliminated; the material properties remain constant until the 
+  next time you change them with <code>SetEps</code> or <code>SetEpsMu,</code>
+  even if you subsequently reassemble the BEM matrix at a different frequency.
+
+  <!---------------------------------------------------------------------->
+  <!---------------------------------------------------------------------->
+  <!---------------------------------------------------------------------->
+  <p>
+  <h2><a name="Specialized"></a>4. Specialized routines for computing field data </h2>
+  <hr>
+
+  <p>
+  <h3><a name="PFT"></a><i> 4A. Power, Force, and Torque Transferred to Objects by 
+                            the incident field
+                        </i> 
+  </h3>
+
+  <p>
+  Once we have solved a scattering problem, we can compute the power absorbed 
+  by a scattering object from the incident field and the force and torque
+  exerted by the external field on the object. 
+
+  <p> 
+  The former quantity is obtained by integrating the Poynting vector over 
+  a surface bounding the object, while the latter quantities are obtained by integrating
+  the Maxwell stress tensor over a surface bounding the object. 
+  Thus one way to get at these quantities would be to evaluate numerical cubatures
+  over bounding surfaces, with the <b>E</b> and <b>H</b> fields at each point 
+  obtained by calling <code>GetFields</code>.
+
+  <p> 
+  Instead, <span class="CodeName">scuff-em</span> suite takes advantage of 
+  certain specialized BEM tricks to compute these quantities much more directly 
+  and efficiently. The <code>RWGGeometry</code> class exports a routine 
+  named <code>GetPFT</code> that implements this calculation. (<code>PFT</code>
+  stands for <b>p</b>ower, <b>f</b>orce, and <b>t</b>orque.)
+
+  <p>
+  The prototypes are 
+
+  <p>
+  <pre class="CPPListing">
+   void RWGGeometry::GetPFT(HVector *KN, HVector *RHS, cdouble Omega, 
+                            int SurfaceIndex, double PFT[8]);
+   void RWGGeometry::GetPFT(HVector *KN, HVector *RHS, cdouble Omega, 
+                            char *SurfaceLabel, double PFT[8]);
+  </pre>
+
+  <p>
+  The input parameters are 
+   <li> <code>KN:</code> the solution vector of the BEM scattering problem.
+   <li> <code>RHS:</code> the right-hand-side vector of the BEM scattering problem.
+   <li> <code>Omega:</code> the angular frequency.
+   <li> <code>SurfaceIndex</code> / <code>SurfaceLabel</code>: either the integer-valued
+        index (first prototype) or the string-valued label (second prototype) of the
+        surface (object) for which you want to compute the power, force, and torque.
+
+  <p>
+  The <code>PFT</code> parameter must point to an array with room for at 
+  least 8 <code>doubles.</code> On return, this array is filled in as follows:
+
+  <p>
+  <table align="center" border="1" cellpadding="5" cellspacing="5"> 
+   <tr> <th> Element </th>               <th> Significance </th> <th> Unit </th> </tr>
+   <tr> <td> <code> PFT[0] </code> </th> <td> Absorbed power </td> </th> <th> Watts </th> </tr>
+   <tr> <td> <code> PFT[1] </code> </th> <td> Total power </td> </th> <th> Watts </th> </tr>
+   <tr> <td> <code> PFT[2] </code> </th> <td> X force </td> </th> <th> nanonewtons </th> </tr>
+   <tr> <td> <code> PFT[3] </code> </th> <td> Y force </td> </th> <th> nanonewtons </th> </tr>
+   <tr> <td> <code> PFT[4] </code> </th> <td> Z force </td> </th> <th> nanonewtons </th> </tr>
+   <tr> <td> <code> PFT[5] </code> </th> <td> X torque </td> </th> <th> nanonewtons &bullet; &mu;m </th> </tr>
+   <tr> <td> <code> PFT[6] </code> </th> <td> Y torque </td> </th> <th> nanonewtons &bullet; &mu;m </th> </tr>
+   <tr> <td> <code> PFT[7] </code> </th> <td> Z torque </td> </th> <th> nanonewtons &bullet; &mu;m </th> </tr>
+  </table>
+
+  <p>
+  <b>Note:</b> Just to clarify, the element <code>PFT[1]</code> in the return vector
+  is the <i>total</i> power, not the <i>scattered</i> power. Be careful,
+  because this does not quite agree with what you might expect based on 
+  <a href="research/scuff-em/scuff-sctter/scuffScatterFiles.shtml#PFT">the
+  way the <code>PFT</code> output files are written by 
+  <span class="CodeName">scuff-scatter.</span></a>
+
+  <h4><i> Power scattered by objects </i></h4>
+
+  <p>
+  The ``total power'' returned by <code>GetPFT</code> is the sum of the 
+  absorbed and scattered power. Hence the scattered power may be obtained 
+  as the difference between <code>PFT[1]</code> and <code>PFT[0]</code>. 
+  However, in cases where the total power is dominated by absorption, 
+  this may be an inaccurate way of computing the scattered power. An 
+  alternative method for calculating the scattered power, which does 
+  not suffer from the same inaccuracy, is provided by the 
+  <code>GetScatteredPower</code> routine. 
+
+  <p>
+  <pre class="CPPListing">
+   cdouble RWGGeometry::GetScatteredPower(HVector *KN, cdouble Omega, int SurfaceIndex);
+   cdouble RWGGeometry::GetScatteredPower(HVector *KN, cdouble Omega, char *SurfaceLabel);
+  </pre>
+
+  <p>
+  The input parameters here have the same significance as their 
+  counterparts in <code>GetPFT</code>. The
+  return value is the scattered power from the surface in question.
+
+  <p>
+  Note that <code>GetScatteredPower</code>
+  is more time-consuming than the method of <code>GetPFT</code>
+  and hence should not be used unless you are in the aforementioned 
+  absorption-dominated regime. 
+
+  <p>
+  C++ example:
+  <p>
+  <pre class="CPPListing">
+
+  /*--------------------------------------------------------------*/
+  /*- initialize the geometry ------------------------------------*/
+  /*--------------------------------------------------------------*/
+  RWGGeometry *G=new RWGGeometry("MyGeometry.scuffgeo");
+  PreloadCache("MyCache.scuffcache");
+
+  /*--------------------------------------------------------------*/
+  /*- assemble and factorize the BEM matrix ----------------------*/
+  /*--------------------------------------------------------------*/
+  double Omega=0.1;
+
+  HMatrix *M   = G->AllocateBEMMatrix();
+  G->AssembleBEMMatrix(Omega, M);
+  M->LUFactorize();
+
+  /*--------------------------------------------------------------*/
+  /*- create a plane wave field source and assemble the RHS vector*/
+  /*--------------------------------------------------------------*/
+  cdouble E0[3] = {1.0, 0.0, 0.0};
+  double nHat[3] = {0.0, 0.0, 1.0};
+  PlaneWave PW( E0, nHat );
+
+  HVector *KN  = G->AllocateRHSVector();
+  HVector *RHS = G->AllocateRHSVector();
+
+  G->AssembleRHSVector(Omega, &PW, RHS);
+  KN->Copy(RHS);
+  
+  /*--------------------------------------------------------------*/
+  /*- solve the scattering problem     ---------------------------*/
+  /*--------------------------------------------------------------*/
+  M->LUSolve(KN);
+
+  /*--------------------------------------------------------------*/
+  /*- compute power, force, torque on the object labeled "Cube"   */
+  /*--------------------------------------------------------------*/
+  double PFT[8];
+  G->GetPFT(KN, RHS, Omega, "Cube", PFT);
+
+  printf("Absorbed power: %e watts \n", PFT[0]);
+  printf("Total power:    %e watts \n", PFT[1]);
+  printf("X force:        %e nanoNewtons \n", PFT[2]);
+  printf("Z force:        %e nanoNewtons \n", PFT[4]);
+
+  /*--------------------------------------------------------------*/
+  /*- compute scattered power ------------------------------------*/
+  /*--------------------------------------------------------------*/
+  double PScat = PFT[1] - PFT[0];
+  if ( fabs(PScat) < 0.01*fabs(PFT[1]) ) 
+   { // PScat as computed via PFT methods is inaccurate;
+     // recompute using more acccurate approach
+     PScat = GetScatteredPower(KN, Omega, "Cube");
+   };
+  printf("Scattered power: %e watts \n", PScat);
+
+  </pre>
+
+  <!---------------------------------------------------------------------->
+  <!---------------------------------------------------------------------->
+  <!---------------------------------------------------------------------->
+
+  <p>
+  <h3><a name="DGF"></a><i> 4B. Dyadic Green's functions
+                        </i> 
+  </h3>
+
+  <p>
+  The <i>dyadic Green's functions</i> (DGFs) of a material configuration
+  are certain susceptibilities that characterize the response of
+  the configuration to illumination by point sources.
+
+  <p>
+  DGFs may be computed by solving scattering problems in which
+  we place a point source at some point <b>x<sup>&prime;</sup></b>
+  and compute the fields at some other point <b>x</b>.
+  The <i>total</i> DGF is obtained by computing the 
+  <i>total</i> field at <b>x</b>. The <i>scatttering</i> DGF
+  (or the "scattering part" of the DGF) is obtained by computing
+  just the <i>scattered</i> field at <b>x</b>, neglecting the 
+  direct contribution of the original point source.
+
+  <p>
+  More specifically, the scattering electric and magnetic DGFs
+  are 3x3 matrices whose components have the following significance:
+
+  <p align="center">
+  <img src="scuff-em/libscuff/EDGF.png">
+
+  <p>
+  The fact that BEM techniques naturally separate the contributions 
+  of induced sources from the contributions of incident-field sources 
+  makes the BEM particularly well-suited to the computation of 
+  scattering DGFs. 
+
+  <p>
+  A quantity of particular interest in many branches of physics
+  is the scattering DGF evaluated for coincident
+  source and evaluation points 
+  <b>x<sup>&prime;</sup></b>=<b>x</b>.
+  <span class=CodeName>libscuff</span> offers the built-in class
+  method <code>GetDyadicGFs()</code> for computing this quantity
+  at arbitrary coincident points in a 
+  <span class=CodeName>scuff-em</span> geometry. 
+  The prototype for this routine is this:
+
+  <p>
+  <pre class="CPPListing">
+   void RWGGeometry::GetDyadicGFs(double X[3], cdouble Omega, HMatrix *M, HVector *KN, cdouble GE[3][3], cdouble GM[3][3]);
+  </pre>
+
+  <p>
+  The input parameters are
+  <ul>
+   <li> <code>X:</code> the Cartesian coordinates of the evaluation point 
+   <li> <code>Omega:</code> the angular frequency
+   <li> <code>M:</code> The assembled and LU-factorized BEM matrix. <b>It is 
+                        the caller's responsibility to call 
+                        <code>AssembleBEMMatrix()</code> and <code>LUFactorize()</code>
+                        before the call to <code>GetDyadicGFs.</code></b>
+   <li> <code>KN:</code> A scratch workspace <code>HVector</code> used internally
+                         within the routine. <code>KN</code> should be the result
+                         of a previous call to <code>AllocateRHSVector.</code>
+  </ul>
+
+  <p>
+  On return, the <code>GE</code> and <code>GM</code> arrays are filled in 
+  with the components of the scattering electric and magnetic DGFs at 
+  the given evaluation point.
+
+  <!---------------------------------------------------------------------->
+  <!---------------------------------------------------------------------->
+  <!---------------------------------------------------------------------->
+  <p>
+  <h2><a name="PanelCubature"></a>
+       5. Routines for evaluating numerical cubatures over panels
+  </h2>
+  <hr>
+
+  <p>
+  In many cases it is convenient to evaluate surface integrals 
+  over the scattering surfaces in your geometry. For example,
+  such integrals may be used to compute <b>(1)</b> the contribution 
+  of surface currents to the electromagnetic fields at arbitrary 
+  points in space, or <b>(2)</b> the electric and magnetic dipole 
+  moments induced by an incident field on the surfaces in your
+  geometry. 
+  
+  <p>
+  Of course, many such calculations are performed automatically
+  for you behind the scenes by specialized 
+  <span class="CodeName">libscuff</span> routines; for example,
+  item <b>(1)</b> is done for you by <code>GetFields()</code>,
+  while item <b>(2)</b> is done for you by <code>GetDipoleMoments().</code>
+  However, in some cases you may need to evaluate your own types
+  of surface integrals. For this purpose, 
+  <span class="CodeName">libscuff</span> offers several convenience
+  routines, as discussed below.
+
+  <p>
+  Since surfaces in <span class=CodeName>scuff-em</span>
+  are specified as unions of flat triangular panels, 
+  surface integrals reduce to <i>panel integrals.</i>
+  Broadly speaking, there are two cases of interest:
+
+  <p>
+  <ol>
+    <li> You want to evaluate an integral over a single panel,
+         i.e. you want to perform a <i>panel cubature.</i>
+         This case arises, for example, in computing the 
+         multipole moments of the source distribution on an 
+         individual panel.
+    
+    <li> You want to evaluate integrals describing the  
+         <i>interaction</i> between two panels, i.e.
+         you want to perform a <i>panel-panel cubature.</i>
+         For example, you may want to compute the average value
+         of the electric field due to sources on one panel, with
+         the average taken over the area of the other panel.
+         This case arises in computing the elements 
+         of the matrices that enter into BEM solvers.
+  </ol>
+
+  <p>
+  More specifically, a panel cubature is a two-dimensional integral of the form 
+  
+  <p align="center">
+  <img align="center" src="scuff-em/libscuff/PC.png">
+
+  <p>
+  where <i>P</i> is a panel, and where we have written the 
+  integrand to indicate that it may depend not only on the integration
+  point <b>x</b> but also on the value <b>b(x)</b> of the RWG basis 
+  function at <b>x</b>. Similarly, a panel-panel cubature is a 
+  four-dimensional integral of the form 
+
+  <p align="center">
+  <img align="center" src="scuff-em/libscuff/PPC.png">
+
+  <p>
+  where <i>P<sub>1</sub></i> and <i>P<sub>2</sub></i> are two panels,
+  and where again the integrand may depend on the values of the 
+  RWG basis functions on the two panels.
+
+  <p>
+  Closely related to the notion of a panel cubature is 
+  the notion of an integral over the support of an RWG basis
+  function, which we term a <i>basis-function cubature</i>
+  (or <i>BF cubature</i> for short).
+  Since each RWG basis function is supported on two triangular
+  panels, a basis-function cubature is just a sum of 
+  two panel cubatures. Similarly, an obvious extension
+  of the panel-panel cubature is the 
+  <i>BF-BF cubature</i>, which is a four-dimensional
+  integral over the supports of two RWG basis functions,
+  computed in practice as a sum of four panel-panel integrals.
+
+  <p>
+  <span class=CodeName>libscuff</span> offers the following 
+  routines for addressing each of the above situations.
+
+  <p>
+  <pre class="CPPListing">
+    void GetPanelCubature(RWGSurface *S, int np, 
+                          PCFunction Integrand, void *UserData, int IDim,
+                          int Order, double RelTol, double AbsTol,
+                          cdouble Omega, HVector *KN,
+                          double *Result);
+
+    void GetBFCubature(RWGSurface *S, int ne, 
+                       PCFunction Integrand, void *UserData, int IDim,
+                       int Order, double RelTol, double AbsTol,
+                       cdouble Omega, HVector *KN,
+                       double *Result);
+                                       
+                                       
+    void GetPanelPanelCubature(RWGSurface *S1,  int np1, RWGSurface *S2, int np2,
+                               PPCFunction Integrand, void *UserData, int IDim,
+                               int Order, double RelTol, double AbsTol,
+                               cdouble Omega, HVector *KN,
+                               double *Result);
+                                       
+    void GetBFBFCubature(RWGSurface *S1,  int ne1, RWGSurface *S2, int ne2,
+                         PPCFunction Integrand, void *UserData, int IDim,
+                         int Order, double RelTol, double AbsTol,
+                         cdouble Omega, HVector *KN,
+                         double *Result);
+  </pre>
+  </pre>
+
+  <p>
+  The various parameters here are explained in the table below.
+
+  <p>
+  <table align="center" border="1" cellspacing="5" cellpadding="5">
+   <tr> <th>Parameter</th> 
+        <th>Meaning</th> 
+   </tr>
+  <!----------------------------------------------------------------------->
+   <tr> <td> 
+            <table>
+              <tr> <td><code>RWGSurface *S</code> </td> </tr>
+              <tr> <td><code>int np       </code> </td> </tr>
+            </table>
+        </td> 
+        <td>For the panel cubature case, these parameters specify the 
+            panel over which we integrate:
+            <code>S</code> is the surface to which the panel belongs, 
+            and <code>np</code> is the index of the panel within that 
+            surface (<code>0 <= np <= S->NumPanels-1</code>).
+        </td>
+   </tr>
+  <!----------------------------------------------------------------------->
+   <tr> <td> 
+            <table>
+              <tr> <td><code>RWGSurface *S</code> </td> </tr>
+              <tr> <td><code>int ne       </code> </td> </tr>
+            </table>
+        </td> 
+        <td>For the BF cubature case, these parameters specify the 
+            RWG basis function over which we integrate:
+            <code>S</code> is the surface to which the basis function 
+            belongs, and <code>ne</code> is the index of the mesh 
+            edge within that surface to which the basis function 
+            in question is associated (<code>0 <= ne <= S->NumEdges-1</code>).
+        </td>
+  <!----------------------------------------------------------------------->
+   <tr> <td>
+            <table>
+              <tr> <td><code>RWGSurface *S1</code> </td> </tr>
+              <tr> <td><code>int np1       </code> </td> </tr>
+              <tr> <td><code>RWGSurface *S2</code> </td> </tr>
+              <tr> <td><code>int np2       </code> </td> </tr>
+              <tr> <td></td> </tr>
+            </table>
+        </td> 
+        <td>For the panel-panel cubature case, <code>(S1,np1)</code>
+            and <code>(S2,np2)</code> identify the panels over which
+            we integrate. 
+            <p>
+            For the BF-BF cubature case, <code>(S1,ne1)</code>
+            and <code>(S2,ne2)</code> identify the mesh edges 
+            associated to the two basis functions over whose supports
+            we integrate.
+        </td>
+   </tr>
+  <!----------------------------------------------------------------------->
+   <tr> 
+    <td><code>PCFunction *Integrand</code> </td>
+    <td>User-specified integrand function for the panel cubature 
+        routine (see below).
+    </td>
+   </tr> 
+  <!----------------------------------------------------------------------->
+   <tr> 
+    <td><code>PPCFunction *Integrand</code> </td>
+    <td>User-specified integrand function for the panel-panel cubature 
+        routine (see below).
+    </td>
+   </tr> 
+  <!----------------------------------------------------------------------->
+   <tr> 
+    <td><code>void *UserData</code> </td>
+    <td>Optional user data passed to <code>Integrand.</code>
+    </td>
+   </tr> 
+  <!----------------------------------------------------------------------->
+   <tr> 
+    <td><code>int IDim</code> </td>
+    <td>The dimension of the integrand vector, measured in 
+        number of <code>double</code> values. Thus, if your 
+        <code>Integrand</code> routine computes one <code>double</code>
+        value, set <code>IDim=1</code>; if your routine computes
+        one <code>cdouble</code> value, set <code>IDim=2</code>; 
+        if your routine computes 6 different <code>double</code>-valued 
+        quantities, set <code>IDim=6.</code>
+    </td>
+   </tr> 
+  <!----------------------------------------------------------------------->
+   <tr> 
+    <td><code>int Order</code> </td>
+    <td>The order of the cubature scheme to use. Higher orders 
+        yield higher accuracy but are more computationally expensive.
+        At present only two nonzero orders are supported: 
+        <code>Order=4</code> and <code>Order=20.</code>
+
+        <p>
+        Setting <code>Order=0</code> will request an <i>adaptive</i>
+        cubature that will recursively subdivide the integration domain
+        until a desired error tolerance is achieved.
+    </td>
+   </tr> 
+  <!----------------------------------------------------------------------->
+   <tr> 
+    <td><table>
+         <tr><td><code>double RelTol</code> </td></tr>
+         <tr><td><code>double AbsTol</code> </td></tr>
+        </table>
+    </td>   
+    <td>Relative and absolute error tolerances for 
+        the adaptive integration. These are only used if <code>Order=0.</code>
+    </td>
+    </td>
+   </tr> 
+  <!----------------------------------------------------------------------->
+   <tr> 
+    <td><table>
+         <tr><td><code>cdouble Omega</code> </td></tr>
+         <tr><td><code>HVector *KN</code> </td></tr>
+        </table>
+    </td>   
+    <td>These optional parameters may be used to specify 
+        information about the surface-current distribution 
+        resulting from the solution to a scattering problem.
+
+        <p>
+        If you have solved a scattering problem to obtain 
+        a vector of surface-current expansion coefficients
+        <code>KN</code>, then you may pass that vector  
+        together with <code>Omega</code> into the panel 
+        cubature routines. In this case, the 
+        <code>K,N,Eps,Mu</code> fields in the 
+        <code>PanelData</code> structure passed to your 
+        integrand routine will be properly filled in.
+
+        <p>
+        Alternatively, you may pass <code>NULL</code> for 
+        <code>KN</code> (and <code>0</code> or any arbitrary
+        value for <code>Omega</code>), in which case your 
+        integrand routine just ignore the corresponding 
+        fields in the <code>PanelData</code> structure.
+        In this case, there is no underlying surface-current
+        distribution available, but the panel cubatures 
+        can still be used to compute geometric data 
+        on panels.
+    </td>
+    </td>
+   </tr> 
+  <!----------------------------------------------------------------------->
+   <tr> 
+    <td><code>double *Result</code> </td>
+    <td>Pointer to a user-allocated buffer with enough room to 
+        store <code>IDim</code> values of type <code>double.</code>
+        On return, this vector is filled in with the values of the 
+        integral.
+    </td>
+   </tr> 
+  </table>
+  <!----------------------------------------------------------------------->
+  
+
+  <p>
+
+  <!----------------------------------------------------------------------->
+  <!----------------------------------------------------------------------->
+  <!----------------------------------------------------------------------->
+  <!--#include virtual="/scuff-EM/scuffEMFooter.shtml">
+ 
+  <!----------------------------------------------------------------------->
+  <!-- end right column of main page table.                             --->
+  <!----------------------------------------------------------------------->
+  </td>
+  </table>
+
+
+<!----------------------------------------------------------------------->
+<!-- end main page table                                               -->
+<!----------------------------------------------------------------------->
+</tr></table>
+   
+<!----------------------------------------------------------------------->
+<!-- end main page body ------------------------------------------------->
+<!----------------------------------------------------------------------->
+   
+<!--#include virtual="/pageend.shtml"-->

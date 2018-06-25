@@ -1,0 +1,1724 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="http://homerreid.github.io/scuff-em-documentation/reference/BrillouinZoneIntegration/">
+      
+      
+        <meta name="author" content="Homer Reid">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-0.17.3, mkdocs-material-2.7.3">
+    
+    
+      
+        <title>Brillouin zone integration - SCUFF-EM documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.8d40d89b.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.6079476c.css">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:300,400,400i,700|">
+        <style>body,input{font-family:"Noto Sans","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+      <link rel="stylesheet" href="../../css/scuff-em.css">
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <a href="#command-line-options-for-customizing-internal-bz-integration" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="http://homerreid.github.io/scuff-em-documentation" title="SCUFF-EM documentation" class="md-header-nav__button md-logo">
+          
+            <img src="../../reference/scuffEMLogo.png" width="24" height="24">
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                SCUFF-EM documentation
+              </span>
+              <span class="md-header-nav__topic">
+                Brillouin zone integration
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/homerreid/scuff-em/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      scuff-em
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href="../.." title="Home" class="md-tabs__link">
+        Home
+      </a>
+    
+  </li>
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../examples/" title="Examples" class="md-tabs__link">
+          Examples
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../tests/Overview/" title="Test suite" class="md-tabs__link">
+          Test suite
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../TopLevel/" title="General reference" class="md-tabs__link md-tabs__link--active">
+          General reference
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../applications/GeneralReference/" title="Command-line tools" class="md-tabs__link">
+          Command-line tools
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../HighLevelInterface/HighLevelInterface/" title="High-level interface" class="md-tabs__link">
+          High-level interface
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../API/libscuff/" title="Low-level API" class="md-tabs__link">
+          Low-level API
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../forDevelopers/Implementation/" title="For developers" class="md-tabs__link">
+          For developers
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    <span class="md-nav__button md-logo">
+      
+        <img src="../../reference/scuffEMLogo.png" width="48" height="48">
+      
+    </span>
+    SCUFF-EM documentation
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/homerreid/scuff-em/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      scuff-em
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Examples
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Examples
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/" title="SCUFF-EM tutorial examples" class="md-nav__link">
+      SCUFF-EM tutorial examples
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/MieScattering/MieScattering/" title="Mie scattering" class="md-nav__link">
+      Mie scattering
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/DielectricShell/DielectricShell/" title="Electrostatics of a spherical dielectric shell" class="md-nav__link">
+      Electrostatics of a spherical dielectric shell
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/ThinFilm/ThinFilm/" title="Spatially-resolved study of plane-wave transmission through an infinite-area thin dielectric film" class="md-nav__link">
+      Spatially-resolved study of plane-wave transmission through an infinite-area thin dielectric film
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/DiffractionPatterns/DiffractionPatterns/" title="Imaging diffraction patterns of discs, disc arrays, and hole arrays in metal screens" class="md-nav__link">
+      Imaging diffraction patterns of discs, disc arrays, and hole arrays in metal screens
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/CubeTorus/" title="Casimir forces in a compact geometry" class="md-nav__link">
+      Casimir forces in a compact geometry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/SiliconBeams/SiliconBeams/" title="Casimir forces in a 1D extended geometry" class="md-nav__link">
+      Casimir forces in a 1D extended geometry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/SiliconSlabs/SiliconSlabs/" title="Casimir forces in a 2D extended geometry" class="md-nav__link">
+      Casimir forces in a 2D extended geometry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/NanostructureCasimirPolder/NanostructureCasimirPolder/" title="Casimir-Polder potentials in dielectric nanostructures" class="md-nav__link">
+      Casimir-Polder potentials in dielectric nanostructures
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/SiO2Spheres/SiO2Spheres/" title="Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres" class="md-nav__link">
+      Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/TipSubstrate/TipSubstrate/" title="Spatial distribution of heat flux from a warm tip over a cold substrate" class="md-nav__link">
+      Spatial distribution of heat flux from a warm tip over a cold substrate
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/HalfSpaceLDOS/HalfSpaceLDOS/" title="LDOS and dyadic Green functions above an infinite aluminum half-space" class="md-nav__link">
+      LDOS and dyadic Green functions above an infinite aluminum half-space
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/PlatonicSolids/PlatonicSolids/" title="Electrostatic polarizability of platonic solids" class="md-nav__link">
+      Electrostatic polarizability of platonic solids
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/TwoBodyCapacitors/TwoBodyCapacitors/" title="Capacitance of two-body capacitors" class="md-nav__link">
+      Capacitance of two-body capacitors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/StriplineCapacitor/StriplineCapacitor/" title="Capacitance of a PCB stripline trace" class="md-nav__link">
+      Capacitance of a PCB stripline trace
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/ImplicitSubstrate/ImplicitSubstrate/" title="Implicit handling of multilayer dielectric substrates" class="md-nav__link">
+      Implicit handling of multilayer dielectric substrates
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/pythonCapacitance/pythonCapacitance/" title="Finite-size effects in stripline capacitors" class="md-nav__link">
+      Finite-size effects in stripline capacitors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/PaulTrap/PaulTrap/" title="Electrostatic fields of an electrode array" class="md-nav__link">
+      Electrostatic fields of an electrode array
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/YagiUdaAntennas/YagiUdaAntennas/" title="Z-parameters and directivity of Yagi-Uda antennas" class="md-nav__link">
+      Z-parameters and directivity of Yagi-Uda antennas
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/MicrostripDevices/MicrostripDevices/" title="Input impedance, mutual coupling, and radiated fields of microstrip RF devices" class="md-nav__link">
+      Input impedance, mutual coupling, and radiated fields of microstrip RF devices
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Test suite
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Test suite
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tests/Overview/" title="Overview of the test suite" class="md-nav__link">
+      Overview of the test suite
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tests/MieScattering/MieScattering/" title="Mie scattering" class="md-nav__link">
+      Mie scattering
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tests/FresnelScattering/FresnelScattering/" title="Fresnel scattering" class="md-nav__link">
+      Fresnel scattering
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tests/CasimirSpheres/CasimirSpheres/" title="Equilibrium Casimir forces between spheres" class="md-nav__link">
+      Equilibrium Casimir forces between spheres
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tests/CasimirPlates/CasimirPlates/" title="Equilibrium Casimir forces between plates" class="md-nav__link">
+      Equilibrium Casimir forces between plates
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tests/CPSphere/CPSphere/" title="Equilibrium Casimir-Polder potential near a sphere" class="md-nav__link">
+      Equilibrium Casimir-Polder potential near a sphere
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tests/CPPlate/CPPlate/" title="Equilibrium Casimir-Polder potential near a plate" class="md-nav__link">
+      Equilibrium Casimir-Polder potential near a plate
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tests/NEQSpheres/NEQSpheres/" title="Heat transfer and non-equilibrium Casimir forces between spheres" class="md-nav__link">
+      Heat transfer and non-equilibrium Casimir forces between spheres
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tests/libscuff/libscuff/" title="Low-level tests of the core library" class="md-nav__link">
+      Low-level tests of the core library
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+    
+    <label class="md-nav__link" for="nav-4">
+      General reference
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        General reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../TopLevel/" title="Top-level overview" class="md-nav__link">
+      Top-level overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Installing/" title="Installation" class="md-nav__link">
+      Installation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Geometries/" title="Geometry descriptions" class="md-nav__link">
+      Geometry descriptions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Materials/" title="Material designations" class="md-nav__link">
+      Material designations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Transformations/" title="Geometric transformations" class="md-nav__link">
+      Geometric transformations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../IncidentFields/" title="Incident fields" class="md-nav__link">
+      Incident fields
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+    <a href="./" title="Brillouin zone integration" class="md-nav__link md-nav__link--active">
+      Brillouin zone integration
+    </a>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../FAQ/" title="FAQ" class="md-nav__link">
+      FAQ
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Command-line tools
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Command-line tools
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/GeneralReference/" title="General command-line reference" class="md-nav__link">
+      General command-line reference
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-scatter/scuff-scatter/" title="scuff-scatter" class="md-nav__link">
+      scuff-scatter
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-transmission/scuff-transmission/" title="scuff-transmission" class="md-nav__link">
+      scuff-transmission
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-ldos/scuff-ldos/" title="scuff-ldos" class="md-nav__link">
+      scuff-ldos
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-tmatrix/scuff-tmatrix/" title="scuff-tmatrix" class="md-nav__link">
+      scuff-tmatrix
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-cas3D/scuff-cas3D/" title="scuff-cas3D" class="md-nav__link">
+      scuff-cas3D
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-caspol/scuff-caspol/" title="scuff-caspol" class="md-nav__link">
+      scuff-caspol
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-neq/scuff-neq/" title="scuff-neq" class="md-nav__link">
+      scuff-neq
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-rf/scuff-rf/" title="scuff-rf" class="md-nav__link">
+      scuff-rf
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-static/scuff-static/" title="scuff-static" class="md-nav__link">
+      scuff-static
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-spectrum/scuff-spectrum/" title="scuff-spectrum" class="md-nav__link">
+      scuff-spectrum
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-analyze/scuff-analyze/" title="scuff-analyze" class="md-nav__link">
+      scuff-analyze
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-integrate/scuff-integrate/" title="scuff-integrate" class="md-nav__link">
+      scuff-integrate
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      High-level interface
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        High-level interface
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../HighLevelInterface/HighLevelInterface/" title="High-Level Interface" class="md-nav__link">
+      High-Level Interface
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Low-level API
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        Low-level API
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../API/libscuff/" title="libscuff" class="md-nav__link">
+      libscuff
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../API/MainFlow/" title="MainFlow API" class="md-nav__link">
+      MainFlow API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../API/UtilityAPI/" title="Utility API" class="md-nav__link">
+      Utility API
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      For developers
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        For developers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../forDevelopers/Implementation/" title="Implementation" class="md-nav__link">
+      Implementation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../forDevelopers/DataStructures/" title="Data Structures" class="md-nav__link">
+      Data Structures
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../forDevelopers/Documentation/" title="Documentation" class="md-nav__link">
+      Documentation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../forDevelopers/SingularIntegrals/" title="Code for computing singular integrals" class="md-nav__link">
+      Code for computing singular integrals
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/homerreid/scuff-em/edit/master/docs/reference/BrillouinZoneIntegration.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="brillouin-zone-integration-in-scuff-em">Brillouin-zone integration in <a class="wikilink" href="../../scuff-em/">scuff-em</a></h1>
+<p>Many codes in the <a class="wikilink" href="../../scuff-em/">scuff-em</a> suite require evaluating
+integrals over the Brillouin zone (BZ) of a 1D or 2D
+reciprocal lattice, i.e.</p>
+<p>
+<script type="math/tex; mode=display">Q(\omega) = \int_\text{BZ} \overline{Q}(\omega, \mathbf{k}_\text{B}) 
+ \,d\mathbf{k}_\text{B}</script>
+</p>
+<p>where we generically use the overlined symbol
+<script type="math/tex">\overline{Q}(\mathbf{k}_\text{B})</script> to denote
+the contribution of Bloch vector <script type="math/tex">\mathbf{k}_\text{B}</script>
+to quantity <script type="math/tex">Q</script>. Examples of calculations that require
+Brillouin-zone integrations include</p>
+<ul>
+<li>
+<p>the Casimir force per unit imaginary frequency
+<script type="math/tex">\omega=i\xi</script> 
+on an extended object in
+<a href="../../applications/scuff-cas3D/scuff-cas3D/"><span class="SC">scuff-cas3d</span></a></p>
+</li>
+<li>
+<p>the Casimir-Polder potential per unit imaginary frequency
+<script type="math/tex">\omega=i\xi</script> 
+experienced by a polarizable particle near an extended surface
+in 
+<a href="../../applications/scuff-caspol/scuff-caspol/"><span class="SC">scuff-caspol</span></a></p>
+</li>
+<li>
+<p>the local density of states at a given angular frequency
+<script type="math/tex">\omega</script>
+at user-specified evaluation points in 
+<a href="../../applications/scuff-ldos/scuff-ldos/"><span class="SC">scuff-ldos</span></a>.</p>
+</li>
+</ul>
+<p>In general, Brillouin-zone integrations are evaluated
+by numerical cubature---that is, as weighted sums of
+integrand samples:
+<script type="math/tex; mode=display"> Q(\omega) \approx \sum w_n \overline Q(\omega, \mathbf{k}_n)</script>
+where <script type="math/tex">\{w_n, \mathbf{k}_n\}</script> are the weights and points in
+a cubature rule for the Brillouin zone of your reciprocal
+lattice, and where each integrand sample
+<script type="math/tex">\overline Q(\omega, \bf k_n)</script> is computed by performing a
+single <a class="wikilink" href="../../scuff-em/">scuff-em</a> calculation at a fixed Bloch
+wavevector. The <a class="wikilink" href="../../scuff-em/">scuff-em</a> workflow offers two 
+options for evaluating such cubatures:   </p>
+<ul>
+<li>You can design and implement your own cubature scheme
+involving your own custom-chosen weights and points
+<script type="math/tex">\{w_n, \bf k_n\}</script>. In this case, you will use 
+the <code class="codehilite">--byOmegakBloch</code> command-line option to instruct
+a <a class="wikilink" href="../../scuff-em/">scuff-em</a> application code to report values of the
+quantity <script type="math/tex">\overline Q(\omega, \bf k_n)</script> at each of your points
+(this output will typically be written to file with
+extension <code class="codehilite"><span class="na">.byOmegakBloch</span></code> or <code class="codehilite"><span class="na">.byXikBloch</span></code>),
+then compute the weighted sums yourself in e.g.
+<a href="http://julialang.org"><span class="SC">julia</span></a>.    </li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li>Alternatively, you can ask <a class="wikilink" href="../../scuff-em/">scuff-em</a> to perform the
+BZ integration internally, using one of several
+built-in cubature schemes. In this case the BZ-integrated
+quantities <script type="math/tex">Q(\omega)</script> will typically be written to 
+an output file with extension <code class="codehilite"><span class="na">.byOmega</span></code> or <code class="codehilite"><span class="na">.byXi</span></code>.
+You will <em>also</em> get an output file named <code class="codehilite"><span class="na">.byOmegakBloch</span></code>
+or <code class="codehilite"><span class="na">.byXikBloch</span></code> that reports the Bloch-vector-resolved
+integrand samples <script type="math/tex">\overline Q(\omega, \bf k_n)</script>
+chosen internally by the <a class="wikilink" href="../../scuff-em/">scuff-em</a> BZ integrator.</li>
+</ul>
+<h3 id="command-line-options-for-customizing-internal-bz-integration">Command-line options for customizing internal BZ integration</h3>
+<p>If you choose the second option above, you may specify
+various command-line options to customize the algorithm
+used by <a class="wikilink" href="../../scuff-em/">scuff-em</a> to select the cubature points and
+weights <script type="math/tex">\{w_n, \mathbf{k}_n\}</script>. The options are 
+listed here and discussed in more detail below.</p>
+<div class="codehilite"><pre><span></span>--BZIMethod <span class="o">[</span>CC <span class="p">|</span> TC <span class="p">|</span> Polar <span class="p">|</span> Polar2<span class="o">]</span>
+</pre></div>
+
+<p>Selects the integration algorithm (see below for details).</p>
+<div class="codehilite"><pre><span></span>--BZIOrder NN
+</pre></div>
+
+<p>Sets the order (accuracy parameter) of the integration
+algorithm to <code class="codehilite">NN</code>. The allowed values of <code class="codehilite">NN</code> here depend
+on the integration algorithm you chose (see below).</p>
+<div class="codehilite"><pre><span></span>--BZIRelTol xx
+--BZIAbsTol xx
+--BZIMaxEvals NN
+</pre></div>
+
+<p>For adaptive integration algorithms in which the 
+order is determined internally (see below), these 
+options allow you to specify relative and absolute
+error tolerances and an upper limit on the number of 
+integrand samples that will be used.</p>
+<div class="codehilite"><pre><span></span>--BZSymmetryFactor <span class="o">[</span><span class="m">2</span><span class="p">|</span><span class="m">4</span><span class="p">|</span><span class="m">8</span><span class="o">]</span>
+</pre></div>
+
+<p>This option lets you tell <a class="wikilink" href="../../scuff-em/">scuff-em</a> that your
+integrand function <script type="math/tex">\overline Q(\mathbf k_\text{B})</script>
+is invariant under 2, 4, or 8-fold rotational 
+symmetry transformations applied to <script type="math/tex">\mathbf k_\text{B}</script>. 
+See below for more details on what this means.</p>
+<h3 id="understanding-the-internal-bz-integration-algorithms">Understanding the internal BZ integration algorithms</h3>
+<p>To help you understand how to configure the various
+command-line options above, this section
+describes the various integration algorithms available
+and how they are affected by the command-line parameters.</p>
+<h5 id="integration-methods-for-1d-brillouin-zones">Integration methods for 1D Brillouin zones</h5>
+<p>For one-dimensional Brillouin zones, there is only one
+BZ integration method available---namely,
+<a href="http://homerreid.com/teaching/18.330/Notes/ClenshawCurtis.pdf">Clenshaw-Curtis quadrature</a>
+(<code class="codehilite">--BZIMethod CC</code>, the default)
+with the number of integrand samples either fixed
+or chosen adaptively until user-specified error tolerances
+are achieved.</p>
+<p>More specifically, you may say either</p>
+<ul>
+<li><code class="codehilite">--BZIOrder [11 | 13 | 15 | ... | 97 | 99]</code></li>
+</ul>
+<p>or </p>
+<ul>
+<li><code class="codehilite">--BZIOrder 0</code></li>
+</ul>
+<p>The former option selects fixed-order CC cubature
+with 11, 13, ... 99 sample points. (This number must 
+be an odd integer between 11 and 99 inclusive.)</p>
+<p>The latter option selects adaptive
+CC cubature
+using <a href="http://ab-initio.mit.edu/wiki/index.php/Cubature">this algorithm</a>.
+In this case the number of sample points will be chosen
+automatically subject to the values you select for the
+<code class="codehilite">--BZIRelTol</code>, <code class="codehilite">--BZIAbsTol</code>, and <code class="codehilite">--BZIMaxEvals</code>
+command-line options.</p>
+<h5 id="symmetry-factors-for-1d-brillouin-zones">Symmetry factors for 1D Brillouin zones</h5>
+<p>For 1D Brillouin zones, the only allowed 
+value of the <code class="codehilite">--BZSymmetryFactor</code> option is <code class="codehilite">2</code>,
+indicating that your integrand is symmetric under
+sign flip of the Bloch wavevector, i.e.
+<script type="math/tex">\overline Q(k_x) = \overline Q(-k_x)</script>.
+In this case the BZ integration may be restricted to 
+the range <script type="math/tex">0\le k_x \le \frac{\pi}{L_x}.</script>
+</p>
+<h4 id="integration-methods-for-2d-brillouin-zones">Integration methods for 2D Brillouin zones</h4>
+<p>The following integration methods are implemented for 
+2D Brillouin zones. (See below for pictures of where
+the various methods place their sample points.)</p>
+<ul>
+<li>
+<p><strong>Clenshaw-Curtis cubature</strong> (<code class="codehilite">--BZIMethod CC</code>)</p>
+<p>Nested 2D fixed-order or adaptive Clenshaw-Curtis cubature.</p>
+<p>For fixed-order nested CC cubature with <code class="codehilite">NN</code> sample points
+per dimension, say <code class="codehilite">--BZIOrder NN</code>. Here <code class="codehilite">NN</code> must be 
+an odd integer between 11 and 99 inclusive.</p>
+<p>For adaptive 2D CC cubature (subject to your specified values
+of <code class="codehilite">--BZIRelTol</code>, <code class="codehilite">--BZIAbsTol</code>, and <code class="codehilite">--BZIMaxEvals</code>)
+say <code class="codehilite">--BZIOrder 0.</code>    </p>
+</li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li>
+<p><strong>Triangle cubature</strong> (<code class="codehilite">--BZIMethod TC</code>)</p>
+<p>This algorithm divides the Brillouin zone into 8
+triangles and applies a fixed-order triangle cubature scheme
+to each triangle, omitting repetition of triangles
+that are symmetry-equivalent given the value you specified
+for <code class="codehilite">--BZSymmetryFactor</code> (see pictures below).</p>
+<p>For this algorithm, the allowed values of
+<code class="codehilite">--BZIOrder</code> are 1, 2, 4, 5, 7, 9, 13, 14, 16, 20, or 25.</p>
+</li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li>
+<p><strong>Polar cubature</strong> (<code class="codehilite">--BZIMethod Polar</code>)</p>
+<p>This algorithm uses a polar decomposition
+<script type="math/tex">(k_x,k_y) \to (k_\rho, k_\theta)</script> to
+evaluate the BZ integral as two nested 1D integrals,
+one over <script type="math/tex">k_\rho</script> and the second over <script type="math/tex">k_\theta</script>.
+(The <script type="math/tex">k_\rho</script> integral is evaluated via
+ Clenshaw-Curtis quadrature, and the <script type="math/tex">k_\theta</script> 
+ quadrature is evaluated using rectangular-rule quadrature,
+ not necessarily of the same order).</p>
+<p>This algorithm is useful for integrands that are strongly 
+peaked near the origin of the Brillouin zone and highly
+attenuated near the boundaries, so that most of the integral
+comes from the region near the origin.</p>
+<p>For this algorithm, the number of integration points
+used for the <script type="math/tex">k_\rho</script> and <script type="math/tex">k_\theta</script> integrals (call these
+numbers <script type="math/tex">N_\rho</script> and <script type="math/tex">N_\theta</script>) are encoded 
+into the value passed to <code class="codehilite">--BZIOrder</code>
+in the form <script type="math/tex">100\times N_\rho + N_\theta,</script>
+where <script type="math/tex">N_\rho</script> and <script type="math/tex">N_\theta</script> are each odd integers 
+between 11 and 99 inclusive.</p>
+<p>Thus, for example, <code class="codehilite">--BZIOrder 3321</code> specifies that the
+<script type="math/tex">k_\rho</script> integral is to be evaluated via 33-point CC
+cubature, while the <script type="math/tex">k_\theta</script> integral is to be evaluated
+via 21-point rectangular-rule cubature.</p>
+</li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li>
+<p><strong> Polar cubature with change of variables
+     <script type="math/tex">k_\rho \to k_z</script> </strong> (<code class="codehilite">--BZIMethod Polar2</code>)</p>
+<p>This is the same as <code class="codehilite">--BZIMethod Polar</code>, but with
+two modifications: <strong>(a)</strong> The <script type="math/tex">k_\rho</script> integral 
+is split into two separate integrals covering the
+ranges <script type="math/tex">k_\rho < k_0</script> and <script type="math/tex">k_\rho >k_0</script> 
+(where <script type="math/tex">k_0\equiv \frac{\omega}{c}</script> is the vacuum photon
+wavenumber at the frequency in question).
+<strong>(b)</strong> In each of the two <script type="math/tex">k_\rho</script> integrals we
+make the change of variables
+<script type="math/tex; mode=display"> k_\rho \to k_z\equiv \sqrt{|k_0^2 - k_\rho^2|}.</script>
+</p>
+<p>These modifications are useful
+for cases in which the free-space wavevector <script type="math/tex">k_0</script>
+falls within the Brillouin zone. In these cases,
+the convergence of the <script type="math/tex">k_\rho</script> integral is
+degraded by the phenomena known as "Wood anomalies"
+in optics or "van Hove singularities" in solid-state
+physics, and changing variables to <script type="math/tex">k_z</script> introduces
+a Jacobian factor that neutralizes these singularities
+to yield a better-behaved integrand.    </p>
+</li>
+</ul>
+<p><strong> Special <script type="math/tex">N_\theta</script> values for rotationally-invariant integrands </strong></p>
+<p>As discussed above, for the <code class="codehilite">Polar</code> and <code class="codehilite">Polar2</code> integration methods
+the value of the <code class="codehilite">--BZIOrder</code> option is interpreted as the composite 
+quantity <script type="math/tex">100\times N_\rho + N_\theta</script>,
+where <script type="math/tex">N_\rho</script> and <script type="math/tex">N_\theta</script> are odd integers in the range <script type="math/tex">[11,99]</script>
+specifying the number of cubature points used for the <script type="math/tex">k_\rho</script> and 
+<script type="math/tex">k_\theta</script> integrals (or set to 0 to request adaptive quadrature).</p>
+<p>For <em>fully</em> rotationally-symmetric geometries in which the BZ integrand
+<script type="math/tex">\overline{Q}</script> is independent of <script type="math/tex">k_\theta</script>, you can specify
+<script type="math/tex">N_\theta=\{2,4,6\}</script> to indicate that the <script type="math/tex">k_\theta</script> integral
+is to be evaluated by a 1-point cubature with the single <script type="math/tex">k_\theta</script>
+sample taken at <script type="math/tex">k_\theta=\{0,\frac{\pi}{2},\frac{\pi}{4}\}</script>.</p>
+<p>(Of course, no geometry discretized into triangles can actually
+be fully rotationally invariant, but pretending so may be a
+reasonable approximation in some cases, such as <a href="../../examples/HalfSpaceLDOS/HalfSpaceLDOS/">this one</a>.)</p>
+<h4 id="symmetry-factors-for-2d-brillouin-zones">Symmetry factors for 2D Brillouin zones</h4>
+<p>For 2D geometries, the option <code class="codehilite">--BZSymmetryFactor</code> may
+take the value 2, 4, or 8, specifying that the Brillouin-zone
+integrand <script type="math/tex">\overline{Q}(k_x, k_y)</script> obeys symmetries as follows:</p>
+<ul>
+<li>
+<p><code class="codehilite">--BZSymmetryFactor 2</code>: </p>
+<p>We have
+<script type="math/tex">\overline{Q}(k_x,k_y) = \overline{Q}(k_x,-k_y),</script> so the BZ integration
+may be restricted to just the right half of the BZ.</p>
+</li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li>
+<p><code class="codehilite">--BZSymmetryFactor 4</code>:</p>
+<p>We have
+<script type="math/tex">\overline{Q}(k_x,k_y) = \overline{Q}(\pm k_x, \pm k_y),</script> 
+so the BZ integration
+may be restricted to just the upper-right quadrant of the BZ.</p>
+</li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li><code class="codehilite">--BZSymmetryFactor 8</code>: 
+    In addition to symmetry under sign changes, the integrand
+    is symmetric under <script type="math/tex">k_x\leftrightarrow k_y</script>,
+    so the BZ integration
+    may be restricted to the triangular region
+    <script type="math/tex">0\le k_y \le k_x \le \frac{\pi}{L_x}.</script>
+    (This is only possible for square lattices.)</li>
+</ul>
+<h5 id="locations-of-quadrature-points-for-2d-brillouin-zones">Locations of quadrature points for 2D Brillouin zones</h5>
+<p>Here are some diagrams indicating the Bloch wavevectors
+that will be sampled by the internal algorithms for Brillouin-zone
+integration with various values of the command-line parameters:</p>
+<p><div class="codehilite"><pre><span></span>--BZIMethod CC    --BZIOrder  <span class="m">21</span>    --BZSymmetryFactor <span class="m">1</span>
+</pre></div>
+<img alt="CC21.SF1.png" src="../BZIDiagrams/CC21.SF1.png" /></p>
+<p>&nbsp;</p>
+<p><div class="codehilite"><pre><span></span>--BZIMethod CC    --BZIOrder  <span class="m">21</span>    --BZSymmetryFactor <span class="m">2</span>
+</pre></div>
+<img alt="CC21.SF1.png" src="../BZIDiagrams/CC21.SF2.png" /></p>
+<p>&nbsp;</p>
+<p><div class="codehilite"><pre><span></span>--BZIMethod CC    --BZIOrder  <span class="m">21</span>    --BZSymmetryFactor <span class="m">4</span>
+</pre></div>
+<img alt="CC21.SF1.png" src="../BZIDiagrams/CC21.SF4.png" />
+&nbsp;</p>
+<p><a name="IrreducibleBZ"></p>
+<p><div class="codehilite"><pre><span></span>--BZIMethod CC    --BZIOrder  <span class="m">21</span>    --BZSymmetryFactor <span class="m">8</span>
+</pre></div>
+<img alt="CC21.SF1.png" src="../BZIDiagrams/CC21.SF8.png" />
+&nbsp;</p>
+<p><div class="codehilite"><pre><span></span>--BZIMethod TC    --BZIOrder  <span class="m">20</span>    --BZSymmetryFactor <span class="m">1</span>
+</pre></div>
+<img alt="TC20.SF1.png" src="../BZIDiagrams/TC20.SF1.png" /></p>
+<p>&nbsp;</p>
+<p><div class="codehilite"><pre><span></span>--BZIMethod TC    --BZIOrder  <span class="m">20</span>    --BZSymmetryFactor <span class="m">2</span>
+</pre></div>
+<img alt="TC20.SF2.png" src="../BZIDiagrams/TC20.SF2.png" /></p>
+<p>&nbsp;</p>
+<p><div class="codehilite"><pre><span></span>--BZIMethod TC    --BZIOrder  <span class="m">20</span>    --BZSymmetryFactor <span class="m">4</span>
+</pre></div>
+<img alt="TC20.SF4.png" src="../BZIDiagrams/TC20.SF4.png" />
+&nbsp;</p>
+<p><div class="codehilite"><pre><span></span>--BZIMethod TC    --BZIOrder  <span class="m">20</span>    --BZSymmetryFactor <span class="m">8</span>
+</pre></div>
+<img alt="TC20.SF8.png" src="../BZIDiagrams/TC20.SF8.png" />
+&nbsp;</p>
+<p><div class="codehilite"><pre><span></span>--BZIMethod Polar --BZIOrder <span class="m">3111</span> --BZSymmetryFactor <span class="m">1</span>
+</pre></div>
+<img alt="Polar.3111.SF1.png" src="../BZIDiagrams/Polar.3111.SF1.png" /></p>
+<p>&nbsp;</p>
+<p><div class="codehilite"><pre><span></span>--BZIMethod Polar --BZIOrder <span class="m">3111</span> --BZSymmetryFactor <span class="m">2</span>
+</pre></div>
+<img alt="Polar.3111.SF2.png" src="../BZIDiagrams/Polar.3111.SF2.png" /></p>
+<p>&nbsp;</p>
+<p><div class="codehilite"><pre><span></span>--BZIMethod Polar --BZIOrder <span class="m">3111</span> --BZSymmetryFactor <span class="m">4</span>
+</pre></div>
+<img alt="Polar.3111.SF4.png" src="../BZIDiagrams/Polar.3111.SF4.png" /></p>
+<p>&nbsp;</p>
+<p><div class="codehilite"><pre><span></span>--BZIMethod Polar --BZIOrder <span class="m">3111</span> --BZSymmetryFactor <span class="m">8</span>
+</pre></div>
+<img alt="Polar.3111.SF8.png" src="../BZIDiagrams/Polar.3111.SF8.png" /></p>
+<p>&nbsp;</p>
+<p><strong>Note:</strong> The next four diagrams are for a frequency of
+<script type="math/tex">\frac{\omega}{c}\approx 0.32\cdot \frac{2\pi}{L}</script>. The accumulation
+of points near <script type="math/tex">|\mathbf{k}_\text{B}|=\frac{\omega}{c}</script>
+is noticeable for the <code class="codehilite">Polar2</code> integration strategy.</p>
+<p><div class="codehilite"><pre><span></span>--BZIMethod Polar2 --BZIOrder <span class="m">1111</span> --BZSymmetryFactor <span class="m">1</span>
+</pre></div>
+<img alt="Polar2.1111.SF1.png" src="../BZIDiagrams/Polar2.SF1.png" /></p>
+<p><div class="codehilite"><pre><span></span>--BZIMethod Polar2 --BZIOrder <span class="m">1111</span> --BZSymmetryFactor <span class="m">2</span>
+</pre></div>
+<img alt="Polar2.1111.SF2.png" src="../BZIDiagrams/Polar2.SF2.png" /></p>
+<p><div class="codehilite"><pre><span></span>--BZIMethod Polar2 --BZIOrder <span class="m">1111</span> --BZSymmetryFactor <span class="m">4</span>
+</pre></div>
+<img alt="Polar2.1111.SF4.png" src="../BZIDiagrams/Polar2.SF4.png" /></p>
+<p><div class="codehilite"><pre><span></span>--BZIMethod Polar2 --BZIOrder <span class="m">1111</span> --BZSymmetryFactor <span class="m">8</span>
+</pre></div>
+<img alt="Polar2.1111.SF8.png" src="../BZIDiagrams/Polar2.SF8.png" /></p>
+<h5 id="locations-of-quadrature-points-for-1d-brillouin-zones">Locations of quadrature points for 1D Brillouin zones</h5>
+<p><div class="codehilite"><pre><span></span>--BZIMethod CC    --BZIOrder  <span class="m">31</span>    --BZSymmetryFactor <span class="m">1</span>
+</pre></div>
+<img alt="CC31.SF1.1D.png" src="../BZIDiagrams/CC31.SF1.1D.png" /></p>
+<p>&nbsp;</p>
+<p><div class="codehilite"><pre><span></span>--BZIMethod CC    --BZIOrder  <span class="m">31</span>    --BZSymmetryFactor <span class="m">2</span>
+</pre></div>
+<img alt="CC31.SF2.png" src="../BZIDiagrams/CC31.SF2.1D.png" /></p>
+<p>&nbsp;</p>
+                
+                  
+                
+              
+              
+                
+
+
+
+  <h2 id="__comments">Comments</h2>
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = "http://homerreid.github.io/scuff-em-documentation/reference/BrillouinZoneIntegration/";
+      this.page.identifier =
+        "/reference/BrillouinZoneIntegration/";
+    };
+    (function() {
+      var d = document, s = d.createElement("script");
+      s.src = "//homerreid-github-io-scuff-em-documentation.disqus.com.disqus.com/embed.js";
+      s.setAttribute("data-timestamp", +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../IncidentFields/" title="Incident fields" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Incident fields
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../FAQ/" title="FAQ" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                FAQ
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="http://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.b438e6c5.js"></script>
+      
+      <script>app.initialize({version:"0.17.3",url:{base:"../.."}})</script>
+      
+        <script src="../../javascripts/MathJax.js?config=TeX-AMS_HTML"></script>
+      
+        <script src="../../javascripts/mathjaxhelper.js"></script>
+      
+    
+    
+      
+        <script>!function(e,a,t,n,o,c,i){e.GoogleAnalyticsObject=o,e.ga=e.ga||function(){(e.ga.q=e.ga.q||[]).push(arguments)},e.ga.l=1*new Date,c=a.createElement(t),i=a.getElementsByTagName(t)[0],c.async=1,c.src="https://www.google-analytics.com/analytics.js",i.parentNode.insertBefore(c,i)}(window,document,"script",0,"ga"),ga("create","UA-119340518-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview");var links=document.getElementsByTagName("a");if(Array.prototype.map.call(links,function(e){e.host!=document.location.host&&e.addEventListener("click",function(){var a=e.getAttribute("data-md-action")||"follow";ga("send","event","outbound",a,e.href)})}),document.forms.search){var query=document.forms.search.query;query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}</script>
+      
+    
+  </body>
+</html>

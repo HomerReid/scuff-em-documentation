@@ -1,0 +1,781 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="744.09448819"
+   height="1052.3622047"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.47 r22583"
+   sodipodi:docname="CircuitSchematic.svg"
+   inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <defs
+     id="defs4">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       id="perspective10" />
+    <inkscape:perspective
+       id="perspective3742"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4168"
+       inkscape:persp3d-origin="25 : 16.666667 : 1"
+       inkscape:vp_z="50 : 25 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 25 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4267"
+       inkscape:persp3d-origin="25 : 16.666667 : 1"
+       inkscape:vp_z="50 : 25 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 25 : 1"
+       sodipodi:type="inkscape:persp3d" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.4"
+     inkscape:cx="171.39554"
+     inkscape:cy="683.53802"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     inkscape:window-width="1650"
+     inkscape:window-height="1142"
+     inkscape:window-x="719"
+     inkscape:window-y="130"
+     inkscape:window-maximized="0"
+     showguides="true"
+     inkscape:guide-bbox="true">
+    <inkscape:grid
+       type="xygrid"
+       id="grid2816"
+       empspacing="5"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="30,810"
+       id="guide4186" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="layer1-9"
+       transform="translate(-15,330.36218)"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         id="path1319"
+         style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:square;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+         d="m 40,25 c 0,8.284271 -6.715729,15 -15,15 -8.284271,0 -15,-6.715729 -15,-15 0,-8.284271 6.715729,-15 15,-15 8.284271,0 15,6.715729 15,15 l 0,0 z" />
+      <path
+         id="path2194"
+         style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 25,10 25,3" />
+      <path
+         id="path2196"
+         style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 25,40 0,7" />
+      <path
+         id="path4056"
+         style="fill:none;stroke:#000000;stroke-width:1.00000012px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 16,25.000005 c 0,0 1.5,-5.000001 4.5,-5.000001 3,0 6,10.000002 9,10.000002 3,0 4.5,-5.000001 4.5,-5.000001" />
+    </g>
+    <rect
+       style="fill:none;stroke:#000000;stroke-width:1.26491117;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect2818"
+       width="100"
+       height="200"
+       x="200"
+       y="302.36218"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:type="arc"
+       style="color:#000000;fill:none;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="path3598"
+       sodipodi:cx="150"
+       sodipodi:cy="302.36218"
+       sodipodi:rx="48.541019"
+       sodipodi:ry="30"
+       d="m 198.54102,302.36218 a 48.541019,30 0 1 1 -97.08204,0 48.541019,30 0 1 1 97.08204,0 z" />
+    <path
+       sodipodi:type="arc"
+       style="color:#000000;fill:none;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="path3600"
+       sodipodi:cx="190"
+       sodipodi:cy="272.36218"
+       sodipodi:rx="80"
+       sodipodi:ry="49.442719"
+       d="m 270,272.36218 a 80,49.442719 0 1 1 -160,0 80,49.442719 0 1 1 160,0 z" />
+    <path
+       sodipodi:type="arc"
+       style="color:#000000;fill:none;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="path3608"
+       sodipodi:cx="0"
+       sodipodi:cy="302.36218"
+       sodipodi:rx="150"
+       sodipodi:ry="30"
+       d="m 150,302.36218 a 150,30 0 1 1 -300,0 150,30 0 1 1 300,0 z" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3726"
+       style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:Courier;font-style:normal;font-weight:normal;font-size:9;-inkscape-font-specification:Courier;font-stretch:normal;font-variant:normal"><flowRegion
+         id="flowRegion3728"><rect
+           id="rect3730"
+           width="458.60925"
+           height="353.55341"
+           x="-462.64987"
+           y="270.50412" /></flowRegion><flowPara
+         id="flowPara3732"></flowPara></flowRoot>    <path
+       sodipodi:type="arc"
+       style="color:#000000;fill:none;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="path3596"
+       sodipodi:cx="150"
+       sodipodi:cy="342.36218"
+       sodipodi:rx="10"
+       sodipodi:ry="5"
+       d="m 160,342.36218 a 10,5 0 1 1 -20,0 10,5 0 1 1 20,0 z"
+       transform="translate(0,-10)"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       id="path3634"
+       d="m 200,362.36218 -20,0"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       xml:space="preserve"
+       style="font-size:9px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Courier;-inkscape-font-specification:Courier"
+       x="206.11172"
+       y="327.71988"
+       id="text3636"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan3638"
+         x="206.11172"
+         y="327.71988"
+         style="font-size:15px">P1</tspan></text>
+    <text
+       id="text3640"
+       y="367.71988"
+       x="206.11172"
+       style="font-size:9px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Courier;-inkscape-font-specification:Courier"
+       xml:space="preserve"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         style="font-size:15px"
+         y="367.71988"
+         x="206.11172"
+         id="tspan3642"
+         sodipodi:role="line">M1</tspan></text>
+    <path
+       d="m 150,362.36218 0,-16 m -12,2 c 0,0 12,-4 24,0 m -24,-10 24,0 m -12,0 0,-16"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       id="path3124"
+       sodipodi:nodetypes="cccccccc"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:nodetypes="cc"
+       id="path3772"
+       d="m 198.9,362.36218 -50,0"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="M 149.75512,337.78078 150,322.36218"
+       id="path3776"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       id="path3778"
+       d="m 149.555,338.78118 0.24488,-15.4186"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 149.75512,372.36218 0.24488,-26"
+       id="path3801"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 198.8,322.36218 -50,0"
+       id="path3808"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       id="text3812"
+       y="347.71988"
+       x="112.11172"
+       style="font-size:9px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Courier;-inkscape-font-specification:Courier"
+       xml:space="preserve"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         style="font-size:15px"
+         y="347.71988"
+         x="112.11172"
+         id="tspan3814"
+         sodipodi:role="line">CT</tspan></text>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3816"
+       style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:Courier;font-style:normal;font-weight:normal;font-size:9;-inkscape-font-specification:Courier;font-stretch:normal;font-variant:normal"><flowRegion
+         id="flowRegion3818"><rect
+           id="rect3820"
+           width="240.92139"
+           height="122.73354"
+           x="37.880722"
+           y="273.02948" /></flowRegion><flowPara
+         id="flowPara3822"></flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3824"
+       style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:Courier;font-style:normal;font-weight:normal;font-size:9;-inkscape-font-specification:Courier;font-stretch:normal;font-variant:normal"><flowRegion
+         id="flowRegion3826"><rect
+           id="rect3828"
+           width="168.69548"
+           height="72.73098"
+           x="100.51018"
+           y="324.04221" /></flowRegion><flowPara
+         id="flowPara3830"></flowPara></flowRoot>    <path
+       d="m 160,342.36218 a 10,5 0 1 1 -20,0 10,5 0 1 1 20,0 z"
+       sodipodi:ry="5"
+       sodipodi:rx="10"
+       sodipodi:cy="342.36218"
+       sodipodi:cx="150"
+       id="path3851"
+       style="color:#000000;fill:none;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       sodipodi:type="arc"
+       transform="translate(0,108)"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 200,480.36218 -20,0"
+       id="path3853"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       id="text3855"
+       y="445.71988"
+       x="206.11172"
+       style="font-size:9px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Courier;-inkscape-font-specification:Courier"
+       xml:space="preserve"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         style="font-size:15px"
+         y="445.71988"
+         x="206.11172"
+         id="tspan3857"
+         sodipodi:role="line">P2</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:9px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Courier;-inkscape-font-specification:Courier"
+       x="206.11172"
+       y="485.71988"
+       id="text3859"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan3861"
+         x="206.11172"
+         y="485.71988"
+         style="font-size:15px">M2</tspan></text>
+    <path
+       sodipodi:nodetypes="cccccccc"
+       id="path3863"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 150,480.36218 0,-16 m -12,2 c 0,0 12,-4 24,0 m -24,-10 24,0 m -12,0 0,-16"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 198.8,480.36218 -50,0"
+       id="path3865"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       id="path3867"
+       d="M 149.75512,455.78078 150,440.36218"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 149.555,456.78118 0.24488,-15.4186"
+       id="path3869"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       id="path3871"
+       d="M 149.75512,479.78078 150,464.36218"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:nodetypes="cc"
+       id="path3873"
+       d="m 198.8,440.36218 -50,0"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       id="path3875"
+       d="m 149.55984,481.37634 0.2352,-16.20931"
+       style="fill:none;stroke:#000000;stroke-width:2.00968456;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       xml:space="preserve"
+       style="font-size:9px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Courier;-inkscape-font-specification:Courier"
+       x="112.11172"
+       y="465.71988"
+       id="text3877"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan3879"
+         x="112.11172"
+         y="465.71988"
+         style="font-size:15px">CT</tspan></text>
+    <path
+       transform="matrix(-1,0,0,1,499.75259,-10)"
+       sodipodi:type="arc"
+       style="color:#000000;fill:none;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="path3908"
+       sodipodi:cx="150"
+       sodipodi:cy="342.36218"
+       sodipodi:rx="10"
+       sodipodi:ry="5"
+       d="m 160,342.36218 a 10,5 0 1 1 -20,0 10,5 0 1 1 20,0 z"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       id="path3910"
+       d="m 299.75259,362.36218 20,0"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       d="m 349.75259,362.36218 0,-16 m 12,2 c 0,0 -12,-4 -24,0 m 24,-10 -24,0 m 12,0 0,-16"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       id="path3920"
+       sodipodi:nodetypes="cccccccc"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:nodetypes="cc"
+       id="path3922"
+       d="m 300.95259,362.36218 50,0"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 349.99747,337.78078 -0.24488,-15.4186"
+       id="path3924"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       id="path3926"
+       d="m 350.19759,338.78118 -0.24488,-15.4186"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 349.99747,361.78078 -0.24488,-15.4186"
+       id="path3928"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 300.95259,322.36218 50,0"
+       id="path3930"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2.00968456;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 350.19275,363.37634 -0.2352,-16.20931"
+       id="path3932"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3968"
+       style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:Courier;font-style:normal;font-weight:normal;font-size:9;-inkscape-font-specification:Courier;font-stretch:normal;font-variant:normal"><flowRegion
+         id="flowRegion3970"><rect
+           id="rect3972"
+           width="42.426407"
+           height="107.07617"
+           x="259.10413"
+           y="305.35437" /></flowRegion><flowPara
+         id="flowPara3974"></flowPara></flowRoot>    <path
+       d="m 160,342.36218 a 10,5 0 1 1 -20,0 10,5 0 1 1 20,0 z"
+       sodipodi:ry="5"
+       sodipodi:rx="10"
+       sodipodi:cy="342.36218"
+       sodipodi:cx="150"
+       id="path3976"
+       style="color:#000000;fill:none;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       sodipodi:type="arc"
+       transform="matrix(-1,0,0,1,499.75259,108)"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 299.75259,480.36218 20,0"
+       id="path3978"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:nodetypes="cccccccc"
+       id="path3980"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 349.75259,480.36218 0,-16 m 12,2 c 0,0 -12,-4 -24,0 m 24,-10 -24,0 m 12,0 0,-16"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 300.95259,480.36218 50,0"
+       id="path3982"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       id="path3984"
+       d="m 349.99747,455.78078 -0.24488,-15.4186"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 350.19759,456.78118 -0.24488,-15.4186"
+       id="path3986"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       id="path3988"
+       d="m 349.99747,479.78078 -0.24488,-15.4186"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:nodetypes="cc"
+       id="path3990"
+       d="m 300.95259,440.36218 50,0"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       id="path3992"
+       d="m 350.19275,481.37634 -0.2352,-16.20931"
+       style="fill:none;stroke:#000000;stroke-width:2.00968456;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       xml:space="preserve"
+       style="font-size:9px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Courier;-inkscape-font-specification:Courier"
+       x="278.11172"
+       y="445.71988"
+       id="text3994"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan3996"
+         x="278.11172"
+         y="445.71988"
+         style="font-size:15px">P4</tspan></text>
+    <text
+       id="text3998"
+       y="485.71988"
+       x="278.11172"
+       style="font-size:9px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Courier;-inkscape-font-specification:Courier"
+       xml:space="preserve"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         style="font-size:15px"
+         y="485.71988"
+         x="278.11172"
+         id="tspan4000"
+         sodipodi:role="line">M4</tspan></text>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4044"
+       style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:Courier;font-style:normal;font-weight:normal;font-size:9;-inkscape-font-specification:Courier;font-stretch:normal;font-variant:normal"><flowRegion
+         id="flowRegion4046"><rect
+           id="rect4048"
+           width="31.819805"
+           height="129.29953"
+           x="267.69043"
+           y="381.62088" /></flowRegion><flowPara
+         id="flowPara4050"></flowPara></flowRoot>    <text
+       id="text4052"
+       y="465.71988"
+       x="366.11172"
+       style="font-size:9px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Courier;-inkscape-font-specification:Courier"
+       xml:space="preserve"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         style="font-size:15px"
+         y="465.71988"
+         x="366.11172"
+         id="tspan4054"
+         sodipodi:role="line">CT</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:9px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Courier;-inkscape-font-specification:Courier"
+       x="366.11172"
+       y="347.71988"
+       id="text4056"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan4058"
+         x="366.11172"
+         y="347.71988"
+         style="font-size:15px">CT</tspan></text>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4060"
+       style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:Courier;font-style:normal;font-weight:normal;font-size:9;-inkscape-font-specification:Courier;font-stretch:normal;font-variant:normal"><flowRegion
+         id="flowRegion4062"><rect
+           id="rect4064"
+           width="29.294424"
+           height="108.5914"
+           x="275.77164"
+           y="376.06506" /></flowRegion><flowPara
+         id="flowPara4066"></flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4068"
+       style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:Courier;font-style:normal;font-weight:normal;font-size:9;-inkscape-font-specification:Courier;font-stretch:normal;font-variant:normal"><flowRegion
+         id="flowRegion4070"><rect
+           id="rect4072"
+           width="57.07362"
+           height="109.60155"
+           x="252.53813"
+           y="386.67166" /></flowRegion><flowPara
+         id="flowPara4074"></flowPara></flowRoot>    <text
+       id="text4076"
+       y="327.71988"
+       x="278.11172"
+       style="font-size:9px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Courier;-inkscape-font-specification:Courier"
+       xml:space="preserve"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         style="font-size:15px"
+         y="327.71988"
+         x="278.11172"
+         id="tspan4078"
+         sodipodi:role="line">P3</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:9px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Courier;-inkscape-font-specification:Courier"
+       x="278.11172"
+       y="367.71988"
+       id="text4080"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan4082"
+         x="278.11172"
+         y="367.71988"
+         style="font-size:15px">M3</tspan></text>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4084"
+       style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:Courier;font-style:normal;font-weight:normal;font-size:9;-inkscape-font-specification:Courier;font-stretch:normal;font-variant:normal"><flowRegion
+         id="flowRegion4086"><rect
+           id="rect4088"
+           width="352.54324"
+           height="92.934036"
+           x="90.913727"
+           y="384.65134" /></flowRegion><flowPara
+         id="flowPara4090"></flowPara></flowRoot>    <path
+       sodipodi:nodetypes="cccccccc"
+       id="path4092"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 99.75259,322.36218 -16,0 m 2,-12 c 0,0 -4,12 0,24 m -10,-24 0,24 m 0,-12 -16,0"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 84,322.36218 70,0"
+       id="path4094"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       id="path4096"
+       d="m 9.0147059,322.36218 66.9705881,0"
+       style="fill:none;stroke:#000000;stroke-width:2.01465225;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       id="text4178"
+       y="303.71988"
+       x="72.111717"
+       style="font-size:9px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Courier;-inkscape-font-specification:Courier"
+       xml:space="preserve"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         style="font-size:15px"
+         y="303.71988"
+         x="72.111717"
+         id="tspan4180"
+         sodipodi:role="line">CM</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 10,340.36218 c 0,-20 0,-18 0,-18"
+       id="path4182"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       id="path4184"
+       d="m 10,390.36218 c 0,-20 0,-20 0,-20"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 0,390.36218 20,0 -10,10 -10,-10 z"
+       id="path4191"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       xml:space="preserve"
+       style="font-size:9px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Courier;-inkscape-font-specification:Courier"
+       x="-1.8882828"
+       y="315.71988"
+       id="text4193"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"><tspan
+         sodipodi:role="line"
+         id="tspan4195"
+         x="-1.8882828"
+         y="315.71988"
+         style="font-size:15px">VIn</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:9px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Courier;-inkscape-font-specification:Courier"
+       x="-54.642857"
+       y="299.14789"
+       id="text4197"><tspan
+         sodipodi:role="line"
+         id="tspan4199"
+         x="-54.642857"
+         y="299.14789" /></text>
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/homer/public_html/scuff-EM/scuff-RF/examples/CircuitSchematic.png"
+       id="path4275"
+       d="m 140,372.36218 20,0 -10,10 -10,-10 z"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+  </g>
+</svg>

@@ -1,413 +1,1271 @@
+
+
+
+
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>Data Structures - SCUFF-EM documentation</title>
-  
-
-  <link rel="shortcut icon" href="../../scuffEM.ico">
-  
-
-  
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
-
-  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
-  <link rel="stylesheet" href="../../css/highlight.css">
-
-  
-  <script>
-    // Current page data
-    var mkdocs_page_name = "forDevelopers/DataStructures"
-  </script>
-  
-  <script src="../../js/jquery-2.1.1.min.js"></script>
-  <script src="../../js/modernizr-2.8.3.min.js"></script>
-  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
-  <script src="../../js/theme.js"></script> 
-  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
-  <script src="../../mathjaxhelper.js"></script>
-
-  
-</head>
-
-<body class="wy-body-for-nav" role="document">
-
-  <div class="wy-grid-for-nav">
-
+<html lang="en" class="no-js">
+  <head>
     
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
-
-      <p align="center"
-      <a href="../..">
-         <img align="center" height="auto" width="100%"  
-              src="../../img/scuffEMNavBar.png"
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="http://homerreid.github.io/scuff-em-documentation/forDevelopers/DataStructures/">
+      
+      
+        <meta name="author" content="Homer Reid">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-0.17.3, mkdocs-material-2.7.3">
+    
+    
+      
+        <title>Data Structures - SCUFF-EM documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.8d40d89b.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.6079476c.css">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:300,400,400i,700|">
+        <style>body,input{font-family:"Noto Sans","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+      <link rel="stylesheet" href="../../css/scuff-em.css">
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <a href="#1-geometries-regions-surfaces" tabindex="1" class="md-skip">
+        Skip to content
       </a>
-
-      <div class="wy-side-nav-search">
-        <a href="../.." class="icon icon-home"> SCUFF-EM documentation</a>
-        <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
-  </form>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="http://homerreid.github.io/scuff-em-documentation" title="SCUFF-EM documentation" class="md-header-nav__button md-logo">
+          
+            <img src="../../reference/scuffEMLogo.png" width="24" height="24">
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                SCUFF-EM documentation
+              </span>
+              <span class="md-header-nav__topic">
+                Data Structures
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+          
+        
       </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
 
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-        <ul class="current">
-          
-            <li>
-    <li class="toctree-l1 ">
-        <a class="" href="../..">SCUFF-EM documentation</a>
-        
-    </li>
-<li>
-          
-            <li>
-    <ul class="subnav">
-    <li><span>Examples</span></li>
 
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../examples/MieScattering/MieScattering/">Mie scattering</a>
-        
-    </li>
+  
 
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../examples/DielectricShell/DielectricShell/">Electrostatics of a spherical dielectric shell</a>
-        
-    </li>
 
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../examples/ThinFilm/ThinFilm/">Spatially-resolved study of plane-wave transmission through an infinite-area thin dielectric film</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../examples/DiffractionPatterns/DiffractionPatterns/">Imaging diffraction patterns of discs, disc arrays, and hole arrays in metal screens</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../examples/CubeTorus/">Casimir forces in a compact geometry</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../examples/SiliconBeams/SiliconBeams/">Casimir forces in a 1D extended geometry</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../examples/SiliconSlabs/SiliconSlabs/">Casimir forces in a 2D extended geometry</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../examples/SiO2Spheres/SiO2Spheres/">Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../examples/TipSubstrate/TipSubstrate/">Spatial distribution of heat flux from a warm tip over a cold substrate</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../examples/HalfSpaceLDOS/HalfSpaceLDOS/">LDOS and dyadic Green functions above an infinite aluminum half-space</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../examples/PlatonicSolids/PlatonicSolids/">Electrostatic polarizability of platonic solids</a>
-        
-    </li>
-
-        
-    </ul>
-<li>
-          
-            <li>
-    <ul class="subnav">
-    <li><span>General reference</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../reference/TopLevel/">Top-level overview</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../reference/Installing/">Installation</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../reference/Geometries/">Geometry descriptions</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../reference/Materials/">Material designations</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../reference/Transformations/">Geometric transformations</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../reference/IncidentFields/">Incident Fields</a>
-        
-    </li>
-
-        
-    </ul>
-<li>
-          
-            <li>
-    <ul class="subnav">
-    <li><span>Command-line application reference</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../applications/GeneralReference/">General command-line reference</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../applications/scuff-scatter/scuff-scatter/">scuff-scatter</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../applications/scuff-transmission/scuff-transmission/">scuff-transmission</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../applications/scuff-ldos/scuff-ldos/">scuff-ldos</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../applications/scuff-tmatrix/scuff-tmatrix/">scuff-tmatrix</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../applications/scuff-cas3D/scuff-cas3D/">scuff-cas3D</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../applications/scuff-caspol/scuff-caspol/">scuff-caspol</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../applications/scuff-neq/scuff-neq/">scuff-neq</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../applications/scuff-RF/scuff-RF/">scuff-RF</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../applications/scuff-static/scuff-static/">scuff-static</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../applications/scuff-analyze/scuff-analyze/">scuff-analyze</a>
-        
-    </li>
-
-        
-    </ul>
-<li>
-          
-            <li>
-    <ul class="subnav">
-    <li><span>API reference</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../API/libscuff/">libscuff</a>
-        
-    </li>
-
-        
-    </ul>
-<li>
-          
-            <li>
-    <ul class="subnav">
-    <li><span>For developers</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../Implementation/">Implementation</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 current">
-        <a class="current" href="./">Data Structures</a>
-        
-            <ul>
-            
-                <li class="toctree-l3"><a href="#1-geometries-regions-surfaces">1. Geometries, Regions, Surfaces</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#2-panels-edges-vertices">2. Panels, Edges, Vertices</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#the-rwgpanel-and-rwgedge-structures">The RWGPanel and RWGEdge structures</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#3-assembling-the-bem-matrix">3. Assembling the BEM Matrix</a></li>
-                
-                    <li><a class="toctree-l4" href="#assemblebemmatrix">AssembleBEMMatrix</a></li>
-                
-                    <li><a class="toctree-l4" href="#assemblebemmatrixblock">AssembleBEMMatrixBlock</a></li>
-                
-                    <li><a class="toctree-l4" href="#surfacesurfaceinteractions">SurfaceSurfaceInteractions</a></li>
-                
-                    <li><a class="toctree-l4" href="#edgeedgeinteractions">EdgeEdgeInteractions</a></li>
-                
-                    <li><a class="toctree-l4" href="#panelpanelinteractions">PanelPanelInteractions</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#4-an-explicit-low-level-example">4. An Explicit Low-Level Example</a></li>
-                
-                    <li><a class="toctree-l4" href="#the-geometry-and-the-labeling-of-panels-edges-and-vertices">The geometry and the labeling of panels, edges, and vertices</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#rwg-basis-function-b0">RWG basis function b0</a></li>
-                
-                    <li><a class="toctree-l4" href="#panel-panel-interactions">Panel-panel interactions</a></li>
-                
-                    <li><a class="toctree-l4" href="#edge-panel-interactions">Edge-panel interactions</a></li>
-                
-            
-            </ul>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../Documentation/">Documentation</a>
-        
-    </li>
-
-        
-    </ul>
-<li>
-          
-        </ul>
+  <a href="https://github.com/homerreid/scuff-em/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
       </div>
-      &nbsp;
+    
+    <div class="md-source__repository">
+      scuff-em
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href="../.." title="Home" class="md-tabs__link">
+        Home
+      </a>
+    
+  </li>
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../examples/" title="Examples" class="md-tabs__link">
+          Examples
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../tests/Overview/" title="Test suite" class="md-tabs__link">
+          Test suite
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../reference/TopLevel/" title="General reference" class="md-tabs__link">
+          General reference
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../applications/GeneralReference/" title="Command-line tools" class="md-tabs__link">
+          Command-line tools
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../HighLevelInterface/HighLevelInterface/" title="High-level interface" class="md-tabs__link">
+          High-level interface
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../API/libscuff/" title="Low-level API" class="md-tabs__link">
+          Low-level API
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../Implementation/" title="For developers" class="md-tabs__link md-tabs__link--active">
+          For developers
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    <span class="md-nav__button md-logo">
+      
+        <img src="../../reference/scuffEMLogo.png" width="48" height="48">
+      
+    </span>
+    SCUFF-EM documentation
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/homerreid/scuff-em/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      scuff-em
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Examples
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Examples
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/" title="SCUFF-EM tutorial examples" class="md-nav__link">
+      SCUFF-EM tutorial examples
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/MieScattering/MieScattering/" title="Mie scattering" class="md-nav__link">
+      Mie scattering
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/DielectricShell/DielectricShell/" title="Electrostatics of a spherical dielectric shell" class="md-nav__link">
+      Electrostatics of a spherical dielectric shell
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/ThinFilm/ThinFilm/" title="Spatially-resolved study of plane-wave transmission through an infinite-area thin dielectric film" class="md-nav__link">
+      Spatially-resolved study of plane-wave transmission through an infinite-area thin dielectric film
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/DiffractionPatterns/DiffractionPatterns/" title="Imaging diffraction patterns of discs, disc arrays, and hole arrays in metal screens" class="md-nav__link">
+      Imaging diffraction patterns of discs, disc arrays, and hole arrays in metal screens
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/CubeTorus/" title="Casimir forces in a compact geometry" class="md-nav__link">
+      Casimir forces in a compact geometry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/SiliconBeams/SiliconBeams/" title="Casimir forces in a 1D extended geometry" class="md-nav__link">
+      Casimir forces in a 1D extended geometry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/SiliconSlabs/SiliconSlabs/" title="Casimir forces in a 2D extended geometry" class="md-nav__link">
+      Casimir forces in a 2D extended geometry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/NanostructureCasimirPolder/NanostructureCasimirPolder/" title="Casimir-Polder potentials in dielectric nanostructures" class="md-nav__link">
+      Casimir-Polder potentials in dielectric nanostructures
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/SiO2Spheres/SiO2Spheres/" title="Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres" class="md-nav__link">
+      Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/TipSubstrate/TipSubstrate/" title="Spatial distribution of heat flux from a warm tip over a cold substrate" class="md-nav__link">
+      Spatial distribution of heat flux from a warm tip over a cold substrate
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/HalfSpaceLDOS/HalfSpaceLDOS/" title="LDOS and dyadic Green functions above an infinite aluminum half-space" class="md-nav__link">
+      LDOS and dyadic Green functions above an infinite aluminum half-space
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/PlatonicSolids/PlatonicSolids/" title="Electrostatic polarizability of platonic solids" class="md-nav__link">
+      Electrostatic polarizability of platonic solids
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/TwoBodyCapacitors/TwoBodyCapacitors/" title="Capacitance of two-body capacitors" class="md-nav__link">
+      Capacitance of two-body capacitors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/StriplineCapacitor/StriplineCapacitor/" title="Capacitance of a PCB stripline trace" class="md-nav__link">
+      Capacitance of a PCB stripline trace
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/ImplicitSubstrate/ImplicitSubstrate/" title="Implicit handling of multilayer dielectric substrates" class="md-nav__link">
+      Implicit handling of multilayer dielectric substrates
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/pythonCapacitance/pythonCapacitance/" title="Finite-size effects in stripline capacitors" class="md-nav__link">
+      Finite-size effects in stripline capacitors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/PaulTrap/PaulTrap/" title="Electrostatic fields of an electrode array" class="md-nav__link">
+      Electrostatic fields of an electrode array
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/YagiUdaAntennas/YagiUdaAntennas/" title="Z-parameters and directivity of Yagi-Uda antennas" class="md-nav__link">
+      Z-parameters and directivity of Yagi-Uda antennas
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/MicrostripDevices/MicrostripDevices/" title="Input impedance, mutual coupling, and radiated fields of microstrip RF devices" class="md-nav__link">
+      Input impedance, mutual coupling, and radiated fields of microstrip RF devices
+    </a>
+  </li>
+
+        
+      </ul>
     </nav>
+  </li>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../..">SCUFF-EM documentation</a>
-      </nav>
-
-      
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="breadcrumbs navigation">
-  <ul class="wy-breadcrumbs">
-    <li><a href="../.."><span class="SmallCaps">scuff-em</span> documentation</a> &raquo;</li>
     
       
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Test suite
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Test suite
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
         
-          <li>For developers &raquo;</li>
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tests/Overview/" title="Overview of the test suite" class="md-nav__link">
+      Overview of the test suite
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tests/MieScattering/MieScattering/" title="Mie scattering" class="md-nav__link">
+      Mie scattering
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tests/FresnelScattering/FresnelScattering/" title="Fresnel scattering" class="md-nav__link">
+      Fresnel scattering
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tests/CasimirSpheres/CasimirSpheres/" title="Equilibrium Casimir forces between spheres" class="md-nav__link">
+      Equilibrium Casimir forces between spheres
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tests/CasimirPlates/CasimirPlates/" title="Equilibrium Casimir forces between plates" class="md-nav__link">
+      Equilibrium Casimir forces between plates
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tests/CPSphere/CPSphere/" title="Equilibrium Casimir-Polder potential near a sphere" class="md-nav__link">
+      Equilibrium Casimir-Polder potential near a sphere
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tests/CPPlate/CPPlate/" title="Equilibrium Casimir-Polder potential near a plate" class="md-nav__link">
+      Equilibrium Casimir-Polder potential near a plate
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tests/NEQSpheres/NEQSpheres/" title="Heat transfer and non-equilibrium Casimir forces between spheres" class="md-nav__link">
+      Heat transfer and non-equilibrium Casimir forces between spheres
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tests/libscuff/libscuff/" title="Low-level tests of the core library" class="md-nav__link">
+      Low-level tests of the core library
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      General reference
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        General reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reference/TopLevel/" title="Top-level overview" class="md-nav__link">
+      Top-level overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reference/Installing/" title="Installation" class="md-nav__link">
+      Installation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reference/Geometries/" title="Geometry descriptions" class="md-nav__link">
+      Geometry descriptions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reference/Materials/" title="Material designations" class="md-nav__link">
+      Material designations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reference/Transformations/" title="Geometric transformations" class="md-nav__link">
+      Geometric transformations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reference/IncidentFields/" title="Incident fields" class="md-nav__link">
+      Incident fields
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reference/BrillouinZoneIntegration/" title="Brillouin zone integration" class="md-nav__link">
+      Brillouin zone integration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reference/FAQ/" title="FAQ" class="md-nav__link">
+      FAQ
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Command-line tools
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Command-line tools
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/GeneralReference/" title="General command-line reference" class="md-nav__link">
+      General command-line reference
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-scatter/scuff-scatter/" title="scuff-scatter" class="md-nav__link">
+      scuff-scatter
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-transmission/scuff-transmission/" title="scuff-transmission" class="md-nav__link">
+      scuff-transmission
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-ldos/scuff-ldos/" title="scuff-ldos" class="md-nav__link">
+      scuff-ldos
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-tmatrix/scuff-tmatrix/" title="scuff-tmatrix" class="md-nav__link">
+      scuff-tmatrix
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-cas3D/scuff-cas3D/" title="scuff-cas3D" class="md-nav__link">
+      scuff-cas3D
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-caspol/scuff-caspol/" title="scuff-caspol" class="md-nav__link">
+      scuff-caspol
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-neq/scuff-neq/" title="scuff-neq" class="md-nav__link">
+      scuff-neq
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-rf/scuff-rf/" title="scuff-rf" class="md-nav__link">
+      scuff-rf
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-static/scuff-static/" title="scuff-static" class="md-nav__link">
+      scuff-static
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-spectrum/scuff-spectrum/" title="scuff-spectrum" class="md-nav__link">
+      scuff-spectrum
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-analyze/scuff-analyze/" title="scuff-analyze" class="md-nav__link">
+      scuff-analyze
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-integrate/scuff-integrate/" title="scuff-integrate" class="md-nav__link">
+      scuff-integrate
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      High-level interface
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        High-level interface
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../HighLevelInterface/HighLevelInterface/" title="High-Level Interface" class="md-nav__link">
+      High-Level Interface
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Low-level API
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        Low-level API
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../API/libscuff/" title="libscuff" class="md-nav__link">
+      libscuff
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../API/MainFlow/" title="MainFlow API" class="md-nav__link">
+      MainFlow API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../API/UtilityAPI/" title="Utility API" class="md-nav__link">
+      Utility API
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8" checked>
+    
+    <label class="md-nav__link" for="nav-8">
+      For developers
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        For developers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Implementation/" title="Implementation" class="md-nav__link">
+      Implementation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
       
     
-    <li>Data Structures</li>
-    <li class="wy-breadcrumbs-aside">
-      
+    
+    <a href="./" title="Data Structures" class="md-nav__link md-nav__link--active">
+      Data Structures
+    </a>
+    
+  </li>
+
         
-          <a href="https://github.com/homerreid/scuff-em/" class="icon icon-github"> Edit on GitHub</a>
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Documentation/" title="Documentation" class="md-nav__link">
+      Documentation
+    </a>
+  </li>
+
         
-      
-    </li>
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../SingularIntegrals/" title="Code for computing singular integrals" class="md-nav__link">
+      Code for computing singular integrals
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
   </ul>
-  <hr/>
-</div>
-          <div role="main">
-            <div class="section">
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
               
+                
+                  <a href="https://github.com/homerreid/scuff-em/edit/master/docs/forDevelopers/DataStructures.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
                 <h1 id="data-structures-and-class-methods-in-scuff-em">Data Structures and Class Methods in <a class="wikilink" href="../../scuff-em/">scuff-em</a></h1>
 <p>This page is intended to serve as a starting point for hackers 
 seeking to understand, or extend, the nitty-gritty implementation
@@ -429,9 +1287,9 @@ available as a PDF document.</p>
 <p><a name="Geometries"></a></p>
 <h2 id="1-geometries-regions-surfaces">1. Geometries, Regions, Surfaces</h2>
 <p>The top-level data structure in <a class="wikilink" href="../../libscuff/">libscuff</a>
-is a C++ class named <code>RWGGeometry.</code> The definition of this class is a 
+is a C++ class named <code class="codehilite">RWGGeometry.</code> The definition of this class is a 
 little too big to present in full here (you can find it in the 
-header file <code>libscuff.h</code>), but we will point out its
+header file <code class="codehilite">libscuff.h</code>), but we will point out its
 most important data fields and class methods.</p>
 <p>Geometries in <a class="wikilink" href="../../scuff-em/">scuff-em</a> are represented
 a collection of two or more contiguous 
@@ -440,241 +1298,241 @@ bounded by one or more two-dimensional <em>surfaces.</em>
 Material properties (permittivity and permeability) are homogeneous 
 (spatially constant) in each region and described by a single
 <a href="../../reference/Materials/"><span class="CodeName">scuff-em</span> material description</a>.</p>
-<p>Each region is assigned an integer index starting from <code>0.</code>
-The <code>RWGGeometry</code> includes the following data fields for 
+<p>Each region is assigned an integer index starting from <code class="codehilite">0.</code>
+The <code class="codehilite">RWGGeometry</code> includes the following data fields for 
 identifying physical regions.</p>
-<pre><code class="C++">class RWGGeometry 
-   { 
-      ... 
-      int NumRegions;
-      char **RegionLabels;
-      MatProp **RegionMPs;
-      ... 
-   }; 
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">RWGGeometry</span> 
+   <span class="p">{</span> 
+      <span class="p">...</span> 
+      <span class="kt">int</span> <span class="n">NumRegions</span><span class="p">;</span>
+      <span class="kt">char</span> <span class="o">**</span><span class="n">RegionLabels</span><span class="p">;</span>
+      <span class="n">MatProp</span> <span class="o">**</span><span class="n">RegionMPs</span><span class="p">;</span>
+      <span class="p">...</span> 
+   <span class="p">};</span> 
+</pre></div>
 
-<p>Here <code>RegionLabels[i]</code> is a string description for the 
-<em>i</em>th region in the problem, and <code>RegionMPs[i]</code> is
-a pointer to an instance of <code>MatProp</code> describing its 
-frequency-dependent material properies. (<code>MatProp</code> is 
+<p>Here <code class="codehilite">RegionLabels[i]</code> is a string description for the 
+<em>i</em>th region in the problem, and <code class="codehilite">RegionMPs[i]</code> is
+a pointer to an instance of <code class="codehilite">MatProp</code> describing its 
+frequency-dependent material properies. (<code class="codehilite">MatProp</code> is 
 a very simple class, implemented by the 
 <a class="wikilink" href="../../libmatprop/">libmatprop</a> submodule of <a class="wikilink" href="../../scuff-em/">scuff-em</a>, for
 handling frequency-dependent material properties.)</p>
-<p><code>RWGGeometry</code> always starts off with a single 
-region (region <code>0</code>) with label <code>Exterior</code> 
+<p><code class="codehilite">RWGGeometry</code> always starts off with a single 
+region (region <code class="codehilite">0</code>) with label <code class="codehilite">Exterior</code> 
 and the material properties of vacuum. 
-Each <code>REGION</code> statement in the
-<a href="../../reference/Geometries/"><code>.scuffgeo</code> file</a>
-then creates a new region, starting with region <code>1.</code>
-(This is true unless the label specified to the <code>REGION</code>
-keyword is <code>Exterior,</code> in which case the 
-statement just redefines the material properties of region <code>0</code>.)
-Each <code>OBJECT...ENDOBJECT</code> section in the <code>.scuffgeo</code>
+Each <code class="codehilite">REGION</code> statement in the
+<a href="../../reference/Geometries/"><code class="codehilite"><span class="na">.scuffgeo</span></code> file</a>
+then creates a new region, starting with region <code class="codehilite">1.</code>
+(This is true unless the label specified to the <code class="codehilite">REGION</code>
+keyword is <code class="codehilite">Exterior,</code> in which case the 
+statement just redefines the material properties of region <code class="codehilite">0</code>.)
+Each <code class="codehilite">OBJECT...ENDOBJECT</code> section in the <code class="codehilite"><span class="na">.scuffgeo</span></code>
 file also creates a single new region (for the interior of the object).</p>
 <p>Regions in a geometry are separated from one another by surfaces.
-Each surface is described by a C++ class named <code>RWGSurface.</code>
-The <code>RWGGeometry</code> class maintains an internal array of 
-<code>RWGSurfaces:</code></p>
-<pre><code class="C++">class RWGGeometry 
-   { 
-      ... 
-      int NumSurfaces;
-      RWGSurface **Surfaces;
-      ... 
-   }; 
-</code></pre>
+Each surface is described by a C++ class named <code class="codehilite">RWGSurface.</code>
+The <code class="codehilite">RWGGeometry</code> class maintains an internal array of 
+<code class="codehilite">RWGSurfaces:</code></p>
+<div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">RWGGeometry</span> 
+   <span class="p">{</span> 
+      <span class="p">...</span> 
+      <span class="kt">int</span> <span class="n">NumSurfaces</span><span class="p">;</span>
+      <span class="n">RWGSurface</span> <span class="o">**</span><span class="n">Surfaces</span><span class="p">;</span>
+      <span class="p">...</span> 
+   <span class="p">};</span> 
+</pre></div>
 
-<p>Each <code>OBJECT...ENDOBJECT</code> or <code>SURFACE...ENDSURFACE</code>
-section in the <code>.scuffgeo</code> file adds a new <code>RWGSurface</code>
+<p>Each <code class="codehilite">OBJECT...ENDOBJECT</code> or <code class="codehilite">SURFACE...ENDSURFACE</code>
+section in the <code class="codehilite"><span class="na">.scuffgeo</span></code> file adds a new <code class="codehilite">RWGSurface</code>
 structure to the geometry. (Note that, in <a class="wikilink" href="../../scuff-em/">scuff-em</a> 
 parlance, an "object" is just a special case of a surface in which the 
 surface is <em>closed.</em>) </p>
-<p>The <code>RWGSurface</code> class is again slightly
+<p>The <code class="codehilite">RWGSurface</code> class is again slightly
 too complicated to list in full here, but we will discuss its most salient 
-fields and methods. Among these are the <code>RegionIndices</code> field:</p>
-<pre><code class="C++"> class RWGSurface
-   { 
-      ... 
-      int RegionIndices[2];
-      ... 
-   }; 
-</code></pre>
+fields and methods. Among these are the <code class="codehilite">RegionIndices</code> field:</p>
+<div class="codehilite"><pre><span></span> <span class="k">class</span> <span class="nc">RWGSurface</span>
+   <span class="p">{</span> 
+      <span class="p">...</span> 
+      <span class="kt">int</span> <span class="n">RegionIndices</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+      <span class="p">...</span> 
+   <span class="p">};</span> 
+</pre></div>
 
 <p>These two integers are the indices of the regions on the two sides of the 
-surface. The <em>first</em> region (<code>RegionIndex[0]</code>) is 
+surface. The <em>first</em> region (<code class="codehilite">RegionIndex[0]</code>) is 
 the <em>positive</em> region for the surface; this means that the electric
 and magnetic surface currents on the surface contribute to the fields 
 in that region with a positive sign. The second region 
-(<code>RegionIndex[1]</code>) is the <em>negative</em> region; currents 
+(<code class="codehilite">RegionIndex[1]</code>) is the <em>negative</em> region; currents 
 on the surface contribute to the fields in that region with a negative
 sign.</p>
 <p>Another way to think of this is that the surface normal vector 
 <strong>n</strong> points 
-<strong>away from</strong> <code>RegionIndex[1]</code> 
+<strong>away from</strong> <code class="codehilite">RegionIndex[1]</code> 
 and 
-<strong>into</strong> <code>RegionIndex[0]</code>.</p>
+<strong>into</strong> <code class="codehilite">RegionIndex[0]</code>.</p>
 <p><a name="Panels"></a></p>
 <h2 id="2-panels-edges-vertices">2. Panels, Edges, Vertices</h2></h2>
 <p>The mesh describing each surface in a geometry is structure is analyzed 
 into lists of <em>vertices</em>, triangular <em>panels,</em> and panel 
-<em>edges.</em> Several internal data fields in the <code>RWGSurface</code>
+<em>edges.</em> Several internal data fields in the <code class="codehilite">RWGSurface</code>
 class are devoted to storing this information. </p>
-<pre><code class="C++">class RWGSurface
-{ 
-  ... 
-  int NumVertices;
-  double *Vertices;
+<div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">RWGSurface</span>
+<span class="p">{</span> 
+  <span class="p">...</span> 
+  <span class="kt">int</span> <span class="n">NumVertices</span><span class="p">;</span>
+  <span class="kt">double</span> <span class="o">*</span><span class="n">Vertices</span><span class="p">;</span>
 
-  int NumPanels;
-  RWGPanel **Panels;
+  <span class="kt">int</span> <span class="n">NumPanels</span><span class="p">;</span>
+  <span class="n">RWGPanel</span> <span class="o">**</span><span class="n">Panels</span><span class="p">;</span>
 
-  int NumEdges;            
-  RWGEdge **Edges;
-  ... 
+  <span class="kt">int</span> <span class="n">NumEdges</span><span class="p">;</span>            
+  <span class="n">RWGEdge</span> <span class="o">**</span><span class="n">Edges</span><span class="p">;</span>
+  <span class="p">...</span> 
 
-};
-</code></pre>
+<span class="p">};</span>
+</pre></div>
 
-<p>Here <code>Vertices</code> is an array of <code>3*NumVertices</code> 
-<code>double</code> values in which the cartesian coordinates of each 
+<p>Here <code class="codehilite">Vertices</code> is an array of <code class="codehilite">3*NumVertices</code> 
+<code class="codehilite">double</code> values in which the cartesian coordinates of each 
 vertex are stored one after another. Thus, the <em>x, y, z</em> 
-coordinates of the <code>nv</code>th vertex are 
-<code>Vertices[3*nv+0], Vertices[3*nv+1], Vertices[3*nv+2].</code></p>
-<p><code>Panels</code> and <code>Edges</code> are arrays of pointers
+coordinates of the <code class="codehilite">nv</code>th vertex are 
+<code class="codehilite">Vertices[3*nv+0], Vertices[3*nv+1], Vertices[3*nv+2].</code></p>
+<p><code class="codehilite">Panels</code> and <code class="codehilite">Edges</code> are arrays of pointers
 to specialized data structures for storing geometric data.</p>
-<h2 id="the-rwgpanel-and-rwgedge-structures">The <code>RWGPanel</code> and <code>RWGEdge</code> structures</h2>
+<h2 id="the-rwgpanel-and-rwgedge-structures">The <code class="codehilite">RWGPanel</code> and <code class="codehilite">RWGEdge</code> structures</h2>
 <p>The elemental data structure in the <span class="codename">scuff-em</span>
-geometry hierarchy is <code>RWGPanel</code>. Each instance of this structure
+geometry hierarchy is <code class="codehilite">RWGPanel</code>. Each instance of this structure
 describes a single triangular panel in the mesh discretization of an 
-<code>RWGSurface.</code></p>
-<p><strong> <code>RWGPanel</code> definition </strong></p>
-<pre><code class="C++">typedef struct RWGPanel
- { 
-   int VI[3];            /* indices of vertices in Vertices array */
-   int EI[3];            /* indices of edges in Edges array */
+<code class="codehilite">RWGSurface.</code></p>
+<p><strong> <code class="codehilite">RWGPanel</code> definition </strong></p>
+<div class="codehilite"><pre><span></span><span class="k">typedef</span> <span class="k">struct</span> <span class="n">RWGPanel</span>
+ <span class="p">{</span> 
+   <span class="kt">int</span> <span class="n">VI</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>            <span class="cm">/* indices of vertices in Vertices array */</span>
+   <span class="kt">int</span> <span class="n">EI</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>            <span class="cm">/* indices of edges in Edges array */</span>
 
-   double Centroid[3];   /* panel centroid */
-   double ZHat[3];       /* normal vector */
-   double Radius;        /* radius of enclosing sphere */
-   double Area;          /* panel area */
+   <span class="kt">double</span> <span class="n">Centroid</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>   <span class="cm">/* panel centroid */</span>
+   <span class="kt">double</span> <span class="n">ZHat</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>       <span class="cm">/* normal vector */</span>
+   <span class="kt">double</span> <span class="n">Radius</span><span class="p">;</span>        <span class="cm">/* radius of enclosing sphere */</span>
+   <span class="kt">double</span> <span class="n">Area</span><span class="p">;</span>          <span class="cm">/* panel area */</span>
 
-   int Index;            /* index of this panel within RWGSurface */
+   <span class="kt">int</span> <span class="n">Index</span><span class="p">;</span>            <span class="cm">/* index of this panel within RWGSurface */</span>
 
- } RWGPanel;
-</code></pre>
+ <span class="p">}</span> <span class="n">RWGPanel</span><span class="p">;</span>
+</pre></div>
 
-<p>Here the elements of the <code>VI</code> array are the indices of the 
+<p>Here the elements of the <code class="codehilite">VI</code> array are the indices of the 
 three panel vertices within the list of vertices for the given 
-<code>RWGSurface.</code> The <code>Index</code> field in <code>RWGPanel</code>
-indicates that panel's index within the <code>Panels</code> array 
-of the parent <code>RWGSurface.</code> The remaining fields tabulate some useful
+<code class="codehilite">RWGSurface.</code> The <code class="codehilite">Index</code> field in <code class="codehilite">RWGPanel</code>
+indicates that panel's index within the <code class="codehilite">Panels</code> array 
+of the parent <code class="codehilite">RWGSurface.</code> The remaining fields tabulate some useful
 geometric data on the panel.</p>
-<p>In addition to an <code>RWGPanel</code> structure for each triangle 
-in the surface mesh, we also create an <code>RWGEdge</code> structure
+<p>In addition to an <code class="codehilite">RWGPanel</code> structure for each triangle 
+in the surface mesh, we also create an <code class="codehilite">RWGEdge</code> structure
 for each panel <em>edge.</em></p>
-<p><strong> <code>RWGEdge</code> definition </strong></p>
-<pre><code class="C++">typedef struct RWGEdge 
- { 
-   int iV1, iV2, iQP, iQM;  /* indices of panel vertices (iV1&amp;lt;iV2) */
-   double Centroid[3];      /* edge centroid */
-   double Length;           /* length of edge */
-   double Radius;           /* radius of enclosing sphere */
+<p><strong> <code class="codehilite">RWGEdge</code> definition </strong></p>
+<div class="codehilite"><pre><span></span><span class="k">typedef</span> <span class="k">struct</span> <span class="n">RWGEdge</span> 
+ <span class="p">{</span> 
+   <span class="kt">int</span> <span class="n">iV1</span><span class="p">,</span> <span class="n">iV2</span><span class="p">,</span> <span class="n">iQP</span><span class="p">,</span> <span class="n">iQM</span><span class="p">;</span>  <span class="cm">/* indices of panel vertices (iV1&amp;lt;iV2) */</span>
+   <span class="kt">double</span> <span class="n">Centroid</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>      <span class="cm">/* edge centroid */</span>
+   <span class="kt">double</span> <span class="n">Length</span><span class="p">;</span>           <span class="cm">/* length of edge */</span>
+   <span class="kt">double</span> <span class="n">Radius</span><span class="p">;</span>           <span class="cm">/* radius of enclosing sphere */</span>
 
-   int iPPanel;             /* index of PPanel within RWGSurface (0..NumPanels-1)*/
-   int iMPanel;             /* index of MPanel within RWGSurface (0..NumPanels-1)*/
-   int PIndex;              /* index of this edge within PPanel (0..2)*/
-   int MIndex;              /* index of this edge within MPanel (0..2)*/
-   int Index;               /* index of this edge within RWGSurface (0..NumEdges-1)*/
+   <span class="kt">int</span> <span class="n">iPPanel</span><span class="p">;</span>             <span class="cm">/* index of PPanel within RWGSurface (0..NumPanels-1)*/</span>
+   <span class="kt">int</span> <span class="n">iMPanel</span><span class="p">;</span>             <span class="cm">/* index of MPanel within RWGSurface (0..NumPanels-1)*/</span>
+   <span class="kt">int</span> <span class="n">PIndex</span><span class="p">;</span>              <span class="cm">/* index of this edge within PPanel (0..2)*/</span>
+   <span class="kt">int</span> <span class="n">MIndex</span><span class="p">;</span>              <span class="cm">/* index of this edge within MPanel (0..2)*/</span>
+   <span class="kt">int</span> <span class="n">Index</span><span class="p">;</span>               <span class="cm">/* index of this edge within RWGSurface (0..NumEdges-1)*/</span>
 
-   RWGEdge *Next;           /* pointer to next edge in linked list */
+   <span class="n">RWGEdge</span> <span class="o">*</span><span class="n">Next</span><span class="p">;</span>           <span class="cm">/* pointer to next edge in linked list */</span>
 
- } RWGEdge;
-</code></pre>
+ <span class="p">}</span> <span class="n">RWGEdge</span><span class="p">;</span>
+</pre></div>
 
-<p>The <code>iQP, iV1, iV2, iQM</code> fields here are indices into the 
-list of vertices for the parent <code>RWGSurface.</code> 
-<code>iV1</code> and <code>iV2</code> are the actual endpoints of the edge.
-<code>iQP</code> and <code>iQM</code> denote respectively the current
+<p>The <code class="codehilite">iQP, iV1, iV2, iQM</code> fields here are indices into the 
+list of vertices for the parent <code class="codehilite">RWGSurface.</code> 
+<code class="codehilite">iV1</code> and <code class="codehilite">iV2</code> are the actual endpoints of the edge.
+<code class="codehilite">iQP</code> and <code class="codehilite">iQM</code> denote respectively the current
 <em>source</em> and <em>sink</em> vertices for the RWG basis function corresponding
 to this edge.</p>
-<p><code>iPPanel</code> and <code>iMPanel</code> are the indices (into the 
-<code>Panels</code> array of the parent <code>RWGSurface</code>) of the 
+<p><code class="codehilite">iPPanel</code> and <code class="codehilite">iMPanel</code> are the indices (into the 
+<code class="codehilite">Panels</code> array of the parent <code class="codehilite">RWGSurface</code>) of the 
 <em>positive</em> and <em>negative</em> panels associated with the edge.
 (The positive panel is the one from which the RWG current emanates; 
-its vertices are <code>iQP, iV1, iV2.</code>
+its vertices are <code class="codehilite">iQP, iV1, iV2.</code>
 The negative panel is the one into which the RWG current is sunk;
-its vertices are <code>iQM, iV1, iV2.</code>) 
-The <code>iPPanel</code> and <code>iMPanel</code> fields take values
-between <code>0</code> and <code>NumPanels-1</code>, where 
-<code>NumPanels</code> is defined in the parent <code>RWGSurface.</code></p>
-<p><code>PIndex</code> and <code>MIndex</code> are the indices of the edge 
-within the positive and negative <code>RWGPanel</code>s.
+its vertices are <code class="codehilite">iQM, iV1, iV2.</code>) 
+The <code class="codehilite">iPPanel</code> and <code class="codehilite">iMPanel</code> fields take values
+between <code class="codehilite">0</code> and <code class="codehilite">NumPanels-1</code>, where 
+<code class="codehilite">NumPanels</code> is defined in the parent <code class="codehilite">RWGSurface.</code></p>
+<p><code class="codehilite">PIndex</code> and <code class="codehilite">MIndex</code> are the indices of the edge 
+within the positive and negative <code class="codehilite">RWGPanel</code>s.
 (The index of an <em>edge</em> within a panel is defined as the index 
 within the panel of the panel <em>vertex</em> opposite that edge; the 
-index of a vertex is its position in the <code>VI</code> array in the 
-<code>RWGPanel</code> structure.)</p>
-<p>The <code>Index</code> field of <code>RWGEdge</code> is the index of 
-the structure within the <code>Edges</code> array of the parent 
-<code>RWGSurface.</code></p>
+index of a vertex is its position in the <code class="codehilite">VI</code> array in the 
+<code class="codehilite">RWGPanel</code> structure.)</p>
+<p>The <code class="codehilite">Index</code> field of <code class="codehilite">RWGEdge</code> is the index of 
+the structure within the <code class="codehilite">Edges</code> array of the parent 
+<code class="codehilite">RWGSurface.</code></p>
 <p>The remaining fields store some geometric data on the edge.
-The <code>Centroid</code> field stores the cartesian coordinates
-of the midpoint of the line segment between vertices <code>V1</code>
-and <code>V2</code>.</p>
-<p>Here's an example of two panels (panel indices <code>17</code> and 
-<code>39</code>) in a surface mesh, and a single 
-edge (edge index <code>24</code>) shared between them. 
-Panel <code>17</code> is the positive panel for the edge, 
-while panel <code>39</code> is the negative panel for the edge; the corresponding
+The <code class="codehilite">Centroid</code> field stores the cartesian coordinates
+of the midpoint of the line segment between vertices <code class="codehilite">V1</code>
+and <code class="codehilite">V2</code>.</p>
+<p>Here's an example of two panels (panel indices <code class="codehilite">17</code> and 
+<code class="codehilite">39</code>) in a surface mesh, and a single 
+edge (edge index <code class="codehilite">24</code>) shared between them. 
+Panel <code class="codehilite">17</code> is the positive panel for the edge, 
+while panel <code class="codehilite">39</code> is the negative panel for the edge; the corresponding
 direction of current flow is indicated by the arrows.
 The larger red numbers near the vertices are the indices of those
-vertices in the <code>Vertices</code> array. 
+vertices in the <code class="codehilite">Vertices</code> array. 
 The smaller magenta and cyan numbers are the indices of the vertices 
-within the <code>VI</code> arrays in the two <code>RWGPanels</code>.
+within the <code class="codehilite">VI</code> arrays in the two <code class="codehilite">RWGPanels</code>.
 (The other four edges of this panel pair would also have corresponding 
-<code>RWGEdge</code> structures; these are not shown in the figure.)</p>
+<code class="codehilite">RWGEdge</code> structures; these are not shown in the figure.)</p>
 <p><img alt="RWG edge" src="../RWGEdge.png" /></p>
 <p><a name="Assembling"></a></p>
 <h2 id="3-assembling-the-bem-matrix">3. Assembling the BEM Matrix</h2>
-<p>The <code>RWGGeometry</code> class contains a hierarchy of 
+<p>The <code class="codehilite">RWGGeometry</code> class contains a hierarchy of 
 routines for assembling the BEM matrix. If you are simply
 using the code to solve scattering problems, you will
 only ever need to call the top-level routine 
-<code>AssembleBEMMatrix</code> or perhaps the 
-second-highest-level routine, <code>AssembleBEMMatrixBlock.</code>
+<code class="codehilite">AssembleBEMMatrix</code> or perhaps the 
+second-highest-level routine, <code class="codehilite">AssembleBEMMatrixBlock.</code>
 However, developers of surface-integral-equation methods 
 may wish to access the lower-level routines for 
 computing the interactions of individual RWG basis functions
 or for computing certain integrals over triangular regions.</p>
-<h3 id="assemblebemmatrix"><code>AssembleBEMMatrix</code></h3>
+<h3 id="assemblebemmatrix"><code class="codehilite">AssembleBEMMatrix</code></h3>
 <p>The top-level matrix assembly routine is 
-<code>AssembleBEMMatrix.</code> This routine loops over 
-all unique pairs of <code>RWGSurfaces</code> in the geometry. 
+<code class="codehilite">AssembleBEMMatrix.</code> This routine loops over 
+all unique pairs of <code class="codehilite">RWGSurfaces</code> in the geometry. 
 For each unique pair 
-of surfaces, the routine calls <code>AssembleBEMMatrixBlock</code> 
+of surfaces, the routine calls <code class="codehilite">AssembleBEMMatrixBlock</code> 
 to assemble the subblock of the BEM matrix corresponding to a single 
-pair of <code>RWGSurfaces,</code> then stamps this subblock 
+pair of <code class="codehilite">RWGSurfaces,</code> then stamps this subblock 
 into the appropriate place in the overall BEM matrix. </p>
-<p>For example, if a geometry contains three <code>RWGSurfaces</code>,
+<p>For example, if a geometry contains three <code class="codehilite">RWGSurfaces</code>,
 then its overall BEM matrix has the block structure</p>
 <p><img alt="BEM matrix blocks" src="../BEMMatrixBlocks.png" /></p>
 <p>where the <script type="math/tex">\mathbf{M}__{ij}</script> subblock describes the
 interactions of surfaces <em>i</em> and <em>j</em>.
-In this case <code>AssembleBEMMatrix</code> proceeds by making 6 calls
-to <code>AssembleBEMMatrixBlock</code>, one for each of the 
+In this case <code class="codehilite">AssembleBEMMatrix</code> proceeds by making 6 calls
+to <code class="codehilite">AssembleBEMMatrixBlock</code>, one for each of the 
 diagonal and above-diagonal blocks. (The below-diagonal
 blocks are related to their above-diagonal counterparts by 
 symmetry.)</p>
-<h3 id="assemblebemmatrixblock"><code>AssembleBEMMatrixBlock</code></h3>
-<p><code>AssembleBEMMatrixBlock</code> computes the subblock of the 
-BEM matrix corresponding to a single pair of <code>RWGSurface</code>s.
+<h3 id="assemblebemmatrixblock"><code class="codehilite">AssembleBEMMatrixBlock</code></h3>
+<p><code class="codehilite">AssembleBEMMatrixBlock</code> computes the subblock of the 
+BEM matrix corresponding to a single pair of <code class="codehilite">RWGSurface</code>s.
 For compact (non-periodic) geometries, this amounts to making just
-a single call to <code>SurfaceSurfaceInteractions</code>. For 
+a single call to <code class="codehilite">SurfaceSurfaceInteractions</code>. For 
 periodic geometries, this involves making multiple calls to 
-<code>SurfaceSurfaceInteractions</code> in which one of the two 
+<code class="codehilite">SurfaceSurfaceInteractions</code> in which one of the two 
 surfaces is displaced through various lattice vectors <strong>L</strong> to account
 for the contribution of periodic images. </p>
 <p>The contribution of the 
-matrix subblock computed by <code>SurfaceSurfaceInteractions</code>
+matrix subblock computed by <code class="codehilite">SurfaceSurfaceInteractions</code>
 with displacement vector <strong>L</strong> is weighted in the overall
 BEM matrix by a Bloch phase factor 
 <script type="math/tex"> e^{i\mathbf{k}\cdot \mathbf{L}}</script>
@@ -683,10 +1541,10 @@ where <strong>k</strong> is the Bloch wavevector, i.e. we have </p>
 <p>where the <strong>L</strong> superscript indicates that the corresponding
 matrix subblock is to be computed with one of the two surfaces 
 displaced through translation vector <strong>L</strong>.</p>
-<h3 id="surfacesurfaceinteractions"><code>SurfaceSurfaceInteractions</code></h3>
-<p><code>SurfaceSurfaceInteractions</code> loops over all <code>RWGEdge</code>
+<h3 id="surfacesurfaceinteractions"><code class="codehilite">SurfaceSurfaceInteractions</code></h3>
+<p><code class="codehilite">SurfaceSurfaceInteractions</code> loops over all <code class="codehilite">RWGEdge</code>
 structures on each of the two surfaces it is considering.
-For each pair of edges, it calls <code>EdgeEdgeInteractions</code>
+For each pair of edges, it calls <code class="codehilite">EdgeEdgeInteractions</code>
 to compute the inner products of the RWG basis functions
 with the <strong>G</strong> and <strong>C</strong> dyadic Green's functions
 for each of the material regions through which the two surfaces
@@ -725,8 +1583,8 @@ the interior medium and one involving the kernels for
 the exterior. (If the surfaces are PEC, then the dimension
 of the matrix is halved with only the <em>EE</em> terms
 retained.)</p>
-<h3 id="edgeedgeinteractions"><code>EdgeEdgeInteractions</code></h3>
-<p><code>EdgeEdgeInteractions</code> considers a pair of RWG basis
+<h3 id="edgeedgeinteractions"><code class="codehilite">EdgeEdgeInteractions</code></h3>
+<p><code class="codehilite">EdgeEdgeInteractions</code> considers a pair of RWG basis
 functions and computes the inner products of these basis functions
 with the <strong>G</strong> and <strong>C</strong> dyadic Green's functions for a 
 single material medium. Because each basis function is supported
@@ -737,9 +1595,9 @@ triangle-pair contributions:</p>
 interior edges to which the RWG basis functions are associated, and
 each of the four terms in the sum is a four-dimensional integral 
 over a single pair of panels, computed by 
-<code>PanelPanelInteractions.</code></p>
-<h3 id="panelpanelinteractions"><code>PanelPanelInteractions</code></h3>
-<p><code>PanelPanelInteractions</code> is the lowest-level routine in the 
+<code class="codehilite">PanelPanelInteractions.</code></p>
+<h3 id="panelpanelinteractions"><code class="codehilite">PanelPanelInteractions</code></h3>
+<p><code class="codehilite">PanelPanelInteractions</code> is the lowest-level routine in the 
 <a class="wikilink" href="../../scuff-em/">scuff-em</a> BEM matrix assembly hierarchy.
 This routine computes the individual terms in equation (1) above,
 i.e. the contributions of a single pair of panels
@@ -751,9 +1609,9 @@ up into two factors between equations (1) and (2): the <em>1/2A</em>
 part is included in the panel-panel integrals (2), while 
 the <em>l</em> part is included when summing the four panel-panel
 contributions in equation (1) to obtain the overall inner product. </p>
-<p>If the panels are far away from each other, <code>PanelPanelInteractions</code> 
+<p>If the panels are far away from each other, <code class="codehilite">PanelPanelInteractions</code> 
 uses low-order four-dimensional numerical cubature to compute the full
-interactions. Otherwise, <code>PanelPanelInteractions</code> uses
+interactions. Otherwise, <code class="codehilite">PanelPanelInteractions</code> uses
 low-order four-dimensional numerical cubature to compute the interactions
 with <em>singularity-subtracted versions</em> of the <strong>G</strong> and <strong>C</strong> 
 kernels, then adds the contributions of the singular terms after 
@@ -772,7 +1630,7 @@ for a dielectric geometry. The
 <a class="wikilink" href="../../gmsh/">gmsh</a> geometry file for this example is 
 <a href="scuff-em/reference/CubeExample/Cube_N.geo">Cube_N.geo</a>,
 the <a class="wikilink" href="../../gmsh/">gmsh</a> mesh file produced by running
-<code>gmsh -2 Cube_N.geo</code> is
+<code class="codehilite">gmsh -2 Cube_N.geo</code> is
 <a href="scuff-em/reference/CubeExample/Cube_10.msh">Cube_10.msh</a>,
 and a <a class="wikilink" href="../../scuff-em/">scuff-em</a> geometry file describing
 a geometry consisting of this discretized cube with interior dielectric
@@ -782,24 +1640,24 @@ permittivity &epsilon;=4 is
 <p>For low-level work it is convenient to have data on the internal 
 indices that <a class="wikilink" href="../../scuff-em/">scuff-em</a> assigns to 
 panels, vertices, and edges when it reads in a geometry file.
-We get this by running <code>scuff-analyze</code> on the mesh file
-in question with the <code>--WriteGMSHLabels</code> options:</p>
-<pre><code class="bash"> % scuff-analyze --mesh Cube_10.msh --WriteGMSHFiles --WriteGMSHLabels
-</code></pre>
+We get this by running <code class="codehilite">scuff-analyze</code> on the mesh file
+in question with the <code class="codehilite">--WriteGMSHLabels</code> options:</p>
+<div class="codehilite"><pre><span></span> % scuff-analyze --mesh Cube_10.msh --WriteGMSHFiles --WriteGMSHLabels
+</pre></div>
 
-<p>This produces a file named <code>Cube_10.pp</code>, which we open in 
+<p>This produces a file named <code class="codehilite">Cube_10.pp</code>, which we open in 
 <a class="wikilink" href="../../gmsh/">gmsh</a> to produce a graphical depiction of 
 the labeling of panels, edges, and vertices. Zooming in on the region
 near the origin, we will focus on the two panels lying closest to the 
 origin in the <em>xy</em> plane; we see that 
 <a class="wikilink" href="../../scuff-em/">scuff-em</a> has assigned these two panels
-panel indices <code>0</code> and <code>1</code>, respectively, while
-the edge they share has been assigned interior-edge index <code>0</code>.</p>
+panel indices <code class="codehilite">0</code> and <code class="codehilite">1</code>, respectively, while
+the edge they share has been assigned interior-edge index <code class="codehilite">0</code>.</p>
 <p><img alt="CubeMeshLabels" src="../CubeMeshLabels.png" /></p>
 <h2 id="rwg-basis-function-b0">RWG basis function <b>b<sub>0</sub></b></h2>
 <p>Here's a schematic depiction of the panels that comprise the
 basis function <strong>b</strong><sub>0</sub> associated with interior edge
-<code>0</code>:</p>
+<code class="codehilite">0</code>:</p>
 <p><img alt="PanelDiagram" src="../PanelDiagram.png" /></p>
 <p>In this diagram, the edge length is <em>L</em>=0.1, <em>O</em> denotes 
 the origin of coordinates, and the vertices marked 
@@ -816,7 +1674,7 @@ Note that
 <i>P<sub>1</sub></i> are respectively the positive and negative
 panels associated with basis function <strong>b</strong><sub>0</sub>.</p>
 <h3 id="panel-panel-interactions">Panel-panel interactions</h3>
-<p>Here's a <code>C++</code> code snippet that computes the 
+<p>Here's a <code class="codehilite">C++</code> code snippet that computes the 
 quantities 
 <i>G<sub>00</sub><sup>++</sup></i> 
 and 
@@ -828,166 +1686,209 @@ with the wavenumber set to <em>k=</em>1.0;
 Just to be totally explicit, the numbers that are being 
 computed here are</p>
 <p><img alt="GC" src="../GCEqs.png" /></p>
-<pre><code class="C++">
- // read in geometry from .scuffgeo file
- RWGGeometry *G = new RWGGeometry(&quot;DielectricCube.scuffgeo&quot;);
- RWGSurface *S = G-&gt;Surfaces[0];
+<div class="codehilite"><pre><span></span> <span class="c1">// read in geometry from .scuffgeo file</span>
+ <span class="n">RWGGeometry</span> <span class="o">*</span><span class="n">G</span> <span class="o">=</span> <span class="k">new</span> <span class="n">RWGGeometry</span><span class="p">(</span><span class="s">&quot;DielectricCube.scuffgeo&quot;</span><span class="p">);</span>
+ <span class="n">RWGSurface</span> <span class="o">*</span><span class="n">S</span> <span class="o">=</span> <span class="n">G</span><span class="o">-&gt;</span><span class="n">Surfaces</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
 
- // initialize an argument structure for GetPanelPanelInteractions
- GetPPIArgStruct MyPPIArgs, *PPIArgs=&amp;MyPPIArgs;
- InitGetPPIArgs(PPIArgs);
- PPIArgs-&gt;Sa = PPIArgs-&gt;Sb = S;
- PPIArgs-&gt;k = 1.0;
+ <span class="c1">// initialize an argument structure for GetPanelPanelInteractions</span>
+ <span class="n">GetPPIArgStruct</span> <span class="n">MyPPIArgs</span><span class="p">,</span> <span class="o">*</span><span class="n">PPIArgs</span><span class="o">=&amp;</span><span class="n">MyPPIArgs</span><span class="p">;</span>
+ <span class="n">InitGetPPIArgs</span><span class="p">(</span><span class="n">PPIArgs</span><span class="p">);</span>
+ <span class="n">PPIArgs</span><span class="o">-&gt;</span><span class="n">Sa</span> <span class="o">=</span> <span class="n">PPIArgs</span><span class="o">-&gt;</span><span class="n">Sb</span> <span class="o">=</span> <span class="n">S</span><span class="p">;</span>
+ <span class="n">PPIArgs</span><span class="o">-&gt;</span><span class="n">k</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
 
- // fill in arguments to compute the positive-positive panel pair
- PPIArgs-&gt;npa = 0;
- PPIArgs-&gt;iQa = 1;
- PPIArgs-&gt;npb = 0;
- PPIArgs-&gt;iQb = 1;
- GetPanelPanelInteractions(PPIArgs);
- printf(&quot;G++ = %e + %ei\n&quot;,real(PPIArgs-&gt;H[0]),imag(PPIArgs-&gt;H[0]));
+ <span class="c1">// fill in arguments to compute the positive-positive panel pair</span>
+ <span class="n">PPIArgs</span><span class="o">-&gt;</span><span class="n">npa</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+ <span class="n">PPIArgs</span><span class="o">-&gt;</span><span class="n">iQa</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+ <span class="n">PPIArgs</span><span class="o">-&gt;</span><span class="n">npb</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+ <span class="n">PPIArgs</span><span class="o">-&gt;</span><span class="n">iQb</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+ <span class="n">GetPanelPanelInteractions</span><span class="p">(</span><span class="n">PPIArgs</span><span class="p">);</span>
+ <span class="n">printf</span><span class="p">(</span><span class="s">&quot;G++ = %e + %ei</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">real</span><span class="p">(</span><span class="n">PPIArgs</span><span class="o">-&gt;</span><span class="n">H</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span><span class="n">imag</span><span class="p">(</span><span class="n">PPIArgs</span><span class="o">-&gt;</span><span class="n">H</span><span class="p">[</span><span class="mi">0</span><span class="p">]));</span>
 
- // fill in arguments to compute the positive-negative panel pair
- PPIArgs-&gt;npa = 0;
- PPIArgs-&gt;iQa = 1;
- PPIArgs-&gt;npb = 1;
- PPIArgs-&gt;iQb = 2;
- GetPanelPanelInteractions(PPIArgs);
- printf(&quot;G++ = %e + %ei\n&quot;,real(PPIArgs-&gt;H[0]),imag(PPIArgs-&gt;H[0]));
-</code></pre>
+ <span class="c1">// fill in arguments to compute the positive-negative panel pair</span>
+ <span class="n">PPIArgs</span><span class="o">-&gt;</span><span class="n">npa</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+ <span class="n">PPIArgs</span><span class="o">-&gt;</span><span class="n">iQa</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+ <span class="n">PPIArgs</span><span class="o">-&gt;</span><span class="n">npb</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+ <span class="n">PPIArgs</span><span class="o">-&gt;</span><span class="n">iQb</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+ <span class="n">GetPanelPanelInteractions</span><span class="p">(</span><span class="n">PPIArgs</span><span class="p">);</span>
+ <span class="n">printf</span><span class="p">(</span><span class="s">&quot;G++ = %e + %ei</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">real</span><span class="p">(</span><span class="n">PPIArgs</span><span class="o">-&gt;</span><span class="n">H</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span><span class="n">imag</span><span class="p">(</span><span class="n">PPIArgs</span><span class="o">-&gt;</span><span class="n">H</span><span class="p">[</span><span class="mi">0</span><span class="p">]));</span>
+</pre></div>
 
-<pre><code>This code produces the following output:
-</code></pre>
-<pre><code>G++ = -3.189105e+00 + -7.950381e-02i
+<div class="codehilite"><pre><span></span>This code produces the following output:
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>G++ = -3.189105e+00 + -7.950381e-02i
 G+- = -1.537561e+00 + -7.956272e-02i
-</code></pre>
+</pre></div>
 
 <p>Notice that, to compute a panel-panel interaction, you allocate
 and initialize an instance of a data structure called 
-<code>GetPPIArgs</code>. This structure contains a large 
+<code class="codehilite">GetPPIArgs</code>. This structure contains a large 
 number of fields which in many cases can be set to default 
 values; to ensure that these fields are properly initialized,
-always call <code>InitGetPPIArgs()</code> on an newly-allocated
-instance of <code>GetPPIArgs</code>.</p>
+always call <code class="codehilite">InitGetPPIArgs()</code> on an newly-allocated
+instance of <code class="codehilite">GetPPIArgs</code>.</p>
 <p>Then, you fill in the appropriate fields of this structure 
 to specify the two panels over which you want to integrate.
 Specifically, the fields 
-<code>Sa</code>, <code>npa</code>
-specify the first panel (the <code>npa</code>th <code>RWGPanel</code>
-in the <code>Panels</code> array for surface <code>Sa</code>), 
-while the field <code>iQa</code> (an integer in the range <code>0..2</code>)
+<code class="codehilite">Sa</code>, <code class="codehilite">npa</code>
+specify the first panel (the <code class="codehilite">npa</code>th <code class="codehilite">RWGPanel</code>
+in the <code class="codehilite">Panels</code> array for surface <code class="codehilite">Sa</code>), 
+while the field <code class="codehilite">iQa</code> (an integer in the range <code class="codehilite">0..2</code>)
 identifies the index of the <strong>Q</strong> vertex (RWG current source/sink
 vertex) within the three vertices of the panel. 
 The fields 
-<code>Sb</code>, <code>npb</code>, and <code>iQb</code>
+<code class="codehilite">Sb</code>, <code class="codehilite">npb</code>, and <code class="codehilite">iQb</code>
 similarly identify the second panel and source/sink vertex.
-Initialize the <code>k</code> field in the 
-<code>GetPPIArgs</code> structure to the wavenumber parameter
+Initialize the <code class="codehilite">k</code> field in the 
+<code class="codehilite">GetPPIArgs</code> structure to the wavenumber parameter
 in the Helmholtz kernel. (<em>k</em> may be complex or purely imaginary.)</p>
 <h3 id="edge-panel-interactions">Edge-panel interactions</h3>
-<p>Here's a <code>C++</code> code snippet that computes the 
+<p>Here's a <code class="codehilite">C++</code> code snippet that computes the 
 full basis-function inner product
 &lt; <strong>b</strong><sub>0</sub> | <strong>G</strong> | <strong>b</strong><sub>0</sub> &gt;
 in equation (1a) above.</p>
-<pre><code class="C++"> GetEEIArgStruct MyEEIArgs, *EEIArgs=&amp;MyEEIArgs;
- InitGetEEIArgs(EEIArgs);
- EEIArgs-&gt;Sa = EEIArgs-&gt;Sb = S;
- EEIArgs-&gt;nea = EEIArgs-&gt;neb = 0;
- EEIArgs-&gt;k = 1.0;
- GetEdgeEdgeInteractions(EEIArgs);
- printf(&quot;&amp;lt;b|G|b&amp;gt; = %e + %ei\n&quot;,real(EEIArgs-&gt;GC[0]),imag(EEIArgs-&gt;GC[0]));
-</code></pre>
+<div class="codehilite"><pre><span></span> <span class="n">GetEEIArgStruct</span> <span class="n">MyEEIArgs</span><span class="p">,</span> <span class="o">*</span><span class="n">EEIArgs</span><span class="o">=&amp;</span><span class="n">MyEEIArgs</span><span class="p">;</span>
+ <span class="n">InitGetEEIArgs</span><span class="p">(</span><span class="n">EEIArgs</span><span class="p">);</span>
+ <span class="n">EEIArgs</span><span class="o">-&gt;</span><span class="n">Sa</span> <span class="o">=</span> <span class="n">EEIArgs</span><span class="o">-&gt;</span><span class="n">Sb</span> <span class="o">=</span> <span class="n">S</span><span class="p">;</span>
+ <span class="n">EEIArgs</span><span class="o">-&gt;</span><span class="n">nea</span> <span class="o">=</span> <span class="n">EEIArgs</span><span class="o">-&gt;</span><span class="n">neb</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+ <span class="n">EEIArgs</span><span class="o">-&gt;</span><span class="n">k</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
+ <span class="n">GetEdgeEdgeInteractions</span><span class="p">(</span><span class="n">EEIArgs</span><span class="p">);</span>
+ <span class="n">printf</span><span class="p">(</span><span class="s">&quot;&amp;lt;b|G|b&amp;gt; = %e + %ei</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">real</span><span class="p">(</span><span class="n">EEIArgs</span><span class="o">-&gt;</span><span class="n">GC</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span><span class="n">imag</span><span class="p">(</span><span class="n">EEIArgs</span><span class="o">-&gt;</span><span class="n">GC</span><span class="p">[</span><span class="mi">0</span><span class="p">]));</span>
+</pre></div>
 
-<p>Note that, similar to the case of <code>GetPanelPanelInteractions</code>
-discussed above, the call to <code>GetEdgeEdgeInteractions</code> takes as
-argument a pointer to a struct of type <code>GetEEIArgStruct</code>.
-As before, you should always call <code>InitGetEEIArgs</code> 
+<p>Note that, similar to the case of <code class="codehilite">GetPanelPanelInteractions</code>
+discussed above, the call to <code class="codehilite">GetEdgeEdgeInteractions</code> takes as
+argument a pointer to a struct of type <code class="codehilite">GetEEIArgStruct</code>.
+As before, you should always call <code class="codehilite">InitGetEEIArgs</code> 
 to initialize this structure, then set whichever fields you 
 need to specify.
 In this case, the only fields we need to set are 
-<code>Sa,Sb</code> (indices of the <code>RWGSurface</code>), 
-<code>nea,neb</code> 
-(indices of the interior edges in the <code>Edges</code> array 
-corresponding to the RWG basis functions), and <code>k</code> 
+<code class="codehilite">Sa,Sb</code> (indices of the <code class="codehilite">RWGSurface</code>), 
+<code class="codehilite">nea,neb</code> 
+(indices of the interior edges in the <code class="codehilite">Edges</code> array 
+corresponding to the RWG basis functions), and <code class="codehilite">k</code> 
 (wavenumber parameter in the Helmholtz kernel). 
 The result of this code snippet is</p>
-<pre><code> &lt;b|G|b&gt; = -6.606176e-02 + 2.356554e-06i
-</code></pre>
+<div class="codehilite"><pre><span></span> &lt;b|G|b&gt; = -6.606176e-02 + 2.356554e-06i
+</pre></div>
 
 <p>Using equation (1a) above, we can understand this result in conjunction 
-with the results printed out above for <code>G++</code> and 
-<code>G+-</code>. For this particular basis function, only two 
+with the results printed out above for <code class="codehilite">G++</code> and 
+<code class="codehilite">G+-</code>. For this particular basis function, only two 
 of the four panel-panel interactions on the RHS of equation (1a) 
 have distinct values (because the two panels that comprise the 
 basis function have the same shapes and areas, so we have
-<code>G-+ = G+-</code> and <code>G-- = G++</code>), and the<br />
+<code class="codehilite">G-+ = G+-</code> and <code class="codehilite">G-- = G++</code>), and the<br />
 edge-length prefactors <em>l</em><sub>m</sub>, <em>l</em><sup>n</sup> 
 both have value 0.1&bullet;&radic;2. Thus for this case 
 equation (1a) reads</p>
 <p>&lt; <strong>b</strong><sub>0</sub> | <strong>G</strong> | <strong>b</strong><sub>0</sub> &gt;
-=2&bullet;0.02&bullet;(<code>G++ - G+-</code>)</p>
+=2&bullet;0.02&bullet;(<code class="codehilite">G++ - G+-</code>)</p>
 <p>and, indeed, plugging in the numbers printed out above, we find</p>
 <p>{6.6e-02, 2.4e-06i} 
 = 2&bullet;0.02&bullet;( {-3.19,-7.95e-2i} - {-1.54,7.96e-2i} ).</p>
+                
+                  
+                
               
-            </div>
+              
+                
+
+
+
+  <h2 id="__comments">Comments</h2>
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = "http://homerreid.github.io/scuff-em-documentation/forDevelopers/DataStructures/";
+      this.page.identifier =
+        "/forDevelopers/DataStructures/";
+    };
+    (function() {
+      var d = document, s = d.createElement("script");
+      s.src = "//homerreid-github-io-scuff-em-documentation.disqus.com.disqus.com/embed.js";
+      s.setAttribute("data-timestamp", +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+
+              
+            </article>
           </div>
-          <footer>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
   
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="../Documentation/" class="btn btn-neutral float-right" title="Documentation"/>Next <span class="icon icon-circle-arrow-right"></span></a>
-      
-      
-        <a href="../Implementation/" class="btn btn-neutral" title="Implementation"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-      
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../Implementation/" title="Implementation" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Implementation
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../Documentation/" title="Documentation" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Documentation
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
     </div>
   
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>
-    <!-- Copyright etc -->
-    </p>
-  </div>
-
-  <a href="http://homerreid.com/scuff-em"> 
-    <span class="SmallCaps">scuff-em</span>
-  </a> documentation, by
-  <a href="http://homerreid.com">Homer Reid</a>
-
-  <p>
-  <font size=-1>
-  Built with <a href="http://www.mkdocs.org">MkDocs</a> 
-  using a customized theme modeled 
-  after the 
-  <a href="https://github.com/snide/sphinx_rtd_theme">theme</a>
-  provided by <a href="https://readthedocs.org">Read the Docs</a>.
-  </font>
-
-</footer>
-	  
-        </div>
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="http://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
       </div>
-
-    </section>
-
+      
+        
+      
+    </div>
   </div>
-
-<div class="rst-versions" role="note" style="cursor: pointer">
-    <span class="rst-current-version" data-toggle="rst-current-version">
+</footer>
       
-          <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+    </div>
+    
+      <script src="../../assets/javascripts/application.b438e6c5.js"></script>
       
+      <script>app.initialize({version:"0.17.3",url:{base:"../.."}})</script>
       
-        <span><a href="../Implementation/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <script src="../../javascripts/MathJax.js?config=TeX-AMS_HTML"></script>
       
+        <script src="../../javascripts/mathjaxhelper.js"></script>
       
-        <span style="margin-left: 15px"><a href="../Documentation/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+    
       
-    </span>
-</div>
-
-</body>
+        <script>!function(e,a,t,n,o,c,i){e.GoogleAnalyticsObject=o,e.ga=e.ga||function(){(e.ga.q=e.ga.q||[]).push(arguments)},e.ga.l=1*new Date,c=a.createElement(t),i=a.getElementsByTagName(t)[0],c.async=1,c.src="https://www.google-analytics.com/analytics.js",i.parentNode.insertBefore(c,i)}(window,document,"script",0,"ga"),ga("create","UA-119340518-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview");var links=document.getElementsByTagName("a");if(Array.prototype.map.call(links,function(e){e.host!=document.location.host&&e.addEventListener("click",function(){var a=e.getAttribute("data-md-action")||"follow";ga("send","event","outbound",a,e.href)})}),document.forms.search){var query=document.forms.search.query;query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}</script>
+      
+    
+  </body>
 </html>

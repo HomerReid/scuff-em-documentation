@@ -1,0 +1,12 @@
+#!/bin/bash
+
+ARGS="-2 Rectangle.geo"
+
+gmsh ${ARGS} -setnumber N 2 -setnumber W 1 -o CPWCenter_Coarse.msh
+gmsh ${ARGS} -setnumber N 2 -setnumber W 2 -o  CPWFlank_Coarse.msh
+
+gmsh ${ARGS} -setnumber N 3 -setnumber W 1 -o CPWCenter_Medium.msh
+gmsh ${ARGS} -setnumber N 3 -setnumber W 2 -o  CPWFlank_Medium.msh
+
+gmsh ${ARGS} -setnumber N 4 -setnumber W 1 -o CPWCenter_Fine.msh
+gmsh ${ARGS} -setnumber N 4 -setnumber W 2 -o  CPWFlank_Fine.msh

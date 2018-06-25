@@ -1,408 +1,1500 @@
+
+
+
+
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>scuff-cas3D - SCUFF-EM documentation</title>
-  
-
-  <link rel="shortcut icon" href="../../../scuffEM.ico">
-  
-
-  
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
-
-  <link rel="stylesheet" href="../../../css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../css/theme_extra.css" type="text/css" />
-  <link rel="stylesheet" href="../../../css/highlight.css">
-
-  
-  <script>
-    // Current page data
-    var mkdocs_page_name = "applications/scuff-cas3D/scuff-cas3D"
-  </script>
-  
-  <script src="../../../js/jquery-2.1.1.min.js"></script>
-  <script src="../../../js/modernizr-2.8.3.min.js"></script>
-  <script type="text/javascript" src="../../../js/highlight.pack.js"></script>
-  <script src="../../../js/theme.js"></script> 
-  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
-  <script src="../../../mathjaxhelper.js"></script>
-
-  
-</head>
-
-<body class="wy-body-for-nav" role="document">
-
-  <div class="wy-grid-for-nav">
-
+<html lang="en" class="no-js">
+  <head>
     
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
-
-      <p align="center"
-      <a href="../../..">
-         <img align="center" height="auto" width="100%"  
-              src="../../../img/scuffEMNavBar.png"
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="http://homerreid.github.io/scuff-em-documentation/applications/scuff-cas3D/scuff-cas3D/">
+      
+      
+        <meta name="author" content="Homer Reid">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-0.17.3, mkdocs-material-2.7.3">
+    
+    
+      
+        <title>scuff-cas3D - SCUFF-EM documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/application.8d40d89b.css">
+      
+        <link rel="stylesheet" href="../../../assets/stylesheets/application-palette.6079476c.css">
+      
+    
+    
+      <script src="../../../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:300,400,400i,700|">
+        <style>body,input{font-family:"Noto Sans","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+      <link rel="stylesheet" href="../../../css/scuff-em.css">
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <a href="#1a-compact-objects" tabindex="1" class="md-skip">
+        Skip to content
       </a>
-
-      <div class="wy-side-nav-search">
-        <a href="../../.." class="icon icon-home"> SCUFF-EM documentation</a>
-        <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
-  </form>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="http://homerreid.github.io/scuff-em-documentation" title="SCUFF-EM documentation" class="md-header-nav__button md-logo">
+          
+            <img src="../../../reference/scuffEMLogo.png" width="24" height="24">
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                SCUFF-EM documentation
+              </span>
+              <span class="md-header-nav__topic">
+                scuff-cas3D
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+          
+        
       </div>
-
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-        <ul class="current">
-          
-            <li>
-    <li class="toctree-l1 ">
-        <a class="" href="../../..">SCUFF-EM documentation</a>
-        
-    </li>
-<li>
-          
-            <li>
-    <ul class="subnav">
-    <li><span>Examples</span></li>
-
-        
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
             
-    <li class="toctree-l1 ">
-        <a class="" href="../../../examples/MieScattering/MieScattering/">Mie scattering</a>
-        
-    </li>
 
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../../examples/DielectricShell/DielectricShell/">Electrostatics of a spherical dielectric shell</a>
-        
-    </li>
 
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../../examples/ThinFilm/ThinFilm/">Spatially-resolved study of plane-wave transmission through an infinite-area thin dielectric film</a>
-        
-    </li>
+  
 
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../../examples/DiffractionPatterns/DiffractionPatterns/">Imaging diffraction patterns of discs, disc arrays, and hole arrays in metal screens</a>
-        
-    </li>
 
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../../examples/CubeTorus/">Casimir forces in a compact geometry</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../../examples/SiliconBeams/SiliconBeams/">Casimir forces in a 1D extended geometry</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../../examples/SiliconSlabs/SiliconSlabs/">Casimir forces in a 2D extended geometry</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../../examples/SiO2Spheres/SiO2Spheres/">Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../../examples/TipSubstrate/TipSubstrate/">Spatial distribution of heat flux from a warm tip over a cold substrate</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../../examples/HalfSpaceLDOS/HalfSpaceLDOS/">LDOS and dyadic Green functions above an infinite aluminum half-space</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../../examples/PlatonicSolids/PlatonicSolids/">Electrostatic polarizability of platonic solids</a>
-        
-    </li>
-
-        
-    </ul>
-<li>
-          
-            <li>
-    <ul class="subnav">
-    <li><span>General reference</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../../reference/TopLevel/">Top-level overview</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../../reference/Installing/">Installation</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../../reference/Geometries/">Geometry descriptions</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../../reference/Materials/">Material designations</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../../reference/Transformations/">Geometric transformations</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../../reference/IncidentFields/">Incident Fields</a>
-        
-    </li>
-
-        
-    </ul>
-<li>
-          
-            <li>
-    <ul class="subnav">
-    <li><span>Command-line application reference</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../GeneralReference/">General command-line reference</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../scuff-scatter/scuff-scatter/">scuff-scatter</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../scuff-transmission/scuff-transmission/">scuff-transmission</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../scuff-ldos/scuff-ldos/">scuff-ldos</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../scuff-tmatrix/scuff-tmatrix/">scuff-tmatrix</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 current">
-        <a class="current" href="./">scuff-cas3D</a>
-        
-            <ul>
-            
-                <li class="toctree-l3"><a href="#1a-compact-objects">1a. Compact objects</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#1b-extended-objects">1b. Extended objects</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#2-scuff-cas3d-command-line-options">2. scuff-cas3d command-line options</a></li>
-                
-                    <li><a class="toctree-l4" href="#common-options">Common options</a></li>
-                
-                    <li><a class="toctree-l4" href="#options-requesting-casimir-output-quantities">Options requesting Casimir output quantities</a></li>
-                
-                    <li><a class="toctree-l4" href="#options-specifying-temperature">Options specifying temperature</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#3-scuff-cas3d-output-files">3. scuff-cas3d output files</a></li>
-                
-                    <li><a class="toctree-l4" href="#the-log-file">The .log file</a></li>
-                
-                    <li><a class="toctree-l4" href="#the-out-file">The .out file</a></li>
-                
-                    <li><a class="toctree-l4" href="#the-byxi-file">The .byXi file</a></li>
-                
-                    <li><a class="toctree-l4" href="#the-byxikbloch-file">The .byXikBloch file</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#4-examples-of-casimir-calculations-using-scuff-cas3d">4. Examples of Casimir calculations using scuff-cas3d</a></li>
-                
-            
-            </ul>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../scuff-caspol/scuff-caspol/">scuff-caspol</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../scuff-neq/scuff-neq/">scuff-neq</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../scuff-RF/scuff-RF/">scuff-RF</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../scuff-static/scuff-static/">scuff-static</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../scuff-analyze/scuff-analyze/">scuff-analyze</a>
-        
-    </li>
-
-        
-    </ul>
-<li>
-          
-            <li>
-    <ul class="subnav">
-    <li><span>API reference</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../../API/libscuff/">libscuff</a>
-        
-    </li>
-
-        
-    </ul>
-<li>
-          
-            <li>
-    <ul class="subnav">
-    <li><span>For developers</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../../forDevelopers/Implementation/">Implementation</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../../forDevelopers/DataStructures/">Data Structures</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../../forDevelopers/Documentation/">Documentation</a>
-        
-    </li>
-
-        
-    </ul>
-<li>
-          
-        </ul>
+  <a href="https://github.com/homerreid/scuff-em/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
       </div>
-      &nbsp;
+    
+    <div class="md-source__repository">
+      scuff-em
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href="../../.." title="Home" class="md-tabs__link">
+        Home
+      </a>
+    
+  </li>
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../examples/" title="Examples" class="md-tabs__link">
+          Examples
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../tests/Overview/" title="Test suite" class="md-tabs__link">
+          Test suite
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../reference/TopLevel/" title="General reference" class="md-tabs__link">
+          General reference
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../GeneralReference/" title="Command-line tools" class="md-tabs__link md-tabs__link--active">
+          Command-line tools
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../HighLevelInterface/HighLevelInterface/" title="High-level interface" class="md-tabs__link">
+          High-level interface
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../API/libscuff/" title="Low-level API" class="md-tabs__link">
+          Low-level API
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../forDevelopers/Implementation/" title="For developers" class="md-tabs__link">
+          For developers
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    <span class="md-nav__button md-logo">
+      
+        <img src="../../../reference/scuffEMLogo.png" width="48" height="48">
+      
+    </span>
+    SCUFF-EM documentation
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/homerreid/scuff-em/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      scuff-em
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Examples
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Examples
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/" title="SCUFF-EM tutorial examples" class="md-nav__link">
+      SCUFF-EM tutorial examples
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/MieScattering/MieScattering/" title="Mie scattering" class="md-nav__link">
+      Mie scattering
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/DielectricShell/DielectricShell/" title="Electrostatics of a spherical dielectric shell" class="md-nav__link">
+      Electrostatics of a spherical dielectric shell
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/ThinFilm/ThinFilm/" title="Spatially-resolved study of plane-wave transmission through an infinite-area thin dielectric film" class="md-nav__link">
+      Spatially-resolved study of plane-wave transmission through an infinite-area thin dielectric film
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/DiffractionPatterns/DiffractionPatterns/" title="Imaging diffraction patterns of discs, disc arrays, and hole arrays in metal screens" class="md-nav__link">
+      Imaging diffraction patterns of discs, disc arrays, and hole arrays in metal screens
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/CubeTorus/" title="Casimir forces in a compact geometry" class="md-nav__link">
+      Casimir forces in a compact geometry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/SiliconBeams/SiliconBeams/" title="Casimir forces in a 1D extended geometry" class="md-nav__link">
+      Casimir forces in a 1D extended geometry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/SiliconSlabs/SiliconSlabs/" title="Casimir forces in a 2D extended geometry" class="md-nav__link">
+      Casimir forces in a 2D extended geometry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/NanostructureCasimirPolder/NanostructureCasimirPolder/" title="Casimir-Polder potentials in dielectric nanostructures" class="md-nav__link">
+      Casimir-Polder potentials in dielectric nanostructures
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/SiO2Spheres/SiO2Spheres/" title="Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres" class="md-nav__link">
+      Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/TipSubstrate/TipSubstrate/" title="Spatial distribution of heat flux from a warm tip over a cold substrate" class="md-nav__link">
+      Spatial distribution of heat flux from a warm tip over a cold substrate
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/HalfSpaceLDOS/HalfSpaceLDOS/" title="LDOS and dyadic Green functions above an infinite aluminum half-space" class="md-nav__link">
+      LDOS and dyadic Green functions above an infinite aluminum half-space
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/PlatonicSolids/PlatonicSolids/" title="Electrostatic polarizability of platonic solids" class="md-nav__link">
+      Electrostatic polarizability of platonic solids
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/TwoBodyCapacitors/TwoBodyCapacitors/" title="Capacitance of two-body capacitors" class="md-nav__link">
+      Capacitance of two-body capacitors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/StriplineCapacitor/StriplineCapacitor/" title="Capacitance of a PCB stripline trace" class="md-nav__link">
+      Capacitance of a PCB stripline trace
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/ImplicitSubstrate/ImplicitSubstrate/" title="Implicit handling of multilayer dielectric substrates" class="md-nav__link">
+      Implicit handling of multilayer dielectric substrates
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/pythonCapacitance/pythonCapacitance/" title="Finite-size effects in stripline capacitors" class="md-nav__link">
+      Finite-size effects in stripline capacitors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/PaulTrap/PaulTrap/" title="Electrostatic fields of an electrode array" class="md-nav__link">
+      Electrostatic fields of an electrode array
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/YagiUdaAntennas/YagiUdaAntennas/" title="Z-parameters and directivity of Yagi-Uda antennas" class="md-nav__link">
+      Z-parameters and directivity of Yagi-Uda antennas
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/MicrostripDevices/MicrostripDevices/" title="Input impedance, mutual coupling, and radiated fields of microstrip RF devices" class="md-nav__link">
+      Input impedance, mutual coupling, and radiated fields of microstrip RF devices
+    </a>
+  </li>
+
+        
+      </ul>
     </nav>
+  </li>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../../..">SCUFF-EM documentation</a>
-      </nav>
-
-      
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="breadcrumbs navigation">
-  <ul class="wy-breadcrumbs">
-    <li><a href="../../.."><span class="SmallCaps">scuff-em</span> documentation</a> &raquo;</li>
     
       
-        
-          <li>Command-line application reference &raquo;</li>
-        
       
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
     
-    <li>scuff-cas3D</li>
-    <li class="wy-breadcrumbs-aside">
-      
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Test suite
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Test suite
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
         
-          <a href="https://github.com/homerreid/scuff-em/" class="icon icon-github"> Edit on GitHub</a>
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/Overview/" title="Overview of the test suite" class="md-nav__link">
+      Overview of the test suite
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/MieScattering/MieScattering/" title="Mie scattering" class="md-nav__link">
+      Mie scattering
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/FresnelScattering/FresnelScattering/" title="Fresnel scattering" class="md-nav__link">
+      Fresnel scattering
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/CasimirSpheres/CasimirSpheres/" title="Equilibrium Casimir forces between spheres" class="md-nav__link">
+      Equilibrium Casimir forces between spheres
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/CasimirPlates/CasimirPlates/" title="Equilibrium Casimir forces between plates" class="md-nav__link">
+      Equilibrium Casimir forces between plates
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/CPSphere/CPSphere/" title="Equilibrium Casimir-Polder potential near a sphere" class="md-nav__link">
+      Equilibrium Casimir-Polder potential near a sphere
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/CPPlate/CPPlate/" title="Equilibrium Casimir-Polder potential near a plate" class="md-nav__link">
+      Equilibrium Casimir-Polder potential near a plate
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/NEQSpheres/NEQSpheres/" title="Heat transfer and non-equilibrium Casimir forces between spheres" class="md-nav__link">
+      Heat transfer and non-equilibrium Casimir forces between spheres
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/libscuff/libscuff/" title="Low-level tests of the core library" class="md-nav__link">
+      Low-level tests of the core library
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
       
-    </li>
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      General reference
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        General reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/TopLevel/" title="Top-level overview" class="md-nav__link">
+      Top-level overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/Installing/" title="Installation" class="md-nav__link">
+      Installation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/Geometries/" title="Geometry descriptions" class="md-nav__link">
+      Geometry descriptions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/Materials/" title="Material designations" class="md-nav__link">
+      Material designations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/Transformations/" title="Geometric transformations" class="md-nav__link">
+      Geometric transformations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/IncidentFields/" title="Incident fields" class="md-nav__link">
+      Incident fields
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/BrillouinZoneIntegration/" title="Brillouin zone integration" class="md-nav__link">
+      Brillouin zone integration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/FAQ/" title="FAQ" class="md-nav__link">
+      FAQ
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
+    
+    <label class="md-nav__link" for="nav-5">
+      Command-line tools
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Command-line tools
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../GeneralReference/" title="General command-line reference" class="md-nav__link">
+      General command-line reference
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../scuff-scatter/scuff-scatter/" title="scuff-scatter" class="md-nav__link">
+      scuff-scatter
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../scuff-transmission/scuff-transmission/" title="scuff-transmission" class="md-nav__link">
+      scuff-transmission
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../scuff-ldos/scuff-ldos/" title="scuff-ldos" class="md-nav__link">
+      scuff-ldos
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../scuff-tmatrix/scuff-tmatrix/" title="scuff-tmatrix" class="md-nav__link">
+      scuff-tmatrix
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        scuff-cas3D
+      </label>
+    
+    <a href="./" title="scuff-cas3D" class="md-nav__link md-nav__link--active">
+      scuff-cas3D
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1a-compact-objects" title="1a. Compact objects" class="md-nav__link">
+    1a. Compact objects
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1b-extended-objects" title="1b. Extended objects" class="md-nav__link">
+    1b. Extended objects
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-scuff-cas3d-command-line-options" title="2. scuff-cas3d command-line options" class="md-nav__link">
+    2. scuff-cas3d command-line options
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#common-options" title="Common options" class="md-nav__link">
+    Common options
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#options-requesting-casimir-output-quantities" title="Options requesting Casimir output quantities" class="md-nav__link">
+    Options requesting Casimir output quantities
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#options-specifying-temperature" title="Options specifying temperature" class="md-nav__link">
+    Options specifying temperature
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-scuff-cas3d-output-files" title="3. scuff-cas3d output files" class="md-nav__link">
+    3. scuff-cas3d output files
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-log-file" title="The .log file" class="md-nav__link">
+    The .log file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-out-file" title="The .out file" class="md-nav__link">
+    The .out file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-byxi-file" title="The .byXi file" class="md-nav__link">
+    The .byXi file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-byxikbloch-file" title="The .byXikBloch file" class="md-nav__link">
+    The .byXikBloch file
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-examples-of-casimir-calculations-using-scuff-cas3d" title="4. Examples of Casimir calculations using scuff-cas3d" class="md-nav__link">
+    4. Examples of Casimir calculations using scuff-cas3d
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+        <li class="md-nav__item">
+          <a href="#__comments" title="Comments" class="md-nav__link md-nav__link--active">
+            Comments
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../scuff-caspol/scuff-caspol/" title="scuff-caspol" class="md-nav__link">
+      scuff-caspol
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../scuff-neq/scuff-neq/" title="scuff-neq" class="md-nav__link">
+      scuff-neq
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../scuff-rf/scuff-rf/" title="scuff-rf" class="md-nav__link">
+      scuff-rf
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../scuff-static/scuff-static/" title="scuff-static" class="md-nav__link">
+      scuff-static
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../scuff-spectrum/scuff-spectrum/" title="scuff-spectrum" class="md-nav__link">
+      scuff-spectrum
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../scuff-analyze/scuff-analyze/" title="scuff-analyze" class="md-nav__link">
+      scuff-analyze
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../scuff-integrate/scuff-integrate/" title="scuff-integrate" class="md-nav__link">
+      scuff-integrate
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      High-level interface
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        High-level interface
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../HighLevelInterface/HighLevelInterface/" title="High-Level Interface" class="md-nav__link">
+      High-Level Interface
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Low-level API
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        Low-level API
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../API/libscuff/" title="libscuff" class="md-nav__link">
+      libscuff
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../API/MainFlow/" title="MainFlow API" class="md-nav__link">
+      MainFlow API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../API/UtilityAPI/" title="Utility API" class="md-nav__link">
+      Utility API
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      For developers
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        For developers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../forDevelopers/Implementation/" title="Implementation" class="md-nav__link">
+      Implementation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../forDevelopers/DataStructures/" title="Data Structures" class="md-nav__link">
+      Data Structures
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../forDevelopers/Documentation/" title="Documentation" class="md-nav__link">
+      Documentation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../forDevelopers/SingularIntegrals/" title="Code for computing singular integrals" class="md-nav__link">
+      Code for computing singular integrals
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
   </ul>
-  <hr/>
-</div>
-          <div role="main">
-            <div class="section">
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1a-compact-objects" title="1a. Compact objects" class="md-nav__link">
+    1a. Compact objects
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1b-extended-objects" title="1b. Extended objects" class="md-nav__link">
+    1b. Extended objects
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-scuff-cas3d-command-line-options" title="2. scuff-cas3d command-line options" class="md-nav__link">
+    2. scuff-cas3d command-line options
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#common-options" title="Common options" class="md-nav__link">
+    Common options
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#options-requesting-casimir-output-quantities" title="Options requesting Casimir output quantities" class="md-nav__link">
+    Options requesting Casimir output quantities
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#options-specifying-temperature" title="Options specifying temperature" class="md-nav__link">
+    Options specifying temperature
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-scuff-cas3d-output-files" title="3. scuff-cas3d output files" class="md-nav__link">
+    3. scuff-cas3d output files
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-log-file" title="The .log file" class="md-nav__link">
+    The .log file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-out-file" title="The .out file" class="md-nav__link">
+    The .out file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-byxi-file" title="The .byXi file" class="md-nav__link">
+    The .byXi file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-byxikbloch-file" title="The .byXikBloch file" class="md-nav__link">
+    The .byXikBloch file
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-examples-of-casimir-calculations-using-scuff-cas3d" title="4. Examples of Casimir calculations using scuff-cas3d" class="md-nav__link">
+    4. Examples of Casimir calculations using scuff-cas3d
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+        <li class="md-nav__item">
+          <a href="#__comments" title="Comments" class="md-nav__link md-nav__link--active">
+            Comments
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
               
+                
+                  <a href="https://github.com/homerreid/scuff-em/edit/master/docs/applications/scuff-cas3D/scuff-cas3D.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
                 <h1>Computing thermal-equilibrium Casimir energies, forces, 
     and torques with <span class="SC">scuff-cas3d</span>
 </h1>
@@ -462,17 +1554,17 @@ plotting or post-processing tools.</p>
 </ul>
 </li>
 <li><a href="#3-scuff-cas3d-output-files">3. <span class="SC">scuff-cas3d</span> output files</a><ul>
-<li><a href="#the-log-file">The .log file</a></li>
-<li><a href="#the-out-file">The .out file</a></li>
-<li><a href="#the-byxi-file">The .byXi file</a></li>
-<li><a href="#the-byxikbloch-file">The .byXikBloch file</a></li>
+<li><a href="#the-log-file">The <span class="na">.log</span> file</a></li>
+<li><a href="#the-out-file">The <span class="na">.out</span> file</a></li>
+<li><a href="#the-byxi-file">The <span class="na">.byXi</span> file</a></li>
+<li><a href="#the-byxikbloch-file">The <span class="na">.byXikBloch</span> file</a></li>
 </ul>
 </li>
 <li><a href="#4-examples-of-casimir-calculations-using-scuff-cas3d">4. Examples of Casimir calculations using <span class="SC">scuff-cas3d</span></a></li>
 </ul>
 </div>
-<h1 id="1-what-scuff-cas3d-actually-computes">1. What <a class="wikilink" href="../../../scuff-cas3d/">scuff-cas3d</a> actually computes</h1>
-<h2 id="1a-compact-objects">1a. Compact objects</h2>
+<h2 id="1-what-scuff-cas3d-actually-computes">1. What <a class="wikilink" href="../../../scuff-cas3d/">scuff-cas3d</a> actually computes</h2>
+<h3 id="1a-compact-objects">1a. Compact objects</h3>
 <p>The Casimir energy <script type="math/tex">\mathcal{E}</script> of a collection of compact bodies,
 and the <script type="math/tex">i</script>-directed Casimir force <script type="math/tex">\mathcal{F}_i</script> and 
 torque <script type="math/tex">\mathcal{T}_i</script> on one of 
@@ -506,19 +1598,19 @@ The question of <em>which</em> frequencies <script type="math/tex">\xi</script> 
 depends on the command-line options you specify:</p>
 <ul>
 <li>
-<p>If you use the <code>--Xi</code> or <code>--XiFile</code> command-line options to 
+<p>If you use the <code class="codehilite">--Xi</code> or <code class="codehilite">--XiFile</code> command-line options to 
 specify one or more particular values of <script type="math/tex">\xi</script>, then <a class="wikilink" href="../../../scuff-cas3d/">scuff-cas3d</a>
 will compute and report just the integrand <script type="math/tex">F(\xi)</script> at those
-values. In this case, the code will produce a <code>.byXi</code> file,
-but no <code>.out</code> file.</p>
+values. In this case, the code will produce a <code class="codehilite"><span class="na">.byXi</span></code> file,
+but no <code class="codehilite"><span class="na">.out</span></code> file.</p>
 </li>
 <li>
-<p>If, instead, you use the <code>--temperature</code> command-line option to specify 
+<p>If, instead, you use the <code class="codehilite">--temperature</code> command-line option to specify 
 a temperature at which to calculate, then <a class="wikilink" href="../../../scuff-cas3d/">scuff-cas3d</a>
 will evaluate the Matsubara sums to compute the full 
 Casimir quantities at the given temperature. In this 
-case you will get both a <code>.byXi</code> and a <code>.out</code> file; 
-the <code>.byXi</code> file will report data on the Casimir
+case you will get both a <code class="codehilite"><span class="na">.byXi</span></code> and a <code class="codehilite"><span class="na">.out</span></code> file; 
+the <code class="codehilite"><span class="na">.byXi</span></code> file will report data on the Casimir
 integrands at the Matsubara frequencies
 <script type="math/tex">\xi_n\equiv n\Delta \xi</script> for <script type="math/tex">n=0,1,\cdots</script>
 </p>
@@ -527,13 +1619,13 @@ integrands at the Matsubara frequencies
 <p>If you don't specify any of the above, then <a class="wikilink" href="../../../scuff-cas3d/">scuff-cas3d</a>
 defaults to performing a full numerical frequency integration
 to compute zero-temperature Casimir quantities. In 
-this case, you will get both a <code>.byXi</code> and a <code>.out</code>
-file; the <code>.byXi</code> file reports data on the Casimir
+this case, you will get both a <code class="codehilite"><span class="na">.byXi</span></code> and a <code class="codehilite"><span class="na">.out</span></code>
+file; the <code class="codehilite"><span class="na">.byXi</span></code> file reports data on the Casimir
 integrands at the frequencies <script type="math/tex">\{\xi\}</script> chosen by 
 the built-in integrator.</p>
 </li>
 </ul>
-<h2 id="1b-extended-objects">1b. Extended objects</h2>
+<h3 id="1b-extended-objects">1b. Extended objects</h3>
 <p>For an extended material configuration described by a
 <a href="../../../reference/Geometries/#Extended">periodic geometry</a>
 with Bloch-periodic boundary conditions, the Casimir force 
@@ -572,38 +1664,38 @@ The question of <em>which</em> (<script type="math/tex">\xi, \mathbf k)</script>
 sampled depends on the command-line options you specify:</p>
 <ul>
 <li>
-<p>If you use the <code>--XikBlochFile</code> command-line option
+<p>If you use the <code class="codehilite">--XikBlochFile</code> command-line option
 to specify a list of <script type="math/tex">(\xi, \mathbf k)</script> points, then 
 <a class="wikilink" href="../../../scuff-cas3d/">scuff-cas3d</a> will compute and report just the 
 integrand <script type="math/tex">f(\xi, \mathbf k)</script> at those values. 
-In this case, the code will produce a <code>.byXikBloch</code> file,
+In this case, the code will produce a <code class="codehilite"><span class="na">.byXikBloch</span></code> file,
 but no other output files.</p>
 </li>
 <li>
-<p>If you use the <code>--Xi</code> or <code>--XiFile</code> command-line options to
+<p>If you use the <code class="codehilite">--Xi</code> or <code class="codehilite">--XiFile</code> command-line options to
 specify one or more particular values of <script type="math/tex">\xi</script> (but not
 specific values of <script type="math/tex">\mathbf k</script>), then <a class="wikilink" href="../../../scuff-cas3d/">scuff-cas3d</a> will
 numerically evaluate the Brillouin-zone integral over 
 <script type="math/tex">\mathbf k</script> and will report the resulting value of the 
 quantity <script type="math/tex">F(\xi)</script> at each <script type="math/tex">\xi</script> value. 
 In this case, the code will produce two output files
-<strong>(1)</strong> a <code>.byXi</code> file reporting values of <script type="math/tex">F(\xi)</script> at the 
-<script type="math/tex">\xi</script> points you specified, and <strong>(2)</strong> a <code>.byXikBloch</code>
+<strong>(1)</strong> a <code class="codehilite"><span class="na">.byXi</span></code> file reporting values of <script type="math/tex">F(\xi)</script> at the 
+<script type="math/tex">\xi</script> points you specified, and <strong>(2)</strong> a <code class="codehilite"><span class="na">.byXikBloch</span></code>
 file reporting values of the <script type="math/tex">\mathbf k</script> integrand <script type="math/tex">f(\xi, \mathbf k)</script>
 at each of the <script type="math/tex">\mathbf k</script> points sampled by the 
 built-in integrator.</p>
 </li>
 <li>
-<p>If you use the <code>--temperature</code> command-line option to specify
+<p>If you use the <code class="codehilite">--temperature</code> command-line option to specify
 a temperature at which to calculate, then <a class="wikilink" href="../../../scuff-cas3d/">scuff-cas3d</a>
 will evaluate the Matsubara sums to compute the full 
 Casimir quantities at the given temperature. In this 
 case you will get three output files: 
-<strong>(1)</strong> a <code>.out</code> file reporting the full Matsubara-summed
+<strong>(1)</strong> a <code class="codehilite"><span class="na">.out</span></code> file reporting the full Matsubara-summed
 Casimir quantities,
-<strong>(2)</strong> a <code>.byXi</code> file reporting values of the function
+<strong>(2)</strong> a <code class="codehilite"><span class="na">.byXi</span></code> file reporting values of the function
 <script type="math/tex">F(\xi)</script> at each Matsubara frequency; and 
-<strong>(3)</strong> a <code>.byXikBloch</code>
+<strong>(3)</strong> a <code class="codehilite"><span class="na">.byXikBloch</span></code>
 file reporting values of the <script type="math/tex">\mathbf k</script> integrand <script type="math/tex">f(\xi, \mathbf k)</script>
 at each point sampled by the built-in integrator.</p>
 </li>
@@ -612,96 +1704,77 @@ at each point sampled by the built-in integrator.</p>
 defaults to performing a full numerical frequency integration
 to compute zero-temperature Casimir quantities. In
 this case, you will get the same three output files
-as in the case of the previous item (<code>.out</code>, <code>.byXi</code>, <code>.byXikBloch</code>);
+as in the case of the previous item (<code class="codehilite"><span class="na">.out</span></code>, <code class="codehilite"><span class="na">.byXi</span></code>, <code class="codehilite"><span class="na">.byXikBloch</span></code>);
 the only difference is that the <script type="math/tex">\xi</script> points reported
-in the <code>.byXi</code> and <code>.byXikBloch</code> files are the quadrature 
+in the <code class="codehilite"><span class="na">.byXi</span></code> and <code class="codehilite"><span class="na">.byXikBloch</span></code> files are the quadrature 
 points chosen by the built-in integrator instead of the 
 Matsubara frequencies.</p>
 </li>
 </ul>
 <p><a name="CommandLineOptions"></a></p>
-<h1 id="2-scuff-cas3d-command-line-options">2. <span class="SC">scuff-cas3d</span> command-line options</h1>
-<h3 id="common-options">Common options</h3>
+<h2 id="2-scuff-cas3d-command-line-options">2. <span class="SC">scuff-cas3d</span> command-line options</h2>
+<h4 id="common-options">Common options</h4>
 <p><a class="wikilink" href="../../../scuff-cas3d/">scuff-cas3d</a> recognizes the following subset of the 
-[list of commonly accepted options to <span class="SC">scuff-em</span> command-line codes][CommonOptions].</p>
-<p class="toc"><code>--geometry
---TransFile
---Xi
---XiFile
---XikBlochFile
---XiQuadrature
---XiMin
---BZQuadrature
---BZSymmetry
---MaxBZSamples
---AbsTol
---RelTol
---FileBase
---Cache
---ReadCache
---WriteCache</code></p>
-<h3 id="options-requesting-casimir-output-quantities">Options requesting Casimir output quantities</h3>
-<p class="toc"><code>--Energy
---XForce
---YForce
---ZForce
---Torque ax ay az</code></p>
+<a href="../../GeneralReference/#CommonOptions">list of commonly accepted options to <span class="SC">scuff-em</span> command-line codes</a>.</p>
+<p class="toc"><code class="codehilite">--geometry--TransFile--Xi--XiFile--XikBlochFile--XiQuadrature--XiMin--BZQuadrature--BZSymmetry--MaxBZSamples--AbsTol--RelTol--FileBase--Cache--ReadCache--WriteCache</code></p>
+<h4 id="options-requesting-casimir-output-quantities">Options requesting Casimir output quantities</h4>
+<p class="toc"><code class="codehilite">--Energy--XForce--YForce--ZForce--Torque ax ay az</code></p>
 <p>Specifies the Casimir quantities in which you are
 interested: the energy, the Cartesian components
 of the force, or the torque about an axis
 passing through the origin and the point with 
-Cartesian coordinates <code>(ax,ay,az).</code> (Thus, for</p>
+Cartesian coordinates <code class="codehilite">(ax,ay,az).</code> (Thus, for</p>
 <p>You may specify more than one of these options,
 but you must specify at least one.</p>
 <p><strong>Note</strong>: <a class="wikilink" href="../../../scuff-cas3d/">scuff-cas3d</a> always computes the force and torque
 on just <strong>one</strong> of the objects or surfaces in your geometry---namely,
-the one described by the first <code>OBJECT</code> or <code>SURFACE</code> 
-specification in your <code>.scuffgeo</code> file. For geometries
+the one described by the first <code class="codehilite">OBJECT</code> or <code class="codehilite">SURFACE</code> 
+specification in your <code class="codehilite"><span class="na">.scuffgeo</span></code> file. For geometries
 consisting of just two objects or surfaces, the force/torque
 on the second object/surface is just the negative of the 
 force/torque on the first. </p>
-<h3 id="options-specifying-temperature">Options specifying temperature</h3>
-<p class="toc"><code>--Temperature 300</code></p>
+<h4 id="options-specifying-temperature">Options specifying temperature</h4>
+<p class="toc"><code class="codehilite">--Temperature 300</code></p>
 <p>Sets the simulation temperature <strong>in units of Kelvin,</strong>
-so that <code>--temperature 300</code> requests room-temperature calculations.
+so that <code class="codehilite">--temperature 300</code> requests room-temperature calculations.
 This option implies that you are asking <a class="wikilink" href="../../../scuff-cas3d/">scuff-cas3d</a>
 to compute full Matsubara-summed Casimir quantities, so it is
-incompatible with options such as <code>--Xi</code> or <code>--XiFile</code> that
+incompatible with options such as <code class="codehilite">--Xi</code> or <code class="codehilite">--XiFile</code> that
 specify particular frequencies at which to compute.</p>
 <p><a name="OutputFiles"></a></p>
-<h1 id="3-scuff-cas3d-output-files">3. <span class="SC">scuff-cas3d</span> output files</h1>
+<h2 id="3-scuff-cas3d-output-files">3. <span class="SC">scuff-cas3d</span> output files</h2>
 <p>The base file name of all output files produced by
-<code>scuff-cas3d</code> may be specified using the <code>--FileBase</code>
+<code class="codehilite">scuff-cas3d</code> may be specified using the <code class="codehilite">--FileBase</code>
 command-line option; if this option is not specified
 then the file base is taken to be the base file
-name of the <code>.scuffgeo</code> file you specified using
-the <code>--geometry</code> option.</p>
-<p>For all data output files (<code>.out</code>, <code>.byXi</code>,
-<code>.byXikBloch</code>), the output file contains a
-<em>header</em> (a sequence of text lines starting with<code>#</code>)
+name of the <code class="codehilite"><span class="na">.scuffgeo</span></code> file you specified using
+the <code class="codehilite">--geometry</code> option.</p>
+<p>For all data output files (<code class="codehilite"><span class="na">.out</span></code>, <code class="codehilite"><span class="na">.byXi</span></code>,
+<code class="codehilite"><span class="na">.byXikBloch</span></code>), the output file contains a
+<em>header</em> (a sequence of text lines starting with<code class="codehilite">#</code>)
 explaining how to interpret the contents of the file.</p>
-<h3 id="the-log-file">The <code>.log</code> file</h3>
+<h4 id="the-log-file">The <code class="codehilite"><span class="na">.log</span></code> file</h4>
 <p>Like all command-line codes in the <a class="wikilink" href="../../../scuff-em/">scuff-em</a> suite,
-<a class="wikilink" href="../../../scuff-cas3d/">scuff-cas3d</a> writes a <a href="../../GeneralReference/#LogFiles"><code>.log</code> file</a> that you 
+<a class="wikilink" href="../../../scuff-cas3d/">scuff-cas3d</a> writes a <a href="../../GeneralReference/#LogFiles"><code class="codehilite"><span class="na">.log</span></code> file</a> that you 
 can monitor to keep track of your calculation's progress.</p>
-<h3 id="the-out-file">The <code>.out</code> file</h3>
+<h4 id="the-out-file">The <code class="codehilite"><span class="na">.out</span></code> file</h4>
 <p>If you requested the calculation of
 full frequency-integrated or Matsubara-summed
 Casimir quantities, these will be written to 
-the <code>.out</code> file.</p>
-<h3 id="the-byxi-file">The <code>.byXi</code> file</h3>
+the <code class="codehilite"><span class="na">.out</span></code> file.</p>
+<h4 id="the-byxi-file">The <code class="codehilite"><span class="na">.byXi</span></code> file</h4>
 <p>For any problem involving compact geometries,
 and for any problem involving extended geometries
 in which you requested Brillouin-zone integrations,
 the contributions of individual imaginary frequencies 
-<script type="math/tex">\xi</script> will be written to a file named <code>.byXi</code>.</p>
-<h3 id="the-byxikbloch-file">The <code>.byXikBloch</code> file</h3>
+<script type="math/tex">\xi</script> will be written to a file named <code class="codehilite"><span class="na">.byXi</span></code>.</p>
+<h4 id="the-byxikbloch-file">The <code class="codehilite"><span class="na">.byXikBloch</span></code> file</h4>
 <p>For any problem involving extended geometries,
 the contributions of individual (frequency, Bloch vector)
 points <script type="math/tex">(\xi,\mathbf k)</script> will be written to a file
-named <code>FILEBASE.byXikBloch</code>.</p>
+named <code class="codehilite">FILEBASE.byXikBloch</code>.</p>
 <p><a name="Examples"></a></p>
-<h1 id="4-examples-of-casimir-calculations-using-scuff-cas3d">4. Examples of Casimir calculations using <span class="SC">scuff-cas3d</span></h1>
+<h2 id="4-examples-of-casimir-calculations-using-scuff-cas3d">4. Examples of Casimir calculations using <span class="SC">scuff-cas3d</span></h2>
 <ul>
 <li>
 <p>Casimir forces in a compact geometry:
@@ -716,65 +1789,107 @@ named <code>FILEBASE.byXikBloch</code>.</p>
   <a href="../../../examples/SiliconSlabs/SiliconSlabs/">infinite-area silicon slabs</a></p>
 </li>
 </ul>
+                
+                  
+                
               
-            </div>
+              
+                
+
+
+
+  <h2 id="__comments">Comments</h2>
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = "http://homerreid.github.io/scuff-em-documentation/applications/scuff-cas3D/scuff-cas3D/";
+      this.page.identifier =
+        "/applications/scuff-cas3D/scuff-cas3D/";
+    };
+    (function() {
+      var d = document, s = d.createElement("script");
+      s.src = "//homerreid-github-io-scuff-em-documentation.disqus.com.disqus.com/embed.js";
+      s.setAttribute("data-timestamp", +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+
+              
+            </article>
           </div>
-          <footer>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
   
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="../../scuff-caspol/scuff-caspol/" class="btn btn-neutral float-right" title="scuff-caspol"/>Next <span class="icon icon-circle-arrow-right"></span></a>
-      
-      
-        <a href="../../scuff-tmatrix/scuff-tmatrix/" class="btn btn-neutral" title="scuff-tmatrix"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-      
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../../scuff-tmatrix/scuff-tmatrix/" title="scuff-tmatrix" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                scuff-tmatrix
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../../scuff-caspol/scuff-caspol/" title="scuff-caspol" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                scuff-caspol
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
     </div>
   
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>
-    <!-- Copyright etc -->
-    </p>
-  </div>
-
-  <a href="http://homerreid.com/scuff-em"> 
-    <span class="SmallCaps">scuff-em</span>
-  </a> documentation, by
-  <a href="http://homerreid.com">Homer Reid</a>
-
-  <p>
-  <font size=-1>
-  Built with <a href="http://www.mkdocs.org">MkDocs</a> 
-  using a customized theme modeled 
-  after the 
-  <a href="https://github.com/snide/sphinx_rtd_theme">theme</a>
-  provided by <a href="https://readthedocs.org">Read the Docs</a>.
-  </font>
-
-</footer>
-	  
-        </div>
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="http://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
       </div>
-
-    </section>
-
+      
+        
+      
+    </div>
   </div>
-
-<div class="rst-versions" role="note" style="cursor: pointer">
-    <span class="rst-current-version" data-toggle="rst-current-version">
+</footer>
       
-          <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+    </div>
+    
+      <script src="../../../assets/javascripts/application.b438e6c5.js"></script>
       
+      <script>app.initialize({version:"0.17.3",url:{base:"../../.."}})</script>
       
-        <span><a href="../../scuff-tmatrix/scuff-tmatrix/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <script src="../../../javascripts/MathJax.js?config=TeX-AMS_HTML"></script>
       
+        <script src="../../../javascripts/mathjaxhelper.js"></script>
       
-        <span style="margin-left: 15px"><a href="../../scuff-caspol/scuff-caspol/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+    
       
-    </span>
-</div>
-
-</body>
+        <script>!function(e,a,t,n,o,c,i){e.GoogleAnalyticsObject=o,e.ga=e.ga||function(){(e.ga.q=e.ga.q||[]).push(arguments)},e.ga.l=1*new Date,c=a.createElement(t),i=a.getElementsByTagName(t)[0],c.async=1,c.src="https://www.google-analytics.com/analytics.js",i.parentNode.insertBefore(c,i)}(window,document,"script",0,"ga"),ga("create","UA-119340518-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview");var links=document.getElementsByTagName("a");if(Array.prototype.map.call(links,function(e){e.host!=document.location.host&&e.addEventListener("click",function(){var a=e.getAttribute("data-md-action")||"follow";ga("send","event","outbound",a,e.href)})}),document.forms.search){var query=document.forms.search.query;query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}</script>
+      
+    
+  </body>
 </html>

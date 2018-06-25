@@ -1,0 +1,14 @@
+04/28/18::21:12:04: Added MicrostripDevices/mshFiles to mesh search path. 
+04/28/18::21:12:04: Found mesh file MicrostripDevices/mshFiles/Center_98.msh 
+04/28/18::21:12:04: Found mesh file MicrostripDevices/mshFiles/Flank_216.msh 
+04/28/18::21:12:04: Found mesh file MicrostripDevices/mshFiles/Flank_216.msh 
+04/28/18::21:12:04: Flipped 0 panel normals to comport with region definitions. 
+04/28/18::21:12:04: Noting that surface 2 (RightFlank) is a duplicate of surface 1 (LeftFlank)... 
+04/28/18::21:12:04: FC::P could not open file Center_98.scuffcache (skipping cache preload) 
+04/28/18::21:12:04: FC::P could not open file Flank_216.scuffcache (skipping cache preload) 
+04/28/18::21:17:55: Added MicrostripDevices/mshFiles to mesh search path. 
+04/28/18::21:17:55: Found mesh file MicrostripDevices/mshFiles/PointFedAntenna_Coarse.msh 
+04/28/18::21:17:55: Found mesh file MicrostripDevices/mshFiles/PointFedAntenna_Coarse.msh 
+04/28/18::21:17:55: Flipped 0 panel normals to comport with region definitions. 
+04/28/18::21:17:55: Noting that surface 1 (Antenna2) is a duplicate of surface 0 (Antenna1)... 
+04/28/18::21:17:55: FC::P could not open file PointFedAntenna_Coarse.scuffcache (skipping cache preload) 

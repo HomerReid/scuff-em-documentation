@@ -1,0 +1,206 @@
+<!--#set 
+    var="title" 
+    value="Modeling RF and Microwave Systems with scuff-RF"
+  -->
+<!--#include virtual="/pagetop.shtml"-->
+
+<!-- begin main page body -->
+
+<!----------------------------------------------------------------------->
+<!-- main page table, with one row and three columns:                  -->
+<!--  navbar, trough, body.                                            -->
+<!----------------------------------------------------------------------->
+<table cellspacing="0" cellpadding="0" width="100%"><tr>
+  
+  <!----------------------------------------------------------------------->
+  <!-- left column of main page table: nav bar. --------------------------->
+  <!----------------------------------------------------------------------->
+  <td valign="top" width="180"> 
+  <!--#include virtual="/research/navbar.shtml"-->
+  </td> 
+
+  <!----------------------------------------------------------------------->
+  <!-- central column of main page table: separation trough --------------->
+  <!----------------------------------------------------------------------->
+  <td width="5%"></td>
+ 
+  <!----------------------------------------------------------------------->
+  <!-- right column of main page table: content of page. ------------------>
+  <!----------------------------------------------------------------------->
+  <td valign="top">
+    
+   <p><br> <p align="center">
+   <table align="center"> 
+     <tr> <td> <img width="411" height="296" src="images/scuffRF.png"></td>
+          <td width="5%"> </td>
+          <td> <h1>
+               Modeling RF and Microwave Systems
+               with <span class=CodeName>scuff-rf</span> 
+               </h1>
+          </td>
+     </tr>
+   </table> 
+    
+    <!----------------------------------------------------------------------->
+    <!-- big table encompassing the entire (right column of the) page-------->
+    <!----------------------------------------------------------------------->
+    <table align="center" width="90%"><tr><td>
+
+    <p><br>
+
+    <p>
+    <span class=CodeName>scuff-rf</span> is a tool within the 
+    <a href="scuff-EM" class=CodeName>scuff-em</a> suite 
+    for modeling passive RF and microwave devices.
+
+    <p>
+    <span class=CodeName>scuff-rf</span> has two basic modes of operation:
+
+    <p align="center">
+     <ul>
+       <li> <i>network parameter</i> mode, in which 
+            <span class=CodeName>scuff-rf</span> 
+            computes multiport network parameters 
+            (<i>S</i>-parameters and/or impedance parameters)
+            for a given multiport device over a given frequency
+            range, and 
+
+       <p>
+       <li> <i>field profile</i> mode, in which 
+            <span class=CodeName>scuff-rf</span> 
+            computes the electromagnetic fields,
+            at arbitrary user-specified evaluation points, 
+            radiated by a given multiport device driven by 
+            user-specified port currents.
+     </ul>
+
+    <p>
+    Together with a circuit simulator, these two modes of operation 
+    allow you to implement the standard <i>co-simulation</i> strategy 
+    for modeling the scattered fields of passive structures driven by 
+    circuits: <b>(a)</b> you use <span class=CodeName>scuff-rf</span> 
+    to compute the multiport <i>S-</i>matrix of your structure,
+    <b>(b)</b> you incorporate this <i>S-</i>matrix into a circuit
+    simulator to compute the currents that flow through the
+    structure when driven by your circuit; finally, 
+    <b>(c)</b> you use <span class=CodeName>scuff-rf</span> a second
+    time to compute the fields radiated by your structure when
+    driven by these currents.
+
+    <p>
+    The basic flow of a <span class=CodeName>scuff-rf</span> run goes 
+    something like this:
+
+    <p>
+    <ol>
+
+      <li CLASS="Padded"> 
+           You create a mesh file describing a discretized representation
+           of your 3D geometry.
+          (<span class=CodeName>scuff-rf</span> doesn't do the 
+           meshing for you; you use external software like 
+           <a class=CodeName href="http://geuz.org/gmsh">GMSH</a> or 
+           <a class=CodeName href="http://www.comsol.com">COMSOL</a> for that.) 
+
+      <p>
+      <li CLASS="Padded"> 
+           You create a text file with extension <code>.ports</code> 
+           that defines <i>ports</i> in your meshed geometry. 
+           Each port is a small region of the physical structure 
+           through which <span class=CodeName>scuff-rf</span> forces
+           a fixed electric current to simulate the effect of driving
+           the structure with an external circuit.
+
+      <p>
+      <li CLASS="Padded"> 
+           <b>Network parameter mode:</b>
+           To calculate the network parameters (the <i>S</i>-matrix and/or 
+           impedance matrix) of your multiport structure, you run 
+           <span class=CodeName>scuff-rf</span> with your geometry file,
+           your <code>.ports</code> file, and a list of frequencies.
+
+           <p>
+           In this case, the output of <span class=CodeName>scuff-rf</span> will
+           be a data file containing the values of the multiport 
+           <i>S-</i>matrix (and/or impedance matrix) of your structure 
+           at each of the frequencies you specified.
+ 
+   
+      <p>
+      <li CLASS="Padded"> 
+           <b>Field profile mode:</b>
+           To calculate the fields radiated by your structure
+           when driven by fixed port currents, you create a text file 
+           with extension <code>.portcurrents</code> specifying the driving 
+           currents for each port, and you create a second text file with 
+           extension <code>.evalpoints</code> listing all the points in space
+           at which you wish to calculate the radiated fields. 
+
+           <p>
+           In this case, the output of <span class=CodeName>scuff-rf</span> will
+           be a data file containing the values of radiated field components
+           at each of the evaluation points you specified.
+
+    </ol>
+
+    <p>
+    Each of these steps is discussed at length in the 
+    <span class=CodeName>scuff-rf</span> documentation, which is divided 
+    into the following sections.
+    
+    <!----------------------------------------------------------------------->
+    <!----------------------------------------------------------------------->
+    <!----------------------------------------------------------------------->
+    <p width="75%">
+    <table class="TOC" cellpadding="5" cellspacing="5">
+
+      <tr> <th> Table Of Contents </th></tr>
+
+      <tr> <td>
+           <a href="research/codes/scuff-EM/scuff-RF/scuffRFTutorial.shtml">
+            1. A Tutorial Walk Through <span class=CodeName>scuff-rf</span>
+            </a>
+           </td>
+      </tr>
+
+      <tr> <td> 
+            <a href="research/codes/scuff-EM/scuff-RF/scuffRFOptions.shtml">
+            2. <span class=CodeName>scuff-rf</span> Command-Line Reference
+            </a>
+           </td>
+      </tr>
+
+      <tr> <td> 
+            <a href="research/codes/scuff-EM/scuff-RF/scuffRFFiles.shtml">
+            3. <span class=CodeName>scuff-rf</span> Input and Output File Reference
+            </a>
+           </td> 
+      </tr>
+
+      <tr> <td> 
+           <a href="research/codes/scuff-EM/scuff-RF/scuffRFExamples.shtml">
+            4. A Compendium of <span class=CodeName>scuff-rf</span> Examples
+           </a>
+           </td> 
+      </tr>
+
+    </table>
+
+  <!--#include virtual="/scuff-EM/scuffEMFooter.shtml"-->
+
+  <!----------------------------------------------------------------------->
+  <!-- end right column of main page table.                             --->
+  <!----------------------------------------------------------------------->
+  </td>
+  </table>
+
+<!----------------------------------------------------------------------->
+<!-- end main page table                                               -->
+<!----------------------------------------------------------------------->
+</tr></table>
+   
+<!----------------------------------------------------------------------->
+<!-- end main page body ------------------------------------------------->
+<!----------------------------------------------------------------------->
+   
+<!--#include virtual="/pageend.shtml"-->

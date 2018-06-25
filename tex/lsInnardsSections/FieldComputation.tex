@@ -1,0 +1,167 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Computation of the fields in \lss geometries}
+
+Using the fields of individual basis functions as
+discussed in the previous section, we can compute the 
+total $\vb E$ and $\vb H$ fields at arbitrary points 
+in a {\sc scuff-em} geometry.
+
+
+\subsection{The simplest case}
+
+The simplest case to consider is that in which we have
+a single compact body $\mc B$ in vacuum; let the body surface
+be $\mc S=\partial \mc B$ and suppose the incident fields 
+arise from sources lying outside $\mc B$. Let the surface-current
+coefficients be $\{\vb k_\alpha, \vb n_\alpha\}$, so that 
+the electric and magnetic surface currents are
+%====================================================================%
+$$ \vb K(\vb x) = \sum_{\alpha} k_\alpha \vb b_\alpha(\vb x),
+   \qquad
+   \vb N(\vb x) = \sum_{\alpha} n_\alpha \vb b_\alpha(\vb x)
+$$
+%====================================================================%
+where $\{\vb b_\alpha\}$ is the set of RWG basis functions 
+on surface $\partial \mc B$. Then the fields at a point outside 
+$\mc B$ are
+%====================================================================%
+\begin{subequations}
+\begin{align}
+ \vb E(\vb x) 
+  &= \vb E\sups{inc}(\vb x) + 
+\sum_{\alpha} \Big\{ ik_0Z_0 k_\alpha \vb e_\alpha(k_0; \vb x)
+                             -n_\alpha \vb h_\alpha(k_0; \vb x)
+                   \Big\}
+\\
+ \vb H(\vb x) 
+  &= \vb H\sups{inc}(\vb x) + 
+     \sum_{\alpha} \Big\{     k_\alpha \vb h_\alpha(k_0; \vb x)
+                         +\frac{ik_0}{Z_0} n_\alpha \vb e_\alpha(k_0; \vb x)
+                   \Big\}.
+\end{align}
+\label{OutsideFields}
+\end{subequations}
+%====================================================================%
+The fields at a point inside $\mc B$ are 
+%====================================================================%
+\begin{subequations}
+\begin{align}
+ \vb E(\vb x)
+  &= -\sum_{\alpha} \Big\{ ik_1Z_1 k_\alpha \vb e_\alpha(k_1; \vb x)
+                                  -n_\alpha \vb h_\alpha(k_1; \vb x)
+                   \Big\}
+\\
+ \vb H(\vb x) 
+  &= -\sum_{\alpha} \Big\{     k_\alpha \vb h_\alpha(k_1; \vb x)
+                         +\frac{ik_1}{Z_1} n_\alpha \vb e_\alpha(k_1; \vb x)
+                   \Big\}.
+\end{align}
+\label{InsideFields}
+\end{subequations}
+%====================================================================%
+Note the following differences between (\ref{OutsideFields}) and
+(\ref{InsideFields}):
+\begin{itemize}
+ \item The incident fields contribute to (\ref{OutsideFields})
+       but not to (\ref{InsideFields}).
+ \item Equation (\ref{InsideFields}) involves a minus sign that 
+       is not present in (\ref{OutsideFields}).
+ \item Equation (\ref{OutsideFields}) involves the vacuum
+       wavenumber $k_0=\omega/c$ and the vacuum 
+       wave impedance $Z_0\approx 377 \, \Omega.$
+       Equation (\ref{InsideFields}) involves the wavenumber 
+       $k_1=\sqrt{\epsilon^r \mu^r}k_0$ and wave impedance 
+       $Z_1=\sqrt{\frac{\mu^r}{\epsilon^r}}Z_0$ for the body interior.
+       (Here $\{\epsilon^r, \mu^r\}$ are the relative permittivity 
+        and permeability of the medium inside body $\mc B$ at the 
+        frequency in question.)
+\end{itemize}
+
+\subsection{The general case}
+
+The previous discussion was for the simplest case of a 
+single compact body in vacuum with incident-field 
+sources lying outside the body. The generalization
+to more complicated cases is straighforward. 
+
+Consider a point $\vb x$ in some region $\mathcal{R}$
+of a \lss geometry. In general, $\mathcal{R}$
+will be bounded by some collection of surfaces
+$\{\mathcal{S}^s\}$. Let's subdivide the set of 
+surfaces bounding $\mathcal{R}$ into two groups:
+a first set $\{\mathcal{S}^\alpha\}$ for which
+$\mathcal{R}$ is the \textit{exterior} surface,
+and a second set $\{\mathcal{S}^\beta\}$ for which
+$\mathcal{R}$ is the \textit{interior} surface.
+Then the electric field at $\vb x$ is
+%====================================================================%
+\begin{align} 
+E_i(\vb x) 
+    = &\hphantom{-} \sum_\alpha \int_{\mathcal{S}^\alpha} 
+           \Big\{ \Gamma_{ij}\supt{EE}(\mathcal{R}; \vb x, \vb x^\prime) 
+                   K_j(\vb x^\prime)
+                  \,+\,
+                   \Gamma_{ij}\supt{EM}(\mathcal{R}; \vb x, \vb x^\prime) 
+                   N_j(\vb x^\prime)
+           \Big\} \, d\vb x^\prime
+\nn
+     &-\sum_\beta \int_{\mathcal{S}^\beta} 
+           \Big\{ \Gamma_{ij}\supt{EE}(\mathcal{R}; \vb x, \vb x^\prime) 
+                   K_j(\vb x^\prime)
+                  \,+\,
+                   \Gamma_{ij}\supt{EM}(\mathcal{R}; \vb x, \vb x^\prime) 
+                   N_j(\vb x^\prime)
+           \Big\} \, d\vb x^\prime
+\nn
+     &+E^{\text{\scriptsize inc},r}_i(\vb x).
+\label{FieldContributionsEquation}
+\end{align}
+%====================================================================%
+In this equation, $\vb E\incr$ is the field due to any 
+incident field sources that lie inside the region $\mathcal{R}^r.$
+(The $\vb H$ fields are given by identical relations with 
+$\{ \Gamma\supt{EE}, \Gamma\supt{EM}, E\incr\} \to 
+ \{ \Gamma\supt{ME}, \Gamma\supt{MM}, H\incr\}$.)
+
+Note the following points with respect to equation
+(\ref{FieldContributionsEquation}):
+\begin{itemize}
+  \item Sources on surfaces $\mathcal{S}_\alpha$ for which
+        $\mathcal{R}$ is the exterior medium  
+        contribute to the fields at $\vb x$ 
+        with a positive sign.
+        Sources on surfaces $\mathcal{S}_\beta$ for which
+        $\mathcal{R}$ is the interior medium  
+        contribute to the fields at $\vb x$ 
+        with a negative sign.
+
+  \item In each line of (\ref{FieldContributionsEquation}), 
+        (i.e. regardless of the surface over which we are 
+        integrating) the Green's functions used to compute
+        the fields at $\vb x$ are the Green's functions for
+        the homogeneous region $\mathcal{R}$ containing $\vb x$.
+        The material properties of other regions are not
+        referenced.
+\end{itemize}
+
+%####################################################################%
+%####################################################################%
+%####################################################################%
+\begin{figure}
+\begin{center}
+%\includegraphics{FieldContributionsFigure}
+\caption{Contributions of objects to the scattered fields at 
+         an arbitrary point $\vb x$. Objects $\mathcal{O}_\beta$
+         and $\mathcal{O}_\gamma$ contribute
+         to the field at $\vb x$ ``with a plus sign'' 
+         (cf. equation \ref{FieldContributionsEquation}).
+         Object $\mathcal{O}_\alpha$ 
+         contributes to the field at $\vb x$ ``with a minus
+         sign.'' Objects $\mathcal{O}_\delta$ and $\mathcal{O}_\lambda$
+         do not contribute to the field at $\vb x$.}
+\label{FieldContributionsFigure}
+\end{center}
+\end{figure}

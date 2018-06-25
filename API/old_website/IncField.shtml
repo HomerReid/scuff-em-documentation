@@ -1,0 +1,452 @@
+<!--#set 
+    var="title" 
+    value="libscuff documentation: Defining Incident Fields with IncField"
+  -->
+<!--#include virtual="/pagetop.shtml"-->
+
+<!-- begin main page body -->
+
+<!----------------------------------------------------------------------->
+<!-- main page table, with one row and three columns:                  -->
+<!--  navbar, trough, body.                                            -->
+<!----------------------------------------------------------------------->
+<table cellspacing="0" cellpadding="0" width="100%"><tr>
+  
+  <!----------------------------------------------------------------------->
+  <!-- left column of main page table: nav bar. --------------------------->
+  <!----------------------------------------------------------------------->
+  <td valign="top" width="180"> 
+  <!--#include virtual="/research/navbar.shtml"-->
+  </td> 
+
+  <!----------------------------------------------------------------------->
+  <!-- central column of main page table: separation trough --------------->
+  <!----------------------------------------------------------------------->
+  <td width="5%"></td>
+ 
+  <!----------------------------------------------------------------------->
+  <!-- right column of main page table: content of page. ------------------>
+  <!----------------------------------------------------------------------->
+  <td valign="top">
+    
+   <p><br> <p align="center">
+   <table align="center"> 
+     <tr> <td> <a href="scuff-em">
+               <img width="411" height="296" src="images/scuffEM.png">
+               </a>
+          </td>
+          <td width="5%"> </td>
+          <td> <h1>
+               <span class=CodeName>libscuff</span> API Documentation:
+
+               <br>
+
+               Defining Incident Fields with <code>IncField</code>
+               </h1>
+          </td>
+     </tr>
+   </table> 
+
+  <p>
+  In <span class=CodeName>libscuff</span>, the incident field in an
+  electromagnetic scattering problem is described by a 
+  C++ base class named <code>IncField.</code>
+  <span class=CodeName>libscuff</span> comes with several built-in 
+  implementations (that is, derived subclasses) of this class for 
+  commonly-encountered types of incident field (including plane waves, 
+  point sources, and Gaussian laser beams), but it is also easy to write 
+  your own implementation by mimicing the example below.
+
+  <p>
+  The basic way to use a derived subclass of <code>IncField</code>
+  in a <span class=CodeName>libscuff</span> program is to create
+  an instance of the class and then pass (a pointer to) this instance
+  to the <code>AssembleRHSVector</code> class method of 
+  <code>RWGGeometry</code>: 
+
+  <p>
+  <pre class="CPPListing">
+   MyIncFieldType *IF = new MyIncFieldType( MyParameters, ... )
+
+   HVector *V = G->AssembleRHSVector(Omega, IF);
+  </pre>
+
+  <p>
+  Within the <code>AssembleRHSVector</code> routine, the incident field
+  will be evaluated at a large number of points on the surfaces of the 
+  scattering objects in your geometry to compute the elements of the 
+  RHS vector in the BEM scattering problem.
+
+  <p>
+  Although the values of the incident-field components depend on the
+  angular frequency &omega; and on the permittivity &epsilon; 
+  and permeability &mu; of the medium in which the field propagates,
+  you will see below that the class constructors below do not require
+  that these parameters be specified. Instead, their values are 
+  configured automatically by <span class="CodeName">libscuff</span>
+  using the value of the <code>Omega</code> parameter 
+  specified when <code>AssembleRHSVector()</code> is called.
+
+  <p> 
+  The first few sections below describe how to instantiate the 
+  built-in derived subclasses of <code>IncField</code> that come
+  with the <span class=CodeName>libscuff</span> distribution.
+  The final section discusses an example of how to write a homemade
+  <code>IncField</code> routine for describing a non-standard type 
+  incident field. 
+
+    <!----================================================================-->
+    <!---------------------------------------------------------------------->
+    <!----================================================================-->
+    <p>
+    <table align="center" class="TOC" cellpadding="5" cellspacing="5">
+
+      <tr> <th> Describing Incident Fields using <code>IncField</code>
+      </th></tr>
+
+      <tr> <td>
+           <a href="scuff-EM/libscuff/IncField.shtml#PlaneWave">
+            1. Plane waves
+           </a>
+           </td>
+      </tr>
+
+      <tr> <td>
+           <a href="scuff-EM/libscuff/IncField.shtml#PointSource">
+            2. Point sources
+           </a>
+           </td>
+      </tr>
+
+      <tr> <td>
+           <a href="scuff-EM/libscuff/IncField.shtml#GaussianBeam">
+            3. Gaussian laser beams
+           </a>
+           </td>
+      </tr>
+
+      <tr> <td>
+           <a href="scuff-EM/libscuff/IncField.shtml#Composite">
+            4. Composite incident fields
+           </a>
+           </td>
+      </tr>
+
+      <tr> <td>
+           <a href="scuff-EM/libscuff/IncField.shtml#Homemade">
+            5. Customizing <code>IncField</code> for an arbitrary 
+               incident field profile
+           </a>
+           </td>
+      </tr>
+
+    </table>
+
+  <!---------------------------------------------------------------------->
+  <!---------------------------------------------------------------------->
+  <!---------------------------------------------------------------------->
+  <p>
+  <h2><a name="PlaneWave"></a>1. Plane waves </h2>
+  <hr>
+
+  <p>
+  The fields of a plane wave are 
+
+  <p align="center">
+  <img src="scuff-em/libscuff/PlaneWave.png">
+
+  <p>
+  where <b>E<sub>0</sub></b> and <b>n</b> are the complex
+  <b>E-</b>field polarization vector and the propagation vector,
+  respectively.
+
+  <p>
+  The corresponding derived subclass of <code>IncField</code>
+  is <code>PlaneWave</code>; the constructor is 
+
+  <p>
+  <pre class="CPPListing">
+  PlaneWave( const cdouble E0[3], const double nHat[3] );
+  </pre>
+
+  <p>
+  where <code>E0</code> and <code>nHat</code> define the 
+  components of <b>E<sub>0</sub></b> and <b>n</b>.
+
+  <p>
+  <h4> Examples </h4>
+
+  <p>
+  A linearly-polarized plane wave traveling in the positive
+  <i>z</i> direction with <b>E-</b>field pointing in the 
+  <i>x</i> direction:
+
+  <p>
+  <pre class="CPPListing">
+   cdouble lPol[3] = { 1.0, 0.0, 0.0 };
+   double nHat[3]  = { 0.0, 0.0, 1.0 };
+   PlaneWave lpw( lPol, nHat );
+
+   HVector *B=AssembleRHSVector(Omega, &lpw); 
+  </pre>
+
+  <p>
+  <pre class="PythonListing">
+   lpw = scuff.PlaneWave([1,0,0], [0,0,1])
+  </pre>
+
+  <p>
+  A right-circularly-polarized plane wave traveling in the positive
+  <i>z</i> direction:
+
+  <p>
+  <pre class="CPPListing">
+   cdouble cPol[3] = { cdouble(1.0,0.0), cdouble(0.0,1.0), 0.0 };
+   double nHat[3]  = { 0.0, 0.0, 1.0 };
+   PlaneWave cpw( cPol, nHat );
+
+   HVector *B=AssembleRHSVector(Omega, &cpw); 
+  </pre>
+
+  <p>
+  <pre class="PythonListing">
+   cpw = scuff.PlaneWave( [1+1i,1+1i,0], [0,0,1])
+   RHS = G.AssembleRHSVector(Omega, cpw)
+  </pre>
+
+  <!---------------------------------------------------------------------->
+  <!---------------------------------------------------------------------->
+  <!---------------------------------------------------------------------->
+  <p>
+  <h2><a name="PointSource"></a>2. Point dipole sources</h2>
+  <hr>
+
+  <p>
+  The field of a point electric dipole located at <b>x<sub>0</sub></b> is
+
+  <p align="center">
+  <img src="scuff-em/libscuff/PointSource.png">
+
+  <p>
+  The corresponding derived subclass of <code>IncField</code>
+  is <code>PointSource</code>; the constructor is 
+
+  <p>
+  <pre class="CPPListing">
+  PointSource( const double X0[3], 
+               const cdouble P[3]);
+               int Type = LIF_ELECTRIC_DIPOLE);
+  </pre>
+
+  <p>
+  where <code>X0</code> and <code>P</code> define the
+  components of <b>x<sub>0</sub></b> and <b>P</b>.
+
+  <p>
+  (Note that if you are measuring length in units of &mu;m,  
+   as is common in <span class=CodeName>scuff-em</span>
+   applications, then a point electric dipole with
+   moment e.g. <code>P={0.0 0.0 1.0}</code> has magnitude
+   8.85&bullet;10<sup>-18</sup> coulombs&bullet;&mu;m
+   or 
+   8.85&bullet;10<sup>-12</sup> coulombs&bullet;meters.)
+
+  <p>
+  The optional <code>Type</code> parameter may be set to
+  <code>LIF_MAGNETIC_DIPOLE</code> to obtain the fields 
+  of a point <code>magnetic</code> dipole; these are related 
+  to the fields of a point electric dipole according to
+
+  <p align="center">
+  <img src="scuff-em/libscuff/PointSource2.png">
+
+  <p>
+  Note that, for the magnetic dipole case, the quantity 
+  <code>P</code> should be set to the
+  magnetic dipole moment times <i>Z</i> 
+  divided by &mu;<sub>0</sub>.
+
+  <p>
+  It is perfectly acceptable for the location of a point dipole 
+  source to lie inside one of the material bodies in your 
+  scattering geometry. You don't have to do anything special 
+  in this case; if the point <code>X0</code> lies inside 
+  one of the material objects specified in your <code>.scuffgeo</code>
+  file, <span class="CodeName">libscuff</span> will automatically 
+  detect this and proceed accordingly.
+  
+
+  <!---------------------------------------------------------------------->
+  <!---------------------------------------------------------------------->
+  <!---------------------------------------------------------------------->
+  <p>
+  <h2><a name="GaussianBeam"></a>3. Gaussian laser beams</h2>
+  <hr>
+
+  <p>
+  The <span class=CodeName>scuff-em</span> implementation of the
+  field of a Gaussian laser beam was contributed by 
+  Johannes Feist
+  and follows this paper:
+
+  <p>
+  <ul> 
+    <li><p> "Electromagnetic Gaussian Beams Beyond the Paraxial Approximation,"
+             by C. J. R. Sheppard and S. Saghafi, 
+             <i>Journal of the Optical Society of America A</i>
+             <b>16</b> 1381 (1999)
+             (<a href="http://dx.doi.org/10.1364/JOSAA.16.001381">
+                       http://dx.doi.org/10.1364/JOSAA.16.001381</a>).
+    </ul> 
+
+  <p>
+  The corresponding derived subclass of <code>IncField</code>
+  is <code>GaussianBeam</code>; the constructor is 
+
+  <p>
+  <pre class="CPPListing">
+  GaussianBeam( const double X0[3], 
+                const double KProp[3], 
+                const cdouble E0[3],
+                const double W[3],
+              );
+  </pre>
+  
+  <p>
+  Here <code>X0</code> is the location of the beam center,  
+  <code>KProp</code> is the propagation vector,
+  <code>E0</code> is the complex <b>E</b>-field polarization 
+  vector, and <code>W</code> is the beam waist. (In the limit
+  of infinite <code>W</code>, the field becomes a plane wave
+  with <b>E</b>-field polarization vector <code>E0</code> 
+  and propagation vector <code>KProp.</code>)
+
+  <!---------------------------------------------------------------------->
+  <!---------------------------------------------------------------------->
+  <!---------------------------------------------------------------------->
+  <p>
+  <h2><a name="Composite"></a> 
+  4. Composite incident fields
+  </h2>
+  <hr>
+
+  <p> 
+  The <code>IncField</code> class contains a <code>Next</code> field that you
+  can use to contruct an incident field consisting of a combination
+  of the various types of fields described above.
+
+  <p> 
+  Here's an example in which the incident field in a scattering problem
+  consists of two incoming plane waves together with the field of a point
+  source:
+
+  <p>
+   <pre class="CPPListing">
+     PlaneWave *PW  = new PlaneWave( Pol1, nHat1 ); 
+     PW->Next       = new PlaneWave( Pol2, nHat2 ); 
+     PW->Next->Next = new PointSource( X0, P );
+
+     // the parameter passed to AssembleRHSVector is the head of the list
+     AssembleRHSVector( Omega, PW );
+   </pre>
+
+  <!---------------------------------------------------------------------->
+  <!---------------------------------------------------------------------->
+  <!---------------------------------------------------------------------->
+  <p>
+  <h2><a name="Homemade"></a> 
+    5. Customizing <code>IncField</code> for an arbitrary 
+       incident field profile 
+  </h2>
+  <hr>
+
+  <p> 
+  If you need to solve scattering problems involving other types of 
+  incident fields, you can create your own derived subclass of 
+  <code>IncField</code>. 
+
+  <p>
+  Probably the easiest way to do this is 
+  to copy the file <code>src/libs/libIncField/PlaneWave.cc</code>
+  that comes with the <span class="CodeName">scuff-em</span> source
+  distribution and modify the constructor and the 
+  <code>GetFields()</code> routine.
+
+  <h4>Incident Field Sources Inside Scattering Objects</h4>
+
+  <p>
+  The discussion so far has assumed that the incident field arises from
+  sources that lie in the <i>exterior medium</i> of a scattering problem.
+  In some cases you may need to solve scattering problems in which
+  the incident field arises from sources contained inside one of the
+  material bodies in your geometry. In contrast to other scattering
+  formulations, in SIE/BEM approaches this distinction is important
+  and must be communicated to the <span class="CodeName">scuff-em</span>
+  core library routines.
+
+  <p>
+  There are two ways to tell <span class="CodeName">libscuff</span> that 
+  the sources of an <code>IncField</code> are contained inside a
+  material body.
+
+  <p>
+  <ul>
+    <li> You can set the <code>ObjectLabel</code> field in the 
+         <code>IncField</code> to the label of the object inside
+         of which the field sources lie.
+         (The label is the string following the <code>OBJECT</code> 
+         keyword in the <code>.scuffgeo</code> file.) In the case 
+         of nested objects (i.e. the field sources lie inside an 
+         object which is itself contained in another object), 
+         set <code>ObjectLabel</code> to the label of the immediate
+         containing object. The default value of <code>ObjectLabel</code>
+         is <code>NULL</code>, which corresponds to field sources in 
+         the exterior medium.
+
+    <p>
+    <li> Alternatively, if you are implementing your own derived subclass
+         of <code>IncField</code>, you can leave the <code>ObjectLabel</code>
+         field equal to <code>NULL</code> and instead provide an implementation
+         of the <code>GetSourcePoint()</code> virtual class method:
+
+         <p>
+         <pre class="CPPListing">
+           bool GetSourcePoint(double X[3]);
+         </pre>
+
+         <p>
+         Your implementation of this method should fill in the components of 
+         <code>X</code> with the cartesian coordinates of the point at which
+         your field sources lie, and should return <code>true.</code>
+         <span class="CodeName">libscuff</span> will then automatically 
+         figure out which (if any) object in the scattering geometry contains 
+         this point.
+
+         <p>The default implementation of <code>GetSourcePoint</code> in the 
+         <code>IncField</code> base class simply returns <code>false,</code>
+         which tells <span class="CodeName">libscuff</span> to look at the
+         <code>ObjectLabel</code> field instead.
+  </ul>
+  
+
+  <!----------------------------------------------------------------------->
+  <!----------------------------------------------------------------------->
+  <!----------------------------------------------------------------------->
+  <!--#include virtual="/scuff-EM/scuffEMFooter.shtml">
+
+  <!----------------------------------------------------------------------->
+  <!-- end right column of main page table.                             --->
+  <!----------------------------------------------------------------------->
+  </td>
+  </table>
+
+<!----------------------------------------------------------------------->
+<!-- end main page table                                               -->
+<!----------------------------------------------------------------------->
+</tr></table>
+   
+<!----------------------------------------------------------------------->
+<!-- end main page body ------------------------------------------------->
+<!----------------------------------------------------------------------->
+   
+<!--#include virtual="/pageend.shtml"-->

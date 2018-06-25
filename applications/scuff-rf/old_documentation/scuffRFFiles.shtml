@@ -1,0 +1,462 @@
+<!--#set 
+    var="title" 
+    value="scuff-RF Input and Output File Reference"
+  -->
+<!--#include virtual="/pagetop.shtml"-->
+
+<!-- begin main page body -->
+
+<!---------------------------------------------------------------------->
+<!-- main page table, with one row and three columns:                 -->
+<!--  navbar, trough, body.                                           -->
+<!---------------------------------------------------------------------->
+<table cellspacing="0" cellpadding="0" width="100%"><tr>
+  
+  <!---------------------------------------------------------------------->
+  <!-- left column of main page table: nav bar. -------------------------->
+  <!---------------------------------------------------------------------->
+  <td valign="top" width="180"> 
+  <!--#include virtual="/research/navbar.shtml"-->
+  </td> 
+
+  <!---------------------------------------------------------------------->
+  <!-- central column of main page table: separation trough -------------->
+  <!---------------------------------------------------------------------->
+  <td width="5%"></td>
+ 
+  <!---------------------------------------------------------------------->
+  <!-- right column of main page table: content of page.------------------>
+  <!---------------------------------------------------------------------->
+  <td valign="top">
+    
+   <p><br> <p align="center">
+   <table align="center"> 
+     <tr> <td> <img width="411" height="296" src="images/scuffRF.png"></td>
+          <td width="5%"> </td>
+          <td> <h1>
+               <span class=CodeName>scuff-rf</span> Input and Output File Reference
+               </h1>
+          </td>
+     </tr>
+   </table> 
+    
+    <!---------------------------------------------------------------------->
+    <!-- big table encompassing the entire page ---------------------------->
+    <!---------------------------------------------------------------------->
+    <table align="center" width="90%"><tr><td>
+
+    <p> <br>
+    <table class="TOC" cellpadding="5" cellspacing="5">
+
+      <tr> <th> <span class=CodeName>scuff-rf</span> File Reference </th></tr>
+
+      <tr> <td> A. Input files </td> </tr>
+
+      <tr> 
+        <td> 
+          <ol> 
+
+             <li> <a href="scuff-EM/scuff-RF/scuffRFFiles.shtml#scuffgeo">
+                  Describing your geometry: The <code>.scuffgeo</code> file
+                  </a>
+
+             <p>
+             <li> <a href="scuff-EM/scuff-RF/scuffRFFiles.shtml#ports">
+                  Defining ports: The <code>.ports</code> file
+                  </a>
+
+             <p>
+             <li> <a href="scuff-EM/scuff-RF/scuffRFFiles.shtml#portcurrents">
+                  Specifying port currents: The <code>.portcurrents</code> file
+                  </a>
+
+             <p>
+             <li> <a href="scuff-EM/scuff-RF/scuffRFFiles.shtml#epfile">
+                  Specifying field evaluation points: The <code>.evalpoints</code> file
+                  </a>
+
+          </ol> 
+        </td> 
+      </tr> 
+
+      <tr> <td> B. Output files </td> </tr>
+
+      <tr> 
+        <td> 
+          <ol> 
+
+             <li> <a href="scuff-EM/scuff-RF/scuffRFFiles.shtml#sparms">
+                  <i>S</i>-parameters: The <code>.spar</code> file
+                  </a>
+
+             <p>
+             <li> <a href="scuff-EM/scuff-RF/scuffRFFiles.shtml#zparms">
+                  Impedance parameters: The <code>.zpar</code> file
+                  </a>
+
+             <p>
+             <li> <a href="scuff-EM/scuff-RF/scuffRFFiles.shtml#fields">
+                  Radiated fields: The <code>.fields</code> file
+                  </a>
+
+          </ol>
+        </td>
+      </tr>
+    </table>
+    <!----================================================================-->
+    <!---------------------------------------------------------------------->
+    <!----================================================================-->
+ 
+    <!---------------------------------------------------------------------->
+    <!---------------------------------------------------------------------->
+    <!---------------------------------------------------------------------->
+    <p>
+    <h2> <a name="scuffgeo"></a>1. The <code>.scuffgeo</code> file</h2>
+    <hr>
+
+    <p>
+    The <code>.scuffgeo</code> file format is common to all tools in the 
+    <span class="CodeName">scuff-em</span> code suite and is described in 
+    detail <a href="scuff-EM/reference/scuffEMGeometries.shtml">here.</a>
+ 
+    <!---------------------------------------------------------------------->
+    <!---------------------------------------------------------------------->
+    <!---------------------------------------------------------------------->
+    <p>
+    <h2> <a name="ports"></a>2. The <code>.ports</code> file</h2>
+    <hr>
+
+    <p>
+    The <code>.ports</code> file should consist of one or more 
+    sections delineated by the keywords <code>PORT</code> and 
+    <code>ENDPORT</code>. Blank lines and comments (lines beginning
+    with <code>#</code>) are ignored. 
+
+    <p>
+    The purpose of the <code>.ports</code> file is to tell 
+    <span class="CodeName">scuff-rf</span> which portions of your
+    structure you want to define to be RF <i>ports</i> -- that is,
+    regions of the structure that interface with RF circuitry.
+    Each port consists of one <i>positive terminal</i> and 
+    one <i>negative terminal.</i> Each "terminal" is just a line 
+    segment (or a closed loop of line segments) represented as
+    a collection of one or more exterior triangle edges in the 
+    mesh discretization of your structure; see examples 
+    <a href="scuff-EM/scuff-RF/scuffRFTutorial.shtml#Ports">here</a>
+    and
+    <a href="scuff-EM/scuff-RF/scuffRFExamples.shtml#Coax">here</a>.
+    When you run a simulation
+    with a specified port current <i>I</i> for a given port, 
+    <span class="CodeName">scuff-rf</span> will force a current of 
+    <i>+I</i> into the positive terminal for that port, 
+    and will extract a current of <i>-I</i> from the negative terminal
+    for that port.
+
+    <p>
+    The <code>PORT...ENDPORT</code> section in the <code>.ports</code>
+    file tells <span class="CodeName">scuff-rf</span> which 
+    exterior triangle edges in your meshed geometry constitute the 
+    positive and negative port terminals. There are two ways to do this.
+
+    <p>
+    <ol>
+
+      <p> <li> 
+       You can explicitly list the indices of the exterior edges that define
+       the positive and negative terminals. (To figure out the indices of 
+       the exterior edges you want to specify, you can use 
+       <a href="scuff-EM/scuff-analyze" class="CodeName">scuff-analyze</a>
+       to obtain a graphical representation of the structure with the indices of
+       all exterior edges labeled.) 
+       This is how it is done in 
+       <a href="scuff-EM/scuff-RF/scuffRFTutorial.shtml#Ports">this example.</a>
+
+      <p> In this case, your <code>PORT...ENDPORT</code> 
+          block should contain lines starting with the keywords <code>PEDGES</code>
+          and <code>MEDGES</code>, followed in each case by the indices of the 
+          external edges in question. Here's an example:
+
+          <p>
+          <pre class="listing"> PORT 
+          POBJECT LeftAntenna
+          MOBJECT RightAntenna
+          PEDGES  2 8 10 16
+          MEDGES  12 13 99
+ ENDPORT
+          </pre>
+
+      <p> The optional <code>POBJECT</code> and <code>MOBJECT</code> 
+          keywords allow you to specify the labels of a particular 
+          <code>OBJECT</code> (or <code>SURFACE</code>)
+          in the geometry. (If not specified, the first object listed 
+          in the <code>.scuffgeo</code> file is used.) 
+          The keywords <code>PSURFACE</code> and <code>MSURFACE</code>
+          are synonyms for <code>POBJECT</code> and <code>MOBJECT.</code>
+
+      <p> <li> 
+       Alternatively, you can define polygonal regions of space such that 
+       all exterior mesh edges lying within the given polygon are 
+       identified as belonging to the terminal in question.
+       This is how it is done in 
+       <a href="scuff-EM/scuff-RF/scuffRFExamples.shtml#TwoSphereCapacitor">this example.</a>
+       Because this approach refers to the underlying <i>geometry</i> as opposed 
+       to any specific meshed representation of it, it has the advantage of 
+       allowing you to reuse the same <code>.ports</code> file for multiple 
+       meshes of varying fineness derived from the same geometry. (This is in
+       contrast to the previous method for specifying ports, in which case you
+       must re-identify the appropriate exterior edges indices each time you 
+       re-mesh the geometry at a different fineness level.)
+
+      <p>
+       In this case, your <code>PORT...ENDPORT</code> block should contain lines
+       starting with the keywords <code>PPOLYGON</code> and <code>MPOLYGON</code>,
+       followed in each case by the cartesian coordinates of the polygon vertices,
+       in the order <code> X<sub>1</sub> Y<sub>1</sub> Z<sub>1</sub>
+                           X<sub>2</sub> Y<sub>2</sub> Z<sub>2</sub> ...
+                           X<sub>N</sub> Y<sub>N</sub> Z<sub>N</sub></code>.
+       Polygons may have any number of vertices greater than or equal to 2.
+
+      <p>
+      For example, here's a <code>PORT</code> specification in which
+      the positive port terminal is defined to consist of all external 
+      triangle edges lying within a given rectangle, while the negative 
+      terminal similarly consists of all edges lying in a separate rectangle.
+
+      <p>
+      <pre class="listing"> PORT 
+       POBJECT LowerSphere
+       PPOLYGON -1 -1  0.98768834 1 -1 0.98768834 1 1 0.98768834 -1 1 0.98768834
+
+       MOBJECT UpperSphere
+       MPOLYGON -1 -1 2.01231166  1 -1 2.01231166 1 1 2.01231166 -1 1 2.01231166
+ ENDPORT
+      </pre>
+
+    </ol>
+
+    <!---------------------------------------------------------------------->
+    <!---------------------------------------------------------------------->
+    <!---------------------------------------------------------------------->
+    <p>
+    <h2> <a name="portcurrents"></a>3. The <code>.portcurrents</code> file</h2>
+    <hr>
+
+    <p>
+    The <code>.portcurrents</code> file should contain one line for each
+    frequency you wish to simulate. (I typically find it most convenient to
+    do only a single frequency at a time, in which case the file will consist
+    of just a single line, but you may do multiple frequencies if you wish.)
+
+    <p>
+    If your structure has <i>N</i> ports, then each line of the 
+    <code>.portcurrents</code> file must contain <i>2N+1</i> 
+    numbers. 
+
+    <p>
+    The first number is the frequency (specified in units of 
+    in GHz, like all frequencies in <span class="CodeName">scuff-rf</span>).
+
+    <p>
+    The next two numbers are the real and imaginary parts of the current,
+    in units of Amperes, to be forced into port 1 at the frequency in 
+    question. The two numbers after that are the real and imaginary parts 
+    of the current for port 2 at that frequency, and so on. 
+
+    <p>
+    Thus the file format is 
+
+    <p>
+    <table class="CodeSnippet"><tr><td>
+ <i>freq real(I<sub>1</sub>) imag(I<sub>1</sub>) real(I<sub>2</sub>) ... imag(I<sub>N</sub>) 
+    </td></tr></table>
+
+    <p>
+    For example, if we had a two-port structure, and we wanted to 
+    compute the fields it radiates at 1.47 GHz with port 1 driven by 
+    a current of <i>I<sub>1</sub>=</i>0.02 + 0.03i A 
+    and port 2 driven by a current of <i>I<sub>1</sub>=</i>0.04 - 0.05i A,
+    our <code>.portcurrents</code> file would look like this:
+
+    <p>
+    <pre class="listing">
+ 1.47 0.02 0.03 0.04 -0.05
+    </pre>
+
+    <!---------------------------------------------------------------------->
+    <!---------------------------------------------------------------------->
+    <!---------------------------------------------------------------------->
+    <p>
+    <h2> <a name="epfile"></a>4. The <code>.epfile</code> file</h2>
+    <hr>
+
+    <p>
+    The <code>.epfile</code> file contains one line for each 
+    evaluation point at which you want <span class="CodeName">scuff-rf</span> 
+    to calculate the radiated electromagnetic fields. 
+    Each line should contain 3 numbers, the <i>x,</i> <i>y,</i> and
+    <i>z</i> coordinates of the evaluation point. (You don't specify the 
+    frequency in this file; that is specified in the <code>.portcurrents</code>
+    file.) Thus the file format of the <code>.epfile</code> file is 
+
+    <p>
+    <table class="CodeSnippet">
+      <tr><td> <i>x<sub>1</sub>  y<sub>1</sub>  z<sub>1</sub> </i></td></tr>
+      <tr><td> <i>x<sub>2</sub>  y<sub>2</sub>  z<sub>2</sub> </i></td></tr>
+      <tr><td> ... </td></tr>
+      <tr><td> <i>x<sub>N</sub>  y<sub>N</sub>  z<sub>N</sub> </i></td></tr>
+    </td></tr></table>
+
+    <!---------------------------------------------------------------------->
+    <!---------------------------------------------------------------------->
+    <!---------------------------------------------------------------------->
+    <p>
+    <h2> <a name="sparms"></a>5. The <code>.sparms</code> file</h2>
+    <hr>
+
+    The <code>.sparms</code> file is a simple text file containing one line
+    for each frequency at which calculations were performed.
+    The first entry on each line is the frequency, and then the real and
+    imaginary parts of the entries of the multiport <i>S-</i> matrix 
+    appear, written in column-major order:
+
+    <p>
+    <table class="CodeSnippet"><tr><td><i><tr><td><i><tr><td><i><tr><td><i>
+ freq re(S<sub>11</sub>) im(S<sub>11</sub>) re(S<sub>12</sub>) im(S<sub>12</sub>) ...  im(S<sub>1N</sub>) re(S<sub>21</sub>) ... im(S<sub>NN</sub>)
+    </i></td></tr></table>
+
+    <!---------------------------------------------------------------------->
+    <!---------------------------------------------------------------------->
+    <!---------------------------------------------------------------------->
+    <p>
+    <h2> <a name="zparms"></a>6. The <code>.zparms</code> file</h2>
+    <hr>
+
+    The <code>.zparms</code> file is a simple text file containing one line
+    for each frequency at which calculations were performed.
+    The first entry on each line is the frequency, and then the real and
+    imaginary parts of the entries of the multiport impedance matrix 
+    appear, written in column-major order:
+
+    <p>
+    <table class="CodeSnippet"><tr><td><i><tr><td><i><tr><td><i><tr><td><i>
+ freq re(Z<sub>11</sub>) im(Z<sub>11</sub>) re(Z<sub>12</sub>) im(Z<sub>12</sub>) ...  im(Z<sub>1N</sub>) re(Z<sub>21</sub>) ... im(Z<sub>NN</sub>)
+    </i></td></tr></table>
+
+
+    <!---------------------------------------------------------------------->
+    <!---------------------------------------------------------------------->
+    <!---------------------------------------------------------------------->
+    <p>
+    <h2> <a name="fields"></a>7. The <code>.fields</code> file</h2>
+    <hr>
+   
+    <p>
+    The <code>.fields</code> file contains one output line for each input
+    line that was found in the <code>.epfile.</code> 
+    Each line in the <code>.fields</code> contains 15 numbers, as follows:
+
+    <p>
+    <table border="1" cellspacing="1" cellpadding="1">
+     <tr> <th> Columns </th> <th> Quantity </th> </tr> 
+     <tr> <td align="center"> 1-3     </td> 
+          <td align="center"> <i>x,y,z</i> coordinates of eval point</td> 
+     </tr> 
+     <tr> <td align="center"> 4-5     </td> 
+          <td align="center"> Re (<i>E<sub>x</sub></i>), Im (<i>E<sub>x</sub></i>) </td> 
+     </tr>
+     <tr> <td align="center"> 6-7     </td> 
+          <td align="center"> Re (<i>E<sub>y</sub></i>), Im (<i>E<sub>y</sub></i>) </td> 
+     </tr>
+     <tr> <td align="center"> 8-9     </td> 
+          <td align="center"> Re (<i>E<sub>z</sub></i>), Im (<i>E<sub>z</sub></i>) </td> 
+     </tr>
+     <tr> <td align="center"> 10-11   </td> 
+          <td align="center"> Re (<i>H<sub>x</sub></i>), Im (<i>H<sub>x</sub></i>) </td> 
+     </tr>
+     <tr> <td align="center"> 12-13   </td> 
+          <td align="center"> Re (<i>H<sub>y</sub></i>), Im (<i>H<sub>y</sub></i>) </td> 
+     </tr>
+     <tr> <td align="center"> 14-15   </td> 
+          <td align="center"> Re (<i>H<sub>z</sub></i>), Im (<i>H<sub>z</sub></i>) </td>
+     </tr>
+    </table>
+
+    <p>
+    In other words, each line of the <code>.fields</code> file has the format 
+
+    <p>
+    <table class="CodeSnippet"><tr><td><i><tr><td><i><tr><td><i><tr><td><i>
+ x y z re(E<sub>x</sub>) im(E<sub>x</sub>) re(E<sub>y</sub>) im(E<sub>y</sub>) re(E<sub>z</sub>) im(E<sub>z</sub>) re(H<sub>x</sub>) im(H<sub>x</sub>) re(H<sub>y</sub>) im(H<sub>y</sub>) re(H<sub>z</sub>) im(H<sub>z</sub>)
+    </i></td></tr></table>
+
+    <p>
+    Note: Electric fields are output in units of volt / millimeter
+    (NOT volt/meter). Magnetic fields are output in units of 
+    amperes / millimeter.
+
+    <!----================================================================-->
+    <!---------------------------------------------------------------------->
+    <!----================================================================-->
+    <p>
+    <hr>
+    <p align="center">
+    <table align="center" class="TOC" cellpadding="5" cellspacing="5">
+
+      <tr> <th> <a class=CodeName 
+                   href="research/codes/scuff-EM/scuff-RF/index.shtml">
+                   scuff-rf</a> Documentation
+      </th></tr>
+
+      <tr> <td>
+           <a href="research/codes/scuff-EM/scuff-RF/scuffRFInstallation.shtml">
+           1. Downloading and Installing <span class=CodeName>scuffrf</span> 
+           </a>
+           </td>
+      </tr>
+
+      <tr> <td>
+           <a href="research/codes/scuff-EM/scuff-RF/scuffRFTutorial.shtml">
+           2. A Tutorial Walk Through <span class=CodeName>scuff-rf</span>
+           </a>
+      </tr>
+
+      <tr> <td> 
+           <a href="research/codes/scuff-EM/scuff-RF/scuffRFOptions.shtml">
+           3. <span class=CodeName>scuff-rf</span> Command-Line Reference
+           </a>
+           </td>
+      </tr>
+
+      <tr> <td> 
+           <b>
+           4. <span class=CodeName>scuff-rf</span> Input and Output File Reference
+           </b>
+           </td>
+      </tr>
+
+      <tr> <td> 
+           <a href="research/codes/scuff-EM/scuff-RF/scuffRFExamples.shtml">
+           5. A Compendium of <span class=CodeName>scuff-rf</span> Examples
+           </a>
+           </td> 
+      </tr>
+
+    </table> <!-- end of table of contents -->
+             
+  <!----------------------------------------------------------------------->
+  <!-- end right column of main page table.                             --->
+  <!----------------------------------------------------------------------->
+  </td>
+  </table>
+
+<!----------------------------------------------------------------------->
+<!-- end main page table                                               -->
+<!----------------------------------------------------------------------->
+</tr></table>
+   
+<!----------------------------------------------------------------------->
+<!-- end main page body ------------------------------------------------->
+<!----------------------------------------------------------------------->
+   
+<!--#include virtual="/pageend.shtml"-->
+ 

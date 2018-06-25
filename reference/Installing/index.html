@@ -1,548 +1,2147 @@
+
+
+
+
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>Installation - SCUFF-EM documentation</title>
-  
-
-  <link rel="shortcut icon" href="../../scuffEM.ico">
-  
-
-  
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
-
-  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
-  <link rel="stylesheet" href="../../css/highlight.css">
-
-  
-  <script>
-    // Current page data
-    var mkdocs_page_name = "reference/Installing"
-  </script>
-  
-  <script src="../../js/jquery-2.1.1.min.js"></script>
-  <script src="../../js/modernizr-2.8.3.min.js"></script>
-  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
-  <script src="../../js/theme.js"></script> 
-  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
-  <script src="../../mathjaxhelper.js"></script>
-
-  
-</head>
-
-<body class="wy-body-for-nav" role="document">
-
-  <div class="wy-grid-for-nav">
-
+<html lang="en" class="no-js">
+  <head>
     
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
-
-      <p align="center"
-      <a href="../..">
-         <img align="center" height="auto" width="100%"  
-              src="../../img/scuffEMNavBar.png"
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="http://homerreid.github.io/scuff-em-documentation/reference/Installing/">
+      
+      
+        <meta name="author" content="Homer Reid">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-0.17.3, mkdocs-material-2.7.3">
+    
+    
+      
+        <title>Installation - SCUFF-EM documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.8d40d89b.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.6079476c.css">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:300,400,400i,700|">
+        <style>body,input{font-family:"Noto Sans","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+      <link rel="stylesheet" href="../../css/scuff-em.css">
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <a href="#external-packages" tabindex="1" class="md-skip">
+        Skip to content
       </a>
-
-      <div class="wy-side-nav-search">
-        <a href="../.." class="icon icon-home"> SCUFF-EM documentation</a>
-        <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
-  </form>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="http://homerreid.github.io/scuff-em-documentation" title="SCUFF-EM documentation" class="md-header-nav__button md-logo">
+          
+            <img src="../../reference/scuffEMLogo.png" width="24" height="24">
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                SCUFF-EM documentation
+              </span>
+              <span class="md-header-nav__topic">
+                Installation
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+          
+        
       </div>
-
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-        <ul class="current">
-          
-            <li>
-    <li class="toctree-l1 ">
-        <a class="" href="../..">SCUFF-EM documentation</a>
-        
-    </li>
-<li>
-          
-            <li>
-    <ul class="subnav">
-    <li><span>Examples</span></li>
-
-        
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
             
-    <li class="toctree-l1 ">
-        <a class="" href="../../examples/MieScattering/MieScattering/">Mie scattering</a>
-        
-    </li>
 
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../examples/DielectricShell/DielectricShell/">Electrostatics of a spherical dielectric shell</a>
-        
-    </li>
 
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../examples/ThinFilm/ThinFilm/">Spatially-resolved study of plane-wave transmission through an infinite-area thin dielectric film</a>
-        
-    </li>
+  
 
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../examples/DiffractionPatterns/DiffractionPatterns/">Imaging diffraction patterns of discs, disc arrays, and hole arrays in metal screens</a>
-        
-    </li>
 
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../examples/CubeTorus/">Casimir forces in a compact geometry</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../examples/SiliconBeams/SiliconBeams/">Casimir forces in a 1D extended geometry</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../examples/SiliconSlabs/SiliconSlabs/">Casimir forces in a 2D extended geometry</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../examples/SiO2Spheres/SiO2Spheres/">Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../examples/TipSubstrate/TipSubstrate/">Spatial distribution of heat flux from a warm tip over a cold substrate</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../examples/HalfSpaceLDOS/HalfSpaceLDOS/">LDOS and dyadic Green functions above an infinite aluminum half-space</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../examples/PlatonicSolids/PlatonicSolids/">Electrostatic polarizability of platonic solids</a>
-        
-    </li>
-
-        
-    </ul>
-<li>
-          
-            <li>
-    <ul class="subnav">
-    <li><span>General reference</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../TopLevel/">Top-level overview</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 current">
-        <a class="current" href="./">Installation</a>
-        
-            <ul>
-            
-                <li class="toctree-l3"><a href="#1-external-packages">1. External packages</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#2-cloning-the-github-repository-and-building-the-code">2. Cloning the GitHub repository and building the code</a></li>
-                
-                    <li><a class="toctree-l4" href="#build-options">Build options</a></li>
-                
-            
-            </ul>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../Geometries/">Geometry descriptions</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../Materials/">Material designations</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../Transformations/">Geometric transformations</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../IncidentFields/">Incident Fields</a>
-        
-    </li>
-
-        
-    </ul>
-<li>
-          
-            <li>
-    <ul class="subnav">
-    <li><span>Command-line application reference</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../applications/GeneralReference/">General command-line reference</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../applications/scuff-scatter/scuff-scatter/">scuff-scatter</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../applications/scuff-transmission/scuff-transmission/">scuff-transmission</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../applications/scuff-ldos/scuff-ldos/">scuff-ldos</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../applications/scuff-tmatrix/scuff-tmatrix/">scuff-tmatrix</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../applications/scuff-cas3D/scuff-cas3D/">scuff-cas3D</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../applications/scuff-caspol/scuff-caspol/">scuff-caspol</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../applications/scuff-neq/scuff-neq/">scuff-neq</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../applications/scuff-RF/scuff-RF/">scuff-RF</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../applications/scuff-static/scuff-static/">scuff-static</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../applications/scuff-analyze/scuff-analyze/">scuff-analyze</a>
-        
-    </li>
-
-        
-    </ul>
-<li>
-          
-            <li>
-    <ul class="subnav">
-    <li><span>API reference</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../API/libscuff/">libscuff</a>
-        
-    </li>
-
-        
-    </ul>
-<li>
-          
-            <li>
-    <ul class="subnav">
-    <li><span>For developers</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../forDevelopers/Implementation/">Implementation</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../forDevelopers/DataStructures/">Data Structures</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../forDevelopers/Documentation/">Documentation</a>
-        
-    </li>
-
-        
-    </ul>
-<li>
-          
-        </ul>
+  <a href="https://github.com/homerreid/scuff-em/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
       </div>
-      &nbsp;
+    
+    <div class="md-source__repository">
+      scuff-em
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href="../.." title="Home" class="md-tabs__link">
+        Home
+      </a>
+    
+  </li>
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../examples/" title="Examples" class="md-tabs__link">
+          Examples
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../tests/Overview/" title="Test suite" class="md-tabs__link">
+          Test suite
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../TopLevel/" title="General reference" class="md-tabs__link md-tabs__link--active">
+          General reference
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../applications/GeneralReference/" title="Command-line tools" class="md-tabs__link">
+          Command-line tools
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../HighLevelInterface/HighLevelInterface/" title="High-level interface" class="md-tabs__link">
+          High-level interface
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../API/libscuff/" title="Low-level API" class="md-tabs__link">
+          Low-level API
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../forDevelopers/Implementation/" title="For developers" class="md-tabs__link">
+          For developers
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    <span class="md-nav__button md-logo">
+      
+        <img src="../../reference/scuffEMLogo.png" width="48" height="48">
+      
+    </span>
+    SCUFF-EM documentation
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/homerreid/scuff-em/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      scuff-em
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Examples
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Examples
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/" title="SCUFF-EM tutorial examples" class="md-nav__link">
+      SCUFF-EM tutorial examples
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/MieScattering/MieScattering/" title="Mie scattering" class="md-nav__link">
+      Mie scattering
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/DielectricShell/DielectricShell/" title="Electrostatics of a spherical dielectric shell" class="md-nav__link">
+      Electrostatics of a spherical dielectric shell
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/ThinFilm/ThinFilm/" title="Spatially-resolved study of plane-wave transmission through an infinite-area thin dielectric film" class="md-nav__link">
+      Spatially-resolved study of plane-wave transmission through an infinite-area thin dielectric film
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/DiffractionPatterns/DiffractionPatterns/" title="Imaging diffraction patterns of discs, disc arrays, and hole arrays in metal screens" class="md-nav__link">
+      Imaging diffraction patterns of discs, disc arrays, and hole arrays in metal screens
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/CubeTorus/" title="Casimir forces in a compact geometry" class="md-nav__link">
+      Casimir forces in a compact geometry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/SiliconBeams/SiliconBeams/" title="Casimir forces in a 1D extended geometry" class="md-nav__link">
+      Casimir forces in a 1D extended geometry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/SiliconSlabs/SiliconSlabs/" title="Casimir forces in a 2D extended geometry" class="md-nav__link">
+      Casimir forces in a 2D extended geometry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/NanostructureCasimirPolder/NanostructureCasimirPolder/" title="Casimir-Polder potentials in dielectric nanostructures" class="md-nav__link">
+      Casimir-Polder potentials in dielectric nanostructures
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/SiO2Spheres/SiO2Spheres/" title="Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres" class="md-nav__link">
+      Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/TipSubstrate/TipSubstrate/" title="Spatial distribution of heat flux from a warm tip over a cold substrate" class="md-nav__link">
+      Spatial distribution of heat flux from a warm tip over a cold substrate
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/HalfSpaceLDOS/HalfSpaceLDOS/" title="LDOS and dyadic Green functions above an infinite aluminum half-space" class="md-nav__link">
+      LDOS and dyadic Green functions above an infinite aluminum half-space
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/PlatonicSolids/PlatonicSolids/" title="Electrostatic polarizability of platonic solids" class="md-nav__link">
+      Electrostatic polarizability of platonic solids
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/TwoBodyCapacitors/TwoBodyCapacitors/" title="Capacitance of two-body capacitors" class="md-nav__link">
+      Capacitance of two-body capacitors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/StriplineCapacitor/StriplineCapacitor/" title="Capacitance of a PCB stripline trace" class="md-nav__link">
+      Capacitance of a PCB stripline trace
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/ImplicitSubstrate/ImplicitSubstrate/" title="Implicit handling of multilayer dielectric substrates" class="md-nav__link">
+      Implicit handling of multilayer dielectric substrates
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/pythonCapacitance/pythonCapacitance/" title="Finite-size effects in stripline capacitors" class="md-nav__link">
+      Finite-size effects in stripline capacitors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/PaulTrap/PaulTrap/" title="Electrostatic fields of an electrode array" class="md-nav__link">
+      Electrostatic fields of an electrode array
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/YagiUdaAntennas/YagiUdaAntennas/" title="Z-parameters and directivity of Yagi-Uda antennas" class="md-nav__link">
+      Z-parameters and directivity of Yagi-Uda antennas
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/MicrostripDevices/MicrostripDevices/" title="Input impedance, mutual coupling, and radiated fields of microstrip RF devices" class="md-nav__link">
+      Input impedance, mutual coupling, and radiated fields of microstrip RF devices
+    </a>
+  </li>
+
+        
+      </ul>
     </nav>
+  </li>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../..">SCUFF-EM documentation</a>
-      </nav>
-
-      
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="breadcrumbs navigation">
-  <ul class="wy-breadcrumbs">
-    <li><a href="../.."><span class="SmallCaps">scuff-em</span> documentation</a> &raquo;</li>
     
       
-        
-          <li>General reference &raquo;</li>
-        
       
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
     
-    <li>Installation</li>
-    <li class="wy-breadcrumbs-aside">
-      
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Test suite
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Test suite
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
         
-          <a href="https://github.com/homerreid/scuff-em/" class="icon icon-github"> Edit on GitHub</a>
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tests/Overview/" title="Overview of the test suite" class="md-nav__link">
+      Overview of the test suite
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tests/MieScattering/MieScattering/" title="Mie scattering" class="md-nav__link">
+      Mie scattering
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tests/FresnelScattering/FresnelScattering/" title="Fresnel scattering" class="md-nav__link">
+      Fresnel scattering
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tests/CasimirSpheres/CasimirSpheres/" title="Equilibrium Casimir forces between spheres" class="md-nav__link">
+      Equilibrium Casimir forces between spheres
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tests/CasimirPlates/CasimirPlates/" title="Equilibrium Casimir forces between plates" class="md-nav__link">
+      Equilibrium Casimir forces between plates
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tests/CPSphere/CPSphere/" title="Equilibrium Casimir-Polder potential near a sphere" class="md-nav__link">
+      Equilibrium Casimir-Polder potential near a sphere
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tests/CPPlate/CPPlate/" title="Equilibrium Casimir-Polder potential near a plate" class="md-nav__link">
+      Equilibrium Casimir-Polder potential near a plate
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tests/NEQSpheres/NEQSpheres/" title="Heat transfer and non-equilibrium Casimir forces between spheres" class="md-nav__link">
+      Heat transfer and non-equilibrium Casimir forces between spheres
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tests/libscuff/libscuff/" title="Low-level tests of the core library" class="md-nav__link">
+      Low-level tests of the core library
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
       
-    </li>
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+    
+    <label class="md-nav__link" for="nav-4">
+      General reference
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        General reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../TopLevel/" title="Top-level overview" class="md-nav__link">
+      Top-level overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Installation
+      </label>
+    
+    <a href="./" title="Installation" class="md-nav__link md-nav__link--active">
+      Installation
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#external-packages" title="External packages" class="md-nav__link">
+    External packages
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#status-of-the-github-repository" title="Status of the GitHub repository" class="md-nav__link">
+    Status of the GitHub repository
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setting-up-an-informative-command-line-prompt" title="Setting up an informative command-line prompt" class="md-nav__link">
+    Setting up an informative command-line prompt
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configure-options" title="Configure options" class="md-nav__link">
+    Configure options
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#specifying-the-installation-prefix" title="Specifying the installation prefix" class="md-nav__link">
+    Specifying the installation prefix
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#specifying-locations-of-external-libraries" title="Specifying locations of external libraries" class="md-nav__link">
+    Specifying locations of external libraries
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-the-mpi-compilers" title="Using the MPI compilers" class="md-nav__link">
+    Using the MPI compilers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#disabling-the-python-interface-to-speed-the-build-process" title="Disabling the python interface to speed the build process" class="md-nav__link">
+    Disabling the python interface to speed the build process
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parallel-make" title="Parallel make" class="md-nav__link">
+    Parallel make
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-installing-on-debianubuntu-based-linux-systems" title="2. Installing on Debian/Ubuntu-based Linux systems" class="md-nav__link">
+    2. Installing on Debian/Ubuntu-based Linux systems
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-use-apt-get-to-install-external-packages" title="A. Use apt-get to install external packages" class="md-nav__link">
+    A. Use apt-get to install external packages
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-clone-the-github-repository-and-build-the-code" title="B. Clone the GitHub repository and build the code" class="md-nav__link">
+    B. Clone the GitHub repository and build the code
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-installing-on-macos" title="3. Installing on MacOS" class="md-nav__link">
+    3. Installing on MacOS
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-use-xcode-and-homebrew-to-install-external-packages" title="A. Use xcode and homebrew to install external packages" class="md-nav__link">
+    A. Use xcode and homebrew to install external packages
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-clone-the-github-repository-and-build-the-code_1" title="B. Clone the GitHub repository and build the code" class="md-nav__link">
+    B. Clone the GitHub repository and build the code
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-installing-on-windows" title="4. Installing on Windows" class="md-nav__link">
+    4. Installing on Windows
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-run-a-scuff-em-computational-example-and-check-cpu-utilization" title="5. Run a scuff-em computational example and check CPU utilization" class="md-nav__link">
+    5. Run a scuff-em computational example and check CPU utilization
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-building-for-debugging" title="6. Building for debugging" class="md-nav__link">
+    6. Building for debugging
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+        <li class="md-nav__item">
+          <a href="#__comments" title="Comments" class="md-nav__link md-nav__link--active">
+            Comments
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Geometries/" title="Geometry descriptions" class="md-nav__link">
+      Geometry descriptions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Materials/" title="Material designations" class="md-nav__link">
+      Material designations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Transformations/" title="Geometric transformations" class="md-nav__link">
+      Geometric transformations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../IncidentFields/" title="Incident fields" class="md-nav__link">
+      Incident fields
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../BrillouinZoneIntegration/" title="Brillouin zone integration" class="md-nav__link">
+      Brillouin zone integration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../FAQ/" title="FAQ" class="md-nav__link">
+      FAQ
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Command-line tools
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Command-line tools
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/GeneralReference/" title="General command-line reference" class="md-nav__link">
+      General command-line reference
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-scatter/scuff-scatter/" title="scuff-scatter" class="md-nav__link">
+      scuff-scatter
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-transmission/scuff-transmission/" title="scuff-transmission" class="md-nav__link">
+      scuff-transmission
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-ldos/scuff-ldos/" title="scuff-ldos" class="md-nav__link">
+      scuff-ldos
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-tmatrix/scuff-tmatrix/" title="scuff-tmatrix" class="md-nav__link">
+      scuff-tmatrix
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-cas3D/scuff-cas3D/" title="scuff-cas3D" class="md-nav__link">
+      scuff-cas3D
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-caspol/scuff-caspol/" title="scuff-caspol" class="md-nav__link">
+      scuff-caspol
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-neq/scuff-neq/" title="scuff-neq" class="md-nav__link">
+      scuff-neq
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-rf/scuff-rf/" title="scuff-rf" class="md-nav__link">
+      scuff-rf
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-static/scuff-static/" title="scuff-static" class="md-nav__link">
+      scuff-static
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-spectrum/scuff-spectrum/" title="scuff-spectrum" class="md-nav__link">
+      scuff-spectrum
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-analyze/scuff-analyze/" title="scuff-analyze" class="md-nav__link">
+      scuff-analyze
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-integrate/scuff-integrate/" title="scuff-integrate" class="md-nav__link">
+      scuff-integrate
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      High-level interface
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        High-level interface
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../HighLevelInterface/HighLevelInterface/" title="High-Level Interface" class="md-nav__link">
+      High-Level Interface
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Low-level API
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        Low-level API
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../API/libscuff/" title="libscuff" class="md-nav__link">
+      libscuff
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../API/MainFlow/" title="MainFlow API" class="md-nav__link">
+      MainFlow API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../API/UtilityAPI/" title="Utility API" class="md-nav__link">
+      Utility API
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      For developers
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        For developers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../forDevelopers/Implementation/" title="Implementation" class="md-nav__link">
+      Implementation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../forDevelopers/DataStructures/" title="Data Structures" class="md-nav__link">
+      Data Structures
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../forDevelopers/Documentation/" title="Documentation" class="md-nav__link">
+      Documentation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../forDevelopers/SingularIntegrals/" title="Code for computing singular integrals" class="md-nav__link">
+      Code for computing singular integrals
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
   </ul>
-  <hr/>
-</div>
-          <div role="main">
-            <div class="section">
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#external-packages" title="External packages" class="md-nav__link">
+    External packages
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#status-of-the-github-repository" title="Status of the GitHub repository" class="md-nav__link">
+    Status of the GitHub repository
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setting-up-an-informative-command-line-prompt" title="Setting up an informative command-line prompt" class="md-nav__link">
+    Setting up an informative command-line prompt
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configure-options" title="Configure options" class="md-nav__link">
+    Configure options
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#specifying-the-installation-prefix" title="Specifying the installation prefix" class="md-nav__link">
+    Specifying the installation prefix
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#specifying-locations-of-external-libraries" title="Specifying locations of external libraries" class="md-nav__link">
+    Specifying locations of external libraries
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-the-mpi-compilers" title="Using the MPI compilers" class="md-nav__link">
+    Using the MPI compilers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#disabling-the-python-interface-to-speed-the-build-process" title="Disabling the python interface to speed the build process" class="md-nav__link">
+    Disabling the python interface to speed the build process
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parallel-make" title="Parallel make" class="md-nav__link">
+    Parallel make
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-installing-on-debianubuntu-based-linux-systems" title="2. Installing on Debian/Ubuntu-based Linux systems" class="md-nav__link">
+    2. Installing on Debian/Ubuntu-based Linux systems
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-use-apt-get-to-install-external-packages" title="A. Use apt-get to install external packages" class="md-nav__link">
+    A. Use apt-get to install external packages
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-clone-the-github-repository-and-build-the-code" title="B. Clone the GitHub repository and build the code" class="md-nav__link">
+    B. Clone the GitHub repository and build the code
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-installing-on-macos" title="3. Installing on MacOS" class="md-nav__link">
+    3. Installing on MacOS
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-use-xcode-and-homebrew-to-install-external-packages" title="A. Use xcode and homebrew to install external packages" class="md-nav__link">
+    A. Use xcode and homebrew to install external packages
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-clone-the-github-repository-and-build-the-code_1" title="B. Clone the GitHub repository and build the code" class="md-nav__link">
+    B. Clone the GitHub repository and build the code
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-installing-on-windows" title="4. Installing on Windows" class="md-nav__link">
+    4. Installing on Windows
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-run-a-scuff-em-computational-example-and-check-cpu-utilization" title="5. Run a scuff-em computational example and check CPU utilization" class="md-nav__link">
+    5. Run a scuff-em computational example and check CPU utilization
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-building-for-debugging" title="6. Building for debugging" class="md-nav__link">
+    6. Building for debugging
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+        <li class="md-nav__item">
+          <a href="#__comments" title="Comments" class="md-nav__link md-nav__link--active">
+            Comments
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
               
-                <h2 id="installing-scuff-em">Installing <a class="wikilink" href="../../scuff-em/">scuff-em</a></h2>
-<h2 id="1-external-packages">1. External packages</h2>
-<p><a class="wikilink" href="../../scuff-em/">scuff-em</a> relies on a small number of well-established free 
-software packages to implement certain non-essential functionality. 
-<a class="wikilink" href="../../scuff-em/">scuff-em</a> can be compiled and installed without any of these packages, 
+                
+                  <a href="https://github.com/homerreid/scuff-em/edit/master/docs/reference/Installing.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1>Installing <span class=SC>scuff-em</span></h1>
+
+<p>The <span class=SC>scuff-em</span> source distribution is packaged with the standard
+<a href="https://www.gnu.org/software/automake/manual/html_node/Autotools-Introduction.html"><span class=SC>gnu autotools</span></a>
+build environment. If you have experience installing <span class=SC>autotools</span>-based
+software packages, you should have no trouble installing <span class=SC>scuff-em</span>
+via your typical procedures, although you are encouraged to skim 
+the <a href="#GeneralComments">general comments</a> section below before you start.</p>
+<p>If you <em>aren't</em> an <span class=SC>autotools</span> expert, you should still be
+able to install <span class=SC>scuff-em</span> without much trouble by following
+the OS-specific instructions below.</p>
+<p><strong>In either case, if you have any trouble installing <span class=SC>scuff-em</span>,
+please <a href="https://github.com/HomerReid/scuff-em/issues">file an issue on the <span class=SC>scuff-em</span> GitHub page</a>.</strong></p>
+<div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#1-general-comments-about-installing-scuff-em">1. General comments about installing <span class=SC>scuff-em</span></a><ul>
+<li><a href="#external-packages">External packages</a></li>
+<li><a href="#status-of-the-github-repository">Status of the GitHub repository</a></li>
+<li><a href="#setting-up-an-informative-command-line-prompt">Setting up an informative command-line prompt</a></li>
+<li><a href="#configure-options">Configure options</a><ul>
+<li><a href="#specifying-the-installation-prefix">Specifying the installation prefix</a></li>
+<li><a href="#specifying-locations-of-external-libraries">Specifying locations of external libraries</a></li>
+<li><a href="#using-the-mpi-compilers">Using the MPI compilers</a></li>
+<li><a href="#disabling-the-python-interface-to-speed-the-build-process">Disabling the python interface to speed the build process</a></li>
+<li><a href="#parallel-make">Parallel make</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#2-installing-on-debianubuntu-based-linux-systems">2. Installing on Debian/Ubuntu-based Linux systems</a><ul>
+<li><a href="#a-use-apt-get-to-install-external-packages">A. Use <span class=SC>apt-get</span> to install external packages</a></li>
+<li><a href="#b-clone-the-github-repository-and-build-the-code">B. Clone the GitHub repository and build the code</a></li>
+</ul>
+</li>
+<li><a href="#3-installing-on-macos">3. Installing on MacOS</a><ul>
+<li><a href="#a-use-xcode-and-homebrew-to-install-external-packages">A. Use <span class=SC>xcode</span> and <span class=SC>homebrew</span> to install external packages</a></li>
+<li><a href="#b-clone-the-github-repository-and-build-the-code_1">B. Clone the GitHub repository and build the code</a></li>
+</ul>
+</li>
+<li><a href="#4-installing-on-windows">4. Installing on Windows</a></li>
+<li><a href="#5-run-a-scuff-em-computational-example-and-check-cpu-utilization">5. Run a <span class=SC>scuff-em</span> computational example and check CPU utilization</a></li>
+<li><a href="#6-building-for-debugging">6. Building for debugging</a></li>
+</ul>
+</div>
+<p><a name="#GeneralComments"></a></p>
+<h2 id="1-general-comments-about-installing-scuff-em">1. General comments about installing <span class=SC>scuff-em</span></h2>
+<h3 id="external-packages">External packages</h3>
+<p><a class="wikilink" href="../../scuff-em/">scuff-em</a> relies on a small number of well-established free open-source
+software packages to implement certain non-essential functionality (see
+the OS-specific instructions below for guidance on how to install these).
+<a class="wikilink" href="../../scuff-em/">scuff-em</a> 
+can be compiled and installed without any of these packages, 
 but in this case the code will be somewhat crippled.</p>
 <ul>
 <li>
-<p>If you actually want to solve scattering problems (instead of 
+<p>If you actually want to solve scattering problems (instead of
   just setting them up), you will need
-  <a href="http://www.netlib.org/lapack">LAPACK/BLAS</a>.</p>
+  <a href="http://www.netlib.org/lapack">LAPACK/BLAS</a> or an equivalent
+  replacement such as the Intel MKL. If you do not already have your
+  own favorite solution for this, I highly recommend the excellent
+  open-source (<span class=SC>openblas</span>)(http://www.openblas.net/)
+  package, which includes both LAPACK and BLAS and automatically
+  tunes itself for optimal performance on your hardware.</p>
 </li>
 <li>
-<p>If you want the capacity to write output files in the 
+<p>If you want the capacity to write output files in the
   standard HDF5 binary format, you will need
   <a href="http://www.hdfgroup.org/HDF5">HDF5</a>.</p>
 </li>
 <li>
 <p>If you want to compile the <a class="wikilink" href="../../python/">python</a> interface, you will need the
-  <a class="wikilink" href="../../python/">python</a> development files.</p>
+  <a class="wikilink" href="../../python/">python</a> development files and the <a class="wikilink" href="../../numpy/">numpy</a> package,
+  as well as the <a href="http://www.swig.org"><span class=SC>swig</sc></a>
+  interface-generator package.</p>
 </li>
 <li>
-<p>Although not required to install, compile, or use
-  <a class="wikilink" href="../../scuff-em/">scuff-em</a>,
+<p>Although not required to install, compile, or use <a class="wikilink" href="../../scuff-em/">scuff-em</a>,
   <a href="http://geuz.org/gmsh"><span class="SC">gmsh</span></a>
   is an extremely valuable open-source meshing and visualization
-  tool that is used throughout the
-  <a class="wikilink" href="../../scuff-em/">scuff-em</a> documentation.</p>
+  tool that is used throughout the <a class="wikilink" href="../../scuff-em/">scuff-em</a> documentation.</p>
+</li>
+<li>
+<p>My <a href="http://github.com/HomerReid/libGDSII"><span class="SC">libgdsii</span></a>
+  package contains a simple 
+  <a href="http://github.com/HomerReid/libGDSII">GDSII-to-GMSH file converter</a>
+utilities for extracting shapes and other information from
+  <a href="https://en.wikipedia.org/wiki/GDSII">GDSII files</a></p>
 </li>
 </ul>
-<p>On Debian/Ubuntu Linux systems, you can fetch all of these packages by doing a </p>
-<pre><code class="bash">% sudo apt-get install liblapack-dev libblas-dev libhdf5-serial-dev python-dev gmsh
-</code></pre>
+<h3 id="status-of-the-github-repository">Status of the GitHub repository</h3>
+<p>After installing external packages, you will fetch the <span class=SC>scuff-em</span>
+source code from its repository hosted on <a href="https://github.com/HomerReid/scuff-em/">GitHub</a> (see specific
+instructions below).
+The current build status of the <a class="wikilink" href="../../scuff-em/">scuff-em</a> master branch is:</p>
+<p><img alt="Build Status" src="https://travis-ci.org/HomerReid/scuff-em.svg?branch=master" /></p>
+<p><a name="UsefulPrompt"></a></p>
+<h3 id="setting-up-an-informative-command-line-prompt">Setting up an informative command-line prompt</h3>
+<p>Regardless of the specific OS you're running (Linux, MacOS,
+or Windows), the installation process will involve typing
+commands at a prompt in a console window. Unfortunately, 
+in most cases the default prompt is not particularly
+informative---in particular, it doesn't tell you the
+current working directory (which can be easy to forget
+when switching among folders in a complex build process)
+or the current host name (which can be easy to forget
+when you're frequently logging in and out of remote
+machines.) Thus, for command-line work I find it useful
+to set up a prompt that includes this information, which
+you can do as follows:</p>
+<div class="codehilite"><pre><span></span>% <span class="nb">export</span> <span class="nv">PS1</span><span class="o">=</span><span class="s1">&#39;$HISTCMD &#39;</span><span class="sb">`</span>hostname<span class="sb">`</span><span class="s1">&#39; $PWD &lt;&gt; &#39;</span>
+<span class="m">34</span> mac-56-129-14.mit.edu /Users/homereid &lt;&gt; 
+</pre></div>
 
-<blockquote>
-<p>Note: In some cases it seems the <code>gmsh</code> package conflicts with 
-the <code>libhdf5-serial-dev</code> package. In this case, just 
-remove <code>gmsh</code> from the above <code>apt-get</code> statement; you can 
-install it by hand following the instructions
-on the <a href="http://geuz.org/gmsh">GMSH website</a>.
-(Note that <a class="wikilink" href="../../gmsh/">gmsh</a>, though very useful, 
-is not necessary to compile or run <a class="wikilink" href="../../scuff-em/">scuff-em</a>.)</p>
-</blockquote>
-<h2 id="2-cloning-the-github-repository-and-building-the-code">2. Cloning the GitHub repository and building the code</h2>
-<p><a class="wikilink" href="../../scuff-em/">scuff-em</a> is hosted on [GitHub][GitHub].
-To fetch and install the latest version of the 
-code, execute the following steps. (Replace the string
-<code>/path/to/scuff-em-installation-directory</code>
-with your desired installation directory.)</p>
-<pre><code class="bash">% git clone https://homerreid@github.com/HomerReid/scuff-em.git
-% cd scuff-em
-% sh autogen.sh --prefix=/path/to/scuff-em-installation-directory
-% make install
-</code></pre>
+<p>Note that the prompt now tells me my current working
+directory (<code class="codehilite">/Users/homereid</code>) and the name of the
+machine (<code class="codehilite">mac-56-129-14.mit.edu</code>) so I don't lose track
+of where I am. (The <code class="codehilite">34</code> refers to the number of commands
+I've executed in this console session thus far.)</p>
+<p>If you find the above command useful, you may copy
+it into your <code class="codehilite"><span class="cp">${</span><span class="n">HOME</span><span class="cp">}</span>/.bashrc</code> file, in which case
+the informative prompt will be set up automatically 
+whenever you open a console window.</p>
+<h3 id="configure-options">Configure options</h3>
+<p>After fetching the source tree, you will run a command that automatically sniffs out
+the environment on your machine to <em>configure</em> the procedure that will be used to
+build <span class=SC>scuff-em</span>. As detailed in the OS-specific instructions 
+below, this command takes the form</p>
+<div class="codehilite"><pre><span></span> % sh autogen.sh <span class="o">[</span>OPTIONS<span class="o">]</span>
+</pre></div>
 
-<p>If this succeeds, the executable versions of the application
-programs (such as <code>scuff-scatter</code>, <code>scuff-rf</code>, etc.) will be 
-installed in the directory <code>PREFIX/bin/</code> 
+<p>the first time you run it after fetching the source, or simply</p>
+<div class="codehilite"><pre><span></span> % configure <span class="o">[</span>OPTIONS<span class="o">]</span>
+</pre></div>
+
+<p>on subsequent builds. For the most part, this step will
+ <em>automatically</em> handle the various things that need to be done to setup the
+build process, but you may <em>guide</em> the process by specifying
+various options manually (in the space labeled <code class="codehilite">[OPTIONS]</code> above).
+Here are a few of the more salient options you may wish to specify
+to customize your build.</p>
+<p><a name="InstallationPrefix"></a></p>
+<h5 id="specifying-the-installation-prefix">Specifying the installation prefix</h5>
+<p>If the build process succeeds, all files needed to
+run <span class=SC>scuff-em</span> calculations---including
+executable programs, library files, and example calculations---will
+be automatically installed in subdirectories of a top-level
+directory known as the <em>prefix.</em> The default prefix is <code class="codehilite">/usr/local/,</code>
+but you may wish to install <span class=SC>scuff-em</span>
+in a different location---in particular, you will <em>need</em> to do this
+if you don't have administrator privileges on the machine you 
+are using. This may be done via the configure option <code class="codehilite">--prefix=/path/to/scuff/installation.</code></p>
+<p>For example, to install <span class=SC>scuff-em</span> in
+a subdirectory of your home directory named <code class="codehilite">scuff-em-installation,</code>
+you can say</p>
+<p><div class="codehilite"><pre><span></span>% configure --prefix<span class="o">=</span><span class="si">${</span><span class="nv">HOME</span><span class="si">}</span>/scuff-em-installation <span class="o">[</span>other options<span class="o">]</span>
+</pre></div>
+In this case, after the <span class=SC>scuff-em</span> installation
+has completed, the various installed files will be in the following
+locations:</p>
+<ul>
+<li>
+<p>Binary executable files (like <code class="codehilite">scuff-scatter</code> and <code class="codehilite">scuff-rf</code>) will be in <code class="codehilite"><span class="cp">${</span><span class="n">HOME</span><span class="cp">}</span>/scuff-em-installation/bin.</code></p>
+</li>
+<li>
+<p>Library files (like <code class="codehilite">libscuff.so</code>) will be in <code class="codehilite"><span class="cp">${</span><span class="n">HOME</span><span class="cp">}</span>/scuff-em-installation/lib.</code></p>
+</li>
+<li>
+<p>The <span class=SC>scuff-em</span> example files (like <code class="codehilite">YagiUdaAntennas</code>) will be in <code class="codehilite"><span class="cp">${</span><span class="n">HOME</span><span class="cp">}</span>/scuff-em-installation/share/scuff-em/examples.</code></p>
+</li>
+</ul>
+<p>If you go this route, you will probably want to add the location
+of the <span class=SC>scuff-em</span> binary executables to your execution
+path by saying</p>
+<div class="codehilite"><pre><span></span> % <span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="si">${</span><span class="nv">PATH</span><span class="si">}</span>:<span class="si">${</span><span class="nv">HOME</span><span class="si">}</span>/scuff-em-installation/bin
+</pre></div>
+
+<p>Now you will be able to run command-line codes like <code class="codehilite">scuff-rf</code>
+from any directory and the OS will know where to find the
+program file.</p>
+<p><a name="HDF5Locations"></a></p>
+<h5 id="specifying-locations-of-external-libraries">Specifying locations of external libraries</h5>
+<p>In some cases, external packages used in the SCUFF-EM compilation
+process may be installed in non-standard locations on your system.
+In this case, you may need to set the <code class="codehilite">CPPFLAGS</code> and/or <code class="codehilite">LDFLAGS</code>
+environment variables to specify the locations of library header
+files and binary files, respectively.</p>
+<p>For example, on my (Ubuntu-based) Linux system, the HDF5 library
+is provided by the <code class="codehilite">libhdf5-openmpi-dev</code> package, which
+places the HDF5 header files in <code class="codehilite">/usr/include/hdf5/openmpi</code> and
+the HDF5 library binaries in <code class="codehilite">/usr/lib/x86_64-linux-gnu/hdf5/openmpi.</code>
+Thus, when I <code class="codehilite">configure</code> to build <span class=SC>scuff-em</span>
+I specify these paths, like this:</p>
+<div class="codehilite"><pre><span></span> % configure <span class="nv">CPPFLAGS</span><span class="o">=</span>-I/usr/include/hdf5/openmpi <span class="nv">LDFLAGS</span><span class="o">=</span>-L/usr/lib/x86_64-linux-gnu/hdf5/openmpi <span class="o">[</span>other options<span class="o">]</span>
+</pre></div>
+
+<p>Note: To figure out where a package like <code class="codehilite">libhdf5-openmpi-dev</code> installs
+its files, you can use the command <code class="codehilite">dpkg --listfiles</code>:</p>
+<div class="codehilite"><pre><span></span>% dpkg --listfiles libhdf5-openmpi-dev
+
+....
+....
+/usr/include/hdf5/openmpi/H5PTpublic.h
+/usr/include/hdf5/openmpi/H5api_adpt.h
+....
+....
+/usr/lib/x86_64-linux-gnu/hdf5/openmpi/libhdf5_hl.a
+/usr/lib/x86_64-linux-gnu/hdf5/openmpi/libhdf5.a
+....
+....
+</pre></div>
+
+<p><a name="openMPI"></a></p>
+<h5 id="using-the-mpi-compilers">Using the MPI compilers</h5>
+<p><span class=SC>scuff-em</span> makes heavy use of
+<a href="http://www.openmp.org/"><span class=SC>openmp</span>-based shared-memory multithreading</a> to accelerate tasks
+such as BEM matrix assembly. Compiling with OpenMP support is enabled by default, but if you wish to <em>disable</em> it
+you may use the <code class="codehilite">--without-openmp</code> option to <code class="codehilite">configure.</code> (But you will be sacrificing a lot of speed if your 
+system has more than one CPU core available!)</p>
+<p>In some cases, you may need to use the MPI-aware compilers when 
+building <span class=SC>scuff-em</span>; this is true, in particular,
+if you are using a parallel version of the HDF5 libraries.
+In this case, 
+just set the <code class="codehilite">CC</code> and <code class="codehilite">CXX</code> environment variables to
+the names of the MPI C and C++ compilers (usually <code class="codehilite">mpicc</code> and <code class="codehilite">mpic++</code>) before
+configuring:</p>
+<div class="codehilite"><pre><span></span>% <span class="nb">export</span> <span class="nv">CC</span><span class="o">=</span>mpicc
+% <span class="nb">export</span> <span class="nv">CXX</span><span class="o">=</span>mpic++
+% ./configure <span class="o">[</span>OPTIONS<span class="o">]</span>
+</pre></div>
+
+<p><a name="Disabling Python"></a></p>
+<h5 id="disabling-the-python-interface-to-speed-the-build-process">Disabling the python interface to speed the build process</h5>
+<p>Compiling the python interface is slow---it accounts for
+more than half of the build time on some systems.
+If you don't need the python interface to <a class="wikilink" href="../../scuff-em/">scuff-em</a>,
+use the configure option <code class="codehilite">--without-python</code> 
+to accelerate the build process.</p>
+<h5 id="parallel-make">Parallel make</h5>
+<p>As described in the OS-specific instructions below,
+after the configure process is finished you will type <code class="codehilite">make install</code>
+to proceed with the actual build and installation of the code.
+If your machine has more than one CPU core, you can accelerate
+this process by saying e.g.</p>
+<div class="codehilite"><pre><span></span>% make -j <span class="m">8</span> install
+</pre></div>
+
+<p>(replace <code class="codehilite">8</code> by the actual number of CPU cores on your machine).</p>
+<p><a name="Linux"></a></p>
+<h2 id="2-installing-on-debianubuntu-based-linux-systems">2. Installing on Debian/Ubuntu-based Linux systems</h2>
+<h4 id="a-use-apt-get-to-install-external-packages">A. Use <span class=SC>apt-get</span> to install external packages</h4>
+<p>On Debian/Ubuntu Linux systems, you can fetch all of the external packages mentioned above as follows:</p>
+<div class="codehilite"><pre><span></span>% sudo apt-get install libopenblas-dev libhdf5-openmpi-dev python-dev python3-scipy gmsh
+</pre></div>
+
+<h4 id="b-clone-the-github-repository-and-build-the-code">B. Clone the GitHub repository and build the code</h4>
+<p>The procedure should now be as simple as </p>
+<div class="codehilite"><pre><span></span>% git clone https://github.com/HomerReid/scuff-em.git
+% <span class="nb">cd</span> scuff-em
+% sh autogen.sh --prefix<span class="o">=</span><span class="si">${</span><span class="nv">HOME</span><span class="si">}</span>/scuff-em-installation
+% make -j <span class="m">8</span> install
+</pre></div>
+
+<p>(In the last line, replace <code class="codehilite">8</code> with the number of CPU cores
+on your machine.)</p>
+<p>As discussed above, if this succeeds, the executable files
+for the <span class=SC>scuff-em</span> application modules
+(such as <code class="codehilite">scuff-scatter</code>, <code class="codehilite">scuff-rf</code>, etc.) will be 
+installed in the directory <code class="codehilite"><span class="cp">${</span><span class="n">HOME</span><span class="cp">}</span>/scuff-em-installation/bin/,</code>
 and the demonstration examples for the various application programs 
-will be in <code>PREFIX/share/scuff-em/examples</code>
-(where <code>PREFIX</code> is the directory you specified using the 
-<code>--prefix</code> option above).</p>
-<p>If you have trouble installing <a class="wikilink" href="../../scuff-em/">scuff-em</a>,
-please file an issue on the 
-<a href="../GitHub"><span class="SC">scuff-em</span> GitHub page</a>.</p>
-<h3 id="build-options">Build options</h3>
-<p>You may specify options to the <code>autogen.sh</code>
-(or <code>configure</code>) command to guide the compilation process. 
-For a full list of available options,
-type <code>configure --help.</code> Here we summarize some of the
-more salient possibilities.</p>
-<p><a name="Threading"></a></p>
-<h4 id="multithreading-openmp-vs-pthreads">Multithreading: <a class="wikilink" href="../../openmp/">openmp</a> vs. <a class="wikilink" href="../../pthreads/">pthreads</a></h4>
-<p>The <a class="wikilink" href="../../scuff-em/">scuff-em</a> core library 
-uses multithreading for all steps in the
-<a href="scuff-em/libscuff/MainFlow.shtml">main flow</a> of
-the BEM scattering procedure. You can use <code>configure</code>
-options to select whether this multithreading is implemented
-using <a class="wikilink" href="../../openmp/">openmp</a> or <a class="wikilink" href="../../pthreads/">pthreads</a>. The former is the default,
-while the latter may be enabled like this:</p>
-<pre><code class="bash">% ./configure --without-openmp --with-pthreads
-</code></pre>
+will be in <code class="codehilite"><span class="cp">${</span><span class="n">HOME</span><span class="cp">}</span>/scuff-em-installation/share/scuff-em/examples.</code>
+At this point you may proceed to <a href="../PerformanceCheck">running a computational example
+and verifying CPU utilization</a>.</p>
+<p><a name="MacOS"></a></p>
+<h2 id="3-installing-on-macos">3. Installing on MacOS</h2>
+<p>The following installation procedure succeeded for me
+on MacOS Sierra 10.12.3 with 
+<a href="https://developer.apple.com/xcode">XCode version 8.1</a>
+and 
+<a href="https://brew.sh/">HomeBrew</a> pre-installed.
+All commands are to be
+entered at the console prompt of a terminal window
+(and, if you wish, after <a href="#UsefulPrompt">setting up an informative prompt</a> to help you keep track of where you are in the filesystem).</p>
+<h4 id="a-use-xcode-and-homebrew-to-install-external-packages">A. Use <span class=SC>xcode</span> and <span class=SC>homebrew</span> to install external packages</h4>
+<h4>A1. Install command-line tools for Apple developer suite</h4>
 
-<p>The default <a class="wikilink" href="../../openmp/">openmp</a>
-multithreading tends to play better with other multithreaded 
-software packages and is definitely the right choice if you 
-will be operating on a shared machine with some CPU cores 
-occupied by other users. 
-(You can monitor performance by inspecting
-<a href="scuff-em/reference/scuffEMMisc.shtml#LogFiles"<code>.log</code> files.</a>)</p>
-<p>Support for <a class="wikilink" href="../../pthreads/">pthreads</a>
-is a legacy feature that will be discontinued in future versions of 
-<a class="wikilink" href="../../scuff-em/">scuff-em</a>.</p>
-<p>Note: in some cases you may need to tweak certain environment 
-variables to achieve maximal 
-<a class="wikilink" href="../../openmp/">openmp</a> performance.
-For example, on my workstation (which has 8 CPU cores),
-in order to get <a class="wikilink" href="../../openmp/">openmp</a> codes
-to use all 8 cores I need to set the following environment
-variable:</p>
-<pre><code class="bash">% export GOMP_CPU_AFFINITY=0-7
-</code></pre>
+<div class="codehilite"><pre><span></span> % xcode-select --install
+</pre></div>
+
+<h4>A2. Use homebrew to install required open-source packages</h4>
+
+<div class="codehilite"><pre><span></span> % brew update
+ % brew install gcc --without-multilib
+ % brew install autoconf automake hdf5 openblas
+</pre></div>
+
+<p>The second command here appears to be necessary---even if
+GCC is already installed on your system---to build anything
+with OpenMPI support, which <a href="../openMPI">(as noted above)</a>
+is important for achieving good <span class=SC>scuff-em</span>
+performance on machines with more than one CPU core.</p>
+<p>You will most likely also want to install
+<a href="http://gmsh.info/"><span class=SC>gmsh</span></a>. (Although
+<a class="wikilink" href="../../gmsh/">gmsh</a> is available within HomeBrew, the HomeBrew-installed 
+version seemed to be lacking graphics support when I tried it, 
+so instead I installed it from the 
+<a href="http://gmsh.info/"><span class=SC>gmsh</span> website</a>, but YMMV.)</p>
+<h4 id="b-clone-the-github-repository-and-build-the-code_1">B. Clone the GitHub repository and build the code</h4>
+<p>On the system I used (MacOS Sierra 10.12.3, XCode version
+8.1), the setup protocol outlined above has the following quirks:</p>
+<ul>
+<li>OpenMPI codes must be compiled with <code class="codehilite">gcc-7</code> or <code class="codehilite">g++-7</code> with the <code class="codehilite">-fopenp</code> compiler flag.</li>
+<li>The Homebrew installation of <span class=SC>openblas</span> leaves it in a nonstandard location, which must then be specified explicitly when building codes.</li>
+</ul>
+<p>The following script accomodates these quirks
+while fetching the latest <span class=SC>scuff-em</span> source
+repository from GitHub, building, and installing in the
+parent directory specified by the <code class="codehilite">--prefix</code> option below:</p>
+<div class="codehilite"><pre><span></span><span class="c1">##!/bin/bash</span>
+
+<span class="nb">export</span> <span class="nv">CC</span><span class="o">=</span><span class="s2">&quot;gcc-7 -fopenmp&quot;</span>
+<span class="nb">export</span> <span class="nv">CXX</span><span class="o">=</span><span class="s2">&quot;g++-7 -fopenmp&quot;</span>
+<span class="nb">export</span> <span class="nv">CPPFLAGS</span><span class="o">=</span><span class="s2">&quot;-I/usr/local/opt/openblas/include&quot;</span>
+<span class="nb">export</span> LDFLAGS<span class="s2">&quot;=-L/usr/local/opt/openblas/lib&quot;</span>
+<span class="nb">export</span> <span class="nv">BLAS_LIBS</span><span class="o">=</span><span class="s2">&quot;-lopenblas&quot;</span>
+
+git clone https://GitHub.com/HomerReid/scuff-em.git
+<span class="nb">cd</span> scuff-em
+sh autogen.sh --prefix<span class="o">=</span><span class="si">${</span><span class="nv">HOME</span><span class="si">}</span>/scuff-em-installation
+
+make install -j <span class="m">4</span>
+</pre></div>
+
+<p>As discussed above, for a system with e.g. 8 CPU cores
+you would say <code class="codehilite">make -j 8</code> instead of <code class="codehilite">make -j 4</code> in
+the last line.</p>
+<p>If this succeeds , you may proceed to <a href="../PerformanceCheck">running a computational example
+and verifying CPU utilization</a>.</p>
+<p><a name="Windows"></a></p>
+<h2 id="4-installing-on-windows">4. Installing on Windows</h2>
+<p><a name="PerformanceCheck"></a></p>
+<h2 id="5-run-a-scuff-em-computational-example-and-check-cpu-utilization">5. Run a <span class=SC>scuff-em</span> computational example and check CPU utilization</h2>
+<p>If the build and installation succeed, you're in business
+to run a <span class=SC>scuff-em</span> calculation
+and verify that your machine's resources are being 
+fully utilized. For example, to compute 
+<a href="../../examples/YagiUdaAntennas">input impedance vs. frequency for a Yagi-Uda antenna</a>, try:</p>
+<div class="codehilite"><pre><span></span><span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="si">${</span><span class="nv">PATH</span><span class="si">}</span>:<span class="si">${</span><span class="nv">HOME</span><span class="si">}</span>/scuff-em-installation/bin
+<span class="nb">cd</span> <span class="si">${</span><span class="nv">HOME</span><span class="si">}</span>/scuff-em-installation/share/scuff-em/examples/YagiUdaAntennas
+. RunScript.SZParms
+</pre></div>
+
+<p>This calculation should take anywhere between 10 seconds and a minute
+depending on your CPU configuration. While the calculation is 
+running in one terminal window, open a second terminal window and
+run <code class="codehilite">top</code> to monitor system performance---in particular,
+to verify that <code class="codehilite">scuff-rf</code> is properly using all of your CPU 
+cores. On the system I used, which has 4 CPU cores, this looks
+like this:</p>
+<p><img alt="Screen shot of top output" src="../TopOnMacOS.png" /></p>
+<p>The red-framed portion of the display here is the part you
+care about: you want the CPU utilization reported
+for <code class="codehilite">scuff-rf</code> to be close to <script type="math/tex">N\times 100\%</script>, where <script type="math/tex">N</script> is the
+number of CPU cores on your machine. If you see something like this,
+then <span class=SC>scuff-em</span> was built properly to 
+take advantage of your machine's resources. On the other hand,
+if the CPU utilization reported for <code class="codehilite">scuff-rf</code> bounces around
+near 100 %, then (assuming your machine has more than one CPU 
+core!) your <span class=SC>scuff-em</span> build is suboptimal---calculations
+will work and will yield correct answers, but at a fraction
+the speed that should be available on your machine.</p>
+<p><strong>Note:</strong> On some (but not all) Linux systems I have
+found it necessary to set the environment variable <code class="codehilite">GOMP_CPU_AFFINITY</code>
+to achieve maximum multithreaded performance in 
+<span class=SC>scuff-em</span> calculations. If you have an 8-core
+machine, say something like</p>
+<div class="codehilite"><pre><span></span>% <span class="nb">export</span> <span class="nv">GOMP_CPU_AFFINITY</span><span class="o">=</span><span class="s2">&quot;0-7&quot;</span>
+</pre></div>
+
+<p>(for a machine with <code class="codehilite">N</code> cores, replace the <code class="codehilite">7</code> with <code class="codehilite">N-1</code>).
+I don't understand why this is needed in some cases but not
+others---if you have any ideas let me know!</p>
+<p><a name="Debugging"></a></p>
+<h2 id="6-building-for-debugging">6. Building for debugging</h2>
+<p>If you would like to run <a class="wikilink" href="../../scuff-em/">scuff-em</a> API codes in a debugger
+like <a href="https://www.gnu.org/software/gdb"><span class="SC">gdb</sc></a>,
+you will want to modify the build options to <strong>(a)</strong> include
+debugging symbols, <strong>(b)</strong> turn off optimization, <strong>(c)</strong>
+disable <a class="wikilink" href="../../openmp/">openmp</a> multithreading, which does not play well
+with <a class="wikilink" href="../../GDB/">GDB</a>. </p>
+<p>Here is the script that works for me to achieve these goals:</p>
+<div class="codehilite"><pre><span></span><span class="c1">##!/bin/bash</span>
+
+<span class="nv">CC</span><span class="o">=</span><span class="s2">&quot;gcc -ggdb -O0&quot;</span>
+<span class="nv">CXX</span><span class="o">=</span><span class="s2">&quot;g++ -ggdb -O0&quot;</span>
+<span class="nb">export</span> <span class="nv">CFLAGS</span><span class="o">=</span><span class="s2">&quot;-O0&quot;</span>
+<span class="nb">export</span> <span class="nv">CXXFLAGS</span><span class="o">=</span><span class="s2">&quot;-O0&quot;</span>
+sh autogen.sh --enable-debug --without-openmp --disable-shared
+</pre></div>
+
+<p>(It shouldn't be necessary to have to add <code class="codehilite">-O0</code> to both the
+environment variables and the compiler command lines, but
+this seems to be the only way things work for me.)</p>
+<p>After running this script to reconfigure for building with
+compiling support, you will want to <code class="codehilite">make clean; make</code>
+to rebuild everything with debugging support. Of course,
+after you are finished debugging you will need to reconfigure
+with debugging support removed and then re-do the 
+clean build. Because this is time-consuming, I typically
+maintain two separate copies of the code base, one for
+debugging and one for running at full speed.</p>
+<p>Once debugging support has been added, you can run 
+the code in <a class="wikilink" href="../../gdb/">gdb</a>. Here's a sample session:</p>
+<div class="codehilite"><pre><span></span> % gdb /path/to/debug/repository/bin/scuff-ldos
+
+ <span class="o">(</span>gdb<span class="o">)</span> <span class="nb">set</span> args &lt; scuff-ldos.args
+
+ <span class="o">(</span>gdb<span class="o">)</span> <span class="nb">break</span> GetHalfSpaceDGFs
+Breakpoint <span class="m">1</span> at 0x409626: file AnalyticalDGFs.cc, line <span class="m">217</span>.
+
+ <span class="o">(</span>gdb<span class="o">)</span> run
+
+Breakpoint <span class="m">1</span>, GetHalfSpaceDGFs <span class="o">(</span><span class="nv">Omega</span><span class="o">=</span>..., <span class="nv">kBloch</span><span class="o">=</span>0x7fffffffd5c0, 
+    <span class="nv">zp</span><span class="o">=</span><span class="m">0</span>.10000000000000001, <span class="nv">LBasis</span><span class="o">=</span>0x7fffffffd380, <span class="nv">MP</span><span class="o">=</span>0x130a7c0, <span class="nv">RelTol</span><span class="o">=</span><span class="m">0</span>.01, 
+    <span class="nv">AbsTol</span><span class="o">=</span>1e-10, <span class="nv">MaxCells</span><span class="o">=</span><span class="m">1000</span>, <span class="nv">GE</span><span class="o">=</span>0x7fffffffd3a0, <span class="nv">GM</span><span class="o">=</span>0x7fffffffd430<span class="o">)</span>
+    at AnalyticalDGFs.cc:217
+
+<span class="m">217</span>   double <span class="nv">BZVolume</span><span class="o">=</span>GetRLBasis<span class="o">(</span>LBasis, RLBasis<span class="o">)</span><span class="p">;</span>
+
+<span class="o">(</span>gdb<span class="o">)</span> print Omega
+<span class="nv">$1</span> <span class="o">=</span> <span class="o">{</span><span class="nv">_M_value</span> <span class="o">=</span> <span class="m">0</span>.10000000000000001 + <span class="m">0</span> * I<span class="o">}</span>
+
+<span class="o">(</span>gdb<span class="o">)</span> u <span class="m">230</span>
+
+GetHalfSpaceDGFs <span class="o">(</span><span class="nv">Omega</span><span class="o">=</span>..., <span class="nv">kBloch</span><span class="o">=</span>0x7fffffffd5c0, <span class="nv">zp</span><span class="o">=</span><span class="m">0</span>.10000000000000001, 
+    <span class="nv">LBasis</span><span class="o">=</span>0x7fffffffd380, <span class="nv">MP</span><span class="o">=</span>0x130a7c0, <span class="nv">RelTol</span><span class="o">=</span><span class="m">0</span>.01, <span class="nv">AbsTol</span><span class="o">=</span>1e-10, 
+    <span class="nv">MaxCells</span><span class="o">=</span><span class="m">1000</span>, <span class="nv">GE</span><span class="o">=</span>0x7fffffffd3a0, <span class="nv">GM</span><span class="o">=</span>0x7fffffffd430<span class="o">)</span>
+    at AnalyticalDGFs.cc:230
+
+<span class="m">230</span>   cdouble Sum<span class="o">[</span><span class="m">18</span><span class="o">]</span><span class="p">;</span>
+
+<span class="o">(</span>gdb<span class="o">)</span> print Data-&gt;Epsilon
+<span class="nv">$2</span> <span class="o">=</span> <span class="o">{</span><span class="nv">_M_value</span> <span class="o">=</span> -45765.335680436379 + <span class="m">115960</span>.58424811834 * I<span class="o">}</span>
+</pre></div>
+
+<p><strong>Note</strong>: If you have a better debugging solution that 
+does not require steps <strong>(b)</strong> and/or <strong>(c)</strong> above , please
+let me know about it. It stinks to have to run the codes
+at greatly reduced speed when debugging, because often the
+problem spots lie after expensive sections like BEM matrix
+assembly, and then it takes forever for the code to run
+in the debugger to get there.</p>
+                
+                  
+                
               
-            </div>
+              
+                
+
+
+
+  <h2 id="__comments">Comments</h2>
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = "http://homerreid.github.io/scuff-em-documentation/reference/Installing/";
+      this.page.identifier =
+        "/reference/Installing/";
+    };
+    (function() {
+      var d = document, s = d.createElement("script");
+      s.src = "//homerreid-github-io-scuff-em-documentation.disqus.com.disqus.com/embed.js";
+      s.setAttribute("data-timestamp", +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+
+              
+            </article>
           </div>
-          <footer>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
   
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="../Geometries/" class="btn btn-neutral float-right" title="Geometry descriptions"/>Next <span class="icon icon-circle-arrow-right"></span></a>
-      
-      
-        <a href="../TopLevel/" class="btn btn-neutral" title="Top-level overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-      
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../TopLevel/" title="Top-level overview" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Top-level overview
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../Geometries/" title="Geometry descriptions" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Geometry descriptions
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
     </div>
   
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>
-    <!-- Copyright etc -->
-    </p>
-  </div>
-
-  <a href="http://homerreid.com/scuff-em"> 
-    <span class="SmallCaps">scuff-em</span>
-  </a> documentation, by
-  <a href="http://homerreid.com">Homer Reid</a>
-
-  <p>
-  <font size=-1>
-  Built with <a href="http://www.mkdocs.org">MkDocs</a> 
-  using a customized theme modeled 
-  after the 
-  <a href="https://github.com/snide/sphinx_rtd_theme">theme</a>
-  provided by <a href="https://readthedocs.org">Read the Docs</a>.
-  </font>
-
-</footer>
-	  
-        </div>
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="http://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
       </div>
-
-    </section>
-
+      
+        
+      
+    </div>
   </div>
-
-<div class="rst-versions" role="note" style="cursor: pointer">
-    <span class="rst-current-version" data-toggle="rst-current-version">
+</footer>
       
-          <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+    </div>
+    
+      <script src="../../assets/javascripts/application.b438e6c5.js"></script>
       
+      <script>app.initialize({version:"0.17.3",url:{base:"../.."}})</script>
       
-        <span><a href="../TopLevel/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <script src="../../javascripts/MathJax.js?config=TeX-AMS_HTML"></script>
       
+        <script src="../../javascripts/mathjaxhelper.js"></script>
       
-        <span style="margin-left: 15px"><a href="../Geometries/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+    
       
-    </span>
-</div>
-
-</body>
+        <script>!function(e,a,t,n,o,c,i){e.GoogleAnalyticsObject=o,e.ga=e.ga||function(){(e.ga.q=e.ga.q||[]).push(arguments)},e.ga.l=1*new Date,c=a.createElement(t),i=a.getElementsByTagName(t)[0],c.async=1,c.src="https://www.google-analytics.com/analytics.js",i.parentNode.insertBefore(c,i)}(window,document,"script",0,"ga"),ga("create","UA-119340518-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview");var links=document.getElementsByTagName("a");if(Array.prototype.map.call(links,function(e){e.host!=document.location.host&&e.addEventListener("click",function(){var a=e.getAttribute("data-md-action")||"follow";ga("send","event","outbound",a,e.href)})}),document.forms.search){var query=document.forms.search.query;query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}</script>
+      
+    
+  </body>
 </html>

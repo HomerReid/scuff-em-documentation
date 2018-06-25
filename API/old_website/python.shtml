@@ -1,0 +1,199 @@
+<!--#set 
+    var="title" 
+    value="Accessing the scuff-EM core library from python programs"
+  -->
+<!--#include virtual="/pagetop.shtml"-->
+
+<!-- begin main page body -->
+
+<!----------------------------------------------------------------------->
+<!-- main page table, with one row and three columns:                  -->
+<!--  navbar, trough, body.                                            -->
+<!----------------------------------------------------------------------->
+<table cellspacing="0" cellpadding="0" width="100%"><tr>
+  
+  <!----------------------------------------------------------------------->
+  <!-- left column of main page table: nav bar. --------------------------->
+  <!----------------------------------------------------------------------->
+  <td valign="top" width="180"> 
+  <!--#include virtual="/research/navbar.shtml"-->
+  </td> 
+
+  <!----------------------------------------------------------------------->
+  <!-- central column of main page table: separation trough --------------->
+  <!----------------------------------------------------------------------->
+  <td width="5%"></td>
+ 
+  <!----------------------------------------------------------------------->
+  <!-- right column of main page table: content of page. ------------------>
+  <!----------------------------------------------------------------------->
+  <td valign="top">
+    
+   <p><br> <p align="center">
+   <table align="center"> 
+     <tr> <td> <img width="411" height="296" src="images/scuffEM.png"></td>
+          <td width="5%"> </td>
+          <td> <h1>
+
+               <span class=CodeName>libscuff</span> 
+               API Documentation: 
+
+               <br> <span class=CodeName>python</span> examples
+
+               </h1>
+          </td>
+     </tr>
+   </table> 
+
+    <!----================================================================-->
+    <!---------------------------------------------------------------------->
+    <!----================================================================-->
+    <p>
+    <table align="center" class="TOC" cellpadding="5" cellspacing="5">
+
+      <tr> <th> <span class="CodeName">scuff-em</span> API: 
+                <span class="CodeName">python</span> Examples
+      </th></tr>
+
+      <tr> <td>
+           <a href="scuff-EM/libscuff/python.shtml#SphericalShell">
+            1. Electrostatics of a Spherical Shell
+           </a>
+           </td>
+      </tr>
+
+      <tr> <td>
+           <a href="scuff-EM/libscuff/python.shtml#StressTensor">
+            2. Maxwell stress tensor near a hole in a metallic plate
+           </a>
+           </td>
+      </tr>
+
+    </table>
+
+  <!---------------------------------------------------------------------->
+  <!---------------------------------------------------------------------->
+  <!---------------------------------------------------------------------->
+  <p>
+  <h2><a name="SphericalShell"></a>1. Electrostatics of a spherical shell 
+  </h2>
+  <hr>
+
+  <p>
+  For our first example, we'll consider the electrostatics of a spherical
+  dielectric shell in a constant electric field. 
+  (By "electrostatics" we really mean the low-frequency limit of a 
+   full-wave calculation, and we approximate our "constant electric field" by
+   the field of a plane wave, which at our low frequency is essentially 
+   constant over the size of the object.)
+   This geometry can be 
+   <a href="scuff-em/scuff-scatter/SphericalShellElectrostatics.pdf">treated analytically,</a>
+   and is discussed thoroughly as an 
+   <a href="scuff-em/scuff-scatter/index.shtml#SphericalShell">example of a
+   <span class="CodeName">scuff-scatter</span> calculation</a>. Our goal
+   here will be to reproduce in 
+   <span class="CodeName">python</span> what we needed to use a shell script
+   to do in 
+   <span class="CodeName">scuff-scatter</span> -- namely, to compute the  
+   electric field at the origin as a function of the shell permittivity.
+
+   <p>
+   The following script is available in the 
+   <span class="CodeName">scuff-em</span> distribution as the file
+   <code>share/scuff-em/examples/SphericalShell/PythonScript</code>. 
+   Note that you need to configure your <span class="CodeName">python</span> paths 
+   to include the location of the <span class="CodeName">scuff-em</span>
+   wrappers.
+   
+   <p>
+   <pre class="PythonListing">
+     import sys
+     sys.path.append("/path/to/scuff-em-installation/lib/python2.7/site-packages");
+     
+     import scuff;
+     import numpy.linalg;
+     
+     # create the geometry, preload the cache 
+     G = scuff.RWGGeometry("SphericalShell.scuffgeo");
+     scuff.PreloadCache("SphericalShell.cache");
+     Omega=0.001;
+
+     # create the incident field 
+     PW=scuff.PlaneWave([0,0,1],[1,0,0]);
+     
+     # read in matrix of eval-point coordinates
+     X=scuff.HMatrix("CenterPoint")
+     
+     # loop over shell permittivity values 
+     for Eps in range(2,102,2):
+ 
+        # set shell permittivity 
+     	G.SetEps("OuterSphere",Eps);
+
+        # set up and solve the BEM problem
+      	M=G.AssembleBEMMatrix(Omega);
+      	RHS=G.AssembleRHSVector(Omega, PW);
+      	KN=numpy.linalg.solve(M,RHS);
+
+        # compute and print scattered fields 
+        # (note Fields is a 6-element array, whose third element is Ez)
+        Fields = G.GetFields(PW, KN, Omega, X );
+        print Eps, Fields[0][2].real
+
+        # clean up
+        del M
+        del RHS
+        del KN
+        del Fields
+   </pre>
+
+   <p>
+   A sample run looks like this:
+
+   <p>
+   <pre class="listing">
+    % python
+
+     Python 2.7.1+ (r271:86832, Apr 11 2011, 18:13:53) 
+     [GCC 4.5.2] on linux2
+     Type "help", "copyright", "credits" or "license" for more information.
+     >>> execfile("PythonScript")
+     2 0.911366542492
+     4 0.695193402985
+     6 0.551800770349
+     8 0.455746982211
+     10 0.387685173336
+     12 0.337125356655
+     ...
+   </pre>
+     
+  <!---------------------------------------------------------------------->
+  <!---------------------------------------------------------------------->
+  <!---------------------------------------------------------------------->
+  <p>
+  <h2><a name="StressTensor"></a>2. Maxwell stress tensor near a hole in a metallic
+                                    plate
+  </h2>
+  <hr>
+
+  <!----------------------------------------------------------------------->
+  <!----------------------------------------------------------------------->
+  <!----------------------------------------------------------------------->
+  <!--#include virtual="/scuff-EM/scuffEMFooter.shtml">
+
+  <!----------------------------------------------------------------------->
+  <!-- end right column of main page table.                             --->
+  <!----------------------------------------------------------------------->
+  </td>
+  </table>
+
+<!----------------------------------------------------------------------->
+<!-- end main page table                                               -->
+<!----------------------------------------------------------------------->
+</tr></table>
+   
+<!----------------------------------------------------------------------->
+<!-- end main page body ------------------------------------------------->
+<!----------------------------------------------------------------------->
+   
+<!--#include virtual="/pageend.shtml"-->

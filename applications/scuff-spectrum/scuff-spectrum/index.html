@@ -1,0 +1,2064 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="http://homerreid.github.io/scuff-em-documentation/applications/scuff-spectrum/scuff-spectrum/">
+      
+      
+        <meta name="author" content="Homer Reid">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-0.17.3, mkdocs-material-2.7.3">
+    
+    
+      
+        <title>scuff-spectrum - SCUFF-EM documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/application.8d40d89b.css">
+      
+        <link rel="stylesheet" href="../../../assets/stylesheets/application-palette.6079476c.css">
+      
+    
+    
+      <script src="../../../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:300,400,400i,700|">
+        <style>body,input{font-family:"Noto Sans","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+      <link rel="stylesheet" href="../../../css/scuff-em.css">
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <a href="#mode-frequencies-as-nonlinear-eigenvalues" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="http://homerreid.github.io/scuff-em-documentation" title="SCUFF-EM documentation" class="md-header-nav__button md-logo">
+          
+            <img src="../../../reference/scuffEMLogo.png" width="24" height="24">
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                SCUFF-EM documentation
+              </span>
+              <span class="md-header-nav__topic">
+                scuff-spectrum
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/homerreid/scuff-em/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      scuff-em
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href="../../.." title="Home" class="md-tabs__link">
+        Home
+      </a>
+    
+  </li>
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../examples/" title="Examples" class="md-tabs__link">
+          Examples
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../tests/Overview/" title="Test suite" class="md-tabs__link">
+          Test suite
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../reference/TopLevel/" title="General reference" class="md-tabs__link">
+          General reference
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../GeneralReference/" title="Command-line tools" class="md-tabs__link md-tabs__link--active">
+          Command-line tools
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../HighLevelInterface/HighLevelInterface/" title="High-level interface" class="md-tabs__link">
+          High-level interface
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../API/libscuff/" title="Low-level API" class="md-tabs__link">
+          Low-level API
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../forDevelopers/Implementation/" title="For developers" class="md-tabs__link">
+          For developers
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    <span class="md-nav__button md-logo">
+      
+        <img src="../../../reference/scuffEMLogo.png" width="48" height="48">
+      
+    </span>
+    SCUFF-EM documentation
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/homerreid/scuff-em/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      scuff-em
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Examples
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Examples
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/" title="SCUFF-EM tutorial examples" class="md-nav__link">
+      SCUFF-EM tutorial examples
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/MieScattering/MieScattering/" title="Mie scattering" class="md-nav__link">
+      Mie scattering
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/DielectricShell/DielectricShell/" title="Electrostatics of a spherical dielectric shell" class="md-nav__link">
+      Electrostatics of a spherical dielectric shell
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/ThinFilm/ThinFilm/" title="Spatially-resolved study of plane-wave transmission through an infinite-area thin dielectric film" class="md-nav__link">
+      Spatially-resolved study of plane-wave transmission through an infinite-area thin dielectric film
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/DiffractionPatterns/DiffractionPatterns/" title="Imaging diffraction patterns of discs, disc arrays, and hole arrays in metal screens" class="md-nav__link">
+      Imaging diffraction patterns of discs, disc arrays, and hole arrays in metal screens
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/CubeTorus/" title="Casimir forces in a compact geometry" class="md-nav__link">
+      Casimir forces in a compact geometry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/SiliconBeams/SiliconBeams/" title="Casimir forces in a 1D extended geometry" class="md-nav__link">
+      Casimir forces in a 1D extended geometry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/SiliconSlabs/SiliconSlabs/" title="Casimir forces in a 2D extended geometry" class="md-nav__link">
+      Casimir forces in a 2D extended geometry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/NanostructureCasimirPolder/NanostructureCasimirPolder/" title="Casimir-Polder potentials in dielectric nanostructures" class="md-nav__link">
+      Casimir-Polder potentials in dielectric nanostructures
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/SiO2Spheres/SiO2Spheres/" title="Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres" class="md-nav__link">
+      Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/TipSubstrate/TipSubstrate/" title="Spatial distribution of heat flux from a warm tip over a cold substrate" class="md-nav__link">
+      Spatial distribution of heat flux from a warm tip over a cold substrate
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/HalfSpaceLDOS/HalfSpaceLDOS/" title="LDOS and dyadic Green functions above an infinite aluminum half-space" class="md-nav__link">
+      LDOS and dyadic Green functions above an infinite aluminum half-space
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/PlatonicSolids/PlatonicSolids/" title="Electrostatic polarizability of platonic solids" class="md-nav__link">
+      Electrostatic polarizability of platonic solids
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/TwoBodyCapacitors/TwoBodyCapacitors/" title="Capacitance of two-body capacitors" class="md-nav__link">
+      Capacitance of two-body capacitors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/StriplineCapacitor/StriplineCapacitor/" title="Capacitance of a PCB stripline trace" class="md-nav__link">
+      Capacitance of a PCB stripline trace
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/ImplicitSubstrate/ImplicitSubstrate/" title="Implicit handling of multilayer dielectric substrates" class="md-nav__link">
+      Implicit handling of multilayer dielectric substrates
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/pythonCapacitance/pythonCapacitance/" title="Finite-size effects in stripline capacitors" class="md-nav__link">
+      Finite-size effects in stripline capacitors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/PaulTrap/PaulTrap/" title="Electrostatic fields of an electrode array" class="md-nav__link">
+      Electrostatic fields of an electrode array
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/YagiUdaAntennas/YagiUdaAntennas/" title="Z-parameters and directivity of Yagi-Uda antennas" class="md-nav__link">
+      Z-parameters and directivity of Yagi-Uda antennas
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/MicrostripDevices/MicrostripDevices/" title="Input impedance, mutual coupling, and radiated fields of microstrip RF devices" class="md-nav__link">
+      Input impedance, mutual coupling, and radiated fields of microstrip RF devices
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Test suite
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Test suite
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/Overview/" title="Overview of the test suite" class="md-nav__link">
+      Overview of the test suite
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/MieScattering/MieScattering/" title="Mie scattering" class="md-nav__link">
+      Mie scattering
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/FresnelScattering/FresnelScattering/" title="Fresnel scattering" class="md-nav__link">
+      Fresnel scattering
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/CasimirSpheres/CasimirSpheres/" title="Equilibrium Casimir forces between spheres" class="md-nav__link">
+      Equilibrium Casimir forces between spheres
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/CasimirPlates/CasimirPlates/" title="Equilibrium Casimir forces between plates" class="md-nav__link">
+      Equilibrium Casimir forces between plates
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/CPSphere/CPSphere/" title="Equilibrium Casimir-Polder potential near a sphere" class="md-nav__link">
+      Equilibrium Casimir-Polder potential near a sphere
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/CPPlate/CPPlate/" title="Equilibrium Casimir-Polder potential near a plate" class="md-nav__link">
+      Equilibrium Casimir-Polder potential near a plate
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/NEQSpheres/NEQSpheres/" title="Heat transfer and non-equilibrium Casimir forces between spheres" class="md-nav__link">
+      Heat transfer and non-equilibrium Casimir forces between spheres
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/libscuff/libscuff/" title="Low-level tests of the core library" class="md-nav__link">
+      Low-level tests of the core library
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      General reference
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        General reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/TopLevel/" title="Top-level overview" class="md-nav__link">
+      Top-level overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/Installing/" title="Installation" class="md-nav__link">
+      Installation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/Geometries/" title="Geometry descriptions" class="md-nav__link">
+      Geometry descriptions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/Materials/" title="Material designations" class="md-nav__link">
+      Material designations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/Transformations/" title="Geometric transformations" class="md-nav__link">
+      Geometric transformations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/IncidentFields/" title="Incident fields" class="md-nav__link">
+      Incident fields
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/BrillouinZoneIntegration/" title="Brillouin zone integration" class="md-nav__link">
+      Brillouin zone integration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/FAQ/" title="FAQ" class="md-nav__link">
+      FAQ
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
+    
+    <label class="md-nav__link" for="nav-5">
+      Command-line tools
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Command-line tools
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../GeneralReference/" title="General command-line reference" class="md-nav__link">
+      General command-line reference
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../scuff-scatter/scuff-scatter/" title="scuff-scatter" class="md-nav__link">
+      scuff-scatter
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../scuff-transmission/scuff-transmission/" title="scuff-transmission" class="md-nav__link">
+      scuff-transmission
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../scuff-ldos/scuff-ldos/" title="scuff-ldos" class="md-nav__link">
+      scuff-ldos
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../scuff-tmatrix/scuff-tmatrix/" title="scuff-tmatrix" class="md-nav__link">
+      scuff-tmatrix
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../scuff-cas3D/scuff-cas3D/" title="scuff-cas3D" class="md-nav__link">
+      scuff-cas3D
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../scuff-caspol/scuff-caspol/" title="scuff-caspol" class="md-nav__link">
+      scuff-caspol
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../scuff-neq/scuff-neq/" title="scuff-neq" class="md-nav__link">
+      scuff-neq
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../scuff-rf/scuff-rf/" title="scuff-rf" class="md-nav__link">
+      scuff-rf
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../scuff-static/scuff-static/" title="scuff-static" class="md-nav__link">
+      scuff-static
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        scuff-spectrum
+      </label>
+    
+    <a href="./" title="scuff-spectrum" class="md-nav__link md-nav__link--active">
+      scuff-spectrum
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#mode-frequencies-as-nonlinear-eigenvalues" title="Mode frequencies as nonlinear eigenvalues" class="md-nav__link">
+    Mode frequencies as nonlinear eigenvalues
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#beyns-contour-integral-algorithm-a-lightning-overview" title="Beyn's contour-integral algorithm: A lightning overview" class="md-nav__link">
+    Beyn's contour-integral algorithm: A lightning overview
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#beyns-algorithm-mechanics" title="Beyn's algorithm: Mechanics" class="md-nav__link">
+    Beyn's algorithm: Mechanics
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-scuff-spectrum-tutorial-modes-of-a-spherical-dielectric-cavity" title="2. scuff-spectrum tutorial: Modes of a spherical dielectric cavity" class="md-nav__link">
+    2. scuff-spectrum tutorial: Modes of a spherical dielectric cavity
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exact-spherical-wave-calculation" title="Exact (spherical-wave) calculation" class="md-nav__link">
+    Exact (spherical-wave) calculation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scuff-spectrum-calculation" title="scuff-spectrum calculation" class="md-nav__link">
+    scuff-spectrum calculation
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scuff-em-geometry-files-for-spherical-cavity" title="scuff-em geometry files for spherical cavity" class="md-nav__link">
+    scuff-em geometry files for spherical cavity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#running-scuff-spectrum-to-pinpoint-mode-frequencies" title="Running scuff-spectrum to pinpoint mode frequencies" class="md-nav__link">
+    Running scuff-spectrum to pinpoint mode frequencies
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mesh-convergence" title="Mesh convergence" class="md-nav__link">
+    Mesh convergence
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#running-scuff-spectrum-to-analyze-eigenmode-field-patterns" title="Running scuff-spectrum to analyze eigenmode field patterns" class="md-nav__link">
+    Running scuff-spectrum to analyze eigenmode field patterns
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-scuff-spectrum-command-line-reference" title="3. scuff-spectrum command-line reference" class="md-nav__link">
+    3. scuff-spectrum command-line reference
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+        <li class="md-nav__item">
+          <a href="#__comments" title="Comments" class="md-nav__link md-nav__link--active">
+            Comments
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../scuff-analyze/scuff-analyze/" title="scuff-analyze" class="md-nav__link">
+      scuff-analyze
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../scuff-integrate/scuff-integrate/" title="scuff-integrate" class="md-nav__link">
+      scuff-integrate
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      High-level interface
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        High-level interface
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../HighLevelInterface/HighLevelInterface/" title="High-Level Interface" class="md-nav__link">
+      High-Level Interface
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Low-level API
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        Low-level API
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../API/libscuff/" title="libscuff" class="md-nav__link">
+      libscuff
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../API/MainFlow/" title="MainFlow API" class="md-nav__link">
+      MainFlow API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../API/UtilityAPI/" title="Utility API" class="md-nav__link">
+      Utility API
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      For developers
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        For developers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../forDevelopers/Implementation/" title="Implementation" class="md-nav__link">
+      Implementation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../forDevelopers/DataStructures/" title="Data Structures" class="md-nav__link">
+      Data Structures
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../forDevelopers/Documentation/" title="Documentation" class="md-nav__link">
+      Documentation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../forDevelopers/SingularIntegrals/" title="Code for computing singular integrals" class="md-nav__link">
+      Code for computing singular integrals
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#mode-frequencies-as-nonlinear-eigenvalues" title="Mode frequencies as nonlinear eigenvalues" class="md-nav__link">
+    Mode frequencies as nonlinear eigenvalues
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#beyns-contour-integral-algorithm-a-lightning-overview" title="Beyn's contour-integral algorithm: A lightning overview" class="md-nav__link">
+    Beyn's contour-integral algorithm: A lightning overview
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#beyns-algorithm-mechanics" title="Beyn's algorithm: Mechanics" class="md-nav__link">
+    Beyn's algorithm: Mechanics
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-scuff-spectrum-tutorial-modes-of-a-spherical-dielectric-cavity" title="2. scuff-spectrum tutorial: Modes of a spherical dielectric cavity" class="md-nav__link">
+    2. scuff-spectrum tutorial: Modes of a spherical dielectric cavity
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exact-spherical-wave-calculation" title="Exact (spherical-wave) calculation" class="md-nav__link">
+    Exact (spherical-wave) calculation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scuff-spectrum-calculation" title="scuff-spectrum calculation" class="md-nav__link">
+    scuff-spectrum calculation
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scuff-em-geometry-files-for-spherical-cavity" title="scuff-em geometry files for spherical cavity" class="md-nav__link">
+    scuff-em geometry files for spherical cavity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#running-scuff-spectrum-to-pinpoint-mode-frequencies" title="Running scuff-spectrum to pinpoint mode frequencies" class="md-nav__link">
+    Running scuff-spectrum to pinpoint mode frequencies
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mesh-convergence" title="Mesh convergence" class="md-nav__link">
+    Mesh convergence
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#running-scuff-spectrum-to-analyze-eigenmode-field-patterns" title="Running scuff-spectrum to analyze eigenmode field patterns" class="md-nav__link">
+    Running scuff-spectrum to analyze eigenmode field patterns
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-scuff-spectrum-command-line-reference" title="3. scuff-spectrum command-line reference" class="md-nav__link">
+    3. scuff-spectrum command-line reference
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+        <li class="md-nav__item">
+          <a href="#__comments" title="Comments" class="md-nav__link md-nav__link--active">
+            Comments
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/homerreid/scuff-em/edit/master/docs/applications/scuff-spectrum/scuff-spectrum.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1> Computing electromagnetic modes with <span class="SC">scuff-spectrum</span>
+</h1>
+
+<p><a class="wikilink" href="../../../scuff-spectrum/">scuff-spectrum</a> is a tool within the <a class="wikilink" href="../../../scuff-em/">scuff-em</a> code suite
+for computing frequencies and field patterns of resonant modes
+in arbitrary material geometries. More specifically, <a class="wikilink" href="../../../scuff-spectrum/">scuff-spectrum</a>
+implements <a href="../../../applications/scuff-spectrum/scuff-spectrum/#BeynMethod">Beyn's contour-integral algorithm for nonlinear
+eigenproblems</a>, described in more detail below,
+to pinpoint frequencies <script type="math/tex">\omega</script> at which the
+<a href="../../../forDevelopers/Implementation.md/#PMCHWTSystem">BEM system matrix <script type="math/tex">\mathbf{M}(\omega)</script></a> is singular,
+allowing nonzero surface currents to flow in the absence of
+external fields. <a class="wikilink" href="../../../scuff-spectrum/">scuff-spectrum</a> reports mode frequencies
+and, optionally, visualization diagrams and various
+types of information on the current and field patterns
+of the corresponding eigenvectors.</p>
+<p>Of course, the information reported by <a class="wikilink" href="../../../scuff-spectrum/">scuff-spectrum</a> could
+also be obtained <em>indirectly</em> from other codes in the
+<a href="../../..#CommandLineSuite"><span class=SC>scuff-em</span> application suite</a>---for
+example, the resonant modes of the
+<a href="../../../applications/scuff-spectrum/scuff-spectrum/#SphericalDielectricCavity">spherical dielectric cavity</a>
+shown below would show up as blips in (say) the
+scattering cross section as the frequency is scanned past
+the vicinity of the resonance.
+<!--# while the [circuit-QED resonator][CircuitQEDResonator]-->
+However, this would be an inefficient and imprecise way to
+determine resonance frequencies---we would probably wind up
+computing scattering cross sections at hundreds of frequencies
+on a dense grid just to approximate the resonance with 
+one- or two-digit accuracy---and it would not yield
+direct information on the current and field patterns
+of the corresponding modes. In contrast, the method
+used by <a class="wikilink" href="../../../scuff-spectrum/">scuff-spectrum</a> is optimized to pinpoint
+mode frequencies with many-digit accuracy---using
+only a small number of samples---and, moreover, directly
+furnishes all information we may need about the current a
+and field patterns of the modes themselves.</p>
+<div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#1-beyns-algorithm-the-computational-engine-behind-scuff-spectrum">1. Beyn's algorithm: the computational engine behind <span class="SC">scuff-spectrum</span></a><ul>
+<li><a href="#mode-frequencies-as-nonlinear-eigenvalues">Mode frequencies as nonlinear eigenvalues</a></li>
+<li><a href="#beyns-contour-integral-algorithm-a-lightning-overview">Beyn's contour-integral algorithm: A lightning overview</a></li>
+<li><a href="#beyns-algorithm-mechanics">Beyn's algorithm: Mechanics</a></li>
+</ul>
+</li>
+<li><a href="#2-scuff-spectrum-tutorial-modes-of-a-spherical-dielectric-cavity">2. <span class="SC">scuff-spectrum</span> tutorial: Modes of a spherical dielectric cavity</a><ul>
+<li><a href="#exact-spherical-wave-calculation">Exact (spherical-wave) calculation</a></li>
+<li><a href="#scuff-spectrum-calculation"><span class=SC>scuff-spectrum</span> calculation</a><ul>
+<li><a href="#scuff-em-geometry-files-for-spherical-cavity"><span class=SC>scuff-em</span> geometry files for spherical cavity</a></li>
+<li><a href="#running-scuff-spectrum-to-pinpoint-mode-frequencies">Running <span class=SC>scuff-spectrum</span> to pinpoint mode frequencies</a></li>
+<li><a href="#mesh-convergence">Mesh convergence</a></li>
+</ul>
+</li>
+<li><a href="#running-scuff-spectrum-to-analyze-eigenmode-field-patterns">Running <span class=SC>scuff-spectrum</span> to analyze eigenmode field patterns</a></li>
+</ul>
+</li>
+<li><a href="#3-scuff-spectrum-command-line-reference">3. <span class="SC">scuff-spectrum</span> command-line reference</a></li>
+</ul>
+</div>
+<p><a name="BeynMethod"></a></p>
+<h2 id="1-beyns-algorithm-the-computational-engine-behind-scuff-spectrum">1. Beyn's algorithm: the computational engine behind <span class="SC">scuff-spectrum</span></h2>
+<h3 id="mode-frequencies-as-nonlinear-eigenvalues">Mode frequencies as nonlinear eigenvalues</h3>
+<p>The basic problem solved by <span class=SC>scuff-spectrum</span>
+is to find values of the angular frequency <script type="math/tex">\omega</script> at which the
+<a href="../../../forDevelopers/Implementation.md/#PMCHWTSystem">BEM system matrix <script type="math/tex">\mathbf{M}(\omega)</script></a> is singular
+(has non-empty nullspace), in which case we can find a 
+nonzero vector <script type="math/tex">\mathbf{v}</script> that solves the equation</p>
+<p>
+<script type="math/tex; mode=display"> \mathbf{M}(\omega) \mathbf{v} = 0. \qquad (1) </script>
+</p>
+<p>This is just the 
+<a href="../../../forDevelopers/Implementation.md/#PMCHWTSystem">usual linear system of equations solved in <span class=SC>scuff-em</span> scattering problems</a>,
+but now with zero right-hand side, i.e. there is no incident field or
+other external stimulus exciting the structure; instead,
+the eigenvector <script type="math/tex">\mathbf{v}={\mathbf{k} \choose \mathbf{n}}</script>
+describes a configuration of surface currents that can exist
+in the absence of external fields---a resonance mode.</p>
+<p>Equation (1) resembles an eigenvalue problem, but with the
+complication that the matrix <script type="math/tex">\mathbf{M}(\omega)</script> depends
+in a complicated nonlinear way on the frequency <script type="math/tex">\omega</script>; 
+this means we can't simply use standard solvers
+for linear eigenproblems such as those implemented
+in <a href="http://www.netlib.org/lapack/"><span class=SC>lapack</span></a>.</p>
+<h3 id="beyns-contour-integral-algorithm-a-lightning-overview">Beyn's contour-integral algorithm: A lightning overview</h3>
+<p>Instead, <a class="wikilink" href="../../../scuff-spectrum/">scuff-spectrum</a> implements the contour-integral approach
+to nonlinear eigenproblems proposed by W. Beyn in this 2012 paper:</p>
+<ul>
+<li>
+<p>Wolf-J&uuml;rgen Beyn, "An integral method for solving nonlinear eigenvalue problems." <em>Linear Algebra and its Applications</em> <strong>436</strong> 3839 (May 2012).</p>
+</li>
+<li>
+<p>DOI: <a href="https://doi.org/10.1016/j.laa.2011.03.030">https://doi.org/10.1016/j.laa.2011.03.030</a></p>
+</li>
+<li>
+<p>ArXiV: <a href="https://arxiv.org/abs/1003.1580">https://arxiv.org/abs/1003.1580</a></p>
+</li>
+</ul>
+<p>In a nutshell, Beyn's method locates eigenvalues of (1) by
+evaluating a certain contour integral in the complex <script type="math/tex">\omega</script> plane;
+the evaluation proceeds via numerical quadrature, sampling
+the integrand at a total of <script type="math/tex">N</script> quadrature points
+<script type="math/tex">\{\omega_n\},n=1,2,\cdots,N</script> (see figure below).
+The number of quadrature points, and the shape and location
+of the contour, are user-tweakable parameters that you 
+will specify as inputs to <a class="wikilink" href="../../../scuff-spectrum/">scuff-spectrum</a>; the basic idea
+is that Beyn's method will identify all eigenvalues located 
+<em>inside</em> the contour, and will ignore any eigenvalues lying
+<em>outside</em> the contour, so the challenge from the user's 
+perspective is to have a rough idea of where your eigenvalues
+will be---and to design contours that enclose the ones you
+want while omitting the others.</p>
+<p>We are being deliberately vague here about precisely
+<em>what</em> contour integral we are evaluating, as this is not
+crucial knowledge for using <a class="wikilink" href="../../../scuff-spectrum/">scuff-spectrum</a> (for details,
+see the original paper linked above). Pretty much all you need
+to know is this: Evaluating the integrand at each
+quadrature point <script type="math/tex">\omega_n</script> involves <strong>(a)</strong> forming and factorizing 
+the matrix <script type="math/tex">\mathbf{M}(\omega_n)</script>, and then <strong>(b)</strong> doing some simple
+linear-algebra calculations involving the solution
+of a small number (see below) of linear systems of equations
+of the form <script type="math/tex">\mathbf{M}(\omega)\mathbf{x}=\mathbf{b}</script>
+for certain given RHS vectors <script type="math/tex">\mathbf{b}.</script> Of course, 
+assembling the system matrix <script type="math/tex">\mathbf{M}(\omega)</script> and solving
+linear systems is exactly what <span class=SC>scuff-em</span>
+does to solve scattering problems, and so <em>mechanically</em>
+Beyn's algorithm boils down simply to solving integral-equation
+scattering problems, at some number of frequencies, with
+some number of RHS vectors at each frequency---not different,
+in principle, from what we would wind up doing in the brute-force
+(frequency-scanning) approach to computing mode frequencies
+discussed above. The difference is that Beyn's algorithm
+chooses the frequencies at which we calculate, and combines
+the results of all those calculations, in clever ways to ensure
+that maximal benefit is extracted from the computations,
+allowing us to converge quickly to highly accurate values
+for the eigenvalues <script type="math/tex">\omega</script> in (1). Of course, in addition
+to the eigenvalue <script type="math/tex">\omega</script>, Beyn's method also gives us
+the eigen<em>vectors</em> <script type="math/tex">\mathbf{v}</script>, which we can use in
+post-processing to do things like visualizing the distribution
+of currents and fields in the various eigenmodes we find (see examples
+below).</p>
+<h3 id="beyns-algorithm-mechanics">Beyn's algorithm: Mechanics</h3>
+<p>Having briefly outlined the idea of Beyn's method---and referring
+interested readers to Beyn's paper cited above for more detail on the 
+theory---let's now turn to a discussion of the mechanics
+of running Beyn-method calculations in <a class="wikilink" href="../../../scuff-spectrum/">scuff-spectrum</a>.</p>
+<p>The following figure illustrates a typical elliptical
+contour <script type="math/tex">\mathcal{C}</script> in the complex-<script type="math/tex">\omega</script> plane over
+which we might wish to execute Beyn's algorithm.
+(Contours in <a class="wikilink" href="../../../scuff-spectrum/">scuff-spectrum</a> are always elliptical.)</p>
+<p><img alt="BeynContour" src="../BeynContour.png" /></p>
+<p>In this figure, blue crosses indicate eigenvalues of (1);
+note that there are 3 eigenvalues contained inside the
+contour <script type="math/tex">\mathcal{C}</script>---labeled <script type="math/tex">\omega_{1,2,3}</script>---as
+well as several other eigenvalues not enclosed by the 
+contour, which we do not label as they will be ignored
+by our calculation. The black dots on the contour indicate
+quadrature points; the <script type="math/tex">\omega</script> values represented by these points
+are the complex frequencies at which <a class="wikilink" href="../../../scuff-scatter/">scuff-scatter</a>
+will assemble the matrix <script type="math/tex">\mathbf{M}(\omega)</script>
+and do some linear algebra to compute 
+the integrand of the Beyn-method contour integrals.</p>
+<p>Items in <em>red</em> in the figure above indicate user-specified
+inputs to <a class="wikilink" href="../../../scuff-scatter/">scuff-scatter</a>: these are</p>
+<ul>
+<li>
+<p>the complex-valued frequency <script type="math/tex">\omega_0</script> at which
+  the contour <script type="math/tex">\mathcal{C}</script> is centered</p>
+</li>
+<li>
+<p>the horizontal and vertical radii (half-minor axes)
+  <script type="math/tex">R_x</script> and <script type="math/tex">R_y</script> of the elliptical contour</p>
+</li>
+<li>
+<p>the number of quadrature points <script type="math/tex">N</script> (12 in this case)</p>
+</li>
+<li>
+<p>an integer <script type="math/tex">L</script> which should be greater than or equal to
+  the number of eigenvalues you <em>expect</em> to be found
+  within the contour; if <a class="wikilink" href="../../../scuff-spectrum/">scuff-spectrum</a> finds more than
+  this number of eigenvalues, Beyn's method breaks down and 
+  must be restarted with a larger value of <script type="math/tex">L</script>. (You will 
+  get a console warning in this case.)</p>
+</li>
+</ul>
+<p>On the other hand, the algorithm works fine if <script type="math/tex">L</script> winds up
+  being <em>larger</em> than the number of eigenvalues found inside
+  the contour, so you should give yourself some leeway by 
+  choosing generous values for <script type="math/tex">L</script> (typical values might 
+  be 10 or 20); higher values of <script type="math/tex">L</script> do result in slightly
+  greater computation time, but not much. (More specifically, <script type="math/tex">L</script>
+  is the number of linear-system solves of the form
+  <script type="math/tex">\mathbf{M}(\omega_n)\mathbf{x}=\mathbf{b}</script> that must be done
+  at each quadrature point <script type="math/tex">\omega_n</script>; increasing <script type="math/tex">L</script> from 10 to 20
+  or 30 or so does require more solves, but that cost is 
+  generally negligible compared to the cost of assembling 
+  and factorizing the matrix <script type="math/tex">\mathbf{M}(\omega)</script>, so don't
+  bother with excessive parsimony in choosing <script type="math/tex">L</script>.)</p>
+<p>Running <a class="wikilink" href="../../../scuff-spectrum/">scuff-spectrum</a> with the above inputs as illustrated
+in the figure above would yield accurate values for the three 
+eigenvalues <script type="math/tex">\omega_{1,2,3}</script> inside the contour---with the
+accuracy increasing with the number of quadrature points <script type="math/tex">N</script>---as
+well as values for the corresponding eigenvectors.</p>
+<p><a name="SphericalDielectricCavity"></a></p>
+<h2 id="2-scuff-spectrum-tutorial-modes-of-a-spherical-dielectric-cavity">2. <span class="SC">scuff-spectrum</span> tutorial: Modes of a spherical dielectric cavity</h2>
+<p>In this example we'll use the Beyn algorithm as implemented by <a class="wikilink" href="../../../scuff-spectrum/">scuff-spectrum</a> to
+compute the modes of a spherical dielectric cavity, i.e. a simple dielectric sphere.</p>
+<h3 id="exact-spherical-wave-calculation">Exact (spherical-wave) calculation</h3>
+<p>For this simple geometry, the mode frequencies can be
+calculated to any desired numerical precision by looking
+for poles of the Mie-scattering coefficients for plane waves
+impinging on a dielectric sphere; the calculation is discussed
+on page 15 of <a href="../../../tex/scuffSpherical.pdf">this memo</a>
+and implemented by 
+<a href="../GetSphericalCavityFrequencies.math">this simple <span class=SC>mathematica</span> code.</a>
+For a sphere of relative permittivity
+<script type="math/tex">\epsilon=4</script> (refractive index <script type="math/tex">n=2</script>), some typical results are:</p>
+<ul>
+<li>For <script type="math/tex">\mathbf{N}</script>-type (electric multipole) waves with <script type="math/tex">\ell=1</script> there is a resonance at</li>
+</ul>
+<p>
+<script type="math/tex; mode=display"> a= 1.1362178236179127955 - 0.63063395652811684933i </script>
+</p>
+<p>where <script type="math/tex">a=\frac{\omega R}{c}</script> with <script type="math/tex">R</script> the sphere radius.</p>
+<ul>
+<li>For <script type="math/tex">\mathbf{M}</script>-type (magnetic multipole) waves with <script type="math/tex">\ell=2</script> there is a resonance at</li>
+</ul>
+<p>
+<script type="math/tex; mode=display"> a=2.0714122747181446982 - 0.14636128063766849563i </script>
+</p>
+<p>Next let's ask how well we can reproduce these results
+in <a class="wikilink" href="../../../scuff-spectrum/">scuff-spectrum</a>.</p>
+<h3 id="scuff-spectrum-calculation"><span class=SC>scuff-spectrum</span> calculation</h3>
+<h4 id="scuff-em-geometry-files-for-spherical-cavity"><span class=SC>scuff-em</span> geometry files for spherical cavity</h4>
+<p>For <a class="wikilink" href="../../../scuff-spectrum/">scuff-spectrum</a> calculations I use a simple <code class="codehilite"><span class="na">.scuffgeo</span></code>
+file describing an isolated sphere with <script type="math/tex">\epsilon_r=4</script>;
+this file is called <code class="codehilite">E4Sphere_501.scuffgeo</code>:</p>
+<div class="codehilite"><pre><span></span>OBJECT Sphere
+    MESHFILE Sphere_501.msh
+    MATERIAL CONST_EPS_4
+ENDOBJECT
+</pre></div>
+
+<p>The file <a href="../Sphere_501.msh"><code class="codehilite">Sphere_501.msh</code></a> to which this refers is a 
+<a href="../gmsh.info"><span class=SC>gmsh</span></a>
+mesh file produced from a <span class=SC>gmsh</span> 
+geometry file named <a href="../Sphere.geo"><code class="codehilite">Sphere.geo</code></a>
+by running <code class="codehilite">gmsh -2 Sphere.geo -o Sphere.msh</code>; to investigate
+the effect of meshing resolution I will also create a series
+of more finely discretized spheres by saying e.g.
+<code class="codehilite">gmsh -2 Sphere.geo -clscale 0.75 -o Sphere_Finer.msh</code>
+(where the <code class="codehilite">-clscale</code> option, short for "characteristic
+length scale", may be used to refine the discretization length
+everywhere in the geometry.)
+The finest-resolution sphere I will use has <script type="math/tex">N=4107</script> interior
+edges; for comparison , here are images of the coarsest <script type="math/tex">(N=501)</script> 
+and finest <script type="math/tex">(N=4107)</script> sphere meshes I will use.</p>
+<p><img alt="Sphere_501.png" src="../Sphere_501.png" />
+<img alt="Sphere_4107.png" src="../Sphere_4107.png" /></p>
+<h4 id="running-scuff-spectrum-to-pinpoint-mode-frequencies">Running <span class=SC>scuff-spectrum</span> to pinpoint mode frequencies</h4>
+<p>Based on the discussion above, I expect to find modes
+at frequencies near <script type="math/tex">\omega_0\approx 1.1-0.63i</script>
+and <script type="math/tex">\omega_0\approx 2.1-0.14i</script>. Thus, I will use <a class="wikilink" href="../../../scuff-spectrum/">scuff-spectrum</a>
+to execute Beyn's method for contours centered near these points
+and enclosing them.</p>
+<p>For example, here's a run in which I specify a contour centered
+at <script type="math/tex">\omega_0=1.1-0.63i</script>, with horizontal and vertical
+radii <script type="math/tex">R_x=R_y=0.2</script>, using <script type="math/tex">N</script>=14 quadrature points, and 
+allowing a budget of up to <script type="math/tex">L</script>=5 eigenvalues to be 
+found within the contour:</p>
+<div class="codehilite"><pre><span></span>% scuff-spectrum --geometry E4Sphere_501.scuffgeo <span class="se">\</span>
+                 --omega0 <span class="m">1</span>.1-0.63i               <span class="se">\</span>
+                 --Rx <span class="m">0</span>.2 --Ry <span class="m">0</span>.2                <span class="se">\</span>
+                 --N <span class="m">14</span> --L <span class="m">5</span>                     
+</pre></div>
+
+<p>This produces the file <code class="codehilite">E4Sphere_501.ModeFrequencies</code>:</p>
+<div class="codehilite"><pre><span></span><span class="c1"># For contour w0=1.1+-0.63i, Rx=2.000000e-01, Ry=2.000000e-01, N=14, L=5# w0=1.1+-0.63i, Rx=2.000000e-01, Ry=2.000000e-01, N=14, L=5:</span>
+<span class="c1"># re(w) im(w)   estimated error in re(w), im(w)</span>
++1.149426e+00 -6.378139e-01  +3.180420e-05 +7.130373e-05  
+</pre></div>
+
+<p>As the header says, the 4 numbers reported here are 
+the real and imaginary parts of the mode frequency
+(which is being estimated at <script type="math/tex">\omega \approx 1.149-0.63i</script>)
+followed by estimates of the integration error,
+i.e. the error incurred by approximating the contour
+integral via numerical quadrature; in this case the 
+error is evidently tiny, and we can be confident that Beyn's
+method has converged even with just the 14 quadrature points
+we used. (For larger contours we would probably need
+more points.)</p>
+<p>Also, in this case Beyn's method only found a single eigenvalue
+within the contour. If we had considered a larger contour,
+there would most probably have been several lines of data
+each with the 4-number format shown above, corresponding to
+multiple eigenvalues identified within the contour.</p>
+<h4 id="mesh-convergence">Mesh convergence</h4>
+<p>Of course, even if Beyn's method converges to many-digit
+precision on an eigenmode, we don't necessarily 
+expect the 
+resulting mode frequency to agree with Mie-theoretic predictions
+to high accuracy, because we are here studying a slightly
+different <em>structure</em>---namely, a sphere approximated by a
+discretized version in the form of a 501-sided polygon---but
+we may expect the mode frequencies to converge toward exact 
+results for spheres as the <em>discretization</em> is refined.</p>
+<p>To test this, I repeated the <a class="wikilink" href="../../../scuff-spectrum/">scuff-spectrum</a> calculations
+above using more finely-meshed spheres. 
+Here are results for mode frequency vs. mesh
+discretization, characterized by the number <em>N</em>
+of interior edges in the discretized sphere:</p>
+<table>
+<thead>
+<tr>
+<th><strong>N</strong></th>
+<th align="center">Re(<script type="math/tex">\omega</script>)</th>
+<th>Im(<script type="math/tex">\omega</script>)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>501</td>
+<td align="center">1.14943</td>
+<td>-0.63781</td>
+</tr>
+<tr>
+<td>1482</td>
+<td align="center">1.14076</td>
+<td>-0.63318</td>
+</tr>
+<tr>
+<td>2604</td>
+<td align="center">1.13877</td>
+<td>-0.63204</td>
+</tr>
+<tr>
+<td>4107</td>
+<td align="center">1.13787</td>
+<td>-0.63157</td>
+</tr>
+<tr>
+<td></td>
+<td align="center"></td>
+<td></td>
+</tr>
+<tr>
+<td>inf</td>
+<td align="center">1.13627</td>
+<td>-0.63071</td>
+</tr>
+<tr>
+<td></td>
+<td align="center"></td>
+<td></td>
+</tr>
+<tr>
+<td>exact</td>
+<td align="center">1.13622</td>
+<td>-0.63063</td>
+</tr>
+</tbody>
+</table>
+<p>In this table, the first four data rows show
+results of <a class="wikilink" href="../../../scuff-spectrum/">scuff-spectrum</a> calculations 
+for discretized meshes with <script type="math/tex">N</script> interior edges.
+The column marked <code class="codehilite">inf</code> corresponds to an extrapolation
+of the finite-<script type="math/tex">N</script> data to the <script type="math/tex">N\to \infty</script> limit
+(basically, just fit the data to <script type="math/tex">A+B/N</script> and 
+retain only the <script type="math/tex">A</script> coefficient.)
+The row labeled <code class="codehilite">exact</code> shows
+numerically exact predictions of Mie theory.</p>
+<p>Here are the analogous results for the <script type="math/tex">M</script>-type <script type="math/tex">\ell=2</script> spherical
+cavity mode:</p>
+<table>
+<thead>
+<tr>
+<th><strong>N</strong></th>
+<th align="center">Re(<script type="math/tex">\omega</script>)</th>
+<th>Im(<script type="math/tex">\omega</script>)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>501</td>
+<td align="center">2.09595</td>
+<td>-0.147858</td>
+</tr>
+<tr>
+<td>1482</td>
+<td align="center">2.07996</td>
+<td>-0.146926</td>
+</tr>
+<tr>
+<td>2604</td>
+<td align="center">2.07615</td>
+<td>-0.146679</td>
+</tr>
+<tr>
+<td>4107</td>
+<td align="center">2.07442</td>
+<td>-0.146564</td>
+</tr>
+<tr>
+<td></td>
+<td align="center"></td>
+<td></td>
+</tr>
+<tr>
+<td>inf</td>
+<td align="center">2.07151</td>
+<td>-0.146403</td>
+</tr>
+<tr>
+<td></td>
+<td align="center"></td>
+<td></td>
+</tr>
+<tr>
+<td>exact</td>
+<td align="center">2.07141</td>
+<td>-0.146361</td>
+</tr>
+</tbody>
+</table>
+<p>These results demonstrate that the Beyn method implemented by 
+<a class="wikilink" href="../../../scuff-spectrum/">scuff-spectrum</a> easily achieves 4-digit precision
+in determining mode frequencies, despite the modest 
+computational burden (equivalent to solving scattering 
+problems at 14 different frequencies). This is <em>much</em> 
+better accuracy than we could hope to get for the 
+same computational cost from a brute-force frequency-scan
+method.</p>
+<h3 id="running-scuff-spectrum-to-analyze-eigenmode-field-patterns">Running <span class=SC>scuff-spectrum</span> to analyze eigenmode field patterns</h3>
+<p>Moreover,
+having identified the <em>frequencies</em> (eigenvalues) of
+our structure with high precision, we can now look
+at the <em>surface currents</em> (eigenvectors) and the <em>field patterns</em>
+they produce. <a class="wikilink" href="../../../scuff-spectrum/">scuff-spectrum</a> offers several command-line
+options to facilitate this analysis, many of which are 
+similar to the post-processing outputs available in 
+<a href="../../../applications/scuff-scatter/scuff-scatter.md/#Options"><span class=SC>scuff-scatter</span></a> and other
+<span class=SC>scuff-em</span> codes:</p>
+<ul>
+<li>
+<p><code class="codehilite">--EPFile MyEPFile</code> requests computation of <strong>E</strong> and <strong>H</strong>
+field components at each evaluation point in a user-specified
+list of evaluation points.</p>
+</li>
+<li>
+<p><code class="codehilite">--FVMesh MyFVMesh.msh</code> requests generation of 
+<span class=SC>gmsh</span> visualization files
+showing fields and fluxes on the user-specified visualization
+mesh (screen) <code class="codehilite">MyFVMesh.msh.</code></p>
+</li>
+<li>
+<p><code class="codehilite">--CartesianMomentFile MyFile</code> requests that values of the 
+Cartesian multipole moments corresponding to the eigen-current
+distribution be written to file <code class="codehilite">MyFile.</code></p>
+</li>
+<li>
+<p><code class="codehilite">--SphericalMomentFile MyFile</code> is like the previous option,
+but for <em>spherical</em> multipole moments.</p>
+</li>
+<li>
+<p><code class="codehilite">--PlotSurfaceCurrents</code> requests visualization files
+showing the distribution of electric and magnetic
+surface currents on the geometry.</p>
+</li>
+</ul>
+<p>For example, here are images showing the distribution of
+surface currents for the two eigenmodes captured by the
+above tables.</p>
+<p><img alt="L1Mode.png" src="../L1Mode.png" /></p>
+<p><img alt="L2Mode.png" src="../L2Mode.png" /></p>
+<p>The quadrupole structure of the <script type="math/tex">\ell=2</script> resonance is clearly
+distinguishable from the dipole structure of the <script type="math/tex">\ell=1</script> mode.</p>
+<p><a name="CommandLineReference"></a></p>
+<h2 id="3-scuff-spectrum-command-line-reference">3. <span class="SC">scuff-spectrum</span> command-line reference</h2>
+                
+                  
+                
+              
+              
+                
+
+
+
+  <h2 id="__comments">Comments</h2>
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = "http://homerreid.github.io/scuff-em-documentation/applications/scuff-spectrum/scuff-spectrum/";
+      this.page.identifier =
+        "/applications/scuff-spectrum/scuff-spectrum/";
+    };
+    (function() {
+      var d = document, s = d.createElement("script");
+      s.src = "//homerreid-github-io-scuff-em-documentation.disqus.com.disqus.com/embed.js";
+      s.setAttribute("data-timestamp", +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../../scuff-static/scuff-static/" title="scuff-static" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                scuff-static
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../../scuff-analyze/scuff-analyze/" title="scuff-analyze" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                scuff-analyze
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="http://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../assets/javascripts/application.b438e6c5.js"></script>
+      
+      <script>app.initialize({version:"0.17.3",url:{base:"../../.."}})</script>
+      
+        <script src="../../../javascripts/MathJax.js?config=TeX-AMS_HTML"></script>
+      
+        <script src="../../../javascripts/mathjaxhelper.js"></script>
+      
+    
+    
+      
+        <script>!function(e,a,t,n,o,c,i){e.GoogleAnalyticsObject=o,e.ga=e.ga||function(){(e.ga.q=e.ga.q||[]).push(arguments)},e.ga.l=1*new Date,c=a.createElement(t),i=a.getElementsByTagName(t)[0],c.async=1,c.src="https://www.google-analytics.com/analytics.js",i.parentNode.insertBefore(c,i)}(window,document,"script",0,"ga"),ga("create","UA-119340518-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview");var links=document.getElementsByTagName("a");if(Array.prototype.map.call(links,function(e){e.host!=document.location.host&&e.addEventListener("click",function(){var a=e.getAttribute("data-md-action")||"follow";ga("send","event","outbound",a,e.href)})}),document.forms.search){var query=document.forms.search.query;query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}</script>
+      
+    
+  </body>
+</html>

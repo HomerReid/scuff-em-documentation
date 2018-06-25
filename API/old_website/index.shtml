@@ -1,0 +1,194 @@
+<!--#set 
+    var="title" 
+    value="libscuff: The Core Library of the scuff-EM Suite"
+  -->
+<!--#include virtual="/pagetop.shtml"-->
+
+<!-- begin main page body -->
+
+<!----------------------------------------------------------------------->
+<!-- main page table, with one row and three columns:                  -->
+<!--  navbar, trough, body.                                            -->
+<!----------------------------------------------------------------------->
+<table cellspacing="0" cellpadding="0" width="100%"><tr>
+  
+  <!----------------------------------------------------------------------->
+  <!-- left column of main page table: nav bar. --------------------------->
+  <!----------------------------------------------------------------------->
+  <td valign="top" width="180"> 
+  <!--#include virtual="/research/navbar.shtml"-->
+  </td> 
+
+  <!----------------------------------------------------------------------->
+  <!-- central column of main page table: separation trough --------------->
+  <!----------------------------------------------------------------------->
+  <td width="5%"></td>
+ 
+  <!----------------------------------------------------------------------->
+  <!-- right column of main page table: content of page. ------------------>
+  <!----------------------------------------------------------------------->
+  <td valign="top">
+    
+   <p><br> <p align="center">
+   <table align="center"> 
+     <tr> <td> <a href="scuff-em">
+               <img width="411" height="296" src="images/scuffEM.png">
+               </a>
+          </td>
+          <td width="5%"> </td>
+          <td> <h1>
+               <span class=CodeName>libscuff</span>: The core library
+               underlying the <span class=CodeName>scuff-em</span> suite
+               </h1>
+          </td>
+     </tr>
+   </table> 
+
+  <p> 
+  The back engine implementing the computational algorithms that underlie
+  the <span class=CodeName>scuff-em</span> suite is a C++ library called
+  <span class=CodeName>libscuff.</span> If you find that the 
+  <a href="scuff-EM/index.shtml#Applications">standalone application programs</a>
+  distributed with <span class=CodeName>scuff-em</span> are not sufficiently
+  flexible for your computational needs, you may wish to write your own
+  codes that access the core library directly.
+
+  <p> 
+  The most direct way to access the core library is of course to write 
+  your own C/C++ codes that link against the 
+  <span class=CodeName>libscuff</span> library binary
+  (<code>libscuff.a</code> or <code>libscuff.so</code>), 
+  but the <span class=CodeName>scuff-em</span> distribution also comes
+  with wrappers that allow you to access the core library 
+  from <span class="CodeName">python</span>.
+
+  <p> 
+  The primary entity in <span class=CodeName>libscuff</span> 
+  is a C++ class named <code>RWGGeometry.</code> (The name 
+  derives from the fact that <span class=CodeName>libscuff</span>
+  uses a set of basis functions known as 
+  <a href="http://dx.doi.org/10.1109/TAP.1982.1142818">"RWG functions"</a>
+  for representing surface currents.) An <code>RWGGeometry</code>
+  stores all necessary data on a scattering geometry described by a
+  <a href="scuff-EM/reference/scuffEMGeometries.shtml"><code>.scuffgeo</code> file</a>,
+  and provides class methods for setting up, solving, and 
+  procssing the solutions of scattering problems in that
+  geometry.
+
+  <p> 
+  The functions provided by <span class=CodeName>libscuff</span> 
+  may be broadly classified into three categories:
+  <i>main flow</i> routines, which handle each of the major steps 
+  in the process of setting up and solving electromagnetic scattering 
+  problems; <i>ancillary</i> routines on <code>RWGGeometry</code> 
+  structures, which offer various additional functionality such as 
+  visualization; and lower-level <i>support</i> routines, which 
+  allow you to manipulate some of the constituent entities 
+  (such as matrices and vectors) involved in scattering problems.
+
+  <p> 
+  The <span class=CodeName>libscuff</span> API may be accessed from
+  C++
+  or 
+  <span class=CodeName>python</span> 
+  programs. In the former case, source files should 
+  include the lines 
+
+  <p> 
+  <pre class="CPPListing">
+    #include &lt;libscuff.h&gt;
+    using namespace scuff;
+  </pre>
+
+  <p> 
+  and should be linked with <code>-lscuff.</code>
+
+  <p> 
+  <span class=CodeName>python</span> code should include the line
+
+  <p> 
+  <pre class="PythonListing">
+    import scuff;
+  </pre>
+
+  <p> 
+  These code snippets indicate the colors that will be used 
+  to illustrate C++
+  and 
+  <span class=CodeName>python</span>
+  examples throughout the core library documentation.
+
+  <!----================================================================-->
+  <!---------------------------------------------------------------------->
+  <!----================================================================-->
+  <p>
+  <table align="center" class="TOC" cellpadding="5" cellspacing="5">
+
+      <tr> <th> <span class="CodeName">scuff-em</span> Core Library
+      </th></tr>
+
+      <tr> <td>
+           <a href="scuff-EM/libscuff/MainFlow.shtml">
+            1. Core Library Reference: Main Flow Routines
+           </a>
+           </td>
+      </tr>
+
+      <tr> <td>
+           <a href="scuff-EM/libscuff/IncField.shtml">
+            2. Core Library Reference: Describing Incident Fields
+           </a>
+           </td>
+      </tr>
+
+      <tr> <td>
+           <a href="scuff-EM/libscuff/Ancillary.shtml">
+            3. Core Library Reference: Ancillary Routines
+           </a>
+           </td>
+      </tr>
+
+      <tr> <td>
+           <a href="scuff-EM/libscuff/MatrixVector.shtml">
+            4. Core Library Reference: Matrices and Vectors
+           </a>
+           </td>
+      </tr>
+
+      <tr> <td>
+           <a href="scuff-EM/libscuff/index.shtml#cpp">
+            5. <span class="CodeName">c++</span> Examples
+           </a>
+           </td>
+      </tr>
+
+      <tr> <td>
+           <a href="scuff-EM/libscuff/index.shtml#python">
+            6.  <span class="CodeName">python</span> Examples
+           </a>
+           </td>
+      </tr>
+
+    </table>
+
+  <!----------------------------------------------------------------------->
+  <!----------------------------------------------------------------------->
+  <!----------------------------------------------------------------------->
+  <!--#include virtual="/scuff-EM/scuffEMFooter.shtml">
+
+  <!----------------------------------------------------------------------->
+  <!-- end right column of main page table.                             --->
+  <!----------------------------------------------------------------------->
+  </td>
+  </table>
+
+<!----------------------------------------------------------------------->
+<!-- end main page table                                               -->
+<!----------------------------------------------------------------------->
+</tr></table>
+   
+<!----------------------------------------------------------------------->
+<!-- end main page body ------------------------------------------------->
+<!----------------------------------------------------------------------->
+   
+<!--#include virtual="/pageend.shtml"-->

@@ -1,0 +1,2031 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="http://homerreid.github.io/scuff-em-documentation/applications/scuff-rf/scuff-rf/">
+      
+      
+        <meta name="author" content="Homer Reid">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-0.17.3, mkdocs-material-2.7.3">
+    
+    
+      
+        <title>scuff-rf - SCUFF-EM documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/application.8d40d89b.css">
+      
+        <link rel="stylesheet" href="../../../assets/stylesheets/application-palette.6079476c.css">
+      
+    
+    
+      <script src="../../../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:300,400,400i,700|">
+        <style>body,input{font-family:"Noto Sans","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+      <link rel="stylesheet" href="../../../css/scuff-em.css">
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <a href="#describing-microstrip-geometries-in-scuff-em" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="http://homerreid.github.io/scuff-em-documentation" title="SCUFF-EM documentation" class="md-header-nav__button md-logo">
+          
+            <img src="../../../reference/scuffEMLogo.png" width="24" height="24">
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                SCUFF-EM documentation
+              </span>
+              <span class="md-header-nav__topic">
+                scuff-rf
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/homerreid/scuff-em/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      scuff-em
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href="../../.." title="Home" class="md-tabs__link">
+        Home
+      </a>
+    
+  </li>
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../examples/" title="Examples" class="md-tabs__link">
+          Examples
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../tests/Overview/" title="Test suite" class="md-tabs__link">
+          Test suite
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../reference/TopLevel/" title="General reference" class="md-tabs__link">
+          General reference
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../GeneralReference/" title="Command-line tools" class="md-tabs__link md-tabs__link--active">
+          Command-line tools
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../HighLevelInterface/HighLevelInterface/" title="High-level interface" class="md-tabs__link">
+          High-level interface
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../API/libscuff/" title="Low-level API" class="md-tabs__link">
+          Low-level API
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../forDevelopers/Implementation/" title="For developers" class="md-tabs__link">
+          For developers
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    <span class="md-nav__button md-logo">
+      
+        <img src="../../../reference/scuffEMLogo.png" width="48" height="48">
+      
+    </span>
+    SCUFF-EM documentation
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/homerreid/scuff-em/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      scuff-em
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Examples
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Examples
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/" title="SCUFF-EM tutorial examples" class="md-nav__link">
+      SCUFF-EM tutorial examples
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/MieScattering/MieScattering/" title="Mie scattering" class="md-nav__link">
+      Mie scattering
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/DielectricShell/DielectricShell/" title="Electrostatics of a spherical dielectric shell" class="md-nav__link">
+      Electrostatics of a spherical dielectric shell
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/ThinFilm/ThinFilm/" title="Spatially-resolved study of plane-wave transmission through an infinite-area thin dielectric film" class="md-nav__link">
+      Spatially-resolved study of plane-wave transmission through an infinite-area thin dielectric film
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/DiffractionPatterns/DiffractionPatterns/" title="Imaging diffraction patterns of discs, disc arrays, and hole arrays in metal screens" class="md-nav__link">
+      Imaging diffraction patterns of discs, disc arrays, and hole arrays in metal screens
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/CubeTorus/" title="Casimir forces in a compact geometry" class="md-nav__link">
+      Casimir forces in a compact geometry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/SiliconBeams/SiliconBeams/" title="Casimir forces in a 1D extended geometry" class="md-nav__link">
+      Casimir forces in a 1D extended geometry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/SiliconSlabs/SiliconSlabs/" title="Casimir forces in a 2D extended geometry" class="md-nav__link">
+      Casimir forces in a 2D extended geometry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/NanostructureCasimirPolder/NanostructureCasimirPolder/" title="Casimir-Polder potentials in dielectric nanostructures" class="md-nav__link">
+      Casimir-Polder potentials in dielectric nanostructures
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/SiO2Spheres/SiO2Spheres/" title="Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres" class="md-nav__link">
+      Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/TipSubstrate/TipSubstrate/" title="Spatial distribution of heat flux from a warm tip over a cold substrate" class="md-nav__link">
+      Spatial distribution of heat flux from a warm tip over a cold substrate
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/HalfSpaceLDOS/HalfSpaceLDOS/" title="LDOS and dyadic Green functions above an infinite aluminum half-space" class="md-nav__link">
+      LDOS and dyadic Green functions above an infinite aluminum half-space
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/PlatonicSolids/PlatonicSolids/" title="Electrostatic polarizability of platonic solids" class="md-nav__link">
+      Electrostatic polarizability of platonic solids
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/TwoBodyCapacitors/TwoBodyCapacitors/" title="Capacitance of two-body capacitors" class="md-nav__link">
+      Capacitance of two-body capacitors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/StriplineCapacitor/StriplineCapacitor/" title="Capacitance of a PCB stripline trace" class="md-nav__link">
+      Capacitance of a PCB stripline trace
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/ImplicitSubstrate/ImplicitSubstrate/" title="Implicit handling of multilayer dielectric substrates" class="md-nav__link">
+      Implicit handling of multilayer dielectric substrates
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/pythonCapacitance/pythonCapacitance/" title="Finite-size effects in stripline capacitors" class="md-nav__link">
+      Finite-size effects in stripline capacitors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/PaulTrap/PaulTrap/" title="Electrostatic fields of an electrode array" class="md-nav__link">
+      Electrostatic fields of an electrode array
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/YagiUdaAntennas/YagiUdaAntennas/" title="Z-parameters and directivity of Yagi-Uda antennas" class="md-nav__link">
+      Z-parameters and directivity of Yagi-Uda antennas
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../examples/MicrostripDevices/MicrostripDevices/" title="Input impedance, mutual coupling, and radiated fields of microstrip RF devices" class="md-nav__link">
+      Input impedance, mutual coupling, and radiated fields of microstrip RF devices
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Test suite
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Test suite
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/Overview/" title="Overview of the test suite" class="md-nav__link">
+      Overview of the test suite
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/MieScattering/MieScattering/" title="Mie scattering" class="md-nav__link">
+      Mie scattering
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/FresnelScattering/FresnelScattering/" title="Fresnel scattering" class="md-nav__link">
+      Fresnel scattering
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/CasimirSpheres/CasimirSpheres/" title="Equilibrium Casimir forces between spheres" class="md-nav__link">
+      Equilibrium Casimir forces between spheres
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/CasimirPlates/CasimirPlates/" title="Equilibrium Casimir forces between plates" class="md-nav__link">
+      Equilibrium Casimir forces between plates
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/CPSphere/CPSphere/" title="Equilibrium Casimir-Polder potential near a sphere" class="md-nav__link">
+      Equilibrium Casimir-Polder potential near a sphere
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/CPPlate/CPPlate/" title="Equilibrium Casimir-Polder potential near a plate" class="md-nav__link">
+      Equilibrium Casimir-Polder potential near a plate
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/NEQSpheres/NEQSpheres/" title="Heat transfer and non-equilibrium Casimir forces between spheres" class="md-nav__link">
+      Heat transfer and non-equilibrium Casimir forces between spheres
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/libscuff/libscuff/" title="Low-level tests of the core library" class="md-nav__link">
+      Low-level tests of the core library
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      General reference
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        General reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/TopLevel/" title="Top-level overview" class="md-nav__link">
+      Top-level overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/Installing/" title="Installation" class="md-nav__link">
+      Installation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/Geometries/" title="Geometry descriptions" class="md-nav__link">
+      Geometry descriptions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/Materials/" title="Material designations" class="md-nav__link">
+      Material designations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/Transformations/" title="Geometric transformations" class="md-nav__link">
+      Geometric transformations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/IncidentFields/" title="Incident fields" class="md-nav__link">
+      Incident fields
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/BrillouinZoneIntegration/" title="Brillouin zone integration" class="md-nav__link">
+      Brillouin zone integration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/FAQ/" title="FAQ" class="md-nav__link">
+      FAQ
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
+    
+    <label class="md-nav__link" for="nav-5">
+      Command-line tools
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Command-line tools
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../GeneralReference/" title="General command-line reference" class="md-nav__link">
+      General command-line reference
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../scuff-scatter/scuff-scatter/" title="scuff-scatter" class="md-nav__link">
+      scuff-scatter
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../scuff-transmission/scuff-transmission/" title="scuff-transmission" class="md-nav__link">
+      scuff-transmission
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../scuff-ldos/scuff-ldos/" title="scuff-ldos" class="md-nav__link">
+      scuff-ldos
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../scuff-tmatrix/scuff-tmatrix/" title="scuff-tmatrix" class="md-nav__link">
+      scuff-tmatrix
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../scuff-cas3D/scuff-cas3D/" title="scuff-cas3D" class="md-nav__link">
+      scuff-cas3D
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../scuff-caspol/scuff-caspol/" title="scuff-caspol" class="md-nav__link">
+      scuff-caspol
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../scuff-neq/scuff-neq/" title="scuff-neq" class="md-nav__link">
+      scuff-neq
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        scuff-rf
+      </label>
+    
+    <a href="./" title="scuff-rf" class="md-nav__link md-nav__link--active">
+      scuff-rf
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#describing-microstrip-geometries-in-scuff-em" title="Describing microstrip geometries in scuff-em" class="md-nav__link">
+    Describing microstrip geometries in scuff-em
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-specifying-meshed-metal-traces" title="1. Specifying meshed metal traces" class="md-nav__link">
+    1. Specifying meshed metal traces
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1a-write-a-scuffgeo-file" title="1A. Write a .scuffgeo file" class="md-nav__link">
+    1A. Write a .scuffgeo file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1b-use-api-routines-to-add-polygon-meshes" title="1B. Use API routines to add polygon meshes" class="md-nav__link">
+    1B. Use API routines to add polygon meshes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-define-the-substrate" title="2. Define the substrate" class="md-nav__link">
+    2. Define the substrate
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2a-write-a-substrate-file" title="2A. Write a .substrate file" class="md-nav__link">
+    2A. Write a .substrate file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2b-include-a-substrateendsubstrate-section-in-your-scuffgeo-file" title="2B. Include a SUBSTRATE....ENDSUBSTRATE section in your .scuffgeo file" class="md-nav__link">
+    2B. Include a SUBSTRATE....ENDSUBSTRATE section in your .scuffgeo file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2c-use-api-routines-to-define-substrate-properties" title="2C. Use API routines to define substrate properties" class="md-nav__link">
+    2C. Use API routines to define substrate properties
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-specifying-ports" title="3. Specifying ports" class="md-nav__link">
+    3. Specifying ports
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3a-write-a-ports-file" title="3A. Write a .ports file" class="md-nav__link">
+    3A. Write a .ports file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3b-make-api-calls" title="3B. Make API calls" class="md-nav__link">
+    3B. Make API calls
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3c-import-port-definitions-from-a-gdsii-file" title="3C. Import port definitions from a .GDSII file" class="md-nav__link">
+    3C. Import port definitions from a .GDSII file
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#double-checking-your-geometry-specification-the-plotgeometry-api-routine" title="Double-checking your geometry specification: The PlotGeometry API routine" class="md-nav__link">
+    Double-checking your geometry specification: The PlotGeometry API routine
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#using-api-routines-to-import-layers-from-gdsii-files" title="Using API routines to import layers from GDSII files" class="md-nav__link">
+    Using API routines to import layers from GDSII files
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#earlier-version-of-the-scuff-rf-documentation" title="Earlier version of the scuff-rf documentation" class="md-nav__link">
+    Earlier version of the scuff-rf documentation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+        <li class="md-nav__item">
+          <a href="#__comments" title="Comments" class="md-nav__link md-nav__link--active">
+            Comments
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../scuff-static/scuff-static/" title="scuff-static" class="md-nav__link">
+      scuff-static
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../scuff-spectrum/scuff-spectrum/" title="scuff-spectrum" class="md-nav__link">
+      scuff-spectrum
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../scuff-analyze/scuff-analyze/" title="scuff-analyze" class="md-nav__link">
+      scuff-analyze
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../scuff-integrate/scuff-integrate/" title="scuff-integrate" class="md-nav__link">
+      scuff-integrate
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      High-level interface
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        High-level interface
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../HighLevelInterface/HighLevelInterface/" title="High-Level Interface" class="md-nav__link">
+      High-Level Interface
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Low-level API
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        Low-level API
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../API/libscuff/" title="libscuff" class="md-nav__link">
+      libscuff
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../API/MainFlow/" title="MainFlow API" class="md-nav__link">
+      MainFlow API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../API/UtilityAPI/" title="Utility API" class="md-nav__link">
+      Utility API
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      For developers
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        For developers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../forDevelopers/Implementation/" title="Implementation" class="md-nav__link">
+      Implementation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../forDevelopers/DataStructures/" title="Data Structures" class="md-nav__link">
+      Data Structures
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../forDevelopers/Documentation/" title="Documentation" class="md-nav__link">
+      Documentation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../forDevelopers/SingularIntegrals/" title="Code for computing singular integrals" class="md-nav__link">
+      Code for computing singular integrals
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#describing-microstrip-geometries-in-scuff-em" title="Describing microstrip geometries in scuff-em" class="md-nav__link">
+    Describing microstrip geometries in scuff-em
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-specifying-meshed-metal-traces" title="1. Specifying meshed metal traces" class="md-nav__link">
+    1. Specifying meshed metal traces
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1a-write-a-scuffgeo-file" title="1A. Write a .scuffgeo file" class="md-nav__link">
+    1A. Write a .scuffgeo file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1b-use-api-routines-to-add-polygon-meshes" title="1B. Use API routines to add polygon meshes" class="md-nav__link">
+    1B. Use API routines to add polygon meshes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-define-the-substrate" title="2. Define the substrate" class="md-nav__link">
+    2. Define the substrate
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2a-write-a-substrate-file" title="2A. Write a .substrate file" class="md-nav__link">
+    2A. Write a .substrate file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2b-include-a-substrateendsubstrate-section-in-your-scuffgeo-file" title="2B. Include a SUBSTRATE....ENDSUBSTRATE section in your .scuffgeo file" class="md-nav__link">
+    2B. Include a SUBSTRATE....ENDSUBSTRATE section in your .scuffgeo file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2c-use-api-routines-to-define-substrate-properties" title="2C. Use API routines to define substrate properties" class="md-nav__link">
+    2C. Use API routines to define substrate properties
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-specifying-ports" title="3. Specifying ports" class="md-nav__link">
+    3. Specifying ports
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3a-write-a-ports-file" title="3A. Write a .ports file" class="md-nav__link">
+    3A. Write a .ports file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3b-make-api-calls" title="3B. Make API calls" class="md-nav__link">
+    3B. Make API calls
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3c-import-port-definitions-from-a-gdsii-file" title="3C. Import port definitions from a .GDSII file" class="md-nav__link">
+    3C. Import port definitions from a .GDSII file
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#double-checking-your-geometry-specification-the-plotgeometry-api-routine" title="Double-checking your geometry specification: The PlotGeometry API routine" class="md-nav__link">
+    Double-checking your geometry specification: The PlotGeometry API routine
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#using-api-routines-to-import-layers-from-gdsii-files" title="Using API routines to import layers from GDSII files" class="md-nav__link">
+    Using API routines to import layers from GDSII files
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#earlier-version-of-the-scuff-rf-documentation" title="Earlier version of the scuff-rf documentation" class="md-nav__link">
+    Earlier version of the scuff-rf documentation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+        <li class="md-nav__item">
+          <a href="#__comments" title="Comments" class="md-nav__link md-nav__link--active">
+            Comments
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/homerreid/scuff-em/edit/master/docs/applications/scuff-rf/scuff-rf.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1> The <span class=SC>scuff-em</span> RF module</h1>
+
+<p>The <span class=SC>scuff-em</span> RF module is an extension of the
+<a href="../../../API/libscuff/"><span class=SC>scuff-em</span> core library</a> to enable
+RF device modeling within the framework of the surface-integral-equation (SIE)
+approach to electromagnetic scattering implemented by <span class=SC>scuff-em</span>.
+More specifically, the RF module extends <span class=SC>scuff-em</span>'s
+core SIE solver in two key ways:</p>
+<ul>
+<li><p>As a new type of incident-field source, <span class=SC>scuff-rf</span>
+  introduces the notion of <em>RF port.</em> An RF port is simply
+  a localized region of a material body into which an RF current
+  may be injected. The fields radiated by currents forced into RF ports
+  are taken to be the incident fields in an SIE scattering problem, which
+  <span class=SC>scuff-em</span> then solves like any other scattering problem
+  to determine the induced currents everywhere <em>else</em> (outside the ports)
+  on the surfaces in a geometry.</li>
+</ul>
+<p>Having computed the induced currents in response to an RF port excitation,
+  we can now make use of the full panoply of existing post-processing options
+  (calculation of scattered and total field components, induced moments, 
+  absorbed and scattered power, visualization of fields and currents, etc)
+  provided by the  <a href="../../../API/libscuff/"><span class=SC>scuff-em</span> core library</a>.
+  However, </p>
+<ul>
+<li><p> As a specific new type of post-processing calculation, <span class=SC>scuff-rf</span>
+  implements an algorithm for computing the matrix of <em>impedance parameters</em>
+  for a multiport RF structure.</li>
+</ul>
+<p>This page documents how to <em>use</em> the <span class=SC>scuff-em</span> RF module
+for practical RF device modeling; technical details regarding the implementation
+of the module are discussed in the <a href="../../../tex/scuff-rf.pdf"><span class=SC>scuff-rf</span> technical memo</a>.</p>
+<div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#multiple-interfaces-to-the-scuff-em-rf-module-c-python-command-line">Multiple interfaces to the <span class=SC>scuff-em</span> RF module: C++, python, command-line</a></li>
+<li><a href="#describing-microstrip-geometries-in-scuff-em">Describing microstrip geometries in <span class=SC>scuff-em</span></a><ul>
+<li><a href="#1-specifying-meshed-metal-traces">1. Specifying meshed metal traces</a><ul>
+<li><a href="#1a-write-a-scuffgeo-file">1A. Write a <span class="na">.scuffgeo</span> file</a></li>
+<li><a href="#1b-use-api-routines-to-add-polygon-meshes">1B. Use API routines to add polygon meshes</a></li>
+</ul>
+</li>
+<li><a href="#2-define-the-substrate">2. Define the substrate</a><ul>
+<li><a href="#2a-write-a-substrate-file">2A. Write a <span class="na">.substrate</span> file</a></li>
+<li><a href="#2b-include-a-substrateendsubstrate-section-in-your-scuffgeo-file">2B. Include a SUBSTRATE....ENDSUBSTRATE section in your <span class="na">.scuffgeo</span> file</a></li>
+<li><a href="#2c-use-api-routines-to-define-substrate-properties">2C. Use API routines to define substrate properties</a></li>
+</ul>
+</li>
+<li><a href="#3-specifying-ports">3. Specifying ports</a><ul>
+<li><a href="#3a-write-a-ports-file">3A. Write a <span class="na">.ports</span> file</a></li>
+<li><a href="#3b-make-api-calls">3B. Make API calls</a></li>
+<li><a href="#3c-import-port-definitions-from-a-gdsii-file">3C. Import port definitions from a <span class="na">.GDSII</span> file</a></li>
+</ul>
+</li>
+<li><a href="#double-checking-your-geometry-specification-the-plotgeometry-api-routine">Double-checking your geometry specification: The PlotGeometry API routine</a><ul>
+<li><a href="#using-api-routines-to-import-layers-from-gdsii-files">Using API routines to import layers from GDSII files</a></li>
+</ul>
+</li>
+<li><a href="#earlier-version-of-the-scuff-rf-documentation">Earlier version of the <span class=SC>scuff-rf</span> documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="multiple-interfaces-to-the-scuff-em-rf-module-c-python-command-line">Multiple interfaces to the <span class=SC>scuff-em</span> RF module: C++, python, command-line</h2>
+<p>There are multiple ways to access the functionality
+offered by the <span class=SC>scuff-em</span> RF module:</p>
+<ul>
+<li>
+<p>You can write C++ or python codes that make calls to API routines
+  to describe geometries, solve RF modeling problems, and do
+  various post-processing calculations. This is ideal for interactive
+  calculations and for harnessing existing C++ or python codes
+  for post-processing.</p>
+</li>
+<li>
+<p>You can use the <code class="codehilite">scuff-rf</code> command-line module (built and installed by the standard
+  <span class=SC>scuff-em</span> installation process), passing command-line 
+  options to describe the geometry and the calculations to perform.
+  Among other things, this is useful for large-scale batch-processed jobs
+  on HPC clusters.</p>
+</li>
+</ul>
+<p>In general, the full functionality of the module is available
+via either interface, and anything you might want to do will be doable
+in multiple ways. In this documentation and the closely related
+<a href="../../../examples/MicrostripDevices/MicrostripDevices/">illustrative tutorial on microstrip-device modeling with 
+the <span class=SC>scuff-em</span> RF module</a>
+we will generally provide both python codes and command-line scripts
+for running all calculations.</p>
+<h2 id="describing-microstrip-geometries-in-scuff-em">Describing microstrip geometries in <span class=SC>scuff-em</span></h2>
+<p>The description of microstrip geometries in <span class=SC>scuff-em</span>
+consists of three ingredients:</p>
+<ol>
+<li>
+<p>one or more meshed polygons defining metal traces (red regions in the
+pictures above)</p>
+</li>
+<li>
+<p>a description of the substrate (its relative permittivity <script type="math/tex">\epsilon_r</script> and
+thickness <script type="math/tex">h</script>).</p>
+</li>
+<li>
+<p>a definition of where the <em>ports</em> are located on the traces (indicated
+schematically by white lines and arrows in the pictures above.)</p>
+</li>
+</ol>
+<p>We'll consider each of these items in turn.</p>
+<h3 id="1-specifying-meshed-metal-traces">1. Specifying meshed metal traces</h3>
+<h4 id="1a-write-a-scuffgeo-file">1A. Write a <code class="codehilite"><span class="na">.scuffgeo</span></code> file</h4>
+<p>One way to define metal traces is simply to write a standard <a href="../../../reference/Geometries/"><span class=SC>scuff-em</span> geometry file</a>
+specifying one or more mesh files (such as <a href="http://www.geuz.org/gmsh"><span class=SC>gmsh</span></a> <code class="codehilite"><span class="na">.msh</span></code> files or <a href="http://www.comsol.com"><span class=SC>comsol</span></a> <code class="codehilite"><span class="na">.mphtxt</span></code> files),
+optionally subjected to rigid geometrical transformations (translations and rotations). For example, <a href="#CoupledAntennaSCUFFGEOFile"><span class=SC>scuff-em</span>
+geometry files for the coupled-antenna geometry</a> shown above describe the geometry as containing two copies
+of a mesh file for the single antenna, the second of which is displaced relative to the first.</p>
+<p><code class="codehilite">PFAntennas_Coarse.scuffgeo</code>:</p>
+<div class="codehilite"><pre><span></span><span class="n">OBJECT</span> <span class="n">Antenna1</span>
+    <span class="n">MESHFILE</span> <span class="n">PointFedAntenna_Coarse</span><span class="o">.</span><span class="n">msh</span>
+<span class="n">ENDOBJECT</span>
+
+<span class="n">OBJECT</span> <span class="n">Antenna2</span>
+    <span class="n">MESHFILE</span> <span class="n">PointFedAntenna_Coarse</span><span class="o">.</span><span class="n">msh</span>
+    <span class="n">DISPLACED</span> <span class="mf">105.7</span> <span class="o">-</span><span class="mf">65.5</span> <span class="mf">0.0</span>
+<span class="n">ENDOBJECT</span>
+</pre></div>
+
+<p>Geometry files may be specified to <span class=SC>scuff-em</span> by saying
+<code class="codehilite">SetGeometryFile(&quot;MyGeometry.scuffgeo&quot;)</code> in C++ or python, or by saying 
+<code class="codehilite">--geometry MyPorts.port</code> on the <code class="codehilite">scuff-rf</code> command line.</p>
+<h4 id="1b-use-api-routines-to-add-polygon-meshes">1B. Use API routines to add polygon meshes</h4>
+<p>Alternatively, you can skip writing a <code class="codehilite"><span class="na">.scuffgeo</span></code> file altogether and instead build up your
+geometry from a C++ or python code by making one or more calls to the <code class="codehilite">AddMetalTraceMesh()</code>
+API routine. Each call to this routine adds one copy of the meshed polygon to your geometry,
+optionally displaced or rotated. Thus, the following two lines in a python code
+yield the same effect as the <code class="codehilite"><span class="na">.scuffgeo</span></code> file above:</p>
+<div class="codehilite"><pre><span></span>  <span class="n">Solver</span><span class="o">=</span> <span class="n">scuff</span><span class="o">.</span><span class="n">RFSolver</span><span class="p">();</span>
+  <span class="n">Solver</span><span class="o">.</span><span class="n">AddMetalTraceMesh</span><span class="p">(</span><span class="s2">&quot;PointFedAntenna_Coarse.msh&quot;</span><span class="p">,</span> <span class="s2">&quot;Antenna1&quot;</span><span class="p">);</span>
+  <span class="n">Solver</span><span class="o">.</span><span class="n">AddMetalTraceMesh</span><span class="p">(</span><span class="s2">&quot;PointFedAntenna_Coarse.msh&quot;</span><span class="p">,</span> <span class="s2">&quot;Antenna2&quot;</span><span class="p">,</span> <span class="s2">&quot;DISPLACED 105.7 -65.5 0.0&quot;</span><span class="p">);</span>
+</pre></div>
+
+<h3 id="2-define-the-substrate">2. Define the substrate</h3>
+<h4 id="2a-write-a-substrate-file">2A. Write a <code class="codehilite"><span class="na">.substrate</span></code> file</h4>
+<p>One way to specify the substrate is to write a simple text file (conventionally 
+assigned file extension <code class="codehilite"><span class="na">.substrate</span></code>) describing the substrate in your geometry.
+As discussed in more detail in the technical documentation for the 
+<a href="../../../tex/FullWaveSubstrate.pdf"><span class=SC>scuff-em</span> full-wave substrate module</a>,
+each line of this file adds either <strong>(a)</strong> a single material layer to the substrate,
+specified by the <script type="math/tex">z</script>-coordinate of its upper surface and a
+<a href="../../../reference/Materials/"><span class=SC>scuff-em</span> material descriptor</a> describing
+its bulk permittivity and permeability, or <strong>(b)</strong> a perfectly conducting ground plane,
+specified by its height (<script type="math/tex">z</script>-coordinate) and the keyword <code class="codehilite">GROUNDPLANE</code>.
+Here's a <code class="codehilite"><span class="na">.substrate</span></code> file defining a dielectric layer of relative
+permittivity <script type="math/tex">\epsilon_r = 2.2</script> and thickness 0.794 mm terminated 
+below by a ground plane.</p>
+<div class="codehilite"><pre><span></span><span class="mf">0.0</span>    <span class="n">CONST_EPS_2</span><span class="o">.</span><span class="mi">2</span>
+<span class="o">-</span><span class="mf">0.794</span> <span class="n">GROUNDPLANE</span>
+</pre></div>
+
+<p>Note that, if the <code class="codehilite">GROUNDPLANE</code> line were omitted, this file would
+describe an infinitely thick substrate (half-space) filling the region <script type="math/tex">z<0</script>.</p>
+<h4 id="2b-include-a-substrateendsubstrate-section-in-your-scuffgeo-file">2B. Include a <code class="codehilite">SUBSTRATE....ENDSUBSTRATE</code> section in your <code class="codehilite"><span class="na">.scuffgeo</span></code> file</h4>
+<p>If you chose to write a <code class="codehilite"><span class="na">.scuffgeo</span></code> file to define your metal traces, you can
+include the substrate definition in this file by adding a <code class="codehilite">SUBSTRATE...ENDSUBSTRATE</code>
+clause. The text between the opening and closing keywords is processed
+as if it had been read in from the <code class="codehilite"><span class="na">.substrate</span></code> file; thus, to specify the 
+substrate described above we would say</p>
+<div class="codehilite"><pre><span></span><span class="n">SUBSTRATE</span>
+     <span class="mf">0.0</span>   <span class="n">CONST_EPS_2</span><span class="o">.</span><span class="mi">2</span>
+  <span class="o">-</span><span class="mf">0.794</span>   <span class="n">GROUNDPLANE</span>
+<span class="n">ENDSUBSTRATE</span>
+</pre></div>
+
+<h4 id="2c-use-api-routines-to-define-substrate-properties">2C. Use API routines to define substrate properties</h4>
+<p>Finally, you can specify substrate properties directly from C++ or
+python codes by calling API routines. For example, to define</p>
+<div class="codehilite"><pre><span></span> <span class="n">SetSubstratePermittivity</span><span class="p">(</span><span class="mf">2.2</span><span class="p">);</span>
+ <span class="n">AddSubstrateLayer</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">);</span>    <span class="o">//</span> <span class="n">equivalent</span> <span class="n">to</span> <span class="n">previous</span> <span class="n">line</span>
+
+ <span class="n">SetSubstrateThickness</span><span class="p">(</span><span class="o">+</span><span class="mf">0.794</span><span class="p">);</span>
+ <span class="n">AddGroundPlane</span><span class="p">(</span><span class="o">-</span><span class="mf">0.794</span><span class="p">);</span>         <span class="o">//</span> <span class="n">equivalent</span> <span class="n">to</span> <span class="n">previous</span> <span class="n">line</span>
+
+ <span class="n">SetSubstrateFile</span><span class="p">(</span><span class="s2">&quot;MyFile.substrate&quot;</span><span class="p">);</span>
+</pre></div>
+
+<p><a name="RFPorts"></a></p>
+<h3 id="3-specifying-ports">3. Specifying ports</h3>
+<p>Ports are regions of surfaces into which external RF currents are forced.
+(More specifically, a port will generally have a <em>positive</em> terminal, into
+which a current is forced, and a <em>negative</em> terminal, from which an identical
+current is extracted. Specifying no negative terminal for a port is equivalent
+to placing the negative terminal on the ground plane of the substrate or on
+a fictitious surface at spatial infinity.)</p>
+<p>Each port terminal consists of one or more triangles in a meshed
+geometry, each with a distinguished choice of edge; the injected (or 
+extracted) port current gives rise to a nonzero surface-current
+density that is only nonzero over these triangles, and which flows
+out over the designated edges to the rest of the structure.
+Some examples are (click for larger images):</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><a href="../PointPort.png"><img alt="" src="../PointPort.png" /></a></td>
+<td align="left">port terminals localized at a single point; the current is injected into (or extracted from) <script type="math/tex">\bf v_0</script> and yields nonzero surface-current density over all triangles with a vertex at <script type="math/tex">\bf v_0</script>
+</td>
+</tr>
+<tr>
+<td align="center"><a href="../LinePort.png"><img alt="" src="../LinePort.png" /></a></td>
+<td align="left">point terminals lying on the boundary of meshed surfaces; each terminal is defined by the vertices of the line segments that encompass it</td>
+</tr>
+<tr>
+<td align="center"><a href="../PolygonPort.png"><img alt="" src="../PolygonPort.png" /></a></td>
+<td align="left">point terminals lying on non-straight-line surface boundaries. In this case, we define the port by the planar polygon <script type="math/tex">\overline{\bf v_1 \bf v_2 \bf v_3 \bf v_4}</script>; the port terminal will consist of all exterior mesh edges lying within this polygon.</td>
+</tr>
+</tbody>
+</table>
+<p>Thus, each port terminal may be defined by specifying <script type="math/tex">N</script> vertices: <script type="math/tex">N=1</script> vertex for a point-defined port terminal, <script type="math/tex">N=2</script> vertices for a line-segment-defined port terminal,
+and <script type="math/tex">N\ge 3</script> for a polygon-defined port terminal. Each vertex has three coordinates, so we have to communicate <script type="math/tex">3N</script> numbers to <span class=SC>scuff-em</span>.</p>
+<p>Also note that a single port terminal may involve two or more polygon specifications; for example, in the second example above the negative port terminal
+is specified by the union of the line segments <script type="math/tex">\overline{\bf v_1 \bf v_2}</script> and <script type="math/tex">\overline{\bf v_5 \bf v_6}.</script>
+</p>
+<h4 id="3a-write-a-ports-file">3A. Write a <code class="codehilite"><span class="na">.ports</span></code> file</h4>
+<p>Ports may be defined by writing a simple text file (conventionally given file extension <code class="codehilite"><span class="na">.ports</span></code>)
+containing one or more <code class="codehilite">PORT...ENDPORT</code> clauses. Each clause
+defines positive (and optionally negative) port terminals using the keyword <code class="codehilite">POSITIVE|NEGATIVE</code>
+followed by a list of <script type="math/tex">3N</script> vertex coordinates <code class="codehilite">x1 y1 z1 x2 y2 z2 ...</code>
+Examples may be found in the <code class="codehilite">share/scuff-em/examples/MicrostripDevices/portFiles</code>
+subdirectory of your <span class=SC>scuff-em</span> installation:</p>
+<p><code class="codehilite">PFAntennas.ports</code></p>
+<div class="codehilite"><pre><span></span><span class="c1"># port specification for center-fed antenna</span>
+<span class="n">PORT</span> 
+    <span class="n">POSITIVE</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> 
+<span class="n">ENDPORT</span>
+</pre></div>
+
+<p><code class="codehilite">CPW.ports</code>
+<div class="codehilite"><pre><span></span><span class="c1"># port specification for coplanar waveguide</span>
+<span class="n">PORT</span>
+    <span class="n">POSITIVE</span> <span class="o">-</span><span class="mf">0.6</span> <span class="mi">0</span> <span class="o">-</span><span class="mf">0.1</span>    <span class="mf">0.60</span> <span class="mi">0</span> <span class="o">-</span><span class="mf">0.1</span>     <span class="mf">0.60</span> <span class="mi">0</span> <span class="mf">0.1</span>   <span class="o">-</span><span class="mf">0.60</span> <span class="mi">0</span> <span class="mf">0.1</span>
+    <span class="n">NEGATIVE</span> <span class="o">-</span><span class="mf">3.0</span> <span class="mi">0</span> <span class="o">-</span><span class="mf">0.1</span>   <span class="o">-</span><span class="mf">0.61</span> <span class="mi">0</span> <span class="o">-</span><span class="mf">0.1</span>    <span class="o">-</span><span class="mf">0.61</span> <span class="mi">0</span> <span class="mf">0.1</span>   <span class="o">-</span><span class="mf">3.00</span> <span class="mi">0</span> <span class="mf">0.1</span>
+    <span class="n">NEGATIVE</span>  <span class="mf">3.0</span> <span class="mi">0</span> <span class="o">-</span><span class="mf">0.1</span>    <span class="mf">0.61</span> <span class="mi">0</span> <span class="o">-</span><span class="mf">0.1</span>     <span class="mf">0.61</span> <span class="mi">0</span> <span class="mf">0.1</span>    <span class="mf">3.00</span> <span class="mi">0</span> <span class="mf">0.1</span>
+<span class="n">ENDPORT</span>
+
+<span class="n">PORT</span>
+    <span class="n">POSITIVE</span> <span class="o">-</span><span class="mf">0.6</span> <span class="mi">10</span> <span class="o">-</span><span class="mf">0.1</span>   <span class="mf">0.60</span> <span class="mi">10</span> <span class="o">-</span><span class="mf">0.1</span>    <span class="mf">0.60</span> <span class="mi">10</span> <span class="mf">0.1</span>  <span class="o">-</span><span class="mf">0.60</span> <span class="mi">10</span> <span class="mf">0.1</span>
+    <span class="n">NEGATIVE</span> <span class="o">-</span><span class="mf">3.0</span> <span class="mi">10</span> <span class="o">-</span><span class="mf">0.1</span>  <span class="o">-</span><span class="mf">0.61</span> <span class="mi">10</span> <span class="o">-</span><span class="mf">0.1</span>   <span class="o">-</span><span class="mf">0.61</span> <span class="mi">10</span> <span class="mf">0.1</span>  <span class="o">-</span><span class="mf">3.00</span> <span class="mi">10</span> <span class="mf">0.1</span>
+    <span class="n">NEGATIVE</span>  <span class="mf">3.0</span> <span class="mi">10</span> <span class="o">-</span><span class="mf">0.1</span>   <span class="mf">0.61</span> <span class="mi">10</span> <span class="o">-</span><span class="mf">0.1</span>    <span class="mf">0.61</span> <span class="mi">10</span> <span class="mf">0.1</span>   <span class="mf">3.00</span> <span class="mi">10</span> <span class="mf">0.1</span>
+<span class="n">ENDPORT</span>
+</pre></div></p>
+<p>Port files may be specified to <span class=SC>scuff-em</span> by saying
+<code class="codehilite">SetPortFile(&quot;MyPorts.port&quot;)</code> in C++ or python, or by saying 
+<code class="codehilite">--PortFile MyPorts.port</code> on the <code class="codehilite">scuff-rf</code> command line.</p>
+<h4 id="3b-make-api-calls">3B. Make API calls</h4>
+<p>If you are building up your geometry from a python script, you can define ports
+via the <code class="codehilite">AddPort</code> routine, whose inputs are lists of vertices defining
+the positive and (optional) negative port terminals.</p>
+<div class="codehilite"><pre><span></span> <span class="c1"># center-fed antenna fed at the origin</span>
+ <span class="n">AddPort</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+
+ <span class="c1"># center-fed antenna with negative terminal at a point 5 mm away </span>
+ <span class="n">AddPort</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+</pre></div>
+
+<p>Note that <code class="codehilite">AddPort</code> assumes that only a single polygon is needed to define
+each port terminal. For port terminals requiring multiple polygons,
+make multiple calls to <code class="codehilite">AddPortTerminal</code>.</p>
+<div class="codehilite"><pre><span></span> <span class="c1"># coplanar waveguide</span>
+ <span class="n">AddPortTerminal</span><span class="p">(</span><span class="s1">&#39;+&#39;</span><span class="p">,[</span><span class="o">-</span><span class="mf">0.50</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">+</span><span class="mf">0.50</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+ <span class="n">AddPortTerminal</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,[</span><span class="o">-</span><span class="mf">3.50</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">+</span><span class="mf">0.51</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+ <span class="n">AddPortTerminal</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,[</span><span class="o">+</span><span class="mf">0.51</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">+</span><span class="mf">3.50</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+</pre></div>
+
+<p><a name="GDSIIPortSpecification"></a></p>
+<h4 id="3c-import-port-definitions-from-a-gdsii-file">3C. Import port definitions from a <code class="codehilite"><span class="na">.GDSII</span></code> file</h4>
+<p>A way to bypass the manual specification of vertices is to define the
+geometric objects (points, lines, or polygons) defining your ports as elements
+(on any layer) of a GDSII file, labeled by specially-formatted text strings 
+placed on the same layer.</p>
+<p>More specifically, to define a port terminal by a polygon,
+draw the polygon as a GDSII boundary and add (<em>on the same GDSII layer</em>)
+a text string, with reference point lying inside the polygon,
+of the form <code class="codehilite">PORT 1+</code> or <code class="codehilite">PORT 2-</code>. (Here <code class="codehilite">PORT</code> is a fixed keyword,
+the integer is the one-based index of the port, and the sign specifies
+whether this is the positive or negative port terminal; you can use the
+characters <code class="codehilite">P</code> in place of <code class="codehilite">+</code> and <code class="codehilite">M</code> or <code class="codehilite">N</code> in place of <code class="codehilite">-</code>).</p>
+<p>To define a port terminal by a line, draw the line as zero-width GDSII path
+and place the text string somewhere near it. (<span class=SC>scuff-em</span>
+will look for zero-width path whose center lies closest to the text string.)</p>
+<p>To define a port terminal by a point, draw a polygon (boundary or box) surrounding the point
+with a labeling text string whose reference point lies inside the boundary/box,
+as above. (To avoid confusing <span class=SC>scuff-em</span>,
+make sure the boundary doesn't fully enclose any <em>exterior</em> edges in a meshed
+surface; this is always possible since the source/sink vertices of pointlike 
+ports must lie in the <em>interior</em> of meshed surfaces.)</p>
+<p>Here are some examples of port-terminal specifications in GDSII files. (Screenshots
+are from the wonderful open-source tool <a href="https://www.klayout.de">klayout</a>; click
+for larger images.) The GDSII files here may be found in the
+<code class="codehilite">share/scuff-em/examples/MicrostripDevices/GSIIFiles</code> subdirectory of your <span class=SC>scuff-em</span> installation.</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Point-defined defined port terminal (source/sink vertex)</td>
+<td align="center"><a href="../EFAntenna.png"><img alt="" src="../EFAntenna.png" /></a></td>
+</tr>
+<tr>
+<td align="center">Line-defined port terminal</td>
+<td align="center"><a href="../EFAntenna.png"><img alt="" src="../EFAntenna.png" /></a></td>
+</tr>
+<tr>
+<td align="center">Polygon-defined port terminals</td>
+<td align="center"><a href="../EFAntenna.png"><img alt="" src="../EFAntenna.png" /></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="double-checking-your-geometry-specification-the-plotgeometry-api-routine">Double-checking your geometry specification: The <code class="codehilite">PlotGeometry</code> API routine</h3>
+<p>Having assembled a microstrip geometry via the steps outlined above, it is highly recommended
+that you ask <span class=SC>scuff-em</span> to confirm what it thinks your geometry
+looks like. This may be done by calling the <code class="codehilite">PlotGeometry()</code> API routine in a C++ or python
+code, or by specifying the <code class="codehilite">--PlotGeometry</code> command-line option to <code class="codehilite">scuff-rf.</code>
+The result will be a <a href="http://www.geuz.org/gmsh">GMSH</a> post-processing file with file extension <code class="codehilite"><span class="na">.pp</span></code> that you
+can open in GMSH to see how <span class=SC>scuff-em</span> understood your specification of 
+metal traces, ports, and substrates.</p>
+<p><a name="GDSIIGeometrySpecification"></a></p>
+<h4 id="using-api-routines-to-import-layers-from-gdsii-files">Using API routines to import layers from GDSII files</h4>
+<p>As an alternative to writing a <code class="codehilite"><span class="na">.scuffgeo</span></code> file or calling <code class="codehilite">AddMetalTraceMesh</code> to specify
+pre-meshed polygons, you can call the <code class="codehilite">ImportGDSIILayer()</code> API routine to request that
+all polygons on a given layer in a GDSII file be instantiated as metal traces in your
+geometry.</p>
+<p>Under the hood, what is going here is the following: <span class=SC>scuff-em</span>
+parses the GDSII file to extract polygon definitions, creates a
+<a class="wikilink" href="../../../gmsh/">gmsh</a> geometry (<code class="codehilite"><span class="na">.geo</span></code>) file for each polygon, runs <a class="wikilink" href="../../../gmsh/">gmsh</a> to create a mesh file
+with the meshing lengthscale you specified, and calls <code class="codehilite">AddMetalTraceMesh</code> to
+add it to the geometry.</p>
+<p>Thus, together with the option
+to <a href="#GDSIIPortSpecification">use GDSII files to define ports</a>, this <em>in principle</em>
+allows the entirety of a <span class=SC>scuff-em</span> microstrip geometry to
+be defined by GDSII files, eliminating the need to run <a href="http://www.geuz.org/gmsh">gmsh</a> or
+write <code class="codehilite"><span class="na">.scuffgeo</span></code> or <code class="codehilite"><span class="na">.port</span></code> files by hand.</p>
+<p>However, at present this way of doing things is <strong>not recommended,</strong> for
+reasons of computational efficiency. </p>
+<h3 id="earlier-version-of-the-scuff-rf-documentation">Earlier version of the <span class=SC>scuff-rf</span> documentation</h3>
+<p>An earlier version of the <span class=SC>scuff-rf</span> documentation
+may be found at 
+<a href="http://homerreid.com/scuff-em/scuff-RF">http://homerreid.com/scuff-em/scuff-RF</a>.</p>
+                
+                  
+                
+              
+              
+                
+
+
+
+  <h2 id="__comments">Comments</h2>
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = "http://homerreid.github.io/scuff-em-documentation/applications/scuff-rf/scuff-rf/";
+      this.page.identifier =
+        "/applications/scuff-rf/scuff-rf/";
+    };
+    (function() {
+      var d = document, s = d.createElement("script");
+      s.src = "//homerreid-github-io-scuff-em-documentation.disqus.com.disqus.com/embed.js";
+      s.setAttribute("data-timestamp", +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../../scuff-neq/scuff-neq/" title="scuff-neq" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                scuff-neq
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../../scuff-static/scuff-static/" title="scuff-static" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                scuff-static
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="http://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../assets/javascripts/application.b438e6c5.js"></script>
+      
+      <script>app.initialize({version:"0.17.3",url:{base:"../../.."}})</script>
+      
+        <script src="../../../javascripts/MathJax.js?config=TeX-AMS_HTML"></script>
+      
+        <script src="../../../javascripts/mathjaxhelper.js"></script>
+      
+    
+    
+      
+        <script>!function(e,a,t,n,o,c,i){e.GoogleAnalyticsObject=o,e.ga=e.ga||function(){(e.ga.q=e.ga.q||[]).push(arguments)},e.ga.l=1*new Date,c=a.createElement(t),i=a.getElementsByTagName(t)[0],c.async=1,c.src="https://www.google-analytics.com/analytics.js",i.parentNode.insertBefore(c,i)}(window,document,"script",0,"ga"),ga("create","UA-119340518-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview");var links=document.getElementsByTagName("a");if(Array.prototype.map.call(links,function(e){e.host!=document.location.host&&e.addEventListener("click",function(){var a=e.getAttribute("data-md-action")||"follow";ga("send","event","outbound",a,e.href)})}),document.forms.search){var query=document.forms.search.query;query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}</script>
+      
+    
+  </body>
+</html>

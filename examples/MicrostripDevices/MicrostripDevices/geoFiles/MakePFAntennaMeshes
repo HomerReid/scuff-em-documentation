@@ -1,0 +1,5 @@
+#!/bin/bash
+
+ARGS="-2 PointFedAntenna.geo"
+gmsh ${ARGS} -setnumber N 0.25 -o PFAntenna_Coarse.msh
+gmsh ${ARGS} -setnumber N 0.50 -o PFAntenna_Fine.msh

@@ -1,0 +1,416 @@
+<!--#set 
+    var="title" 
+    value="libscuff documentation: Matrices and Vectors"
+  -->
+<!--#include virtual="/pagetop.shtml"-->
+
+<!-- begin main page body -->
+
+<!----------------------------------------------------------------------->
+<!-- main page table, with one row and three columns:                  -->
+<!--  navbar, trough, body.                                            -->
+<!----------------------------------------------------------------------->
+<table cellspacing="0" cellpadding="0" width="100%"><tr>
+  
+  <!----------------------------------------------------------------------->
+  <!-- left column of main page table: nav bar. --------------------------->
+  <!----------------------------------------------------------------------->
+  <td valign="top" width="180"> 
+  <!--#include virtual="/research/navbar.shtml"-->
+  </td> 
+
+  <!----------------------------------------------------------------------->
+  <!-- central column of main page table: separation trough --------------->
+  <!----------------------------------------------------------------------->
+  <td width="5%"></td>
+ 
+  <!----------------------------------------------------------------------->
+  <!-- right column of main page table: content of page. ------------------>
+  <!----------------------------------------------------------------------->
+  <td valign="top">
+    
+   <p><br> <p align="center">
+   <table align="center"> 
+     <tr> <td> <a href="scuff-em">
+               <img width="411" height="296" src="images/scuffEM.png">
+               </a>
+          </td>
+          <td width="5%"> </td>
+          <td> <h1>
+               <span class=CodeName>libscuff</span> 
+               API Documentation: 
+
+               <br>
+
+               Manipulating Matrices and Vectors 
+               </h1>
+          </td>
+     </tr>
+   </table> 
+
+  <p> 
+  <span class=CodeName>libscuff</span> provides some simple classes 
+  called <code>HMatrix</code> and <code>HVector</code> for 
+  working with numerical matrices and vectors.
+
+  <p> 
+  This page documents a representative <i>subset</i> of the 
+  matrix and vector functions provided; for the full API,  
+  consult the file <code>include/scuff-em/libhmat.h</code>
+  that comes with the <span class="CodeName">scuff-em</span>
+  distribution.
+
+    <!----================================================================-->
+    <!---------------------------------------------------------------------->
+    <!----================================================================-->
+    <p>
+    <table align="center" class="TOC" cellpadding="5" cellspacing="5">
+
+      <tr> <th> Matrices and Vectors in <span class=CodeName>libscuff</code>
+      </th></tr>
+
+      <tr> <td>
+           <a href="scuff-EM/libscuff/MatrixVector.shtml#Creating">
+            1. Creating from scratch
+           </a>
+           </td>
+      </tr>
+
+      <tr> <td>
+           <a href="scuff-EM/libscuff/MatrixVector.shtml#Importing">
+            2. Importing from text or binary files 
+           </a>
+           </td>
+      </tr>
+
+      <tr> <td>
+           <a href="scuff-EM/libscuff/MatrixVector.shtml#Exporting">
+            3. Exporting to text or binary files
+           </a>
+           </td>
+      </tr>
+
+      <tr> <td>
+           <a href="scuff-EM/libscuff/MatrixVector.shtml#Simple">
+            4. Simple manipulations
+           </a>
+           </td>
+      </tr>
+
+      <tr> <td>
+           <a href="scuff-EM/libscuff/MatrixVector.shtml#LapackBlas">
+            5. Numerical linear algebra: <span class="CodeName">LAPACK/BLAS</span>
+               wrappers
+           </a>
+           </td>
+      </tr>
+
+    </table>
+
+  <!---------------------------------------------------------------------->
+  <!---------------------------------------------------------------------->
+  <!---------------------------------------------------------------------->
+  <p>
+  <h2><a name="Creating"></a>1. Creating from scratch </h2>
+  <hr>
+
+    <p>
+    Create real-valued matrices and vectors of known dimensions:
+
+    <p>
+    <pre class="CPPListing">
+      HVector *V = new HVector( 13);   // create a 13-component real-valued vector
+
+      HMatrix *M = new HMatrix( 5, 6); // create a 5x6 real-valued matrix
+    </pre>
+
+    <p>
+    Create complex-valued matrices and vectors:
+
+    <p>
+    <pre class="CPPListing">
+      HVector *V = new HVector( 13, LHM_COMPLEX); 
+
+      HMatrix *M = new HMatrix( 5, 6, LHM_COMPLEX);
+    </pre>
+
+    <p>
+    For symmetric or Hermitian matrices, you have the option of using
+    <i>packed storage</i>; this roughly halves the RAM needed to store 
+    your matrix, but has the drawback of slowing down linear algebra 
+    operations.
+ 
+    <p>
+    <pre class="CPPListing">
+      // real symmetric matrix, M_{ij} = M_{ji}
+      HMatrix *M = new HMatrix( 5, 5, LHM_REAL, LHM_SYMMETRIC );
+
+      // complex hermitian matrix, M_{ij} = M^*_{ji} 
+      HMatrix *M = new HMatrix( 5, 5, LHM_COMPLEX, LHM_HERMITIAN );
+
+      // complex symmetric matrix, M_{ij} = M_{ji} 
+      HMatrix *M = new HMatrix( 5, 5, LHM_COMPLEX, LHM_SYMMETRIC );
+    </pre>
+
+  <!---------------------------------------------------------------------->
+  <!---------------------------------------------------------------------->
+  <!---------------------------------------------------------------------->
+  <p>
+  <h2><a name="Importing"></a>2. Importing from text or binary files </h2>
+  <hr>
+
+    <p>
+    <h3>Text files: </h3>
+
+    <p>
+    Create a new vector or matrix by importing a list of numbers 
+    in an ASCII text file:
+
+    <p>
+    <pre class="CPPListing">
+      HVector *V = new HVector("MyVector.dat", LHM_TEXT );
+      if (V->ErrMsg) 
+       ErrExit(V->ErrMsg);
+
+      HVector *M = new HMatrix("MyMatrix.dat", LHM_TEXT );
+      if (M->ErrMsg) 
+       ErrExit(M->ErrMsg);
+    </pre>
+
+    <p>
+    Here <code>MyVector.dat</code> should be a file with 
+    a single number per line, while <code>MyMatrix.dat</code>
+    may have multiple numbers per line.
+    <a href="scuff-em/reference/scuffEMMisc.shtml#Complex">Complex numbers</a>
+    are allowed. Blank lines and comments (lines beginning with a 
+    pound sign <code>#</code>) are skipped. 
+    The dimension of the resulting <code>HVector</code>, 
+    and the number of rows of the resulting <code>HMatrix</code>,
+    will be the number of non-blank non-comment lines in the file, 
+    while the number of columns of the <code>HMatrix</code> will
+    be the largest number of numbers read from any one line.
+
+    <p>
+    Note that, if the file import operation fails,
+    the constructor returns an <code>HVector</code> or
+    <code>HMatrix</code> whose <code>ErrMsg</code> field 
+    points to a nonempty error message. (In this case, all 
+    other class fields in the object should be assumed to be 
+    invalid.)
+
+    <p>
+    If the operation is successful, then <code>ErrMsg</code>
+    will be <code>NULL</code> on return.
+
+    <p>
+    <h3>HDF5 files: </h3>
+
+    <p>
+    Create a new vector or matrix by importing from an HDF5 
+    binary data file:
+
+    <p>
+    <pre class="CPPListing">
+       HMatrix *M1 = new HMatrix("MyFile.hdf5", LHM_HDF5, "M1");
+       HMatrix *M2 = new HMatrix("MyFile.hdf5", LHM_HDF5, "M2");
+       HVector *V  = new HVector("MyFile.hdf5", LHM_HDF5, "V");
+  
+       if (M1->ErrMsg) ErrExit(M1->ErrMsg);
+       if (M2->ErrMsg) ErrExit(M2->ErrMsg);
+       if (V->ErrMsg)  ErrExit(V->ErrMsg);
+    </pre>
+
+    <p>
+    Note that the third parameter to the constructor here is 
+    the label of the dataset to within the HDF5 file.
+
+  <!---------------------------------------------------------------------->
+  <!---------------------------------------------------------------------->
+  <!---------------------------------------------------------------------->
+  <p>
+  <h2><a name="Exporting"></a>3. Exporting to text or binary files</h2>
+  <hr>
+
+    <p>
+    <h3>Text files: </h3>
+
+    <p>
+    Write the contents of a vector or matrix to an ASCII text file:
+    <p>
+    <pre class="CPPListing">
+      M->ExportToText("MyMatrix.dat");
+      V->ExportToText("MyVector.dat");
+    </pre>
+
+    <p>
+    The argument to <code>ExportToText</code> supports <code>printf-</code>like
+    semantics for inserting numbers, etc. into the file name:
+
+    <pre class="CPPListing">
+      int N = 3;
+      M->ExportToText("Matrix_%i.dat", N);
+    </pre>
+
+    <p>
+    <h3>HDF5 files: </h3>
+
+    <p>
+    There are two calling conventions for exporting matrices and vectors
+    to HDF5 files. 
+
+    <p>If you want each matrix and vector to be exported to a separate 
+    HDF5 file, you can say simply 
+
+    <p>
+    <pre class="CPPListing">
+      M->ExportToHDF5("MyMatrix.hdf5","M");
+      V->ExportToHDF5("MyVector.hdf5","V");
+    </pre>
+
+    <p>Alternatively, you can write multiple matrices and vectors to 
+    a single HDF5 file.
+
+    <p>
+    <pre class="CPPListing">
+      void *HC = HMatrix::OpenHDF5Context("MyFile.hdf5");
+      M->ExportToHDF5(HC, "M");
+      V->ExportToHDF5(HC, "V");
+      HMatrix::CloseHDF5Context(HC);
+    </pre>
+
+  <!---------------------------------------------------------------------->
+  <!---------------------------------------------------------------------->
+  <!---------------------------------------------------------------------->
+  <p>
+  <h2><a name="Simple"></a>4. Simple manipulations</h2>
+  <hr>
+
+    <p> 
+    <b> Note: All indices are zero-based.</b>
+
+    <p> 
+    Get or set individual entries:
+    <p> 
+    <pre class="CPPListing">
+       HMatrix *M = new HMatrix(M, N, LHM_COMPLEX);
+       HVector *V = new HVector(N);
+
+       M->SetEntry( 3, 4, 5.6 );
+       M->SetEntry( 3, 4, cdouble(5.6+7.8) );
+
+       V->SetEntry( 7, 8.009 );
+
+       double D;
+       cdouble Z;
+
+       Z = M->GetEntry( 3, 4 );
+       D = M->GetEntryD( 3, 4 ); // discard any imaginary part 
+
+       Z = V->GetEntry(7);
+       D = V->GetEntryD(8);
+    </pre>
+
+    <p> 
+    Augment individual entries:
+
+    <p> 
+    <pre class="CPPListing">
+       M->AddEntry( 3, 4, 5.6 );  // the (3,4) entry gets increased by 5.6
+       V->AddEntry( 0, cdouble(0.0, 2.3) ); // the 0th entry gets increased by 2.3i
+    </pre>
+
+    <p> 
+    Replace a matrix with its conjugate or non-conjugate tranpose 
+    (no distinction for real-valued matrices):
+
+    <p> 
+    <pre class="CPPListing">
+       M->Adjoint();    // conjugate transpose
+       M->Transpose();  // non-conjugate transpose
+    </pre>
+
+  <!---------------------------------------------------------------------->
+  <!---------------------------------------------------------------------->
+  <!---------------------------------------------------------------------->
+  <p>
+  <h2><a name="LapackBlas"></a>5. Numerical linear algebra: 
+                                  <span class="CodeName">LAPACK/BLAS</span>
+                                  wrappers
+  </h2>
+  <hr>
+
+    <p> 
+    Multiply two matrices:
+
+    <p> 
+    <pre class="CPPListing">
+      int P, Q, R;
+      A=new HMatrix(P, Q);
+      B=new HMatrix(Q, R);
+      C=new HMatrix(P, R); 
+      ... 
+      A->Multiply(B, C); // set C = A*B 
+    </pre class="CPPListing">
+
+    <p> 
+    Replace a matrix with its LU factorization:
+
+    <p> 
+    <pre class="CPPListing">
+       M->LUFactorize();
+    </pre>
+
+    <p> 
+    Solve a single linear system using an LU-factorized matrix:
+    <p> 
+    <pre class="CPPListing">
+       M=new HMatrix(N, N);
+       // insert code to fill in M 
+       M->LUFactorize();
+
+       V=new HVector(N);
+       // insert code to fill in V 
+       M->LUSolve(V);   // replaces V with M^{-1} * V 
+    </pre>
+
+    <p> 
+    Of course, we only need to call <code>LUFactorize</code> once for
+    a given matrix, after which we can make any number of calls to 
+    <code>LUSolve()</code> with different vectors. 
+
+    <p> 
+    We can also solve multiple simultaneous systems by passing
+    an <code>HMatrix</code> instead of an <code>HVector</code> to  
+    <code>LUSolve:</code>
+    <p> 
+    <pre class="CPPListing">
+       M=new HMatrix(N, N);
+       // insert code to fill in M 
+       M->LUFactorize();
+
+       R=new HMatrix(N, M); 
+       // insert code to fill in the M columns of R 
+       M->LUSolve(R);   // replaces R with M^{-1} * R
+    </pre>
+
+  <!----------------------------------------------------------------------->
+  <!----------------------------------------------------------------------->
+  <!----------------------------------------------------------------------->
+  <!--#include virtual="/scuff-EM/scuffEMFooter.shtml">
+
+  <!----------------------------------------------------------------------->
+  <!-- end right column of main page table.                             --->
+  <!----------------------------------------------------------------------->
+  </td>
+  </table>
+
+<!----------------------------------------------------------------------->
+<!-- end main page table                                               -->
+<!----------------------------------------------------------------------->
+</tr></table>
+   
+<!----------------------------------------------------------------------->
+<!-- end main page body ------------------------------------------------->
+<!----------------------------------------------------------------------->
+   
+<!--#include virtual="/pageend.shtml"-->

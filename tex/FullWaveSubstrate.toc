@@ -1,0 +1,24 @@
+\select@language {english}
+\contentsline {section}{\numberline {1}Overview}{2}
+\contentsline {paragraph}{Homogeneous DGF}{3}
+\contentsline {paragraph}{Inhomogeneous DGF}{3}
+\contentsline {section}{\numberline {2}{\sc libsubstrate:} Numerical computation of substrate Green's functions}{5}
+\contentsline {subsection}{\numberline {2.1}Overview of computational strategy}{5}
+\contentsline {subsection}{\numberline {2.2}Computation of Fourier-space DGF $\boldsymbol {\mathcal {\setbox \z@ \hbox {\frozen@everymath \@emptytoks \mathsurround \z@ $\textstyle G$}\mathaccent "0365{G}}}(\mathbf {q})$}{6}
+\contentsline {paragraph}{Fields in layer interiors.}{6}
+\contentsline {paragraph}{Surface currents from incident fields.}{7}
+\contentsline {subsection}{\numberline {2.3}Reduction of 2D Fourier integrals to 1D (Sommerfeld) integrals}{11}
+\contentsline {subsubsection}{\numberline {2.3.1}Factor $\setbox \z@ \hbox {\frozen@everymath \@emptytoks \mathsurround \z@ $\textstyle \boldsymbol {\mathcal {G}}$}\mathaccent "0365{\boldsymbol {\mathcal {G}}}$ into $q$-independent and $\theta _{\mathbf {q}}$-independent terms}{11}
+\contentsline {subsubsection}{\numberline {2.3.2}Evaluate $\theta _{\mathbf {q}}$ integrals}{12}
+\contentsline {subsubsection}{\numberline {2.3.3}Evaluate Sommerfeld integrals over $q$}{14}
+\contentsline {section}{\numberline {3}{\sc scuff-em} integration: Substrate contributions to BEM matrix and RHS vector}{15}
+\contentsline {subsection}{\numberline {3.1}Fields of individual basis functions}{15}
+\contentsline {subsection}{\numberline {3.2}SIE matrix elements: Panel-panel integrals}{15}
+\contentsline {section}{\numberline {4}Metal-on-Insulator geometries}{17}
+\contentsline {section}{\numberline {5}Unit-test framework}{18}
+\contentsline {subsection}{\numberline {5.1}{\sc libsubstrate} unit tests}{18}
+\contentsline {subsubsection}{\numberline {5.1.1}\texttt {tGTwiddle}}{18}
+\contentsline {section}{\numberline {A}Symbols and indices used in this document}{19}
+\contentsline {subsection}{\numberline {A.1}Symbols}{19}
+\contentsline {subsection}{\numberline {A.2}Indices}{20}
+\contentsline {section}{\numberline {B}$8\times 8$ Dyadic Green's Functions}{21}

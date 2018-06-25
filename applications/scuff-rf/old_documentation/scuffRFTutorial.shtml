@@ -1,0 +1,572 @@
+<!--#set 
+    var="title" 
+    value="A Tutorial Walk Through scuff-RF"
+  -->
+<!--#include virtual="/pagetop.shtml"-->
+
+<!-- begin main page body -->
+
+<!---------------------------------------------------------------------->
+<!-- main page table, with one row and three columns:                 -->
+<!--  navbar, trough, body.                                           -->
+<!---------------------------------------------------------------------->
+<table cellspacing="0" cellpadding="0" width="100%"><tr>
+  
+  <!---------------------------------------------------------------------->
+  <!-- left column of main page table: nav bar. -------------------------->
+  <!---------------------------------------------------------------------->
+  <td valign="top" width="180"> 
+  <!--#include virtual="/research/navbar.shtml"-->
+  </td> 
+
+  <!---------------------------------------------------------------------->
+  <!-- central column of main page table: separation trough -------------->
+  <!---------------------------------------------------------------------->
+  <td width="5%"></td>
+ 
+  <!---------------------------------------------------------------------->
+  <!-- right column of main page table: content of page.------------------>
+  <!---------------------------------------------------------------------->
+  <td valign="top">
+    
+   <p><br> <p align="center">
+   <table align="center"> 
+     <tr> <td> <img width="411" height="296" src="images/scuffRF.png"></td>
+          <td width="5%"> </td>
+          <td> <h1>
+               A Tutorial Walk Through <span class=CodeName>scuff-rf</span>
+               </h1>
+          </td>
+     </tr>
+   </table> 
+    
+    <!---------------------------------------------------------------------->
+    <!-- big table encompassing the entire page ---------------------------->
+    <!---------------------------------------------------------------------->
+    <table align="center" width="90%"><tr><td>
+   
+    <p>
+    <br>
+
+    <p>
+    This page presents a tutorial walkthrough introduction to 
+    <span class=CodeName>scuff-rf</span>. We will look in detail 
+    at each of the steps needed to investigate the fields radiated
+    by a coil antenna driven by external RF circuitry at a frequency
+    of 297 MHz. We will consider both the case in which the coil stands
+    alone in free space, and the case in which a lossy object is
+    present near the coil to absorb some the radiated power.
+
+    <!----================================================================-->
+    <!---------------------------------------------------------------------->
+    <!----================================================================-->
+    <p align="center">
+    <table align="center" class="TOC" cellpadding="5" cellspacing="5">
+
+      <tr> <th> <span class=CodeName>scuff-rf</span> Tutorial
+      </th></tr>
+
+      <tr> <td>
+           <a href="scuff-EM/scuffRFTutorial.shtml#Geometry">
+            1. Defining the geometry
+           </a>
+           </td>
+      </tr>
+
+      <tr> <td>
+           <a href="scuff-EM/scuff-RF/scuffRFTutorial.shtml#Ports">
+            2. Defining ports
+           </a>
+           </td>
+      </tr>
+
+      <tr> <td>
+           <a href="scuff-EM/scuff-RF/scuffRFTutorial.shtml#Parameters">
+            3. Computing <i>S-</i> and <i>Z</i>-parameters
+           </a>
+           </td>
+      </tr>
+
+      <tr> <td>
+           <a href="scuff-EM/scuff-RF/scuffRFTutorial.shtml#PortCurrents">
+            4. Computing port currents
+           </a>
+           </td>
+      </tr>
+
+      <tr> <td>
+           <a href="scuff-EM/scuff-RF/scuffRFTutorial.shtml#Fields">
+            5. Computing radiated fields
+           </a>
+           </td>
+      </tr>
+    </table>
+    <!----================================================================-->
+    <!-- end table of contents ===========================================-->
+    <!----================================================================-->
+
+    <!---------------------------------------------------------------------->
+    <!---------------------------------------------------------------------->
+    <!---------------------------------------------------------------------->
+    <p>
+    <h2><a name="Geometry"></a>1. Defining the Geometry</h2>
+    <hr>
+
+    <p>
+    In this tutorial we will consider a circular antenna, both on its
+    own in free space and in the presence of a spherical absorber.
+    (All input and output files referenced below may be found in 
+    the <code>examples/MRICoil</code> subdirectory of the 
+    <span class=CodeName>scuff-rf</span> distribution.)
+
+    <p> 
+     <table align="center" border="1" cellpadding="5"> <tr> 
+               <td> 
+                    <a href="scuff-EM/scuff-RF/examples/Antenna.png">
+                    <img width=439 height=429 
+                         src="scuff-EM/scuff-RF/examples/Antenna.png">
+                    </a>
+               </td> 
+               <td> 
+                    <a href="scuff-EM/scuff-RF/examples/AntennaAndSphere.png">
+                    <img width=303 height=404 
+                         src="scuff-EM/scuff-RF/examples/AntennaAndSphere.png">
+                    </a>
+               </td> 
+             </tr> 
+             <tr> 
+               <th> The antenna on its own </th>
+               <th> The antenna-and-sphere geometry </th>
+             </tr> 
+     </table>
+
+    <p>
+    The first step is to create mesh files for each of the two objects.
+    <span class=CodeName>scuff-rf</span> can read mesh files in multiple
+    formats, including <code>.msh</code> files produced by
+    <a class="CodeName" href="http://geuz.org/gmsh">gmsh</a>
+    and <code>.mphtxt</code> files produced by 
+    <a class="CodeName" href="http://www.comsol.com">comsol</a>.
+    Here we will use <span class="CodeName">gmsh</span>.
+
+    <p> 
+    To create mesh files using <span class=CodeName>gmsh</span>, I 
+    first use a text editor to create a <code>.geo</code> file 
+    describing the geometry, then run <span class=CodeName>gmsh</span>
+    on this file to produce a <code>.msh</code> file.
+    The geometry files for the antenna and the sphere are 
+    <a href="scuff-EM/scuff-RF/examples/CoilAntenna.geo"><code>CoilAntenna.geo</code></a>
+    and
+    <a href="scuff-EM/scuff-RF/examples/Sphere.geo"><code>Sphere.geo,</code></a>
+    and the <span class=CodeName>gmsh</span> commands that turn these into
+    <code>.msh</code> files are
+
+    <p> 
+    <pre class="Listing">
+ % gmsh -2 CoilAntenna.geo
+ % gmsh -2 Sphere.geo
+    </pre>
+
+    <p> 
+    This will create files named <code>CoilAntenna.msh</code> and 
+    <code>Sphere.msh.</code> You can visualize these files by
+    opening them in <span class=CodeName>gmsh:</span> 
+
+    <p> 
+    <pre class="Listing">
+ % gmsh CoilAntenna.msh Sphere.msh
+    </pre>
+
+    <p>
+    Note that all lengths in the <code>.geo</code> file are specified
+    in units of millimeters; this is the universal length unit in
+    <span class=CodeName>scuff-rf</span>.
+
+    <p>
+    After creating mesh files, the next step is to write a short text file
+    telling <span class=CodeName>scuff-rf</span> 
+    about the objects we wish to include in our geometry.
+    (I generally give this file the extension <code>.rwggeo</code>;
+    see <a href="research/codes/Casimir/Casimir3DTutorial.shtml#rwggeo">here</a>
+    for a little more detail on the <code>.rwggeo</code> file format.)
+
+    <p>
+    Here we will create two <code>.rwggeo</code> files: one describing 
+    a geometry consisting only of the coil, and a second describing the
+    coil together with the sphere.
+    The former of these files, <code>Antenna.rwggeo</code>, looks like this:
+    <pre class="Listing">
+ OBJECT CoilAntenna.msh LABEL CoilAntenna
+    </pre>
+
+    <p>
+    The <code>LABEL</code> field defines an optional label that you can 
+    give the object. This is not strictly necessary, but comes in handy
+    when defining ports (see below).
+ 
+    <p>
+    The second file, <code>AntennaAndSphere.rwggeo</code>, looks like this:
+    <pre class="Listing">
+ OBJECT CoilAntenna.msh LABEL CoilAntenna
+ OBJECT Sphere.msh      LABEL LossySphere  MATERIAL CONST_EPS_55+43i
+    </pre>
+
+    <p>
+    The <code>MATERIAL</code> field allows you to specify a
+    material for the interior of an object. (If this field
+    is not specified, the object is taken to be a perfect conductor.)
+    In this case we are defining the material to be a lossy dielectric 
+    with dielectric permittivity &epsilon;=55+43<i>i</i>. (Of course
+    a frequency-independent imaginary part of &epsilon; is unphysical, 
+    but no problems will arise as long as we are only working at a 
+    single frequency.) For more details on how to specify materials 
+    in <span class=CodeName>scuff-em</span>, see 
+    <a href="research/codes/Casimir/MaterialNames.shtml">here</a>.
+
+    <!---------------------------------------------------------------------->
+    <!---------------------------------------------------------------------->
+    <!---------------------------------------------------------------------->
+    <p>
+    <h2><a name="Ports"></a>2. Defining Ports </h2>
+    <hr>
+
+    <p>
+    The next step is to define ports in our structure. A <i>port</i> consists
+    of two line segments on an exterior boundary of a thin metallic conductor.
+    One of the line segments is the positive terminal of the port, while  
+    the other line segment is the negative terminal. When you specify
+    a port current <i>I</i> for a port,
+    <span class=CodeName>scuff-rf</span> forces a total current <i>I</i> into
+    the line segment defining the positive terminal, and extracts a total
+    current <i>I</i> from the line segment defining the negative terminal.
+
+    <p>
+    For example, in the loop antenna picture above, there are four ports, 
+    corresponding to the gaps in the structure at 3, 6, 9, and 12 o'clock.
+    
+    <p>
+    Each of the line segments that defines a port terminal is itself a union of 
+    exterior triangle edges in the mesh discretization of an object. 
+    There are two basic ways to specify a port in 
+    <span class=CodeName>scuff-rf</span>:
+
+    <p>
+    <ol>
+      <li> You can explicitly identify the indices of all the exterior 
+           edges in the port. This method has the advantage of being 
+           very direct, but suffers from the drawback that when you 
+           refine the mesh discretization (i.e. make the triangles smaller)
+           you will need to repeat the process all over again for the 
+           refined mesh.
+ 
+      <li> Alternatively, you can define planar polygonal regions of 
+           space (such as a square, a rectangle, or a pentagon)
+           within which port edges terminate. Then, all exterior edges 
+           of a meshed structure that lie inside the specified 
+           polygon will be automatically identified as belonging 
+           to the port. The advantage of this way of defining ports
+           is that you don't need to rewrite the <code>.ports</code>
+           file every time you refine the mesh discretization.
+           This method is detailed 
+           <a href="scuff-EM/scuff-RF/scuffRFFiles.shtml#ports">here.</a>
+    </ol>
+    
+
+    <p> Here we will define ports using option (1) above. To specify ports
+    this way, you simply enumerate the indices of the exterior triangle edges 
+    defining the positive and negative terminals of
+    the port. Of course, to do that, you need to know how 
+    <span class=CodeName>scuff-em</span> assigns indices to the exterior
+    edges, and to get this information you use 
+    <span class=CodeName>scuff-analyze</span> to emit a visualization file 
+    indicating the labeling of indices. The syntax for this is
+ 
+    <p>
+    <pre class="Listing">
+ % scuff-analyze --meshfile CoilAntenna.msh ---WriteGMSHFiles --WriteGMSHLabels
+    </pre>
+
+    <p>
+    This will emit a file named <code>CoilAntenna.pp</code>, 
+    which you can open in <span class=CodeName>gmsh</span>: 
+
+    <p>
+    <pre class="Listing">
+ % gmsh CoilAntenna.pp
+    </pre>
+
+    <p>
+    to reveal something like this. (Note: the <code>pp</code> extension 
+    stands for "post-processing," because we are here using the 
+    post-processing functionality of <span class=CodeName>gmsh.</span>)
+
+    <p align="center">
+    <a href="scuff-EM/scuff-RF/examples/GMSH1.png">
+     <img width=395 height=335 src="scuff-EM/scuff-RF/examples/GMSH1.png">
+    </a>
+
+    <p>
+    At this level of zoom the edge indices obscure the actual structure,
+    but if we zoom in on one of the ports, say the one at 3 o'clock, 
+    we see this (click for higher resolution): 
+
+    <p align="center">
+    <a href="scuff-EM/scuff-RF/examples/GMSH2.png">
+     <img src="scuff-EM/scuff-RF/examples/GMSH2.png"-->
+    </a>
+
+    <p>
+    which makes it clear that the positive terminal of our port consists
+    of exterior edges 1, 48, and 2, while the negative terminal consists of 
+    of exterior edges 45, 245, and 42. 
+
+    <p>
+    We codify this information in a text file that we will here call 
+    <code>CoilAntenna.ports.</code> (This is the file that we will
+    eventually specify with the <code>--portfile</code> command-line argument
+    to <span class=CodeName>scuff-rf.</span>) 
+    The <code>.ports</code> file consists of a sequence of 
+    <code>PORT...ENDPORT</code> blocks, like this: 
+
+    <pre class="Listing">
+ PORT
+     PEDGES 1  48 2
+     MEDGES 45 245 42
+ ENDPORT
+    </pre>
+
+    <p>
+    The <code>PEDGES</code> keyword denotes the exterior edges that 
+    comprise the positive terminal of the port, while 
+    <code>MEDGES</code> denotes exterior edges that comprise the negative
+    terminal of the port. The positive and negative terminals do not 
+    need to have the same number of edges. For more details on the file
+    format of the <code>.ports</code> file, see  
+    <a href="scuff-EM/scuff-RF/scuffRFFiles.shtml#ports">here.</a>
+
+    <p>
+    For the case at hand, in addition to the port we just defined, there
+    are three other ports (at 12, 9, and 6 o'clock), so the full final
+    <code>.ports</code> file has four separate <code>PORT...ENDPORT</code>
+    sections: 
+    <a href="scuff-EM/scuff-RF/examples/CoilAntenna.ports">CoilAntenna.ports.</a>
+
+    <!---------------------------------------------------------------------->
+    <!---------------------------------------------------------------------->
+    <p>
+    <h2><a name="Parameters"></a>3. Computing <i>S-</i> and <i>Z</i>-parameters</h2>
+    <hr>
+
+    <p>
+    Now we're ready to compute the network parameters of our multiport device.
+
+    <pre class="Listing">
+ % scuff-rf --geometry Antenna.rwggeo --portfile CoilAntenna.ports --frequency 0.297 --sparameters --zparameters
+    </pre>
+
+    <p>
+    The <code>--frequency</code> option specifies a single frequency at which
+    to do calculations. (Frequencies in <span class=CodeName>scuff-rf</span> 
+    are always specified in units of GHz, so in this we are asking for a
+    calculation at 297 MHz.)
+
+    <p>
+    This will produce files named <code>Antenna.sparms</code>
+    and <code>Antenna.zparms</code>. The file format of these files
+    is described 
+    <a href="scuff-EM/scuff-RF/scuffRFFiles.shtml#sparms">here.</a>
+
+    <!---------------------------------------------------------------------->
+    <!---------------------------------------------------------------------->
+    <!---------------------------------------------------------------------->
+    <p>
+    <h2><a name="PortCurrents"></a>4. Computing port currents </h2>
+    <hr>
+
+    <p>
+    Computing the actual currents that flow into the ports of a given
+    structure, when driven by a given external circuit at a given 
+    frequency, is outside the bailiwick of 
+    <span class=CodeName>scuff-rf</span>; this is something you will
+    most likely want to do by incorporating the 
+    <i>S-</i> or <i>Z-</i>parameters computed by
+    <span class=CodeName>scuff-rf</span> into a circuit simulator 
+    together with the rest of your circuit, running an AC simulation,
+    and noting the values reported by the circuit simulator for the 
+    port currents, which you can then use to run 
+    <span class=CodeName>scuff-rf</span> in field-profile mode, as 
+    described in the next section. 
+
+    <p>
+    Here we will consider the case in which our four-port loop antenna
+    is embedded in a circuit so simple that we can set up and solve the
+    circuit equations directly without need for a simulator. The circuit
+    we will consider is this one:
+
+    <p align="center">
+    <img width="389" height="207" align="center" src="scuff-EM/scuff-RF/examples/CircuitSchematic.png">
+
+    <p> 
+    where the rectangular box denotes our four-port antenna structure
+    (<code>P1, M1</code> are the node names for the positive and 
+    negative terminals of port 1, etc.), the <code>CT</code>s are tuning  
+    capacitors, and <code>CM</code> is a matching capacitor inserted to
+    make the circuit look like a 50 &Omega; load at the frequency of interest.
+
+    <p>
+    If <i>I<sub>n</sub></i> is the <i>n</i>th port current 
+    (the current flowing into node <i>Pn</i>) and 
+    <i>V<sub>Pn</sub>, V<sub>Mn</sub></i> are the node voltages 
+    at the positive and negative terminals of port <i>n</i>,
+    then the small-signal equations for this circuit read 
+
+    <p>
+    <table align="center"><tr><td> 
+    <i>I<sub>n</sub> = -(V<sub>Pn</sub> - V<sub>Mn</sub>) / Z<sub>T</sub> </i>
+    </td></tr></table>
+    for <i>n</i>=2,3,4, and 
+    <table align="center"><tr><td> 
+    <i>I<sub>1</sub> = (V<sub>In</sub> - V<sub>P1</sub>)/Z<sub>M</sub> 
+                      -V<sub>P1</sub> / Z<sub>T</sub></i>
+    </td></tr></table>
+
+    <p>
+    where <i>Z<sub>T</sub> = 1/i&omega;C<sub>T</sub></i>
+    and
+          <i>Z<sub>M</sub> = 1/i&omega;C<sub>M</sub></i>
+    are the capacitor impedances.
+    On the other hand, by the definition of impedance parameters, 
+    we also have 
+    <table align="center"><tr><td> 
+    <i>V<sub>m</sub> = &Sigma;<sub>mn</sub> Z<sub>mn</sub> I<sub>n</sub></i>
+    </td></tr></table>
+
+    <p>
+    where the <i>Z<sub>mn</sub></i> are the entries in the impedance 
+    matrix that we measured using <span class="CodeName">scuff-rf</span>
+    in the previous step. 
+    Putting this all together gives us a linear system that we can solve
+    for the port currents:
+
+    <p align="center">
+    <img width="708" height="105" align="center" 
+         src="scuff-EM/scuff-RF/examples/CircuitEquation.png">
+
+    <p>
+    (where <b>Z</b> is the 4x4 impedance matrix for the coil antenna 
+    and where I put 
+    <i>Z<sub>S</sub>=Z<sub>T</sub> Z<sub>M</sub> / (Z<sub>T</sub> + Z<sub>M</sub>)</i>
+    for the impedance of the two capacitors in parallel.
+
+    <!---------------------------------------------------------------------->
+    <!---------------------------------------------------------------------->
+    <!---------------------------------------------------------------------->
+    <p>
+    <h2><a name="Fields"></a>5. Computing radiated fields</h2>
+    <hr>
+
+    <p>
+    To compute the fields radiated by our four-port antenna structure when
+    driven by prescribed port currents, we first create a simple, one-line 
+    text file that we will call <code>CoilAntenna.portcurrents.</code> 
+    This file contains 9 numbers: the first number is the frequency in GHz,
+    the second and third numbers are the real and imaginary parts of 
+    port current 1 (in Amperes); 
+    the next two numbers are the real and imaginary parts of port current 2,
+    etc. Using the results of the circuit calculation above, we write 
+    <code>CoilAntenna.portcurrents</code> to read:
+
+    <pre class=listing>
+ 0.297 0.23 0.34 0.45 0.67 0.45 0.67 0.45 0.67
+    </pre>
+
+    <p>
+    The next step is to define evaluation points at which we would like 
+    to calculate the scattered fields. We write these points in a text
+    file that we will call <code>CoilAntenna.epfile</code>; each line 
+    of this file contains three numbers, corresponding to the 
+    <i>x, y, z</i> coordinates of a single evaluation point.
+
+    <p>
+    Now we are ready to run <span class="CodeName">scuff-rf</span> to 
+    computed the fields radiated by our structure when driven by 
+    the port currents determined above:
+
+    <p>
+    <pre class="listing">
+ % scuff-rf --geometry Antenna.rwggeo --portfile CoilAntenna.ports --portcurrentfile CoilAntenna.portcurrents --epfile EPFile
+    </pre>
+
+    <p>
+    This will generate an output file named <code>CoilAntenna.fields</code>
+    listing the components of the <i>E</i> and <i>H</i> fields at each of the 
+    evaluation points specified in <code>CoilAntenna.epfile.</code>
+    
+
+    <!----================================================================-->
+    <!---------------------------------------------------------------------->
+    <!----================================================================-->
+    <p>
+    <hr>
+    <p align="center">
+    <table align="center" class="TOC" cellpadding="5" cellspacing="5">
+
+      <tr> <th> <a class=CodeName 
+                   href="research/codes/scuff-EM/scuff-RF/index.shtml">
+                   scuff-rf</a> Documentation
+      </th></tr>
+
+      <tr> <td>
+           <a href="research/codes/scuff-EM/scuff-RF/scuffRFInstallation.shtml">
+           1. Downloading and Installing <span class=CodeName>scuff-rf</span> 
+           </a>
+           </td>
+      </tr>
+
+      <tr> <td>
+           <b>
+           2. A Tutorial Walk Through <span class=CodeName>scuff-rf</span>
+           </b>
+           </td>
+      </tr>
+
+      <tr> <td> 
+           <a href="research/codes/scuff-EM/scuff-RF/scuffRFOptions.shtml">
+           3. <span class=CodeName>scuff-rf</span> Command-Line Reference
+           </a>
+           </td>
+      </tr>
+
+      <tr> <td> 
+           <a href="research/codes/scuff-EM/scuff-RF/scuffRFFiles.shtml">
+           4. <span class=CodeName>scuff-rf</span> Input and Output File Reference
+           </a>
+           </td>
+      </tr>
+
+      <tr> <td> 
+           <a href="research/codes/scuff-EM/scuff-RF/scuffRFExamples.shtml">
+           5. A Compendium of <span class=CodeName>scuff-rf</span> Examples
+           </a>
+           </td> 
+      </tr>
+
+    </table>
+             
+  <!----------------------------------------------------------------------->
+  <!-- end right column of main page table.                             --->
+  <!----------------------------------------------------------------------->
+  </td>
+  </table>
+
+
+<!----------------------------------------------------------------------->
+<!-- end main page table                                               -->
+<!----------------------------------------------------------------------->
+</tr></table>
+   
+<!----------------------------------------------------------------------->
+<!-- end main page body ------------------------------------------------->
+<!----------------------------------------------------------------------->
+   
+<!--#include virtual="/pageend.shtml"-->

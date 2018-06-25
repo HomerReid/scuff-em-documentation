@@ -1,407 +1,1278 @@
+
+
+
+
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>Material designations - SCUFF-EM documentation</title>
-  
-
-  <link rel="shortcut icon" href="../../scuffEM.ico">
-  
-
-  
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
-
-  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
-  <link rel="stylesheet" href="../../css/highlight.css">
-
-  
-  <script>
-    // Current page data
-    var mkdocs_page_name = "reference/Materials"
-  </script>
-  
-  <script src="../../js/jquery-2.1.1.min.js"></script>
-  <script src="../../js/modernizr-2.8.3.min.js"></script>
-  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
-  <script src="../../js/theme.js"></script> 
-  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
-  <script src="../../mathjaxhelper.js"></script>
-
-  
-</head>
-
-<body class="wy-body-for-nav" role="document">
-
-  <div class="wy-grid-for-nav">
-
+<html lang="en" class="no-js">
+  <head>
     
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
-
-      <p align="center"
-      <a href="../..">
-         <img align="center" height="auto" width="100%"  
-              src="../../img/scuffEMNavBar.png"
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="http://homerreid.github.io/scuff-em-documentation/reference/Materials/">
+      
+      
+        <meta name="author" content="Homer Reid">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-0.17.3, mkdocs-material-2.7.3">
+    
+    
+      
+        <title>Material designations - SCUFF-EM documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.8d40d89b.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.6079476c.css">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:300,400,400i,700|">
+        <style>body,input{font-family:"Noto Sans","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+      <link rel="stylesheet" href="../../css/scuff-em.css">
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <a href="#1-built-in-materials" tabindex="1" class="md-skip">
+        Skip to content
       </a>
-
-      <div class="wy-side-nav-search">
-        <a href="../.." class="icon icon-home"> SCUFF-EM documentation</a>
-        <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
-  </form>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="http://homerreid.github.io/scuff-em-documentation" title="SCUFF-EM documentation" class="md-header-nav__button md-logo">
+          
+            <img src="../../reference/scuffEMLogo.png" width="24" height="24">
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                SCUFF-EM documentation
+              </span>
+              <span class="md-header-nav__topic">
+                Material designations
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+          
+        
       </div>
-
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-        <ul class="current">
-          
-            <li>
-    <li class="toctree-l1 ">
-        <a class="" href="../..">SCUFF-EM documentation</a>
-        
-    </li>
-<li>
-          
-            <li>
-    <ul class="subnav">
-    <li><span>Examples</span></li>
-
-        
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
             
-    <li class="toctree-l1 ">
-        <a class="" href="../../examples/MieScattering/MieScattering/">Mie scattering</a>
-        
-    </li>
 
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../examples/DielectricShell/DielectricShell/">Electrostatics of a spherical dielectric shell</a>
-        
-    </li>
 
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../examples/ThinFilm/ThinFilm/">Spatially-resolved study of plane-wave transmission through an infinite-area thin dielectric film</a>
-        
-    </li>
+  
 
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../examples/DiffractionPatterns/DiffractionPatterns/">Imaging diffraction patterns of discs, disc arrays, and hole arrays in metal screens</a>
-        
-    </li>
 
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../examples/CubeTorus/">Casimir forces in a compact geometry</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../examples/SiliconBeams/SiliconBeams/">Casimir forces in a 1D extended geometry</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../examples/SiliconSlabs/SiliconSlabs/">Casimir forces in a 2D extended geometry</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../examples/SiO2Spheres/SiO2Spheres/">Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../examples/TipSubstrate/TipSubstrate/">Spatial distribution of heat flux from a warm tip over a cold substrate</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../examples/HalfSpaceLDOS/HalfSpaceLDOS/">LDOS and dyadic Green functions above an infinite aluminum half-space</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../examples/PlatonicSolids/PlatonicSolids/">Electrostatic polarizability of platonic solids</a>
-        
-    </li>
-
-        
-    </ul>
-<li>
-          
-            <li>
-    <ul class="subnav">
-    <li><span>General reference</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../TopLevel/">Top-level overview</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../Installing/">Installation</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../Geometries/">Geometry descriptions</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 current">
-        <a class="current" href="./">Material designations</a>
-        
-            <ul>
-            
-                <li class="toctree-l3"><a href="#1-built-in-materials">1. Built-In Materials</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#2-frequency-independent-materials">2. Frequency-independent materials</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#3-materials-specified-using-tabulated-data">3. Materials specified using tabulated data</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#4-user-defined-materials">4. User-defined materials</a></li>
-                
-                    <li><a class="toctree-l4" href="#the-location-of-the-database-file">The location of the database file</a></li>
-                
-                    <li><a class="toctree-l4" href="#entries-in-the-database-file">Entries in the database file</a></li>
-                
-                    <li><a class="toctree-l4" href="#a-sample-database-file">A Sample Database File</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#5-scuff-plotepsmu-a-command-line-utility-for-verifying-material-properties">5. scuff-plotEpsMu: A command-line utility for verifying material properties</a></li>
-                
-            
-            </ul>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../Transformations/">Geometric transformations</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../IncidentFields/">Incident Fields</a>
-        
-    </li>
-
-        
-    </ul>
-<li>
-          
-            <li>
-    <ul class="subnav">
-    <li><span>Command-line application reference</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../applications/GeneralReference/">General command-line reference</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../applications/scuff-scatter/scuff-scatter/">scuff-scatter</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../applications/scuff-transmission/scuff-transmission/">scuff-transmission</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../applications/scuff-ldos/scuff-ldos/">scuff-ldos</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../applications/scuff-tmatrix/scuff-tmatrix/">scuff-tmatrix</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../applications/scuff-cas3D/scuff-cas3D/">scuff-cas3D</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../applications/scuff-caspol/scuff-caspol/">scuff-caspol</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../applications/scuff-neq/scuff-neq/">scuff-neq</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../applications/scuff-RF/scuff-RF/">scuff-RF</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../applications/scuff-static/scuff-static/">scuff-static</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../applications/scuff-analyze/scuff-analyze/">scuff-analyze</a>
-        
-    </li>
-
-        
-    </ul>
-<li>
-          
-            <li>
-    <ul class="subnav">
-    <li><span>API reference</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../API/libscuff/">libscuff</a>
-        
-    </li>
-
-        
-    </ul>
-<li>
-          
-            <li>
-    <ul class="subnav">
-    <li><span>For developers</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../forDevelopers/Implementation/">Implementation</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../forDevelopers/DataStructures/">Data Structures</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../forDevelopers/Documentation/">Documentation</a>
-        
-    </li>
-
-        
-    </ul>
-<li>
-          
-        </ul>
+  <a href="https://github.com/homerreid/scuff-em/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
       </div>
-      &nbsp;
+    
+    <div class="md-source__repository">
+      scuff-em
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href="../.." title="Home" class="md-tabs__link">
+        Home
+      </a>
+    
+  </li>
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../examples/" title="Examples" class="md-tabs__link">
+          Examples
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../tests/Overview/" title="Test suite" class="md-tabs__link">
+          Test suite
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../TopLevel/" title="General reference" class="md-tabs__link md-tabs__link--active">
+          General reference
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../applications/GeneralReference/" title="Command-line tools" class="md-tabs__link">
+          Command-line tools
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../HighLevelInterface/HighLevelInterface/" title="High-level interface" class="md-tabs__link">
+          High-level interface
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../API/libscuff/" title="Low-level API" class="md-tabs__link">
+          Low-level API
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../forDevelopers/Implementation/" title="For developers" class="md-tabs__link">
+          For developers
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    <span class="md-nav__button md-logo">
+      
+        <img src="../../reference/scuffEMLogo.png" width="48" height="48">
+      
+    </span>
+    SCUFF-EM documentation
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/homerreid/scuff-em/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      scuff-em
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Examples
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Examples
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/" title="SCUFF-EM tutorial examples" class="md-nav__link">
+      SCUFF-EM tutorial examples
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/MieScattering/MieScattering/" title="Mie scattering" class="md-nav__link">
+      Mie scattering
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/DielectricShell/DielectricShell/" title="Electrostatics of a spherical dielectric shell" class="md-nav__link">
+      Electrostatics of a spherical dielectric shell
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/ThinFilm/ThinFilm/" title="Spatially-resolved study of plane-wave transmission through an infinite-area thin dielectric film" class="md-nav__link">
+      Spatially-resolved study of plane-wave transmission through an infinite-area thin dielectric film
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/DiffractionPatterns/DiffractionPatterns/" title="Imaging diffraction patterns of discs, disc arrays, and hole arrays in metal screens" class="md-nav__link">
+      Imaging diffraction patterns of discs, disc arrays, and hole arrays in metal screens
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/CubeTorus/" title="Casimir forces in a compact geometry" class="md-nav__link">
+      Casimir forces in a compact geometry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/SiliconBeams/SiliconBeams/" title="Casimir forces in a 1D extended geometry" class="md-nav__link">
+      Casimir forces in a 1D extended geometry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/SiliconSlabs/SiliconSlabs/" title="Casimir forces in a 2D extended geometry" class="md-nav__link">
+      Casimir forces in a 2D extended geometry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/NanostructureCasimirPolder/NanostructureCasimirPolder/" title="Casimir-Polder potentials in dielectric nanostructures" class="md-nav__link">
+      Casimir-Polder potentials in dielectric nanostructures
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/SiO2Spheres/SiO2Spheres/" title="Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres" class="md-nav__link">
+      Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/TipSubstrate/TipSubstrate/" title="Spatial distribution of heat flux from a warm tip over a cold substrate" class="md-nav__link">
+      Spatial distribution of heat flux from a warm tip over a cold substrate
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/HalfSpaceLDOS/HalfSpaceLDOS/" title="LDOS and dyadic Green functions above an infinite aluminum half-space" class="md-nav__link">
+      LDOS and dyadic Green functions above an infinite aluminum half-space
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/PlatonicSolids/PlatonicSolids/" title="Electrostatic polarizability of platonic solids" class="md-nav__link">
+      Electrostatic polarizability of platonic solids
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/TwoBodyCapacitors/TwoBodyCapacitors/" title="Capacitance of two-body capacitors" class="md-nav__link">
+      Capacitance of two-body capacitors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/StriplineCapacitor/StriplineCapacitor/" title="Capacitance of a PCB stripline trace" class="md-nav__link">
+      Capacitance of a PCB stripline trace
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/ImplicitSubstrate/ImplicitSubstrate/" title="Implicit handling of multilayer dielectric substrates" class="md-nav__link">
+      Implicit handling of multilayer dielectric substrates
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/pythonCapacitance/pythonCapacitance/" title="Finite-size effects in stripline capacitors" class="md-nav__link">
+      Finite-size effects in stripline capacitors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/PaulTrap/PaulTrap/" title="Electrostatic fields of an electrode array" class="md-nav__link">
+      Electrostatic fields of an electrode array
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/YagiUdaAntennas/YagiUdaAntennas/" title="Z-parameters and directivity of Yagi-Uda antennas" class="md-nav__link">
+      Z-parameters and directivity of Yagi-Uda antennas
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/MicrostripDevices/MicrostripDevices/" title="Input impedance, mutual coupling, and radiated fields of microstrip RF devices" class="md-nav__link">
+      Input impedance, mutual coupling, and radiated fields of microstrip RF devices
+    </a>
+  </li>
+
+        
+      </ul>
     </nav>
+  </li>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../..">SCUFF-EM documentation</a>
-      </nav>
-
-      
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="breadcrumbs navigation">
-  <ul class="wy-breadcrumbs">
-    <li><a href="../.."><span class="SmallCaps">scuff-em</span> documentation</a> &raquo;</li>
     
       
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Test suite
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Test suite
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
         
-          <li>General reference &raquo;</li>
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tests/Overview/" title="Overview of the test suite" class="md-nav__link">
+      Overview of the test suite
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tests/MieScattering/MieScattering/" title="Mie scattering" class="md-nav__link">
+      Mie scattering
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tests/FresnelScattering/FresnelScattering/" title="Fresnel scattering" class="md-nav__link">
+      Fresnel scattering
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tests/CasimirSpheres/CasimirSpheres/" title="Equilibrium Casimir forces between spheres" class="md-nav__link">
+      Equilibrium Casimir forces between spheres
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tests/CasimirPlates/CasimirPlates/" title="Equilibrium Casimir forces between plates" class="md-nav__link">
+      Equilibrium Casimir forces between plates
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tests/CPSphere/CPSphere/" title="Equilibrium Casimir-Polder potential near a sphere" class="md-nav__link">
+      Equilibrium Casimir-Polder potential near a sphere
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tests/CPPlate/CPPlate/" title="Equilibrium Casimir-Polder potential near a plate" class="md-nav__link">
+      Equilibrium Casimir-Polder potential near a plate
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tests/NEQSpheres/NEQSpheres/" title="Heat transfer and non-equilibrium Casimir forces between spheres" class="md-nav__link">
+      Heat transfer and non-equilibrium Casimir forces between spheres
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tests/libscuff/libscuff/" title="Low-level tests of the core library" class="md-nav__link">
+      Low-level tests of the core library
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+    
+    <label class="md-nav__link" for="nav-4">
+      General reference
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        General reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../TopLevel/" title="Top-level overview" class="md-nav__link">
+      Top-level overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Installing/" title="Installation" class="md-nav__link">
+      Installation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Geometries/" title="Geometry descriptions" class="md-nav__link">
+      Geometry descriptions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
       
     
-    <li>Material designations</li>
-    <li class="wy-breadcrumbs-aside">
-      
+    
+    <a href="./" title="Material designations" class="md-nav__link md-nav__link--active">
+      Material designations
+    </a>
+    
+  </li>
+
         
-          <a href="https://github.com/homerreid/scuff-em/" class="icon icon-github"> Edit on GitHub</a>
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Transformations/" title="Geometric transformations" class="md-nav__link">
+      Geometric transformations
+    </a>
+  </li>
+
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../IncidentFields/" title="Incident fields" class="md-nav__link">
+      Incident fields
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../BrillouinZoneIntegration/" title="Brillouin zone integration" class="md-nav__link">
+      Brillouin zone integration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../FAQ/" title="FAQ" class="md-nav__link">
+      FAQ
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
       
-    </li>
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Command-line tools
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Command-line tools
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/GeneralReference/" title="General command-line reference" class="md-nav__link">
+      General command-line reference
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-scatter/scuff-scatter/" title="scuff-scatter" class="md-nav__link">
+      scuff-scatter
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-transmission/scuff-transmission/" title="scuff-transmission" class="md-nav__link">
+      scuff-transmission
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-ldos/scuff-ldos/" title="scuff-ldos" class="md-nav__link">
+      scuff-ldos
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-tmatrix/scuff-tmatrix/" title="scuff-tmatrix" class="md-nav__link">
+      scuff-tmatrix
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-cas3D/scuff-cas3D/" title="scuff-cas3D" class="md-nav__link">
+      scuff-cas3D
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-caspol/scuff-caspol/" title="scuff-caspol" class="md-nav__link">
+      scuff-caspol
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-neq/scuff-neq/" title="scuff-neq" class="md-nav__link">
+      scuff-neq
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-rf/scuff-rf/" title="scuff-rf" class="md-nav__link">
+      scuff-rf
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-static/scuff-static/" title="scuff-static" class="md-nav__link">
+      scuff-static
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-spectrum/scuff-spectrum/" title="scuff-spectrum" class="md-nav__link">
+      scuff-spectrum
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-analyze/scuff-analyze/" title="scuff-analyze" class="md-nav__link">
+      scuff-analyze
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../applications/scuff-integrate/scuff-integrate/" title="scuff-integrate" class="md-nav__link">
+      scuff-integrate
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      High-level interface
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        High-level interface
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../HighLevelInterface/HighLevelInterface/" title="High-Level Interface" class="md-nav__link">
+      High-Level Interface
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Low-level API
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        Low-level API
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../API/libscuff/" title="libscuff" class="md-nav__link">
+      libscuff
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../API/MainFlow/" title="MainFlow API" class="md-nav__link">
+      MainFlow API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../API/UtilityAPI/" title="Utility API" class="md-nav__link">
+      Utility API
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      For developers
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        For developers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../forDevelopers/Implementation/" title="Implementation" class="md-nav__link">
+      Implementation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../forDevelopers/DataStructures/" title="Data Structures" class="md-nav__link">
+      Data Structures
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../forDevelopers/Documentation/" title="Documentation" class="md-nav__link">
+      Documentation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../forDevelopers/SingularIntegrals/" title="Code for computing singular integrals" class="md-nav__link">
+      Code for computing singular integrals
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
   </ul>
-  <hr/>
-</div>
-          <div role="main">
-            <div class="section">
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
               
+                
+                  <a href="https://github.com/homerreid/scuff-em/edit/master/docs/reference/Materials.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
                 <h1 id="material-descriptions-in-scuff-em">Material descriptions in <a class="wikilink" href="../../scuff-em/">scuff-em</a></h1>
 <p><a class="wikilink" href="../../scuff-em/">scuff-em</a> allows the
 frequency-dependent electrical properties (dielectric
 permittivity and magnetic permeability) of materials to be 
 specified in one of several ways:</p>
 <ul>
-<li>You can use a <em>built-in</em> material like <code>PEC</code> or <code>Vacuum.</code>  </li>
+<li>You can use a <em>built-in</em> material like <code class="codehilite">PEC</code> or <code class="codehilite">Vacuum.</code>  </li>
 <li>You can specify a material with <em>constant</em> (frequency-independent) 
 permittivity and permeability.</li>
 <li>You can specify a data file containing tabulated 
@@ -415,16 +1286,16 @@ specified using mathematical expressions.</li>
 </ul>
 <p>Materials are generally specified to
 <a class="wikilink" href="../../scuff-em/">scuff-em</a> by including a line like </p>
-<pre><code class="bash">MATERIAL MyMaterialName
-</code></pre>
+<div class="codehilite"><pre><span></span>MATERIAL MyMaterialName
+</pre></div>
 
 <p>in the 
-<a href="../Geometries/"><code>.scuffgeo</code> file</a>;
-here <code>MyMaterialName</code> is a string constructed in different
+<a href="../Geometries/"><code class="codehilite"><span class="na">.scuffgeo</span></code> file</a>;
+here <code class="codehilite">MyMaterialName</code> is a string constructed in different
 ways depending on which of the above types of material specification
 you have in mind, as detailed below.</p>
 <p>Note that material specification in <a class="wikilink" href="../../scuff-em/">scuff-em</a> are 
-<em>case-insensitive.</em> The strings <code>TEFLON,</code> <code>Teflon,</code> and <code>teflon</code> all 
+<em>case-insensitive.</em> The strings <code class="codehilite">TEFLON,</code> <code class="codehilite">Teflon,</code> and <code class="codehilite">teflon</code> all 
 refer to the same material.</p>
 <p>Note also that the values of the permittivity and permeability
 described by <a class="wikilink" href="../../scuff-em/">scuff-em</a> material designations are always
@@ -441,15 +1312,15 @@ with values of 1 in vacuum.</p>
  <li> <a href="#Tabulated">Materials specified using tabulated data</a>
  <li> <a href="#Parsed">User-defined materials</a>
  <li> <a href="#scuff-plotEpsMu">
-       <span class="SmallCaps">scuff-plotepseu:</span> A command-line 
+       <span class="SmallCaps">scuff-plotepsmu:</span> A command-line 
        utility for verifying material properties</a>
 </ol>
 
 <hr />
 <p><a name="BuiltIn"></a></p>
 <h2 id="1-built-in-materials">1. Built-In Materials</h2>
-<p>The two built-in materials are <code>Vacuum</code> and 
-<code>PEC</code>. The former describes a material with 
+<p>The two built-in materials are <code class="codehilite">Vacuum</code> and 
+<code class="codehilite">PEC</code>. The former describes a material with 
 <script type="math/tex">\epsilon=\mu=1</script> at all frequencies, while the latter describes 
 a <strong>P</strong>erfect <strong>E</strong>lectrical <strong>C</strong>onductor.</p>
 <hr />
@@ -457,24 +1328,24 @@ a <strong>P</strong>erfect <strong>E</strong>lectrical <strong>C</strong>onducto
 <h2 id="2-frequency-independent-materials">2. Frequency-independent materials</h2>
 <p>For a non-magnetic material with frequency-independent permittivity
 <script type="math/tex">\epsilon</script>, you can use a material specification of the form </p>
-<pre><code>MATERIAL CONST_EPS_11.8
-</code></pre>
+<div class="codehilite"><pre><span></span>MATERIAL CONST_EPS_11.8
+</pre></div>
 
-<p>where you would replace <code>11.8</code> with the constant value 
-of the permittivity. (Note that <code>CONST_EPS_11.8</code> 
+<p>where you would replace <code class="codehilite">11.8</code> with the constant value 
+of the permittivity. (Note that <code class="codehilite">CONST_EPS_11.8</code> 
 is all one word, with no spaces.)</p>
 <p>For a material with frequency-independent permittivity <script type="math/tex">\epsilon</script>
 <em>and</em> frequency-independent permeability <script type="math/tex">\mu\ne1</script>, you can 
 use a material-property designation of the form </p>
-<pre><code>MATERIAL CONST_EPS_11.8_MU_0.8
-</code></pre>
+<div class="codehilite"><pre><span></span>MATERIAL CONST_EPS_11.8_MU_0.8
+</pre></div>
 
-<p>where you would replace <code>0.8</code> with the constant value 
+<p>where you would replace <code class="codehilite">0.8</code> with the constant value 
 of the permeability. (Again, all one word, no spaces.)</p>
 <p>You can also specify materials with negative and/or complex 
 permittivity: </p>
-<pre><code>MATERIAL CONST_EPS_-54+46i
-</code></pre>
+<div class="codehilite"><pre><span></span>MATERIAL CONST_EPS_-54+46i
+</pre></div>
 
 <p>Of course, a dielectric function with a frequency-independent 
 imaginary part is unphysical, but no problems will arise as long 
@@ -485,17 +1356,17 @@ as you are only doing computations at a single frequency.</p>
 <p>If you have tabulated frequency data for the permittivity and/or permeability
 of your material, you can specify this to <a class="wikilink" href="../../scuff-em/">scuff-em</a> using a material 
 specification of the form</p>
-<pre><code>MATERIAL FILE_MyDataFile.dat
-</code></pre>
+<div class="codehilite"><pre><span></span>MATERIAL FILE_MyDataFile.dat
+</pre></div>
 
-<p>where the <code>FILE_</code> part of the string is fixed, and the 
+<p>where the <code class="codehilite">FILE_</code> part of the string is fixed, and the 
 remainder is the name of your data file (which is of course case-sensitive.)
 Again, note that the material property specification is all one word with
 no spaces.</p>
 <p>The data file is interpreted by <a class="wikilink" href="../../scuff-em/">scuff-em</a>
 in the following way:</p>
 <ul>
-<li>Blank lines and comments (lines beginning with <code>#</code>) are ignored.</li>
+<li>Blank lines and comments (lines beginning with <code class="codehilite">#</code>) are ignored.</li>
 <li>All other lines must contain either two or three space-separated 
 strings, which are interpreted as</li>
 </ul>
@@ -506,53 +1377,53 @@ strings, which are interpreted as</li>
 is the relative permittivity at that frequency, and the optional
 <strong><em>Mu(Omega)</em></strong> is the relative permeability.</p>
 <p>The values specified for <em>Eps</em> and <em>Mu</em> may be
-<a href="../../applications/GeneralReference/#Complex">complex numbers.</a>.</p>
+<a href="../../applications/GeneralReference/#ComplexNumbers">complex numbers.</a>.</p>
 <p><strong>Note that <script type="math/tex">\omega</script> values in material data files are always specified
 in units of radians per second, <em>not</em> the specialized frequency
 units that are used in <a class="wikilink" href="../../scuff-em/">scuff-em</a> application codes.</strong> For 
 example, an angular frequency of <script type="math/tex">3\cdot 10^{14}</script> rad/sec would
-be specified as <code>1.0</code> in (for example) the <code>--omega</code> argument
-to <a class="wikilink" href="../../scuff-scatter/">scuff-scatter</a>, but as <code>3.0e14</code> in a material data file.</p>
+be specified as <code class="codehilite">1.0</code> in (for example) the <code class="codehilite">--omega</code> argument
+to <a class="wikilink" href="../../scuff-scatter/">scuff-scatter</a>, but as <code class="codehilite">3.0e14</code> in a material data file.</p>
 <p>For example, suppose you have tabulated data for the 
 frequency-dependent permittivity of silver over a finite
 range of frequencies. Put those data into a text file
-called (for example) <code>Silver.dat</code>
+called (for example) <code class="codehilite">Silver.dat</code>
 with the angular frequencies (in radians per second)
 on the first column, and the complex relative permittivity
 on the second column, so that the data file looks something
 like this:</p>
-<pre><code>2.5133e15 -28.832+0.39369i
+<div class="codehilite"><pre><span></span>2.5133e15 -28.832+0.39369i
 2.6180e15 -26.235+0.35815i
 ...
 5.2360e15 -2.3459+0.23547i
 5.3855e15 -1.7349+0.24727i
-</code></pre>
+</pre></div>
 
 <p>This says that, for example, at angular frequency
 <script type="math/tex">\omega=2.5133\cdot 10^{15}\hbox{ rad/sec}</script> we have 
 relative permittivity 
 <script type="math/tex">\epsilon(\omega)=-28.832 + 0.39369i.</script>
 </p>
-<p>Then your <code>.scuffgeo</code> file may refer to a material
-named <code>FILE_Silver.dat,</code> whose dielectric function at
+<p>Then your <code class="codehilite"><span class="na">.scuffgeo</span></code> file may refer to a material
+named <code class="codehilite">FILE_Silver.dat,</code> whose dielectric function at
 arbitrary frequencies <script type="math/tex">\omega</script> will be obtained by
 interpolating the data specified in your data file.
 For example, to describe a sphere made of this material
 your ``.scuffgeo'' file could contain a section like</p>
-<pre><code>OBJECT SilverSphere
+<div class="codehilite"><pre><span></span>OBJECT SilverSphere
     MESHFILE Sphere.msh
     MATERIAL FILE_Silver.dat
 ENDOBJECT
-</code></pre>
+</pre></div>
 
 <p>Note: If you are doing calculations at <em>imaginary</em> frequencies
 (in <a class="wikilink" href="../../scuff-cas3d/">scuff-cas3d</a>, <a class="wikilink" href="../../scuff-caspol/">scuff-caspol</a>, or <a class="wikilink" href="../../scuff-scatter/">scuff-scatter</a> with
-an imaginary value specified for <code>--omega</code>)
+an imaginary value specified for <code class="codehilite">--omega</code>)
 and you have tabulated data for the relative permittivity
 on the imaginary frequency axis, you can play exactly the 
 same game described above, except that now the <script type="math/tex">\omega</script>
 values on the first column of the data file will be 
-pure imaginary (they will end in <code>i</code> or <code>I</code>).
+pure imaginary (they will end in <code class="codehilite">i</code> or <code class="codehilite">I</code>).
 (Also, on physical grounds the relative permittivity at
 each frequency should be real-valued and positive in this 
 case).</p>
@@ -563,10 +1434,10 @@ case).</p>
 frequency-dependent material designations. You do this by 
 first creating an entry in a database file that describes 
 your material, and then referring back to that entry in 
-<code>.scuffgeo</code> files and anywhere else you need to 
+<code class="codehilite"><span class="na">.scuffgeo</span></code> files and anywhere else you need to 
 specify a material property designation. (Alternatively, 
 you can define the material on-the-fly inside a 
-<code>MATERIAL...ENDMATERIAL</code> section in your <code>.scuffgeo</code> file. 
+<code class="codehilite">MATERIAL...ENDMATERIAL</code> section in your <code class="codehilite"><span class="na">.scuffgeo</span></code> file. 
 See <a href="../Geometries/">here</a> for more details.</p>
 <p><a name="Database"></a></p>
 <h3 id="the-location-of-the-database-file">The location of the database file</h3>
@@ -574,15 +1445,15 @@ See <a href="../Geometries/">here</a> for more details.</p>
 database file:</p>
 <ul>
 <li>
-<p>The file <code>${HOME}/.matprop.dat</code> (i.e. a file 
-named <code>.matprop.dat</code> in the top-level directory
+<p>The file <code class="codehilite"><span class="cp">${</span><span class="n">HOME</span><span class="cp">}</span>/.matprop.dat</code> (i.e. a file 
+named <code class="codehilite"><span class="na">.matprop.dat</span></code> in the top-level directory
 for your user account.)</p>
 </li>
 <li>
-<p>The file named by the environment variable <code>SCUFF_MATPROPFILE.</code> </p>
+<p>The file named by the environment variable <code class="codehilite">SCUFF_MATPROPFILE.</code> </p>
 </li>
 <li>
-<p>A file named <code>matprop.dat</code> in the current working
+<p>A file named <code class="codehilite">matprop.dat</code> in the current working
 directory. (Note the absence of a leading period as compared
 with the previous item.)</p>
 </li>
@@ -592,7 +1463,7 @@ convenient; they allow you to create and maintain a single database
 file that contains all the common materials you will ever need to use.</p>
 <h3 id="entries-in-the-database-file">Entries in the database file</h3>
 <p>A typical entry in the database file looks like this:</p>
-<pre><code>MATERIAL SiliconCarbide
+<div class="codehilite"><pre><span></span>MATERIAL SiliconCarbide
 
   EpsInf = 6.7;
   a0     = -3.32377e28;
@@ -603,61 +1474,61 @@ file that contains all the common materials you will ever need to use.</p>
   Eps(w) = EpsInf * ( w^2 + a1*i*w + a0 ) / ( w^2 + b1*i*w + b0);
 
 ENDMATERIAL
-</code></pre>
+</pre></div>
 
 <p>The first line defines the name of the material (the name you
-would supply as an argument to the <code>MATERIAL</code> keyword 
-in a <code>.scuffgeo</code> file, for example).</p>
+would supply as an argument to the <code class="codehilite">MATERIAL</code> keyword 
+in a <code class="codehilite"><span class="na">.scuffgeo</span></code> file, for example).</p>
 <p>The next few lines define some constants. These constant
-definitions are specific to this particular <code>MATERIAL</code>;
-two different <code>MATERIAL</code> sections in the database 
+definitions are specific to this particular <code class="codehilite">MATERIAL</code>;
+two different <code class="codehilite">MATERIAL</code> sections in the database 
 file may define the same constant to have two different values.</p>
-<p>The line <code>Eps(w) = ...</code> defines the 
+<p>The line <code class="codehilite">Eps(w) = ...</code> defines the 
 frequency-dependent relative permittivity of your material.
-The expression to the right of the <code>=</code> sign is 
+The expression to the right of the <code class="codehilite">=</code> sign is 
 parsed and interpreted as a function
-of the single variable <code>w,</code> the angular frequency.
+of the single variable <code class="codehilite">w,</code> the angular frequency.
 The expression may refer to any of the constants you have defined 
 for the present material; it may also use the symbols
-<code>i</code> and <code>I</code> to denote the imaginary unit.</p>
+<code class="codehilite">i</code> and <code class="codehilite">I</code> to denote the imaginary unit.</p>
 <p><strong>Again, <script type="math/tex">\omega</script> values in material property specifications are 
 always interpreted in units of radians per second, <em>not</em> the 
 specialized angular-frequency units that are used in some of the 
 <a class="wikilink" href="../../scuff-em/">scuff-em</a> application codes.</strong></p>
 <p>If your material has <script type="math/tex">\mu\ne 1</script>, you may optionally also include a line 
 of the form</p>
-<pre><code>Mu(w) = some-function(w)
-</code></pre>
+<div class="codehilite"><pre><span></span>Mu(w) = some-function(w)
+</pre></div>
 
 <h3 id="a-sample-database-file">A Sample Database File</h3>
-<p>Here is a sample database file:<a href="../matprop.dat"><code>matprop.dat</code></a>.
-I recommend you rename this file to <code>${HOME}/.matprop.dat</code> and 
+<p>Here is a sample database file:<a href="../matprop.dat"><code class="codehilite">matprop.dat</code></a>.
+I recommend you rename this file to <code class="codehilite"><span class="cp">${</span><span class="n">HOME</span><span class="cp">}</span>/.matprop.dat</code> and 
 augment it as necessary for your applications.</p>
 <hr />
 <p><a name="scuff-plotEpsMu"></a> </p>
-<h1 id="5-scuff-plotepsmu-a-command-line-utility-for-verifying-material-properties">5. <code>scuff-plotEpsMu:</code> A command-line utility for verifying material properties</h1>
+<h1 id="5-scuff-plotepsmu-a-command-line-utility-for-verifying-material-properties">5. <code class="codehilite">scuff-plotEpsMu:</code> A command-line utility for verifying material properties</h1>
 <p>The <a class="wikilink" href="../../scuff-em/">scuff-em</a> distribution comes with an application program named 
-<code>scuff-plotEpsMu</code> that you
+<code class="codehilite">scuff-plotEpsMu</code> that you
 can use to make sure that a material property designation is 
 interpreted the way you intended. You can run this command with 
 no arguments to get usage information:</p>
-<pre><code class="bash">% scuff-plotEpsMu 
+<div class="codehilite"><pre><span></span>% scuff-plotEpsMu 
 
-error: --material option is mandatory (aborting)
+error: --material option is mandatory <span class="o">(</span>aborting<span class="o">)</span>
 
-usage: scuff-plotEpsMu [options]
+usage: scuff-plotEpsMu <span class="o">[</span>options<span class="o">]</span>
 
 options: 
 
---material xx  (name of material)
---OmegaMin xx  (minimum angular frequency)
---OmegaMax xx  (maximum angular frequency)
---gnuplot      (use GNUPLOT to plot results)
---geometry xx  (.scuffgeo file containing material definition)
-</code></pre>
+--material xx  <span class="o">(</span>name of material<span class="o">)</span>
+--OmegaMin xx  <span class="o">(</span>minimum angular frequency<span class="o">)</span>
+--OmegaMax xx  <span class="o">(</span>maximum angular frequency<span class="o">)</span>
+--gnuplot      <span class="o">(</span>use GNUPLOT to plot results<span class="o">)</span>
+--geometry xx  <span class="o">(</span>.scuffgeo file containing material definition<span class="o">)</span>
+</pre></div>
 
-<p>Running <code>scuff-plotEpsMu --material MyMaterial</code>
-will produce an output file name <code>MyMaterial.epsmu</code>,
+<p>Running <code class="codehilite">scuff-plotEpsMu --material MyMaterial</code>
+will produce an output file name <code class="codehilite">MyMaterial.epsmu</code>,
 which will contain 7 columns of data, representing the 
 permittivity and permeability of your material at various 
 angular frequencies on both the real and imaginary &omega; 
@@ -683,88 +1554,130 @@ axes:</p>
 </p>
 
 <p>If <a class="wikilink" href="../../gnuplot/">gnuplot</a> is installed on your system,
-then you can use the <code>--GnuPlot</code> option to generate pop-up 
+then you can use the <code class="codehilite">--GnuPlot</code> option to generate pop-up 
 plots of <script type="math/tex">\epsilon(\omega)</script> and <script type="math/tex">\mu(\omega)</script> vs. <script type="math/tex">\omega</script>
 for your material.</p>
-<p>You can use <code>--OmegaMin/--OmegaMax</code> to set the
+<p>You can use <code class="codehilite">--OmegaMin/--OmegaMax</code> to set the
 range of angular frequencies over which material properties 
 will be plotted. The defaults are equivalent to specifying 
-<code>--OmegaMin 1e8</code> and <code>--OmegaMax 1e16</code>, 
+<code class="codehilite">--OmegaMin 1e8</code> and <code class="codehilite">--OmegaMax 1e16</code>, 
 respectively.</p>
-<p>If your material is defined on-the-fly in a <code>.scuffgeo</code> 
-file, you can pass that file to <code>scuff-plotEpsMu</code> using 
-the <code>--geometry</code> option. (If your material is defined
+<p>If your material is defined on-the-fly in a <code class="codehilite"><span class="na">.scuffgeo</span></code> 
+file, you can pass that file to <code class="codehilite">scuff-plotEpsMu</code> using 
+the <code class="codehilite">--geometry</code> option. (If your material is defined
 in a <a href="#Database">material database file</a>
 then this option is not needed.)</p>
 <p>For example, in 
 <a href="scuff-em/scuff-scatter/index.shtml#Mie">this example</a>
-we used a material named <code>SiliconCarbide,</code> which was defined
-in a geometry file named <code>SiCSphere.scuffgeo.</code> To check the
+we used a material named <code class="codehilite">SiliconCarbide,</code> which was defined
+in a geometry file named <code class="codehilite">SiCSphere.scuffgeo.</code> To check the
 the frequency-dependent permittivity of this material, we can say</p>
-<pre><code class="bash">% scuff-plotEpsMu --material SiliconCarbide --geometry SiCSphere.scuffgeo --gnuplot
-</code></pre>
+<div class="codehilite"><pre><span></span>% scuff-plotEpsMu --material SiliconCarbide --geometry SiCSphere.scuffgeo --gnuplot
+</pre></div>
 
 <p>This will pop up four graphs, of which one looks something like this:</p>
 <p><img alt="SiliconCarbideEps.png" src="../SiliconCarbideEps.png" /></p>
+                
+                  
+                
               
-            </div>
+              
+                
+
+
+
+  <h2 id="__comments">Comments</h2>
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = "http://homerreid.github.io/scuff-em-documentation/reference/Materials/";
+      this.page.identifier =
+        "/reference/Materials/";
+    };
+    (function() {
+      var d = document, s = d.createElement("script");
+      s.src = "//homerreid-github-io-scuff-em-documentation.disqus.com.disqus.com/embed.js";
+      s.setAttribute("data-timestamp", +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+
+              
+            </article>
           </div>
-          <footer>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
   
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="../Transformations/" class="btn btn-neutral float-right" title="Geometric transformations"/>Next <span class="icon icon-circle-arrow-right"></span></a>
-      
-      
-        <a href="../Geometries/" class="btn btn-neutral" title="Geometry descriptions"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-      
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../Geometries/" title="Geometry descriptions" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Geometry descriptions
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../Transformations/" title="Geometric transformations" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Geometric transformations
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
     </div>
   
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>
-    <!-- Copyright etc -->
-    </p>
-  </div>
-
-  <a href="http://homerreid.com/scuff-em"> 
-    <span class="SmallCaps">scuff-em</span>
-  </a> documentation, by
-  <a href="http://homerreid.com">Homer Reid</a>
-
-  <p>
-  <font size=-1>
-  Built with <a href="http://www.mkdocs.org">MkDocs</a> 
-  using a customized theme modeled 
-  after the 
-  <a href="https://github.com/snide/sphinx_rtd_theme">theme</a>
-  provided by <a href="https://readthedocs.org">Read the Docs</a>.
-  </font>
-
-</footer>
-	  
-        </div>
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="http://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
       </div>
-
-    </section>
-
+      
+        
+      
+    </div>
   </div>
-
-<div class="rst-versions" role="note" style="cursor: pointer">
-    <span class="rst-current-version" data-toggle="rst-current-version">
+</footer>
       
-          <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+    </div>
+    
+      <script src="../../assets/javascripts/application.b438e6c5.js"></script>
       
+      <script>app.initialize({version:"0.17.3",url:{base:"../.."}})</script>
       
-        <span><a href="../Geometries/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <script src="../../javascripts/MathJax.js?config=TeX-AMS_HTML"></script>
       
+        <script src="../../javascripts/mathjaxhelper.js"></script>
       
-        <span style="margin-left: 15px"><a href="../Transformations/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+    
       
-    </span>
-</div>
-
-</body>
+        <script>!function(e,a,t,n,o,c,i){e.GoogleAnalyticsObject=o,e.ga=e.ga||function(){(e.ga.q=e.ga.q||[]).push(arguments)},e.ga.l=1*new Date,c=a.createElement(t),i=a.getElementsByTagName(t)[0],c.async=1,c.src="https://www.google-analytics.com/analytics.js",i.parentNode.insertBefore(c,i)}(window,document,"script",0,"ga"),ga("create","UA-119340518-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview");var links=document.getElementsByTagName("a");if(Array.prototype.map.call(links,function(e){e.host!=document.location.host&&e.addEventListener("click",function(){var a=e.getAttribute("data-md-action")||"follow";ga("send","event","outbound",a,e.href)})}),document.forms.search){var query=document.forms.search.query;query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}</script>
+      
+    
+  </body>
 </html>

@@ -1,0 +1,336 @@
+<!--#set 
+    var="title" 
+    value="scuff-RF Command-Line Reference"
+  -->
+<!--#include virtual="/pagetop.shtml"-->
+
+<!-- begin main page body -->
+
+<!---------------------------------------------------------------------->
+<!-- main page table, with one row and three columns:                 -->
+<!--  navbar, trough, body.                                           -->
+<!---------------------------------------------------------------------->
+<table cellspacing="0" cellpadding="0" width="100%"><tr>
+  
+  <!---------------------------------------------------------------------->
+  <!-- left column of main page table: nav bar. -------------------------->
+  <!---------------------------------------------------------------------->
+  <td valign="top" width="180"> 
+  <!--#include virtual="/research/navbar.shtml"-->
+  </td> 
+
+  <!---------------------------------------------------------------------->
+  <!-- central column of main page table: separation trough -------------->
+  <!---------------------------------------------------------------------->
+  <td width="5%"></td>
+ 
+  <!---------------------------------------------------------------------->
+  <!-- right column of main page table: content of page.------------------>
+  <!---------------------------------------------------------------------->
+  <td valign="top">
+    
+   <p><br> <p align="center">
+   <table align="center"> 
+     <tr> <td> <img width="411" height="296" src="images/scuffRF.png"></td>
+          <td width="5%"> </td>
+          <td> <h1>
+               <span class=CodeName>scuff-rf</span> Command-Line Reference
+               </h1>
+          </td>
+     </tr>
+   </table> 
+    
+    <!---------------------------------------------------------------------->
+    <!-- big table encompassing the entire page ---------------------------->
+    <!---------------------------------------------------------------------->
+    <table align="center" width="90%"><tr><td>
+
+    <p> <br>
+
+    <p>
+    The following table summarizes all command-line options
+    currently available in <span class=CodeName>scuff-rf</span>.
+
+    <p>
+    As is true for all programs in the 
+    <span class=CodeName>scuff-em</span> suite, command-line 
+    options may be specified in a text file catted to standard
+    input; see <a href="scuff-EM/reference/scuffEMMisc.shtml#Options">here</a>
+    for an example of how this works.
+
+    <p>
+    Note that, if you find yourself needing more flexibility than
+    can be achieved with these command-line options, then you have 
+    probably graduated from using prefab command-line programs
+    to writing your own applications using the 
+    <a class="CodeName" href="scuff-EM/libscuff/cpp.shtml">c++,</a>
+    <a class="CodeName" href="scuff-EM/libscuff/python.shtml">python,</a>
+    or
+    <a class="CodeName" href="scuff-EM/libscuff/matlab.shtml">matlab</a>
+    interfaces to <span class=CodeName>libscuff</span>.
+
+    <!---------------------------------------------------------------------->
+    <!-- command-line options table               -------------------------->
+    <!---------------------------------------------------------------------->
+    <p>
+    <table border="1" cellpadding="5" cellspacing="5">
+
+    <!----%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%---->
+    <tr>
+      <th> Option </th>
+      <th> Description </th>
+    </tr>
+
+    <!----%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%---->
+    <tr> 
+       <th colspan=2 height="100"> 
+           <i>Options describing the geometry </i>
+       </th> 
+    </tr>
+
+    <!----%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%---->
+    <tr>
+      <td> <code>--geometry MyGeometry.scuffgeo</code> </td>
+      <td> Specifies the <code>.scuffgeo</code> file that describes the 
+           geometry you are simulating. This option is always mandatory. 
+
+           <p>
+           For details on how to write a <code>.scuffgeo</code> file, 
+           see the reference material
+           <a href="research/codes/scuff-EM/scuff-RF/scuffRFFiles.shtml#scuffgeo">here</a>, 
+           or look at some examples
+           <a href="research/codes/scuff-EM/scuff-RF/scuffRFTutorial.shtml">here</a>
+           and
+           <a href="research/codes/scuff-EM/scuff-RF/scuffRFExamples.shtml">here.</a>
+      </td>
+    </tr>
+
+    <!----%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%---->
+    <tr>
+      <td> <code>--portfile MyGeometry.ports</code> </td>
+      <td> Specifies the <code>.ports</code> file that defines the ports
+           through which currents are injected into your structure.
+
+           <p>
+           For details on how to write a <code>.ports</code> file, 
+           see the reference material
+           <a href="research/codes/scuff-EM/scuff-RF/scuffRFFiles.shtml#ports">here</a>, 
+           or look at some examples
+           <a href="research/codes/scuff-EM/scuff-RF/scuffRFTutorial.shtml">here</a>
+           and
+           <a href="research/codes/scuff-EM/scuff-RF/scuffRFExamples.shtml">here.</a>
+      </td>
+    </tr>
+
+    <!----%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%---->
+    <tr> 
+       <th colspan=2 height="100"> 
+           <i>Options for requesting port visualization output</i>
+       </th> 
+    </tr>
+
+    <!----%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%---->
+    <tr>
+      <td> <code> --PlotPorts </code>
+      </td>
+      <td> Specifying this option will cause <span class=CodeName>scuff-rf</span>
+           to emit a <span class=CodeName>gmsh</span> visualization file
+           describing the ports in your structure and then exit immediately
+           without performing any calculations. This is useful for 
+           confirming that <span class=CodeName>scuff-rf</span> processed 
+           your <code>.ports</code> file in the way that you intended.
+
+           <p>
+           Running <span class=CodeName>scuff-rf</span> with <code>--PlotPorts</code>
+           will produce a <span class=CodeName>gmsh</span> post-processing file
+           named <code>MyGeometry.ports.pp.</code> Opening this file in 
+           <span class=CodeName>gmsh</span> will give you a graphical
+           depiction of all port edges in your structure as interpreted by 
+           <span class=CodeName>scuff-rf</span>. (Positive and negative port 
+           edges are plotted with values +1 and -1, respectively.) You can 
+           use the "merge" command in <span class=CodeName>gmsh</span>
+           (<code>File->Merge</code>) to overlay your full <code>.msh</code>
+           file on top of the <code>.ports.pp</code> file to see how the 
+           ports align with the structure.
+
+           <p>
+           If <code>--PlotPorts</codes> is present on the command line,
+           all command-line options other than <code>--geometry<code> and 
+           <code>--ports</code> are ignored, and <span class=CodeName>scuff-rf</span>
+           will terminate immediately upon producing the <code>.ports.pp</code> file.
+      </td>
+
+    </tr>
+
+    <!----%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%---->
+    <tr> 
+       <th colspan=2 height="100"> 
+           <i>Options for network parameter mode </i>
+       </th> 
+    </tr>
+
+    <!----%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%---->
+    <tr>
+      <td> <table>
+             <tr><td> <code> --SParameters </code> </td></tr>
+             <tr><td> <code> --ZParameters </code> </td></tr>
+           </table>
+      </td>
+      <td> Request computation of <i>S</i>-parameters and/or impedance
+           parameters. You may specify both, either, or neither of these
+           options. 
+      </td>
+    </tr>
+
+    <!----%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%---->
+    <tr>
+      <td> <table> 
+             <tr><td> <code> --frequency 3.24 </code> </td></tr>
+             <tr><td> <br> </td></tr>
+             <tr><td> <code> --freqfile  MyFreqFile </code> </td></tr>
+             <tr><td> <br> </td></tr>
+             <tr><td> <code> --minfreq 0.92   </code> </td></tr>
+             <tr><td> <code> --maxfreq 1.23   </code> </td></tr>
+             <tr><td> <code> --numfreqs  10   </code> </td></tr>
+             <tr><td> <code> --logfreq        </code> </td></tr>
+           </table> 
+      </td>
+      <td> Specify the frequencies at which network parameters are to be 
+           computed. Note that frequencies in 
+           <span class="CodeName">scuff-rf</span> are always specified
+           in units of GHz.
+
+           <p> The <code>--frequency</code> option requests calculation
+               at a single frequency.
+
+           <p> The <code>--freqfile </code> option requests calculation
+               at all frequencies listed in the specified file. (This should
+               be a simple text file with one frequency per line.) 
+
+           <p> Use <code>--minfreq AA --maxfreq BB --numfreqs CC</code> 
+               to request calculations at <code>CC</code> frequencies 
+               between <code>AA</code> and <code>BB</code> (including the 
+               endpoints). Frequencies will
+               be linearly spaced unless you say <code>--logfreq,</code> in
+               which case frequencies will be logarithmically spaced.
+      </td>
+    </tr>
+
+    <!----%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%---->
+    <tr> 
+       <th colspan=2 height="100"> 
+           <i>Options for field profile mode </i>
+       </th>
+    </tr>
+
+    <!----%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%---->
+    <tr>
+      <td> 
+            <code> --portcurrentfile MyPortCurrents.portcurrents </code>
+      </td>
+      <td> Specify the file defining the driving port currents.
+
+           <p>
+           For details on how to write a <code>.portcurrents</code> file, 
+           see the reference material
+           <a href="research/codes/scuff-EM/scuff-RF/scuffRFFiles.shtml#portcurrents">here</a>, 
+           or look at some examples
+           <a href="research/codes/scuff-EM/scuff-RF/scuffRFTutorial.shtml">here</a>
+           and
+           <a href="research/codes/scuff-EM/scuff-RF/scuffRFExamples.shtml">here.</a>
+      </td>
+    </tr>
+
+    <!----%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%---->
+    <tr>
+      <td> 
+           <code> --EPFile MyEvalPoints.evalpoints </code>
+      </td>
+      <td> Specify the file defining the coordinates of the points at which
+           you wish to evaluate the scattered fields.
+
+           <p>
+           For details on how to write an <code>.evalpoints</code> file, 
+           see the reference material
+           <a href="research/codes/scuff-EM/scuff-RF/scuffRFFiles.shtml#epfile">here</a>, 
+           or look at some examples
+           <a href="research/codes/scuff-EM/scuff-RF/scuffRFTutorial.shtml">here</a>
+           and
+           <a href="research/codes/scuff-EM/scuff-RF/scuffRFExamples.shtml">here.</a>
+      </td>
+    </tr>
+
+    </table>
+    <!---------------------------------------------------------------------->
+    <!-- end command-line options table               ---------------------->
+    <!---------------------------------------------------------------------->
+
+    <!----================================================================-->
+    <!---------------------------------------------------------------------->
+    <!----================================================================-->
+    <p>
+    <p align="center">
+    <table align="center" class="TOC" cellpadding="5" cellspacing="5">
+
+      <tr> <th> <a class=CodeName 
+                   href="research/codes/scuff-EM/scuff-RF/index.shtml">
+                   scuff-rf</a> Documentation
+      </th></tr>
+
+      <tr> <td>
+           <a href="research/codes/scuff-EM/scuff-RF/scuffRFInstallation.shtml">
+           1. Downloading and Installing <span class=CodeName>scuffrf</span> 
+           </a>
+           </td>
+      </tr>
+
+      <tr> <td>
+           <a href="research/codes/scuff-EM/scuff-RF/scuffRFTutorial.shtml">
+           2. A Tutorial Walk Through <span class=CodeName>scuff-rf</span>
+           </a>
+           </td>
+      </tr>
+
+      <tr> <td> 
+           <b>
+           3. <span class=CodeName>scuff-rf</span> Command-Line Reference
+           </b>
+           </td>
+      </tr>
+
+      <tr> <td> 
+           <a href="research/codes/scuff-EM/scuff-RF/scuffRFFiles.shtml">
+           4. <span class=CodeName>scuff-rf</span> Input and Output File Reference
+           </a>
+           </td>
+      </tr>
+
+      <tr> <td> 
+           <a href="research/codes/scuff-EM/scuff-RF/scuffRFExamples.shtml">
+           5. A Compendium of <span class=CodeName>scuff-rf</span> Examples
+           </a>
+           </td> 
+      </tr>
+
+    </table>
+    <!----================================================================-->
+    <!---------------------------------------------------------------------->
+    <!----================================================================-->
+             
+  <!----------------------------------------------------------------------->
+  <!-- end right column of main page table.                             --->
+  <!----------------------------------------------------------------------->
+  </td>
+  </table>
+
+<!----------------------------------------------------------------------->
+<!-- end main page table                                               -->
+<!----------------------------------------------------------------------->
+</tr></table>
+   
+<!----------------------------------------------------------------------->
+<!-- end main page body ------------------------------------------------->
+<!----------------------------------------------------------------------->
+   
+<!--#include virtual="/pageend.shtml"-->
+ 

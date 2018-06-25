@@ -1,0 +1,3 @@
+#!/bin/bash
+
+$SEI/scuff-microstrip --geometry Rectangle.scuffgeo --portfile Rectangle.ports --PlotGeometry

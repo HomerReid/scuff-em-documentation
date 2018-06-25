@@ -1,0 +1,7 @@
+#!/bin/bash
+
+gmsh -clscale 0.5 -2 Hemisphere.geo
+RenameMesh Hemisphere.msh
+
+gmsh -clscale 0.35 -2 Hemisphere.geo
+RenameMesh Hemisphere.msh

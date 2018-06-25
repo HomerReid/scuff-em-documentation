@@ -1,0 +1,243 @@
+<!--#set 
+    var="title" 
+    value="Accessing the scuff-EM core library from C++ programs"
+  -->
+<!--#include virtual="/pagetop.shtml"-->
+
+<!-- begin main page body -->
+
+<!----------------------------------------------------------------------->
+<!-- main page table, with one row and three columns:                  -->
+<!--  navbar, trough, body.                                            -->
+<!----------------------------------------------------------------------->
+<table cellspacing="0" cellpadding="0" width="100%"><tr>
+  
+  <!----------------------------------------------------------------------->
+  <!-- left column of main page table: nav bar. --------------------------->
+  <!----------------------------------------------------------------------->
+  <td valign="top" width="180"> 
+  <!--#include virtual="/research/navbar.shtml"-->
+  </td> 
+
+  <!----------------------------------------------------------------------->
+  <!-- central column of main page table: separation trough --------------->
+  <!----------------------------------------------------------------------->
+  <td width="5%"></td>
+ 
+  <!----------------------------------------------------------------------->
+  <!-- right column of main page table: content of page. ------------------>
+  <!----------------------------------------------------------------------->
+  <td valign="top">
+    
+   <p><br> <p align="center">
+   <table align="center"> 
+     <tr> <td> <img width="411" height="296" src="images/scuffEM.png"></td>
+          <td width="5%"> </td>
+          <td> <h1>
+
+               <span class=CodeName>libscuff</span> 
+               API Documentation: 
+
+               <br> <span class=CodeName>c++</span> examples
+
+               </h1>
+          </td>
+     </tr>
+   </table> 
+
+   <!----================================================================-->
+   <!---------------------------------------------------------------------->
+   <!----================================================================-->
+   <p>
+   <table align="center" class="TOC" cellpadding="5" cellspacing="5">
+
+     <tr> <th> <span class="CodeName">scuff-em</span> API: 
+               <span class="CodeName">c++</span> Examples
+     </th></tr>
+
+     <tr> <td>
+          <a href="scuff-EM/libscuff/cpp.shtml#PlateWithHole">
+          1. Scattering Green's functions of a thin plate with a hole
+          </a>
+          </td>
+     </tr>
+
+   </table>
+
+  <!----------------------------------------------------------------------->
+  <!----------------------------------------------------------------------->
+  <!----------------------------------------------------------------------->
+  <p>
+  <h2><a name="PlateWithHole"></a>1. Scattering Green's functions of a thin plate with a hole
+  </h2>
+  <hr>
+
+  <p>
+  As a first example, we'll look at the scattering behavior of a thin gold plate
+  with a hole in it. More specifically, we'll compute the scattering contributions
+  to the <i>dyadic Green's functions.</i> The files for this example (including the 
+  <code>.cc</code> source file and a barebones makefile 
+  (<code>Makefile.manual</code>) for compiling 
+  it) are in the subdirectory <code>share/scuff-em/examples/PlateWithHole</code>
+  of the <span class="CodeName">scuff-em</span> installation.
+
+  <p>
+  The surface geometry we'll use is described by a <span class="CodeName">gmsh</span>
+  geometry file named 
+  <a href="scuff-em/libscuff/PlateWithHole.geo"><code>PlateWithHole.geo</code></a>,
+  which we can turn into a meshfile with the command
+
+  <p>
+  <pre class=listing>
+    % gmsh -2 -clscale 1.0 PlateWithHole.geo
+  </pre>
+
+  <p>
+  This produces a file named <code>PlateWithHole.msh:</code>
+
+  <p align="center">
+  <img src="scuff-em/libscuff/PlateWithHole.png">
+
+  <p>
+  We are interested in the fields scattered from the plate 
+  by point dipole sources located at various points on the 
+  <i>Z-</i>axis. More specifically, we would like to compute
+  the <i>xx</i> and <i>zz</i> components of the 
+  dyadic Green's functions, 
+  <i>G<sub>xx</sub>(<b>r,r</b>)</i>
+  and 
+  <i>G<sub>zz</sub>(<b>r,r</b>)</i>,
+  for points <b>r</b> on the <i>z-</i> axis. The former of 
+  these is computed by placing an <i>x-</i> directed point
+  dipole source at <b>r</b>, solving a scattering problem
+  with the incident field taken to be the field of that point
+  source, and then computing the <i>x</i>-component of the 
+  scattered electric field back at the original point 
+  <b>r</b>. (<i>G<sub>zz</sub></i> is computed similarly, 
+  except that we replace the <i>x-</i>directed point source
+  with a <i>z-</i> directed source, and instead of computing
+  the <i>x-</i> component of the scattered field we want the
+  <i>z-</i> component.)
+
+  <p>
+  In addition to scanning the position <b>r</b> over the
+  <i>z</i> axis, we would also like to scan the angular
+  frequency over a range from the low-frequency regime
+  (wavelength much larger than the size of the plate) 
+  to moderate frequencies.
+
+  <p>
+  Here's some general pseudocode for what we are trying to do:
+
+  <p>
+  <table class="CodeSnippet">
+
+  <tr><td>
+     initialize the geometry
+  </td></tr>
+
+  <tr> <td> &nbsp; &nbsp; &nbsp;
+  </td></tr>
+
+  <tr> <td> 
+     for <i>Omega</i> in <i>list-of-Omega-values</i>
+  </td> </tr>
+
+  <tr> <td> &nbsp; &nbsp; &nbsp;
+  </td></tr>
+
+  <tr> <td> &nbsp; &nbsp; &nbsp;
+       assemble and LU-factorize the BEM matrix at frequency <i>Omega</i>
+  </tr> </td> 
+
+  <tr> <td> &nbsp; &nbsp; &nbsp;
+  </td></tr>
+
+  <tr> <td> &nbsp; &nbsp; &nbsp;
+       for <i>Z</i> in <i>list-of-Z-values</i>
+  </td></tr>
+
+  <tr> <td> &nbsp; &nbsp; &nbsp;
+  </td></tr>
+
+  <tr> <td> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+       put an <i>x-</i>directed point source at coordinates <i>(0,0,Z)</i>
+  </td> <tr>
+
+  <tr> <td> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+       solve the scattering problem
+  </td> <tr>
+
+  <tr> <td> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+       compute the <i>x-</i>component of the scattered 
+       <b>E-</b>field at <i>(0,0,Z)</i>
+  </td> <tr>
+
+  <tr> <td> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+  </td> <tr>
+
+  <tr> <td> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+       put a <i>z-</i>directed point source at coordinates <i>(0,0,Z)</i>
+  </td> <tr>
+
+  <tr> <td> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+       solve the scattering problem
+  </td> <tr>
+
+  <tr> <td> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+       compute the <i>z-</i>component of the scattered 
+       <b>E-</b>field at <i>(0,0,Z)</i>
+  </td> <tr>
+ 
+  </table>
+
+  <p>
+  Note that the loop over frequencies is the <i>outer</i> loop here,
+  while the loop over point-source locations is the inner loop.
+  This is almost always the right way to order things in a BEM calculation:
+  The BEM matrix for a scattering problem depends on the frequency, but 
+  not on the incident field. 
+  Thus, once we have assembled and factorized the matrix, we can
+  solve any number of problems involving different incident fields,
+  and compute the scattered fields at any number of evaluation points, 
+  essentially for free (or least without paying the cost of assembling
+  and factorizing the BEM matrix, which is generally the most expensive 
+  part of the calculation).
+
+  <p>
+  A simple <span class="CodeName">C++</span> program that implements 
+  the above pseudocode is the file <code>PlateWithHole.cc</code>
+  in the <code>share/scuff-em/examples/PlateWithHole.</code> 
+  (That directory also includes a simple handwritten 
+   makefile named <code>Makefile.manual</code>
+   which, in a perfect world, you should be able to modify slightly
+   and then simply do a <code>make -f Makefile.manual</code>
+   to compile and link against the <code>libscuff</code> binary 
+   in your <span class="CodeName">scuff-em</span> installation.)
+
+  <p>
+  <pre class="CPPListing">
+<!--#include virtual="/scuff-EM/libscuff/PlateWithHole.cc">
+  </pre>
+
+  <!----------------------------------------------------------------------->
+  <!----------------------------------------------------------------------->
+  <!----------------------------------------------------------------------->
+  <!--#include virtual="/scuff-EM/scuffEMFooter.shtml">
+
+  <!----------------------------------------------------------------------->
+  <!-- end right column of main page table.                             --->
+  <!----------------------------------------------------------------------->
+  </td>
+  </table>
+
+<!----------------------------------------------------------------------->
+<!-- end main page table                                               -->
+<!----------------------------------------------------------------------->
+</tr></table>
+   
+<!----------------------------------------------------------------------->
+<!-- end main page body ------------------------------------------------->
+<!----------------------------------------------------------------------->
+   
+<!--#include virtual="/pageend.shtml"-->

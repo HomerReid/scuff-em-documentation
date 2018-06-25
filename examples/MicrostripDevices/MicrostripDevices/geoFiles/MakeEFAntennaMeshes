@@ -1,0 +1,9 @@
+#!/bin/bash
+
+ARGS="-2 EdgeFedAntenna.geo"
+
+for L in 0 8
+do 
+ gmsh ${ARGS} -setnumber N 1 -setnumber LFeed $L -o EFAntenna_L${L}_Coarse.msh
+ gmsh ${ARGS} -setnumber N 2 -setnumber LFeed $L -o EFAntenna_L${L}_Fine.msh
+done

@@ -1,0 +1,3 @@
+OBJECT Rectangle
+	MESHFILE Rectangle.msh
+ENDOBJECT

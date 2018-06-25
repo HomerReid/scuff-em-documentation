@@ -1,0 +1,496 @@
+<!--#set 
+    var="title" 
+    value="A Compendium of scuff-RF Examples"
+  -->
+<!--#include virtual="/pagetop.shtml"-->
+
+<!-- begin main page body -->
+
+<!---------------------------------------------------------------------->
+<!-- main page table, with one row and three columns:                 -->
+<!--  navbar, trough, body.                                           -->
+<!---------------------------------------------------------------------->
+<table cellspacing="0" cellpadding="0" width="100%"><tr>
+  
+  <!---------------------------------------------------------------------->
+  <!-- left column of main page table: nav bar. -------------------------->
+  <!---------------------------------------------------------------------->
+  <td valign="top" width="180"> 
+  <!--#include virtual="/research/navbar.shtml"-->
+  </td> 
+
+  <!---------------------------------------------------------------------->
+  <!-- central column of main page table: separation trough -------------->
+  <!---------------------------------------------------------------------->
+  <td width="5%"></td>
+ 
+  <!---------------------------------------------------------------------->
+  <!-- right column of main page table: content of page.------------------>
+  <!---------------------------------------------------------------------->
+  <td valign="top">
+    
+   <p><br> <p align="center">
+   <table align="center"> 
+     <tr> <td> <img width="411" height="296" src="images/scuffRF.png"></td>
+          <td width="5%"> </td>
+          <td> <h1>
+               A Compendium of <span class=CodeName>scuff-rf</span> Examples
+               </h1>
+          </td>
+     </tr>
+   </table> 
+    
+    <!---------------------------------------------------------------------->
+    <!-- big table encompassing the entire page ---------------------------->
+    <!---------------------------------------------------------------------->
+    <table align="center" width="90%"><tr><td>
+   
+    <p>
+    <br>
+
+    <p>
+    Here are a series of actual <span class=CodeName>scuff-rf</span> examples, including 
+    geometry files, mesh files, <span class=CodeName>scuff-rf</span> input files, and 
+    command-line syntax.
+
+    <!----================================================================-->
+    <!---------------------------------------------------------------------->
+    <!----================================================================-->
+    <p>
+    <table align="center" class="TOC" cellpadding="5" cellspacing="5">
+
+      <tr> <th> <span class=CodeName>scuff-rf</span> Examples
+      </th></tr>
+
+      <tr> <td>
+           <a href="research/codes/scuff-EM/scuff-RF/scuffRFExamples.shtml#Coax">
+            1. Input impedance of short-circuited and open-circuited lengths of coaxial cable
+           </a>
+           </td>
+      </tr>
+
+      <tr> <td>
+           <a href="research/codes/scuff-EM/scuff-RF/scuffRFExamples.shtml#Antenna">
+            2. S-parameters of a planar antenna structure
+           </a>
+           </td>
+      </tr>
+
+      <tr> <td>
+           <a href="research/codes/scuff-EM/scuff-RF/scuffRFExamples.shtml#TwoSphereCapacitor">
+            3. Capacitance of a two-sphere capacitor
+           </a>
+           </td>
+      </tr>
+
+      <tr> <td>
+           <a href="research/codes/scuff-EM/scuff-RF/scuffRFExamples.shtml#MRICoil">
+            4. S-parameters and radiated fields of an MRI coil
+           </a>
+           </td>
+      </tr>
+
+    </table>
+    <!----================================================================-->
+    <!-- end table of contents ===========================================-->
+    <!----================================================================-->
+
+    <!---------------------------------------------------------------------->
+    <!---------------------------------------------------------------------->
+    <!---------------------------------------------------------------------->
+    <p>
+    <h2><a name="Coax"></a>1. Input impedance of short-circuited and 
+                              open-circuited lengths of coaxial cable
+    </h2>
+    <hr>
+
+    <p>
+    Here we will investigate the input impedance of a length of coaxial 
+    cable, in both shunted (short-circuited) and open-circuited configurations.
+    All the input files needed to run this example are included in 
+    the <code>examples/CoaxialCable</code> subdirectory of the 
+    <a href="scuff-EM/scuff-RF/scuffRFInstallation.shtml">
+    <span class=CodeName>scuff-rf</span> distribution.</a>
+
+    <p>
+    The structure in question consists of concentric metallic cylinders, 
+    of inner radius <i>R<sub>1</sub></i>=5 mm and outer radius 
+    <i>R<sub>2</sub></i>=2.303<i>R<sub>1</sub></i>. (The ratio of 2.303 between
+    outer and inner conductors ensures that the characteristic impedance
+    of the cable is 50 &Omega;.) The cable is 50 mm long. In the closed-circuit
+    case, the region between inner and outer conductors is filled in with
+    metal at the far end of the structure, while in the open-circut case there
+    is no metal there.
+
+    <p>
+    <table align="center" border="1" cellpadding="5" cellspacing="5"> 
+      <tr> <th> Closed-circuited coaxial cable stub </th>
+           <th> <a href="scuff-EM/scuff-RF/examples/ClosedCoax.png">
+                <img width=521 height=406 src="scuff-EM/scuff-RF/examples/ClosedCoax.png">
+                </a>
+           </th>
+      </tr>
+      <tr> <th> Open-circuited coaxial cable stub </th>
+           <th> <a href="scuff-EM/scuff-RF/examples/OpenCoax.png">
+                <img width=521 height=406 src="scuff-EM/scuff-RF/examples/OpenCoax.png">
+                </a>
+           </th>
+    </table>
+
+    <p>
+    You will notice that there are two <code>.msh</code> files for the
+    closed-circuit case: <code>ClosedCoax_644.msh</code> and 
+    <code>ClosedCoax_2372.msh</code>. These describe the same structure, but
+    meshed with different resolutions. (Similarly, for the open-circuit case, 
+    we have <code>OpenCoax_580.msh</code> and <code>OpenCoax_2296.msh</code>.)
+    The number after the underscore refers to the number of interior edges in 
+    the mesh discretization, which is a measure of the meshing fineness 
+    (the more interior edges, the finer the meshing.)
+
+    For each <code>.msh</code> file we have corresponding <code>.ports</code>
+    and <code>.rwggeo</code> files.
+
+    <p>
+    For the closed-circuit structure, we have only a single port, whose  
+    positive (negative) terminal is the circumference of the inner (outer) 
+    conductor. To create the <code>.ports</code> file, say for the 
+    more coarsely-meshed structure (<code>ClosedCoax_644.msh</code>), we 
+    follow the procedure outlined 
+    <a href="scuff-EM/scuff-RF/scuffRFTutorial.shtml#ports">here:</a>
+
+    <p>
+    <pre class="listing">
+ % scuff-rf --meshfile ClosedCoax_644.msh
+ % gmsh ClosedCoax_644.pp
+    </pre>
+
+    <p>
+    This brings up the following display, from which we can easily 
+    read off the indices of the exterior edges that contribute to the 
+    positive and negative terminals of the port:
+
+    <p> 
+    <table align="center" border="1">
+     <tr> 
+       <th> <a href="scuff-EM/scuff-RF/examples/GMSH3.png">
+            <img src="scuff-EM/scuff-RF/examples/GMSH3_Smaller.png">
+            </a>
+       </th>
+       <td> 
+<pre>
+ PORT
+   PEDGES 0 1 2 3 4 5 6 7
+   MEDGES 8 9 10 11 12 13 14 15 16 17 18 19 
+ ENDPORT
+</pre>
+       </th>
+     </tr> 
+     <tr> 
+       <th> Screenshot of <code> %gmsh ClosedCoax_644.pp</code> </th>
+       <th> Contents of file <code> ClosedCoax_644.ports</code> </th>
+     </tr> 
+    </table>
+
+    <p>
+    We can proceed similarly to create <code>.ports</code> files 
+    for the other meshfiles. (For the open-circuited case, we will have
+    <i>two</i> ports instead of just the one port in the closed-circuited 
+    case.)
+
+    <p>
+    To compute the impedance parameters of the closed-circuit
+    structures over the frequency range 10 MHz -- 10 GHz, we say:
+
+    <p>
+    <pre class=listing>
+ % scuff-rf --geometry ClosedCoax_644.rwggeo --portfile ClosedCoax_644.ports
+            --minfreq 0.01 --maxfreq 10 --numfreqs 30 --logfreq 
+            --zparameters
+    </pre>
+
+    <p>
+    This produces a file named <code>ClosedCoax_644.zparms</code>
+    (see <a href="scuff-EM/scuff-RF/scuffRFFiles.shtml#zparms">here</a> 
+    for details on the file format). 
+    We repeat the procedure for the other files (the more finely-meshed 
+    closed-circuit structure and the coarse and fine open-circuit 
+    structures) to produce data for those structures, and we compare against 
+    the 
+<a href="http://en.wikipedia.org/wiki/Transmission_line">well-known expressions 
+    for the input impedance vs. frequency of closed-circuited and open-circuited
+    transmission lines,</a> namely
+
+    <p> 
+    <table align="center">
+     <tr> <td> <i>Z<sub>closed</sub>(f) = iZ<sub>0</sub></i>
+                  tan(<i>f/f<sub>0</sub></i>)
+          </td>       
+          <td width="10%"></td>
+          <td> <i>Z<sub>open</sub>(f) = -iZ<sub>0</sub></i>
+                  cot(<i>f/f<sub>0</sub></i>)
+          </td>       
+     </tr>
+    </table>
+
+    <p> 
+    where <i>f<sub>0</sub>=c/L</i>=6 GHz for our 50 mm transmission
+    line.
+
+    <p> 
+    In the figure below, the red curves denote the theoretical expressions,
+    while the green and turquoise dots are the predictions of 
+    <span class="CodeName">scuff-rf</span> for the coarse and fine
+    mesh discretizations of each structure.
+    
+
+    <p align="center"> 
+    <table align="center">
+    <tr>
+      <th> Closed-circuit case</th>
+      <th><a href="scuff-EM/scuff-RF/examples/ClosedCoax_ZIn.png">
+          <img src="scuff-EM/scuff-RF/examples/ClosedCoax_ZIn.png">
+      </th>
+    </tr>
+    <tr>
+      <th> Open-circuit case</th>
+      <th><a href="scuff-EM/scuff-RF/examples/OpenCoax_ZIn.png">
+          <img src="scuff-EM/scuff-RF/examples/OpenCoax_ZIn.png">
+      </th>
+    </tr>
+    </table>
+
+    <!---------------------------------------------------------------------->
+    <!---------------------------------------------------------------------->
+    <!---------------------------------------------------------------------->
+    <p>
+    <h2><a name="Antenna"></a>2. S-parameters of a planar antenna structure
+    </h2>
+    <hr>
+
+    <p>
+    For our next trick, we'll look at a wire-loop antenna with a 
+    single feed port. (The files for this example are in the 
+    <code>share/scuff-em/examples/WireAntenna</code> subdirectory
+    of your <span class="CodeName">scuff-em</span> installation.)
+    The antenna is described by the <span class="CodeName">gmsh</span>
+    geometry file <code>SquareCoil.geo</code>, and meshed
+    versions of this geometry (with two different meshing finenesses)
+    are <code>SquareCoil_79.msh</code> and
+    <code>SquareCoil_439.msh:</code>
+
+    <p align="center">
+    <table>
+     <tr>  <td><img width="277" height="617" src="scuff-em/scuff-rf/examples/SquareCoil_79.png"></td>
+           <td width="10%"> </td>
+           <td><img width="231" height="613" src="scuff-em/scuff-rf/examples/SquareCoil_439.png"></td>
+     </tr>
+     <tr>  <th><code>SquareCoil_79.msh</code></th>
+           <td width="10%"> </td>
+           <th><code>SquareCoil_439.msh</code></th>
+    </table>
+
+    <p>
+    To create <code>.ports</code> files for these meshes, we 
+    follow the procedure described above to 
+    figure out the indices of the edges in the mesh geometry 
+    on either side of the excitation gap. The resulting
+    files are <code>SquareCoil_79.ports</code> and 
+    <code>SquareCoil_439.ports</code> in the 
+    <code>share/scuff-em/examples/WireAntenna</code> directory.
+
+    <p>
+    We'll begin by looking at the input impedance over a
+    fairly wide frequency range from 10 MHz to 1 GHz. For
+    convenience we'll put all our command-line options for 
+    this run into a file called <code>SquareCoil_79.args:</code>
+
+    <p>
+    <pre class="listing">
+ geometry  SquareCoil_79.scuffgeo
+ portfile  SquareCoil_79.ports
+ cache     SquareCoil_79.cache
+ # note frequencies are specified in GHz
+ minFreq   0.01
+ maxFreq   1.0
+ numFreqs  30
+ logFreq
+ zParameters
+    </pre>
+
+    <p>
+    Now from the command line we say 
+
+    <p>
+    <pre class="listing">
+ % scuff-rf < SquareCoil_79.args
+    </pre>
+
+    <p>
+    This produces an output file named <code>SquareCoil_79.zparms</code>
+    whose content we can plot in <span class="CodeName">gnuplot.</span>
+
+    <p>
+    <pre class="listing">
+ % gnuplot
+ gnuplot> set logscale x
+ gnuplot> set xlabel 'Frequency (GHz)'
+ gnuplot> set ylabel 'Input impedance(GHz)'
+ gnuplot> plot 'SquareCoil_79.zparms' u 1:2 t 'Real' w lp, '' u 1:3 t 'Imag' w lp
+    </pre>
+
+    <p align="center">
+    <img src="scuff-em/scuff-rf/examples/SquareCoil_439_ZIn1.png">
+
+    <p>
+    We learn two things from this:
+    <ul>
+    <li> At low frequencies the impedance of the structure 
+         has a positive imaginary part that grows linearly with
+         frequency, i.e. the structure is an inductor. (Fitting
+         the low-frequency data to a line reveals the inductance
+         to be around 190 nH.)
+
+    <li> <p> There is some kind of blip around 300 MHz.
+    </ul>
+
+    <p>
+    So let's zoom in on a narrower frequency region near 300 MHz. 
+    Modify the options as follows:
+
+    <p>
+    <pre class="listing">
+ geometry  SquareCoil_79.scuffgeo
+ portfile  SquareCoil_79.ports
+ cache     SquareCoil_79.cache
+ minFreq   0.25
+ maxFreq   0.4
+ numFreqs  60
+ zParameters
+    </pre>
+
+    <p>
+    and re-run the example:
+
+    <p>
+    <pre class="listing">
+ % scuff-rf < SquareCoil_79.args
+    </pre class="listing">
+
+    <p align="center">
+    <img src="scuff-em/scuff-rf/examples/SquareCoil_439_ZIn2.png">
+
+    <p>
+    It seems we have ourselves a 340 MHz antenna.
+
+
+    <!---------------------------------------------------------------------->
+    <!---------------------------------------------------------------------->
+    <!---------------------------------------------------------------------->
+    <p>
+    <h2><a name="TwoSphereCapacitor"></a>3. Capacitance of a two-sphere capacitor
+    </h2>
+    <hr>
+
+    <p>
+    This example demonstrates how to specify ports by defining polygonal 
+    regions of space. In contrast to the port specifications described above, 
+    in which we explicitly listed the indices of the exterior mesh edges,
+    the polygonal-region method has the advantage of referring only to the 
+    geometry of your structure, not the actual mesh; what this means is that  
+    you can re-mesh a given geometry at several different levels of meshing 
+    fineness and reuse the same <code>.ports</code> file for all the different
+    meshes. 
+
+    <p>
+    The geometry here is a capacitor consisting of two identical spheres.
+
+    <!---------------------------------------------------------------------->
+    <!---------------------------------------------------------------------->
+    <!---------------------------------------------------------------------->
+    <p>
+    <h2><a name="MRICoil"></a>3. S-parameters and radiated fields of an MRI coil
+    </h2>
+    <hr>
+
+    <p>
+    <pre class="listing">
+ % scuff-rf < SquareCoil_79.args2
+    </pre
+
+    <!----================================================================-->
+    <!---------------------------------------------------------------------->
+    <!----================================================================-->
+    <p>
+    <hr>
+    <p align="center">
+    <table align="center" class="TOC" cellpadding="5" cellspacing="5">
+
+      <tr> <th> <a class=CodeName 
+                   href="research/codes/scuff-EM/scuff-RF/index.shtml">
+                   scuff-rf</a> Documentation
+      </th></tr>
+
+      <tr> <td>
+           <a href="research/codes/scuff-EM/scuff-RF/scuffRFInstallation.shtml">
+           1. Downloading and Installing <span class=CodeName>scuffrf</span> 
+           </a>
+           </td>
+      </tr>
+
+      <tr> <td>
+           <a href="research/codes/scuff-EM/scuff-RF/scuffRFTutorial.shtml">
+           2. A Tutorial Walk Through <span class=CodeName>scuff-rf</span>
+           </a>
+           </td>
+      </tr>
+
+      <tr> <td> 
+           <a href="research/codes/scuff-EM/scuff-RF/scuffRFOptions.shtml">
+           3. <span class=CodeName>scuff-rf</span> Command-Line Reference
+           </a>
+           </td>
+      </tr>
+
+      <tr> <td> 
+           <a href="research/codes/scuff-EM/scuff-RF/scuffRFFiles.shtml">
+           4. <span class=CodeName>scuff-rf</span> Input and Output File Reference
+           </a>
+           </td>
+      </tr>
+
+      <tr> <td> 
+           <b>
+           5. A Compendium of <span class=CodeName>scuff-rf</span> Examples
+           </b>
+           </td> 
+      </tr>
+
+    </table>
+    <!----================================================================-->
+    <!---------------------------------------------------------------------->
+    <!----================================================================-->
+             
+  <!----------------------------------------------------------------------->
+  <!-- end right column of main page table.                             --->
+  <!----------------------------------------------------------------------->
+  </td>
+  </table>
+
+<!----------------------------------------------------------------------->
+
+  <!----------------------------------------------------------------------->
+  <!-- end right column of main page table.                             --->
+  <!----------------------------------------------------------------------->
+  </td>
+  </table>
+
+<!----------------------------------------------------------------------->
+<!-- end main page table                                               -->
+<!----------------------------------------------------------------------->
+</tr></table>
+   
+<!----------------------------------------------------------------------->
+<!-- end main page body ------------------------------------------------->
+<!----------------------------------------------------------------------->
+   
+<!--#include virtual="/pageend.shtml"-->

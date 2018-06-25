@@ -1,0 +1,1758 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="http://homerreid.github.io/scuff-em-documentation/examples/MicrostripDevices/MicrostripDevices/">
+      
+      
+        <meta name="author" content="Homer Reid">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-0.17.3, mkdocs-material-2.7.3">
+    
+    
+      
+        <title>Input impedance, mutual coupling, and radiated fields of microstrip RF devices - SCUFF-EM documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/application.8d40d89b.css">
+      
+        <link rel="stylesheet" href="../../../assets/stylesheets/application-palette.6079476c.css">
+      
+    
+    
+      <script src="../../../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:300,400,400i,700|">
+        <style>body,input{font-family:"Noto Sans","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+      <link rel="stylesheet" href="../../../css/scuff-em.css">
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <a href="#layout-of-the-microstripdevices-directory" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="http://homerreid.github.io/scuff-em-documentation" title="SCUFF-EM documentation" class="md-header-nav__button md-logo">
+          
+            <img src="../../../reference/scuffEMLogo.png" width="24" height="24">
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                SCUFF-EM documentation
+              </span>
+              <span class="md-header-nav__topic">
+                Input impedance, mutual coupling, and radiated fields of microstrip RF devices
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/homerreid/scuff-em/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      scuff-em
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href="../../.." title="Home" class="md-tabs__link">
+        Home
+      </a>
+    
+  </li>
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../" title="Examples" class="md-tabs__link md-tabs__link--active">
+          Examples
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../tests/Overview/" title="Test suite" class="md-tabs__link">
+          Test suite
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../reference/TopLevel/" title="General reference" class="md-tabs__link">
+          General reference
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../applications/GeneralReference/" title="Command-line tools" class="md-tabs__link">
+          Command-line tools
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../HighLevelInterface/HighLevelInterface/" title="High-level interface" class="md-tabs__link">
+          High-level interface
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../API/libscuff/" title="Low-level API" class="md-tabs__link">
+          Low-level API
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../forDevelopers/Implementation/" title="For developers" class="md-tabs__link">
+          For developers
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    <span class="md-nav__button md-logo">
+      
+        <img src="../../../reference/scuffEMLogo.png" width="48" height="48">
+      
+    </span>
+    SCUFF-EM documentation
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/homerreid/scuff-em/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      scuff-em
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      Examples
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Examples
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../" title="SCUFF-EM tutorial examples" class="md-nav__link">
+      SCUFF-EM tutorial examples
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../MieScattering/MieScattering/" title="Mie scattering" class="md-nav__link">
+      Mie scattering
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../DielectricShell/DielectricShell/" title="Electrostatics of a spherical dielectric shell" class="md-nav__link">
+      Electrostatics of a spherical dielectric shell
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ThinFilm/ThinFilm/" title="Spatially-resolved study of plane-wave transmission through an infinite-area thin dielectric film" class="md-nav__link">
+      Spatially-resolved study of plane-wave transmission through an infinite-area thin dielectric film
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../DiffractionPatterns/DiffractionPatterns/" title="Imaging diffraction patterns of discs, disc arrays, and hole arrays in metal screens" class="md-nav__link">
+      Imaging diffraction patterns of discs, disc arrays, and hole arrays in metal screens
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../CubeTorus/" title="Casimir forces in a compact geometry" class="md-nav__link">
+      Casimir forces in a compact geometry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../SiliconBeams/SiliconBeams/" title="Casimir forces in a 1D extended geometry" class="md-nav__link">
+      Casimir forces in a 1D extended geometry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../SiliconSlabs/SiliconSlabs/" title="Casimir forces in a 2D extended geometry" class="md-nav__link">
+      Casimir forces in a 2D extended geometry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../NanostructureCasimirPolder/NanostructureCasimirPolder/" title="Casimir-Polder potentials in dielectric nanostructures" class="md-nav__link">
+      Casimir-Polder potentials in dielectric nanostructures
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../SiO2Spheres/SiO2Spheres/" title="Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres" class="md-nav__link">
+      Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../TipSubstrate/TipSubstrate/" title="Spatial distribution of heat flux from a warm tip over a cold substrate" class="md-nav__link">
+      Spatial distribution of heat flux from a warm tip over a cold substrate
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../HalfSpaceLDOS/HalfSpaceLDOS/" title="LDOS and dyadic Green functions above an infinite aluminum half-space" class="md-nav__link">
+      LDOS and dyadic Green functions above an infinite aluminum half-space
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../PlatonicSolids/PlatonicSolids/" title="Electrostatic polarizability of platonic solids" class="md-nav__link">
+      Electrostatic polarizability of platonic solids
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../TwoBodyCapacitors/TwoBodyCapacitors/" title="Capacitance of two-body capacitors" class="md-nav__link">
+      Capacitance of two-body capacitors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../StriplineCapacitor/StriplineCapacitor/" title="Capacitance of a PCB stripline trace" class="md-nav__link">
+      Capacitance of a PCB stripline trace
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ImplicitSubstrate/ImplicitSubstrate/" title="Implicit handling of multilayer dielectric substrates" class="md-nav__link">
+      Implicit handling of multilayer dielectric substrates
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../pythonCapacitance/pythonCapacitance/" title="Finite-size effects in stripline capacitors" class="md-nav__link">
+      Finite-size effects in stripline capacitors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../PaulTrap/PaulTrap/" title="Electrostatic fields of an electrode array" class="md-nav__link">
+      Electrostatic fields of an electrode array
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../YagiUdaAntennas/YagiUdaAntennas/" title="Z-parameters and directivity of Yagi-Uda antennas" class="md-nav__link">
+      Z-parameters and directivity of Yagi-Uda antennas
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Input impedance, mutual coupling, and radiated fields of microstrip RF devices
+      </label>
+    
+    <a href="./" title="Input impedance, mutual coupling, and radiated fields of microstrip RF devices" class="md-nav__link md-nav__link--active">
+      Input impedance, mutual coupling, and radiated fields of microstrip RF devices
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#layout-of-the-microstripdevices-directory" title="Layout of the MicrostripDevices directory" class="md-nav__link">
+    Layout of the MicrostripDevices directory
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-1-edge-fed-patch-antenna" title="Example 1: Edge-fed patch antenna" class="md-nav__link">
+    Example 1: Edge-fed patch antenna
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#defining-metal-meshes" title="Defining metal meshes" class="md-nav__link">
+    Defining metal meshes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#defining-ports" title="Defining ports" class="md-nav__link">
+    Defining ports
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#defining-the-substrate" title="Defining the substrate" class="md-nav__link">
+    Defining the substrate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-calculation" title="Python calculation" class="md-nav__link">
+    Python calculation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#command-line-calculation" title="Command-line calculation" class="md-nav__link">
+    Command-line calculation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-2-coupled-center-fed-patch-antennas" title="Example 2: Coupled center-fed patch antennas" class="md-nav__link">
+    Example 2: Coupled center-fed patch antennas
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-3-coplanar-waveguide-section" title="Example 3: Coplanar waveguide section" class="md-nav__link">
+    Example 3: Coplanar waveguide section
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+        <li class="md-nav__item">
+          <a href="#__comments" title="Comments" class="md-nav__link md-nav__link--active">
+            Comments
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Test suite
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Test suite
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/Overview/" title="Overview of the test suite" class="md-nav__link">
+      Overview of the test suite
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/MieScattering/MieScattering/" title="Mie scattering" class="md-nav__link">
+      Mie scattering
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/FresnelScattering/FresnelScattering/" title="Fresnel scattering" class="md-nav__link">
+      Fresnel scattering
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/CasimirSpheres/CasimirSpheres/" title="Equilibrium Casimir forces between spheres" class="md-nav__link">
+      Equilibrium Casimir forces between spheres
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/CasimirPlates/CasimirPlates/" title="Equilibrium Casimir forces between plates" class="md-nav__link">
+      Equilibrium Casimir forces between plates
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/CPSphere/CPSphere/" title="Equilibrium Casimir-Polder potential near a sphere" class="md-nav__link">
+      Equilibrium Casimir-Polder potential near a sphere
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/CPPlate/CPPlate/" title="Equilibrium Casimir-Polder potential near a plate" class="md-nav__link">
+      Equilibrium Casimir-Polder potential near a plate
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/NEQSpheres/NEQSpheres/" title="Heat transfer and non-equilibrium Casimir forces between spheres" class="md-nav__link">
+      Heat transfer and non-equilibrium Casimir forces between spheres
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/libscuff/libscuff/" title="Low-level tests of the core library" class="md-nav__link">
+      Low-level tests of the core library
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      General reference
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        General reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/TopLevel/" title="Top-level overview" class="md-nav__link">
+      Top-level overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/Installing/" title="Installation" class="md-nav__link">
+      Installation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/Geometries/" title="Geometry descriptions" class="md-nav__link">
+      Geometry descriptions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/Materials/" title="Material designations" class="md-nav__link">
+      Material designations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/Transformations/" title="Geometric transformations" class="md-nav__link">
+      Geometric transformations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/IncidentFields/" title="Incident fields" class="md-nav__link">
+      Incident fields
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/BrillouinZoneIntegration/" title="Brillouin zone integration" class="md-nav__link">
+      Brillouin zone integration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/FAQ/" title="FAQ" class="md-nav__link">
+      FAQ
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Command-line tools
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Command-line tools
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../applications/GeneralReference/" title="General command-line reference" class="md-nav__link">
+      General command-line reference
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../applications/scuff-scatter/scuff-scatter/" title="scuff-scatter" class="md-nav__link">
+      scuff-scatter
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../applications/scuff-transmission/scuff-transmission/" title="scuff-transmission" class="md-nav__link">
+      scuff-transmission
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../applications/scuff-ldos/scuff-ldos/" title="scuff-ldos" class="md-nav__link">
+      scuff-ldos
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../applications/scuff-tmatrix/scuff-tmatrix/" title="scuff-tmatrix" class="md-nav__link">
+      scuff-tmatrix
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../applications/scuff-cas3D/scuff-cas3D/" title="scuff-cas3D" class="md-nav__link">
+      scuff-cas3D
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../applications/scuff-caspol/scuff-caspol/" title="scuff-caspol" class="md-nav__link">
+      scuff-caspol
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../applications/scuff-neq/scuff-neq/" title="scuff-neq" class="md-nav__link">
+      scuff-neq
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../applications/scuff-rf/scuff-rf/" title="scuff-rf" class="md-nav__link">
+      scuff-rf
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../applications/scuff-static/scuff-static/" title="scuff-static" class="md-nav__link">
+      scuff-static
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../applications/scuff-spectrum/scuff-spectrum/" title="scuff-spectrum" class="md-nav__link">
+      scuff-spectrum
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../applications/scuff-analyze/scuff-analyze/" title="scuff-analyze" class="md-nav__link">
+      scuff-analyze
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../applications/scuff-integrate/scuff-integrate/" title="scuff-integrate" class="md-nav__link">
+      scuff-integrate
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      High-level interface
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        High-level interface
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../HighLevelInterface/HighLevelInterface/" title="High-Level Interface" class="md-nav__link">
+      High-Level Interface
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Low-level API
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        Low-level API
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../API/libscuff/" title="libscuff" class="md-nav__link">
+      libscuff
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../API/MainFlow/" title="MainFlow API" class="md-nav__link">
+      MainFlow API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../API/UtilityAPI/" title="Utility API" class="md-nav__link">
+      Utility API
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      For developers
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        For developers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../forDevelopers/Implementation/" title="Implementation" class="md-nav__link">
+      Implementation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../forDevelopers/DataStructures/" title="Data Structures" class="md-nav__link">
+      Data Structures
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../forDevelopers/Documentation/" title="Documentation" class="md-nav__link">
+      Documentation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../forDevelopers/SingularIntegrals/" title="Code for computing singular integrals" class="md-nav__link">
+      Code for computing singular integrals
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#layout-of-the-microstripdevices-directory" title="Layout of the MicrostripDevices directory" class="md-nav__link">
+    Layout of the MicrostripDevices directory
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-1-edge-fed-patch-antenna" title="Example 1: Edge-fed patch antenna" class="md-nav__link">
+    Example 1: Edge-fed patch antenna
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#defining-metal-meshes" title="Defining metal meshes" class="md-nav__link">
+    Defining metal meshes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#defining-ports" title="Defining ports" class="md-nav__link">
+    Defining ports
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#defining-the-substrate" title="Defining the substrate" class="md-nav__link">
+    Defining the substrate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-calculation" title="Python calculation" class="md-nav__link">
+    Python calculation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#command-line-calculation" title="Command-line calculation" class="md-nav__link">
+    Command-line calculation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-2-coupled-center-fed-patch-antennas" title="Example 2: Coupled center-fed patch antennas" class="md-nav__link">
+    Example 2: Coupled center-fed patch antennas
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-3-coplanar-waveguide-section" title="Example 3: Coplanar waveguide section" class="md-nav__link">
+    Example 3: Coplanar waveguide section
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+        <li class="md-nav__item">
+          <a href="#__comments" title="Comments" class="md-nav__link md-nav__link--active">
+            Comments
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/homerreid/scuff-em/edit/master/docs/examples/MicrostripDevices/MicrostripDevices.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1> Input impedance, mutual coupling, and radiated fields of microstrip RF devices</h1>
+
+<p>In this example, we use the
+<a href="../../../applications/scuff-rf/scuff-rf/"><span class=SC>scuff-em</span> RF module</a>
+together with
+<a href="../../../tex/FullWaveSubstrate.pdf"><span class=SC>scuff-em</span>'s built-in support for
+implicit multilayer dielectric substrates in full-wave calculations</a>
+to compute multiport <script type="math/tex">Z</script>-parameters, <script type="math/tex">S</script>-parameters, and radiated
+field pattern of antennas, coplanar waveguides, and other <em>microstrip RF
+devices</em>---arbitrarily-shaped finite-sized metal traces lying on the surface of
+an (infinite-area) dielectric substrate, optionally terminated below by a
+perfectly-conducting ground plane. More specifically, we will consider 
+three particular examples (click the pictures for larger images):</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><a href="../EFAntenna.png"><img alt="" src="../EFAntenna.png" /></a></td>
+<td align="left">an <em>edge-fed patch antenna</em>, for which we will compute input impedance over a wide bandwidth and radiation patterns at specific resonance frequencies</td>
+</tr>
+<tr>
+<td align="center"><a href="../CoupledAntennas.png"><img alt="" src="../CoupledAntennas.png" /></a></td>
+<td align="left">two coupled <em>center-fed patch antennas</em>, whose mutual coupling we will study as a function of their separation, and</td>
+</tr>
+<tr>
+<td align="center"><a href="../CPW.png"><img alt="" src="../CPW.png" /></a></td>
+<td align="left">a section of a <em>coplanar waveguide</em>, which we will treat as a two-port device and compare computed multiport S-parameters to the predictions of transmission-line theory.</td>
+</tr>
+</tbody>
+</table>
+<p>In all of these calculations, the metal traces (red regions) are described by
+the usual <a href="../../../reference/Geometries/">discretized triangle mesh files common to all <span class=SC>scuff-em</span>
+geometries</a>, but the dielectric substrate (green) and ground plane
+(black bottom layer) are <em>not meshed</em>; instead, the presence of the substrate layers
+is taken into account 
+<a href="../../../tex/FullWaveSubstrate.pdf"><em>implicitly</em> through the use of an appropriate Green's function.</a>
+(Note that this implicitly-described substrate is always infinitely extended in the
+<script type="math/tex">x</script> and <script type="math/tex">y</script> directions; do not be misled by the apparently finite transverse size of
+the substrates in the pictures above.)</p>
+<p>The input files for all of these examples may be found in the <code class="codehilite">share/scuff-em/examples/MicrostripDevices</code>
+subdirectory of your <code class="codehilite">scuff-em</code> installation.</p>
+<div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#the-scuff-em-rf-module-a-brief-overview">The <span class=SC>scuff-em</span> RF module: A brief overview</a></li>
+<li><a href="#layout-of-the-microstripdevices-directory">Layout of the MicrostripDevices directory</a></li>
+<li><a href="#example-1-edge-fed-patch-antenna">Example 1: Edge-fed patch antenna</a><ul>
+<li><a href="#defining-metal-meshes">Defining metal meshes</a></li>
+<li><a href="#defining-ports">Defining ports</a></li>
+<li><a href="#defining-the-substrate">Defining the substrate</a></li>
+<li><a href="#python-calculation">Python calculation</a></li>
+<li><a href="#command-line-calculation">Command-line calculation</a></li>
+</ul>
+</li>
+<li><a href="#example-2-coupled-center-fed-patch-antennas">Example 2: Coupled center-fed patch antennas</a></li>
+<li><a href="#example-3-coplanar-waveguide-section">Example 3: Coplanar waveguide section</a></li>
+</ul>
+</div>
+<h2 id="the-scuff-em-rf-module-a-brief-overview">The <span class=SC>scuff-em</span> RF module: A brief overview</h2>
+<p>The <span class=SC>scuff-em</span> RF module is discussed in detail
+at <a href="../../../applications/scuff-rf/scuff-rf/">its main documentation page</a>, but for busy readers
+we summarize here some salient points.</p>
+<ul>
+<li>
+<p>The module extends the <a href="../../../API/libscuff/"><span class=SC>scuff-em</span> core library</a> to
+  allow RF modeling problems to be studied within the framework of the
+  <a href="../../../API/libscuff/">surface-integral-equation (SIE) approach to electromagnetic scattering implemented by <span class=SC>scuff-em</span></a>.</p>
+</li>
+<li>
+<p>The functionality of the module may be accessed either from C++/python
+  API codes or via the <code class="codehilite">scuff-rf</code> command-line module distributed with
+  <span class=SC>scuff-em</span>; in particular, all of the microstrip-device
+  calculations covered in this example may be done equally well
+  in python or from the command line, and we will show how to do everything
+  both ways.</p>
+</li>
+<li>
+<p>The primary way in which the RF module extends the core library is by adding
+  support for <a href="../../../applications/scuff-rf/scuff-rf/#RFPorts"><em>RF ports</em></a>, regions of meshed surfaces at which external
+  RF currents (white arrows in the figures above) are injected or extracted.
+  This means that, in addition to specifying the usual
+  <a href="../../../reference/Geometries/">collection of meshed surfaces constituting a <span class=SC>scuff-em</span> geometry</a>,
+  you must also define one or more ports for your structure.
+  Port terminals in <span class=SC>scuff-em</span> are defined by geometric objects:
+  lines or polygons (identifying regions on the boundaries of meshed surfaces)
+  or points (identifying source/sink points inside meshed surfaces).
+  Port definitions may be communicated to <span class=SC>scuff-em</span> by</p>
+<ul>
+<li><strong>(a)</strong> writing a simple text file (<code class="codehilite"><span class="na">.ports</span></code> file),</li>
+<li><strong>(b)</strong> making API calls from C++/python,</li>
+<li><strong>(c)</strong> creating a GDSII file containing points, lines, or polygons tagged by special text strings.</li>
+</ul>
+</li>
+</ul>
+<p>Examples of all of these methods are discussed below.</p>
+<h2 id="layout-of-the-microstripdevices-directory">Layout of the <code class="codehilite">MicrostripDevices</code> directory</h2>
+<p>All files needed to run the examples described here may be found
+in the <code class="codehilite">share/scuff-em/examples/MicrostripDevices</code> directory of your
+<span class=SC>scuff-em</span> installation. The files are organized into
+subdirectories as follows:</p>
+<ul>
+<li><code class="codehilite">scuffgeoFiles</code>: <span class=SC>scuff-em</span> geometry files (<code class="codehilite"><span class="na">.scuffgeo</span></code> files)</li>
+<li><code class="codehilite">mshFiles</code>: <a href="http://www.geuz.org/gmsh"><span class=SC>gmsh</span></a>-produced mesh files (<code class="codehilite"><span class="na">.msh</span></code> files) referenced by the `.scuffgeo files</li>
+<li><code class="codehilite">geoFiles</code>: <a href="http://www.geuz.org/gmsh"><span class=SC>gmsh</span></a> geometry files (<code class="codehilite"><span class="na">.geo</span></code> files) that are meshed by <a class="wikilink" href="../../../gmsh/">gmsh</a> to produce <code class="codehilite"><span class="na">.msh</span></code> files</li>
+<li><code class="codehilite">portFiles</code>: Files defining <a href="../../../applications/scuff-rf/scuff-rf/#RFPorts">RF ports</a> (<code class="codehilite"><span class="na">.port</span></code> files)</li>
+<li><code class="codehilite">GDSIIFiles</code>: GDSII files that may be used in place of <code class="codehilite"><span class="na">.port</span></code> files (and optionally in place of <code class="codehilite"><span class="na">.scuffgeo</span></code> files, although this is <a href="../../../applications/scuff-rf/scuff-rf/#GDSIIGeometrySpecification">not recommended</a>)</li>
+<li><code class="codehilite">python</code>: Python scripts that run the calculations described below</li>
+<li><code class="codehilite">bashScripts</code>: Shell scripts that run the calculations described below</li>
+</ul>
+<h2 id="example-1-edge-fed-patch-antenna">Example 1: Edge-fed patch antenna</h2>
+<p>Our first example is the <em>edge-fed patch antenna</em> shown above and studied originally in this paper:</p>
+<ul>
+<li><a href="https://doi.org/10.1109/8.182458">Wu et al., "Feeding Structure Contribution to Radiation by Patch Antennas with Rectangular Boundaries," IEEE Transactions on Antennas and Propagation <strong>40</strong> 1245 (1992). DOI: 10.1109/8.18245</a></li>
+</ul>
+<p>This antenna is also used as a demonstration example for the commercial solver FEKO:</p>
+<ul>
+<li><a href="http://feko.info/fekoweb/applications/white-papers/edge_fed_rectangular_microstrip_patch_antenna/document">http://feko.info/fekoweb/applications/white-papers/edge_fed_rectangular_microstrip_patch_antenna/document</a></li>
+</ul>
+<h3 id="defining-metal-meshes">Defining metal meshes</h3>
+<p>The metal patch is described by the <a href="http://www.geuz.org/gmsh">GMSH</a> geometry file 
+<a href="../EdgeFedAntenna.geo"><code class="codehilite">EdgeFedAntenna.geo</code></a>,
+which we process with <a class="wikilink" href="../../../gmsh/">gmsh</a> to yield mesh files
+<code class="codehilite">EFAntenna_L8_Coarse.msh</code> (coarser discretization) and
+<code class="codehilite">EFAntenna_L8_Fine.msh</code> (finer discretization):</p>
+<div class="codehilite"><pre><span></span> % gmsh -2 EdgeFedAntenna.geo -setnumber LFeed <span class="m">8</span>.0 -setnumber N <span class="m">1</span> -o EFAntenna_L8_Coarse.geo
+ % gmsh -2 EdgeFedAntenna.geo -setnumber LFeed <span class="m">8</span>.0 -setnumber N <span class="m">2</span> -o EFAntenna_L8_Fine.geo
+</pre></div>
+
+<p>The coarser mesh looks like this:</p>
+<p><img alt="EFAntennaMesh.png" src="../EFAntennaMesh.png" /></p>
+<p>Note that the <code class="codehilite"><span class="na">.geo</span></code> file contains several user-definable parameters, of which
+we are here specifying two: <code class="codehilite">LFeed</code> (length of feed line) and <code class="codehilite">N</code> (discretization
+fineness, i.e. number of triangle edges per unit length). Also note that we have
+taken care to create a <a href="../../../reference/FAQ/#HighlyStructuredMeshes">highly structured</a> mesh,
+which yields an enormous reduction in computational cost.</p>
+<h3 id="defining-ports">Defining ports</h3>
+<p>The next step is to define a single RF port with positive terminal lying on the feed edge.
+(We won't specify a negative terminal for this port; this is equivalent to placing
+the negative terminal on the substrate ground plane).
+Note that the <code class="codehilite"><span class="na">.geo</span></code> file is set up to ensure that the feed edge always lies on the
+<script type="math/tex">x</script>-axis centered at the origin, irrespective of the settings of the user-tweakable
+parameters; this means that we only need to define one port specification one 
+time, and can then reuse it for all meshes produced from this <code class="codehilite"><span class="na">.geo</span></code> file.
+In this case, we can simply specify the port to be defined by a line segment
+lying on the <script type="math/tex">x</script> axis and extending at least over the
+range <script type="math/tex">\left[-\frac{W_{\hbox{feed}}}{2}, +\frac{W_{\hbox{feed}}}{2}\right]</script>.
+For example, we might define this line segment to run from 
+<script type="math/tex">\vb x_1=(-5;0,0)</script> to <script type="math/tex">\vb x_2=(+5,0,0)</script>; in a python code
+this would look like</p>
+<div class="codehilite"><pre><span></span>  <span class="n">Solver</span><span class="o">.</span><span class="n">AddPort</span><span class="p">([</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+</pre></div>
+
+<p>Alternatively, we could write a <code class="codehilite"><span class="na">.port</span></code> file (call it <code class="codehilite">EFAntenna.ports</code>)
+consisting of just three lines:</p>
+<div class="codehilite"><pre><span></span><span class="n">PORT</span>
+    <span class="n">POSITIVE</span> <span class="o">-</span><span class="mi">5</span> <span class="mi">0</span> <span class="mi">0</span> <span class="o">+</span><span class="mi">5</span> <span class="mi">0</span> <span class="mi">0</span> 
+<span class="n">ENDPORT</span>
+</pre></div>
+
+<p>and specify this file by saying <code class="codehilite">Solver.SetPortFile(&quot;EFAntenna.ports&quot;)</code> (in python)
+or <code class="codehilite">--portFile EFAntenna.ports</code> on the <span class=SC>scuff-rf</span> command line.</p>
+<h3 id="defining-the-substrate">Defining the substrate</h3>
+<p>Finally, we need to define the grounded dielectric substrate. Referring to the
+<a href="https://doi.org/10.1109/8.182458">original paper</a> cited above, the substrate has relative
+permittivity <script type="math/tex">\epsilon_r=2.2</script> and thickness <script type="math/tex">h=0.794</script> mm and is terminated by a 
+ground plane. We could describe this situation in python by saying</p>
+<div class="codehilite"><pre><span></span>   <span class="n">Solver</span><span class="o">.</span><span class="n">SetSubstratePermittivity</span><span class="p">(</span><span class="mf">2.2</span><span class="p">)</span>
+   <span class="n">Solver</span><span class="o">.</span><span class="n">SetSubstrateThickness</span><span class="p">(</span><span class="mf">0.794</span><span class="p">)</span>
+</pre></div>
+
+<p>Alternatively, we could write a text file called <code class="codehilite">EFAntenna.substrate</code>:</p>
+<div class="codehilite"><pre><span></span><span class="mf">0.0</span>    <span class="n">CONST_EPS_2</span><span class="o">.</span><span class="mi">2</span>
+<span class="o">-</span><span class="mf">0.794</span> <span class="n">GROUNDPLANE</span> 
+</pre></div>
+
+<p>and say <code class="codehilite">Solver.SetSubstrateFile(&quot;EFAntenna.substrate&quot;)</code> (in python) or 
+<code class="codehilite">--substratefile EFAntenna.substrate</code> (on the <span class=SC>scuff-rf</span>
+command line). (Or we could include the content of the file
+in a <code class="codehilite">SUBSTRATE...ENDSUBSTRATE</code> clause in a <code class="codehilite"><span class="na">.scuffgeo</span></code> file.)</p>
+<h3 id="python-calculation">Python calculation</h3>
+<h3 id="command-line-calculation">Command-line calculation</h3>
+<p>Here's how the same calculation is run from the command line using <code class="codehilite">scuff-rf</code>:</p>
+<h2 id="example-2-coupled-center-fed-patch-antennas">Example 2: Coupled center-fed patch antennas</h2>
+<p>For our next trick, we again pursue the theme of microstrip patch antennas, but now
+with some variations:</p>
+<ul>
+<li>
+<p>First, instead of the reflection coefficient (<script type="math/tex">S_{11}</script>)
+  of a single antenna, we'll look at the <em>coupling</em> (<script type="math/tex">S_{12}</script>) between
+  <em>two</em> patch antennas.</p>
+</li>
+<li>
+<p>Second, these antennas are driven by currents injected into points lying 
+  inside them (they are <em>center-fed</em>), not edge-fed like the previous example.</p>
+</li>
+<li>
+<p>Third, instead of varying the frequency, we'll (mostly) 
+  keep the frequency fixed and instead vary the <em>separation distance</em> between the
+  patches; to do this with maximum efficiency in <span class=SC>scuff-em</span> we
+  will need to take advantage of the <a href="../../../forDevelopers/Implementation/">structure of the system matrix</a>---which
+  will turn out to be extremely easy to do. </p>
+</li>
+</ul>
+<p>The antennas in this example were studied in this paper:</p>
+<ul>
+<li><a href="https://doi.org/10.1109/TAP.1981.1142529">Jedlicka et al., "Measured Mutual Coupling Between Microstrip Antennas", IEEE Transactions on Antennas and Propagation <strong>29</strong> 147 (1981). DOI: 10.1109/TAP.1981.1142529</a></li>
+</ul>
+<h2 id="example-3-coplanar-waveguide-section">Example 3: Coplanar waveguide section</h2>
+                
+                  
+                
+              
+              
+                
+
+
+
+  <h2 id="__comments">Comments</h2>
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = "http://homerreid.github.io/scuff-em-documentation/examples/MicrostripDevices/MicrostripDevices/";
+      this.page.identifier =
+        "/examples/MicrostripDevices/MicrostripDevices/";
+    };
+    (function() {
+      var d = document, s = d.createElement("script");
+      s.src = "//homerreid-github-io-scuff-em-documentation.disqus.com.disqus.com/embed.js";
+      s.setAttribute("data-timestamp", +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../../YagiUdaAntennas/YagiUdaAntennas/" title="Z-parameters and directivity of Yagi-Uda antennas" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Z-parameters and directivity of Yagi-Uda antennas
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../../../tests/Overview/" title="Overview of the test suite" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Overview of the test suite
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="http://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../assets/javascripts/application.b438e6c5.js"></script>
+      
+      <script>app.initialize({version:"0.17.3",url:{base:"../../.."}})</script>
+      
+        <script src="../../../javascripts/MathJax.js?config=TeX-AMS_HTML"></script>
+      
+        <script src="../../../javascripts/mathjaxhelper.js"></script>
+      
+    
+    
+      
+        <script>!function(e,a,t,n,o,c,i){e.GoogleAnalyticsObject=o,e.ga=e.ga||function(){(e.ga.q=e.ga.q||[]).push(arguments)},e.ga.l=1*new Date,c=a.createElement(t),i=a.getElementsByTagName(t)[0],c.async=1,c.src="https://www.google-analytics.com/analytics.js",i.parentNode.insertBefore(c,i)}(window,document,"script",0,"ga"),ga("create","UA-119340518-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview");var links=document.getElementsByTagName("a");if(Array.prototype.map.call(links,function(e){e.host!=document.location.host&&e.addEventListener("click",function(){var a=e.getAttribute("data-md-action")||"follow";ga("send","event","outbound",a,e.href)})}),document.forms.search){var query=document.forms.search.query;query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}</script>
+      
+    
+  </body>
+</html>

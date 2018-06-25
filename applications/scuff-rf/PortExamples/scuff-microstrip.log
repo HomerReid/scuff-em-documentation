@@ -1,0 +1,94 @@
+05/07/18::18:02:39: scuff-microstrip running on miho:18032 (05/07/18::18:02:39) 
+05/07/18::18:02:39: Added /home/homer/work/scuff-em-sandbox/mshFiles to mesh search path. 
+05/07/18::18:02:39:  Opened mesh file ./ˆ$­û 
+05/07/18::18:02:39: Flipped 0 panel normals to comport with region definitions. 
+05/07/18::18:02:39: FC::P could not open file Rectangle.scuffcache (skipping cache preload) 
+05/07/18::18:02:39: Port  0 (POSITIVE): perimeter 1.303650e+00, 4 edges=[Rectangle(56) Rectangle(57) Rectangle(58) Rectangle(59)] 
+05/07/18::18:02:39: Port  0 (NEGATIVE): perimeter 0.000000e+00, 0 edges 
+05/07/18::18:02:39: Reading substrate definition from ./smFI5A. 
+05/07/18::18:02:39:  Layer #1: CONST_EPS_0 at z=0.000000e+00. 
+05/07/18::18:02:39: Detecting equivalences among 596 edges (177906 pairs)... 
+05/07/18::18:02:39:   Step 1: fetching lists of equivalent edges... 
+05/07/18::18:02:39:   168/596 edges are parents (2.818792e+01 %) 
+05/07/18::18:02:39:   Step 2: Identifying equivalent edge pairs... 
+05/07/18::18:02:39: NumChildPairs={13092,13092} by different methods 
+05/07/18::18:02:39:  Of 177906 total edge-edge pairs:  
+05/07/18::18:02:39:     13092 are children (savings of 7.4 %) 
+05/07/18::18:02:39:     13019 are parents (7.3 %) 
+05/07/18::18:02:39:     151795 are unicorns 
+05/07/18::18:11:11: scuff-microstrip running on miho:18309 (05/07/18::18:11:11) 
+05/07/18::18:11:11: Added /home/homer/work/scuff-em-sandbox/mshFiles to mesh search path. 
+05/07/18::18:11:11:  Opened mesh file ./ˆ$­û 
+05/07/18::18:11:11: Flipped 0 panel normals to comport with region definitions. 
+05/07/18::18:11:11: FC::P could not open file Rectangle.scuffcache (skipping cache preload) 
+05/07/18::18:11:11: Port  0 (POSITIVE): perimeter 9.000000e+00, 6 edges=[Rectangle(24) Rectangle(25) Rectangle(26) Rectangle(27) Rectangle(28) Rectangle(29)] 
+05/07/18::18:11:11: Port  0 (NEGATIVE): perimeter 0.000000e+00, 0 edges 
+05/07/18::18:11:11: Reading substrate definition from ./czgXWl. 
+05/07/18::18:11:11:  Layer #1: CONST_EPS_0 at z=0.000000e+00. 
+05/07/18::18:11:11: Detecting equivalences among 186 edges (17391 pairs)... 
+05/07/18::18:11:11:   Step 1: fetching lists of equivalent edges... 
+05/07/18::18:11:11:   126/186 edges are parents (6.774194e+01 %) 
+05/07/18::18:11:11:   Step 2: Identifying equivalent edge pairs... 
+05/07/18::18:11:11: NumChildPairs={7382,7382} by different methods 
+05/07/18::18:11:11:  Of 17391 total edge-edge pairs:  
+05/07/18::18:11:11:     7382 are children (savings of 42.4 %) 
+05/07/18::18:11:11:     3295 are parents (18.9 %) 
+05/07/18::18:11:11:     6714 are unicorns 
+05/07/18::18:12:03: scuff-microstrip running on miho:18364 (05/07/18::18:12:03) 
+05/07/18::18:12:03: Added /home/homer/work/scuff-em-sandbox/mshFiles to mesh search path. 
+05/07/18::18:12:03:  Opened mesh file ./ˆ$­û 
+05/07/18::18:12:03: Flipped 0 panel normals to comport with region definitions. 
+05/07/18::18:12:03: FC::P could not open file Rectangle.scuffcache (skipping cache preload) 
+05/07/18::18:12:03: Port  0 (POSITIVE): perimeter 1.440000e+01, 6 edges=[Rectangle(30) Rectangle(31) Rectangle(32) Rectangle(33) Rectangle(34) Rectangle(35)] 
+05/07/18::18:12:03: Port  0 (NEGATIVE): perimeter 0.000000e+00, 0 edges 
+05/07/18::18:12:03: Reading substrate definition from ./oC5KzL. 
+05/07/18::18:12:03:  Layer #1: CONST_EPS_0 at z=0.000000e+00. 
+05/07/18::18:12:03: Detecting equivalences among 300 edges (45150 pairs)... 
+05/07/18::18:12:03:   Step 1: fetching lists of equivalent edges... 
+05/07/18::18:12:03:   245/300 edges are parents (8.166667e+01 %) 
+05/07/18::18:12:03:   Step 2: Identifying equivalent edge pairs... 
+05/07/18::18:12:03: NumChildPairs={29207,29207} by different methods 
+05/07/18::18:12:03:  Of 45150 total edge-edge pairs:  
+05/07/18::18:12:03:     29207 are children (savings of 64.7 %) 
+05/07/18::18:12:03:     10821 are parents (24.0 %) 
+05/07/18::18:12:03:     5122 are unicorns 
+05/10/18::01:39:33: scuff-microstrip running on miho:22466 (05/10/18::01:39:33) 
+05/10/18::01:40:04: scuff-microstrip running on miho:22489 (05/10/18::01:40:04) 
+05/10/18::01:40:04: Added mshFiles to mesh search path. 
+05/10/18::01:40:04: error: scuffgeoFiles/CPW_Coarse.scuffgeo:3: could not open file CPWCenter_98.msh (aborting) 
+05/10/18::01:40:31: scuff-microstrip running on miho:22533 (05/10/18::01:40:31) 
+05/10/18::01:40:31: Added mshFiles to mesh search path. 
+05/10/18::01:40:31:  Opened mesh file mshFiles/CPWCenter_Coarse.msh 
+05/10/18::01:40:31:  Opened mesh file mshFiles/CPWFlank_Fine.msh 
+05/10/18::01:40:31:  Opened mesh file mshFiles/CPWFlank_Fine.msh 
+05/10/18::01:40:31: Flipped 0 panel normals to comport with region definitions. 
+05/10/18::01:40:31: Noting that surface 2 (RightFlank) is a duplicate of surface 1 (LeftFlank)... 
+05/10/18::01:40:31: FC::P could not open file CPWCenter_Coarse.scuffcache (skipping cache preload) 
+05/10/18::01:40:31: FC::P could not open file CPWFlank_Fine.scuffcache (skipping cache preload) 
+05/10/18::01:40:31: Port  0 (POSITIVE): perimeter 3.000000e+00, 10 edges=[Center(1) Center(3) LeftFlank(9) LeftFlank(10) LeftFlank(11) LeftFlank(12) RightFlank(9) RightFlank(10) RightFlank(11) RightFlank(12)] 
+05/10/18::01:40:31: Port  0 (NEGATIVE): perimeter 1.000000e+00, 4 edges=[LeftFlank(1) RightFlank(1) LeftFlank(3) RightFlank(3)] 
+05/10/18::01:40:31: Port  1 (POSITIVE): perimeter 3.000000e+00, 10 edges=[Center(5) Center(6) LeftFlank(15) LeftFlank(16) LeftFlank(17) LeftFlank(18) RightFlank(15) RightFlank(16) RightFlank(17) RightFlank(18)] 
+05/10/18::01:40:31: Port  1 (NEGATIVE): perimeter 1.000000e+00, 4 edges=[LeftFlank(5) RightFlank(5) LeftFlank(6) RightFlank(6)] 
+05/10/18::01:40:31: Reading substrate definition from ./v0wGoP. 
+05/10/18::01:40:31:  Layer #1: CONST_EPS_0 at z=0.000000e+00. 
+05/10/18::01:40:31: Detecting equivalences among 1922 edges (1848003 pairs)... 
+05/10/18::01:40:31:   Step 1: fetching lists of equivalent edges... 
+05/10/18::01:40:34:   1916/1922 edges are parents (9.968783e+01 %) 
+05/10/18::01:40:34:   Step 2: Identifying equivalent edge pairs... 
+05/10/18::01:40:53: scuff-microstrip running on miho:22569 (05/10/18::01:40:53) 
+05/10/18::01:40:53: Added mshFiles to mesh search path. 
+05/10/18::01:40:53:  Opened mesh file mshFiles/CPWCenter_Coarse.msh 
+05/10/18::01:40:53:  Opened mesh file mshFiles/CPWFlank_Fine.msh 
+05/10/18::01:40:53:  Opened mesh file mshFiles/CPWFlank_Fine.msh 
+05/10/18::01:40:53: Flipped 0 panel normals to comport with region definitions. 
+05/10/18::01:40:53: Noting that surface 2 (RightFlank) is a duplicate of surface 1 (LeftFlank)... 
+05/10/18::01:40:53: FC::P could not open file CPWCenter_Coarse.scuffcache (skipping cache preload) 
+05/10/18::01:40:53: FC::P could not open file CPWFlank_Fine.scuffcache (skipping cache preload) 
+05/10/18::01:40:53: Port  0 (POSITIVE): perimeter 3.000000e+00, 10 edges=[Center(1) Center(3) LeftFlank(9) LeftFlank(10) LeftFlank(11) LeftFlank(12) RightFlank(9) RightFlank(10) RightFlank(11) RightFlank(12)] 
+05/10/18::01:40:53: Port  0 (NEGATIVE): perimeter 1.000000e+00, 4 edges=[LeftFlank(1) RightFlank(1) LeftFlank(3) RightFlank(3)] 
+05/10/18::01:40:53: Port  1 (POSITIVE): perimeter 3.000000e+00, 10 edges=[Center(5) Center(6) LeftFlank(15) LeftFlank(16) LeftFlank(17) LeftFlank(18) RightFlank(15) RightFlank(16) RightFlank(17) RightFlank(18)] 
+05/10/18::01:40:53: Port  1 (NEGATIVE): perimeter 1.000000e+00, 4 edges=[LeftFlank(5) RightFlank(5) LeftFlank(6) RightFlank(6)] 
+05/10/18::01:40:53: Reading substrate definition from ./DJguvH. 
+05/10/18::01:40:53:  Layer #1: CONST_EPS_0 at z=0.000000e+00. 
+05/10/18::01:40:53: Detecting equivalences among 1922 edges (1848003 pairs)... 
+05/10/18::01:40:53:   Step 1: fetching lists of equivalent edges... 

@@ -1,0 +1,47 @@
+\select@language {english}
+\contentsline {section}{\numberline {1}Vector Spherical Wave Solutions to Maxwell's Equations}{3}
+\contentsline {paragraph}{Vector spherical harmonics}{3}
+\contentsline {paragraph}{Radial functions}{4}
+\contentsline {paragraph}{Scalar Helmholtz solutions}{4}
+\contentsline {paragraph}{Vector spherical wave functions}{4}
+\contentsline {paragraph}{Curl Identities}{4}
+\contentsline {paragraph}{General solution of source-free Maxwell equations}{5}
+\contentsline {paragraph}{Unified notation for $\mathbf {M}, \mathbf {N}$ waves}{5}
+\contentsline {paragraph}{Spherical-wave expansion of dyadic Green's function}{5}
+\contentsline {section}{\numberline {2}Explicit expression for small $\ell $}{6}
+\contentsline {paragraph}{The first few radial functions}{6}
+\contentsline {paragraph}{The first few regular functions}{6}
+\contentsline {paragraph}{The first few outgoing functions}{8}
+\contentsline {section}{\numberline {3}Translation matrices}{9}
+\contentsline {paragraph}{Scalar case}{9}
+\contentsline {paragraph}{Vector case}{9}
+\contentsline {section}{\numberline {4}Spherical-wave expansion of incident fields}{10}
+\contentsline {subsection}{\numberline {4.1}Plane waves}{10}
+\contentsline {subsection}{\numberline {4.2}Point sources at the origin}{10}
+\contentsline {subsection}{\numberline {4.3}Point sources not at the origin}{11}
+\contentsline {section}{\numberline {5}Scattering from a homogeneous dielectric sphere}{12}
+\contentsline {paragraph}{Inside the sphere:}{12}
+\contentsline {paragraph}{Outside the sphere:}{12}
+\contentsline {subsection}{\numberline {5.1}Sources outside the sphere}{12}
+\contentsline {subsubsection}{\numberline {5.1.1}Analytical results in the low-frequency limit}{13}
+\contentsline {subsection}{\numberline {5.2}Sources inside the sphere}{15}
+\contentsline {subsection}{\numberline {5.3}Frequencies of spherical resonant cavities}{15}
+\contentsline {section}{\numberline {6}Scattering from a sphere with impedance boundary conditions}{17}
+\contentsline {section}{\numberline {7}Dyadic Green's functions}{18}
+\contentsline {section}{\numberline {8}VSWVIE: Volume-integral-equation approach to scattering with vector spherical waves as volume-current basis functions}{19}
+\contentsline {subsection}{\numberline {8.1}Review of the standard VIE formalism}{19}
+\contentsline {subsection}{\numberline {8.2}Vector spherical waves as volume-current basis functions}{20}
+\contentsline {subsection}{\numberline {8.3}Solution of VIE equation in VSW basis}{20}
+\contentsline {subsection}{\numberline {8.4}Overlap integrals}{20}
+\contentsline {subsection}{\numberline {8.5}Fields produced by VSW basis functions}{22}
+\contentsline {paragraph}{Evaluation point outside sphere ($|\mathbf {x}|>R$):}{22}
+\contentsline {paragraph}{Evaluation point inside sphere ($|\mathbf {x}|<R$):}{22}
+\contentsline {subsection}{\numberline {8.6}Matrix elements of $\mathbb {G}$}{23}
+\contentsline {subsection}{\numberline {8.7}Alternative expression for total fields inside the body}{25}
+\contentsline {subsection}{\numberline {8.8}Homogeneous dielectric sphere}{25}
+\contentsline {section}{\numberline {9}Stress-tensor approach to power, force, and torque computation}{27}
+\contentsline {subsection}{\numberline {9.1}Sample stress-tensor power calculation}{29}
+\contentsline {subsection}{\numberline {9.2}Sample stress-tensor force calculation}{31}
+\contentsline {subsection}{\numberline {9.3}$x$-directed force density}{32}
+\contentsline {subsection}{\numberline {9.4}Total $x$-directed force}{32}
+\contentsline {section}{\numberline {10}$\mathbb {T}$-matrix elements and surface currents}{34}

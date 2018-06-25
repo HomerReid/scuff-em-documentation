@@ -1,0 +1,2021 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="http://homerreid.github.io/scuff-em-documentation/examples/PaulTrap/PaulTrap/">
+      
+      
+        <meta name="author" content="Homer Reid">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-0.17.3, mkdocs-material-2.7.3">
+    
+    
+      
+        <title>Electrostatic fields of an electrode array - SCUFF-EM documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/application.8d40d89b.css">
+      
+        <link rel="stylesheet" href="../../../assets/stylesheets/application-palette.6079476c.css">
+      
+    
+    
+      <script src="../../../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:300,400,400i,700|">
+        <style>body,input{font-family:"Noto Sans","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+      <link rel="stylesheet" href="../../../css/scuff-em.css">
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <a href="#simple-scuff-em-geometry-file" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="http://homerreid.github.io/scuff-em-documentation" title="SCUFF-EM documentation" class="md-header-nav__button md-logo">
+          
+            <img src="../../../reference/scuffEMLogo.png" width="24" height="24">
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                SCUFF-EM documentation
+              </span>
+              <span class="md-header-nav__topic">
+                Electrostatic fields of an electrode array
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/homerreid/scuff-em/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      scuff-em
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href="../../.." title="Home" class="md-tabs__link">
+        Home
+      </a>
+    
+  </li>
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../" title="Examples" class="md-tabs__link md-tabs__link--active">
+          Examples
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../tests/Overview/" title="Test suite" class="md-tabs__link">
+          Test suite
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../reference/TopLevel/" title="General reference" class="md-tabs__link">
+          General reference
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../applications/GeneralReference/" title="Command-line tools" class="md-tabs__link">
+          Command-line tools
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../HighLevelInterface/HighLevelInterface/" title="High-level interface" class="md-tabs__link">
+          High-level interface
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../API/libscuff/" title="Low-level API" class="md-tabs__link">
+          Low-level API
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../forDevelopers/Implementation/" title="For developers" class="md-tabs__link">
+          For developers
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    <span class="md-nav__button md-logo">
+      
+        <img src="../../../reference/scuffEMLogo.png" width="48" height="48">
+      
+    </span>
+    SCUFF-EM documentation
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/homerreid/scuff-em/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      scuff-em
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      Examples
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Examples
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../" title="SCUFF-EM tutorial examples" class="md-nav__link">
+      SCUFF-EM tutorial examples
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../MieScattering/MieScattering/" title="Mie scattering" class="md-nav__link">
+      Mie scattering
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../DielectricShell/DielectricShell/" title="Electrostatics of a spherical dielectric shell" class="md-nav__link">
+      Electrostatics of a spherical dielectric shell
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ThinFilm/ThinFilm/" title="Spatially-resolved study of plane-wave transmission through an infinite-area thin dielectric film" class="md-nav__link">
+      Spatially-resolved study of plane-wave transmission through an infinite-area thin dielectric film
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../DiffractionPatterns/DiffractionPatterns/" title="Imaging diffraction patterns of discs, disc arrays, and hole arrays in metal screens" class="md-nav__link">
+      Imaging diffraction patterns of discs, disc arrays, and hole arrays in metal screens
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../CubeTorus/" title="Casimir forces in a compact geometry" class="md-nav__link">
+      Casimir forces in a compact geometry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../SiliconBeams/SiliconBeams/" title="Casimir forces in a 1D extended geometry" class="md-nav__link">
+      Casimir forces in a 1D extended geometry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../SiliconSlabs/SiliconSlabs/" title="Casimir forces in a 2D extended geometry" class="md-nav__link">
+      Casimir forces in a 2D extended geometry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../NanostructureCasimirPolder/NanostructureCasimirPolder/" title="Casimir-Polder potentials in dielectric nanostructures" class="md-nav__link">
+      Casimir-Polder potentials in dielectric nanostructures
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../SiO2Spheres/SiO2Spheres/" title="Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres" class="md-nav__link">
+      Thermal radiation, heat transfer, and non-equilibrium Casimir forces between silicon dioxide spheres
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../TipSubstrate/TipSubstrate/" title="Spatial distribution of heat flux from a warm tip over a cold substrate" class="md-nav__link">
+      Spatial distribution of heat flux from a warm tip over a cold substrate
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../HalfSpaceLDOS/HalfSpaceLDOS/" title="LDOS and dyadic Green functions above an infinite aluminum half-space" class="md-nav__link">
+      LDOS and dyadic Green functions above an infinite aluminum half-space
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../PlatonicSolids/PlatonicSolids/" title="Electrostatic polarizability of platonic solids" class="md-nav__link">
+      Electrostatic polarizability of platonic solids
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../TwoBodyCapacitors/TwoBodyCapacitors/" title="Capacitance of two-body capacitors" class="md-nav__link">
+      Capacitance of two-body capacitors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../StriplineCapacitor/StriplineCapacitor/" title="Capacitance of a PCB stripline trace" class="md-nav__link">
+      Capacitance of a PCB stripline trace
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ImplicitSubstrate/ImplicitSubstrate/" title="Implicit handling of multilayer dielectric substrates" class="md-nav__link">
+      Implicit handling of multilayer dielectric substrates
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../pythonCapacitance/pythonCapacitance/" title="Finite-size effects in stripline capacitors" class="md-nav__link">
+      Finite-size effects in stripline capacitors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Electrostatic fields of an electrode array
+      </label>
+    
+    <a href="./" title="Electrostatic fields of an electrode array" class="md-nav__link md-nav__link--active">
+      Electrostatic fields of an electrode array
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#simple-scuff-em-geometry-file" title="Simple scuff-em geometry file" class="md-nav__link">
+    Simple scuff-em geometry file
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#improved-scuff-em-geometry-file" title="Improved scuff-em geometry file" class="md-nav__link">
+    Improved scuff-em geometry file
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visually-confirming-the-geometry-description" title="Visually confirming the geometry description" class="md-nav__link">
+    Visually confirming the geometry description
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-1-calculation-computing-fields-of-individual-conductors" title="Phase 1 calculation: Computing fields of individual conductors" class="md-nav__link">
+    Phase 1 calculation: Computing fields of individual conductors
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#running-multiple-calculations-at-once-the-excitation-file" title="Running multiple calculations at once: The excitation file" class="md-nav__link">
+    Running multiple calculations at once: The excitation file
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-2-calculation-external-sources-and-field-visualization" title="Phase 2 calculation: External sources and field visualization" class="md-nav__link">
+    Phase 2 calculation: External sources and field visualization
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+        <li class="md-nav__item">
+          <a href="#__comments" title="Comments" class="md-nav__link md-nav__link--active">
+            Comments
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../YagiUdaAntennas/YagiUdaAntennas/" title="Z-parameters and directivity of Yagi-Uda antennas" class="md-nav__link">
+      Z-parameters and directivity of Yagi-Uda antennas
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../MicrostripDevices/MicrostripDevices/" title="Input impedance, mutual coupling, and radiated fields of microstrip RF devices" class="md-nav__link">
+      Input impedance, mutual coupling, and radiated fields of microstrip RF devices
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Test suite
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Test suite
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/Overview/" title="Overview of the test suite" class="md-nav__link">
+      Overview of the test suite
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/MieScattering/MieScattering/" title="Mie scattering" class="md-nav__link">
+      Mie scattering
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/FresnelScattering/FresnelScattering/" title="Fresnel scattering" class="md-nav__link">
+      Fresnel scattering
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/CasimirSpheres/CasimirSpheres/" title="Equilibrium Casimir forces between spheres" class="md-nav__link">
+      Equilibrium Casimir forces between spheres
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/CasimirPlates/CasimirPlates/" title="Equilibrium Casimir forces between plates" class="md-nav__link">
+      Equilibrium Casimir forces between plates
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/CPSphere/CPSphere/" title="Equilibrium Casimir-Polder potential near a sphere" class="md-nav__link">
+      Equilibrium Casimir-Polder potential near a sphere
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/CPPlate/CPPlate/" title="Equilibrium Casimir-Polder potential near a plate" class="md-nav__link">
+      Equilibrium Casimir-Polder potential near a plate
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/NEQSpheres/NEQSpheres/" title="Heat transfer and non-equilibrium Casimir forces between spheres" class="md-nav__link">
+      Heat transfer and non-equilibrium Casimir forces between spheres
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tests/libscuff/libscuff/" title="Low-level tests of the core library" class="md-nav__link">
+      Low-level tests of the core library
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      General reference
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        General reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/TopLevel/" title="Top-level overview" class="md-nav__link">
+      Top-level overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/Installing/" title="Installation" class="md-nav__link">
+      Installation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/Geometries/" title="Geometry descriptions" class="md-nav__link">
+      Geometry descriptions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/Materials/" title="Material designations" class="md-nav__link">
+      Material designations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/Transformations/" title="Geometric transformations" class="md-nav__link">
+      Geometric transformations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/IncidentFields/" title="Incident fields" class="md-nav__link">
+      Incident fields
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/BrillouinZoneIntegration/" title="Brillouin zone integration" class="md-nav__link">
+      Brillouin zone integration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/FAQ/" title="FAQ" class="md-nav__link">
+      FAQ
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Command-line tools
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Command-line tools
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../applications/GeneralReference/" title="General command-line reference" class="md-nav__link">
+      General command-line reference
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../applications/scuff-scatter/scuff-scatter/" title="scuff-scatter" class="md-nav__link">
+      scuff-scatter
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../applications/scuff-transmission/scuff-transmission/" title="scuff-transmission" class="md-nav__link">
+      scuff-transmission
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../applications/scuff-ldos/scuff-ldos/" title="scuff-ldos" class="md-nav__link">
+      scuff-ldos
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../applications/scuff-tmatrix/scuff-tmatrix/" title="scuff-tmatrix" class="md-nav__link">
+      scuff-tmatrix
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../applications/scuff-cas3D/scuff-cas3D/" title="scuff-cas3D" class="md-nav__link">
+      scuff-cas3D
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../applications/scuff-caspol/scuff-caspol/" title="scuff-caspol" class="md-nav__link">
+      scuff-caspol
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../applications/scuff-neq/scuff-neq/" title="scuff-neq" class="md-nav__link">
+      scuff-neq
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../applications/scuff-rf/scuff-rf/" title="scuff-rf" class="md-nav__link">
+      scuff-rf
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../applications/scuff-static/scuff-static/" title="scuff-static" class="md-nav__link">
+      scuff-static
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../applications/scuff-spectrum/scuff-spectrum/" title="scuff-spectrum" class="md-nav__link">
+      scuff-spectrum
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../applications/scuff-analyze/scuff-analyze/" title="scuff-analyze" class="md-nav__link">
+      scuff-analyze
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../applications/scuff-integrate/scuff-integrate/" title="scuff-integrate" class="md-nav__link">
+      scuff-integrate
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      High-level interface
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        High-level interface
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../HighLevelInterface/HighLevelInterface/" title="High-Level Interface" class="md-nav__link">
+      High-Level Interface
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Low-level API
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        Low-level API
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../API/libscuff/" title="libscuff" class="md-nav__link">
+      libscuff
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../API/MainFlow/" title="MainFlow API" class="md-nav__link">
+      MainFlow API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../API/UtilityAPI/" title="Utility API" class="md-nav__link">
+      Utility API
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      For developers
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        For developers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../forDevelopers/Implementation/" title="Implementation" class="md-nav__link">
+      Implementation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../forDevelopers/DataStructures/" title="Data Structures" class="md-nav__link">
+      Data Structures
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../forDevelopers/Documentation/" title="Documentation" class="md-nav__link">
+      Documentation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../forDevelopers/SingularIntegrals/" title="Code for computing singular integrals" class="md-nav__link">
+      Code for computing singular integrals
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#simple-scuff-em-geometry-file" title="Simple scuff-em geometry file" class="md-nav__link">
+    Simple scuff-em geometry file
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#improved-scuff-em-geometry-file" title="Improved scuff-em geometry file" class="md-nav__link">
+    Improved scuff-em geometry file
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visually-confirming-the-geometry-description" title="Visually confirming the geometry description" class="md-nav__link">
+    Visually confirming the geometry description
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-1-calculation-computing-fields-of-individual-conductors" title="Phase 1 calculation: Computing fields of individual conductors" class="md-nav__link">
+    Phase 1 calculation: Computing fields of individual conductors
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#running-multiple-calculations-at-once-the-excitation-file" title="Running multiple calculations at once: The excitation file" class="md-nav__link">
+    Running multiple calculations at once: The excitation file
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-2-calculation-external-sources-and-field-visualization" title="Phase 2 calculation: External sources and field visualization" class="md-nav__link">
+    Phase 2 calculation: External sources and field visualization
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+        <li class="md-nav__item">
+          <a href="#__comments" title="Comments" class="md-nav__link md-nav__link--active">
+            Comments
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/homerreid/scuff-em/edit/master/docs/examples/PaulTrap/PaulTrap.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1>Electrostatic fields of an electrode array</h1>
+
+<p>In this example we use <a class="wikilink" href="../../../scuff-static/">scuff-static</a> to compute the electrostatic
+fields in the vicinity of a complicated electrode array with the
+various electrodes held at various external potentials.</p>
+<p>More specifically, the calculation will proceed in two stages:</p>
+<ol>
+<li>
+<p>First, for each of the <em>N</em> electrodes in the device
+   we will compute the fields produced by maintaining that
+   electrode at a potential of 1 volt, with all other electrodes 
+   grounded.
+   This will produce <em>N</em> separate datasets, each reporting
+   the electrostatic potential and <strong>E</strong>-field components
+   at our desired evaluation points.
+   The 
+   <a href="../../../tex/scuff-static.pdf">structure of the boundary-element-method (BEM) solver implemented by <span class=SC>scuff-static</span></a>
+   ensures that this calculation is fast, even for large <em>N</em>:
+   once we have assembled and factorized the BEM matrix
+   for a given geometry, we can solve any number of electrostatic
+   problems involving different excitations of that geometry essentially
+   "for free."</p>
+</li>
+<li>
+<p>Then we will run a second calculation in which all electrodes
+   are maintained at specific voltages and---in addition---an
+   externally-sourced electrostatic field is present. For
+   this case we will generate graphic visualization files
+   illustrating the fields in the vicinity of the device.</p>
+</li>
+</ol>
+<p>The geometry considered in this example is a model of a
+<a href="https://en.wikipedia.org/wiki/Quadrupole_ion_trap">Paul trap</a>;
+I am grateful to Anton Grounds for suggesting this
+application and for providing the sophisticated
+parameterized <a class="wikilink" href="../../../gmsh/">gmsh</a> file describing the geometry.</p>
+<p>The files for this example may be found in the
+<code class="codehilite">share/scuff-em/examples/PaulTrap</code> subdirectory
+of your <a class="wikilink" href="../../../scuff-em/">scuff-em</a> installation.</p>
+<h2 id="gmsh-geometry-and-mesh-files"><span class=SC>gmsh</span> geometry and mesh files</h2>
+<p>The <a href="http://www.geuz.org/gmsh"><span class=SC>gmsh</span></a>
+geometry file <a href="../Trap.geo"><code class="codehilite">Trap.geo</code></a> describes
+a collection of conductor surfaces constituting a Paul trap.
+This file contains a user-specifiable parameter <code class="codehilite">ELCNT</code>
+that may be used to set the number of electrodes; to create
+a mesh for a 8-electrode geometry, we say</p>
+<div class="codehilite"><pre><span></span>% gmsh -2 -setnumber ELCNT <span class="m">4</span> Trap.geo -o Trap_4.msh
+</pre></div>
+
+<p>(Note that the total number of electrodes is twice the value
+specified for <code class="codehilite">ELCNT</code>).
+This produces the <a class="wikilink" href="../../../gmsh/">gmsh</a> mesh file <code class="codehilite">Trap_4.msh</code>, which we can
+open in <a class="wikilink" href="../../../gmsh/">gmsh</a> to visualize: </p>
+<div class="codehilite"><pre><span></span>% gmsh Trap_4.msh
+</pre></div>
+
+<p><img alt="Trap_4.msh image" src="../PaulTrapMesh.png" /></p>
+<h2 id="simple-scuff-em-geometry-file">Simple <span class=SC>scuff-em</span> geometry file</h2>
+<p>The <a class="wikilink" href="../../../gmsh/">gmsh</a> file <code class="codehilite">Trap.geo</code> is designed to ensure that
+each separate metallic strip in the geometry---including
+each of the 8 identically-shaped electrodes, plus each of 
+the 7 strips of varying thicknesses running down the center
+of the structure---is meshed as a separate
+entity and assigned a unique (integer) identifier. Thus, one way to
+write a <a href="../../../reference/Geometries"><span class=SC>scuff-em</span> geometry file</a>
+for this geometry would be simply to include each of the 15
+distinct surfaces in <code class="codehilite">OBJECT...ENDOBJECT</code> clauses, each clause
+referencing a unique entity in the mesh. This strategy
+is pursued by the file <a href="../Trap_4.scuffgeo"><code class="codehilite">Trap_4.scuffgeo</code></a>,
+which looks like this:</p>
+<div class="codehilite"><pre><span></span>OBJECT GND
+    MESHFILE Trap_4.msh
+    MESHTAG <span class="m">1</span>
+ENDOBJECT
+
+OBJECT Rot2
+    MESHFILE Trap_4.msh
+    MESHTAG <span class="m">2</span>
+ENDOBJECT
+
+OBJECT Rot3
+    MESHFILE Trap_4.msh
+    MESHTAG <span class="m">3</span>
+ENDOBJECT
+
+OBJECT RF
+    MESHFILE Trap_4.msh
+    MESHTAG <span class="m">4</span>
+ENDOBJECT
+
+OBJECT Rot1
+    MESHFILE Trap_4.msh
+    MESHTAG <span class="m">5</span>
+ENDOBJECT
+
+OBJECT Rot4
+    MESHFILE Trap_4.msh
+    MESHTAG <span class="m">6</span>
+ENDOBJECT
+
+OBJECT UpperDC1
+    MESHFILE Trap_4.msh
+    MESHTAG <span class="m">7</span>
+ENDOBJECT
+
+OBJECT LowerDC1
+    MESHFILE Trap_4.msh
+    MESHTAG <span class="m">8</span>
+ENDOBJECT
+
+OBJECT UpperDC2
+    MESHFILE Trap_4.msh
+    MESHTAG <span class="m">9</span>
+ENDOBJECT
+
+OBJECT LowerDC2
+    MESHFILE Trap_4.msh
+    MESHTAG <span class="m">10</span>
+ENDOBJECT
+
+OBJECT UpperDC3
+    MESHFILE Trap_4.msh
+    MESHTAG <span class="m">11</span>
+ENDOBJECT
+
+OBJECT LowerDC3
+    MESHFILE Trap_4.msh
+    MESHTAG <span class="m">12</span>
+ENDOBJECT
+
+OBJECT UpperDC4
+    MESHFILE Trap_4.msh
+    MESHTAG <span class="m">13</span>
+ENDOBJECT
+
+OBJECT LowerDC4
+    MESHFILE Trap_4.msh
+    MESHTAG <span class="m">14</span>
+ENDOBJECT
+</pre></div>
+
+<p>Note that, although each of the <code class="codehilite">OBJECT</code> clauses references
+the same mesh file, the different values of the <code class="codehilite">MESHTAG</code>
+field select distinct entities within that file, so that each
+of the 15 <code class="codehilite">OBJECTs</code> are treated by <a class="wikilink" href="../../../scuff-em/">scuff-em</a> as
+distinct identities.
+(The values of the <code class="codehilite">MESHTAG</code> identifiers are defined
+in <code class="codehilite"><span class="na">.geo</span></code> files by <a class="wikilink" href="../../../gmsh/">gmsh</a>'s <code class="codehilite">Physical Surface</code> construct;
+see <a href="../Trap.geo"><code class="codehilite">Trap.geo</code></a> for an example).`</p>
+<h2 id="improved-scuff-em-geometry-file">Improved <span class=SC>scuff-em</span> geometry file</h2>
+<p>The file <code class="codehilite">Trap_4.scuffgeo</code> above defines a perfectly workable
+<a class="wikilink" href="../../../scuff-em/">scuff-em</a> geometry, and running calculations with this
+file will yield results identical to those obtained below.</p>
+<p>However, the strategy pursued by <code class="codehilite">Trap_4.scuffgeo</code> is <em>not</em>
+the optimal way to define this geometry to <a class="wikilink" href="../../../scuff-em/">scuff-em</a>,
+because it ignores significant potential for computational
+cost savings afforded by the structure of the geometry.
+Indeed, as we see from the image above, the geometry
+here contains many copies of <em>identical</em> shapes that
+are simply rotated and/or translated with respect to one
+another in space. For geometries of this sort, it
+is best <em>not</em> to define separate mesh entities for each
+of the various identical copies of structures, but rather
+to inform <a class="wikilink" href="../../../scuff-em/">scuff-em</a> of the redundancies that are present
+so that the code can make maximal reuse of computations
+carried out for identical structures.</p>
+<p>More specifically, we will modify the above file as follows:</p>
+<ul>
+<li>
+<p>Instead of defining each of the 8 electrodes to be a separate
+entity in the mesh, we will reference just <em>one</em> of the electrode
+rectangles in the mesh file, together with <code class="codehilite">DISPLACED</code> statements
+indicating how identical copies of that entity are to be translated
+in space to define the 8 electrodes in the positions shown above.</p>
+</li>
+<li>
+<p>Similarly, instead of defining separate meshed entities
+for each of the long runners in the center of the geometry,
+we will take advantage of the 180<script type="math/tex">^\circ</script> rotational symmetry
+by referencing only one copy of each distinct shape
+together with <code class="codehilite">ROTATED</code> statements indicating how identical
+copies of that shape are to be rotated in space to define the
+desired configuration of the runners.</p>
+</li>
+</ul>
+<p>As a result, <a class="wikilink" href="../../../scuff-em/">scuff-em</a> will need to read and store only
+5 distinct entities from the mesh file, together with
+instructions for displacements and rotations. This is a major
+reduction in complexity from the 15 distinct mesh structures
+involved in the simple <code class="codehilite"><span class="na">.scuffgeo</span></code> file above. (The primary
+computational efficiency here is that identical mesh
+structures--independent of displacement or rotation---contribute
+identical diagonal blocks to the BEM system matrix; if
+<a class="wikilink" href="../../../scuff-em/">scuff-em</a> knows that an object in a geometry has 7 identical
+mates, then it need only compute the corresponding matrix
+block <em>once</em> instead of 8 times, yielding huge cost reductions.
+<a class="wikilink" href="../../../scuff-static/">scuff-static</a> also detects and exploits redundancies in <em>off-diagonal</em>
+matrix blocks.)</p>
+<p>The file that implements this improved strategy is <a href="../Trap_4_Improved.scuffgeo"><code class="codehilite">Trap_4_Improved.scuffgeo</code></a>,
+and it looks like this:</p>
+<div class="codehilite"><pre><span></span>OBJECT UpperDC1
+    MESHFILE Trap_4.msh
+    MESHTAG <span class="m">7</span>
+ENDOBJECT
+
+OBJECT LowerDC1
+    MESHFILE Trap_4.msh
+    MESHTAG <span class="m">7</span>
+    DISPLACED <span class="m">0</span> -1656 <span class="m">0</span>
+ENDOBJECT
+
+OBJECT UpperDC2
+    MESHFILE Trap_4.msh
+    MESHTAG <span class="m">7</span>
+    DISPLACED <span class="m">220</span> <span class="m">0</span> <span class="m">0</span> 
+ENDOBJECT
+
+OBJECT LowerDC2
+    MESHFILE Trap_4.msh
+    MESHTAG <span class="m">7</span>
+    DISPLACED <span class="m">0</span> -1656 <span class="m">0</span>
+    DISPLACED <span class="m">220</span> <span class="m">0</span> <span class="m">0</span> 
+ENDOBJECT
+
+OBJECT UpperDC3
+    MESHFILE Trap_4.msh
+    MESHTAG <span class="m">7</span>
+    DISPLACED <span class="m">440</span> <span class="m">0</span> <span class="m">0</span> 
+ENDOBJECT
+
+OBJECT LowerDC3
+    MESHFILE Trap_4.msh
+    MESHTAG <span class="m">7</span>
+    DISPLACED <span class="m">0</span> -1656 <span class="m">0</span>
+    DISPLACED <span class="m">440</span> <span class="m">0</span> <span class="m">0</span> 
+ENDOBJECT
+
+OBJECT UpperDC4
+    MESHFILE Trap_4.msh
+    MESHTAG <span class="m">7</span>
+    DISPLACED <span class="m">660</span> <span class="m">0</span> <span class="m">0</span> 
+ENDOBJECT
+
+OBJECT LowerDC4
+    MESHFILE Trap_4.msh
+    MESHTAG <span class="m">7</span>
+    DISPLACED <span class="m">0</span> -1656 <span class="m">0</span>
+    DISPLACED <span class="m">660</span> <span class="m">0</span> <span class="m">0</span> 
+ENDOBJECT
+
+OBJECT GND
+    MESHFILE Trap_4.msh
+    MESHTAG <span class="m">1</span>
+ENDOBJECT
+
+OBJECT Rot1
+    MESHFILE Trap_4.msh
+    MESHTAG <span class="m">5</span>
+ENDOBJECT
+
+OBJECT Rot2
+    MESHFILE Trap_4.msh
+    MESHTAG <span class="m">2</span>
+ENDOBJECT
+
+OBJECT Rot3
+    MESHFILE Trap_4.msh
+    MESHTAG <span class="m">2</span>
+    ROTATED <span class="m">180</span> ABOUT <span class="m">0</span> <span class="m">0</span> <span class="m">1</span>
+ENDOBJECT
+
+OBJECT Rot4
+    MESHFILE Trap_4.msh
+    MESHTAG <span class="m">5</span>
+    ROTATED <span class="m">180</span> ABOUT <span class="m">0</span> <span class="m">0</span> <span class="m">1</span>
+ENDOBJECT
+
+OBJECT RF
+    MESHFILE Trap_4.msh
+    MESHTAG <span class="m">4</span>
+ENDOBJECT
+</pre></div>
+
+<p>As anticipated above, note that this file references
+only 5 distinct <code class="codehilite">MESHTAG</code> values instead of the 15 distinct
+values referenced by the original <code class="codehilite">Trap_4.scuffgeo</code> file.</p>
+<h3 id="visually-confirming-the-geometry-description">Visually confirming the geometry description</h3>
+<p>Before proceeding, we should certainly pause to check
+that the geometry defined by the improved geometry file
+does indeed look like what we want. We do this by
+running the <a href="../../../applications/scuff-analyze/scuff-analyze/"><span class=SC>scuff-analyze</span></a> utility
+with the <code class="codehilite">--WriteGMSHFiles</code> command-line option:</p>
+<div class="codehilite"><pre><span></span>% scuff-analyze --geometry Trap_4_Improved.scuffgeo --WriteGMSHFiles
+</pre></div>
+
+<p>This produces a file named <code class="codehilite">Trap_4_Improved.pp</code>, which we open
+in <code class="codehilite">gmsh</code> for visual confirmation:</p>
+<div class="codehilite"><pre><span></span>% gmsh Trap_4_Improved.pp
+</pre></div>
+
+<p><img alt="Trap_4_Improved.png" src="../Trap_4_Improved.png" /></p>
+<h2 id="phase-1-calculation-computing-fields-of-individual-conductors">Phase 1 calculation: Computing fields of individual conductors</h2>
+<p>The first phase of our calculation will be to determine the
+electrostatic field configurations produced by holding each of the
+individual electrodes at a potential of 1 V with all other electrodes
+grounded. This will yield 8 distinct field configurations,
+which we can sample at an arbitrary set of evaluation points
+or visualize in graphical form; the electrostatic field
+obtained by driving all conductors with arbitrary specified
+voltages will be a weighted linear combination of
+these 8 configurations, so we can use the elemental fields
+to optimize a set of electrode voltages to yield a given
+field profile (phase 2, below).</p>
+<h3 id="running-multiple-calculations-at-once-the-excitation-file">Running multiple calculations at once: The excitation file</h3>
+<p>One obvious way to do this calculation would be to run <a class="wikilink" href="../../../scuff-static/">scuff-static</a>
+8 times, each time using the <a href="../../../applications/scuff-static/scuff-static/#Type1Excitations"><code class="codehilite">--PotFile</code></a>
+command-line option to define a different set of conductor potentials.</p>
+<p>However, such an approach would be inefficient given the structure
+of the <a href="../../../tex/scuff-static.pdf">boundary-element method (BEM) implemented by
+<span class=SC>scuff-static</span></a>. In BEM solvers, almost all of the
+computational cost goes into assembling and factorizing the
+system matrix, which knows only about the geometry itself
+and is <em>independent</em> of any excitation that may furnish the
+stimulus in an electrostatics problem (such as externally-sourced
+fields or sets of prescribed conductor potentials).
+Thus, in cases where we wish to consider the response of a
+geometry to multiple stimuli, it is efficient to do the
+calculations all at once; having paid the cost of forming and
+factorizing the system matrix, we can solve electrostatics
+problems for any number of distinct stimuli essentially <strong>for free.</strong></p>
+<p>To allow this efficiency to be exploited in command-line calculations,
+<a class="wikilink" href="../../../scuff-static/">scuff-static</a> allows users to specify an
+<a href="../../../applications/scuff-static/scuff-static/#ExcitationFile"><em>excitation file</em></a>
+describing one or more stimuli to be applied to the geometry
+sequentially. For the purposes of our first calculation,
+the excitation file will specify 8 separate stimuli, each
+consisting of a choice of one conductor to be held at 
+a potential of <code class="codehilite">1.0</code> V (by default, any conductors not
+specified are maintained at 0 V). This file is called 
+<a href="../Phase1.Excitations"><code class="codehilite">Phase1.Excitations</code></a>:</p>
+<div class="codehilite"><pre><span></span>EXCITATION UpperDC1
+    UpperDC1 <span class="m">1</span>.0
+ENDEXCITATION
+
+EXCITATION LowerDC1
+    LowerDC1 <span class="m">1</span>.0
+ENDEXCITATION
+
+EXCITATION UpperDC2
+    UpperDC2 <span class="m">1</span>.0
+ENDEXCITATION
+
+EXCITATION LowerDC2
+    LowerDC2 <span class="m">1</span>.0
+ENDEXCITATION
+
+EXCITATION UpperDC3
+    UpperDC3 <span class="m">1</span>.0
+ENDEXCITATION
+
+EXCITATION LowerDC3
+    LowerDC3 <span class="m">1</span>.0
+ENDEXCITATION
+
+EXCITATION UpperDC4
+    UpperDC4 <span class="m">1</span>.0
+ENDEXCITATION
+
+EXCITATION LowerDC4
+    LowerDC4 <span class="m">1</span>.0
+ENDEXCITATION
+</pre></div>
+
+<p>This file is passed to <span class=SC>scuff-em</span> via
+the <code class="codehilite">--ExcitationFile</code> command-line option.
+Notice that each <code class="codehilite">EXCITATION</code> is labeled by an arbitrary user-defined
+tag, which will be used to identify the output produced under that
+excitation.</p>
+<p>Speaking of outputs, we will want to tell <a class="wikilink" href="../../../scuff-static/">scuff-static</a> what we'd
+like it to compute for each excitation. In this case I'll ask for
+two types of output:</p>
+<ul>
+<li>
+<p>numerical values of the electrostatic potential and field at a set
+of evaluation points I choose; I will choose a line of points lying
+slightly above the structure and running down the center conductor.
+I put the coordinates of these points into a text file called <a href="../MyEPFile"><code class="codehilite">MyEPFile</code></a>
+and say <code class="codehilite">--EPFile MyEPFile</code> on the <span class=SC>scuff-static</span>
+command line.</p>
+</li>
+<li>
+<p>graphical visualization files showing the distribution of surface charge
+induced on the geometry by each exciting stimulus. (See below for a
+different type of graphical visualization output.) To request
+this I use the <code class="codehilite">--PlotFile</code> option to specify the visualization output
+file name (here I call it <code class="codehilite">MyPlotFile.pp</code>).</p>
+</li>
+</ul>
+<p>Here's a script <a href="../Phase1.RunScript">(<code class="codehilite">Phase1.RunScript</code>)</a>
+that runs the phase-1 calculation:</p>
+<div class="codehilite"><pre><span></span><span class="ch">#!/bin/bash</span>
+
+<span class="nv">ARGS</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="nv">ARGS</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">ARGS</span><span class="si">}</span><span class="s2"> --geometry Trap_4_Improved.scuffgeo&quot;</span>
+<span class="nv">ARGS</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">ARGS</span><span class="si">}</span><span class="s2"> --ExcitationFile Phase1.Excitations&quot;</span>
+<span class="nv">ARGS</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">ARGS</span><span class="si">}</span><span class="s2"> --EPFile MyEPFile&quot;</span>
+<span class="nv">ARGS</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">ARGS</span><span class="si">}</span><span class="s2"> --PlotFile MyPlotFile.pp&quot;</span>
+scuff-static <span class="si">${</span><span class="nv">ARGS</span><span class="si">}</span>
+</pre></div>
+
+<p>This script takes about 3 seconds to run on my laptop.
+When it's finished, you have two new output files:</p>
+<ul>
+<li>
+<p><code class="codehilite">Trap_4_Improved.MyEPFile.out</code> is a text data file reporting
+values of the electrostatic potential and field components
+at each evaluation point in <code class="codehilite">MyEPFile</code> for each excitation.  </p>
+</li>
+<li>
+<p><code class="codehilite">MyPlotFile.pp</code> is a <a class="wikilink" href="../../../gmsh/">gmsh</a> visualization file plotting the 
+induced charge density for each of the 8 excitations. For example,
+here's what it looks like when the electrode named <code class="codehilite">LowerDC2</code> is 
+driven:</p>
+</li>
+</ul>
+<p><img alt="ChargeDensityPlot.png" src="../ChargeDensityPlot.png" /></p>
+<h2 id="phase-2-calculation-external-sources-and-field-visualization">Phase 2 calculation: External sources and field visualization</h2>
+<p>Having determined the fields produced by each electrode in isolation,
+in practice we would now presumably do some sort of design calculation
+to identify the optimal voltages at which to drive each electrode
+for our desired application. As a follow-up calculation, we'll
+now do a run in which <strong>(a)</strong> each conductor is set to a nonzero
+voltage, <strong>(b)</strong> additional external field sources are present, <strong>(c)</strong>
+we wish to visualize the electrostatic fields over a region of 
+space.</p>
+<p>Items <strong>(a)</strong> and <strong>(b)</strong> are handled by writing an excitation
+file <a href="../Phase2.Excitations">(<code class="codehilite">Phase2.Excitations</code>)</a> that specifies,
+in addition to prescribed conductor potentials, several
+external field sources that are also present in the geometry:
+a point monopole, a point dipole, a constant electric field, and
+an arbitrary user-specified function.
+(Needless to say, this contrived assortment of sources is intended
+primarily to illustrate the types of external-field sources
+that may be specified in excitation files). </p>
+<div class="codehilite"><pre><span></span>EXCITATION KitchenSink
+
+<span class="c1"># conductor potentials </span>
+
+    UpperDC1   <span class="m">0</span>.5
+    LowerDC1  -0.7
+    UpperDC2  -0.3
+    LowerDC2   <span class="m">0</span>.5
+    UpperDC3   <span class="m">0</span>.2
+    LowerDC3  -0.4
+    UpperDC4  -0.6
+    LowerDC4   <span class="m">1</span>.0
+
+<span class="c1"># point charge at X=(-400,1000,250) with charge -300</span>
+    monopole -400.0 <span class="m">1000</span>.0 <span class="m">250</span>.0   -300
+
+<span class="c1"># z-directed point dipole at X=(-300,-1000,-400)</span>
+    dipole  -300.0 -1000.0 -400.0  <span class="m">0</span>.0 <span class="m">0</span>.0 <span class="m">10000</span>.0
+
+<span class="c1"># small constant background field in Z-direction</span>
+    constant_field <span class="m">0</span> <span class="m">0</span> <span class="m">1</span>.0e-4
+
+<span class="c1"># arbitrary user-specified function of x, y, z, r, Rho, Theta, Phi</span>
+        phi <span class="m">1</span>.0e-8*Rho*Rho*cos<span class="o">(</span><span class="m">2</span>.0*Phi<span class="o">)</span>
+
+ENDEXCITATION
+</pre></div>
+
+<p>Item <strong>(c)</strong> is handled by using <a class="wikilink" href="../../../gmsh/">gmsh</a> to define a <em>field-visualization
+mesh</em>---in essence, a screen on which we want an image of the electrostatic
+field configuration, although it need not be planar---together with a
+set of <a href="../../../reference/Transformations">geometrical transformations</a> specifying how the screen 
+is to be replicated throughout space to yield quasi-3D visual information on the 
+field configuration. In this case, the mesh is described by 
+the simple <a class="wikilink" href="../../../gmsh/">gmsh</a> geometry file <a href="../Screen.geo"><code class="codehilite">Screen.geo</code></a>,
+which we turn into <code class="codehilite">Screen.msh</code> by running <code class="codehilite">gmsh -2 Screen.geo</code>.
+Then, the transformation file <a href="../Screen.trans"><code class="codehilite">Screen.trans</code></a>
+specifies three geometrical transformations in which the screen
+is rotated and displaced to define the three walls of the diorama
+shown in the figure below.</p>
+<p>The script that runs the calculation is <a href="../Phase2.RunScript"><code class="codehilite">Phase2.RunScript</code></a>:</p>
+<div class="codehilite"><pre><span></span><span class="ch">#!/bin/bash</span>
+
+<span class="nv">ARGS</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="nv">ARGS</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">ARGS</span><span class="si">}</span><span class="s2"> --geometry Trap_4_Improved.scuffgeo&quot;</span>
+<span class="nv">ARGS</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">ARGS</span><span class="si">}</span><span class="s2"> --ExcitationFile Phase2.Excitations&quot;</span>
+<span class="nv">ARGS</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">ARGS</span><span class="si">}</span><span class="s2"> --FVMesh Screen.msh&quot;</span>
+<span class="nv">ARGS</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">ARGS</span><span class="si">}</span><span class="s2"> --FVMeshTransFile Screen.trans&quot;</span>
+scuff-static <span class="si">${</span><span class="nv">ARGS</span><span class="si">}</span>
+</pre></div>
+
+<p>This produces several files with extension <code class="codehilite"><span class="na">.pp</span><span class="c">;</span></code> we open them
+all simultaneously in <a class="wikilink" href="../../../gmsh/">gmsh</a> together with the original geometry
+mesh to get some graphical insight into the spatial variation of the
+fields in our problem.</p>
+<div class="codehilite"><pre><span></span> % gmsh Trap_4*.pp Trap_4.msh
+</pre></div>
+
+<p>Click the image below for higher resolution:</p>
+<p><a href="../KitchenSink.png"><img src="../KitchenSink.png"></a></p>
+                
+                  
+                
+              
+              
+                
+
+
+
+  <h2 id="__comments">Comments</h2>
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = "http://homerreid.github.io/scuff-em-documentation/examples/PaulTrap/PaulTrap/";
+      this.page.identifier =
+        "/examples/PaulTrap/PaulTrap/";
+    };
+    (function() {
+      var d = document, s = d.createElement("script");
+      s.src = "//homerreid-github-io-scuff-em-documentation.disqus.com.disqus.com/embed.js";
+      s.setAttribute("data-timestamp", +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../../pythonCapacitance/pythonCapacitance/" title="Finite-size effects in stripline capacitors" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Finite-size effects in stripline capacitors
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../../YagiUdaAntennas/YagiUdaAntennas/" title="Z-parameters and directivity of Yagi-Uda antennas" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Z-parameters and directivity of Yagi-Uda antennas
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="http://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../assets/javascripts/application.b438e6c5.js"></script>
+      
+      <script>app.initialize({version:"0.17.3",url:{base:"../../.."}})</script>
+      
+        <script src="../../../javascripts/MathJax.js?config=TeX-AMS_HTML"></script>
+      
+        <script src="../../../javascripts/mathjaxhelper.js"></script>
+      
+    
+    
+      
+        <script>!function(e,a,t,n,o,c,i){e.GoogleAnalyticsObject=o,e.ga=e.ga||function(){(e.ga.q=e.ga.q||[]).push(arguments)},e.ga.l=1*new Date,c=a.createElement(t),i=a.getElementsByTagName(t)[0],c.async=1,c.src="https://www.google-analytics.com/analytics.js",i.parentNode.insertBefore(c,i)}(window,document,"script",0,"ga"),ga("create","UA-119340518-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview");var links=document.getElementsByTagName("a");if(Array.prototype.map.call(links,function(e){e.host!=document.location.host&&e.addEventListener("click",function(){var a=e.getAttribute("data-md-action")||"follow";ga("send","event","outbound",a,e.href)})}),document.forms.search){var query=document.forms.search.query;query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}</script>
+      
+    
+  </body>
+</html>

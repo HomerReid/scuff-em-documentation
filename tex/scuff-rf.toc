@@ -1,0 +1,8 @@
+\select@language {english}
+\contentsline {section}{\numberline {1}Overview}{1}
+\contentsline {section}{\numberline {2}The concept of an \texttt {RWGPort}}{3}
+\contentsline {paragraph}{Some technical implementation details}{5}
+\contentsline {section}{\numberline {3}SIE scattering problems with port excitation}{6}
+\contentsline {subsection}{\numberline {3.1}Port currents: A new type of incident field}{6}
+\contentsline {section}{\numberline {4}Calculation of impedance matrix}{8}
+\contentsline {subsection}{\numberline {.1}Port voltages: Alternative computation of impedance matrix}{10}

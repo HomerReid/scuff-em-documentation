@@ -1,0 +1,718 @@
+!--#set 
+    var="title" 
+    value="libscuff documentation: Main Flow Routines"
+  -->
+<!--#include virtual="/pagetop.shtml"-->
+
+<!-- begin main page body -->
+
+<!----------------------------------------------------------------------->
+<!-- main page table, with one row and three columns:                  -->
+<!--  navbar, trough, body.                                            -->
+<!----------------------------------------------------------------------->
+<table cellspacing="0" cellpadding="0" width="100%"><tr>
+  
+  <!----------------------------------------------------------------------->
+  <!-- left column of main page table: nav bar. --------------------------->
+  <!----------------------------------------------------------------------->
+  <td valign="top" width="180"> 
+  <!--#include virtual="/research/navbar.shtml"-->
+  </td> 
+
+  <!----------------------------------------------------------------------->
+  <!-- central column of main page table: separation trough --------------->
+  <!----------------------------------------------------------------------->
+  <td width="5%"></td>
+ 
+  <!----------------------------------------------------------------------->
+  <!-- right column of main page table: content of page. ------------------>
+  <!----------------------------------------------------------------------->
+  <td valign="top">
+    
+   <p><br> <p align="center">
+   <table align="center"> 
+     <tr> <td> <a href="scuff-em">
+               <img width="411" height="296" src="images/scuffEM.png">
+               </a>
+          </td>
+          <td width="5%"> </td>
+          <td> <h1>
+               <span class=CodeName>libscuff</span> 
+               API Documentation: 
+
+               <br>
+
+               Main Flow Routines
+               </h1>
+          </td>
+     </tr>
+   </table> 
+
+  <p> 
+  This page documents the <i>main flow</i> portion of the 
+  <span class=CodeName>libscuff</span> API -- that is, the 
+  routines that implement the key steps in the procedure for
+  solving BEM scattering problems.
+
+  <p> 
+  The procedure used by <span class=CodeName>libscuff</span> to solve
+  scattering problems is discussed briefly on the 
+  <a href="scuff-EM/reference/scuffEMImplementation.shtml">
+  <span class="CodeName">scuff-em</span> implementation notes page </a>
+  (and in more detail in the technical documents referenced therein);
+  the key equation is this linear system: 
+ 
+  <p align="center">
+  <img align="center" width="700" height="177"
+       src="scuff-em/reference/Equations/MatrixEquation.png">
+
+  <p>
+   In what follows, we will refer to the matrix in this equation
+   as <code>M</code>, to the vector on the left-hand side 
+   as <code>KN</code>, and to the vector on the right-hand side 
+   as <code>RHS</code>.
+
+  <p>
+  The steps in the <i>main flow</i> of a 
+  <span class=CodeName>libscuff</span> scattering problem 
+  are the following:
+
+  <p>
+  <blockquote>
+  <ol>
+    <li> Create an <code>RWGGeometry</code> object from a 
+         <a href="scuff-EM/reference/scuffEMGeometries.shtml"><code>.scuffgeo</code> file</a>.
+    <p>
+    <li> Assemble the BEM matrix <code>M</code> at a 
+         given frequency.
+    <p>
+    <li> Assemble the RHS vector <code>RHS</code> 
+         for a given incident field.
+    <p>
+    <li> Solve the linear system <code>M*KN=RHS</code> for 
+         the surface-current vector <code>KN</code>. 
+    <p>
+    <li> Use the vector <code>KN</code> to compute the scattered fields
+         at arbitrary points in space.
+  </ol>
+  </blockquote>
+
+  <p>
+  The <span class=CodeName>libscuff</span> API routines for each of 
+  these steps are discussed below.
+
+    <!----================================================================-->
+    <!---------------------------------------------------------------------->
+    <!----================================================================-->
+    <p>
+    <table align="center" class="TOC" cellpadding="5" cellspacing="5">
+
+      <tr> <th> <span class="CodeName">libscuff</span> Main Flow API
+      </th></tr>
+
+      <tr> <td>
+           <a href="scuff-EM/libscuff/MainFlow.shtml#Create">
+            1. Creating an RWGGeometry
+           </a>
+           </td>
+      </tr>
+
+      <tr> <td>
+           <a href="scuff-EM/libscuff/MainFlow.shtml#AssembleM">
+            2. Assembling the BEM matrix
+           </a>
+           </td>
+      </tr>
+
+      <tr> <td>
+           <a href="scuff-EM/libscuff/MainFlow.shtml#AssembleRHS">
+            3. Assembling the RHS vector
+           </a>
+           </td>
+      </tr>
+
+      <tr> <td>
+           <a href="scuff-EM/libscuff/MainFlow.shtml#Solve">
+            4. Solving the BEM system
+           </a>
+           </td>
+      </tr>
+
+      <tr> <td>
+           <a href="scuff-EM/libscuff/MainFlow.shtml#Compute">
+            5. Computing fields
+           </a>
+           </td>
+      <tr>
+    </table>
+
+  <!---------------------------------------------------------------------->
+  <!---------------------------------------------------------------------->
+  <!---------------------------------------------------------------------->
+  <p>
+  <h2><a name="Create"></a>1. Creating an <code>RWGGeometry</code> </h2>
+  <hr>
+
+    <p> 
+    The <code>RWGGeometry</code> class constructor takes a string 
+    argument that should be the name of a 
+    <a href="scuff-EM/reference/scuffEMGeometries.shtml"><code>.scuffgeo</code> file.</a>
+
+    <p> 
+    C++:
+
+    <p> 
+    <pre class="CPPListing">
+       RWGGeometry *G = new RWGGeometry("MyGeometry.scuffgeo");
+    </pre>
+
+    <p> 
+    Python:
+
+    <p> 
+    <pre class="PythonListing">
+       G =  scuff.RWGGeometry("MyGeometry.scuffgeo");
+    </pre>
+
+  <!---------------------------------------------------------------------->
+  <!---------------------------------------------------------------------->
+  <!---------------------------------------------------------------------->
+  <p>
+  <h2><a name="AssembleM"></a>2. Assembling the BEM matrix </h2>
+  <hr>
+
+    <p>
+    The BEM matrix is assembled by the
+    <code>AssembleBEMMatrix()</code> class method of
+    <code>RWGGeometry.</code>
+
+    <p>
+    The simplest invocation of this function requires only that
+    you specify the angular frequency:
+
+    <p> 
+    <pre class="CPPListing">
+       HMatrix *M = G->AssembleBEMMatrix(3.197);
+    </pre>
+
+    <p> 
+    <pre class="PythonListing">
+       M =  G.AssembleBEMMatrix(3.197);
+    </pre>
+
+    <p>
+    The return value of this function is a pointer to a newly-allocated
+    instance of <code>HMatrix</code>, a 
+    <a href="scuff-EM/libscuff/MatrixVector.shtml"> simple matrix class</a> provided
+    by <span class="CodeName">libscuff.</span> If you later want to 
+    recompute the matrix at a different frequency, you can pass 
+    <code>M</code> back as the second argument of 
+    <code>AssembleBEMMatrix</code> to avoid reallocating new storage:
+
+    <p> 
+    <pre class="CPPListing">
+       // first computation; allocates a new matrix
+       HMatrix *M = G->AssembleBEMMatrix(3.197);
+
+       // subsequent computation; reuses the existing matrix
+       G->AssembleBEMMatrix(5.134, M);
+    </pre>
+
+    <p>
+    The angular-frequency parameter to <code>AssembleBEMMatrix</code>
+    has type <code>cdouble,</code> which is 
+    <span class=CodeName>libscuff</span> shorthand 
+    for a complex number consisting
+    of two <code>double</code>-values:
+
+    <p> 
+    <pre class="CPPListing">
+    typedef std::complex<double> cdouble;
+    </pre>
+
+    <p> 
+    You may pass arbitrary complex-valued 
+    frequencies to <code>AssembleBEMMatrix:</code> 
+
+    <pre class="CPPListing">
+       cdouble Omega(2.3, 4.5);
+
+       HMatrix *M = G->AssembleBEMMatrix(Omega);
+    </pre>
+
+  <!---------------------------------------------------------------------->
+  <!---------------------------------------------------------------------->
+  <!---------------------------------------------------------------------->
+  <p>
+  <h2><a name="AssembleRHS"></a>3. Assembling the RHS vector </h2>
+  <hr>
+
+    <p>
+    The RHS vector is assembled by the
+    <code>AssembleRHSVector()</code> class method provided by 
+    <code>RWGGeometry.</code>
+
+    <p>
+    Before you can call this routine, you must define the incident 
+    field in your scattering geometry. This is done by instantiating
+    a class derived from the <code>IncField</code> base class 
+    defined in <code>libscuff.h</code>.
+
+    <p>
+    For most users, this will be a one-liner, because
+    <span class="CodeName">libscuff</span> comes with several
+    built-in classes derived from <code>IncField</code>
+    that implement commonly-encountered types of incident field, 
+    including plane waves, Gaussian laser beams, and the fields of
+    pointlike dipole radiators. For an instance, you can define a
+    plane wave traveling in the positive <i>z</i> direction with
+    <b>E-</b> field polarized in the <i>x</i> direction like this:
+
+    <p>
+    <pre class="CPPListing">
+       double pwDir[3]  = { 0.0, 0.0, 1.0 };
+       cdouble pwPol[3] = { 1.0, 0.0, 0.0 };
+       pw = new PlaneWave(pwPol, pwDir);
+    </pre>
+
+    <p>
+    <pre class="PythonListing">
+       pw = scuff.PlaneWave([1,0,0], [0,0,1])
+    </pre>
+
+    <p>
+    For details on how to create plane waves and other types of
+    incident fields, as well as information on how to create your 
+    own derived subclass of <code>IncField</code> to represent an
+    arbitrary incident field, see the 
+    <a href="scuff-em/libscuff/IncField.shtml">IncField documentation.</a>
+
+    <p>
+    Having defined our incident field, we pass it, and the frequency,
+    to <code>AssembleRHSVector</code>:
+
+    <p>
+    <pre class="CPPListing">
+       pw = new PlaneWave(pwPol, pwDir);
+       HVector *RHS = AssembleRHSVector(Omega, pw);
+    </pre>
+
+    <p>
+    <pre class="PythonListing">
+       pw = scuff.PlaneWave([1,0,0], [0,0,1])
+       RHS  = G.AssembleRHSVector(Omega, pw)
+    </pre>
+
+    <p>
+    As with <code>AssembleBEMMatrix</code>, these invocations 
+    of <code>AssembleRHSVector</code> will cause a new <code>HVector</code>
+    to be allocated. If you later want to reuse the same vector
+    to store a different right-hand side, you can pass it as the 
+    third argument:
+
+    <p>
+    <pre class="CPPListing">
+
+       // first computation; allocates a new vector
+       pw1 = new PlaneWave(pwPol1, pwDir1);
+       HVector *RHS = G->AssembleRHSVector(Omega, pw1);
+
+       // subsequent computation; reuses the existing vector
+       pw2 = new PlaneWave(pwPol2, pwDir2);
+       G->AssembleRHSVector(Omega, pw, RHS);
+
+    </pre>
+
+  <!---------------------------------------------------------------------->
+  <!---------------------------------------------------------------------->
+  <!---------------------------------------------------------------------->
+  <p>
+  <h2><a name="Solve"></a>4. Solving the BEM system </h2>
+  <hr>
+
+    <p>
+    Having assembled the BEM matrix and the RHS vector, the next step
+    is to do some numerical linear algebra to solve the BEM system for 
+    the vector of surface-current expansion coefficients. 
+
+    <p>
+    <h3>Solving the BEM system in C++ programs</h3>
+
+    <p>
+    From a C++ program, the easiest way to do this is to use the 
+    simple interface to
+    <a href="http://www.netlib.org/lapack">LAPACK</a> provided by
+    the 
+    <a href="scuff-em/libscuff/MatrixVector.shtml">
+    <span class=CodeName">libscuff</span> matrix/vector support layer.</a>
+    Specifically, after assembling the BEM matrix <code>M</code> you 
+    say <code>M->LUFactorize()</code> to replace <code>M</code> with its
+    LU-factorization; then, after assembling the RHS vector <code>RHS</code>
+    you say <code>M->LUSolve(RHS)</code> to replace <code>RHS</code>
+    with the solution of the system <code>M*KN=RHS.</code>
+
+    <p>
+    Note that you only have to call <code>LUFactorize()</code> 
+    <i>once</i> on a given BEM matrix, after which you can make any
+    number of calls to <code>LUSolve()</code> to solve the linear system
+    for any number of right-hand side vectors. If you subsequently 
+    reassemble the BEM matrix (say, at a different frequency), you 
+    must call <code>LUFactorize()</code> again before starting to 
+    do <code>LUSolves.</code>.
+
+    <p>
+    <pre class="CPPListing">
+
+      RWGGeometry *G=new RWGGeometry("MyGeometry.scuffgeo");
+
+      HMatrix *M=G->AllocateBEMMatrix();
+
+      HMatrix *KN=G->AllocateRHSVector();
+
+      for( nf=0; nf&lt;NumFreqs; nf++ ) 
+       { 
+         G->AssembleBEMMatrix( OmegaValues[nf], M );
+         M->LUFactorize();
+
+         for( ni=0; ni&lt;NumIncidentFields; ni++ )
+          { 
+            G->AssembleRHSVector( OmegaValues[nf], IncFields[ni], KN );
+            M->LUSolve(KN);
+
+            // now call GetFields() and/or do other things with the solution vector KN
+
+          };
+       };
+      
+    </pre>
+
+    <p>
+    <h3>Solving the BEM system in Python programs</h3>
+
+    <p>
+    Probably the easiest thing to do here is to use
+    <code>numpy.linalg.solve</code>:
+
+    <p>
+    <pre class="PythonListing">
+      import numpy;
+      KN = numpy.linalg.solve(M, RHS)
+    </pre>
+
+    <p>
+    Alternatively, you can access the LAPACK wrappers provided by 
+    <span class="CodeName">libscuff:</span>
+
+    <p>
+    <pre class="PythonListing">
+     M2 = scuff.HMatrix(M)
+     M2.LUFactorize()
+     KN = RHS
+     M2.LUSolve(LHS2)
+    </pre>
+
+
+
+  <!---------------------------------------------------------------------->
+  <!---------------------------------------------------------------------->
+  <!---------------------------------------------------------------------->
+  <p>
+  <h2><a name="Compute"></a>5. Computing fields</h2>
+  <hr>
+
+    <p> 
+    The final step in the main flow is to use the solution to the 
+    BEM system to compute the electric and magnetic fields at arbitrary
+    points in space. This is done using the <code>GetFields</code>
+    class method of <code>RWGGeometry.</code> 
+    (<span class="CodeName">libscuff</span> also offers a number of 
+     <a href="scuff-em/libscuff/Ancillary.shtml#Specialized">more 
+      specialized routines for computing field data</a> that may be
+      convenient in particular situations.)
+
+    <p>
+    <code>GetFields</code> offers a choice of several
+    calling conventions, ranging from simplest to most powerful.
+    But before we can discuss these we need to recall a 
+    peculiarity of the SIE/BEM approach to scattering problems.
+
+    <h3> Selecting the Incident, Scattered, or Total Fields</h3>
+
+    <p> 
+    To understand the calling convention for <code>GetFields</code>, we 
+    must first remember that in an SIE/BEM scattering problem 
+    there are three types of fields we can compute:
+
+    <p> 
+    <ol>
+      <li> the <i>incident</i> fields, which depend 
+           on the 
+           <code>IncField</code> object passed to 
+           <code>AssembleRHSVector,</code>
+
+      <p>
+      <li> the <i>scattered</i> fields, which depend on the 
+           <code>HVector</code> object obtained by solving the 
+           linear BEM system, and
+
+      <p>
+      <li> the <i>total</i> fields, representing the sum of incident 
+           and scattered contributions.
+    </ol>
+ 
+    <p>
+    Thus the first two parameters to <code>GetFields</code> are 
+    an <code>IncField</code> pointer and an <code>HVector</code> pointer:
+
+    <p>
+    <pre class="CPPListing">
+      RWGGeometry::GetFields( const IncField *IF, const HVector *KN, ... /* other arguments */ 
+    </pre>
+
+    <p>
+    Here <code>IF</code> should be the same <code>IncField</code> pointer
+    you passed to <code>AssembleRHSVector</code>, while <code>KN</code> 
+    should be the solution to the BEM system, as computed (for instance)
+    by saying something like <code>M->LUSolve(KN).</code>
+
+    <p>
+    You can select the type of field computed by <code>GetFields</code> by 
+    passing <code>NULL</code> values for one of these parameters to omit 
+    the corresponding field contributions. More specifically,
+
+    <p> 
+    <ol>
+      <li> If you pass <code>NULL</code> for the <code>KN</code> argument,
+           the fields computed will be the <i>incident</i> fields.
+
+      <p>
+      <li> If you pass <code>NULL</code> for the <code>IF</code> argument,
+           the fields computed will be the <i>scattered</i> fields.
+
+      <p>
+      <li> If you pass non-<code>NULL</code> values for both arguments,
+           the fields computed will be the <i>total</i> fields.
+    </ol>
+
+    <p> 
+    Note that the term "scattered fields" is actually somewhat imprecise,
+    because the fields arising from the surface currents are in fact the 
+    <i>total</i> fields in regions that do not contain field sources.
+    For example, consider a compact dielectric object irradiated by 
+    a plane wave. Outside the object, we have an incident field  
+    (the field of the plane wave) and a scattered field (the field arising 
+    from the surface currents on the sphere), and the total field is 
+    the sum of these two contributions.
+    However, inside the object we have <i>only</i> the contributions 
+    of the surface currents; the field arising from these currents
+    is already the total field inside the sphere with no contribution
+    from the incident field. For evaluation points inside the object, 
+    the scattered and total fields as computed by <code>GetFields</code> 
+    are identical, while the incident field is zero.
+
+    <h4> Field components at a single point </h4>
+
+    <p>
+    The simplest way to use <code>GetFields</code> is to compute the
+    Cartesian components of the <b>E</b> and <b>H</b> fields
+    at a single point <b>x.</b> The function prototype in this case 
+    is 
+
+    <p>
+    <pre class="CPPListing">
+      RWGGeometry::GetFields( const IncField *IF,
+                              const HVector *KN, 
+                              const cdouble Omega, 
+                              const double X[3],
+                              cdouble EH[6] );
+    </pre>
+    <p>
+    where the additional inputs beyond those discussed above are
+    <ul>
+     <li> <code>Omega:</code> the angular frequency
+     <li> <code>X</code>: the cartesian components of the evaluation point
+     <li> <code>KN:</code> the surface-current expansion vector
+    </ul>
+    and, on return, the output vector <code>EH</code> contains
+    the field components:
+    <ul>
+     <li> <code>EH[0..2]</code> are the cartesian components of the 
+                                scattered <b>E</b> field, 
+     <li> <code>EH[3..5]</code> are the cartesian components of the 
+                                scattered <b>H</b> field.
+    </ul>
+
+    <p>
+    <h4> Scattered field components at multiple points </h4>
+
+    <p>
+    To compute the scattered-field components at <i>N</i> evaluation points, 
+    you could just repeat the above procedure <i>N</i> times, but you will
+    get better throughput by first
+    <a href="scuff-em/libscuff/MatrixVector.shtml">creating an <code>HMatrix</code></a>,
+    of dimension <i>N x 3</i>, whose rows are the Cartesian components
+    of the evaluation points, and then passing this <code>HMatrix</code> in
+    place of the <code>X</code> parameter to <code>GetFields:</code>
+
+    <p>
+    <pre class="CPPListing">
+      HMatrix *RWGGeometry::GetFields( const IncField *IF,
+                                       const HVector *KN, 
+                                       const cdouble Omega, 
+                                       const HMatrix *XMatrix,
+                                       HMatrix *FMatrix = 0);
+    </pre>
+
+    <p>
+    In this case, the return value is a newly allocated <code>HMatrix</code>
+    of dimension <i>N x 6</i>, whose rows are the cartesian components 
+    of the scattered fields at your evaluation points, in the order
+    Ex, Ey, Ez, Hx, Hy, Hz. (If you already have a matrix of the correct
+    size lying around, perhaps from a previous call to <code>GetFields</code>,
+    you can pass it as the <code>FMatrix</code> parameter to suppress allocation
+    of a new <code>HMatrix</code>).
+
+    <p>
+
+    In <span class="CodeName">python</span>, you can create 
+    an <i>N</i>x3 <code>XMatrix</code> either by reading from a text 
+    file (containing the three cartesian coordinates of each evaluation 
+    point on a separate line, with blank lines and lines beginning with 
+    <code>#</code> ignored):
+
+
+    <p>
+    <pre class="PythonListing">
+     X=scuff.HMatrix("MyEvalPointFile")
+
+     Fields=G.GetFields(PW, KN, Omega, X)
+
+     # now we have Fields[0][0..5] = (Ex,Ey,Ez,Hx,Hy,Hz) at point 1 
+     #                   [1][0..5] = (Ex,Ey,Ez,Hx,Hy,Hz) at point 2 
+     # etc. 
+    </pre>
+
+    <p>
+    or by creating an <code>XMatrix</code> of size <i>N x 3</i> and  
+    setting the entries by hand. For example, if we want the fields at 
+    two evaluation points with coordinates <code>(0.1,0.2,0.3)</code> 
+    and <code>(0.4,0.5,0.6)</code>, we can say
+
+    <pre class="PythonListing">
+     X=scuff.HMatrix(2, 3); # for 2 eval points 
+
+     X->SetEntry( 0, 0, 0.1 ); # x coord of first point 
+     X->SetEntry( 0, 1, 0.2 ); # y coord of first point 
+     X->SetEntry( 0, 2, 0.3 ); # z coord of first point
+
+     X->SetEntry( 1, 0, 0.4 ); # x coord of second point 
+     X->SetEntry( 1, 1, 0.5 ); # y coord of second point 
+     X->SetEntry( 1, 2, 0.6 ); # z coord of second point
+
+     Fields=G.GetFields(PW, KN, Omega, X)
+
+     # now we have Fields[0][0..5] = (Ex,Ey,Ez,Hx,Hy,Hz) at point 1 
+     #                   [1][0..5] = (Ex,Ey,Ez,Hx,Hy,Hz) at point 2 
+     # etc. 
+    </pre> 
+
+    <p>
+    Alternatively, you can create <code>X</code> as a <code>numpy.array:</code> 
+
+    <p>
+    <pre class="PythonListing">
+     X=numpy.array( [ [0.1, 0.4], [0.2,0.5], [0.3, 0.6]]);
+
+     Fields=G.GetFields(PW, KN, Omega, X)
+    </pre>
+
+    <p>
+    Note that, when constructed as a <code>numpy.array</code>, 
+    <code>X</code> must have "shape" <code>(3,N)</code>, 
+    not <code>(N,3)</code> as you might expect.
+ 
+
+    <p>
+    <h4> Functions of field components at multiple points </h4>
+
+    <p>
+    The two invocations of <code>GetFields</code> discussed above
+    simply return the Cartesian components of the fields.
+    In some cases, you may instead (or in addition) want to evaluate
+    certain functions of these field components; for example, you
+    may want to compute the electromagnetic energy density at the
+    evaluation points (which involves squaring and summing the 
+    field components), or the components of the Poynting vector.
+
+    The version of <code>GetFields</code> that you want in this case is 
+
+    <p>
+    <pre class="CPPListing">
+      HMatrix *RWGGeometry::GetFields( const IncField *IF,
+                                       const HVector *KN, 
+                                       const cdouble Omega, 
+                                       const HMatrix *XMatrix,
+                                       HMatrix *FMatrix = 0,
+                                       const char *FuncString = 0);
+    </pre>
+
+    <p>
+    The arguments are as in the previous case with the exception
+    of the <code>FuncString</code> argument. This should be a
+    comma-separated list of string expressions, each describing a
+    function involving the field components, the material
+    properties, and the coordinates of the evaluation point.
+    The function string may refer to any of the variables in the 
+    following table.
+
+    <p>
+    <table align="center" border="1">
+     <tr> <th> Expression</th>  <th>Significance</th>  </tr>
+     <tr> <td>  x,  y,  z</td>  <td>Coordinates of evaluation point</td>  </tr>
+     <tr> <td> Ex, Ey, Ez</td>  <td>Electric field components</td>  </tr>
+     <tr> <td> Hx, Hy, Hz</td>  <td>Magnetic field components</td>  </tr>
+     <tr> <td>  Eps, Mu  </td>  <td><b>Relative</b> material properties at evaluation point</td>  </tr>
+     <tr> <td>  eps, mu  </td>  <td><b>Absolute</b> material properties at evaluation point</td>  </tr>
+     <tr> <td>  eps0, mu0, c0, z0 </td> 
+          <td>Permittivity, permeability, speed-of-light, impedance of the vacuum</td>
+     </tr>
+    </table>
+
+    <p>
+    <table align="center" border="1">
+    </table>
+
+    <p>
+    If there are <code>M</code> comma-separated strings in your
+    <code>Functions</code> string, then the return value of 
+    this version of <code>GetFields</code> is a newly-allocated 
+    <code>HMatrix</code> of dimension <code>NxM.</code> If you happen
+    to have a matrix of this size lying around (perhaps from an
+    earlier call to <code>GetFields</code> with the same numbers 
+    of evaluation points and field functions) you can pass it as the 
+    <code>FMatrix</code> argument to suppress allocation of a new 
+    matrix. (If <code>FMatrix</code> is <code>NULL</code> or points
+    to a matrix of the wrong size, a new matrix will be allocated
+    and returned.)
+
+  <!----------------------------------------------------------------------->
+  <!----------------------------------------------------------------------->
+  <!----------------------------------------------------------------------->
+  <!--#include virtual="/scuff-EM/scuffEMFooter.shtml">
+
+  <!----------------------------------------------------------------------->
+  <!-- end right column of main page table.                             --->
+  <!----------------------------------------------------------------------->
+  </td>
+  </table>
+
+<!----------------------------------------------------------------------->
+<!-- end main page table                                               -->
+<!----------------------------------------------------------------------->
+</tr></table>
+   
+<!----------------------------------------------------------------------->
+<!-- end main page body ------------------------------------------------->
+<!----------------------------------------------------------------------->
+   
+<!--#include virtual="/pageend.shtml"-->
