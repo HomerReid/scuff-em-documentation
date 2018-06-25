@@ -179,7 +179,7 @@ EXEEXT =
 F77 = gfortran
 FFLAGS = -g -O2
 FGREP = /usr/bin/grep -F
-FLIBS =  -L/home/homer/codes/lib -L/usr/lib64/gcc/x86_64-suse-linux/4.8 -L/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../x86_64-suse-linux/lib -L/usr/lib64/gcc/x86_64-suse-linux/4.8/../../.. -lgfortran -lm -lquadmath
+FLIBS =  -L/home/homer/codes/lib -L/home/homer/codes/lib64 -L/usr/lib64/gcc/x86_64-suse-linux/4.8 -L/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../x86_64-suse-linux/lib -L/usr/lib64/gcc/x86_64-suse-linux/4.8/../../.. -lgfortran -lm -lquadmath
 GREP = /usr/bin/grep
 INSTALL = /usr/bin/install -c
 INSTALL_DATA = ${INSTALL} -m 644
@@ -188,9 +188,9 @@ INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
 LAPACK_LIBS = 
 LD = /usr/x86_64-suse-linux/bin/ld -m elf_x86_64
-LDFLAGS = -L/home/homer/codes/lib
+LDFLAGS = -L/home/homer/codes/lib -L/home/homer/codes/lib64
 LIBOBJS = 
-LIBS = -lgsl -lgslcblas -lm -lreadline  -L/home/homer/codes/lib -Wl,-rpath=/home/homer/codes/lib -lopenblas -lgfortran -lhdf5_hl -lhdf5   -lhdf5_hl -lhdf5  -L/home/homer/codes/lib -L/usr/lib64/gcc/x86_64-suse-linux/4.8 -L/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../x86_64-suse-linux/lib -L/usr/lib64/gcc/x86_64-suse-linux/4.8/../../.. -lgfortran -lm -lquadmath
+LIBS = -lGDSII -lgsl -lgslcblas -lm -lreadline  -L/home/homer/codes/lib -Wl,-rpath=/home/homer/codes/lib -lopenblas -lgfortran -lhdf5_hl -lhdf5   -lhdf5_hl -lhdf5  -L/home/homer/codes/lib -L/home/homer/codes/lib64 -L/usr/lib64/gcc/x86_64-suse-linux/4.8 -L/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../x86_64-suse-linux/lib -L/usr/lib64/gcc/x86_64-suse-linux/4.8/../../.. -lgfortran -lm -lquadmath
 LIBTOOL = $(SHELL) $(top_builddir)/libtool
 LIPO = 
 LN_S = ln -s
@@ -223,7 +223,7 @@ PYTHON_PLATFORM =
 PYTHON_PREFIX = 
 PYTHON_VERSION = 
 RANLIB = ranlib
-SCUFFLIBS = -L/home/homer/codes/lib -lgsl -lgslcblas -lm -lreadline  -L/home/homer/codes/lib -Wl,-rpath=/home/homer/codes/lib -lopenblas -lgfortran -lhdf5_hl -lhdf5   -lhdf5_hl -lhdf5  -L/home/homer/codes/lib -L/usr/lib64/gcc/x86_64-suse-linux/4.8 -L/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../x86_64-suse-linux/lib -L/usr/lib64/gcc/x86_64-suse-linux/4.8/../../.. -lgfortran -lm -lquadmath
+SCUFFLIBS = -L/home/homer/codes/lib -L/home/homer/codes/lib64 -lGDSII -lgsl -lgslcblas -lm -lreadline  -L/home/homer/codes/lib -Wl,-rpath=/home/homer/codes/lib -lopenblas -lgfortran -lhdf5_hl -lhdf5   -lhdf5_hl -lhdf5  -L/home/homer/codes/lib -L/home/homer/codes/lib64 -L/usr/lib64/gcc/x86_64-suse-linux/4.8 -L/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../x86_64-suse-linux/lib -L/usr/lib64/gcc/x86_64-suse-linux/4.8/../../.. -lgfortran -lm -lquadmath
 SED = /usr/bin/sed
 SET_MAKE = 
 SHARED_VERSION_INFO = 0:0:0
