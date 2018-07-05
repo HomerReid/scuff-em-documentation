@@ -1,0 +1,6 @@
+# Data columns:
+# 1   frequency (GHz)
+# 2   h (substrate thickness)
+# 3   Eps (substrate permittivity)
+# 4,5 re,im Z11 (Ohms)
+1.000000e-01 

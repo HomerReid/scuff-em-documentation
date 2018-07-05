@@ -5,4 +5,3 @@
 \contentsline {section}{\numberline {3}SIE scattering problems with port excitation}{6}
 \contentsline {subsection}{\numberline {3.1}Port currents: A new type of incident field}{6}
 \contentsline {section}{\numberline {4}Calculation of impedance matrix}{8}
-\contentsline {subsection}{\numberline {.1}Port voltages: Alternative computation of impedance matrix}{10}

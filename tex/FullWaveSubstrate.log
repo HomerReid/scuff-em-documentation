@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/TeX Live for SUSE Linux) (preloaded format=pdflatex 2018.4.5)  16 APR 2018 06:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/TeX Live for SUSE Linux) (preloaded format=pdflatex 2018.4.5)  25 JUN 2018 13:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -398,12 +398,17 @@ LaTeX Font Info:    Try loading font information for U+rsfs on input line 37.
 
 (/usr/share/texmf/tex/latex/jknapltx/ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
-) (./FullWaveSubstrate.toc)
+) (./FullWaveSubstrate.toc
+Overfull \hbox (4.36638pt too wide) in paragraph at lines 5--5
+ [] []\OT1/cmr/m/sc/10 libsubstrate: \OT1/cmr/bx/n/10 Nu-mer-i-cal com-pu-ta-ti
+on of sub-strate Green's func- 
+ []
+
+)
 \tf@toc=\write5
 \openout5 = `FullWaveSubstrate.toc'.
 
-
-[1
+ [1
 
 
 
@@ -412,7 +417,7 @@ File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `!tbp') on input line 82.
 
-<figures/MultilayerSubstrate.pdf, id=11, 347.78627pt x 130.06287pt>
+<figures/MultilayerSubstrate.pdf, id=18, 347.78627pt x 130.06287pt>
 File: figures/MultilayerSubstrate.pdf Graphic file (type pdf)
 
 <use figures/MultilayerSubstrate.pdf>
@@ -499,10 +504,10 @@ Overfull \hbox (11.782pt too wide) in paragraph at lines 866--866
 
 [11] [12] [13] [14] [15] [16] [17]
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 1175.
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 1179.
 
 
-Overfull \hbox (9.70941pt too wide) in paragraph at lines 1177--1184
+Overfull \hbox (9.70941pt too wide) in paragraph at lines 1181--1188
 \OT1/cmr/m/n/10 The unit-test code \OT1/cmtt/m/n/10 tGTwiddle.cc \OT1/cmr/m/n/1
 0 tests that the full Fourier-space DGF $[](\OT1/cmr/bx/n/10 q\OML/cmm/m/it/10 
 ; z[]; z[]\OT1/cmr/m/n/10 )$
@@ -510,43 +515,35 @@ Overfull \hbox (9.70941pt too wide) in paragraph at lines 1177--1184
 
 
 LaTeX Warning: Reference `MultilayerSubstrate.pdf' on page 18 undefined on inpu
-t line 1198.
-
-
-LaTeX Warning: Reference `tgTwiddleCondition1' on page 18 undefined on input li
-ne 1210.
-
-
-LaTeX Warning: Reference `tgTwiddleCondition2' on page 18 undefined on input li
-ne 1210.
+t line 1202.
 
 [18]
-Overfull \hbox (102.79984pt too wide) in paragraph at lines 1228--1296
+Overfull \hbox (102.79984pt too wide) in paragraph at lines 1232--1300
 []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1228--1296
+Underfull \hbox (badness 10000) in paragraph at lines 1232--1300
 
  []
 
 
-Overfull \hbox (60.94003pt too wide) in paragraph at lines 1304--1342
+Overfull \hbox (60.94003pt too wide) in paragraph at lines 1308--1346
 []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1304--1342
+Underfull \hbox (badness 10000) in paragraph at lines 1308--1346
 
  []
 
 [19] [20]
-Overfull \hbox (3.70407pt too wide) in paragraph at lines 1390--1390
+Overfull \hbox (3.70407pt too wide) in paragraph at lines 1394--1394
 [] 
  []
 
 
-Overfull \hbox (135.26814pt too wide) detected at line 1425
+Overfull \hbox (135.26814pt too wide) detected at line 1429
 [] \OT1/cmr/m/n/10 = [] \OML/cmm/m/it/10 ? []
  []
 
@@ -561,7 +558,7 @@ LaTeX Warning: There were multiply-defined labels.
 Here is how much of TeX's memory you used:
  5524 strings out of 494041
  73019 string characters out of 6158496
- 164074 words of memory out of 5000000
+ 164094 words of memory out of 5000000
  8744 multiletter control sequences out of 15000+600000
  23384 words of font info for 90 fonts, out of 8000000 for 9000
  475 hyphenation exceptions out of 8191
@@ -596,7 +593,7 @@ are/texmf/fonts/type1/public/amsfonts/cm/cmtt8.pfb></usr/share/texmf/fonts/type
 1/public/amsfonts/euler/eufm10.pfb></usr/share/texmf/fonts/type1/public/amsfont
 s/euler/eufm7.pfb></usr/share/texmf/fonts/type1/public/amsfonts/symbols/msbm10.
 pfb>
-Output written on FullWaveSubstrate.pdf (21 pages, 460129 bytes).
+Output written on FullWaveSubstrate.pdf (21 pages, 462891 bytes).
 PDF statistics:
  231 PDF objects out of 1000 (max. 8388607)
  166 compressed objects within 2 object streams

@@ -446,6 +446,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../../../examples/NanorodResonantModes/NanorodResonantModes/" title="Mode frequencies and field patterns of resonant modes in gold nanorods" class="md-nav__link">
+      Mode frequencies and field patterns of resonant modes in gold nanorods
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../../../examples/CubeTorus/" title="Casimir forces in a compact geometry" class="md-nav__link">
       Casimir forces in a compact geometry
     </a>
@@ -808,6 +820,18 @@
   <li class="md-nav__item">
     <a href="../../../reference/Geometries/" title="Geometry descriptions" class="md-nav__link">
       Geometry descriptions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/EquivalentEdgeSurfacePairs/" title="Equivalent edge/surface pairs" class="md-nav__link">
+      Equivalent edge/surface pairs
     </a>
   </li>
 
@@ -1487,7 +1511,7 @@
 <p><a class="wikilink" href="../../../scuff-spectrum/">scuff-spectrum</a> is a tool within the <a class="wikilink" href="../../../scuff-em/">scuff-em</a> code suite
 for computing frequencies and field patterns of resonant modes
 in arbitrary material geometries. More specifically, <a class="wikilink" href="../../../scuff-spectrum/">scuff-spectrum</a>
-implements <a href="../../../applications/scuff-spectrum/scuff-spectrum/#BeynMethod">Beyn's contour-integral algorithm for nonlinear
+implements <a href="./#BeynMethod">Beyn's contour-integral algorithm for nonlinear
 eigenproblems</a>, described in more detail below,
 to pinpoint frequencies <script type="math/tex">\omega</script> at which the
 <a href="../../../forDevelopers/Implementation.md/#PMCHWTSystem">BEM system matrix <script type="math/tex">\mathbf{M}(\omega)</script></a> is singular,
@@ -1562,6 +1586,7 @@ in a complicated nonlinear way on the frequency <script type="math/tex">\omega</
 this means we can't simply use standard solvers
 for linear eigenproblems such as those implemented
 in <a href="http://www.netlib.org/lapack/"><span class=SC>lapack</span></a>.</p>
+<p><a name="BeynMethod"></a></p>
 <h3 id="beyns-contour-integral-algorithm-a-lightning-overview">Beyn's contour-integral algorithm: A lightning overview</h3>
 <p>Instead, <a class="wikilink" href="../../../scuff-spectrum/">scuff-spectrum</a> implements the contour-integral approach
 to nonlinear eigenproblems proposed by W. Beyn in this 2012 paper:</p>

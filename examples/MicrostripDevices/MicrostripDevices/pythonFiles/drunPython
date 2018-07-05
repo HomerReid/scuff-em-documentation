@@ -1,0 +1,8 @@
+
+#!/bin/bash
+
+export SCUFF=/home/homer/work/scuff-em-debug
+
+export PYTHONPATH=${SCUFF}/lib/python2.7/site-packages:${SCUFF}/lib64/python2.7/site-packages
+
+gdb --args python "$@"

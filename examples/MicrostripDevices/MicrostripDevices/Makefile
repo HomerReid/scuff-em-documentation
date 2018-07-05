@@ -81,11 +81,12 @@ subdir = examples/MicrostripDevices
 DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/Makefile.am
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/acx_blas.m4 \
-	$(top_srcdir)/m4/acx_lapack.m4 $(top_srcdir)/m4/ax_openmp.m4 \
-	$(top_srcdir)/m4/ax_pthread.m4 $(top_srcdir)/m4/libtool.m4 \
-	$(top_srcdir)/m4/ltoptions.m4 $(top_srcdir)/m4/ltsugar.m4 \
-	$(top_srcdir)/m4/ltversion.m4 $(top_srcdir)/m4/lt~obsolete.m4 \
-	$(top_srcdir)/configure.ac
+	$(top_srcdir)/m4/acx_lapack.m4 \
+	$(top_srcdir)/m4/ax_cxx_compile_stdcxx.m4 \
+	$(top_srcdir)/m4/ax_openmp.m4 $(top_srcdir)/m4/ax_pthread.m4 \
+	$(top_srcdir)/m4/libtool.m4 $(top_srcdir)/m4/ltoptions.m4 \
+	$(top_srcdir)/m4/ltsugar.m4 $(top_srcdir)/m4/ltversion.m4 \
+	$(top_srcdir)/m4/lt~obsolete.m4 $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(install_sh) -d
@@ -161,8 +162,8 @@ CCDEPMODE = depmode=gcc3
 CFLAGS = -g -O2
 CPP = mpicc -E
 CPPFLAGS = -I/usr/include/hdf5/openmpi -I/home/homer/codes/include
-CXX = mpic++
-CXXCPP = mpic++ -E
+CXX = mpic++ -std=gnu++11
+CXXCPP = mpic++ -E -std=gnu++11
 CXXDEPMODE = depmode=gcc3
 CXXFLAGS = -g -O2 -Wall -W -Wcast-qual -Wpointer-arith -Wcast-align -pedantic -Wno-long-long -Wshadow -Wwrite-strings -Wredundant-decls -pedantic -fopenmp 
 CYGPATH_W = echo
@@ -181,6 +182,7 @@ FFLAGS = -g -O2
 FGREP = /usr/bin/grep -F
 FLIBS =  -L/home/homer/codes/lib -L/home/homer/codes/lib64 -L/usr/lib64/gcc/x86_64-suse-linux/4.8 -L/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../x86_64-suse-linux/lib -L/usr/lib64/gcc/x86_64-suse-linux/4.8/../../.. -lgfortran -lm -lquadmath
 GREP = /usr/bin/grep
+HAVE_CXX11 = 1
 INSTALL = /usr/bin/install -c
 INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_PROGRAM = ${INSTALL}
@@ -216,12 +218,12 @@ PATH_SEPARATOR = :
 PTHREAD_CC = mpicc
 PTHREAD_CFLAGS = 
 PTHREAD_LIBS = 
-PYTHON = 
-PYTHON_EXEC_PREFIX = 
-PYTHON_INCLUDES = 
-PYTHON_PLATFORM = 
-PYTHON_PREFIX = 
-PYTHON_VERSION = 
+PYTHON = /usr/bin/python
+PYTHON_EXEC_PREFIX = ${exec_prefix}
+PYTHON_INCLUDES = -I/usr/include/python2.7 -I/usr/lib64/python2.7/site-packages/numpy/core/include
+PYTHON_PLATFORM = linux2
+PYTHON_PREFIX = ${prefix}
+PYTHON_VERSION = 2.7
 RANLIB = ranlib
 SCUFFLIBS = -L/home/homer/codes/lib -L/home/homer/codes/lib64 -lGDSII -lgsl -lgslcblas -lm -lreadline  -L/home/homer/codes/lib -Wl,-rpath=/home/homer/codes/lib -lopenblas -lgfortran -lhdf5_hl -lhdf5   -lhdf5_hl -lhdf5  -L/home/homer/codes/lib -L/home/homer/codes/lib64 -L/usr/lib64/gcc/x86_64-suse-linux/4.8 -L/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib64/gcc/x86_64-suse-linux/4.8/../../../../x86_64-suse-linux/lib -L/usr/lib64/gcc/x86_64-suse-linux/4.8/../../.. -lgfortran -lm -lquadmath
 SED = /usr/bin/sed
@@ -274,13 +276,13 @@ mandir = ${datarootdir}/man
 mkdir_p = $(MKDIR_P)
 oldincludedir = /usr/include
 pdfdir = ${docdir}
-pkgpyexecdir = 
-pkgpythondir = 
+pkgpyexecdir = ${pyexecdir}/scuff-em
+pkgpythondir = ${pythondir}/scuff-em
 prefix = /home/homer/work/scuff-em-development-installation
 program_transform_name = s,x,x,
 psdir = ${docdir}
-pyexecdir = 
-pythondir = 
+pyexecdir = ${exec_prefix}/lib64/python2.7/site-packages
+pythondir = ${prefix}/lib/python2.7/site-packages
 sbindir = ${exec_prefix}/sbin
 sharedstatedir = ${prefix}/com
 srcdir = .

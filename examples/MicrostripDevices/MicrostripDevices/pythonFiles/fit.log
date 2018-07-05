@@ -1,0 +1,550 @@
+
+
+*******************************************************************************
+Wed Jun 27 21:51:02 2018
+
+
+FIT:    data read from 'N1160.zparms' u 1:(-1/$11)
+        format = x:z
+        x range restricted to [0.00000 : 1.00000]
+        #datapoints = 10
+        residuals are weighted equally (unit weight)
+
+function used for fitting: a*x
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a            
+   0 1.6952237503e+00   0.00e+00  4.50e-01    1.000000e+00
+   4 8.1082485001e-05  -1.60e-09  4.50e-05    8.547214e-02
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 8.10825e-05
+rel. change during last iteration : -1.60459e-14
+
+degrees of freedom    (FIT_NDF)                        : 9
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.00300153
+variance of residuals (reduced chisquare) = WSSR/ndf   : 9.00917e-06
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 0.0854721        +/- 0.002108     (2.467%)
+
+
+*******************************************************************************
+Wed Jun 27 21:52:22 2018
+
+
+FIT:    data read from 'N1160.zparms' u (ifeq($2,2,$1)):(-1/$11)
+        format = x:z
+        x range restricted to [0.00000 : 1.00000]
+        #datapoints = 10
+        residuals are weighted equally (unit weight)
+
+function used for fitting: a*x
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a2           
+   0 9.4932828576e-03   0.00e+00  0.00e+00    1.000000e+00
+BREAK: Singular matrix in Givens()
+
+*******************************************************************************
+Wed Jun 27 21:52:27 2018
+
+
+FIT:    data read from 'N1160.zparms' u (ifeq($2,2,$1)):(-1/$11)
+        format = x:z
+        x range restricted to [0.00000 : 1.00000]
+        #datapoints = 10
+        residuals are weighted equally (unit weight)
+
+function used for fitting: a2*x
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a2           
+   0 1.9623300833e+00   0.00e+00  4.51e-01    1.001000e+00
+   4 3.4768501318e-07  -4.66e-07  4.51e-05    1.703465e-02
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 3.47685e-07
+rel. change during last iteration : -4.65514e-12
+
+degrees of freedom    (FIT_NDF)                        : 9
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.000196549
+variance of residuals (reduced chisquare) = WSSR/ndf   : 3.86317e-08
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a2              = 0.0170346        +/- 0.0001381    (0.8105%)
+
+
+*******************************************************************************
+Wed Jun 27 21:54:00 2018
+
+
+FIT:    data read from 'N1160.zparms' u (ifeq($2,2,ifeq($3,0.5,$1))):(-1/$11)
+        format = x:z
+        x range restricted to [0.00000 : 1.00000]
+BREAK: No data to fit
+
+*******************************************************************************
+Wed Jun 27 21:54:14 2018
+
+
+FIT:    data read from 'N1160.zparms' u (ifeq($2,10,ifeq($3,0.5,$1))):(-1/$11)
+        format = x:z
+        x range restricted to [0.00000 : 1.00000]
+        #datapoints = 10
+        residuals are weighted equally (unit weight)
+
+function used for fitting: a10*x
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a10          
+   0 1.5823151301e+00   0.00e+00  4.50e-01    1.000000e+00
+   4 5.2605089179e-04  -2.27e-10  4.50e-05    1.165782e-01
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 0.000526051
+rel. change during last iteration : -2.26712e-15
+
+degrees of freedom    (FIT_NDF)                        : 9
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.00764527
+variance of residuals (reduced chisquare) = WSSR/ndf   : 5.84501e-05
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a10             = 0.116578         +/- 0.00537      (4.606%)
+
+
+*******************************************************************************
+Wed Jun 27 21:55:45 2018
+
+
+FIT:    data read from 'N2640.zparms' u (ifeq($2,10,ifeq($3,0.5,$1))):(-1/$11)
+        format = x:z
+        x range restricted to [0.00000 : 1.00000]
+        #datapoints = 5
+        residuals are weighted equally (unit weight)
+
+function used for fitting: a10Fine*x
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a10Fine      
+   0 1.3359015899e-01   0.00e+00  1.82e-01    1.000000e+00
+   4 3.6219340502e-06  -1.63e-07  1.82e-05    1.000416e-01
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 3.62193e-06
+rel. change during last iteration : -1.63177e-12
+
+degrees of freedom    (FIT_NDF)                        : 4
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.000951569
+variance of residuals (reduced chisquare) = WSSR/ndf   : 9.05484e-07
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a10Fine         = 0.100042         +/- 0.002343     (2.342%)
+
+
+*******************************************************************************
+Wed Jun 27 21:56:20 2018
+
+
+FIT:    data read from 'N2640.zparms' u (ifeq($2,10,ifeq($3,1,$1))):(-1/$11)
+        format = x:z
+        x range restricted to [0.00000 : 1.00000]
+        #datapoints = 10
+        residuals are weighted equally (unit weight)
+
+function used for fitting: b10Fine*x
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   b10Fine      
+   0 1.7077882646e+00   0.00e+00  4.50e-01    1.000000e+00
+   4 7.2304547011e-05  -1.99e-09  4.50e-05    8.208676e-02
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 7.23045e-05
+rel. change during last iteration : -1.98683e-14
+
+degrees of freedom    (FIT_NDF)                        : 9
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.0028344
+variance of residuals (reduced chisquare) = WSSR/ndf   : 8.03384e-06
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+b10Fine         = 0.0820868        +/- 0.001991     (2.425%)
+
+
+*******************************************************************************
+Wed Jun 27 22:00:31 2018
+
+
+FIT:    data read from 'N2640.zparms' u (ifeq($2,10,ifeq($3,1,$1))):(-1/$5)
+        format = x:z
+        x range restricted to [0.00000 : 1.00000]
+        #datapoints = 10
+        residuals are weighted equally (unit weight)
+
+function used for fitting: a10Fine*x
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a10Fine      
+   0 1.2314028213e-02   0.00e+00  4.50e-02    1.000416e-01
+   4 3.2472794772e-06  -2.48e-10  4.50e-06    2.210585e-02
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 3.24728e-06
+rel. change during last iteration : -2.47802e-15
+
+degrees of freedom    (FIT_NDF)                        : 9
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.000600674
+variance of residuals (reduced chisquare) = WSSR/ndf   : 3.60809e-07
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a10Fine         = 0.0221058        +/- 0.0004219    (1.909%)
+
+
+*******************************************************************************
+Wed Jun 27 22:00:41 2018
+
+
+FIT:    data read from 'N2640.zparms' u (ifeq($2,10,ifeq($3,0.5,$1))):(-1/$5)
+        format = x:z
+        x range restricted to [0.00000 : 1.00000]
+        #datapoints = 10
+        residuals are weighted equally (unit weight)
+
+function used for fitting: b10Fine*x
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   b10Fine      
+   0 6.8909834249e-03   0.00e+00  3.70e-02    8.208676e-02
+   4 1.4227173807e-06  -3.57e-10  3.70e-06    2.378394e-02
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 1.42272e-06
+rel. change during last iteration : -3.57218e-15
+
+degrees of freedom    (FIT_NDF)                        : 9
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.000397592
+variance of residuals (reduced chisquare) = WSSR/ndf   : 1.5808e-07
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+b10Fine         = 0.0237839        +/- 0.0002793    (1.174%)
+
+
+*******************************************************************************
+Wed Jun 27 22:01:12 2018
+
+
+FIT:    data read from 'N2640.zparms' u (ifeq($2,2,ifeq($3,0.5,$1))):(-1/$5)
+        format = x:z
+        x range restricted to [0.00000 : 1.00000]
+BREAK: No data to fit
+
+*******************************************************************************
+Wed Jun 27 22:01:48 2018
+
+
+FIT:    data read from 'N1160.zparms' u (ifeq($2,10,ifeq($3,0.5,$1))):(-1/$5)
+        format = x:z
+        x range restricted to [0.00000 : 1.00000]
+        #datapoints = 10
+        residuals are weighted equally (unit weight)
+
+function used for fitting: b10*x
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   b10          
+   0 1.9274104025e+00   0.00e+00  4.50e-01    1.000000e+00
+   4 2.6774575399e-05  -5.91e-09  4.50e-05    2.483547e-02
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 2.67746e-05
+rel. change during last iteration : -5.90955e-14
+
+degrees of freedom    (FIT_NDF)                        : 9
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.00172481
+variance of residuals (reduced chisquare) = WSSR/ndf   : 2.97495e-06
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+b10             = 0.0248355        +/- 0.001212     (4.878%)
+
+
+*******************************************************************************
+Wed Jun 27 22:02:43 2018
+
+
+FIT:    data read from 'N2640.zparms' u (ifeq($2,2,ifeq($3,0.5,$1))):(-1/$5)
+        format = x:z
+        x range restricted to [0.00000 : 1.00000]
+        #datapoints = 10
+        residuals are weighted equally (unit weight)
+
+function used for fitting: b2Fine*x
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   b2Fine       
+   0 2.0027736272e+00   0.00e+00  4.50e-01    1.000000e+00
+   4 1.0501353896e-06  -1.57e-07  4.50e-05    5.946788e-03
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 1.05014e-06
+rel. change during last iteration : -1.57306e-12
+
+degrees of freedom    (FIT_NDF)                        : 9
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.000341587
+variance of residuals (reduced chisquare) = WSSR/ndf   : 1.16682e-07
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+b2Fine          = 0.00594679       +/- 0.0002399    (4.035%)
+
+
+*******************************************************************************
+Wed Jun 27 22:02:51 2018
+
+
+FIT:    data read from 'N2640.zparms' u (ifeq($2,2,ifeq($3,1.0,$1))):(-1/$5)
+        format = x:z
+        x range restricted to [0.00000 : 1.00000]
+BREAK: No data to fit
+
+*******************************************************************************
+Wed Jun 27 22:03:12 2018
+
+
+FIT:    data read from 'N2640.zparms' u (ifeq($2,2,ifeq($3,1.0,$1))):(-1/$5)
+        format = x:z
+        x range restricted to [0.00000 : 1.00000]
+BREAK: No data to fit
+
+*******************************************************************************
+Wed Jun 27 22:03:25 2018
+
+
+FIT:    data read from 'N2640.zparms' u (ifeq($2,2,ifeq($3,1.0,$1))):(-1/$5)
+        format = x:z
+        x range restricted to [0.00000 : 1.00000]
+        #datapoints = 4
+        residuals are weighted equally (unit weight)
+
+function used for fitting: a2Fine*x
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a2Fine       
+   0 9.4386049383e-02   0.00e+00  1.54e-01    1.000000e+00
+   4 1.3303160686e-08  -1.10e-04  1.54e-05    5.420242e-03
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 1.33032e-08
+rel. change during last iteration : -1.10302e-09
+
+degrees of freedom    (FIT_NDF)                        : 3
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 6.65912e-05
+variance of residuals (reduced chisquare) = WSSR/ndf   : 4.43439e-09
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a2Fine          = 0.00542024       +/- 0.0002156    (3.977%)
+
+
+*******************************************************************************
+Wed Jun 27 22:03:57 2018
+
+
+FIT:    data read from 'N2640.zparms' u (ifeq($2,2,ifeq($3,1.0,$1))):(-1/$11)
+        format = x:z
+        x range restricted to [0.00000 : 1.00000]
+        #datapoints = 10
+        residuals are weighted equally (unit weight)
+
+function used for fitting: a2Fine*x
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a2Fine       
+   0 2.7683599466e-04   0.00e+00  2.44e-03    5.420242e-03
+   4 6.6135754464e-08  -5.20e-10  2.44e-07    1.710590e-02
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 6.61358e-08
+rel. change during last iteration : -5.20304e-15
+
+degrees of freedom    (FIT_NDF)                        : 9
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 8.57229e-05
+variance of residuals (reduced chisquare) = WSSR/ndf   : 7.34842e-09
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a2Fine          = 0.0171059        +/- 6.021e-05    (0.352%)
+
+
+*******************************************************************************
+Wed Jun 27 22:04:03 2018
+
+
+FIT:    data read from 'N2640.zparms' u (ifeq($2,2,ifeq($3,0.5,$1))):(-1/$11)
+        format = x:z
+        x range restricted to [0.00000 : 1.00000]
+        #datapoints = 10
+        residuals are weighted equally (unit weight)
+
+function used for fitting: b2Fine*x
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   b2Fine       
+   0 6.3413867918e-04   0.00e+00  2.68e-03    5.946788e-03
+   3 1.4267445868e-05  -3.58e-02  2.68e-06    2.343497e-02
+
+After 3 iterations the fit converged.
+final sum of squares of residuals : 1.42674e-05
+rel. change during last iteration : -3.58345e-07
+
+degrees of freedom    (FIT_NDF)                        : 9
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.00125908
+variance of residuals (reduced chisquare) = WSSR/ndf   : 1.58527e-06
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+b2Fine          = 0.023435         +/- 0.0008844    (3.774%)
+
+
+*******************************************************************************
+Wed Jun 27 22:05:07 2018
+
+
+FIT:    data read from 'N1160.zparms' u (ifeq($2,2,ifeq($3,2.0,$1))):(-1/$11)
+        format = x:z
+        x range restricted to [0.00000 : 1.00000]
+        #datapoints = 10
+        residuals are weighted equally (unit weight)
+
+function used for fitting: a2*x
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a2           
+   0 7.5382484614e-05   0.00e+00  7.67e-03    1.703465e-02
+   4 3.6187929711e-08   0.00e+00  7.67e+00    1.093752e-02
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 3.61879e-08
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 9
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 6.34104e-05
+variance of residuals (reduced chisquare) = WSSR/ndf   : 4.02088e-09
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a2              = 0.0109375        +/- 4.454e-05    (0.4072%)
+
+
+*******************************************************************************
+Wed Jun 27 22:05:16 2018
+
+
+FIT:    data read from 'N1160.zparms' u (ifeq($2,2,ifeq($3,1.0,$1))):(-1/$11)
+        format = x:z
+        x range restricted to [0.00000 : 1.00000]
+        #datapoints = 10
+        residuals are weighted equally (unit weight)
+
+function used for fitting: b2*x
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   b2           
+   0 1.9583434946e+00   0.00e+00  4.50e-01    1.000000e+00
+   4 3.4768501318e-07  -4.65e-07  4.50e-05    1.703465e-02
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 3.47685e-07
+rel. change during last iteration : -4.64707e-12
+
+degrees of freedom    (FIT_NDF)                        : 9
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.000196549
+variance of residuals (reduced chisquare) = WSSR/ndf   : 3.86317e-08
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+b2              = 0.0170346        +/- 0.0001381    (0.8105%)
+
+
+*******************************************************************************
+Wed Jun 27 22:06:56 2018
+
+
+FIT:    data read from 'N1160.zparms' u (ifeq($2,10,ifeq($3,1.0,$1))):(-1/$11)
+        format = x:z
+        x range restricted to [0.00000 : 1.00000]
+        #datapoints = 10
+        residuals are weighted equally (unit weight)
+
+function used for fitting: a2*x
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   b2           
+   0 1.1340821915e-02   0.00e+00  0.00e+00    1.703465e-02
+BREAK: Singular matrix in Givens()
+
+*******************************************************************************
+Wed Jun 27 22:06:58 2018
+
+
+FIT:    data read from 'N1160.zparms' u (ifeq($2,10,ifeq($3,1.0,$1))):(-1/$11)
+        format = x:z
+        x range restricted to [0.00000 : 1.00000]
+        #datapoints = 10
+        residuals are weighted equally (unit weight)
+
+function used for fitting: a2*x
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a2           
+   0 1.1340821915e-02   0.00e+00  4.92e-03    1.093752e-02
+   3 8.1082485001e-05  -1.15e-01  4.92e-06    8.547214e-02
+
+After 3 iterations the fit converged.
+final sum of squares of residuals : 8.10825e-05
+rel. change during last iteration : -1.14538e-06
+
+degrees of freedom    (FIT_NDF)                        : 9
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.00300153
+variance of residuals (reduced chisquare) = WSSR/ndf   : 9.00917e-06
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a2              = 0.0854721        +/- 0.002108     (2.467%)
+
+
+*******************************************************************************
+Wed Jun 27 22:07:06 2018
+
+
+FIT:    data read from 'N1160.zparms' u (ifeq($2,10,ifeq($3,0.5,$1))):(-1/$11)
+        format = x:z
+        x range restricted to [0.00000 : 1.00000]
+        #datapoints = 10
+        residuals are weighted equally (unit weight)
+
+function used for fitting: b2*x
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   b2           
+   0 2.0602652490e-02   0.00e+00  7.68e-03    1.705168e-02
+   3 5.2605089179e-04  -3.15e-02  7.68e-06    1.165782e-01
+
+After 3 iterations the fit converged.
+final sum of squares of residuals : 0.000526051
+rel. change during last iteration : -3.14781e-07
+
+degrees of freedom    (FIT_NDF)                        : 9
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.00764527
+variance of residuals (reduced chisquare) = WSSR/ndf   : 5.84501e-05
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+b2              = 0.116578         +/- 0.00537      (4.606%)

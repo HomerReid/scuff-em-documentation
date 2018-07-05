@@ -1,0 +1,9 @@
+#!/bin/bash
+
+export SCUFF=/home/homer/work/scuff-em-development-installation
+
+export PYTHONPATH=${SCUFF}/lib/python2.7/site-packages:${SCUFF}/lib64/python2.7/site-packages
+
+export SCUFF_LOGLEVEL=VERBOSE2
+
+python "$@"

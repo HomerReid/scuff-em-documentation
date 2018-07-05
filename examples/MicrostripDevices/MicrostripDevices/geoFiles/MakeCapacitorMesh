@@ -1,0 +1,1 @@
+gmsh Rectangle.geo -3 -setnumber W 10 -setnumber L 10 -setnumber N 3 -o Plate10x10.msh; RenameMesh Plate10x10.msh

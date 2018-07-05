@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/TeX Live for SUSE Linux) (preloaded format=pdflatex 2018.4.5)  24 JUN 2018 05:28
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/TeX Live for SUSE Linux) (preloaded format=pdflatex 2018.4.5)  25 JUN 2018 13:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -436,43 +436,43 @@ ple pdfs with page group included in a single page
 
 pdfTeX warning: pdflatex (file ./figures/LinePort.pdf): PDF inclusion: multiple
  pdfs with page group included in a single page
->] [5] [6] [7] [8] [9] [10] (./scuff-rf.aux) ) 
+>] [5] [6] [7] [8] [9] (./scuff-rf.aux) ) 
 Here is how much of TeX's memory you used:
- 5141 strings out of 494041
- 68040 string characters out of 6158496
+ 5133 strings out of 494041
+ 67912 string characters out of 6158496
  149046 words of memory out of 5000000
- 8373 multiletter control sequences out of 15000+600000
- 21066 words of font info for 81 fonts, out of 8000000 for 9000
+ 8365 multiletter control sequences out of 15000+600000
+ 19041 words of font info for 73 fonts, out of 8000000 for 9000
  475 hyphenation exceptions out of 8191
  38i,21n,28p,883b,422s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texmf/fonts/type1/pub
-lic/amsfonts/cm/cmbx10.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmb
-x12.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmbx5.pfb></usr/share/
-texmf/fonts/type1/public/amsfonts/cm/cmbx6.pfb></usr/share/texmf/fonts/type1/pu
-blic/amsfonts/cm/cmbx7.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmb
-x8.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share
-/texmf/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf/fonts/type1/
-public/amsfonts/cmextra/cmex8.pfb></usr/share/texmf/fonts/type1/public/amsfonts
-/cm/cmmi10.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr
-/share/texmf/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texmf/fonts/t
-ype1/public/amsfonts/cm/cmmi7.pfb></usr/share/texmf/fonts/type1/public/amsfonts
-/cm/cmmi8.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/
-share/texmf/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf/fonts/ty
-pe1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf/fonts/type1/public/amsfonts/
-cm/cmr5.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/sha
-re/texmf/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf/fonts/type1/
-public/amsfonts/cm/cmr8.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cm
-sl10.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/shar
-e/texmf/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texmf/fonts/type1/
-public/amsfonts/cm/cmsy6.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/c
-msy7.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share
-/texmf/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf/fonts/type1/
-public/amsfonts/cm/cmtt10.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/
-cmtt12.pfb></usr/share/texmf/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on scuff-rf.pdf (10 pages, 385141 bytes).
+</usr/share/texmf/fonts/type1/public/a
+msfonts/cm/cmbx10.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmbx12.p
+fb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmbx5.pfb></usr/share/texmf
+/fonts/type1/public/amsfonts/cm/cmbx6.pfb></usr/share/texmf/fonts/type1/public/
+amsfonts/cm/cmbx7.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmbx8.pf
+b></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texm
+f/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf/fonts/type1/publi
+c/amsfonts/cmextra/cmex8.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/c
+mmi10.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/shar
+e/texmf/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texmf/fonts/type1/
+public/amsfonts/cm/cmmi7.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/c
+mmi8.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share
+/texmf/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf/fonts/type1/p
+ublic/amsfonts/cm/cmr17.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cm
+r5.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/te
+xmf/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf/fonts/type1/publi
+c/amsfonts/cm/cmr8.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmsl10.
+pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/tex
+mf/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texmf/fonts/type1/publi
+c/amsfonts/cm/cmsy6.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmsy7.
+pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texm
+f/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf/fonts/type1/publi
+c/amsfonts/cm/cmtt10.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmtt1
+2.pfb></usr/share/texmf/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on scuff-rf.pdf (9 pages, 380464 bytes).
 PDF statistics:
- 169 PDF objects out of 1000 (max. 8388607)
- 121 compressed objects within 2 object streams
+ 166 PDF objects out of 1000 (max. 8388607)
+ 119 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  16 words of extra memory for PDF output out of 10000 (max. 10000000)
 
